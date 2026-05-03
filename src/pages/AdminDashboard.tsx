@@ -278,7 +278,7 @@ const AdminDashboard = () => {
               <p className="text-[10px] text-muted-foreground italic">Define quantos jogos do calendário aparecerão automaticamente no topo da lista.</p>
             </div>
             <Button onClick={handleSaveSettings} disabled={isSaving} variant="outline" className="w-full h-10 rounded-xl font-bold border-2 border-[#2A9D8F]/20 text-[#2A9D8F] hover:bg-[#2A9D8F]/5">
-              {isSaving ? "Salvando..." : <><Save className="w-4 h-4 mr-2" /> Salvar Aparência</>}
+              {isSaving ? "Salvando..." : <><Save className="w-4 h-4 mr-2" /> Salvar Alterações</>}
             </Button>
           </div>
         </div>
