@@ -291,7 +291,7 @@ export function ToursSection() {
           price: m.price,
           duration: "6-7 horas",
           max_group_size: 15,
-          image_url: "https://images.unsplash.com/photo-1483729558449-99ef09a8c325?q=80&w=2070",
+          image_url: "https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/render/image/public/site-images/1776136644074_ueljwux2xe.webp?quality=70&width=800&format=avif&resize=cover&v=1777777351048",
           is_featured: true,
           category: 'CITY TOUR',
           category_en: 'CITY TOUR',
