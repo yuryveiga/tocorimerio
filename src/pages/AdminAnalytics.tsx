@@ -70,7 +70,7 @@ const AdminAnalytics = () => {
       const { data, error } = await supabase
         .from("site_visits")
         .select("*")
-        .order("created_at", { ascending: true })
+        .order("created_at", { ascending: false })
         .limit(10000);
 
       if (error) {
