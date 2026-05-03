@@ -59,6 +59,15 @@ const cleanReferrer = (ref: string | null): string => {
   }
 };
 
+const getCountryName = (code: string): string => {
+  if (!code || code === "Desconhecido" || code.length > 2) return code;
+  try {
+    return new Intl.DisplayNames(['pt-BR'], { type: 'region' }).of(code.toUpperCase()) || code;
+  } catch {
+    return code;
+  }
+};
+
 const AdminAnalytics = () => {
   const [loading, setLoading] = useState(true);
   const [allVisits, setAllVisits] = useState<Visit[]>([]);
@@ -145,12 +154,13 @@ const AdminAnalytics = () => {
     const countryMap: Record<string, number> = {};
     visits.forEach((v) => {
       const c = v.country || "Desconhecido";
-      countryMap[c] = (countryMap[c] || 0) + 1;
+      const name = getCountryName(c);
+      countryMap[name] = (countryMap[name] || 0) + 1;
     });
     const visitsByCountry = Object.entries(countryMap)
       .map(([name, value]) => ({ name, value }))
       .sort((a, b) => b.value - a.value)
-      .slice(0, 6);
+      .slice(0, 8); // Aumentado para 8 países para melhor visualização
 
     // Referrers
     const refMap: Record<string, number> = {};
@@ -376,7 +386,7 @@ const AdminAnalytics = () => {
                     cx="50%"
                     cy="50%"
                     labelLine={false}
-                    label={({ name, percent }) => `${name} ${((percent ?? 0) * 100).toFixed(0)}%`}
+                    label={({ name, percent }) => `${name} (${((percent ?? 0) * 100).toFixed(0)}%)`}
                     outerRadius={110}
                     dataKey="value"
                   >
