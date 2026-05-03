@@ -266,6 +266,17 @@ const AdminDashboard = () => {
                 className="h-12 rounded-xl"
               />
             </div>
+            <div className="space-y-2">
+              <Label className="text-xs font-black uppercase tracking-widest text-[#E63946]">Jogos no Maracanã (Destaque Home)</Label>
+              <Input 
+                type="number" min={0} 
+                value={settings['home_matches_count'] || "0"} 
+                onChange={(e) => setSettings({ ...settings, home_matches_count: e.target.value })} 
+                placeholder="Quantidade de jogos a mostrar..."
+                className="h-12 rounded-xl border-[#E63946]/30"
+              />
+              <p className="text-[10px] text-muted-foreground italic">Define quantos jogos do calendário aparecerão automaticamente no topo da lista.</p>
+            </div>
           </div>
         </div>
 

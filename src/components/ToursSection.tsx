@@ -260,7 +260,7 @@ export function ToursSection() {
   const activeCat = categories[activeTab];
   
   const displayTours = useMemo(() => {
-    return tours
+    const filteredTours = tours
       .filter(t => t.category?.toUpperCase().includes(activeCat?.value))
       .sort((a, b) => {
         const isMatchDayA = a.title?.includes('Maracanã MatchDay');
@@ -271,7 +271,34 @@ export function ToursSection() {
         
         return (b.is_featured ? 1 : 0) - (a.is_featured ? 1 : 0);
       });
-  }, [tours, activeCat]);
+
+    // Se a categoria for CITY TOUR ou FUTEBOL, e houver configuração de matches na home
+    if (homeMatchesCount > 0 && (activeCat?.value === 'CITY TOUR' || activeCat?.value === 'FUTEBOL')) {
+      const matchCards = (matches || [])
+        .filter(m => m.status === 'available' && getMatchDateInRio(m.match_date) >= new Date())
+        .slice(0, homeMatchesCount)
+        .map(m => ({
+          id: `match-${m.id}`,
+          title: `${m.home_team} x ${m.away_team}`,
+          title_en: `${m.home_team} vs ${m.away_team}`,
+          title_es: `${m.home_team} x ${m.away_team}`,
+          short_description: language === 'pt' ? `Experiência completa no Maracanã. Inclui guia, transfer e ingresso oficial.` : language === 'es' ? `Experiencia completa en el Maracanã. Incluye guía, traslado y entrada oficial.` : `Complete Maracanã experience. Includes guide, transfer, and official ticket.`,
+          price: m.price,
+          duration: "6-7 horas",
+          max_group_size: 15,
+          image_url: "https://images.unsplash.com/photo-1483729558449-99ef09a8c325?q=80&w=2070",
+          is_featured: true,
+          category: language === 'pt' ? 'FUTEBOL' : language === 'es' ? 'FÚTBOL' : 'FOOTBALL',
+          external_url: `/match/${m.slug || m.id}`,
+          included_json: language === 'pt' ? ["Ingresso", "Guia", "Transfer"] : language === 'es' ? ["Entrada", "Guía", "Traslado"] : ["Ticket", "Guide", "Transfer"],
+          pricing_model: 'fixed'
+        }));
+
+      return [...matchCards, ...filteredTours];
+    }
+
+    return filteredTours;
+  }, [tours, matches, activeCat, homeMatchesCount, language]);
 
   
   // Title and subtitle
