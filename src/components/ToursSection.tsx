@@ -266,7 +266,7 @@ export function ToursSection() {
   
   const displayTours = useMemo(() => {
     const filteredTours = tours
-      .filter(t => t.category?.toUpperCase().includes(activeCat?.value))
+      .filter(t => (t.category || "").toUpperCase().includes((activeCat?.value || "").toUpperCase()))
       .sort((a, b) => {
         const isMatchDayA = a.title?.includes('Maracanã MatchDay');
         const isMatchDayB = b.title?.includes('Maracanã MatchDay');
@@ -322,7 +322,7 @@ export function ToursSection() {
           {toursSubtitle && <p className="text-muted-foreground text-lg max-w-xl mx-auto font-sans">{toursSubtitle}</p>}
         </div>
         
-        <div role="tablist" className="flex justify-center gap-3 mb-12">
+        <div role="tablist" className="flex flex-wrap justify-center gap-3 mb-12">
           {categories.map((cat, idx) => (
             <Button
               key={cat.value}

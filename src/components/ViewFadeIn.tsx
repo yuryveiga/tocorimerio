@@ -24,7 +24,7 @@ export const ViewFadeIn = ({
           observer.unobserve(entry.target);
         }
       },
-      { threshold: 0.1 }
+      { threshold: 0.05, rootMargin: '50px' }
     );
 
     if (ref.current) {
