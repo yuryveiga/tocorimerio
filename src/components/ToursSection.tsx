@@ -37,6 +37,7 @@ export type TourCardProps = {
   included_json?: any[];
   included_json_en?: any[];
   included_json_es?: any[];
+  match_date?: string;
 };
 
 export const TourCard = memo(({ tour }: { tour: TourCardProps }) => {
@@ -107,6 +108,17 @@ export const TourCard = memo(({ tour }: { tour: TourCardProps }) => {
           </div>
         )}
         <div className="absolute top-4 right-4 bg-card/90 backdrop-blur-sm text-foreground text-[10px] font-black px-3 py-1.5 rounded-full font-sans uppercase tracking-[0.15em] border border-border/50 shadow-sm z-10">{category}</div>
+        
+        {tour.match_date && (
+          <div className="absolute bottom-4 left-4 bg-white/90 backdrop-blur-md text-primary px-3 py-2 rounded-xl shadow-xl border border-primary/20 z-10 flex flex-col items-center min-w-[60px]">
+            <span className="text-[10px] font-black uppercase tracking-widest leading-none mb-1 opacity-70">
+              {new Date(tour.match_date).toLocaleDateString(language === 'pt' ? 'pt-BR' : language === 'es' ? 'es-ES' : 'en-US', { month: 'short' })}
+            </span>
+            <span className="text-2xl font-black leading-none">
+              {new Date(tour.match_date).getUTCDate()}
+            </span>
+          </div>
+        )}
         
         {/* Scarcity Badge */}
         {!hideUrgency && (() => {
@@ -298,7 +310,8 @@ export function ToursSection() {
           category_es: 'CITY TOUR',
           external_url: `/match/${m.slug || m.id}`,
           included_json: language === 'pt' ? ["Ingresso", "Guia", "Transfer"] : language === 'es' ? ["Entrada", "Guía", "Traslado"] : ["Ticket", "Guide", "Transfer"],
-          pricing_model: 'fixed'
+          pricing_model: 'fixed',
+          match_date: m.match_date
         }));
 
       return [...matchCards, ...filteredTours];
