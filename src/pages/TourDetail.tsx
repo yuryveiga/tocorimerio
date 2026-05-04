@@ -383,14 +383,14 @@ export function TourDetail() {
     <main className="min-h-screen bg-background font-sans overflow-x-hidden">
       <Helmet>
         <title>{translatedTitle} | {siteTitle}</title>
-        <meta name="description" content={(translatedShortDesc || siteSettings?.site_description || "").replace(/<[^>]*>/g, "").substring(0, 160)} />
+        <meta name="description" content={`${getTourMinPrice(tour) > 0 ? `${t("a_partir_de")} ${formatPrice(getTourMinPrice(tour))} - ` : ""}${(translatedShortDesc || siteSettings?.site_description || "").replace(/<[^>]*>/g, "").substring(0, 150)}`} />
 
         
         {/* Open Graph / Facebook */}
         <meta property="og:type" content="website" />
         <meta property="og:url" content={getCanonicalUrl(`/passeio/${tour?.slug || tour?.id}`)} />
         <meta property="og:title" content={`${translatedTitle} | ${siteTitle}`} />
-        <meta property="og:description" content={translatedShortDesc || siteSettings?.site_description} />
+        <meta property="og:description" content={`${getTourMinPrice(tour) > 0 ? `${t("a_partir_de")} ${formatPrice(getTourMinPrice(tour))} - ` : ""}${translatedShortDesc || siteSettings?.site_description}`} />
         <meta property="og:image" content={tour.image_url} />
 
         {/* Twitter */}

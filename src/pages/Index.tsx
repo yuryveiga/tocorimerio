@@ -47,7 +47,7 @@ const Index = () => {
       <HeroSection />
       
       <Suspense fallback={<SectionLoader />}>
-        <ViewFadeIn><ToursSection /></ViewFadeIn>
+        <ToursSection />
         <WhyChooseUs />
         <ViewFadeIn><ReviewsSection /></ViewFadeIn>
         <ViewFadeIn><WeatherSection /></ViewFadeIn>

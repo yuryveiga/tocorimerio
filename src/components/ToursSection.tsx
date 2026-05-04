@@ -222,7 +222,7 @@ export function ToursSection() {
   const [activeTab, setActiveTab] = useState(0);
   const [isAnimating, setIsAnimating] = useState(false);
 
-  const isLoading = siteDataLoading || matchesLoading;
+  const isLoading = siteDataLoading;
   const columns = Number(siteSettings['home_tours_columns']) || 3;
   const count = Number(siteSettings['home_tours_count']) || 6;
   const homeMatchesCount = Number(siteSettings['home_matches_count']) || 0;
