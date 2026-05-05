@@ -1,3 +1,4 @@
+// Force refresh to resolve stale context issues
 import React, { createContext, useContext, useState, ReactNode, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { translationsPt, translationsEn, translationsEs } from "@/translations";
