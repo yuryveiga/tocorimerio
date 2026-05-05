@@ -126,6 +126,30 @@ export function PasseioDetalhe() {
 
   const translatedDifficulty = useMemo(() => getTranslated('difficulty') as string, [getTranslated]);
   const translatedItinerary = useMemo(() => getTranslated(`itinerary_json${language !== 'pt' ? `_${language}` : ""}`) as { time: string; description: string }[] || tour?.itinerary_json, [getTranslated, language, tour?.itinerary_json]);
+  
+  const displayedItinerary = useMemo(() => {
+    if (!translatedItinerary) return [];
+    const items = translatedItinerary as { time: string; description: string }[];
+    
+    // Para o Boteco Tour, se for Diurno, subtraímos 6 horas do itinerário Noturno (que é o padrão no banco)
+    if (translatedTitle?.toLowerCase().includes('boteco') && selectedPeriod === 'morning') {
+      return items.map(item => {
+        const timeMatch = item.time.match(/(\d{1,2}):(\d{2})/);
+        if (timeMatch) {
+          let hours = parseInt(timeMatch[1]);
+          let minutes = timeMatch[2];
+          let newHours = hours - 6;
+          if (newHours < 0) newHours += 24;
+          return { 
+            ...item, 
+            time: `${String(newHours).padStart(2, '0')}:${minutes}` 
+          };
+        }
+        return item;
+      });
+    }
+    return items;
+  }, [translatedItinerary, selectedPeriod, translatedTitle]);
   const translatedIncluded = useMemo(() => {
     const items = getTranslated(`included_json${language !== 'pt' ? `_${language}` : ""}`) || tour?.included_json;
     
@@ -821,12 +845,12 @@ export function PasseioDetalhe() {
                )}
 
                {/* Itinerary */}
-               {translatedItinerary && (translatedItinerary as { time: string; description: string }[]).length > 0 && (
+               {displayedItinerary && (displayedItinerary as { time: string; description: string }[]).length > 0 && (
                  <div className="bg-card rounded-2xl border p-8 space-y-8">
                    <h2 className="text-2xl font-serif font-bold text-[#2A9D8F]">{t("itinerario_detalhes")}</h2>
                    <div className="relative space-y-8">
                      <div className="absolute left-3 top-2 bottom-2 w-0.5 bg-dashed border-l-2 border-primary/20" />
-                     {(translatedItinerary as { time: string; description: string }[]).map((step, i) => (
+                     {(displayedItinerary as { time: string; description: string }[]).map((step, i) => (
                        <div key={i} className="relative pl-10">
                          <div className="absolute left-0 top-1 w-6 h-6 rounded-full bg-primary flex items-center justify-center text-[10px] text-primary-foreground font-bold shadow-lg ring-4 ring-background">{i + 1}</div>
                          <h3 className="font-bold text-lg mb-1">{step.time}</h3>
