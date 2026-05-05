@@ -239,14 +239,14 @@ const BlogPost = () => {
       `}</style>
       <Helmet>
         <title>{title} | {siteTitle}</title>
-        <meta name="description" content={(excerpt || content || title).replace(/<[^>]*>/g, "").substring(0, 160)} />
+        <meta name="description" content={(excerpt || (content && content.replace(/<[^>]*>/g, "").substring(0, 160)) || title)} />
 
         
         {/* Open Graph / Facebook */}
         <meta property="og:type" content="article" />
         <meta property="og:url" content={getCanonicalUrl(`/blog/${post.slug}`)} />
         <meta property="og:title" content={`${title} | ${siteTitle}`} />
-        <meta property="og:description" content={excerpt || title} />
+        <meta property="og:description" content={excerpt || (content && content.replace(/<[^>]*>/g, "").substring(0, 160)) || title} />
         <meta property="og:image" content={post.image_url || fallbackImage} />
 
         <link rel="canonical" href={getCanonicalUrl(`/blog/${post.slug}`)} />

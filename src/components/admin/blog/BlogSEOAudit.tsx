@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import { CheckCircle2, AlertCircle, XCircle, Sparkles, Wand2, Search, Info } from "lucide-react";
 import { useMemo } from "react";
+import { toast } from "sonner";
 
 interface BlogSEOAuditProps {
   post: Partial<LovableBlogPost>;
@@ -13,16 +14,38 @@ interface BlogSEOAuditProps {
 
 export function BlogSEOAudit({ post, onUpdate }: BlogSEOAuditProps) {
   const issues = useMemo(() => {
-    const list: { type: 'success' | 'warning' | 'error'; message: string; tip?: string }[] = [];
+    const list: { 
+      type: 'success' | 'warning' | 'error'; 
+      message: string; 
+      tip?: string;
+      action?: string;
+      onFix?: () => void;
+    }[] = [];
     
     // Title Analysis
     const title = post.title || "";
     if (title.length === 0) {
-      list.push({ type: 'error', message: "Título ausente", tip: "O Google precisa de um título para exibir nos resultados." });
+      list.push({ 
+        type: 'error', 
+        message: "Título ausente", 
+        tip: "O Google precisa de um título para exibir nos resultados." 
+      });
     } else if (title.length < 30) {
-      list.push({ type: 'warning', message: "Título muito curto", tip: "Títulos entre 50-60 caracteres performam melhor." });
+      list.push({ 
+        type: 'warning', 
+        message: "Título muito curto", 
+        tip: "Títulos entre 50-60 caracteres performam melhor.",
+        action: "Expandir Título",
+        onFix: () => onUpdate({ title: title + " | Melhores Passeios no Rio de Janeiro" })
+      });
     } else if (title.length > 70) {
-      list.push({ type: 'warning', message: "Título muito longo", tip: "Títulos acima de 70 caracteres podem ser cortados no Google." });
+      list.push({ 
+        type: 'warning', 
+        message: "Título muito longo", 
+        tip: "Títulos acima de 70 caracteres podem ser cortados no Google.",
+        action: "Encurtar",
+        onFix: () => onUpdate({ title: title.substring(0, 65).trim() })
+      });
     } else {
       list.push({ type: 'success', message: "Tamanho do título ideal" });
     }
@@ -30,11 +53,28 @@ export function BlogSEOAudit({ post, onUpdate }: BlogSEOAuditProps) {
     // Slug Analysis
     const slug = post.slug || "";
     if (!slug) {
-      list.push({ type: 'error', message: "URL amigável (slug) ausente" });
-    } else if (slug.includes('_')) {
-      list.push({ type: 'warning', message: "Slug contém underscores", tip: "Use hifens (-) em vez de underscores (_) para melhor indexação." });
+      list.push({ 
+        type: 'error', 
+        message: "URL amigável (slug) ausente",
+        action: "Gerar Slug",
+        onFix: () => onUpdate({ slug: title ? title.toLowerCase().replace(/\s+/g, '-').replace(/[^\w-]+/g, '') : "post-" + Date.now() })
+      });
+    } else if (slug.includes('_') || /[A-Z]/.test(slug)) {
+      list.push({ 
+        type: 'warning', 
+        message: "Slug mal formatado", 
+        tip: "Use apenas letras minúsculas e hifens (-) para melhor indexação.",
+        action: "Corrigir Slug",
+        onFix: () => onUpdate({ slug: slug.toLowerCase().replace(/_/g, '-').replace(/[^\w-]+/g, '') })
+      });
     } else if (slug.length > 50) {
-      list.push({ type: 'warning', message: "Slug muito longo", tip: "URLs curtas e descritivas são preferidas." });
+      list.push({ 
+        type: 'warning', 
+        message: "Slug muito longo", 
+        tip: "URLs curtas e descritivas são preferidas.",
+        action: "Encurtar Slug",
+        onFix: () => onUpdate({ slug: slug.substring(0, 40).replace(/-$/, '') })
+      });
     } else {
       list.push({ type: 'success', message: "URL amigável bem estruturada" });
     }
@@ -42,19 +82,46 @@ export function BlogSEOAudit({ post, onUpdate }: BlogSEOAuditProps) {
     // Excerpt (Meta Description) Analysis
     const excerpt = post.excerpt || "";
     if (excerpt.length === 0) {
-      list.push({ type: 'error', message: "Descrição (meta description) ausente", tip: "Sem isso, o Google escolherá um trecho aleatório do texto." });
+      list.push({ 
+        type: 'error', 
+        message: "Descrição (meta description) ausente", 
+        tip: "Sem isso, o Google escolherá um trecho aleatório do texto.",
+        action: "Gerar do Texto",
+        onFix: () => {
+          const plainText = (post.content || "").replace(/<[^>]*>/g, "").trim();
+          if (plainText) {
+            onUpdate({ excerpt: plainText.substring(0, 155).trim() + "..." });
+          }
+        }
+      });
     } else if (excerpt.length < 120) {
-      list.push({ type: 'warning', message: "Descrição muito curta", tip: "Tente usar entre 140-160 caracteres para maior taxa de clique." });
+      list.push({ 
+        type: 'warning', 
+        message: "Descrição muito curta", 
+        tip: "Tente usar entre 140-160 caracteres para maior taxa de clique.",
+        action: "Completar",
+        onFix: () => onUpdate({ excerpt: excerpt + " Confira todos os detalhes e dicas exclusivas em nosso blog oficial da Tocorime Rio." })
+      });
     } else if (excerpt.length > 165) {
-      list.push({ type: 'warning', message: "Descrição muito longa", tip: "O Google cortará o texto se passar de 160 caracteres." });
+      list.push({ 
+        type: 'warning', 
+        message: "Descrição muito longa", 
+        tip: "O Google cortará o texto se passar de 160 caracteres.",
+        action: "Ajustar Tamanho",
+        onFix: () => onUpdate({ excerpt: excerpt.substring(0, 157).trim() + "..." })
+      });
     } else {
       list.push({ type: 'success', message: "Descrição otimizada" });
     }
 
     // Content Analysis
     const content = post.content || "";
-    const wordCount = content.replace(/<[^>]*>/g, "").split(/\s+/).filter(Boolean).length;
-    if (wordCount < 300) {
+    const cleanContent = content.replace(/<[^>]*>/g, " ").replace(/\s+/g, " ").trim();
+    const wordCount = cleanContent.split(" ").filter(Boolean).length;
+    
+    if (wordCount < 10) {
+       list.push({ type: 'error', message: "Conteúdo não detectado", tip: "Escreva algo no post para que o Google possa indexá-lo." });
+    } else if (wordCount < 300) {
       list.push({ type: 'warning', message: `Conteúdo curto (${wordCount} palavras)`, tip: "Artigos com mais de 600 palavras tendem a ranquear melhor." });
     } else if (wordCount > 1500) {
       list.push({ type: 'success', message: `Conteúdo épico (${wordCount} palavras)!` });
@@ -69,55 +136,43 @@ export function BlogSEOAudit({ post, onUpdate }: BlogSEOAuditProps) {
       list.push({ type: 'success', message: "Imagem de capa configurada" });
     }
 
-    // Keyword Analysis (Simple)
-    const keywords = title.toLowerCase().split(' ').filter(w => w.length > 3);
+    // Keyword Analysis
+    const keywords = title.toLowerCase().split(' ').filter(w => w.length > 4);
     const topKeywords = keywords.slice(0, 3);
     if (topKeywords.length > 0) {
-      const contentLower = content.toLowerCase();
+      const contentLower = cleanContent.toLowerCase();
       topKeywords.forEach(kw => {
         const count = (contentLower.match(new RegExp(kw, 'g')) || []).length;
-        if (count === 0 && content.length > 0) {
-          list.push({ type: 'warning', message: `Palavra-chave "${kw}" não encontrada no texto`, tip: "Repetir suas palavras-chave do título no texto ajuda o Google a entender o tema." });
+        if (count === 0 && wordCount > 0) {
+          list.push({ 
+            type: 'warning', 
+            message: `Palavra-chave "${kw}" ausente no texto`, 
+            tip: "Incluir a palavra principal no primeiro parágrafo ajuda no SEO.",
+            action: "Inserir no Início",
+            onFix: () => onUpdate({ content: `<p><strong>${kw.charAt(0).toUpperCase() + kw.slice(1)}</strong> é um tema essencial para quem busca o melhor do Rio. </p>` + content })
+          });
         } else if (count > 0) {
           list.push({ type: 'success', message: `Palavra-chave "${kw}" presente (${count}x)` });
         }
       });
     }
 
-    // Languages Analysis
-    if (!post.title_en || !post.content_en || !post.title_es || !post.content_es) {
-      list.push({ type: 'warning', message: "Traduções incompletas", tip: "Traduzir o post ajuda a captar tráfego internacional." });
-    } else {
-      list.push({ type: 'success', message: "Post multi-idioma (Global SEO)" });
-    }
-
     return list;
-  }, [post]);
+  }, [post, onUpdate]);
 
   const score = useMemo(() => {
     const total = issues.length;
+    if (total === 0) return 0;
     const success = issues.filter(i => i.type === 'success').length;
     const warning = issues.filter(i => i.type === 'warning').length;
     return Math.round(((success + warning * 0.5) / total) * 100) || 0;
   }, [issues]);
 
   const handleAutoOptimize = () => {
-    const updates: Partial<LovableBlogPost> = {};
-    
-    // Auto-generate excerpt if missing
-    if (!post.excerpt && post.content) {
-      const plainText = post.content.replace(/<[^>]*>/g, "");
-      updates.excerpt = plainText.substring(0, 155).trim() + "...";
-    }
-
-    // Fix slug if it has underscores
-    if (post.slug && post.slug.includes('_')) {
-      updates.slug = post.slug.replace(/_/g, '-');
-    }
-
-    if (Object.keys(updates).length > 0) {
-      onUpdate(updates);
-    }
+    issues.forEach(issue => {
+      if (issue.onFix) issue.onFix();
+    });
+    toast.success("Otimização automática aplicada!");
   };
 
   return (
@@ -138,7 +193,7 @@ export function BlogSEOAudit({ post, onUpdate }: BlogSEOAuditProps) {
               className="border-primary/20 hover:bg-primary/5 font-bold rounded-xl h-11"
             >
               <Wand2 className="w-4 h-4 mr-2 text-primary" />
-              Otimizar Automaticamente
+              Otimizar Tudo
             </Button>
           </div>
 
@@ -146,27 +201,38 @@ export function BlogSEOAudit({ post, onUpdate }: BlogSEOAuditProps) {
             {issues.map((issue, idx) => (
               <div 
                 key={idx} 
-                className={`p-4 rounded-2xl border flex items-start gap-4 transition-all hover:scale-[1.01] ${
+                className={`p-4 rounded-2xl border flex items-center gap-4 transition-all hover:scale-[1.01] ${
                   issue.type === 'success' ? 'bg-green-50/50 border-green-100' : 
                   issue.type === 'warning' ? 'bg-amber-50/50 border-amber-100' : 
                   'bg-red-50/50 border-red-100'
                 }`}
               >
-                <div className="mt-0.5">
+                <div className="shrink-0">
                   {issue.type === 'success' && <CheckCircle2 className="w-5 h-5 text-green-600" />}
                   {issue.type === 'warning' && <AlertCircle className="w-5 h-5 text-amber-600" />}
                   {issue.type === 'error' && <XCircle className="w-5 h-5 text-red-600" />}
                 </div>
-                <div>
-                  <p className={`font-black text-sm uppercase tracking-tight ${
+                <div className="flex-1 min-w-0">
+                  <p className={`font-black text-sm uppercase tracking-tight truncate ${
                     issue.type === 'success' ? 'text-green-800' : 
                     issue.type === 'warning' ? 'text-amber-800' : 
                     'text-red-800'
                   }`}>
                     {issue.message}
                   </p>
-                  {issue.tip && <p className="text-xs text-muted-foreground mt-1 font-medium">{issue.tip}</p>}
+                  {issue.tip && <p className="text-xs text-muted-foreground mt-0.5 font-medium">{issue.tip}</p>}
                 </div>
+                {issue.onFix && (
+                  <Button 
+                    size="sm" 
+                    variant="ghost" 
+                    className="shrink-0 text-[10px] font-black uppercase tracking-widest text-primary hover:text-primary hover:bg-primary/10"
+                    onClick={issue.onFix}
+                  >
+                    <Sparkles className="w-3 h-3 mr-1" />
+                    {issue.action || "Otimizar"}
+                  </Button>
+                )}
               </div>
             ))}
           </div>
