@@ -1,4 +1,4 @@
-export const pt = {
+export const translationsPt = {
   inicio: 'Início',
   passeios: 'Passeios',
   sobre: 'Sobre Nós',
@@ -240,7 +240,7 @@ export const pt = {
   pq_seguranca_desc: 'Veículos modernos com ar-condicionado e suporte total do início ao fim.',
 };
 
-export const en = {
+export const translationsEn = {
   inicio: 'Home',
   passeios: 'Tours',
   sobre: 'About Us',
@@ -482,7 +482,7 @@ export const en = {
   pq_seguranca_desc: 'Modern vehicles with AC and full support from start to finish.',
 };
 
-export const es = {
+export const translationsEs = {
   inicio: 'Inicio',
   passeios: 'Paseos',
   sobre: 'Sobre Nosotros',
