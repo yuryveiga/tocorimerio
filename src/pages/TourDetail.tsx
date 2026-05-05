@@ -38,7 +38,7 @@ import { ptBR, enUS, es } from "date-fns/locale";
 import { getCanonicalUrl, BASE_URL, generateTouristAttractionSchema, generateTourPackageSchema, generateFAQSchema } from "@/utils/seo";
 
 
-const WeatherSection = lazy(() => import("@/components/WeatherSection").then(m => ({ default: m.WeatherSection })));
+import { WeatherSection } from "@/components/WeatherSection";
 
 const getYouTubeEmbedUrl = (url: string) => {
   if (!url) return "";
