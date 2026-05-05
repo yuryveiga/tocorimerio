@@ -6,12 +6,12 @@ import { Progress } from "@/components/ui/progress";
 import { CheckCircle2, AlertCircle, XCircle, Sparkles, Wand2, Search, Info } from "lucide-react";
 import { useMemo } from "react";
 
-interface BlogPostSEOAuditProps {
+interface BlogSEOAuditProps {
   post: Partial<LovableBlogPost>;
   onUpdate: (updates: Partial<LovableBlogPost>) => void;
 }
 
-export function BlogPostSEOAudit({ post, onUpdate }: BlogPostSEOAuditProps) {
+export function BlogSEOAudit({ post, onUpdate }: BlogSEOAuditProps) {
   const issues = useMemo(() => {
     const list: { type: 'success' | 'warning' | 'error'; message: string; tip?: string }[] = [];
     

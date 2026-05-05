@@ -38,7 +38,7 @@ export type TourCardProps = {
   match_date?: string;
 };
 
-export const TourCard = memo(({ tour }: { tour: TourCardProps }) => {
+export const TourItem = memo(({ tour }: { tour: TourCardProps }) => {
   const { t, formatPrice, language } = useLocale();
   const { siteSettings } = useSiteData();
   const hidePrices = siteSettings['hide_prices'] === 'true';
@@ -221,4 +221,4 @@ export const TourCard = memo(({ tour }: { tour: TourCardProps }) => {
   );
 });
 
-TourCard.displayName = "TourCard";
+TourItem.displayName = "TourItem";

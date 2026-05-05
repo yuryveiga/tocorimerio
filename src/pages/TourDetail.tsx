@@ -10,7 +10,7 @@ import { LovableTour } from "@/integrations/lovable/client";
 import { useSiteData } from "@/hooks/useSiteData";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
-import { TourCard, TourCardProps } from "@/components/TourCard";
+import { TourItem, TourCardProps } from "@/components/TourItem";
 
 import { useLocale } from "@/contexts/LocaleContext";
 import { useCart } from "@/contexts/CartContext";
@@ -1163,7 +1163,7 @@ export function TourDetail() {
               {relatedTours.map((item) => (
                 <CarouselItem key={item.id} className="pl-4 basis-full sm:basis-1/2 lg:basis-1/3 xl:basis-1/5">
                   <div className="h-full transition-transform hover:scale-[1.02] duration-300">
-                    <TourCard tour={item as any} />
+                    <TourItem tour={item as any} />
                   </div>
                 </CarouselItem>
               ))}

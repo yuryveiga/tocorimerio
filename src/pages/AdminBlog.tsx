@@ -11,7 +11,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/u
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { DeleteConfirmDialog } from "@/components/admin/DeleteConfirmDialog";
 import { OptimizedImage } from "@/components/OptimizedImage";
-import { BlogPostSEOAudit } from "@/components/admin/blog/BlogPostSEOAudit";
+import { BlogSEOAudit } from "@/components/admin/blog/BlogSEOAudit";
 
 import {
   AlertDialog,
@@ -524,7 +524,7 @@ const AdminBlog = () => {
                </TabsContent>
 
                <TabsContent value="seo" className="m-0 flex-1 overflow-hidden">
-                 <BlogPostSEOAudit 
+                 <BlogSEOAudit 
                    post={editing} 
                    onUpdate={(updates) => setEditing(prev => prev ? { ...prev, ...updates } : prev)} 
                  />
