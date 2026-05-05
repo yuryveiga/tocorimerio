@@ -56,7 +56,7 @@ const getYouTubeEmbedUrl = (url: string) => {
   return url;
 };
 
-export function TourDetail() {
+export function PasseioDetalhe() {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
   const { tours, isLoading: isGlobalLoading, siteSettings, socialMedia } = useSiteData();
@@ -1282,5 +1282,5 @@ export function TourDetail() {
   );
 }
 
-export default TourDetail;
+export default PasseioDetalhe;
 

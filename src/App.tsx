@@ -18,9 +18,8 @@ import { ErrorBoundary } from "./components/ErrorBoundary";
 import { ScrollToHash } from "./components/ScrollToHash";
 import { MobileStickyCTA } from "./components/MobileStickyCTA";
 
-// Pages
 import Index from "./pages/Index";
-import TourDetail from "./pages/TourDetail";
+import PasseioDetalhe from "./pages/PasseioDetalhe";
 import BlogPost from "./pages/BlogPost";
 const NotFound = lazy(() => import("./pages/NotFound"));
 const AdminLogin = lazy(() => import("./pages/AdminLogin"));
@@ -93,7 +92,7 @@ const App = ({ queryClient: externalQueryClient }: { queryClient?: QueryClient }
                       <Route path="/maracanã-calendário" element={<MaracanaCalendar />} />
                       <Route path="/maracana-calendario" element={<Navigate to="/maracanã-calendário" replace />} />
                       <Route path="/maracanacalendar" element={<Navigate to="/maracanã-calendário" replace />} />
-                      <Route path="/passeio/:id" element={<TourDetail />} />
+                      <Route path="/passeio/:id" element={<PasseioDetalhe />} />
                       <Route path="/match/:id" element={<MatchDetail />} />
                       <Route path="/jogo/:id" element={<Navigate to="/match/:id" replace />} />
                       <Route path="/flamengo-x-vasco-maracana" element={<FlamengoVascoMaracana />} />
