@@ -18,9 +18,9 @@ import { ErrorBoundary } from "./components/ErrorBoundary";
 import { ScrollToHash } from "./components/ScrollToHash";
 import { MobileStickyCTA } from "./components/MobileStickyCTA";
 
-import Index from "./pages/Index";
-import PasseioDetalhe from "./pages/PasseioDetalhe";
-import BlogPost from "./pages/BlogPost";
+const Index = lazy(() => import("./pages/Index"));
+const PasseioDetalhe = lazy(() => import("./pages/PasseioDetalhe"));
+const BlogPost = lazy(() => import("./pages/BlogPost"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 const AdminLogin = lazy(() => import("./pages/AdminLogin"));
 const AdminResetPassword = lazy(() => import("./pages/AdminResetPassword"));
