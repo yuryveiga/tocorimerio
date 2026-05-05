@@ -60,6 +60,8 @@ export const tourSchema = z.object({
   has_night: z.boolean().optional().default(false),
   allows_private: z.boolean().optional().default(false),
   allows_open: z.boolean().optional().default(false),
+  bares_diurnos: z.string().optional().default(""),
+  bares_noturnos: z.string().optional().default(""),
 });
 
 export type TourFormValues = z.infer<typeof tourSchema>;

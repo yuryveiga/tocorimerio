@@ -269,6 +269,35 @@ export function TourFormDialog({
                       <Label htmlFor="is_featured" className="font-bold">Destaque na Home</Label>
                     </div>
                   </div>
+
+                  {/* Specific Boteco Tour Fields */}
+                  {form.watch("title")?.toLowerCase().includes('boteco') && (
+                    <div className="space-y-6 pt-6 border-t">
+                      <h3 className="font-black text-xs uppercase tracking-widest text-primary">Configuração do Boteco Tour</h3>
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div className="space-y-2">
+                          <Label className="text-xs font-bold uppercase text-muted-foreground flex items-center gap-2">
+                            <Sunrise className="w-4 h-4 text-orange-500" /> Bares Diurnos
+                          </Label>
+                          <textarea 
+                            {...form.register("bares_diurnos")}
+                            placeholder="Lista de bares para o tour diurno..."
+                            className="w-full min-h-[100px] rounded-xl border p-4 text-sm font-sans focus:ring-primary" 
+                          />
+                        </div>
+                        <div className="space-y-2">
+                          <Label className="text-xs font-bold uppercase text-muted-foreground flex items-center gap-2">
+                            <Moon className="w-4 h-4 text-indigo-500" /> Bares Noturnos
+                          </Label>
+                          <textarea 
+                            {...form.register("bares_noturnos")}
+                            placeholder="Lista de bares para o tour noturno..."
+                            className="w-full min-h-[100px] rounded-xl border p-4 text-sm font-sans focus:ring-primary" 
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  )}
                 </TabsContent>
               </div>
             </div>

@@ -54,6 +54,8 @@ export type LovableTour = {
   available_days?: string[];
   use_custom_options?: boolean;
   custom_options_json?: { title: string; price: number; positive_notices: string[]; negative_notices: string[] }[];
+  bares_diurnos?: string;
+  bares_noturnos?: string;
 };
 
 export type LovablePage = {
