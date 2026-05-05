@@ -24,7 +24,9 @@ import {
 
 import { NavLink } from "@/components/NavLink";
 import { useLocation, useNavigate } from "react-router-dom";
-import { useAuth } from "@/hooks/useAuth";
+import { useAuth } from "@/hooks/use-auth";
+import { useSiteData } from "@/hooks/useSiteData";
+import { OptimizedImage } from "@/components/OptimizedImage";
 import {
   Sidebar,
   SidebarContent,
@@ -91,10 +93,13 @@ const menuGroups = [
 
 
 export function AdminSidebar() {
-  const { state } = useSidebar();
+  const { state, toggleSidebar } = useSidebar();
   const collapsed = state === "collapsed";
   const { signOut, user } = useAuth();
+  const { images, siteSettings } = useSiteData();
   const navigate = useNavigate();
+
+  const logoUrl = images["logo"] || "https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/images__1_-removebg-preview.png";
 
   const handleSignOut = async () => {
     await signOut();
@@ -105,10 +110,14 @@ export function AdminSidebar() {
     <Sidebar collapsible="icon" className="border-r border-border/50 group">
       <SidebarHeader className="h-16 flex items-center justify-between px-3 shrink-0 border-b border-border/40 bg-card/50 backdrop-blur-sm relative">
         <div className={cn("flex items-center gap-3 transition-all duration-300", collapsed ? "opacity-0 w-0 overflow-hidden" : "opacity-100 w-auto")}>
-          <div className="w-8 h-8 rounded-xl bg-primary flex items-center justify-center shadow-lg shadow-primary/20 shrink-0">
-            <Zap className="w-4 h-4 text-white fill-white" />
+          <div className="w-9 h-9 rounded-xl bg-white flex items-center justify-center shadow-sm shrink-0 overflow-hidden border border-border/50">
+            <OptimizedImage 
+              src={siteSettings?.logo_url || logoUrl} 
+              alt="Tocorime Rio" 
+              className="w-full h-full object-contain p-1" 
+            />
           </div>
-          <span className="font-serif font-black text-lg tracking-tight whitespace-nowrap">EcoWander</span>
+          <span className="font-serif font-black text-base tracking-tight whitespace-nowrap text-foreground">Tocorime Rio</span>
         </div>
         
         {/* Floating Toggle Handle */}
