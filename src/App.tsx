@@ -123,7 +123,7 @@ const App = ({ queryClient: externalQueryClient }: { queryClient?: QueryClient }
                 </CartProvider>
               </LocaleProvider>
             </CurrencyProvider>
-outer>
+
           </TooltipProvider>
         </AuthProvider>
       </ErrorBoundary>
