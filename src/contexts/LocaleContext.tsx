@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useState, ReactNode, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useCurrency } from './CurrencyContext';
-import { pt, en, es } from "./translations";
+import { pt, en, es } from "@/translations";
 
 type Language = 'pt' | 'en' | 'es';
 type Currency = 'BRL' | 'USD' | 'EUR';
