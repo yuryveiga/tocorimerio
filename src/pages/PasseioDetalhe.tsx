@@ -150,6 +150,8 @@ export function PasseioDetalhe() {
       .replace(/minuto/gi, t("minuto"));
   };
 
+  const highlights = (translatedHighlights as { icon: string; text: string }[]) || [];
+  const faqItems = (translatedFaq as { q: string; a: string }[]) || [];
   const canonicalUrl = getCanonicalUrl(`/passeio/${tour?.slug || tour?.id}`);
 
   const jsonLd = tour ? {
@@ -384,8 +386,6 @@ export function PasseioDetalhe() {
 
   if (!tour) return <div className="min-h-screen flex flex-col items-center justify-center"><h1 className="text-2xl font-bold">{t("nao_encontrado")}</h1><Link to="/"><Button className="mt-4">{t("voltar_home")}</Button></Link></div>;
 
-  const highlights = (translatedHighlights as { icon: string; text: string }[]) || [];
-  const faqItems = (translatedFaq as { q: string; a: string }[]) || [];
 
   const openLightbox = (index: number, source: 'hero' | 'gallery' = 'hero') => {
     setLightboxIndex(index);
