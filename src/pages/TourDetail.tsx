@@ -10,6 +10,8 @@ import { LovableTour } from "@/integrations/lovable/client";
 import { useSiteData } from "@/hooks/useSiteData";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
+import { TourCard } from "@/components/ToursSection";
+
 import { useLocale } from "@/contexts/LocaleContext";
 import { useCart } from "@/contexts/CartContext";
 import { toast } from "sonner";
@@ -278,6 +280,15 @@ export function TourDetail() {
     
     return basePrice;
   }, [tour, quantity, selectedOptionIdx]);
+
+  const relatedTours = useMemo(() => {
+    if (!tours.length || !tour) return [];
+    return [...tours]
+      .filter(t => t.id !== tour.id && t.is_active !== false)
+      .sort(() => 0.5 - Math.random())
+      .slice(0, 10);
+  }, [tours, tour?.id]);
+
 
   useEffect(() => {
     const fetchWeather = async () => {
@@ -1125,6 +1136,49 @@ export function TourDetail() {
           </div>
         </div>
       </section>
+      
+      {/* Você também pode gostar - Related Tours Carousel */}
+      <section className="py-24 border-t border-border/50 bg-background overflow-hidden">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-4">
+            <div className="space-y-4">
+              <span className="text-primary font-black text-xs uppercase tracking-[0.3em]">{language === 'pt' ? 'Explore Mais' : language === 'es' ? 'Explorar Más' : 'Explore More'}</span>
+              <h2 className="text-3xl md:text-5xl font-serif font-black text-foreground">
+                {language === 'pt' ? 'Você também pode gostar' : language === 'es' ? 'También te pode gustar' : 'You might also like'}
+              </h2>
+            </div>
+            <div className="hidden md:flex gap-2">
+              {/* Desktop navigation will be handled by Carousel buttons, but we can add a 'See All' if needed */}
+            </div>
+          </div>
+          
+          <Carousel
+            opts={{
+              align: "start",
+              loop: true,
+            }}
+            className="w-full relative group"
+          >
+            <CarouselContent className="-ml-4 pb-8">
+              {relatedTours.map((item) => (
+                <CarouselItem key={item.id} className="pl-4 basis-full sm:basis-1/2 lg:basis-1/3 xl:basis-1/5">
+                  <div className="h-full transition-transform hover:scale-[1.02] duration-300">
+                    <TourCard tour={item as any} />
+                  </div>
+                </CarouselItem>
+              ))}
+
+            </CarouselContent>
+
+            
+            <div className="absolute -top-20 right-12 flex gap-2">
+              <CarouselPrevious className="static translate-y-0 h-12 w-12 border-2 hover:bg-primary hover:text-white transition-all shadow-xl" />
+              <CarouselNext className="static translate-y-0 h-12 w-12 border-2 hover:bg-primary hover:text-white transition-all shadow-xl" />
+            </div>
+          </Carousel>
+        </div>
+      </section>
+
 
       <Footer />
 

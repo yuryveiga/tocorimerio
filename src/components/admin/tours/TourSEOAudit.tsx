@@ -7,10 +7,8 @@ interface TourSEOAuditProps {
 }
 
 export function TourSEOAudit({ values }: TourSEOAuditProps) {
-  // Debug to verify if data is arriving
-  console.log("SEO Audit Values:", values);
-  
   const issues: { type: 'error' | 'warning' | 'success'; message: string }[] = [];
+
   const title = values?.title || "";
   const description = values?.short_description || "";
   const imageUrl = values?.image_url || "";
