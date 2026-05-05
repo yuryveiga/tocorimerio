@@ -104,3 +104,44 @@ export const generateFAQSchema = (faqs: { q: string; a: string }[]) => {
     }))
   };
 };
+
+/**
+ * Gera uma meta descrição otimizada para SEO, curta e com CTA.
+ * @param text O texto original (pode ser longo e conter HTML)
+ * @param title O título do item (para contexto)
+ * @param language O idioma atual
+ * @returns Descrição otimizada (máx 160 caracteres)
+ */
+export const generateOptimizedMetaDescription = (text: string, title: string = "", language: string = "pt") => {
+  if (!text) return "";
+
+  // 1. Limpa HTML e espaços extras
+  let clean = text
+    .replace(/<[^>]*>/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+
+  // 2. Define o CTA e Símbolos por idioma
+  const ctas: Record<string, string> = {
+    pt: "Reserve agora! ✓",
+    en: "Book now! ✓",
+    es: "¡Reserva ahora! ✓"
+  };
+
+  const cta = ctas[language] || ctas.pt;
+  const maxLength = 155 - cta.length;
+
+  // 3. Corta o texto preservando palavras completas se possível
+  if (clean.length > maxLength) {
+    clean = clean.substring(0, maxLength).trim();
+    // Tenta cortar no último espaço para não quebrar palavra
+    const lastSpace = clean.lastIndexOf(" ");
+    if (lastSpace > maxLength * 0.8) {
+      clean = clean.substring(0, lastSpace);
+    }
+    clean += "...";
+  }
+
+  // 4. Monta a string final
+  return `${clean} ${cta}`;
+};

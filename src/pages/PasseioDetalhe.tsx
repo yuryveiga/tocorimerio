@@ -35,7 +35,7 @@ import { Calendar as CalendarUI } from "@/components/ui/calendar";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { format, parseISO, isPast, isToday } from "date-fns";
 import { ptBR, enUS, es as esLocale } from "date-fns/locale";
-import { getCanonicalUrl, BASE_URL, generateTouristAttractionSchema, generateTourPackageSchema, generateFAQSchema } from "@/utils/seo";
+import { getCanonicalUrl, BASE_URL, generateTouristAttractionSchema, generateTourPackageSchema, generateFAQSchema, generateOptimizedMetaDescription } from "@/utils/seo";
 
 
 import { WeatherSection } from "@/components/WeatherSection";
@@ -421,19 +421,19 @@ export function PasseioDetalhe() {
     <main className="min-h-screen bg-background font-sans overflow-x-hidden">
       <Helmet>
         <title>{translatedTitle} | {siteTitle}</title>
-        <meta name="description" content={`${getTourMinPrice(tour) > 0 ? `${t("a_partir_de")} ${formatPrice(getTourMinPrice(tour))} - ` : ""}${(translatedShortDesc || siteSettings?.site_description || "").replace(/<[^>]*>/g, "").substring(0, 150)}`} />
+        <meta name="description" content={generateOptimizedMetaDescription(translatedShortDesc, translatedTitle, language)} />
 
         
         {/* Open Graph / Facebook */}
         <meta property="og:type" content="website" />
         <meta property="og:url" content={getCanonicalUrl(`/passeio/${tour?.slug || tour?.id}`)} />
         <meta property="og:title" content={`${translatedTitle} | ${siteTitle}`} />
-        <meta property="og:description" content={`${getTourMinPrice(tour) > 0 ? `${t("a_partir_de")} ${formatPrice(getTourMinPrice(tour))} - ` : ""}${translatedShortDesc || siteSettings?.site_description}`} />
+        <meta property="og:description" content={generateOptimizedMetaDescription(translatedShortDesc, translatedTitle, language)} />
         <meta property="og:image" content={tour.image_url} />
 
         {/* Twitter */}
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:description" content={translatedShortDesc || siteSettings?.site_description} />
+        <meta name="twitter:description" content={generateOptimizedMetaDescription(translatedShortDesc, translatedTitle, language)} />
         <meta name="twitter:image" content={tour.image_url} />
 
         <link rel="canonical" href={canonicalUrl} />

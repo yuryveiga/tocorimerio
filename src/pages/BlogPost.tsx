@@ -17,7 +17,7 @@ import { Button } from "@/components/ui/button";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 import "react-quill-new/dist/quill.snow.css";
 import { OptimizedImage } from "@/components/OptimizedImage";
-import { getCanonicalUrl } from "@/utils/seo";
+import { getCanonicalUrl, generateOptimizedMetaDescription } from "@/utils/seo";
 
 const InlineCTA = () => {
   const { t, language } = useLocale();
@@ -239,14 +239,14 @@ const BlogPost = () => {
       `}</style>
       <Helmet>
         <title>{title} | {siteTitle}</title>
-        <meta name="description" content={(excerpt || (content && content.replace(/<[^>]*>/g, "").substring(0, 160)) || title)} />
+        <meta name="description" content={generateOptimizedMetaDescription(excerpt || content || title, title, language)} />
 
         
         {/* Open Graph / Facebook */}
         <meta property="og:type" content="article" />
         <meta property="og:url" content={getCanonicalUrl(`/blog/${post.slug}`)} />
         <meta property="og:title" content={`${title} | ${siteTitle}`} />
-        <meta property="og:description" content={excerpt || (content && content.replace(/<[^>]*>/g, "").substring(0, 160)) || title} />
+        <meta property="og:description" content={generateOptimizedMetaDescription(excerpt || content || title, title, language)} />
         <meta property="og:image" content={post.image_url || fallbackImage} />
 
         <link rel="canonical" href={getCanonicalUrl(`/blog/${post.slug}`)} />
