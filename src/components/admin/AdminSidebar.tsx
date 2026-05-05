@@ -32,9 +32,12 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
   SidebarFooter,
+  SidebarHeader,
+  SidebarTrigger,
   useSidebar,
 } from "@/components/ui/sidebar";
 import { Button } from "@/components/ui/button";
+import { Menu } from "lucide-react";
 
 const menuGroups = [
   {
@@ -97,7 +100,11 @@ export function AdminSidebar() {
 
   return (
     <Sidebar collapsible="icon">
-      <SidebarContent className="gap-0 py-0 overflow-x-hidden">
+      <SidebarHeader className="border-b h-14 flex items-center justify-between px-4 shrink-0">
+        {!collapsed && <span className="font-serif font-bold text-sm tracking-tight">Eco Wanderlust</span>}
+        <SidebarTrigger className={collapsed ? "mx-auto" : ""} />
+      </SidebarHeader>
+      <SidebarContent className="gap-0 py-2 overflow-x-hidden">
         {menuGroups.map((group) => (
           <SidebarGroup key={group.label} className="py-1">
             {!collapsed && (

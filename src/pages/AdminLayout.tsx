@@ -39,7 +39,6 @@ const AdminLayout = () => {
         <div className="flex-1 flex flex-col">
           <header className="h-14 flex items-center justify-between border-b border-border px-4 bg-background">
             <div className="flex items-center">
-              <SidebarTrigger className="mr-4" />
               <h2 className="font-sans font-medium text-foreground">Painel Admin</h2>
             </div>
             <Button variant="outline" size="sm" asChild className="gap-2">
