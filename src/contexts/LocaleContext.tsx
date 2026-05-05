@@ -15,8 +15,6 @@ interface LocaleContextType {
   formatPrice: (priceBrl: number) => string;
 }
 
-const translationsMap = { pt, en, es };
-
 const LocaleContext = createContext<LocaleContextType | undefined>(undefined);
 
 export const LocaleProvider = ({ children }: { children: ReactNode }) => {
@@ -25,7 +23,8 @@ export const LocaleProvider = ({ children }: { children: ReactNode }) => {
   const { rates } = useCurrency();
 
   const t = (key: string) => {
-    return (translationsMap[language] as any)[key] || key;
+    const map: any = { pt, en, es };
+    return map[language][key] || key;
   };
 
   const formatPrice = (priceBrl: number) => {
