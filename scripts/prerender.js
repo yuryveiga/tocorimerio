@@ -49,9 +49,12 @@ async function fetchDynamicRoutes() {
   }
 
   // Fetch tours
-  const { data: tours } = await supabase.from('tours').select('id');
+  const { data: tours } = await supabase.from('tours').select('id, slug');
   if (tours) {
-    tours.forEach(tour => routes.push(`/passeio/${tour.id}`));
+    tours.forEach(tour => {
+      routes.push(`/passeio/${tour.id}`);
+      if (tour.slug) routes.push(`/passeio/${tour.slug}`);
+    });
   }
 
   // Fetch pages
