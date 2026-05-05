@@ -39,7 +39,7 @@ const AdminSimulator = lazy(() => import("./pages/AdminSimulator"));
 const AdminCalendar = lazy(() => import("./pages/AdminCalendar"));
 const AdminAnalytics = lazy(() => import("./pages/AdminAnalytics"));
 
-const TourDetail = lazy(() => import("./pages/TourDetail").then(m => ({ default: m.TourDetail })));
+const TourDetail = lazy(() => import("./pages/TourDetail"));
 const Blog = lazy(() => import("./pages/Blog"));
 const BlogPost = lazy(() => import("./pages/BlogPost"));
 const Cart = lazy(() => import("./pages/Cart"));

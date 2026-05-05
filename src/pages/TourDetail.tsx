@@ -1282,3 +1282,5 @@ export function TourDetail() {
   );
 }
 
+export default TourDetail;
+

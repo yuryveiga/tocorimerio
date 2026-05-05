@@ -11,6 +11,8 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/u
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { DeleteConfirmDialog } from "@/components/admin/DeleteConfirmDialog";
 import { OptimizedImage } from "@/components/OptimizedImage";
+import { BlogPostSEOAudit } from "@/components/admin/blog/BlogPostSEOAudit";
+
 import {
   AlertDialog,
   AlertDialogAction,
@@ -409,6 +411,7 @@ const AdminBlog = () => {
                 </DialogTitle>
                 <TabsList className="h-12 bg-transparent border-b w-full justify-start gap-4">
                   <TabsTrigger value="content" className="data-[state=active]:border-b-2 data-[state=active]:border-primary rounded-none px-4 py-2 font-bold">Conteúdo</TabsTrigger>
+                  <TabsTrigger value="seo" className="data-[state=active]:border-b-2 data-[state=active]:border-primary rounded-none px-4 py-2 font-bold">SEO</TabsTrigger>
                   <TabsTrigger value="gallery" className="data-[state=active]:border-b-2 data-[state=active]:border-primary rounded-none px-4 py-2 font-bold">Galeria</TabsTrigger>
                 </TabsList>
               </DialogHeader>
@@ -519,6 +522,14 @@ const AdminBlog = () => {
                     </div>
                  </div>
                </TabsContent>
+
+               <TabsContent value="seo" className="m-0 flex-1 overflow-hidden">
+                 <BlogPostSEOAudit 
+                   post={editing} 
+                   onUpdate={(updates) => setEditing(prev => prev ? { ...prev, ...updates } : prev)} 
+                 />
+               </TabsContent>
+
 
                <TabsContent value="gallery" className="m-0 flex-1 overflow-y-auto p-8">
                  <div className="space-y-6">
