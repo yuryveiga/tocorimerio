@@ -20,6 +20,8 @@ import { MobileStickyCTA } from "./components/MobileStickyCTA";
 
 // Pages
 import Index from "./pages/Index";
+import TourDetail from "./pages/TourDetail";
+import BlogPost from "./pages/BlogPost";
 const NotFound = lazy(() => import("./pages/NotFound"));
 const AdminLogin = lazy(() => import("./pages/AdminLogin"));
 const AdminResetPassword = lazy(() => import("./pages/AdminResetPassword"));
@@ -39,9 +41,7 @@ const AdminSimulator = lazy(() => import("./pages/AdminSimulator"));
 const AdminCalendar = lazy(() => import("./pages/AdminCalendar"));
 const AdminAnalytics = lazy(() => import("./pages/AdminAnalytics"));
 
-const TourDetail = lazy(() => import("./pages/TourDetail"));
 const Blog = lazy(() => import("./pages/Blog"));
-const BlogPost = lazy(() => import("./pages/BlogPost"));
 const Cart = lazy(() => import("./pages/Cart"));
 const MaracanaCalendar = lazy(() => import("./pages/MaracanaCalendar"));
 const GenericPage = lazy(() => import("./pages/GenericPage"));
