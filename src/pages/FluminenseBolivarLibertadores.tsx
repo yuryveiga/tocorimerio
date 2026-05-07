@@ -144,7 +144,11 @@ const FluminenseBolivarLibertadores = () => {
             radial-gradient(ellipse 80% 60% at 50% 0%, rgba(26,122,46,0.18) 0%, transparent 60%),
             radial-gradient(ellipse 60% 40% at 20% 80%, rgba(139,0,0,0.15) 0%, transparent 50%),
             radial-gradient(ellipse 50% 50% at 80% 60%, rgba(212,168,67,0.08) 0%, transparent 50%),
-            linear-gradient(180deg, #0a0a0a 0%, #0d0d0d 100%);
+            linear-gradient(180deg, rgba(10,10,10,0.78) 0%, rgba(13,13,13,0.92) 100%),
+            url('https://lncimg.lance.com.br/cdn-cgi/image/width=1600,quality=80,fit=cover,format=webp/uploads/2016/10/19/5807e137e598d.jpeg');
+          background-size: cover;
+          background-position: center;
+          background-repeat: no-repeat;
         }
 
         .libertadores-page .hero-bg::before {
