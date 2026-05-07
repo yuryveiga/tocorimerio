@@ -818,6 +818,24 @@ const FluminenseBolivarLibertadores = () => {
         <p>🔴 <span className="urgency-highlight">MUST-WIN</span> — Fluminense need a <span className="urgency-highlight">3-goal margin</span> to advance. Don't miss the most intense Maracanã night of 2026.</p>
       </div>
 
+      {/* MATCH VIDEO */}
+      <section className="video-section fade-in" style={{ padding: "60px 20px", maxWidth: 1100, margin: "0 auto" }}>
+        <div style={{ textAlign: "center", marginBottom: 32 }}>
+          <div className="section-label">Watch</div>
+          <div className="section-title">Feel the Maracanã Atmosphere</div>
+        </div>
+        <div style={{ position: "relative", paddingBottom: "56.25%", height: 0, overflow: "hidden", borderRadius: 16, boxShadow: "0 20px 60px rgba(0,0,0,0.4)" }}>
+          <iframe
+            src="https://www.youtube.com/embed/cCyYRbMyBpk"
+            title="Fluminense vs Bolívar — Maracanã"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowFullScreen
+            loading="lazy"
+            style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%", border: 0 }}
+          />
+        </div>
+      </section>
+
       {/* PACKAGES */}
       <section className="packages-section" id="packages">
         <div className="packages-header fade-in">
