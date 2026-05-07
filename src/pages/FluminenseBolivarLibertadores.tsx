@@ -861,73 +861,73 @@ const FluminenseBolivarLibertadores = () => {
       <section className="packages-section" id="packages">
         <div className="packages-header fade-in">
           <div className="section-label">Choose Your Experience</div>
-          <div className="section-title">Setores & Pacotes</div>
-          <p className="section-sub" style={{ margin: "0 auto" }}>Setores oficiais do Maracanã. Todos os pacotes incluem ingresso, transfer ida e volta (Ipanema / Copa) e guia trilíngue.</p>
+          <div className="section-title">Sectors & Packages</div>
+          <p className="section-sub" style={{ margin: "0 auto" }}>Official Maracanã sectors. Every package includes the official ticket, round-trip transfer (Ipanema / Copacabana) and a trilingual guide.</p>
         </div>
 
         <div className="packages-grid fade-in">
           <div className="pkg-card featured">
-            <div className="pkg-badge">Disponível</div>
-            <div className="pkg-tier">Melhor Custo-Benefício</div>
-            <div className="pkg-name">Regular Oeste Superior</div>
+            <div className="pkg-badge">Available</div>
+            <div className="pkg-tier">Best Value</div>
+            <div className="pkg-name">Regular — West Upper</div>
             <div className="pkg-price"><sub>R$ </sub>500</div>
-            <div className="pkg-per">por pessoa</div>
+            <div className="pkg-per">per person</div>
             <div className="pkg-divider"></div>
             <ul className="pkg-features">
-              <li><span className="check">✓</span> Setor Oeste Superior (sem lugar marcado)</li>
-              <li><span className="check">✓</span> Sem cadastro biométrico</li>
-              <li><span className="check">✓</span> Acesso pelo estacionamento (entrada rápida e segura)</li>
-              <li><span className="check">✓</span> Transfer ida e volta (Ipanema / Copa)</li>
-              <li><span className="check">✓</span> Guia trilíngue (PT / EN / ES)</li>
-              <li><span className="check">✓</span> Staff de apoio durante todo o evento</li>
+              <li><span className="check">✓</span> Upper West Sector (unassigned seating)</li>
+              <li><span className="check">✓</span> No biometric registration required</li>
+              <li><span className="check">✓</span> Parking lot access (faster, safer entry)</li>
+              <li><span className="check">✓</span> Round-trip transfer (Ipanema / Copa)</li>
+              <li><span className="check">✓</span> Trilingual guide (EN / PT / ES)</li>
+              <li><span className="check">✓</span> Support staff throughout the event</li>
             </ul>
-            <a href={BOOKING_URL} className="pkg-cta green">Reservar Oeste Superior</a>
+            <a href={BOOKING_URL} className="pkg-cta green">Book West Upper</a>
           </div>
 
           <div className="pkg-card">
-            <div className="pkg-tier">Sob Consulta</div>
-            <div className="pkg-name">Regular Oeste Inferior</div>
+            <div className="pkg-tier">On Request</div>
+            <div className="pkg-name">Regular — West Lower</div>
             <div className="pkg-price"><sub>R$ </sub>550</div>
-            <div className="pkg-per">por pessoa</div>
+            <div className="pkg-per">per person</div>
             <div className="pkg-divider"></div>
             <ul className="pkg-features">
-              <li><span className="check">✓</span> Setor Oeste Inferior — assento colado ao campo</li>
-              <li><span className="check">✓</span> Cadastro biométrico facial obrigatório (auxiliamos)</li>
-              <li><span className="check">✓</span> Transfer ida e volta + guia trilíngue</li>
-              <li className="inactive"><span className="check">—</span> Não inclui acesso pelo estacionamento</li>
+              <li><span className="check">✓</span> Lower West Sector — seat right next to the pitch</li>
+              <li><span className="check">✓</span> Biometric facial registration required (we assist)</li>
+              <li><span className="check">✓</span> Round-trip transfer + trilingual guide</li>
+              <li className="inactive"><span className="check">—</span> Does not include parking lot access</li>
             </ul>
-            <a href={BOOKING_URL} className="pkg-cta outline">Consultar Disponibilidade</a>
+            <a href={BOOKING_URL} className="pkg-cta outline">Check Availability</a>
           </div>
 
           <div className="pkg-card">
             <div className="pkg-tier">All-Inclusive</div>
             <div className="pkg-name">Regular + Maracanã Club</div>
             <div className="pkg-price"><sub>R$ </sub>750</div>
-            <div className="pkg-per">por pessoa</div>
+            <div className="pkg-per">per person</div>
             <div className="pkg-divider"></div>
             <ul className="pkg-features">
-              <li><span className="check">✓</span> Setor Oeste Superior + acesso ao Maracanã Club</li>
-              <li><span className="check">✓</span> Comidas inclusas: petiscos, hot dogs, sanduíches, pratos quentes, sobremesas</li>
-              <li><span className="check">✓</span> Bar aberto: água, Coca-Cola, mate e Chopp Brahma</li>
-              <li><span className="check">✓</span> Estacionamento, transfer e guia trilíngue</li>
+              <li><span className="check">✓</span> Upper West Sector + Maracanã Club access</li>
+              <li><span className="check">✓</span> Food included: appetizers, hot dogs, sandwiches, hot dishes, desserts</li>
+              <li><span className="check">✓</span> Open bar: water, Coca-Cola, mate and Brahma draft beer</li>
+              <li><span className="check">✓</span> Parking access, transfer and trilingual guide</li>
             </ul>
-            <a href={BOOKING_URL} className="pkg-cta outline">Consultar Maracanã Club</a>
+            <a href={BOOKING_URL} className="pkg-cta outline">Check Maracanã Club</a>
           </div>
 
           <div className="pkg-card">
             <div className="pkg-tier">Premium</div>
             <div className="pkg-name">Premium Maracanã Mais</div>
             <div className="pkg-price"><sub>R$ </sub>1.400</div>
-            <div className="pkg-per">por pessoa</div>
+            <div className="pkg-per">per person</div>
             <div className="pkg-divider"></div>
             <ul className="pkg-features">
-              <li><span className="check">✓</span> Hospitalidade premium ao lado do campo</li>
-              <li><span className="check">✓</span> Lugar marcado colado ao gramado</li>
-              <li><span className="check">✓</span> Cadastro biométrico facial obrigatório (auxiliamos)</li>
-              <li><span className="check">✓</span> Comidas e bebidas inclusas (chopp à parte)</li>
-              <li><span className="check">✓</span> Estacionamento, transfer e guia trilíngue</li>
+              <li><span className="check">✓</span> Premium pitch-side hospitality</li>
+              <li><span className="check">✓</span> Assigned seat next to the field</li>
+              <li><span className="check">✓</span> Biometric facial registration required (we assist)</li>
+              <li><span className="check">✓</span> Food & drinks included (draft beer sold separately)</li>
+              <li><span className="check">✓</span> Parking access, transfer and trilingual guide</li>
             </ul>
-            <a href={BOOKING_URL} className="pkg-cta outline">Consultar Premium</a>
+            <a href={BOOKING_URL} className="pkg-cta outline">Check Premium</a>
           </div>
         </div>
       </section>
