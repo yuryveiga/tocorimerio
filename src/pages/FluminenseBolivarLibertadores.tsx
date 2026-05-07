@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Helmet } from "react-helmet-async";
 
 const TARGET_DATE = new Date('2026-05-19T21:30:00-03:00');
+const BOOKING_URL = "https://tocorimerio.com/match/fluminense-vs-bolivar-2026-05-19";
 
 const FluminenseBolivarLibertadores = () => {
   const [timeLeft, setTimeLeft] = useState({
@@ -735,7 +736,7 @@ const FluminenseBolivarLibertadores = () => {
         <div className="nav-links">
           <a href="#packages">Packages</a>
           <a href="#included">What's Included</a>
-          <a href="#packages" className="nav-cta">Book Now</a>
+          <a href={BOOKING_URL} className="nav-cta">Book Now</a>
         </div>
       </nav>
 
@@ -802,7 +803,7 @@ const FluminenseBolivarLibertadores = () => {
         </div>
 
         <div className="hero-ctas">
-          <a href="#packages" className="btn-primary">Get My Tickets</a>
+          <a href={BOOKING_URL} className="btn-primary">Get My Tickets</a>
           <a href="#included" className="btn-secondary">See What's Included</a>
         </div>
 
@@ -840,7 +841,7 @@ const FluminenseBolivarLibertadores = () => {
               <li className="inactive"><span className="check">—</span> Premium seating section</li>
               <li className="inactive"><span className="check">—</span> Pre-match bar meetup</li>
             </ul>
-            <a href="#" className="pkg-cta outline">Select Essential</a>
+            <a href={BOOKING_URL} className="pkg-cta outline">Select Essential</a>
           </div>
 
           <div className="pkg-card featured">
@@ -858,7 +859,7 @@ const FluminenseBolivarLibertadores = () => {
               <li><span className="check">✓</span> Brazilian snacks & local beer included</li>
               <li><span className="check">✓</span> Matchday digital booklet</li>
             </ul>
-            <a href="#" className="pkg-cta green">Select Full Experience</a>
+            <a href={BOOKING_URL} className="pkg-cta green">Select Full Experience</a>
           </div>
 
           <div className="pkg-card">
@@ -875,7 +876,7 @@ const FluminenseBolivarLibertadores = () => {
               <li><span className="check">✓</span> Premium bar package (open tab)</li>
               <li><span className="check">✓</span> Exclusive Fluminense matchday scarf</li>
             </ul>
-            <a href="#" className="pkg-cta outline">Select VIP Platinum</a>
+            <a href={BOOKING_URL} className="pkg-cta outline">Select VIP Platinum</a>
           </div>
         </div>
       </section>
@@ -935,7 +936,7 @@ const FluminenseBolivarLibertadores = () => {
         <p className="stakes-lead">
           Fluminense must win — and win <strong>big</strong>. After falling 2–0 in La Paz, the Tricolor need at least a <strong>3-goal margin</strong> to leapfrog Bolívar on head-to-head. With 78,000 fans roaring under the Maracanã lights, this is Copa Libertadores football at its most dramatic.
         </p>
-        <a href="#packages" className="btn-primary">I Want to Be There</a>
+        <a href={BOOKING_URL} className="btn-primary">I Want to Be There</a>
       </section>
 
       {/* HOW IT WORKS */}
@@ -1018,7 +1019,7 @@ const FluminenseBolivarLibertadores = () => {
           <div className="from">Packages from</div>
           <div className="amount">USD 79</div>
         </div>
-        <a href="#packages" className="btn-primary" style={{ fontSize: "1.1rem", padding: "1.1rem 3rem" }}>Secure My Spot Now</a>
+        <a href={BOOKING_URL} className="btn-primary" style={{ fontSize: "1.1rem", padding: "1.1rem 3rem" }}>Secure My Spot Now</a>
         <p className="cta-note">Instant confirmation · Secure payment · Free cancellation up to 72h before</p>
       </section>
 
