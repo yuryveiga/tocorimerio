@@ -30,6 +30,7 @@ import { getCanonicalUrl } from "@/utils/seo";
 import { LovableMatch } from "@/types";
 import { WhyChooseUs } from "@/components/WhyChooseUs";
 import { PaymentLogos } from "@/components/PaymentLogos";
+import { YouMayAlsoLike } from "@/components/YouMayAlsoLike";
 
 // Partner Project Config
 const MARACANA_PROJECT_URL = "https://mwxbskzggzznxvkwgrnz.supabase.co";
@@ -729,6 +730,8 @@ export default function MatchDetail() {
           </div>
         </div>
       </section>
+
+      <YouMayAlsoLike />
 
       <WhyChooseUs />
 
