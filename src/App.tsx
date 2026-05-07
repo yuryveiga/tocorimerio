@@ -47,6 +47,7 @@ const GenericPage = lazy(() => import("./pages/GenericPage"));
 const CheckoutSuccess = lazy(() => import("./pages/CheckoutSuccess"));
 const MatchDetail = lazy(() => import("./pages/MatchDetail"));
 const FlamengoVascoMaracana = lazy(() => import("./pages/FlamengoVascoMaracana"));
+const FluminenseBolivarLibertadores = lazy(() => import("./pages/FluminenseBolivarLibertadores"));
 
 const PageLoader = () => <div className="min-h-screen flex items-center justify-center bg-background"><div className="w-12 h-12 border-4 border-primary border-t-transparent rounded-full animate-spin" /></div>;
 
@@ -96,6 +97,7 @@ const App = ({ queryClient: externalQueryClient }: { queryClient?: QueryClient }
                       <Route path="/match/:id" element={<MatchDetail />} />
                       <Route path="/jogo/:id" element={<Navigate to="/match/:id" replace />} />
                       <Route path="/flamengo-x-vasco-maracana" element={<FlamengoVascoMaracana />} />
+                      <Route path="/Fluminense-bolivar-libertadores" element={<FluminenseBolivarLibertadores />} />
                       <Route path="/:slug" element={<GenericPage />} />
                       <Route path="/admin/login" element={<AdminLogin />} />
                       <Route path="/admin/reset-password" element={<AdminResetPassword />} />
