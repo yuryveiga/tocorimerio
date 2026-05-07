@@ -433,10 +433,16 @@ const FluminenseBolivarLibertadores = () => {
         .libertadores-page .packages-header { text-align: center; margin-bottom: 3.5rem; }
         .libertadores-page .packages-grid {
           display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+          grid-template-columns: repeat(4, 1fr);
           gap: 1.5px;
-          max-width: 1100px; margin: 0 auto;
+          max-width: 1400px; margin: 0 auto;
           background: rgba(255,255,255,0.06);
+        }
+        @media (max-width: 1100px) {
+          .libertadores-page .packages-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (max-width: 640px) {
+          .libertadores-page .packages-grid { grid-template-columns: 1fr; }
         }
 
         .libertadores-page .pkg-card {
