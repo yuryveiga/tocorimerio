@@ -499,6 +499,8 @@ export type Database = {
           allows_open: boolean
           allows_private: boolean
           available_days: Json | null
+          bares_diurnos: string | null
+          bares_noturnos: string | null
           carousel_images_json: Json | null
           category: string
           category_en: string | null
@@ -556,6 +558,8 @@ export type Database = {
           allows_open?: boolean
           allows_private?: boolean
           available_days?: Json | null
+          bares_diurnos?: string | null
+          bares_noturnos?: string | null
           carousel_images_json?: Json | null
           category?: string
           category_en?: string | null
@@ -613,6 +617,8 @@ export type Database = {
           allows_open?: boolean
           allows_private?: boolean
           available_days?: Json | null
+          bares_diurnos?: string | null
+          bares_noturnos?: string | null
           carousel_images_json?: Json | null
           category?: string
           category_en?: string | null
