@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Helmet } from "react-helmet-async";
 import bolivarCrest from "@/assets/bolivar-crest.png";
+import { Footer } from "@/components/Footer";
 
 const TARGET_DATE = new Date('2026-05-19T21:30:00-03:00');
 const BOOKING_URL = "https://tocorimerio.com/match/fluminense-vs-bolivar-2026-05-19";
@@ -1075,17 +1076,7 @@ const FluminenseBolivarLibertadores = () => {
       </section>
 
       {/* FOOTER */}
-      <footer>
-        <div className="logo">Tocori<span>merio</span></div>
-        <div className="footer-links">
-          <a href="#">About</a>
-          <a href="#">FAQ</a>
-          <a href="#">Contact</a>
-          <a href="#">Terms</a>
-          <a href="#">Privacy</a>
-        </div>
-        <div className="footer-copy">© 2026 Tocorimerio.com · Rio de Janeiro</div>
-      </footer>
+      <Footer />
     </div>
   );
 };
