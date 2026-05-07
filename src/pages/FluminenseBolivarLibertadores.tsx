@@ -691,10 +691,11 @@ const FluminenseBolivarLibertadores = () => {
         .libertadores-page .cta-note { font-size: 0.8rem; color: var(--text-dim); margin-top: 1.5rem; }
 
         /* ── FOOTER ── */
-        .libertadores-page footer { text-align: center; }
-        .libertadores-page footer .grid > div { align-items: center; }
-        .libertadores-page footer ul { align-items: center; }
-        .libertadores-page footer .flex.items-center.gap-2 { justify-content: center; }
+        .libertadores-page footer,
+        .libertadores-page footer * { text-align: center; }
+        .libertadores-page footer ul { list-style: none; padding-left: 0; }
+        .libertadores-page footer ul li,
+        .libertadores-page footer .flex { justify-content: center; align-items: center; }
         .libertadores-page footer .flex.flex-col { align-items: center; }
 
         /* ── ANIMATIONS ── */
