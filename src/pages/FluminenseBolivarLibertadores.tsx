@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Helmet } from "react-helmet-async";
+import bolivarCrest from "@/assets/bolivar-crest.png";
 
 const TARGET_DATE = new Date('2026-05-19T21:30:00-03:00');
 const BOOKING_URL = "https://tocorimerio.com/match/fluminense-vs-bolivar-2026-05-19";
@@ -773,7 +774,7 @@ const FluminenseBolivarLibertadores = () => {
             <div className="vs-divider"></div>
           </div>
           <div className="team-block">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Club_Bol%C3%ADvar_logo.svg/240px-Club_Bol%C3%ADvar_logo.svg.png" alt="Club Bolívar" className="team-logo" loading="eager" />
+            <img src={bolivarCrest} alt="Club Bolívar" className="team-logo" loading="eager" />
             <div className="team-name blv">Bolívar</div>
             <div className="team-sub">La Paz · BOL</div>
           </div>
