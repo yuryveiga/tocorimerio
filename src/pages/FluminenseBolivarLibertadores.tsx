@@ -205,6 +205,14 @@ const FluminenseBolivarLibertadores = () => {
         }
 
         .libertadores-page .team-block { text-align: center; }
+        .libertadores-page .team-logo {
+          width: clamp(80px, 12vw, 140px);
+          height: clamp(80px, 12vw, 140px);
+          object-fit: contain;
+          margin: 0 auto 0.8rem;
+          display: block;
+          filter: drop-shadow(0 6px 20px rgba(0,0,0,0.5));
+        }
         .libertadores-page .team-name {
           font-family: 'Bebas Neue', sans-serif;
           font-size: clamp(2.5rem, 7vw, 5.5rem);
@@ -751,6 +759,7 @@ const FluminenseBolivarLibertadores = () => {
 
         <div className="match-header">
           <div className="team-block">
+            <img src="https://crests.football-data.org/1765.png" alt="Fluminense FC" className="team-logo" loading="eager" />
             <div className="team-name flu">Fluminense</div>
             <div className="team-sub">Rio de Janeiro · BRA</div>
           </div>
@@ -760,6 +769,7 @@ const FluminenseBolivarLibertadores = () => {
             <div className="vs-divider"></div>
           </div>
           <div className="team-block">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Club_Bol%C3%ADvar_logo.svg/240px-Club_Bol%C3%ADvar_logo.svg.png" alt="Club Bolívar" className="team-logo" loading="eager" />
             <div className="team-name blv">Bolívar</div>
             <div className="team-sub">La Paz · BOL</div>
           </div>
@@ -840,61 +850,73 @@ const FluminenseBolivarLibertadores = () => {
       <section className="packages-section" id="packages">
         <div className="packages-header fade-in">
           <div className="section-label">Choose Your Experience</div>
-          <div className="section-title">Match Day Packages</div>
-          <p className="section-sub" style={{ margin: "0 auto" }}>Every package includes your official ticket, English-speaking guide, and pre-match transfer from Ipanema or Copacabana.</p>
+          <div className="section-title">Setores & Pacotes</div>
+          <p className="section-sub" style={{ margin: "0 auto" }}>Setores oficiais do Maracanã. Todos os pacotes incluem ingresso, transfer ida e volta (Ipanema / Copa) e guia trilíngue.</p>
         </div>
 
         <div className="packages-grid fade-in">
-          <div className="pkg-card">
-            <div className="pkg-tier">Starter</div>
-            <div className="pkg-name">Essential</div>
-            <div className="pkg-price"><sub>USD </sub>79</div>
-            <div className="pkg-per">per person</div>
+          <div className="pkg-card featured">
+            <div className="pkg-badge">Disponível</div>
+            <div className="pkg-tier">Melhor Custo-Benefício</div>
+            <div className="pkg-name">Regular Oeste Superior</div>
+            <div className="pkg-price"><sub>R$ </sub>500</div>
+            <div className="pkg-per">por pessoa</div>
             <div className="pkg-divider"></div>
             <ul className="pkg-features">
-              <li><span className="check">✓</span> Official match ticket (lower tier)</li>
-              <li><span className="check">✓</span> Round-trip transfer (Ipanema / Copa)</li>
-              <li><span className="check">✓</span> English-speaking local guide</li>
-              <li><span className="check">✓</span> Stadium entry briefing</li>
-              <li className="inactive"><span className="check">—</span> Premium seating section</li>
-              <li className="inactive"><span className="check">—</span> Pre-match bar meetup</li>
+              <li><span className="check">✓</span> Setor Oeste Superior (sem lugar marcado)</li>
+              <li><span className="check">✓</span> Sem cadastro biométrico</li>
+              <li><span className="check">✓</span> Acesso pelo estacionamento (entrada rápida e segura)</li>
+              <li><span className="check">✓</span> Transfer ida e volta (Ipanema / Copa)</li>
+              <li><span className="check">✓</span> Guia trilíngue (PT / EN / ES)</li>
+              <li><span className="check">✓</span> Staff de apoio durante todo o evento</li>
             </ul>
-            <a href={BOOKING_URL} className="pkg-cta outline">Select Essential</a>
+            <a href={BOOKING_URL} className="pkg-cta green">Reservar Oeste Superior</a>
           </div>
 
-          <div className="pkg-card featured">
-            <div className="pkg-badge">Most Popular</div>
-            <div className="pkg-tier">Recommended</div>
-            <div className="pkg-name">Full Experience</div>
-            <div className="pkg-price"><sub>USD </sub>129</div>
-            <div className="pkg-per">per person</div>
+          <div className="pkg-card">
+            <div className="pkg-tier">Sob Consulta</div>
+            <div className="pkg-name">Regular Oeste Inferior</div>
+            <div className="pkg-price"><sub>R$ </sub>550</div>
+            <div className="pkg-per">por pessoa</div>
             <div className="pkg-divider"></div>
             <ul className="pkg-features">
-              <li><span className="check">✓</span> Official match ticket (premium lower tier)</li>
-              <li><span className="check">✓</span> Round-trip transfer (Ipanema / Copa)</li>
-              <li><span className="check">✓</span> English-speaking local guide</li>
-              <li><span className="check">✓</span> Pre-match bar meetup with the group</li>
-              <li><span className="check">✓</span> Brazilian snacks & local beer included</li>
-              <li><span className="check">✓</span> Matchday digital booklet</li>
+              <li><span className="check">✓</span> Setor Oeste Inferior — assento colado ao campo</li>
+              <li><span className="check">✓</span> Cadastro biométrico facial obrigatório (auxiliamos)</li>
+              <li><span className="check">✓</span> Transfer ida e volta + guia trilíngue</li>
+              <li className="inactive"><span className="check">—</span> Não inclui acesso pelo estacionamento</li>
             </ul>
-            <a href={BOOKING_URL} className="pkg-cta green">Select Full Experience</a>
+            <a href={BOOKING_URL} className="pkg-cta outline">Consultar Disponibilidade</a>
+          </div>
+
+          <div className="pkg-card">
+            <div className="pkg-tier">All-Inclusive</div>
+            <div className="pkg-name">Regular + Maracanã Club</div>
+            <div className="pkg-price"><sub>R$ </sub>750</div>
+            <div className="pkg-per">por pessoa</div>
+            <div className="pkg-divider"></div>
+            <ul className="pkg-features">
+              <li><span className="check">✓</span> Setor Oeste Superior + acesso ao Maracanã Club</li>
+              <li><span className="check">✓</span> Comidas inclusas: petiscos, hot dogs, sanduíches, pratos quentes, sobremesas</li>
+              <li><span className="check">✓</span> Bar aberto: água, Coca-Cola, mate e Chopp Brahma</li>
+              <li><span className="check">✓</span> Estacionamento, transfer e guia trilíngue</li>
+            </ul>
+            <a href={BOOKING_URL} className="pkg-cta outline">Consultar Maracanã Club</a>
           </div>
 
           <div className="pkg-card">
             <div className="pkg-tier">Premium</div>
-            <div className="pkg-name">VIP Platinum</div>
-            <div className="pkg-price"><sub>USD </sub>219</div>
-            <div className="pkg-per">per person</div>
+            <div className="pkg-name">Premium Maracanã Mais</div>
+            <div className="pkg-price"><sub>R$ </sub>1.400</div>
+            <div className="pkg-per">por pessoa</div>
             <div className="pkg-divider"></div>
             <ul className="pkg-features">
-              <li><span className="check">✓</span> Official ticket — best seats in the stadium</li>
-              <li><span className="check">✓</span> Private transfer (dedicated vehicle)</li>
-              <li><span className="check">✓</span> Personal guide (max 4 per guide)</li>
-              <li><span className="check">✓</span> Private pre-match dinner in Urca</li>
-              <li><span className="check">✓</span> Premium bar package (open tab)</li>
-              <li><span className="check">✓</span> Exclusive Fluminense matchday scarf</li>
+              <li><span className="check">✓</span> Hospitalidade premium ao lado do campo</li>
+              <li><span className="check">✓</span> Lugar marcado colado ao gramado</li>
+              <li><span className="check">✓</span> Cadastro biométrico facial obrigatório (auxiliamos)</li>
+              <li><span className="check">✓</span> Comidas e bebidas inclusas (chopp à parte)</li>
+              <li><span className="check">✓</span> Estacionamento, transfer e guia trilíngue</li>
             </ul>
-            <a href={BOOKING_URL} className="pkg-cta outline">Select VIP Platinum</a>
+            <a href={BOOKING_URL} className="pkg-cta outline">Consultar Premium</a>
           </div>
         </div>
       </section>
