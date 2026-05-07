@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { Helmet } from "react-helmet-async";
 import bolivarCrest from "@/assets/bolivar-crest.png";
-import { Footer } from "@/components/Footer";
 
 const TARGET_DATE = new Date('2026-05-19T21:30:00-03:00');
 const BOOKING_URL = "https://tocorimerio.com/match/fluminense-vs-bolivar-2026-05-19";
@@ -1052,8 +1051,6 @@ const FluminenseBolivarLibertadores = () => {
         <p className="cta-note">Instant confirmation · Secure payment · Free cancellation up to 72h before</p>
       </section>
 
-      {/* FOOTER */}
-      <Footer />
     </div>
   );
 };
