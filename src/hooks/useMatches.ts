@@ -72,6 +72,8 @@ export function useMatches() {
       const pkgsByMatch: Record<string, { price_brl: number; total_stock: number; sold_count: number }[]> = {};
       (packagesData || []).forEach((p: any) => {
         if (!p.price_brl || p.price_brl <= 0) return;
+        const remaining = (Number(p.total_stock) || 0) - (Number(p.sold_count) || 0);
+        if (remaining <= 0) return;
         if (!pkgsByMatch[p.match_id]) pkgsByMatch[p.match_id] = [];
         pkgsByMatch[p.match_id].push({
           price_brl: Number(p.price_brl),

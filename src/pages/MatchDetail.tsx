@@ -136,7 +136,11 @@ export default function MatchDetail() {
         return [];
       }
       return (data || [])
-        .filter((p: any) => p.is_active && (p.price_brl ?? 0) > 0)
+        .filter((p: any) =>
+          p.is_active &&
+          (p.price_brl ?? 0) > 0 &&
+          ((p.total_stock ?? 0) - (p.sold_count ?? 0)) > 0
+        )
         .sort((a: any, b: any) => (a.package_type?.display_order ?? 99) - (b.package_type?.display_order ?? 99));
     },
     enabled: !!match?.id,
