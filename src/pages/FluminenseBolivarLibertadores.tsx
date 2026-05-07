@@ -691,35 +691,11 @@ const FluminenseBolivarLibertadores = () => {
         .libertadores-page .cta-note { font-size: 0.8rem; color: var(--text-dim); margin-top: 1.5rem; }
 
         /* ── FOOTER ── */
-        .libertadores-page footer {
-          background: var(--dark);
-          border-top: 1px solid rgba(255,255,255,0.06);
-          padding: 2.5rem 2rem;
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          flex-wrap: wrap;
-          gap: 1.5rem;
-        }
-        .libertadores-page footer .logo { font-size: 1.3rem; }
-        .libertadores-page .footer-links {
-          display: flex; gap: 1.5rem; flex-wrap: wrap;
-        }
-        .libertadores-page .footer-links a {
-          font-family: 'Barlow Condensed', sans-serif;
-          font-size: 0.75rem;
-          letter-spacing: 0.12em;
-          text-transform: uppercase;
-          color: var(--text-dim);
-          text-decoration: none;
-          transition: color 0.2s;
-        }
-        .libertadores-page .footer-links a:hover { color: var(--gold); }
-        .libertadores-page .footer-copy {
-          font-size: 0.75rem;
-          color: var(--text-dim);
-          opacity: 0.5;
-        }
+        .libertadores-page footer { text-align: center; }
+        .libertadores-page footer .grid > div { align-items: center; }
+        .libertadores-page footer ul { align-items: center; }
+        .libertadores-page footer .flex.items-center.gap-2 { justify-content: center; }
+        .libertadores-page footer .flex.flex-col { align-items: center; }
 
         /* ── ANIMATIONS ── */
         @keyframes fadeDown {
