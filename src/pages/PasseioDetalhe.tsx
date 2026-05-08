@@ -35,7 +35,7 @@ import { Calendar as CalendarUI } from "@/components/ui/calendar";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { format, parseISO, isPast, isToday } from "date-fns";
 import { ptBR, enUS, es as esLocale } from "date-fns/locale";
-import { getCanonicalUrl, BASE_URL, generateTouristAttractionSchema, generateTourPackageSchema, generateFAQSchema, generateOptimizedMetaDescription } from "@/utils/seo";
+import { getCanonicalUrl, BASE_URL, generateTouristAttractionSchema, generateTourPackageSchema, generateFAQSchema, generateOptimizedMetaDescription, getHreflangLinks } from "@/utils/seo";
 
 
 import { WeatherSection } from "@/components/WeatherSection";
@@ -430,14 +430,19 @@ export function PasseioDetalhe() {
         <meta property="og:title" content={`${translatedTitle} | ${siteTitle}`} />
         <meta property="og:description" content={generateOptimizedMetaDescription(translatedShortDesc, translatedTitle, language)} />
         <meta property="og:image" content={tour.image_url} />
+        <meta property="og:site_name" content="Tocorime Rio" />
+        <meta property="og:locale" content={language === 'pt' ? 'pt_BR' : language === 'es' ? 'es_ES' : 'en_US'} />
 
         {/* Twitter */}
         <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={`${translatedTitle} | ${siteTitle}`} />
         <meta name="twitter:description" content={generateOptimizedMetaDescription(translatedShortDesc, translatedTitle, language)} />
         <meta name="twitter:image" content={tour.image_url} />
 
         <link rel="canonical" href={canonicalUrl} />
-        {/* Note: In a SPA without language prefixes in URL, hreflang is less effective but we keep it pointing to standard URL or param-based if we add it later */}
+        {getHreflangLinks(`/passeio/${tour?.slug || tour?.id}`).map((l) => (
+          <link key={l.hreflang} rel="alternate" hrefLang={l.hreflang} href={l.href} />
+        ))}
         {jsonLd && <script type="application/ld+json">{JSON.stringify(jsonLd)}</script>}
         <script type="application/ld+json">{JSON.stringify(breadcrumbsLd)}</script>
       </Helmet>
