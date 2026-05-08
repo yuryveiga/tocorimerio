@@ -78,20 +78,47 @@ async function prerender() {
 
   const browser = await chromium.launch({ headless: true });
   const CONCURRENCY = 3; // Reduced concurrency to save resources
+  const results = { ok: 0, fail: 0, failed: [] };
 
   for (let i = 0; i < routes.length; i += CONCURRENCY) {
     const batch = routes.slice(i, i + CONCURRENCY);
     await Promise.all(batch.map(async (route) => {
       const page = await browser.newPage();
-      // Block images/fonts/analytics to speed up rendering
-      await page.route('**/*.{png,jpg,jpeg,svg,gif,webp,woff2,google-analytics,doubleclick,facebook}', r => r.fulfill({status: 200, body: ''}));
+      // Block heavy assets and trackers to speed up rendering (keep CSS/JS!)
+      await page.route('**/*', (route) => {
+        const url = route.request().url();
+        const type = route.request().resourceType();
+        if (type === 'image' || type === 'font' || type === 'media') {
+          return route.fulfill({ status: 200, body: '' });
+        }
+        if (/google-analytics|googletagmanager|doubleclick|facebook\.net|hotjar|clarity/.test(url)) {
+          return route.fulfill({ status: 200, body: '' });
+        }
+        return route.continue();
+      });
       
       console.log(`Prerendering ${route}...`);
       try {
-        // Use 'load' instead of 'networkidle' for better compatibility with external scripts
         await page.goto(`${baseUrl}${route}`, { waitUntil: 'load', timeout: 60000 });
-        // Give time for hydration/React to finish rendering
-        await page.waitForTimeout(3000); 
+        // Wait for React to render real content (root must have children) and network to settle
+        await page.waitForFunction(
+          () => {
+            const root = document.getElementById('root');
+            return root && root.children.length > 0 && root.innerText.trim().length > 50;
+          },
+          { timeout: 30000 }
+        ).catch(() => console.warn(`  ⚠ ${route}: content wait timeout, saving anyway`));
+        await page.waitForLoadState('networkidle', { timeout: 15000 }).catch(() => {});
+        // Extra settle for Helmet to flush meta tags
+        await page.waitForTimeout(500);
+
+        // Tag the output so we can verify in production
+        await page.evaluate(() => {
+          const m = document.createElement('meta');
+          m.name = 'prerendered';
+          m.content = new Date().toISOString();
+          document.head.appendChild(m);
+        });
 
         let content = await page.content();
         
@@ -104,8 +131,11 @@ async function prerender() {
         
         await fs.writeFile(savePath, content);
         console.log(`✓ Saved ${savePath}`);
+        results.ok++;
       } catch (e) {
         console.error(`✗ Error prerendering ${route}:`, e.message);
+        results.fail++;
+        results.failed.push(route);
       } finally {
         await page.close();
       }
@@ -114,7 +144,8 @@ async function prerender() {
 
   await browser.close();
   server.close();
-  console.log('Prerendering complete!');
+  console.log(`\nPrerendering complete! ✓ ${results.ok} ok, ✗ ${results.fail} failed`);
+  if (results.failed.length) console.log('Failed routes:', results.failed);
 }
 
 prerender().catch(console.error);
