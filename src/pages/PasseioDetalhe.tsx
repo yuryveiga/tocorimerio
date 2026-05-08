@@ -998,7 +998,7 @@ export function PasseioDetalhe() {
                                aria-label={selectedDate ? `${t("data_viagem")}: ${format(parseISO(selectedDate), "dd/MM/yy")}` : t("selecione_data")}
                              >
                                <CalendarIcon className="w-4 h-4 text-primary" />
-                               {selectedDate ? format(parseISO(selectedDate), "dd/MM/yy", { locale: language === 'pt' ? ptBR : language === 'es' ? es : enUS }) : t("selecione_data")}
+                               {selectedDate ? format(parseISO(selectedDate), "dd/MM/yy", { locale: language === 'pt' ? ptBR : language === 'es' ? esLocale : enUS }) : t("selecione_data")}
                              </Button>
                            </PopoverTrigger>
                            <PopoverContent className="w-auto p-0 rounded-3xl overflow-hidden shadow-2xl border-primary/10" align="start">
