@@ -12,6 +12,123 @@ export const getCanonicalUrl = (path: string = "") => {
   return `${BASE_URL}${finalPath}`;
 };
 
+/**
+ * Gera as tags hreflang para SEO multilíngue.
+ * O site é uma SPA sem prefixo de idioma na URL, então apontamos
+ * todas as variantes para a mesma URL canônica + x-default.
+ * Isso sinaliza ao Google que existem versões traduzidas no mesmo path.
+ */
+export const getHreflangLinks = (path: string = "") => {
+  const url = getCanonicalUrl(path);
+  return [
+    { hreflang: "pt-BR", href: url },
+    { hreflang: "en", href: url },
+    { hreflang: "es", href: url },
+    { hreflang: "x-default", href: url },
+  ];
+};
+
+/**
+ * Gera schema "Article" / "BlogPosting" completo para rich snippets de blog.
+ */
+export const generateArticleSchema = (params: {
+  title: string;
+  description: string;
+  imageUrl: string;
+  url: string;
+  datePublished?: string;
+  dateModified?: string;
+  authorName?: string;
+}) => ({
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": params.title,
+  "description": params.description,
+  "image": params.imageUrl,
+  "datePublished": params.datePublished,
+  "dateModified": params.dateModified || params.datePublished,
+  "author": {
+    "@type": "Organization",
+    "name": params.authorName || "Tocorime Rio",
+    "url": BASE_URL,
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Tocorime Rio",
+    "logo": {
+      "@type": "ImageObject",
+      "url": `${BASE_URL}/favicon.png`,
+    },
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": params.url,
+  },
+});
+
+/**
+ * Gera schema "SportsEvent" para páginas de jogos / eventos esportivos.
+ */
+export const generateSportsEventSchema = (params: {
+  name: string;
+  description: string;
+  startDate: string; // ISO
+  endDate?: string;
+  imageUrl?: string;
+  url: string;
+  homeTeam: string;
+  awayTeam: string;
+  venueName?: string;
+  venueAddress?: string;
+  offerUrl?: string;
+  offerPrice?: number;
+  offerCurrency?: string;
+}) => ({
+  "@context": "https://schema.org",
+  "@type": "SportsEvent",
+  "name": params.name,
+  "description": params.description,
+  "startDate": params.startDate,
+  "endDate": params.endDate || params.startDate,
+  "eventStatus": "https://schema.org/EventScheduled",
+  "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+  "image": params.imageUrl,
+  "url": params.url,
+  "location": {
+    "@type": "Place",
+    "name": params.venueName || "Estádio do Maracanã",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": params.venueAddress || "Av. Pres. Castelo Branco, Portão 3",
+      "addressLocality": "Rio de Janeiro",
+      "addressRegion": "RJ",
+      "postalCode": "20271-130",
+      "addressCountry": "BR",
+    },
+  },
+  "homeTeam": { "@type": "SportsTeam", "name": params.homeTeam },
+  "awayTeam": { "@type": "SportsTeam", "name": params.awayTeam },
+  "competitor": [
+    { "@type": "SportsTeam", "name": params.homeTeam },
+    { "@type": "SportsTeam", "name": params.awayTeam },
+  ],
+  "organizer": {
+    "@type": "Organization",
+    "name": "Tocorime Rio",
+    "url": BASE_URL,
+  },
+  ...(params.offerUrl && {
+    offers: {
+      "@type": "Offer",
+      "url": params.offerUrl,
+      "price": params.offerPrice ?? 0,
+      "priceCurrency": params.offerCurrency || "BRL",
+      "availability": "https://schema.org/InStock",
+      "validFrom": new Date().toISOString(),
+    },
+  }),
+});
+
 export const generateLocalBusinessSchema = (siteTitle: string, description: string, imageUrl?: string) => {
   return {
     "@context": "https://schema.org",

@@ -1,99 +1,77 @@
-## Objetivo
-Fazer o Hero responder em **3 segundos**: O QUE é · PARA QUEM é · COMO COMPRAR — com prova social, gatilhos de urgência/autoridade/segurança e CTA inequívoco. Resposta direta às suas perguntas: **sim, dá para colocar logo + nome do site acima do rate** (na verdade vamos fazer melhor: já temos a logo no Header fixo no topo, e dentro do Hero vamos criar uma "marca-assinatura" pequena acima do título).
+# Plano de Melhorias de SEO — Indexação no Google
+
+## Diagnóstico Atual
+O site já tem uma base sólida: sitemap dinâmico, schema markup em passeios, canonical URLs, PWA, e Google Analytics. O foco deste plano são ajustes pontuais e de baixo risco que aceleram a indexação e melhoram a aparência nos resultados de busca.
 
 ---
 
-## 1. Barra de urgência no topo (acima do Header)
-Tarja fina, full-width, em laranja accent (`--accent`), que rola junto:
-> 🔥 **Últimas vagas para esta semana** · Cancelamento grátis até 24h antes · ⭐ 4.9 no TripAdvisor
+## Ações Propostas (não-radicais)
 
-- Fechável (X), guarda preferência em `localStorage` por 24h.
-- Multilíngue (pt/en/es).
-- Empurra o Header para baixo automaticamente.
+### 1. Adicionar Hreflang para todos os idiomas
+**Impacto:** Alto para SEO internacional. O Google entende que o mesmo conteúdo existe em PT, EN e ES.
+**Onde:** `<head>` de todas as páginas públicas (Index, PasseioDetalhe, BlogPost, Blog, GenericPage).
+**Implementação:** Incluir tags `<link rel="alternate" hreflang="...">` apontando para as versões em cada idioma, mais a versão `x-default`.
 
-## 2. Hero reestruturado — leitura em 3 segundos
+### 2. Schema "Article" nos posts do blog
+**Impacto:** Alto — habilita rich snippets (data de publicação, autor, imagem destacada) no Google.
+**Onde:** Página `BlogPost.tsx`.
+**Implementação:** Adicionar JSON-LD do tipo `Article` com `headline`, `image`, `datePublished`, `dateModified`, `author`, `publisher`.
 
-Nova hierarquia visual (de cima para baixo, dentro do hero):
+### 3. Breadcrumb visual + schema em Blog e páginas de conteúdo
+**Impacto:** Médio — melhora navegação e aparece nos SERPs como breadcrumbs.
+**Onde:** `BlogPost.tsx`, `Blog.tsx`, `FluminenseBolivarLibertadores.tsx`.
+**Implementação:** Adicionar componente visual de breadcrumbs no topo + JSON-LD `BreadcrumbList`.
 
-```text
-[Mini-marca: logo + "Tocorime Rio"]            ← O QUE É (identidade)
-⭐ 4.9 · +500 viajantes atendidos · TripAdvisor  ← PROVA SOCIAL (chip)
+### 4. Open Graph e Twitter Cards completos nas páginas internas
+**Impacto:** Médio — melhora o compartilhamento social e sinais de engajamento.
+**Onde:** `BlogPost.tsx`, `PasseioDetalhe.tsx`, `FluminenseBolivarLibertadores.tsx`.
+**Implementação:** Garantir que todas tenham `og:title`, `og:description`, `og:image`, `og:url`, `og:type`, `twitter:card`, `twitter:title`, `twitter:description`, `twitter:image`.
 
-PASSEIOS PRIVATIVOS NO RIO DE JANEIRO            ← O QUE É (claro!)
-para casais, famílias e pequenos grupos          ← PARA QUEM É
+### 5. Schema "SportsEvent" na página Fluminense vs Bolívar
+**Impacto:** Médio — pode aparecer no painel de eventos do Google.
+**Onde:** `FluminenseBolivarLibertadores.tsx`.
+**Implementação:** JSON-LD do tipo `SportsEvent` com nome, data/hora, local (Maracanã), oferta de ingressos (link para o site), e times participantes.
 
-Guias locais especialistas · Entrada garantida · Pagamento seguro
-                                                 ← AUTORIDADE + SEGURANÇA
+### 6. Corrigir/verificar URLs com caracteres especiais no sitemap
+**Impacto:** Baixo a Médio — URLs codificadas incorretamente no sitemap XML dificultam o rastreamento.
+**Onde:** `public/sitemap.xml` e/ou script gerador.
+**Implementação:** Verificar slugs com hifens, acentos, ou caracteres especiais que possam estar quebrados no XML (ex: `experi-ncias`, `n-o-podeperder`).
 
-[ Reservar agora → ]   [ Ver passeios ]          ← COMO COMPRAR (CTA primário forte)
+### 7. Meta descriptions únicas e otimizadas em todas as rotas
+**Impacto:** Médio — CTR nos resultados de busca.
+**Onde:** Todas as páginas públicas (MaracanaCalendar, Blog, FlamengoVascoMaracana, etc.).
+**Implementação:** Garantir que nenhuma página reutilize a mesma description da home. Usar `generateOptimizedMetaDescription` já existente.
 
-🔥 Últimas vagas desta semana                    ← ESCASSEIA
-```
-
-Mudanças concretas no `HeroSection.tsx`:
-- Adicionar bloco "mini-marca" no topo: logo (h-10) + nome do site em serif, opacidade 90%.
-- Trocar o chip "Mais avaliados" por chip de **prova social numérica**: `⭐ 4.9 · +500 viajantes · TripAdvisor`.
-- Subtítulo ganha **público-alvo explícito** ("para casais, famílias e pequenos grupos").
-- Adicionar **linha de garantias** com 3 ícones (ShieldCheck, Award, Lock) entre subtítulo e CTAs.
-- CTA primário muda de "Nossos Passeios" para **"Reservar agora"** (verbo de ação direto), com seta animada e shadow accent. CTA secundário fica "Ver passeios".
-- Badge **"🔥 Últimas vagas desta semana"** logo abaixo dos botões, pulsando sutilmente.
-- Aplicar a TODOS os 3 estilos de hero (style1/style2/style3) — usuário pode trocar via admin.
-
-## 3. Otimização mobile do Hero
-- Reduzir tamanho do título em telas <640px (já existe, mas garantir leitura sem rolar).
-- Empilhar CTAs em mobile com `w-full` e altura `h-14` (polegar friendly).
-- Mini-marca, chip de prova social e garantias quebram em 2 linhas se preciso, mantendo legibilidade.
-
----
-
-## Resposta direta à sua pergunta
-> "Consigo colocar acima do rate tripadvisor, a logo e o nome do site?"
-
-**Sim.** A nova ordem dentro do hero será:
-1. Mini-marca (logo + "Tocorime Rio") — **acima**
-2. Chip de prova social (rate TripAdvisor + nº de clientes) — **abaixo da marca**
-3. Título grande
-4. Subtítulo + público-alvo
-5. Linha de garantias
-6. CTAs
-7. Badge de escassez
-
-A logo grande continua no Header fixo (não muda).
+### 8. Atributo `loading="lazy"` e `fetchpriority` em imagens abaixo da dobra
+**Impacto:** Médio — Core Web Vitals (LCP).
+**Onde:** Componentes `OptimizedImage` e imagens nas páginas de conteúdo.
+**Implementação:** Aplicar `fetchpriority="high"` apenas na imagem hero; `loading="lazy"` nas demais.
 
 ---
 
-## Cobertura dos seus pontos críticos
+## Técnico
 
-| Problema | Solução no plano |
-|---|---|
-| Falta de clareza imediata | Título reescrito + público-alvo explícito |
-| Excesso de informação | Hierarquia visual em camadas curtas |
-| CTA pouco visível | "Reservar agora" com cor accent + animação |
-| Mobile mal otimizado | CTAs `w-full h-14`, tipografia ajustada |
-| Falta de prova social | Chip "⭐ 4.9 · +500 viajantes · TripAdvisor" |
-| Jornada confusa | 2 CTAs claros: comprar vs. explorar |
-| Muitos cliques até compra | "Reservar agora" leva direto a #tours (lista) |
-| Escassez | Tarja topo + badge "Últimas vagas" no hero |
-| Autoridade | "Guias locais especialistas" na linha de garantias |
-| Segurança | "Pagamento seguro · Cancelamento grátis 24h" |
-| Prova social | Chip numérico + tarja com rate |
+### Arquivos a modificar
+- `src/pages/BlogPost.tsx` — Article schema, OG tags, breadcrumbs
+- `src/pages/PasseioDetalhe.tsx` — hreflang, OG tags audit
+- `src/pages/FluminenseBolivarLibertadores.tsx` — SportsEvent schema, OG tags, canonical, breadcrumb
+- `src/pages/Index.tsx` — hreflang
+- `src/pages/Blog.tsx` — breadcrumb, hreflang, OG tags
+- `src/utils/seo.ts` — helpers para hreflang e Article schema
+- `scripts/generate-sitemap.js` — sanitização de slugs
+- `public/robots.txt` — já está OK
 
----
-
-## Ficou de fora deste plano (próximos passos sugeridos)
-- Pop-up exit-intent com cupom (próxima rodada)
-- WhatsApp pré-preenchido por passeio (próxima rodada)
-- Reviews específicos na `TourDetail` (próxima rodada)
-
-Esses são alto impacto também, mas merecem rodada separada para manter este PR focado e revisável.
+### O que NÃO será alterado
+- Estrutura de rotas ou URLs existentes
+- Design visual (exceto breadcrumbs discretos)
+- Backend ou banco de dados
+- Conteúdo textual existente
 
 ---
 
-## Detalhes técnicos
-- **Arquivos a editar/criar:**
-  - `src/components/UrgencyBar.tsx` (novo) — tarja fechável no topo
-  - `src/components/HeroSection.tsx` — reestruturação dos 3 estilos
-  - `src/pages/Index.tsx` — montar `<UrgencyBar />` antes do `<Header />`
-  - `src/translations/*` — adicionar chaves: `urgency_bar_text`, `social_proof_chip`, `hero_audience`, `guarantee_guides`, `guarantee_entry`, `guarantee_payment`, `cta_book_now`, `cta_see_tours`, `last_spots_week` (pt/en/es)
-- **Sem mudanças de banco** — número "+500 viajantes" fica configurável via `siteSettings` (chave `social_proof_count`) com fallback "+500".
-- Nada quebra: todos os 3 hero styles continuam funcionando.
+## Resultado Esperado
+- Melhor sinalização de idioma para o Google (hreflang)
+- Rich snippets em posts do blog (Article schema)
+- Maior chance de aparecer no painel de eventos Google (SportsEvent)
+- Melhor aparência nos resultados de busca (OG images, descriptions únicas)
+- CRAWL mais eficiente (sitemap limpo, breadcrumbs como sinal de estrutura)

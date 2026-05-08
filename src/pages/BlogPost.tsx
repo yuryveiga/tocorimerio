@@ -17,7 +17,7 @@ import { Button } from "@/components/ui/button";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 import "react-quill-new/dist/quill.snow.css";
 import { OptimizedImage } from "@/components/OptimizedImage";
-import { getCanonicalUrl, generateOptimizedMetaDescription } from "@/utils/seo";
+import { getCanonicalUrl, generateOptimizedMetaDescription, getHreflangLinks, generateArticleSchema } from "@/utils/seo";
 
 const InlineCTA = () => {
   const { t, language } = useLocale();
@@ -248,23 +248,25 @@ const BlogPost = () => {
         <meta property="og:title" content={`${title} | ${siteTitle}`} />
         <meta property="og:description" content={generateOptimizedMetaDescription(excerpt || content || title, title, language)} />
         <meta property="og:image" content={post.image_url || fallbackImage} />
+        <meta property="og:site_name" content="Tocorime Rio" />
+        <meta property="og:locale" content={language === 'pt' ? 'pt_BR' : language === 'es' ? 'es_ES' : 'en_US'} />
+        {post.created_at && <meta property="article:published_time" content={post.created_at} />}
+        {post.updated_at && <meta property="article:modified_time" content={post.updated_at} />}
 
         <link rel="canonical" href={getCanonicalUrl(`/blog/${post.slug}`)} />
+        {getHreflangLinks(`/blog/${post.slug}`).map((l) => (
+          <link key={l.hreflang} rel="alternate" hrefLang={l.hreflang} href={l.href} />
+        ))}
 
         <script type="application/ld+json">
-          {JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "BlogPosting",
-            "headline": title,
-            "description": excerpt || title,
-            "image": post.image_url || fallbackImage,
-            "datePublished": post.created_at,
-            "dateModified": post.updated_at || post.created_at,
-            "author": {
-              "@type": "Person",
-              "name": "Tocorime Rio"
-            }
-          })}
+          {JSON.stringify(generateArticleSchema({
+            title,
+            description: excerpt || title,
+            imageUrl: post.image_url || fallbackImage,
+            url: getCanonicalUrl(`/blog/${post.slug}`),
+            datePublished: post.created_at,
+            dateModified: post.updated_at || post.created_at,
+          }))}
         </script>
 
         <script type="application/ld+json">
@@ -296,6 +298,7 @@ const BlogPost = () => {
 
         {/* Twitter */}
         <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={`${title} | ${siteTitle}`} />
         <meta name="twitter:description" content={excerpt || title} />
         <meta name="twitter:image" content={post.image_url || fallbackImage} />
 

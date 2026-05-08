@@ -5,7 +5,7 @@ import { HeroSection } from "@/components/HeroSection";
 import { UrgencyBar } from "@/components/UrgencyBar";
 import { useSiteData } from "@/hooks/useSiteData";
 import { useLocale } from "@/contexts/LocaleContext";
-import { getCanonicalUrl, generateLocalBusinessSchema } from "@/utils/seo";
+import { getCanonicalUrl, generateLocalBusinessSchema, getHreflangLinks } from "@/utils/seo";
 import { ViewFadeIn } from "@/components/ViewFadeIn";
 
 // Lazy load sections below the fold
@@ -39,6 +39,12 @@ const Index = () => {
         <meta property="og:site_name" content="Tocorime Rio" />
         <meta property="og:locale" content={language === 'pt' ? 'pt_BR' : language === 'es' ? 'es_ES' : 'en_US'} />
         <link rel="canonical" href={getCanonicalUrl("/")} />
+        {getHreflangLinks("/").map((l) => (
+          <link key={l.hreflang} rel="alternate" hrefLang={l.hreflang} href={l.href} />
+        ))}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={siteTitle} />
+        <meta name="twitter:description" content={siteDescription} />
         <script type="application/ld+json">
           {JSON.stringify(generateLocalBusinessSchema("Tocorime Rio", siteDescription, images?.hero_bg))}
         </script>
