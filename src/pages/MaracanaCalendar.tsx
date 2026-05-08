@@ -14,7 +14,7 @@ import { MapPin, ArrowRight, Bus, Ticket, UserCheck, Clock, Camera, Users, Chevr
 import { useState, useMemo, useEffect } from "react";
 import { Helmet } from "react-helmet-async";
 import { useSiteData } from "@/hooks/useSiteData";
-import { getCanonicalUrl } from "@/utils/seo";
+import { getCanonicalUrl, getHreflangLinks } from "@/utils/seo";
 
 const localeMap: Record<string, Locale> = { pt: ptBR, en: enUS, es };
 
@@ -90,6 +90,15 @@ const MaracanaCalendar = () => {
         <title>Calendário de Jogos no Rio de Janeiro | Tocorime Rio</title>
         <meta name="description" content="Veja o calendário completo de partidas de futebol no Rio de Janeiro. Planeje sua visita ao Maracanã com datas, horários e disponibilidade." />
         <link rel="canonical" href={getCanonicalUrl("/maracana-calendario")} />
+        {getHreflangLinks("/maracana-calendario").map((l) => (
+          <link key={l.hreflang} rel="alternate" hrefLang={l.hreflang} href={l.href} />
+        ))}
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content={getCanonicalUrl("/maracana-calendario")} />
+        <meta property="og:title" content="Calendário de Jogos no Maracanã | Tocorime Rio" />
+        <meta property="og:description" content="Calendário completo de partidas no Maracanã. Planeje sua visita com datas, horários e pacotes." />
+        <meta property="og:site_name" content="Tocorime Rio" />
+        <meta name="twitter:card" content="summary_large_image" />
       </Helmet>
       
       <Header />

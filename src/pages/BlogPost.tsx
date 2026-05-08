@@ -338,6 +338,13 @@ const BlogPost = () => {
             {/* CONTENT SECTION */}
             <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 -mt-20 relative z-20 mb-20">
               <div className="bg-card rounded-3xl shadow-2xl p-8 sm:p-16 border border-border/50">
+                <nav aria-label="Breadcrumb" className="flex items-center gap-2 text-[10px] font-black uppercase tracking-[0.2em] text-muted-foreground mb-8">
+                  <Link to="/" className="hover:text-primary transition-colors">{t("inicio")}</Link>
+                  <span aria-hidden>/</span>
+                  <Link to="/blog" className="hover:text-primary transition-colors">Blog</Link>
+                  <span aria-hidden>/</span>
+                  <span className="text-foreground/70 truncate max-w-[60%]">{title}</span>
+                </nav>
                 <div 
                   className="max-w-none ql-editor blog-content-area"
                   style={{ padding: 0 }}

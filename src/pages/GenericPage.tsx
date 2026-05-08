@@ -5,7 +5,7 @@ import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { OptimizedImage } from "@/components/OptimizedImage";
 import { Helmet } from "react-helmet-async";
-import { getCanonicalUrl } from "@/utils/seo";
+import { getCanonicalUrl, getHreflangLinks } from "@/utils/seo";
 import DOMPurify from "dompurify";
 
 const GenericPage = () => {
@@ -43,6 +43,15 @@ const GenericPage = () => {
         <title>{page.title} | Tocorime Rio</title>
         <meta name="description" content={page.content?.replace(/<[^>]*>/g, "").substring(0, 160) || page.title} />
         <link rel="canonical" href={getCanonicalUrl(`/${slug}`)} />
+        {getHreflangLinks(`/${slug}`).map((l) => (
+          <link key={l.hreflang} rel="alternate" hrefLang={l.hreflang} href={l.href} />
+        ))}
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content={getCanonicalUrl(`/${slug}`)} />
+        <meta property="og:title" content={`${page.title} | Tocorime Rio`} />
+        <meta property="og:description" content={page.content?.replace(/<[^>]*>/g, "").substring(0, 160) || page.title} />
+        <meta property="og:site_name" content="Tocorime Rio" />
+        <meta name="twitter:card" content="summary_large_image" />
       </Helmet>
       <Header />
       
