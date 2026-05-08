@@ -63,8 +63,6 @@ const AdminTours = () => {
     return { faq_json: [], faq_json_en: [], faq_json_es: [] };
   };
 
-  const totalPages = Math.ceil(totalCount / pageSize);
-
   return (
     <div className="flex flex-col h-full overflow-hidden font-sans">
       <div className="flex items-center justify-between mb-6 shrink-0">
@@ -119,7 +117,7 @@ const AdminTours = () => {
               {tours.map((tour) => (
                 <TourCard 
                   key={tour.id} 
-                  tour={tour} 
+                  tour={tour as any} 
                   onEdit={setEditing} 
                   onDelete={setItemToDelete} 
                 />
@@ -154,8 +152,8 @@ const AdminTours = () => {
       />
 
       <DeleteConfirmDialog 
-        isOpen={!!itemToDelete}
-        onClose={() => setItemToDelete(null)}
+        open={!!itemToDelete}
+        onOpenChange={(open) => !open && setItemToDelete(null)}
         onConfirm={() => itemToDelete && handleDelete(itemToDelete)}
       />
 
