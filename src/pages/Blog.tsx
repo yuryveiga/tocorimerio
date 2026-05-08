@@ -10,7 +10,7 @@ import { useLocale } from "@/contexts/LocaleContext";
 import { useSiteData } from "@/hooks/useSiteData";
 import { Helmet } from "react-helmet-async";
 import { OptimizedImage } from "@/components/OptimizedImage";
-import { getCanonicalUrl } from "@/utils/seo";
+import { getCanonicalUrl, getHreflangLinks } from "@/utils/seo";
 
 const Blog = () => {
   const [posts, setPosts] = useState<LovableBlogPost[]>([]);
@@ -49,6 +49,17 @@ const Blog = () => {
         <title>Blog - Tocorime Rio | Dicas de Passeios no Rio de Janeiro</title>
         <meta name="description" content="Dicas, roteiros e guias sobre passeios no Rio de Janeiro. Descubra trilhas, praias, gastronomia e experiências únicas com a Tocorime Rio." />
         <link rel="canonical" href={getCanonicalUrl("/blog")} />
+        {getHreflangLinks("/blog").map((l) => (
+          <link key={l.hreflang} rel="alternate" hrefLang={l.hreflang} href={l.href} />
+        ))}
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content={getCanonicalUrl("/blog")} />
+        <meta property="og:title" content="Blog - Tocorime Rio | Dicas de Passeios no Rio de Janeiro" />
+        <meta property="og:description" content="Dicas, roteiros e guias sobre passeios no Rio de Janeiro. Descubra trilhas, praias, gastronomia e experiências únicas." />
+        <meta property="og:site_name" content="Tocorime Rio" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Blog - Tocorime Rio" />
+        <meta name="twitter:description" content="Dicas, roteiros e guias sobre passeios no Rio de Janeiro." />
       </Helmet>
       <Header />
       

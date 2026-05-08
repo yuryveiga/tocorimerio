@@ -127,6 +127,16 @@ const FlamengoVascoMaracana = () => {
         <meta property="og:image" content={heroImg} />
         <meta property="og:type" content="website" />
         <link rel="canonical" href="https://tocorimerio.com/flamengo-x-vasco-maracana" />
+        <link rel="alternate" hrefLang="pt-BR" href="https://tocorimerio.com/flamengo-x-vasco-maracana" />
+        <link rel="alternate" hrefLang="en" href="https://tocorimerio.com/flamengo-x-vasco-maracana" />
+        <link rel="alternate" hrefLang="es" href="https://tocorimerio.com/flamengo-x-vasco-maracana" />
+        <link rel="alternate" hrefLang="x-default" href="https://tocorimerio.com/flamengo-x-vasco-maracana" />
+        <meta property="og:url" content="https://tocorimerio.com/flamengo-x-vasco-maracana" />
+        <meta property="og:site_name" content="Tocorime Rio" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Flamengo vs Vasco — Maracanã Matchday Experience" />
+        <meta name="twitter:description" content="Match ticket + executive transfer + multilingual guide. From US$114.52 per person." />
+        <meta name="twitter:image" content={heroImg} />
         
         {/* Google tag (gtag.js) */}
         <script async src="https://www.googletagmanager.com/gtag/js?id=AW-18075082892"></script>
