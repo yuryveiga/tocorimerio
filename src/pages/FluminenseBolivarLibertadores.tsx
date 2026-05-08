@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
 import { Helmet } from "react-helmet-async";
 import bolivarCrest from "@/assets/bolivar-crest.png";
+import { getCanonicalUrl, generateSportsEventSchema } from "@/utils/seo";
 
 const TARGET_DATE = new Date('2026-05-19T21:30:00-03:00');
 const BOOKING_URL = "https://tocorimerio.com/match/fluminense-vs-bolivar-2026-05-19";
+const PAGE_PATH = "/Fluminense-bolivar-libertadores";
 
 const FluminenseBolivarLibertadores = () => {
   const [timeLeft, setTimeLeft] = useState({
@@ -62,6 +64,40 @@ const FluminenseBolivarLibertadores = () => {
       <Helmet>
         <title>Tocorimerio — Fluminense vs Bolívar | Copa Libertadores 2026</title>
         <meta name="description" content="Live Fluminense vs Bolívar at Maracanã. MUST-WIN match for the Tricolor. Book your matchday package now." />
+        <link rel="canonical" href={getCanonicalUrl(PAGE_PATH)} />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content={getCanonicalUrl(PAGE_PATH)} />
+        <meta property="og:title" content="Fluminense vs Bolívar — Copa Libertadores 2026 | Maracanã Matchday" />
+        <meta property="og:description" content="Live Fluminense vs Bolívar at Maracanã on May 19, 2026. Book your matchday package: tickets, transfer and bilingual guide." />
+        <meta property="og:image" content="https://lncimg.lance.com.br/cdn-cgi/image/width=1600,quality=80,fit=cover,format=webp/uploads/2016/10/19/5807e137e598d.jpeg" />
+        <meta property="og:site_name" content="Tocorime Rio" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Fluminense vs Bolívar — Copa Libertadores 2026" />
+        <meta name="twitter:description" content="Live Fluminense vs Bolívar at Maracanã. Matchday packages with tickets, transfer and bilingual guide." />
+        <script type="application/ld+json">
+          {JSON.stringify(generateSportsEventSchema({
+            name: "Fluminense vs Bolívar — Copa Libertadores 2026",
+            description: "Copa Libertadores 2026 group stage match between Fluminense and Bolívar at Maracanã Stadium, Rio de Janeiro.",
+            startDate: TARGET_DATE.toISOString(),
+            imageUrl: "https://lncimg.lance.com.br/cdn-cgi/image/width=1600,quality=80,fit=cover,format=webp/uploads/2016/10/19/5807e137e598d.jpeg",
+            url: getCanonicalUrl(PAGE_PATH),
+            homeTeam: "Fluminense FC",
+            awayTeam: "Club Bolívar",
+            venueName: "Estádio do Maracanã",
+            offerUrl: BOOKING_URL,
+          }))}
+        </script>
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+              { "@type": "ListItem", "position": 1, "name": "Home", "item": getCanonicalUrl("/") },
+              { "@type": "ListItem", "position": 2, "name": "Maracanã Matchday", "item": getCanonicalUrl("/passeio/maracanã-matchday") },
+              { "@type": "ListItem", "position": 3, "name": "Fluminense vs Bolívar", "item": getCanonicalUrl(PAGE_PATH) },
+            ],
+          })}
+        </script>
         <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:ital,wght@0,400;0,600;0,700;1,400&family=Barlow:wght@400;500&display=swap" rel="stylesheet" />
       </Helmet>
 
