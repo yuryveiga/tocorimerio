@@ -1029,7 +1029,9 @@ const BrasilPanamaMaracana = () => {
             </div>
           </div>
 
-          <p className="hero-headline" dangerouslySetInnerHTML={{ __html: t('bp_hero_headline') }}></p>
+          <h1 className="hero-headline reveal" style={{ fontSize: 'clamp(32px, 5vw, 64px)', lineHeight: 1.1, fontWeight: 800 }}>
+            {renderBoldText(t('bp_hero_headline'))}
+          </h1>
 
           <div className="meta-chips">
             <div className="chip"><span className="chip-icon">📅</span> {t('bp_meta_date')}</div>
