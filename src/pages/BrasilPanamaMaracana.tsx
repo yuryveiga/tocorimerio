@@ -124,6 +124,8 @@ const BrasilPanamaMaracana = () => {
           --border-2:    rgba(255,255,255,0.12);
           --radius:      12px;
           --radius-sm:   8px;
+          --yellow:      #FFD700;
+          --teal:        #2A9D8F;
           
           background: var(--ink);
           color: var(--white);
@@ -1057,7 +1059,7 @@ const BrasilPanamaMaracana = () => {
               <span>🎟️</span> {t('bp_view_sectors')}
             </a>
             <a className="btn-ghost" href="#included">
-              {t('bp_whats_included_cta')}
+              <span>🛡️</span> {t('bp_whats_included_cta')}
             </a>
           </div>
         </div>
