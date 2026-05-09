@@ -248,10 +248,10 @@ const BrasilPanamaMaracana = () => {
         .brasil-panama-page .hero-bg-grad {
           position: absolute; inset: 0;
           background:
-            radial-gradient(ellipse 90% 70% at 50% -10%, rgba(0,155,59,.22) 0%, transparent 55%),
-            radial-gradient(ellipse 60% 50% at 15% 80%,  rgba(42,157,143,.14) 0%, transparent 50%),
-            radial-gradient(ellipse 50% 50% at 85% 70%,  rgba(0,48,135,.12) 0%, transparent 50%),
-            var(--ink);
+            radial-gradient(ellipse 90% 70% at 50% -10%, rgba(0,155,59,0.3) 0%, transparent 60%),
+            radial-gradient(ellipse 60% 50% at 15% 80%,  rgba(42,157,143,0.2) 0%, transparent 60%),
+            radial-gradient(ellipse 50% 50% at 85% 70%,  rgba(0,48,135,0.2) 0%, transparent 60%),
+            linear-gradient(to bottom, rgba(14,14,15,0.2) 0%, var(--ink) 100%);
           z-index: 1;
         }
         .brasil-panama-page .hero-bg-grid {
@@ -1317,8 +1317,8 @@ const BrasilPanamaMaracana = () => {
       <section className="final-cta" id="book">
         <div className="reveal">
           <div className="eyebrow" style={{ justifyContent: 'center' }}>{t('bp_final_vagas')}</div>
-          <h2 className="section-h" dangerouslySetInnerHTML={{ __html: t('bp_final_title') }}></h2>
-          <p className="final-cta-sub">{t('bp_final_desc')}</p>
+          <h2 className="section-h">{renderBoldText(t('bp_final_title'))}</h2>
+          <p className="final-cta-sub">{renderBoldText(t('bp_final_desc'))}</p>
           <div style={{ display: 'flex', gap: '14px', justifyContent: 'center', flexWrap: 'wrap' }}>
             <a className="btn-main" href="#sectors" style={{ fontSize: '17px', padding: '18px 42px' }}>
               <span>🎟️</span> {t('bp_view_sectors')}

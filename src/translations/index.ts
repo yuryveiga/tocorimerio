@@ -335,8 +335,8 @@ export const translationsPt = {
   bp_reviews_title: "O que dizem nossos viajantes",
   bp_reviews_count: "1.090+ avaliações no Google",
   bp_final_vagas: "Vagas limitadas",
-  bp_final_title: "A despedida histórica merece ser vivida ao vivo.",
-  bp_final_desc: "Brasil vs Panamá — o último jogo em casa antes da Copa do Mundo 2026. Não perca.",
+  bp_final_title: "A **despedida histórica** merece ser vivida ao vivo.",
+  bp_final_desc: "Brasil vs Panamá — o último jogo em casa antes da **Copa do Mundo 2026**. Não perca.",
   bp_final_wa: "Falar no WhatsApp",
   bp_final_note: "🔒 Ingressos oficiais · Transfer incluso · Guia bilingue · Suporte 24h",
 };
@@ -672,8 +672,8 @@ export const translationsEn = {
   bp_reviews_title: "What our travelers say",
   bp_reviews_count: "1,090+ reviews on Google",
   bp_final_vagas: "Limited spots",
-  bp_final_title: "The historic farewell deserves to be lived live.",
-  bp_final_desc: "Brazil vs Panama — the last home game before the 2026 World Cup. Don't miss out.",
+  bp_final_title: "The **historic farewell** deserves to be lived live.",
+  bp_final_desc: "Brazil vs Panama — the last home game before the **2026 World Cup**. Don't miss out.",
   bp_final_wa: "Chat on WhatsApp",
   bp_final_note: "🔒 Official tickets · Transfer included · Bilingual guide · 24h Support",
 };
@@ -1009,8 +1009,8 @@ export const translationsEs = {
   bp_reviews_title: "Lo que dicen nuestros viajeros",
   bp_reviews_count: "1.090+ reseñas en Google",
   bp_final_vagas: "Plazas limitadas",
-  bp_final_title: "La despedida histórica merece ser vivida en vivo.",
-  bp_final_desc: "Brasil vs Panamá — o último partido en casa antes del Mundial 2026. No te lo pierdas.",
+  bp_final_title: "La **despedida histórica** merece ser vivida en vivo.",
+  bp_final_desc: "Brasil vs Panamá — o último partido en casa antes del **Mundial 2026**. No te lo pierdas.",
   bp_final_wa: "Hablar por WhatsApp",
   bp_final_note: "🔒 Entradas oficiales · Traslado incluido · Guía bilingüe · Soporte 24h",
 };
