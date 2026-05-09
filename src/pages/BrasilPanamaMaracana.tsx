@@ -548,6 +548,7 @@ const BrasilPanamaMaracana = () => {
           text-transform: uppercase;
           color: var(--teal);
           margin-bottom: 14px;
+          justify-content: center;
         }
         .brasil-panama-page .eyebrow::before {
           content: '';
@@ -563,12 +564,16 @@ const BrasilPanamaMaracana = () => {
           line-height: 1.12;
           letter-spacing: -0.02em;
           margin-bottom: 18px;
+          text-align: inherit;
         }
         .brasil-panama-page .section-sub {
           font-size: 16px;
           color: var(--muted);
           max-width: 540px;
           line-height: 1.7;
+          margin-left: auto;
+          margin-right: auto;
+          text-align: inherit;
         }
 
         .brasil-panama-page .video-section {
@@ -591,14 +596,8 @@ const BrasilPanamaMaracana = () => {
         }
 
         .brasil-panama-page .sectors-section { background: var(--ink); }
-        .brasil-panama-page .sectors-header { max-width: 640px; margin: 0 auto 52px; text-align: center; }
-        .brasil-panama-page .section-sub {
-          font-size: 16px;
-          color: var(--muted);
-          max-width: 540px;
-          line-height: 1.7;
-          margin: 0 auto;
-        }
+        .brasil-panama-page .sectors-header { max-width: 640px; margin: 0 auto 52px; text-align: center; display: flex; flex-direction: column; align-items: center; }
+        .brasil-panama-page .section-header-center { text-align: center; margin-bottom: 52px; display: flex; flex-direction: column; align-items: center; }
 
         .brasil-panama-page .stadium-map {
           position: relative;
@@ -1179,19 +1178,14 @@ const BrasilPanamaMaracana = () => {
       {/* WHAT'S INCLUDED */}
       <section className="section section-alt" id="included">
         <div className="container">
-          <div className="included-layout">
-            <div className="included-sticky reveal">
-              <div className="giant-check">🎉</div>
-              <div className="eyebrow">{t('bp_nav_included')}</div>
-              <h2 className="section-h">{t('bp_inc_title')}</h2>
-              <p className="section-sub">{t('bp_inc_desc')}</p>
-              <br /><br />
-              <a href="https://tocorimerio.com/match/brasil-vs-panam-2026-05-31" target="_blank" rel="noopener" className="btn-main" style={{ display: 'inline-flex' }}>
-                <span>🎟️</span> {t('bp_inc_cta')}
-              </a>
-            </div>
+          <div className="section-header-center reveal">
+            <div className="eyebrow">{t('bp_nav_included')}</div>
+            <h2 className="section-h">{t('bp_inc_title')}</h2>
+            <p className="section-sub">{t('bp_inc_desc')}</p>
+          </div>
 
-            <div className="includes-list">
+          <div className="included-layout" style={{ gridTemplateColumns: '1fr', maxWidth: '960px' }}>
+            <div className="includes-list" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '24px' }}>
               <div className="include-row reveal">
                 <div className="inc-icon-wrap">🎟️</div>
                 <div className="inc-body">
@@ -1206,21 +1200,21 @@ const BrasilPanamaMaracana = () => {
                   <div className="inc-desc">{t('bp_inc_item2_desc')}</div>
                 </div>
               </div>
-              <div className="include-row">
+              <div className="include-row reveal reveal-d2">
                 <div className="inc-icon-wrap">🍺</div>
-                <div className="inc-content">
-                  <h4 className="inc-title">{t('bp_step3_title')}</h4>
-                  <p className="inc-desc">{renderBoldText(t('bp_step3_desc'))}</p>
+                <div className="inc-body">
+                  <div className="inc-title">{t('bp_step3_title')}</div>
+                  <div className="inc-desc">{renderBoldText(t('bp_step3_desc'))}</div>
                 </div>
               </div>
-              <div className="include-row reveal reveal-d4">
+              <div className="include-row reveal reveal-d3">
                 <div className="inc-icon-wrap">🛡️</div>
                 <div className="inc-body">
                   <div className="inc-title">{t('bp_inc_item5_title')}</div>
                   <div className="inc-desc">{t('bp_inc_item5_desc')}</div>
                 </div>
               </div>
-              <div className="include-row reveal reveal-d5">
+              <div className="include-row reveal reveal-d4">
                 <div className="inc-icon-wrap">📱</div>
                 <div className="inc-body">
                   <div className="inc-title">{t('bp_inc_item6_title')}</div>
@@ -1228,17 +1222,22 @@ const BrasilPanamaMaracana = () => {
                 </div>
               </div>
             </div>
+            
+            <div style={{ textAlign: 'center', marginTop: '48px' }} className="reveal">
+              <a href="https://tocorimerio.com/match/brasil-vs-panam-2026-05-31" target="_blank" rel="noopener" className="btn-main" style={{ display: 'inline-flex' }}>
+                <span>🎟️</span> {t('bp_inc_cta')}
+              </a>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* HOW IT WORKS */}
       <section className="section" id="how">
-        <div className="container" style={{ textAlign: 'center' }}>
-          <div className="reveal">
+        <div className="container">
+          <div className="section-header-center reveal">
             <div className="eyebrow">{t('bp_how_eyebrow')}</div>
             <h2 className="section-h">{t('bp_how_title')}</h2>
-            <p className="section-sub" style={{ margin: '0 auto' }}>{t('bp_how_desc')}</p>
+            <p className="section-sub">{t('bp_how_desc')}</p>
           </div>
 
           <div className="steps-grid reveal reveal-d1">
@@ -1279,7 +1278,7 @@ const BrasilPanamaMaracana = () => {
       {/* REVIEWS */}
       <section className="section section-alt" id="reviews">
         <div className="container">
-          <div className="reviews-header reveal">
+          <div className="section-header-center reveal">
             <div className="eyebrow">{t('bp_reviews_eyebrow')}</div>
             <h2 className="section-h">{t('bp_reviews_title')}</h2>
             <div className="rating-hero">
