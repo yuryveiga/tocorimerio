@@ -582,7 +582,14 @@ const BrasilPanamaMaracana = () => {
         }
 
         .brasil-panama-page .sectors-section { background: var(--ink); }
-        .brasil-panama-page .sectors-header { max-width: 640px; margin-bottom: 52px; }
+        .brasil-panama-page .sectors-header { max-width: 640px; margin: 0 auto 52px; text-align: center; }
+        .brasil-panama-page .section-sub {
+          font-size: 16px;
+          color: var(--muted);
+          max-width: 540px;
+          line-height: 1.7;
+          margin: 0 auto;
+        }
 
         .brasil-panama-page .stadium-map {
           position: relative;
