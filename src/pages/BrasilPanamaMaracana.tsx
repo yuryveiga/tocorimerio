@@ -1119,7 +1119,7 @@ const BrasilPanamaMaracana = () => {
           <div className="info-col">
             <span className="info-col-label">{t('bp_log_sale_label')}</span>
             <span className="info-col-val">{t('bp_log_sale_val')}</span>
-            <span className="info-col-sub">Oficial CBF</span>
+            <span className="info-col-sub">{t('bp_log_sale_sub')}</span>
           </div>
           <div className="info-col">
             <span className="info-col-label">{t('bp_log_docs_label')}</span>
