@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title id="meta-title">Brasil vs Panamá | Experiência VIP Maracanã | TocorimeRio</title>
+    <title id="meta-title">Brasil vs Panamá | Maracanã 2026 | TocorimeRio</title>
     <meta name="description" id="meta-desc" content="Garanta seu lugar no Maracanã para o histórico Brasil vs Panamá. Transfer de luxo e guia especializado incluídos.">
     
     <!-- Fonts -->
@@ -15,13 +15,15 @@
         :root {
             --yellow:      #FFD700;
             --teal:        #2A9D8F;
+            --teal-dark:   #21867a;
             --teal-glow:   rgba(42,157,143,0.4);
             --white:       #FFFFFF;
             --ink:         #080809;
             --ink-2:       #111214;
             --ink-3:       #1c1d21;
+            --muted:       #8a8d96;
+            --muted-2:     #5a5d66;
             --border:      rgba(255,255,255,0.06);
-            --border-glow: rgba(42,157,143,0.2);
             --radius-lg:   24px;
             --radius-md:   16px;
             --radius-sm:   12px;
@@ -40,44 +42,26 @@
             -webkit-font-smoothing: antialiased;
         }
 
-        /* CUSTOM CURSOR - Design Spell */
+        /* CUSTOM CURSOR */
         #cursor {
-            position: fixed; top: 0; left: 0;
-            width: 20px; height: 20px;
-            background: var(--yellow);
-            border-radius: 50%;
-            pointer-events: none;
-            z-index: 9999;
-            mix-blend-mode: difference;
-            transition: transform 0.1s ease-out;
-            display: none;
+            position: fixed; top: 0; left: 0; width: 10px; height: 10px;
+            background: var(--yellow); border-radius: 50%; pointer-events: none;
+            z-index: 9999; mix-blend-mode: difference; transition: transform 0.1s ease-out; display: none;
         }
         #cursor-follower {
-            position: fixed; top: 0; left: 0;
-            width: 40px; height: 40px;
-            border: 1px solid var(--yellow);
-            border-radius: 50%;
-            pointer-events: none;
-            z-index: 9998;
-            transition: transform 0.15s ease-out;
-            display: none;
+            position: fixed; top: 0; left: 0; width: 40px; height: 40px;
+            border: 1px solid var(--yellow); border-radius: 50%; pointer-events: none;
+            z-index: 9998; transition: transform 0.15s ease-out; display: none;
         }
         @media (pointer: fine) { #cursor, #cursor-follower { display: block; } }
 
         .container { max-width: var(--container); margin: 0 auto; padding: 0 32px; }
 
-        /* NOISE OVERLAY - Frontend Design Texture */
+        /* NOISE & TEXTURE */
         .noise {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: url('https://grainy-gradients.vercel.app/noise.svg');
             opacity: 0.03; pointer-events: none; z-index: 9000;
-        }
-
-        /* AMBIENT GLOWS */
-        .glow {
-            position: absolute; width: 60vw; height: 60vw;
-            background: radial-gradient(circle, var(--teal-glow) 0%, transparent 70%);
-            filter: blur(80px); opacity: 0.3; pointer-events: none; z-index: 0;
         }
 
         /* TICKER */
@@ -99,38 +83,37 @@
             position: fixed; top: 40px; left: 0; width: 100%; z-index: 400;
             padding: 24px 0; transition: var(--transition);
         }
-        nav.scrolled { background: rgba(8, 8, 9, 0.8); backdrop-filter: blur(20px); border-bottom: 1px solid var(--border); padding: 16px 0; }
+        nav.scrolled { background: rgba(8, 8, 9, 0.85); backdrop-filter: blur(20px); border-bottom: 1px solid var(--border); padding: 16px 0; }
         .nav-flex { display: flex; align-items: center; justify-content: space-between; }
-        .logo { display: flex; align-items: center; gap: 12px; font-weight: 800; font-size: 18px; }
+        .logo { display: flex; align-items: center; gap: 12px; font-weight: 800; font-size: 18px; text-decoration: none; color: white; }
         .logo img { height: 36px; }
 
         .nav-controls { display: flex; gap: 8px; }
         select {
             background: var(--ink-3); color: var(--white); border: 1px solid var(--border);
             padding: 8px 12px; border-radius: 8px; font-size: 11px; font-weight: 700;
-            outline: none; cursor: pointer; transition: 0.3s;
+            outline: none; transition: 0.3s;
         }
         select:hover { border-color: var(--teal); }
 
         /* HERO */
         .hero {
-            position: relative; height: 100vh; min-height: 800px;
+            position: relative; height: 100vh; min-height: 850px;
             display: flex; align-items: center; justify-content: center;
             padding-top: 100px; overflow: hidden; text-align: center;
         }
         .hero-media {
             position: absolute; inset: 0; z-index: -1;
             background: url('https://i0.wp.com/www.portaleducadora.com/wp-content/uploads/2023/10/estadio-do-maracana-na-copa-das-americas-2019.jpeg') center/cover no-repeat;
-            filter: brightness(0.3) saturate(1.2);
+            filter: brightness(0.25) saturate(1.2);
         }
         .hero-vignette { position: absolute; inset: 0; background: radial-gradient(circle at center, transparent 0%, var(--ink) 95%); }
 
         .hero-eyebrow {
             display: inline-block; padding: 10px 24px; background: rgba(255,255,255,0.05);
             border: 1px solid var(--border); border-radius: 100px;
-            font-size: 10px; font-weight: 800; letter-spacing: 0.2em; text-transform: uppercase;
-            color: var(--yellow); margin-bottom: 40px;
-            backdrop-filter: blur(10px);
+            font-size: 10px; font-weight: 800; letter-spacing: 0.25em; text-transform: uppercase;
+            color: var(--yellow); margin-bottom: 40px; backdrop-filter: blur(10px);
         }
 
         .match-display { display: flex; align-items: center; justify-content: center; gap: 60px; margin-bottom: 60px; }
@@ -156,53 +139,84 @@
             padding: 12px 24px; border-radius: 100px; font-size: 14px; font-weight: 600;
             display: flex; align-items: center; gap: 10px; transition: 0.4s;
         }
-        .meta-item:hover { border-color: var(--teal); background: var(--ink-3); transform: translateY(-3px); }
 
-        /* SECTORS - Bento Grid Style */
-        .sectors { padding: 120px 0; background: var(--ink-2); }
-        .section-header { text-align: center; margin-bottom: 100px; }
-        .h2 { font-family: 'Playfair Display', serif; font-size: clamp(40px, 8vw, 72px); line-height: 1; margin-bottom: 32px; }
+        /* SECTORS */
+        .section { padding: 120px 0; border-bottom: 1px solid var(--border); }
+        .section-header { text-align: center; margin-bottom: 80px; }
+        .h2 { font-family: 'Playfair Display', serif; font-size: clamp(40px, 8vw, 64px); line-height: 1; margin-bottom: 24px; }
         
         .bento-grid {
             display: grid; grid-template-columns: repeat(12, 1fr); gap: 24px;
         }
         .card {
-            grid-column: span 6; background: var(--ink); border: 1px solid var(--border);
+            grid-column: span 6; background: var(--ink-2); border: 1px solid var(--border);
             border-radius: var(--radius-lg); padding: 48px; position: relative;
-            overflow: hidden; transition: 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            display: flex; flex-direction: column; transition: 0.5s var(--transition);
         }
-        .card:hover { border-color: var(--teal); transform: scale(1.02); }
-        .card.premium { grid-column: span 6; background: linear-gradient(135deg, #0a1a18 0%, var(--ink) 100%); }
-        .card.small { grid-column: span 4; padding: 32px; }
+        .card:hover { border-color: var(--teal); transform: translateY(-8px); }
+        .card.premium { background: linear-gradient(135deg, #0d201e 0%, var(--ink-2) 100%); }
         
-        .card-name { font-size: 24px; font-weight: 800; margin-bottom: 8px; }
-        .card-desc { color: var(--muted); font-size: 14px; margin-bottom: 32px; }
-        .card-price { font-size: 14px; font-weight: 700; color: var(--muted-2); text-transform: uppercase; letter-spacing: 0.1em; }
+        .card-name { font-size: 26px; font-weight: 800; margin-bottom: 8px; }
+        .card-desc { color: var(--muted); font-size: 15px; margin-bottom: 32px; }
+        .card-price { font-size: 13px; font-weight: 700; color: var(--muted-2); text-transform: uppercase; margin-bottom: 24px; letter-spacing: 0.1em; }
         
-        .card-tags { display: flex; gap: 8px; margin-top: auto; }
+        .tag-row { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 40px; }
         .tag { font-size: 10px; font-weight: 800; padding: 6px 12px; border-radius: 6px; background: var(--ink-3); color: var(--muted); text-transform: uppercase; }
-        .tag.accent { background: rgba(42,157,143,0.1); color: var(--teal); }
+        .tag.accent { background: rgba(42,157,143,0.15); color: var(--teal); }
+
+        .card-cta {
+            margin-top: auto; padding: 16px; border-radius: 12px; background: var(--ink-3);
+            text-align: center; color: var(--muted-2); font-size: 14px; font-weight: 700;
+            border: 1px dashed var(--border);
+        }
+
+        /* WHAT'S INCLUDED */
+        .included-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px; }
+        .inc-card { display: flex; gap: 24px; padding: 32px; background: var(--ink-2); border: 1px solid var(--border); border-radius: var(--radius-md); }
+        .inc-icon { font-size: 24px; width: 56px; height: 56px; background: var(--ink-3); border-radius: 12px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+        .inc-content h4 { font-size: 18px; margin-bottom: 8px; }
+        .inc-content p { font-size: 14px; color: var(--muted); line-height: 1.6; }
+
+        /* REVIEWS */
+        .reviews-scroll { display: flex; gap: 24px; overflow-x: auto; padding: 20px 0 60px; scroll-snap-type: x mandatory; }
+        .reviews-scroll::-webkit-scrollbar { height: 4px; }
+        .reviews-scroll::-webkit-scrollbar-track { background: var(--ink-3); }
+        .reviews-scroll::-webkit-scrollbar-thumb { background: var(--teal); border-radius: 10px; }
+        
+        .rev-card {
+            min-width: 380px; scroll-snap-align: start; background: var(--ink-2); padding: 40px;
+            border-radius: var(--radius-lg); border: 1px solid var(--border);
+        }
+        .rev-stars { color: var(--yellow); font-size: 14px; margin-bottom: 20px; letter-spacing: 3px; }
+        .rev-text { font-size: 15px; font-style: italic; color: var(--white); margin-bottom: 32px; line-height: 1.7; opacity: 0.9; }
+        .rev-user { display: flex; align-items: center; gap: 16px; }
+        .rev-info h5 { font-size: 15px; font-weight: 700; }
+        .rev-info p { font-size: 12px; color: var(--muted); }
 
         /* BUTTONS */
-        .btn {
+        .btn-main {
             display: inline-flex; align-items: center; gap: 12px;
             background: linear-gradient(135deg, var(--teal) 0%, var(--teal-dark) 100%);
-            padding: 16px 40px; border-radius: 100px; font-weight: 800; font-size: 15px;
-            box-shadow: 0 10px 40px var(--teal-glow); transition: 0.4s;
+            padding: 18px 48px; border-radius: 100px; color: white; font-weight: 800; font-size: 16px;
+            text-decoration: none; box-shadow: 0 10px 40px var(--teal-glow); transition: 0.4s;
         }
-        .btn:hover { transform: translateY(-4px); box-shadow: 0 20px 60px var(--teal-glow); }
+        .btn-main:hover { transform: translateY(-4px); box-shadow: 0 20px 60px var(--teal-glow); }
 
         /* FOOTER */
-        footer { padding: 120px 0; text-align: center; border-top: 1px solid var(--border); }
-        .footer-logo { font-size: 32px; font-weight: 900; margin-bottom: 40px; display: block; }
-        .footer-links { display: flex; justify-content: center; gap: 32px; margin-bottom: 40px; }
-        .f-link { font-size: 12px; font-weight: 700; color: var(--muted); opacity: 0.5; transition: 0.3s; }
-        .f-link.active { color: var(--yellow); opacity: 1; }
+        footer { padding: 100px 0; text-align: center; }
+        .footer-logo { font-size: 28px; font-weight: 900; margin-bottom: 40px; display: block; text-decoration: none; color: white; }
+        .lang-links { display: flex; justify-content: center; gap: 24px; margin-bottom: 40px; }
+        .l-link { font-size: 12px; font-weight: 800; color: var(--muted); opacity: 0.4; text-decoration: none; transition: 0.3s; }
+        .l-link.active { color: var(--yellow); opacity: 1; border-bottom: 2px solid var(--yellow); }
 
-        @media (max-width: 992px) {
+        @media (max-width: 768px) {
+            .match-display { flex-direction: column; gap: 20px; }
+            .team { width: 100%; }
+            .team-name { font-size: 32px; }
+            .crest { width: 100px; height: 100px; }
+            .bento-grid { grid-template-columns: 1fr; }
             .card { grid-column: span 12 !important; }
-            .match-display { flex-direction: column; gap: 30px; }
-            .hero { height: auto; padding-bottom: 100px; }
+            .rev-card { min-width: 85vw; }
         }
     </style>
 </head>
@@ -222,27 +236,22 @@
                 <img src="https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/render/image/public/site-images/1776136512230_pbsqj7cxjr.webp?quality=70&width=800&format=avif&resize=contain&v=1778307264662" alt="Toco">
                 <span>TocorimeRio</span>
             </a>
-            <div class="nav-controls">
+            <div class="nav-actions" style="display: flex; align-items: center; gap: 12px;">
                 <select id="lang" onchange="setLang(this.value)">
-                    <option value="pt">PT</option>
-                    <option value="en">EN</option>
-                    <option value="es">ES</option>
+                    <option value="pt">Português</option>
+                    <option value="en">English</option>
+                    <option value="es">Español</option>
                 </select>
-                <select id="curr">
-                    <option value="BRL">R$ BRL</option>
-                    <option value="USD">$ USD</option>
-                </select>
-                <a href="https://tocorimerio.com/match/brasil-vs-panam-2026-05-31" class="btn" style="padding: 10px 24px; font-size: 13px;" id="nav-cta"></a>
+                <a href="https://tocorimerio.com/match/brasil-vs-panam-2026-05-31" class="btn-main" style="padding: 10px 24px; font-size: 13px;" id="nav-cta"></a>
             </div>
         </div>
     </nav>
 
     <main>
+        <!-- HERO -->
         <section class="hero">
             <div class="hero-media"></div>
             <div class="hero-vignette"></div>
-            <div class="glow" style="top: -10%; left: -10%;"></div>
-            
             <div class="container">
                 <div class="hero-eyebrow" id="eyebrow"></div>
                 
@@ -270,28 +279,57 @@
             </div>
         </section>
 
-        <section class="sectors">
+        <!-- SECTORS -->
+        <section class="section">
             <div class="container">
                 <div class="section-header">
-                    <div class="eyebrow" id="s-eyebrow"></div>
+                    <div class="hero-eyebrow" style="color: var(--teal); background: rgba(42,157,143,0.1);" id="s-eyebrow"></div>
                     <h2 class="h2" id="s-title"></h2>
-                    <p class="headline" style="font-size: 18px;" id="s-desc"></p>
+                    <p class="headline" style="font-size: 18px; margin-bottom: 0;" id="s-desc"></p>
                 </div>
-
                 <div class="bento-grid" id="grid"></div>
+            </div>
+        </section>
+
+        <!-- WHAT'S INCLUDED -->
+        <section class="section" style="background: var(--ink-2);">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="h2" id="inc-title"></h2>
+                    <p class="headline" style="font-size: 18px; margin-bottom: 0;" id="inc-desc"></p>
+                </div>
+                <div class="included-grid" id="inc-grid"></div>
+            </div>
+        </section>
+
+        <!-- REVIEWS -->
+        <section class="section">
+            <div class="container">
+                <div class="section-header" style="text-align: left; display: flex; justify-content: space-between; align-items: flex-end;">
+                    <div>
+                        <h2 class="h2" id="rev-title"></h2>
+                        <p class="headline" style="font-size: 18px; margin: 0;" id="rev-desc"></p>
+                    </div>
+                    <div style="text-align: right;">
+                        <div style="font-size: 40px; font-weight: 900; color: var(--yellow);">5.0</div>
+                        <div style="color: var(--yellow); letter-spacing: 2px;">★★★★★</div>
+                    </div>
+                </div>
+                <div class="reviews-scroll" id="rev-grid"></div>
             </div>
         </section>
     </main>
 
     <footer>
         <div class="container">
-            <span class="footer-logo">TocorimeRio</span>
-            <div class="footer-links">
-                <span class="f-link" id="f-pt" onclick="setLang('pt')">PT</span>
-                <span class="f-link" id="f-en" onclick="setLang('en')">EN</span>
-                <span class="f-link" id="f-es" onclick="setLang('es')">ES</span>
+            <a href="/" class="footer-logo">TocorimeRio</a>
+            <div class="lang-links">
+                <a href="#" class="l-link" id="l-pt" onclick="setLang('pt'); return false;">PORTUGUÊS</a>
+                <a href="#" class="l-link" id="l-en" onclick="setLang('en'); return false;">ENGLISH</a>
+                <a href="#" class="l-link" id="l-es" onclick="setLang('es'); return false;">ESPAÑOL</a>
             </div>
-            <p id="f-copy" style="color: var(--muted); font-size: 14px; max-width: 600px; margin: 0 auto;"></p>
+            <p id="f-copy" style="color: var(--muted); font-size: 14px; max-width: 600px; margin: 0 auto 40px;"></p>
+            <p style="font-size: 10px; color: var(--muted-2); letter-spacing: 0.1em;">© 2026 TOCORIMERIO. ALL RIGHTS RESERVED.</p>
         </div>
     </footer>
 
@@ -301,45 +339,84 @@
                 eyebrow: "Amistoso Oficial • Pré-Copa 2026",
                 headline: "A **despedida histórica** da Seleção no Maracanã — último jogo em solo brasileiro antes da **Copa do Mundo 2026**",
                 br: "Brasil", br_r: "Mandante", pan: "Panamá", pan_r: "Visitante",
-                date: "📅 31 de Maio", time: "⏰ 18h30 BRT", venue: "🏟️ Maracanã",
-                s_eyebrow: "Ingressos Oficiais", s_title: "Escolha seu setor", s_desc: "Pacotes exclusivos com transfer e guia bilíngue incluídos.",
-                cta: "Comprar Ingresso", unavailable: "Ainda não disponível",
-                f_copy: "Experiências premium para viajantes internacionais no Rio.",
+                date: "📅 31 de Maio, 2026", time: "⏰ 18h30 BRT", venue: "🏟️ Maracanã, Rio",
+                s_eyebrow: "Ingressos Oficiais", s_title: "Setores Disponíveis", s_desc: "Todos os pacotes incluem traslado VIP e guia especializado.",
+                inc_title: "O que está incluído?", inc_desc: "Cuidamos de tudo para você focar no jogo.",
+                rev_title: "Avaliações Reais", rev_desc: "O que dizem os viajantes que foram ao Maracanã conosco.",
+                cta: "Comprar Ingresso", unavailable: "Ainda não disponível", btn_un: "Indisponível",
+                f_copy: "Oferecemos experiências autênticas e seguras para viajantes internacionais no Rio de Janeiro.",
                 sectors: [
-                    { name: "Leste Inferior", desc: "Visão privilegiada central", premium: true, tags: ["Premium", "Central"] },
-                    { name: "Oeste Inferior", desc: "Setor VIP coberto", premium: false, tags: ["Conforto", "VIP"] },
-                    { name: "Leste Superior", desc: "Visão panorâmica", premium: false, tags: ["Panorâmico"] },
-                    { name: "Norte / Sul", desc: "Clima de torcida", premium: false, tags: ["Popular"] }
+                    { name: "Leste Inferior", desc: "Visão privilegiada do centro do campo", premium: true, tags: ["Mais Procurado", "Premium"] },
+                    { name: "Oeste Inferior", desc: "Setor VIP com poltronas confortáveis", premium: false, tags: ["Conforto", "Coberto"] },
+                    { name: "Leste Superior", desc: "Visão panorâmica de todo o estádio", premium: false, tags: ["Panorâmico"] },
+                    { name: "Norte / Sul", desc: "Sinta a energia da torcida local", premium: false, tags: ["Atmosfera"] }
+                ],
+                includes: [
+                    { icon: "🎟️", title: "Ingresso Garantido", desc: "Entrada oficial no setor escolhido." },
+                    { icon: "🚐", title: "Transfer VIP", desc: "Ida e volta do seu hotel em transporte climatizado." },
+                    { icon: "🌍", title: "Guia Bilíngue", desc: "Acompanhamento profissional durante todo o evento." },
+                    { icon: "🛡️", title: "Segurança", desc: "Equipe dedicada para garantir sua tranquilidade." }
+                ],
+                reviews: [
+                    { name: "James H.", meta: "Reino Unido • 2025", text: "A experiência foi muito além do que eu esperava. O guia foi incrível." },
+                    { name: "Sofia M.", meta: "Alemanha • 2025", text: "Estava viajando sozinha e preocupada com segurança. Foi tudo perfeito." },
+                    { name: "Daniel K.", meta: "EUA • 2026", text: "Melhor noite da minha viagem ao Rio. O Maracanã é mágico." }
                 ]
             },
             en: {
                 eyebrow: "Official Friendly • Pre-World Cup 2026",
                 headline: "The **historic farewell** of the National Team at Maracanã — last game on Brazilian soil before the **2026 World Cup**",
                 br: "Brazil", br_r: "Home", pan: "Panama", pan_r: "Away",
-                date: "📅 May 31", time: "⏰ 6:30 PM BRT", venue: "🏟️ Maracanã",
-                s_eyebrow: "Official Tickets", s_title: "Select your sector", s_desc: "Exclusive packages with luxury transfer and bilingual guide.",
-                cta: "Buy Ticket", unavailable: "Not available yet",
-                f_copy: "Premium experiences for international travelers in Rio.",
+                date: "📅 May 31, 2026", time: "⏰ 6:30 PM BRT", venue: "🏟️ Maracanã Stadium",
+                s_eyebrow: "Official Tickets", s_title: "Available Sectors", s_desc: "All packages include VIP transfer and expert guide.",
+                inc_title: "What's Included?", inc_desc: "We take care of everything so you can focus on the match.",
+                rev_title: "Real Reviews", rev_desc: "What travelers who went to Maracanã with us are saying.",
+                cta: "Buy Ticket", unavailable: "Not available yet", btn_un: "Unavailable",
+                f_copy: "We offer authentic and safe experiences for international travelers in Rio de Janeiro.",
                 sectors: [
-                    { name: "Lower East", desc: "Privileged central view", premium: true, tags: ["Premium", "Central"] },
-                    { name: "Lower West", desc: "VIP covered sector", premium: false, tags: ["Comfort", "VIP"] },
-                    { name: "Upper East", desc: "Panoramic view", premium: false, tags: ["Panoramic"] },
-                    { name: "North / South", desc: "Crowd atmosphere", premium: false, tags: ["Popular"] }
+                    { name: "Lower East", desc: "Privileged view of the center pitch", premium: true, tags: ["Most Wanted", "Premium"] },
+                    { name: "Lower West", desc: "VIP sector with comfortable seats", premium: false, tags: ["Comfort", "Covered"] },
+                    { name: "Upper East", desc: "Panoramic view of the whole stadium", premium: false, tags: ["Panoramic"] },
+                    { name: "North / South", desc: "Feel the energy of the local crowd", premium: false, tags: ["Atmosphere"] }
+                ],
+                includes: [
+                    { icon: "🎟️", title: "Guaranteed Ticket", desc: "Official entry in the chosen sector." },
+                    { icon: "🚐", title: "VIP Transfer", desc: "Round-trip from your hotel in air-conditioned transport." },
+                    { icon: "🌍", title: "Bilingual Guide", desc: "Professional accompaniment throughout the event." },
+                    { icon: "🛡️", title: "Security", desc: "Dedicated team to ensure your peace of mind." }
+                ],
+                reviews: [
+                    { name: "James H.", meta: "UK • 2025", text: "The experience was far beyond what I expected. The guide was incredible." },
+                    { name: "Sofia M.", meta: "Germany • 2025", text: "Traveling solo and worried about safety. Everything was perfect." },
+                    { name: "Daniel K.", meta: "USA • 2026", text: "Best night of my trip to Rio. Maracanã is magic." }
                 ]
             },
             es: {
                 eyebrow: "Amistoso Oficial • Pre-Mundial 2026",
                 headline: "La **despedida histórica** de la Selección en el Maracanã — último partido en suelo brasileño antes de la **Copa del Mundo 2026**",
                 br: "Brasil", br_r: "Local", pan: "Panamá", pan_r: "Visitante",
-                date: "📅 31 de Mayo", time: "⏰ 18h30 BRT", venue: "🏟️ Maracanã",
-                s_eyebrow: "Entradas Oficiales", s_title: "Elige tu sector", s_desc: "Paquetes exclusivos con traslado de lujo y guía bilingüe.",
-                cta: "Comprar Entrada", unavailable: "Aún no disponible",
-                f_copy: "Experiencias premium para viajeros internacionales en Río.",
+                date: "📅 31 de Mayo, 2026", time: "⏰ 18h30 BRT", venue: "🏟️ Estadio Maracanã",
+                s_eyebrow: "Entradas Oficiales", s_title: "Sectores Disponibles", s_desc: "Todos los paquetes incluyen traslado VIP y guía especializado.",
+                inc_title: "¿Qué está incluido?", inc_desc: "Nos encargamos de todo para que disfrutes del juego.",
+                rev_title: "Reseñas Reales", rev_desc: "Lo que dicen los viajeros que fueron al Maracanã con nosotros.",
+                cta: "Comprar Entrada", unavailable: "Aún no disponible", btn_un: "No disponible",
+                f_copy: "Ofrecemos experiencias auténticas y seguras para viajeros internacionales en Río de Janeiro.",
                 sectors: [
-                    { name: "Leste Inferior", desc: "Vista privilegiada central", premium: true, tags: ["Premium", "Central"] },
-                    { name: "Oeste Inferior", desc: "Sector VIP cubierto", premium: false, tags: ["Confort", "VIP"] },
-                    { name: "Leste Superior", desc: "Vista panorámica", premium: false, tags: ["Panorámico"] },
-                    { name: "Norte / Sur", desc: "Clima de hinchada", premium: false, tags: ["Popular"] }
+                    { name: "Leste Inferior", desc: "Vista privilegiada del centro del campo", premium: true, tags: ["Más Buscado", "Premium"] },
+                    { name: "Oeste Inferior", desc: "Sector VIP con asientos cómodos", premium: false, tags: ["Confort", "Cubierto"] },
+                    { name: "Leste Superior", desc: "Vista panorámica de todo el estadio", premium: false, tags: ["Panorámico"] },
+                    { name: "Norte / Sur", desc: "Siente la energía de la hinchada local", premium: false, tags: ["Atmósfera"] }
+                ],
+                includes: [
+                    { icon: "🎟️", title: "Entrada Garantizada", desc: "Entrada oficial en el sector elegido." },
+                    { icon: "🚐", title: "Transfer VIP", desc: "Ida y vuelta desde tu hotel en transporte climatizado." },
+                    { icon: "🌍", title: "Guía Bilingüe", desc: "Acompañamiento profesional durante todo el evento." },
+                    { icon: "🛡️", title: "Seguridad", desc: "Equipo dedicado para garantizar tu tranquilidad." }
+                ],
+                reviews: [
+                    { name: "James H.", meta: "UK • 2025", text: "La experiencia fue mucho más allá de lo que esperaba. El guía fue increíble." },
+                    { name: "Sofia M.", meta: "Alemania • 2025", text: "Viajaba sola y me preocupaba la seguridad. Fue todo perfecto." },
+                    { name: "Daniel K.", meta: "EE.UU. • 2026", text: "La mejor noche de mi viaje a Río. El Maracanã es mágico." }
                 ]
             }
         };
@@ -361,48 +438,85 @@
             document.getElementById('s-eyebrow').innerText = t.s_eyebrow;
             document.getElementById('s-title').innerText = t.s_title;
             document.getElementById('s-desc').innerText = t.s_desc;
+            document.getElementById('inc-title').innerText = t.inc_title;
+            document.getElementById('inc-desc').innerText = t.inc_desc;
+            document.getElementById('rev-title').innerText = t.rev_title;
+            document.getElementById('rev-desc').innerText = t.rev_desc;
             document.getElementById('f-copy').innerText = t.f_copy;
             document.getElementById('nav-cta').innerText = t.cta;
             document.getElementById('lang').value = lang;
 
-            const grid = document.getElementById('grid');
-            grid.innerHTML = t.sectors.map(s => `
-                <div class="card ${s.premium ? 'premium' : 'small'}">
+            // Grid Sectors
+            document.getElementById('grid').innerHTML = t.sectors.map(s => `
+                <div class="card ${s.premium ? 'premium' : ''}">
                     <div class="card-name">${s.name}</div>
                     <div class="card-desc">${s.desc}</div>
                     <div class="card-price">${t.unavailable}</div>
-                    <div class="card-tags">
-                        ${s.tags.map(tag => `<span class="tag ${s.premium ? 'accent' : ''}">${tag}</span>`).join('')}
+                    <div class="tag-row">${s.tags.map(tag => `<span class="tag ${s.premium ? 'accent' : ''}">${tag}</span>`).join('')}</div>
+                    <div class="card-cta">${t.btn_un}</div>
+                </div>
+            `).join('');
+
+            // Included Grid
+            document.getElementById('inc-grid').innerHTML = t.includes.map(i => `
+                <div class="inc-card">
+                    <div class="inc-icon">${i.icon}</div>
+                    <div class="inc-content">
+                        <h4>${i.title}</h4>
+                        <p>${i.desc}</p>
                     </div>
                 </div>
             `).join('');
 
-            const tickerTrack = document.getElementById('ticker-track');
-            const items = [t.eyebrow, t.s_eyebrow, t.date + " " + t.time];
-            tickerTrack.innerHTML = [...items, ...items, ...items, ...items].map(i => `<div class="ticker-item">${i}</div><div class="ticker-dot"></div>`).join('');
+            // Reviews
+            document.getElementById('rev-grid').innerHTML = t.reviews.map(r => `
+                <div class="rev-card">
+                    <div class="rev-stars">★★★★★</div>
+                    <p class="rev-text">"${r.text}"</p>
+                    <div class="rev-user">
+                        <div class="rev-info">
+                            <h5>${r.name}</h5>
+                            <p>${r.meta}</p>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
 
-            document.querySelectorAll('.f-link').forEach(el => el.classList.remove('active'));
-            document.getElementById('f-' + lang).classList.add('active');
+            // Ticker
+            const items = [t.eyebrow, t.s_eyebrow, t.date];
+            document.getElementById('ticker-track').innerHTML = [...items, ...items, ...items, ...items].map(i => `<div class="ticker-item">${i}</div><div class="ticker-dot"></div>`).join('');
+
+            // Lang Links
+            document.querySelectorAll('.l-link').forEach(el => el.classList.remove('active'));
+            document.getElementById('l-' + lang).classList.add('active');
+
+            // Re-bind cursor
+            bindCursor();
         }
 
-        // CURSOR LOGIC - Design Spell
-        const cursor = document.getElementById('cursor');
-        const follower = document.getElementById('cursor-follower');
-        
-        document.addEventListener('mousemove', (e) => {
-            cursor.style.transform = `translate3d(${e.clientX - 10}px, ${e.clientY - 10}px, 0)`;
-            follower.style.transform = `translate3d(${e.clientX - 20}px, ${e.clientY - 20}px, 0)`;
-        });
+        function bindCursor() {
+            document.querySelectorAll('a, button, select, .l-link, .card').forEach(el => {
+                el.onmouseenter = () => {
+                    document.getElementById('cursor').style.transform = 'scale(4)';
+                    document.getElementById('cursor').style.opacity = '0.2';
+                };
+                el.onmouseleave = () => {
+                    document.getElementById('cursor').style.transform = 'scale(1)';
+                    document.getElementById('cursor').style.opacity = '1';
+                };
+            });
+        }
 
-        document.querySelectorAll('a, button, select, .f-link').forEach(el => {
-            el.addEventListener('mouseenter', () => {
-                cursor.style.transform += ' scale(3)';
-                cursor.style.opacity = '0.3';
-            });
-            el.addEventListener('mouseleave', () => {
-                cursor.style.transform = cursor.style.transform.replace(' scale(3)', '');
-                cursor.style.opacity = '1';
-            });
+        // CURSOR MOVEMENT
+        document.addEventListener('mousemove', (e) => {
+            const cursor = document.getElementById('cursor');
+            const follower = document.getElementById('cursor-follower');
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+            follower.style.left = e.clientX + 'px';
+            follower.style.top = e.clientY + 'px';
+            follower.style.transform = 'translate(-20px, -20px)';
+            cursor.style.transform += ' translate(-5px, -5px)';
         });
 
         window.addEventListener('scroll', () => {
