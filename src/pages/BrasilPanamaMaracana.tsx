@@ -5,7 +5,7 @@ import { useLocale } from "@/contexts/LocaleContext";
 const TARGET_DATE = new Date('2026-05-31T18:30:00-03:00');
 
 const BrasilPanamaMaracana = () => {
-  const { t } = useLocale();
+  const { t, language, setLanguage, currency, setCurrency } = useLocale();
   const [timeLeft, setTimeLeft] = useState({
     days: "—",
     hours: "—",
@@ -13,6 +13,17 @@ const BrasilPanamaMaracana = () => {
     seconds: "—",
     isLive: false
   });
+
+  const renderBoldText = (text: string) => {
+    if (!text) return "";
+    const parts = text.split(/(\*\*.*?\*\*)/g);
+    return parts.map((part, i) => {
+      if (part.startsWith('**') && part.endsWith('**')) {
+        return <strong key={i} style={{ color: 'var(--yellow)', fontWeight: '700' }}>{part.slice(2, -2)}</strong>;
+      }
+      return part;
+    });
+  };
 
   useEffect(() => {
     const updateCountdown = () => {
@@ -162,6 +173,9 @@ const BrasilPanamaMaracana = () => {
           transition: top .3s;
         }
         .brasil-panama-page .nav-logo {
+          display: flex;
+          align-items: center;
+          gap: 12px;
           height: 32px;
         }
         .brasil-panama-page .nav-logo img {
@@ -169,7 +183,28 @@ const BrasilPanamaMaracana = () => {
           width: auto;
           object-fit: contain;
         }
-        .brasil-panama-page .nav-right { display: flex; align-items: center; gap: 20px; }
+        .brasil-panama-page .nav-logo span {
+          color: var(--white);
+          font-weight: 800;
+          font-size: 16px;
+          letter-spacing: -0.01em;
+        }
+        .brasil-panama-page .nav-right { display: flex; align-items: center; gap: 16px; }
+        .brasil-panama-page .nav-lang-btn {
+          background: rgba(255,255,255,0.05);
+          border: 1px solid var(--border);
+          color: var(--muted);
+          font-size: 11px;
+          font-weight: 700;
+          padding: 6px 12px;
+          border-radius: 100px;
+          cursor: pointer;
+          display: flex;
+          align-items: center;
+          gap: 6px;
+          text-transform: uppercase;
+        }
+        .brasil-panama-page .nav-lang-btn:hover { border-color: var(--teal); color: var(--white); }
         .brasil-panama-page .nav-link {
           font-size: 13px;
           font-weight: 500;
@@ -208,7 +243,7 @@ const BrasilPanamaMaracana = () => {
           position: absolute; inset: 0;
           width: 100%; height: 100%;
           object-fit: cover;
-          opacity: 0.4;
+          opacity: 0.6;
         }
         .brasil-panama-page .hero-bg-grad {
           position: absolute; inset: 0;
@@ -924,27 +959,36 @@ const BrasilPanamaMaracana = () => {
 
       {/* NAV */}
       <nav id="nav-bp">
-        <div className="nav-logo">
+        <a href="/" className="nav-logo">
           <img src="https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/render/image/public/site-images/1776136512230_pbsqj7cxjr.webp?quality=70&width=800&format=avif&resize=contain&v=1778307264662" alt="TocorimeRio" />
-        </div>
+          <span>TocorimeRio</span>
+        </a>
         <div className="nav-right">
-          <a className="nav-link" href="#sectors">{t('bp_nav_sectors')}</a>
-          <a className="nav-link" href="#included">{t('bp_nav_included')}</a>
-          <a className="nav-btn" href="#sectors">{t('bp_nav_buy')}</a>
+          <div style={{ display: 'flex', gap: '8px' }}>
+            <button className="nav-lang-btn" onClick={() => setLanguage(language === 'pt' ? 'en' : language === 'en' ? 'es' : 'pt')}>
+              🌐 {language}
+            </button>
+            <button className="nav-lang-btn" onClick={() => setCurrency(currency === 'BRL' ? 'USD' : currency === 'USD' ? 'EUR' : 'BRL')}>
+              {currency === 'BRL' ? 'R$' : currency === 'USD' ? '$' : '€'} {currency}
+            </button>
+          </div>
+          <a href="https://tocorimerio.com/match/brasil-vs-panam-2026-05-31" target="_blank" rel="noopener" className="nav-btn">
+            {t('bp_inc_cta')}
+          </a>
         </div>
       </nav>
 
       {/* HERO */}
       <section className="hero">
-        <div className="hero-bg" aria-hidden="true">
+        <div className="hero-bg">
           <img src="https://i0.wp.com/www.portaleducadora.com/wp-content/uploads/2023/10/estadio-do-maracana-na-copa-das-americas-2019.jpeg" alt="Maracanã" />
           <div className="hero-bg-grad"></div>
           <div className="hero-bg-grid"></div>
-          <div className="orb orb-1"></div>
-          <div className="orb orb-2"></div>
-          <div className="orb orb-3"></div>
           <div className="hero-bg-arc"></div>
         </div>
+        <div className="orb orb-1"></div>
+        <div className="orb orb-2"></div>
+        <div className="orb orb-3"></div>
 
         <div className="hero-inner">
           <div className="comp-pill">
@@ -1017,81 +1061,63 @@ const BrasilPanamaMaracana = () => {
       <div className="trust-bar">
         <div className="trust-inner">
           <div className="trust-item">
-            <span className="trust-icon">⭐</span>
-            <span>{t('bp_trust_google')}</span>
+            <span className="trust-icon">✅</span>
+            <span>{renderBoldText(t('bp_trust_transfer'))}</span>
           </div>
           <div className="trust-div"></div>
           <div className="trust-item">
-            <span className="trust-icon">🎟️</span>
-            <span>{t('bp_trust_reviews')}</span>
-          </div>
-          <div className="trust-div"></div>
-          <div className="trust-item">
-            <span className="trust-icon">🚐</span>
-            <span>{t('bp_trust_transfer')}</span>
-          </div>
-          <div className="trust-div"></div>
-          <div className="trust-item">
-            <span className="trust-icon">🗣️</span>
+            <span className="trust-icon">🌟</span>
             <span>{t('bp_trust_guide')}</span>
           </div>
           <div className="trust-div"></div>
           <div className="trust-item">
-            <span className="trust-icon">🔒</span>
+            <span className="trust-icon">🎫</span>
             <span>{t('bp_trust_official')}</span>
           </div>
         </div>
       </div>
 
       {/* VIDEO SECTION */}
-      <section className="section video-section">
-        <div className="container">
-          <div className="video-container reveal">
-            <iframe 
-              src="https://www.youtube.com/embed/cCyYRbMyBpk" 
-              title="TocorimeRio Experience" 
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-              allowFullScreen
-            ></iframe>
-          </div>
+      <section className="section video-section reveal" style={{ paddingBottom: '96px' }}>
+        <div className="sectors-header" style={{ margin: '0 auto 40px', textAlign: 'center' }}>
+          <span className="eyebrow">Experience</span>
+          <h2 className="section-h">{t('bp_video_title')}</h2>
+        </div>
+        <div className="video-container">
+          <iframe 
+            src="https://www.youtube.com/embed/cCyYRbMyBpk" 
+            title="TocorimeRio Experience"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+            allowFullScreen
+          ></iframe>
         </div>
       </section>
 
       {/* INFO STRIP */}
-      <div className="info-strip">
+      <section className="info-strip reveal">
         <div className="info-strip-inner">
           <div className="info-col">
-            <span className="info-col-label">{t('data')}</span>
-            <span className="info-col-val">{t('bp_info_date')}</span>
-            <span className="info-col-sub">{t('bp_info_date_sub')}</span>
+            <span className="info-col-label">{t('bp_log_bio_label')}</span>
+            <span className="info-col-val" style={{ color: 'var(--yellow)' }}>{t('bp_log_bio_val')}</span>
+            <span className="info-col-sub">{t('bp_log_bio_sub')}</span>
           </div>
           <div className="info-col">
-            <span className="info-col-label">{t('horario')}</span>
-            <span className="info-col-val">{t('bp_info_time')}</span>
-            <span className="info-col-sub">{t('bp_info_time_sub')}</span>
+            <span className="info-col-label">{t('bp_log_sale_label')}</span>
+            <span className="info-col-val">{t('bp_log_sale_val')}</span>
+            <span className="info-col-sub">Oficial CBF</span>
           </div>
           <div className="info-col">
-            <span className="info-col-label">Estádio</span>
-            <span className="info-col-val">{t('bp_info_venue')}</span>
-            <span className="info-col-sub">{t('bp_info_venue_sub')}</span>
+            <span className="info-col-label">{t('bp_log_docs_label')}</span>
+            <span className="info-col-val">{t('bp_log_docs_val')}</span>
+            <span className="info-col-sub">{t('bp_log_docs_sub')}</span>
           </div>
           <div className="info-col">
-            <span className="info-col-label">Competição</span>
-            <span className="info-col-val">{t('bp_info_comp')}</span>
-            <span className="info-col-sub">{t('bp_info_comp_sub')}</span>
-          </div>
-          <div className="info-col">
-            <span className="info-col-label">Técnico</span>
-            <span className="info-col-val">{t('bp_info_coach')}</span>
-            <span className="info-col-sub">{t('bp_info_coach_sub')}</span>
-          </div>
-          <div className="info-col">
-            <span className="info-col-label">Transmissão</span>
-            <span className="info-col-val">{t('bp_info_tv')}</span>
-            <span className="info-col-sub">{t('bp_info_tv_sub')}</span>
+            <span className="info-col-label">{t('bp_log_transfer_label')}</span>
+            <span className="info-col-val" style={{ color: 'var(--teal)' }}>{t('bp_log_transfer_val')}</span>
+            <span className="info-col-sub">{t('bp_log_transfer_sub')}</span>
           </div>
         </div>
-      </div>
+      </section>
 
       {/* SECTORS */}
       <section className="section sectors-section" id="sectors">
@@ -1102,162 +1128,37 @@ const BrasilPanamaMaracana = () => {
             <p className="section-sub">{t('bp_sectors_desc')}</p>
           </div>
 
-          <div className="stadium-map reveal reveal-d1" aria-hidden="true">
-            <svg className="stadium-svg" viewBox="0 0 600 320" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <ellipse cx="300" cy="160" rx="280" ry="150" stroke="rgba(255,255,255,0.08)" stroke-width="1.5" fill="rgba(255,255,255,0.02)"/>
-              <ellipse cx="300" cy="160" rx="230" ry="118" stroke="rgba(255,255,255,0.06)" stroke-width="1" fill="none"/>
-              <ellipse cx="300" cy="160" rx="155" ry="82" fill="rgba(0,155,59,0.12)" stroke="rgba(0,155,59,0.25)" stroke-width="1.5"/>
-              <ellipse cx="300" cy="160" rx="50" ry="26" fill="none" stroke="rgba(255,255,255,0.15)" stroke-width="1"/>
-              <line x1="300" y1="78" x2="300" y2="242" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
-              <rect x="220" y="14" width="160" height="34" rx="4" fill="rgba(42,157,143,0.15)" stroke="rgba(42,157,143,0.4)" stroke-width="1"/>
-              <text x="300" y="36" text-anchor="middle" fill="#2A9D8F" font-size="11" font-weight="700" font-family="Sora,sans-serif">NORTE · R$100</text>
-              <rect x="220" y="272" width="160" height="34" rx="4" fill="rgba(244,196,48,0.1)" stroke="rgba(244,196,48,0.3)" stroke-width="1"/>
-              <text x="300" y="294" text-anchor="middle" fill="#F4C430" font-size="11" font-weight="700" font-family="Sora,sans-serif">SUL · R$150</text>
-              <rect x="482" y="82" width="108" height="34" rx="4" fill="rgba(255,255,255,0.06)" stroke="rgba(255,255,255,0.15)" stroke-width="1"/>
-              <text x="536" y="99" text-anchor="middle" fill="rgba(255,255,255,0.6)" font-size="9.5" font-weight="700" font-family="Sora,sans-serif">LESTE SUP</text>
-              <text x="536" y="112" text-anchor="middle" fill="rgba(255,255,255,0.6)" font-size="9.5" font-weight="700" font-family="Sora,sans-serif">R$200</text>
-              <rect x="482" y="204" width="108" height="34" rx="4" fill="rgba(255,255,255,0.06)" stroke="rgba(255,255,255,0.15)" stroke-width="1"/>
-              <text x="536" y="221" text-anchor="middle" fill="rgba(255,255,255,0.6)" font-size="9.5" font-weight="700" font-family="Sora,sans-serif">LESTE INF</text>
-              <text x="536" y="234" text-anchor="middle" fill="rgba(255,255,255,0.6)" font-size="9.5" font-weight="700" font-family="Sora,sans-serif">R$300</text>
-              <rect x="10" y="143" width="115" height="34" rx="4" fill="rgba(42,157,143,0.12)" stroke="rgba(42,157,143,0.35)" stroke-width="1"/>
-              <text x="67" y="160" text-anchor="middle" fill="#2A9D8F" font-size="9.5" font-weight="700" font-family="Sora,sans-serif">OESTE INF</text>
-              <text x="67" y="173" text-anchor="middle" fill="#2A9D8F" font-size="9.5" font-weight="700" font-family="Sora,sans-serif">R$400</text>
-              <line x1="300" y1="48" x2="300" y2="78" stroke="rgba(42,157,143,0.3)" stroke-width="1" stroke-dasharray="3,3"/>
-              <line x1="300" y1="242" x2="300" y2="272" stroke="rgba(244,196,48,0.25)" stroke-width="1" stroke-dasharray="3,3"/>
-              <line x1="450" y1="140" x2="482" y2="118" stroke="rgba(255,255,255,0.1)" stroke-width="1" stroke-dasharray="3,3"/>
-              <line x1="450" y1="180" x2="482" y2="210" stroke="rgba(255,255,255,0.1)" stroke-width="1" stroke-dasharray="3,3"/>
-              <line x1="145" y1="160" x2="125" y2="160" stroke="rgba(42,157,143,0.3)" stroke-width="1" stroke-dasharray="3,3"/>
-            </svg>
-          </div>
-
-          <div className="sectors-grid reveal reveal-d2">
-            {/* NORTE */}
-            <div className="sector-card">
-              <div className="sector-top">
-                <div className="sector-name">{t('bp_sector_norte')}</div>
-                <div className="sector-location">{t('bp_sector_norte_desc')}</div>
-              </div>
-              <div className="sector-price-row">
-                <div className="sector-price-main">
-                  <div className="sector-label-sm">{t('bp_label_inteira')}</div>
-                  <div className="sector-price"><sup>R$</sup>100</div>
-                </div>
-                <div className="sector-price-half">
-                  R$50 <span>{t('bp_label_meia')}</span>
-                </div>
-              </div>
-              <div className="sector-divider"></div>
-              <div className="sector-perks">
-                <span className="perk-tag">{t('bp_perk_norte')}</span>
-                <span className="perk-tag">{t('bp_perk_vista')}</span>
-              </div>
-              <a href="https://tocorimerio.com/match/brasil-vs-panam-2026-05-31" target="_blank" rel="noopener" className="sector-cta outline">
-                {t('bp_select_sector').replace('{sector}', t('bp_sector_norte'))}
-              </a>
-            </div>
-
-            {/* SUL */}
-            <div className="sector-card">
-              <div className="sector-top">
-                <div className="sector-name">{t('bp_sector_sul')}</div>
-                <div className="sector-location">{t('bp_sector_sul_desc')}</div>
-              </div>
-              <div className="sector-price-row">
-                <div className="sector-price-main">
-                  <div className="sector-label-sm">{t('bp_label_inteira')}</div>
-                  <div className="sector-price"><sup>R$</sup>150</div>
-                </div>
-                <div className="sector-price-half">
-                  R$75 <span>{t('bp_label_meia')}</span>
-                </div>
-              </div>
-              <div className="sector-divider"></div>
-              <div className="sector-perks">
-                <span className="perk-tag">{t('bp_perk_sul')}</span>
-                <span className="perk-tag">{t('bp_perk_torcida')}</span>
-              </div>
-              <a href="https://tocorimerio.com/match/brasil-vs-panam-2026-05-31" target="_blank" rel="noopener" className="sector-cta outline">
-                {t('bp_select_sector').replace('{sector}', t('bp_sector_sul'))}
-              </a>
-            </div>
-
-            {/* LESTE SUPERIOR */}
-            <div className="sector-card">
-              <div className="sector-top">
-                <div className="sector-name">{t('bp_sector_leste_sup')}</div>
-                <div className="sector-location">{t('bp_sector_leste_sup_desc')}</div>
-              </div>
-              <div className="sector-price-row">
-                <div className="sector-price-main">
-                  <div className="sector-label-sm">{t('bp_label_inteira')}</div>
-                  <div className="sector-price"><sup>R$</sup>200</div>
-                </div>
-                <div className="sector-price-half">
-                  R$100 <span>{t('bp_label_meia')}</span>
-                </div>
-              </div>
-              <div className="sector-divider"></div>
-              <div className="sector-perks">
-                <span className="perk-tag">{t('bp_perk_leste')}</span>
-                <span className="perk-tag">{t('bp_perk_lateral')}</span>
-              </div>
-              <a href="https://tocorimerio.com/match/brasil-vs-panam-2026-05-31" target="_blank" rel="noopener" className="sector-cta outline">
-                {t('bp_select_sector').replace('{sector}', t('bp_sector_leste_sup'))}
-              </a>
-            </div>
-
-            {/* LESTE INFERIOR */}
+          <div className="sectors-grid">
             <div className="sector-card premium">
               <div className="sector-top">
-                <div className="sector-name">{t('bp_sector_leste_inf')}</div>
-                <div className="sector-location">{t('bp_sector_leste_inf_desc')}</div>
+                <span className="sector-name">{t('bp_sector_padrão')}</span>
+                <span className="sector-location">{t('bp_sector_padrão_desc')}</span>
               </div>
               <div className="sector-price-row">
                 <div className="sector-price-main">
-                  <div className="sector-label-sm">{t('bp_label_inteira')}</div>
-                  <div className="sector-price"><sup>R$</sup>300</div>
+                  <span className="sector-label-sm">{t('bp_label_inteira')}</span>
+                  <span className="sector-price"><sup>R$</sup>{t('bp_sector_padrão_price')}</span>
                 </div>
                 <div className="sector-price-half">
-                  R$150 <span>{t('bp_label_meia')}</span>
+                  <span>{t('bp_label_meia')}</span>
+                  R$ 550
                 </div>
               </div>
               <div className="sector-divider"></div>
               <div className="sector-perks">
-                <span className="perk-tag green">{t('bp_perk_best_value')}</span>
-                <span className="perk-tag">{t('bp_perk_field')}</span>
+                <span className="perk-tag green">{t('bp_perk_padrão')}</span>
+                <span className="perk-tag">{t('bp_perk_vista')}</span>
+                <span className="perk-tag">{t('bp_perk_best_value')}</span>
               </div>
               <a href="https://tocorimerio.com/match/brasil-vs-panam-2026-05-31" target="_blank" rel="noopener" className="sector-cta filled">
-                {t('bp_select_sector').replace('{sector}', t('bp_sector_leste_inf'))}
-              </a>
-            </div>
-
-            {/* OESTE INFERIOR */}
-            <div className="sector-card">
-              <div className="sector-top">
-                <div className="sector-name">{t('bp_sector_oeste_inf')}</div>
-                <div className="sector-location">{t('bp_sector_oeste_inf_desc')}</div>
-              </div>
-              <div className="sector-price-row">
-                <div className="sector-price-main">
-                  <div className="sector-label-sm">{t('bp_label_inteira')}</div>
-                  <div className="sector-price"><sup>R$</sup>400</div>
-                </div>
-                <div className="sector-price-half">
-                  R$200 <span>{t('bp_label_meia')}</span>
-                </div>
-              </div>
-              <div className="sector-divider"></div>
-              <div className="sector-perks">
-                <span className="perk-tag green">{t('bp_perk_premium')}</span>
-                <span className="perk-tag">{t('bp_perk_nobre')}</span>
-              </div>
-              <a href="https://tocorimerio.com/match/brasil-vs-panam-2026-05-31" target="_blank" rel="noopener" className="sector-cta outline">
-                {t('bp_select_sector').replace('{sector}', t('bp_sector_oeste_inf'))}
+                {t('bp_select_sector', { sector: t('bp_sector_padrão') })}
               </a>
             </div>
           </div>
 
-          <div className="addon-note reveal reveal-d3" dangerouslySetInnerHTML={{ __html: t('bp_addon_note') }}></div>
+          <div className="addon-note">
+            {renderBoldText(t('bp_addon_note'))}
+          </div>
         </div>
       </section>
 
@@ -1291,18 +1192,11 @@ const BrasilPanamaMaracana = () => {
                   <div className="inc-desc">{t('bp_inc_item2_desc')}</div>
                 </div>
               </div>
-              <div className="include-row reveal reveal-d2">
-                <div className="inc-icon-wrap">🗣️</div>
-                <div className="inc-body">
-                  <div className="inc-title">{t('bp_inc_item3_title')}</div>
-                  <div className="inc-desc">{t('bp_inc_item3_desc')}</div>
-                </div>
-              </div>
-              <div className="include-row reveal reveal-d3">
+              <div className="include-row">
                 <div className="inc-icon-wrap">🍺</div>
-                <div className="inc-body">
-                  <div className="inc-title">{t('bp_inc_item4_title')}</div>
-                  <div className="inc-desc">{t('bp_inc_item4_desc')}</div>
+                <div className="inc-content">
+                  <h4 className="inc-title">{t('bp_step3_title')}</h4>
+                  <p className="inc-desc">{renderBoldText(t('bp_step3_desc'))}</p>
                 </div>
               </div>
               <div className="include-row reveal reveal-d4">
@@ -1323,32 +1217,6 @@ const BrasilPanamaMaracana = () => {
           </div>
         </div>
       </section>
-
-      {/* INFO STRIP LOGISTICS */}
-      <div className="info-strip">
-        <div className="info-strip-inner container">
-          <div className="info-col">
-            <span className="info-col-label">{t('bp_log_bio_label')}</span>
-            <span className="info-col-val">{t('bp_log_bio_val')}</span>
-            <span className="info-col-sub">{t('bp_log_bio_sub')}</span>
-          </div>
-          <div className="info-col">
-            <span className="info-col-label">{t('bp_log_sale_label')}</span>
-            <span className="info-col-val">{t('bp_log_sale_val')}</span>
-            <span className="info-col-sub">{t('bp_log_sale_sub')}</span>
-          </div>
-          <div className="info-col">
-            <span className="info-col-label">{t('bp_log_docs_label')}</span>
-            <span className="info-col-val">{t('bp_log_docs_val')}</span>
-            <span className="info-col-sub">{t('bp_log_docs_sub')}</span>
-          </div>
-          <div className="info-col">
-            <span className="info-col-label">{t('bp_log_gates_label')}</span>
-            <span className="info-col-val">{t('bp_log_gates_val')}</span>
-            <span className="info-col-sub">{t('bp_log_gates_sub')}</span>
-          </div>
-        </div>
-      </div>
 
       {/* HOW IT WORKS */}
       <section className="section" id="how">
@@ -1376,7 +1244,7 @@ const BrasilPanamaMaracana = () => {
               <div className="step-num">03</div>
               <div className="step-icon">🍺</div>
               <div className="step-title">{t('bp_step3_title')}</div>
-              <div className="step-desc">{t('bp_step3_desc')}</div>
+              <div className="step-desc">{renderBoldText(t('bp_step3_desc'))}</div>
             </div>
             <div className="step-card">
               <div className="step-num">04</div>
@@ -1457,18 +1325,22 @@ const BrasilPanamaMaracana = () => {
       </section>
 
       {/* FOOTER */}
-      <footer>
-        <div className="nav-logo">
-          <img src="https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/render/image/public/site-images/1776136512230_pbsqj7cxjr.webp?quality=70&width=800&format=avif&resize=contain&v=1778307264662" alt="TocorimeRio" />
+      <footer style={{ padding: '60px 24px', borderTop: '1px solid var(--border)', textAlign: 'center', background: 'var(--ink-2)' }}>
+        <a href="/" className="nav-logo" style={{ justifyContent: 'center', marginBottom: '24px' }}>
+          <img src="https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/render/image/public/site-images/1776136512230_pbsqj7cxjr.webp?quality=70&width=800&format=avif&resize=contain&v=1778307264662" alt="TocorimeRio" style={{ height: '40px' }} />
+          <span style={{ fontSize: '20px' }}>TocorimeRio</span>
+        </a>
+        <p style={{ fontSize: '13px', color: 'var(--muted)', maxWidth: '500px', margin: '0 auto 32px' }}>
+          Oferecemos experiências autênticas e seguras para viajantes internacionais no Rio de Janeiro.
+        </p>
+        <div style={{ display: 'flex', justifyContent: 'center', gap: '16px' }}>
+          <a href={`https://wa.me/5521970702523`} target="_blank" rel="noopener" className="btn-main">
+            WhatsApp Support
+          </a>
         </div>
-        <div className="footer-links">
-          <a href="https://tocorimerio.com">{t('inicio')}</a>
-          <a href="#">{t('sobre')}</a>
-          <a href="#">FAQ</a>
-          <a href="#">{t('contato')}</a>
-          <a href="#">Termos</a>
+        <div className="footer-copy" style={{ marginTop: '40px', fontSize: '11px', color: 'var(--muted-2)' }}>
+          © 2026 TocorimeRio.com · Rio de Janeiro, Brasil
         </div>
-        <div className="footer-copy">© 2026 TocorimeRio.com · Rio de Janeiro, Brasil</div>
       </footer>
     </div>
   );
