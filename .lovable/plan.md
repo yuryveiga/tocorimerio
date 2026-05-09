@@ -1,77 +1,56 @@
-# Plano de Melhorias de SEO — Indexação no Google
+# Plano: Página índice de passeios indexável
 
-## Diagnóstico Atual
-O site já tem uma base sólida: sitemap dinâmico, schema markup em passeios, canonical URLs, PWA, e Google Analytics. O foco deste plano são ajustes pontuais e de baixo risco que aceleram a indexação e melhoram a aparência nos resultados de busca.
+## Objetivo
+- Criar a rota `/passeio` listando todos os passeios ativos do Supabase.
+- Garantir que essa página seja gerada como HTML estático no deploy (indexável pelo Google).
+- Ao clicar em um passeio, abrir a página de detalhe já existente (`/passeio/:slug` ou `/passeio/:id`).
+- Confirmar que `/maracanã-calendário` continua sendo prerenderizada (sem mudanças além de garantir presença no sitemap).
 
----
+## O que será feito
 
-## Ações Propostas (não-radicais)
+### 1. Nova página `src/pages/PasseiosIndex.tsx`
+- Busca todos os tours ativos via Supabase (`tours` onde `is_active = true`, ordenados por `sort_order`).
+- Layout em grid reaproveitando o componente `TourItem` que já é usado na home (consistência visual + zero retrabalho).
+- Cada card linka para `/passeio/{slug || id}` — a página de detalhe atual `PasseioDetalhe.tsx`.
+- Header e Footer padrão do site.
+- Suporte aos 3 idiomas (pt/en/es) via `useLocale`.
 
-### 1. Adicionar Hreflang para todos os idiomas
-**Impacto:** Alto para SEO internacional. O Google entende que o mesmo conteúdo existe em PT, EN e ES.
-**Onde:** `<head>` de todas as páginas públicas (Index, PasseioDetalhe, BlogPost, Blog, GenericPage).
-**Implementação:** Incluir tags `<link rel="alternate" hreflang="...">` apontando para as versões em cada idioma, mais a versão `x-default`.
+### 2. SEO completo
+- `<title>`: "Todos os Passeios no Rio de Janeiro | Tocorime Rio"
+- Meta description, canonical, hreflang (pt/en/es).
+- H1 único: "Passeios no Rio de Janeiro".
+- JSON-LD `ItemList` com todos os passeios (nome, imagem, URL, preço).
+- Open Graph + Twitter card.
 
-### 2. Schema "Article" nos posts do blog
-**Impacto:** Alto — habilita rich snippets (data de publicação, autor, imagem destacada) no Google.
-**Onde:** Página `BlogPost.tsx`.
-**Implementação:** Adicionar JSON-LD do tipo `Article` com `headline`, `image`, `datePublished`, `dateModified`, `author`, `publisher`.
+### 3. Registrar rota no React Router
+- Adicionar `<Route path="/passeio" element={<PasseiosIndex />} />` em `src/App.tsx`, antes da rota `/passeio/:id`.
 
-### 3. Breadcrumb visual + schema em Blog e páginas de conteúdo
-**Impacto:** Médio — melhora navegação e aparece nos SERPs como breadcrumbs.
-**Onde:** `BlogPost.tsx`, `Blog.tsx`, `FluminenseBolivarLibertadores.tsx`.
-**Implementação:** Adicionar componente visual de breadcrumbs no topo + JSON-LD `BreadcrumbList`.
+### 4. Incluir no prerender
+- Adicionar `/passeio` à lista de rotas em `scripts/prerender.js`.
+- Resultado: `dist/passeio/index.html` com HTML completo + dados de todos os tours já renderizados.
 
-### 4. Open Graph e Twitter Cards completos nas páginas internas
-**Impacto:** Médio — melhora o compartilhamento social e sinais de engajamento.
-**Onde:** `BlogPost.tsx`, `PasseioDetalhe.tsx`, `FluminenseBolivarLibertadores.tsx`.
-**Implementação:** Garantir que todas tenham `og:title`, `og:description`, `og:image`, `og:url`, `og:type`, `twitter:card`, `twitter:title`, `twitter:description`, `twitter:image`.
+### 5. Sitemap
+- Adicionar `/passeio` ao `public/sitemap.xml` (ou ao gerador `scripts/generate-sitemap.js` se for dinâmico).
 
-### 5. Schema "SportsEvent" na página Fluminense vs Bolívar
-**Impacto:** Médio — pode aparecer no painel de eventos do Google.
-**Onde:** `FluminenseBolivarLibertadores.tsx`.
-**Implementação:** JSON-LD do tipo `SportsEvent` com nome, data/hora, local (Maracanã), oferta de ingressos (link para o site), e times participantes.
+### 6. Calendário do Maracanã
+- Não criar HTML separado. A página `/maracanã-calendário` já é prerenderizada pelo `scripts/prerender.js` no deploy do GitHub Actions.
+- Apenas verificar se está listada no `sitemap.xml`; se não estiver, adicionar.
 
-### 6. Corrigir/verificar URLs com caracteres especiais no sitemap
-**Impacto:** Baixo a Médio — URLs codificadas incorretamente no sitemap XML dificultam o rastreamento.
-**Onde:** `public/sitemap.xml` e/ou script gerador.
-**Implementação:** Verificar slugs com hifens, acentos, ou caracteres especiais que possam estar quebrados no XML (ex: `experi-ncias`, `n-o-podeperder`).
+## Detalhes técnicos
 
-### 7. Meta descriptions únicas e otimizadas em todas as rotas
-**Impacto:** Médio — CTR nos resultados de busca.
-**Onde:** Todas as páginas públicas (MaracanaCalendar, Blog, FlamengoVascoMaracana, etc.).
-**Implementação:** Garantir que nenhuma página reutilize a mesma description da home. Usar `generateOptimizedMetaDescription` já existente.
+- **Stack**: React + Vite + Supabase + React Router (sem mudanças de stack).
+- **Data fetching**: hook similar ao já existente para tours (provavelmente `useSiteData` ou consulta direta com `supabase.from('tours')`).
+- **Prerender**: o Playwright já espera o React renderizar conteúdo real antes de salvar, então a lista de tours estará no HTML final.
+- **Links internos**: `<Link to={...}>` do React Router — ao clicar, navegação SPA normal abre a página de detalhe.
 
-### 8. Atributo `loading="lazy"` e `fetchpriority` em imagens abaixo da dobra
-**Impacto:** Médio — Core Web Vitals (LCP).
-**Onde:** Componentes `OptimizedImage` e imagens nas páginas de conteúdo.
-**Implementação:** Aplicar `fetchpriority="high"` apenas na imagem hero; `loading="lazy"` nas demais.
+## Arquivos afetados
 
----
+- `src/pages/PasseiosIndex.tsx` (novo)
+- `src/App.tsx` (adicionar rota)
+- `scripts/prerender.js` (adicionar `/passeio` à lista de rotas)
+- `public/sitemap.xml` (adicionar URL)
 
-## Técnico
-
-### Arquivos a modificar
-- `src/pages/BlogPost.tsx` — Article schema, OG tags, breadcrumbs
-- `src/pages/PasseioDetalhe.tsx` — hreflang, OG tags audit
-- `src/pages/FluminenseBolivarLibertadores.tsx` — SportsEvent schema, OG tags, canonical, breadcrumb
-- `src/pages/Index.tsx` — hreflang
-- `src/pages/Blog.tsx` — breadcrumb, hreflang, OG tags
-- `src/utils/seo.ts` — helpers para hreflang e Article schema
-- `scripts/generate-sitemap.js` — sanitização de slugs
-- `public/robots.txt` — já está OK
-
-### O que NÃO será alterado
-- Estrutura de rotas ou URLs existentes
-- Design visual (exceto breadcrumbs discretos)
-- Backend ou banco de dados
-- Conteúdo textual existente
-
----
-
-## Resultado Esperado
-- Melhor sinalização de idioma para o Google (hreflang)
-- Rich snippets em posts do blog (Article schema)
-- Maior chance de aparecer no painel de eventos Google (SportsEvent)
-- Melhor aparência nos resultados de busca (OG images, descriptions únicas)
-- CRAWL mais eficiente (sitemap limpo, breadcrumbs como sinal de estrutura)
+## Fora do escopo
+- Filtros, ordenação por preço ou busca (pode ser adicionado depois se quiser).
+- Mudanças nas páginas de detalhe `/passeio/:id`.
+- Criar HTML "puro" separado para o calendário do Maracanã.
