@@ -48,6 +48,7 @@ const CheckoutSuccess = lazy(() => import("./pages/CheckoutSuccess"));
 const MatchDetail = lazy(() => import("./pages/MatchDetail"));
 const FlamengoVascoMaracana = lazy(() => import("./pages/FlamengoVascoMaracana"));
 const FluminenseBolivarLibertadores = lazy(() => import("./pages/FluminenseBolivarLibertadores"));
+const PasseiosIndex = lazy(() => import("./pages/PasseiosIndex"));
 
 const PageLoader = () => <div className="min-h-screen flex items-center justify-center bg-background"><div className="w-12 h-12 border-4 border-primary border-t-transparent rounded-full animate-spin" /></div>;
 
@@ -93,6 +94,8 @@ const App = ({ queryClient: externalQueryClient }: { queryClient?: QueryClient }
                       <Route path="/maracanã-calendário" element={<MaracanaCalendar />} />
                       <Route path="/maracana-calendario" element={<Navigate to="/maracanã-calendário" replace />} />
                       <Route path="/maracanacalendar" element={<Navigate to="/maracanã-calendário" replace />} />
+                      <Route path="/passeio" element={<PasseiosIndex />} />
+                      <Route path="/passeios" element={<Navigate to="/passeio" replace />} />
                       <Route path="/passeio/:id" element={<PasseioDetalhe />} />
                       <Route path="/match/:id" element={<MatchDetail />} />
                       <Route path="/jogo/:id" element={<Navigate to="/match/:id" replace />} />

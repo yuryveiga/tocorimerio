@@ -38,7 +38,7 @@ async function startServer() {
 }
 
 async function fetchDynamicRoutes() {
-  const routes = ['/', '/blog', '/carrinho', '/maracanã-calendário', '/Fluminense-bolivar-libertadores'];
+  const routes = ['/', '/blog', '/carrinho', '/passeio', '/maracanã-calendário', '/Fluminense-bolivar-libertadores'];
 
   console.log('Fetching dynamic routes from Supabase...');
   
