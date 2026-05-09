@@ -3,606 +3,415 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title id="meta-title">Brasil vs Panamá | TocorimeRio</title>
-    <meta name="description" id="meta-desc" content="Garanta seu lugar no Maracanã para Brasil vs Panamá. Transfer e guia bilingue incluídos.">
+    <title id="meta-title">Brasil vs Panamá | Experiência VIP Maracanã | TocorimeRio</title>
+    <meta name="description" id="meta-desc" content="Garanta seu lugar no Maracanã para o histórico Brasil vs Panamá. Transfer de luxo e guia especializado incluídos.">
     
-    <!-- Google Fonts -->
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Sora:wght@100..800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Sora:wght@300;400;600;700;800&display=swap" rel="stylesheet">
     
     <style>
         :root {
             --yellow:      #FFD700;
             --teal:        #2A9D8F;
-            --teal-dark:   #21867a;
+            --teal-glow:   rgba(42,157,143,0.4);
             --white:       #FFFFFF;
-            --off-white:   #F7F5F0;
-            --ink:         #0E0E0F;
-            --ink-2:       #17181a;
-            --ink-3:       #222326;
-            --ink-4:       #2e3035;
-            --muted:       #8a8d96;
-            --muted-2:     #5a5d66;
-            --border:      rgba(255,255,255,0.07);
-            --border-2:    rgba(255,255,255,0.12);
-            --radius:      16px;
-            --radius-sm:   10px;
-            --container:   1180px;
+            --ink:         #080809;
+            --ink-2:       #111214;
+            --ink-3:       #1c1d21;
+            --border:      rgba(255,255,255,0.06);
+            --border-glow: rgba(42,157,143,0.2);
+            --radius-lg:   24px;
+            --radius-md:   16px;
+            --radius-sm:   12px;
+            --container:   1200px;
+            --transition:  0.6s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        * { margin: 0; padding: 0; box-sizing: border-box; cursor: none !important; }
         html { scroll-behavior: smooth; }
         body {
             background: var(--ink);
             color: var(--white);
-            font-family: 'Sora', system-ui, sans-serif;
-            font-size: 16px;
-            line-height: 1.6;
+            font-family: 'Sora', sans-serif;
+            line-height: 1.5;
             overflow-x: hidden;
-        }
-        img { display: block; max-width: 100%; }
-        a { color: inherit; text-decoration: none; transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
-
-        .container {
-            max-width: var(--container);
-            margin: 0 auto;
-            padding: 0 24px;
+            -webkit-font-smoothing: antialiased;
         }
 
-        /* UTILS */
-        .reveal { opacity: 0; transform: translateY(30px); transition: 1s cubic-bezier(0.2, 0.8, 0.2, 1); }
-        .reveal.in { opacity: 1; transform: translateY(0); }
-        .yellow { color: var(--yellow) !important; font-weight: 700; }
+        /* CUSTOM CURSOR - Design Spell */
+        #cursor {
+            position: fixed; top: 0; left: 0;
+            width: 20px; height: 20px;
+            background: var(--yellow);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9999;
+            mix-blend-mode: difference;
+            transition: transform 0.1s ease-out;
+            display: none;
+        }
+        #cursor-follower {
+            position: fixed; top: 0; left: 0;
+            width: 40px; height: 40px;
+            border: 1px solid var(--yellow);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9998;
+            transition: transform 0.15s ease-out;
+            display: none;
+        }
+        @media (pointer: fine) { #cursor, #cursor-follower { display: block; } }
+
+        .container { max-width: var(--container); margin: 0 auto; padding: 0 32px; }
+
+        /* NOISE OVERLAY - Frontend Design Texture */
+        .noise {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: url('https://grainy-gradients.vercel.app/noise.svg');
+            opacity: 0.03; pointer-events: none; z-index: 9000;
+        }
+
+        /* AMBIENT GLOWS */
+        .glow {
+            position: absolute; width: 60vw; height: 60vw;
+            background: radial-gradient(circle, var(--teal-glow) 0%, transparent 70%);
+            filter: blur(80px); opacity: 0.3; pointer-events: none; z-index: 0;
+        }
 
         /* TICKER */
-        .ticker-wrap {
-            background: var(--yellow);
-            overflow: hidden;
-            white-space: nowrap;
-            height: 42px;
-            display: flex;
-            align-items: center;
-            position: relative;
-            z-index: 201;
+        .ticker {
+            background: var(--yellow); height: 40px; overflow: hidden;
+            display: flex; align-items: center; position: sticky; top: 0; z-index: 500;
         }
-        .ticker-track {
-            display: inline-flex;
-            animation: ticker-bp 35s linear infinite;
-        }
-        @keyframes ticker-bp {
-            0%   { transform: translateX(0); }
-            100% { transform: translateX(-50%); }
-        }
+        .ticker-track { display: flex; animation: scroll 30s linear infinite; white-space: nowrap; }
+        @keyframes scroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
         .ticker-item {
-            display: inline-flex;
-            align-items: center;
-            gap: 12px;
-            padding: 0 40px;
-            font-size: 12px;
-            font-weight: 800;
-            letter-spacing: .12em;
-            text-transform: uppercase;
-            color: var(--ink);
+            color: var(--ink); font-weight: 800; font-size: 11px;
+            text-transform: uppercase; letter-spacing: 0.15em; padding: 0 40px;
+            display: flex; align-items: center; gap: 12px;
         }
-        .ticker-dot { width: 4px; height: 4px; background: var(--ink); border-radius: 50%; opacity: .4; flex-shrink: 0; }
+        .ticker-dot { width: 5px; height: 5px; background: var(--ink); border-radius: 50%; opacity: 0.3; }
 
-        /* HEADER & CONTROLS */
-        header-nav {
-            position: fixed; top: 42px; left: 0; right: 0; z-index: 200;
-            background: rgba(14, 14, 15, 0.85);
-            backdrop-filter: blur(20px) saturate(1.8);
-            border-bottom: 1px solid var(--border);
-            transition: 0.4s;
+        /* NAV */
+        nav {
+            position: fixed; top: 40px; left: 0; width: 100%; z-index: 400;
+            padding: 24px 0; transition: var(--transition);
         }
-        header-nav.scrolled { top: 0; background: rgba(14, 14, 15, 0.95); }
-        .nav-inner {
-            height: 80px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-        .nav-logo { display: flex; align-items: center; gap: 14px; }
-        .nav-logo img { height: 40px; }
-        .nav-logo span { font-weight: 800; font-size: 20px; letter-spacing: -0.02em; }
-        
-        .nav-actions { display: flex; align-items: center; gap: 12px; }
-        
-        .control-select {
-            background: var(--ink-3);
-            border: 1px solid var(--border-2);
-            color: var(--white);
-            font-size: 12px;
-            font-weight: 600;
-            padding: 8px 12px;
-            border-radius: 8px;
-            cursor: pointer;
-            outline: none;
-        }
+        nav.scrolled { background: rgba(8, 8, 9, 0.8); backdrop-filter: blur(20px); border-bottom: 1px solid var(--border); padding: 16px 0; }
+        .nav-flex { display: flex; align-items: center; justify-content: space-between; }
+        .logo { display: flex; align-items: center; gap: 12px; font-weight: 800; font-size: 18px; }
+        .logo img { height: 36px; }
 
-        .btn-main {
-            display: inline-flex; align-items: center; gap: 10px;
-            background: linear-gradient(135deg, var(--teal) 0%, var(--teal-dark) 100%);
-            color: var(--white);
-            font-size: 14px;
-            font-weight: 700;
-            padding: 12px 28px;
-            border-radius: 100px;
-            box-shadow: 0 8px 30px rgba(42,157,143,0.3);
+        .nav-controls { display: flex; gap: 8px; }
+        select {
+            background: var(--ink-3); color: var(--white); border: 1px solid var(--border);
+            padding: 8px 12px; border-radius: 8px; font-size: 11px; font-weight: 700;
+            outline: none; cursor: pointer; transition: 0.3s;
         }
-        .btn-main:hover { transform: translateY(-2px); box-shadow: 0 12px 40px rgba(42,157,143,0.4); }
+        select:hover { border-color: var(--teal); }
 
         /* HERO */
         .hero {
-            position: relative;
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            overflow: hidden;
-            background: var(--ink);
-            padding-top: 100px;
+            position: relative; height: 100vh; min-height: 800px;
+            display: flex; align-items: center; justify-content: center;
+            padding-top: 100px; overflow: hidden; text-align: center;
         }
-        .hero-bg {
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background-image: url('https://i0.wp.com/www.portaleducadora.com/wp-content/uploads/2023/10/estadio-do-maracana-na-copa-das-americas-2019.jpeg');
-            background-size: cover; background-position: center;
-            filter: brightness(0.35) saturate(1.2);
-            z-index: 0;
+        .hero-media {
+            position: absolute; inset: 0; z-index: -1;
+            background: url('https://i0.wp.com/www.portaleducadora.com/wp-content/uploads/2023/10/estadio-do-maracana-na-copa-das-americas-2019.jpeg') center/cover no-repeat;
+            filter: brightness(0.3) saturate(1.2);
         }
-        .hero-overlay {
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background: radial-gradient(circle at center, transparent 0%, var(--ink) 90%);
-            z-index: 1;
-        }
-        .hero-content { position: relative; z-index: 2; width: 100%; max-width: 960px; padding: 0 24px; }
-        
-        .hero-pill {
-            display: inline-flex; align-items: center; gap: 10px;
-            background: rgba(255,255,255,0.06);
+        .hero-vignette { position: absolute; inset: 0; background: radial-gradient(circle at center, transparent 0%, var(--ink) 95%); }
+
+        .hero-eyebrow {
+            display: inline-block; padding: 10px 24px; background: rgba(255,255,255,0.05);
+            border: 1px solid var(--border); border-radius: 100px;
+            font-size: 10px; font-weight: 800; letter-spacing: 0.2em; text-transform: uppercase;
+            color: var(--yellow); margin-bottom: 40px;
             backdrop-filter: blur(10px);
-            border: 1px solid var(--border-2);
-            padding: 8px 20px;
-            border-radius: 100px;
-            font-size: 11px;
-            font-weight: 700;
-            letter-spacing: 0.15em;
-            text-transform: uppercase;
-            color: var(--yellow);
-            margin-bottom: 40px;
         }
 
-        .match-card {
-            display: flex; align-items: center; justify-content: center; gap: 40px;
-            margin-bottom: 48px;
-        }
-        .team { display: flex; flex-direction: column; align-items: center; gap: 16px; width: 180px; }
-        .team-crest { width: 110px; height: 110px; object-fit: contain; filter: drop-shadow(0 10px 30px rgba(0,0,0,0.6)); }
-        .team-name { font-family: 'Playfair Display', serif; font-size: 36px; font-weight: 900; letter-spacing: -0.02em; }
-        .team-sub { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); }
+        .match-display { display: flex; align-items: center; justify-content: center; gap: 60px; margin-bottom: 60px; }
+        .team { width: 220px; animation: float 6s ease-in-out infinite; }
+        .team.away { animation-delay: -3s; }
+        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
         
-        .vs-wrap { display: flex; flex-direction: column; align-items: center; gap: 8px; }
-        .vs-line { width: 1px; height: 50px; background: linear-gradient(to bottom, transparent, var(--border-2), transparent); }
-        .vs-label { font-size: 14px; font-weight: 800; color: var(--teal); letter-spacing: 0.1em; }
+        .crest { width: 140px; height: 140px; object-fit: contain; filter: drop-shadow(0 20px 40px rgba(0,0,0,0.6)); margin-bottom: 24px; }
+        .team-name { font-family: 'Playfair Display', serif; font-size: 48px; font-weight: 900; letter-spacing: -0.03em; }
+        .team-role { font-size: 10px; font-weight: 700; text-transform: uppercase; color: var(--muted); letter-spacing: 0.15em; }
 
-        .hero-headline {
-            font-size: clamp(16px, 3vw, 20px);
-            font-weight: 400;
-            color: var(--muted);
-            margin-bottom: 48px;
-            max-width: 800px;
-            margin-left: auto;
-            margin-right: auto;
-            line-height: 1.6;
-        }
+        .vs { font-size: 14px; font-weight: 900; color: var(--teal); letter-spacing: 0.2em; opacity: 0.5; }
 
-        .meta-chips {
-            display: flex; flex-wrap: wrap; justify-content: center; gap: 12px;
-            margin-bottom: 50px;
+        .headline {
+            font-size: clamp(18px, 4vw, 24px); font-weight: 300; color: var(--muted);
+            max-width: 900px; margin: 0 auto 60px; line-height: 1.5;
         }
-        .chip {
-            display: inline-flex; align-items: center; gap: 8px;
-            background: var(--ink-3); border: 1px solid var(--border-2);
-            padding: 10px 20px; border-radius: 100px; font-size: 14px; font-weight: 500;
-            transition: 0.3s;
-        }
-        .chip:hover { border-color: var(--teal); transform: translateY(-2px); }
+        .headline strong { color: var(--yellow); font-weight: 700; }
 
-        /* SECTORS */
-        .section-header { text-align: center; margin-bottom: 80px; }
-        .eyebrow {
-            display: flex; align-items: center; gap: 10px; justify-content: center;
-            font-size: 12px; font-weight: 800; letter-spacing: 0.25em; text-transform: uppercase;
-            color: var(--teal); margin-bottom: 20px;
+        .meta-grid { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; }
+        .meta-item {
+            background: var(--ink-2); border: 1px solid var(--border);
+            padding: 12px 24px; border-radius: 100px; font-size: 14px; font-weight: 600;
+            display: flex; align-items: center; gap: 10px; transition: 0.4s;
         }
-        .section-h { font-family: 'Playfair Display', serif; font-size: clamp(36px, 6vw, 54px); font-weight: 900; line-height: 1.05; margin-bottom: 24px; }
-        .section-sub { color: var(--muted); max-width: 650px; margin: 0 auto; font-size: 18px; }
+        .meta-item:hover { border-color: var(--teal); background: var(--ink-3); transform: translateY(-3px); }
 
-        .sectors-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 28px;
-            margin-bottom: 100px;
-        }
-        .sector-card {
-            background: var(--ink-2);
-            padding: 32px;
-            border-radius: 20px;
-            border: 1px solid var(--border);
-            display: flex;
-            flex-direction: column;
-            gap: 24px;
-            transition: 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
-        }
-        .sector-card:hover { transform: translateY(-10px); border-color: var(--teal); box-shadow: 0 20px 40px rgba(0,0,0,0.4); }
-        .sector-card.premium { background: linear-gradient(135deg, rgba(42,157,143,0.1) 0%, var(--ink-2) 60%); }
+        /* SECTORS - Bento Grid Style */
+        .sectors { padding: 120px 0; background: var(--ink-2); }
+        .section-header { text-align: center; margin-bottom: 100px; }
+        .h2 { font-family: 'Playfair Display', serif; font-size: clamp(40px, 8vw, 72px); line-height: 1; margin-bottom: 32px; }
         
-        .sector-top { flex: 1; }
-        .sector-name { font-size: 18px; font-weight: 800; margin-bottom: 6px; }
-        .sector-desc { font-size: 13px; color: var(--muted); }
-        .sector-price { font-size: 22px; font-weight: 800; color: var(--muted-2); }
-        
-        .sector-perks { display: flex; flex-wrap: wrap; gap: 8px; }
-        .perk-tag { font-size: 11px; font-weight: 700; background: var(--ink-4); padding: 5px 12px; border-radius: 6px; color: var(--muted); }
-        .perk-tag.highlight { color: var(--teal); background: rgba(42,157,143,0.1); }
-        
-        .sector-cta {
-            background: var(--ink-3); color: var(--muted); padding: 16px; border-radius: 12px;
-            text-align: center; font-size: 15px; font-weight: 700; cursor: not-allowed; opacity: 0.6;
-            border: 1px dashed var(--border-2);
+        .bento-grid {
+            display: grid; grid-template-columns: repeat(12, 1fr); gap: 24px;
         }
+        .card {
+            grid-column: span 6; background: var(--ink); border: 1px solid var(--border);
+            border-radius: var(--radius-lg); padding: 48px; position: relative;
+            overflow: hidden; transition: 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .card:hover { border-color: var(--teal); transform: scale(1.02); }
+        .card.premium { grid-column: span 6; background: linear-gradient(135deg, #0a1a18 0%, var(--ink) 100%); }
+        .card.small { grid-column: span 4; padding: 32px; }
+        
+        .card-name { font-size: 24px; font-weight: 800; margin-bottom: 8px; }
+        .card-desc { color: var(--muted); font-size: 14px; margin-bottom: 32px; }
+        .card-price { font-size: 14px; font-weight: 700; color: var(--muted-2); text-transform: uppercase; letter-spacing: 0.1em; }
+        
+        .card-tags { display: flex; gap: 8px; margin-top: auto; }
+        .tag { font-size: 10px; font-weight: 800; padding: 6px 12px; border-radius: 6px; background: var(--ink-3); color: var(--muted); text-transform: uppercase; }
+        .tag.accent { background: rgba(42,157,143,0.1); color: var(--teal); }
 
-        /* INFO STRIP */
-        .info-strip { background: var(--ink-2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 80px 0; }
-        .info-strip-inner { display: flex; flex-wrap: wrap; justify-content: space-around; gap: 50px; text-align: center; }
-        .info-col { display: flex; flex-direction: column; gap: 10px; }
-        .info-col-label { font-size: 12px; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: 0.15em; }
-        .info-col-val { font-size: 24px; font-weight: 800; color: var(--white); }
-        .info-col-sub { font-size: 14px; color: var(--muted); }
+        /* BUTTONS */
+        .btn {
+            display: inline-flex; align-items: center; gap: 12px;
+            background: linear-gradient(135deg, var(--teal) 0%, var(--teal-dark) 100%);
+            padding: 16px 40px; border-radius: 100px; font-weight: 800; font-size: 15px;
+            box-shadow: 0 10px 40px var(--teal-glow); transition: 0.4s;
+        }
+        .btn:hover { transform: translateY(-4px); box-shadow: 0 20px 60px var(--teal-glow); }
 
         /* FOOTER */
-        footer { padding: 100px 0; text-align: center; background: var(--ink); border-top: 1px solid var(--border); }
-        .footer-logo { display: flex; align-items: center; justify-content: center; gap: 14px; margin-bottom: 32px; }
-        .footer-logo span { font-weight: 900; font-size: 24px; letter-spacing: -0.02em; }
-        .footer-copy { font-size: 14px; color: var(--muted); max-width: 500px; margin: 0 auto 40px; }
-        
-        .lang-footer { display: flex; justify-content: center; gap: 20px; margin-bottom: 40px; }
-        .lang-link { font-size: 13px; font-weight: 600; color: var(--muted); opacity: 0.6; cursor: pointer; }
-        .lang-link.active { color: var(--yellow); opacity: 1; }
+        footer { padding: 120px 0; text-align: center; border-top: 1px solid var(--border); }
+        .footer-logo { font-size: 32px; font-weight: 900; margin-bottom: 40px; display: block; }
+        .footer-links { display: flex; justify-content: center; gap: 32px; margin-bottom: 40px; }
+        .f-link { font-size: 12px; font-weight: 700; color: var(--muted); opacity: 0.5; transition: 0.3s; }
+        .f-link.active { color: var(--yellow); opacity: 1; }
 
-        @media (max-width: 768px) {
-            .match-card { gap: 15px; flex-direction: column; }
-            .team { width: 100%; }
-            .team-crest { width: 90px; height: 90px; }
-            .team-name { font-size: 28px; }
-            .vs-line { height: 20px; }
-            .nav-inner { height: 70px; }
-            .nav-actions { display: none; }
-            .hero { padding-top: 140px; }
+        @media (max-width: 992px) {
+            .card { grid-column: span 12 !important; }
+            .match-display { flex-direction: column; gap: 30px; }
+            .hero { height: auto; padding-bottom: 100px; }
         }
     </style>
 </head>
 <body>
 
-    <!-- TICKER -->
-    <div class="ticker-wrap">
-        <div class="ticker-track" id="ticker-track">
-            <!-- Dynamic Content -->
-        </div>
+    <div id="cursor"></div>
+    <div id="cursor-follower"></div>
+    <div class="noise"></div>
+
+    <div class="ticker">
+        <div class="ticker-track" id="ticker-track"></div>
     </div>
 
-    <!-- NAVIGATION -->
-    <header-nav id="navbar">
-        <div class="container nav-inner">
-            <div class="nav-logo">
-                <img src="https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/render/image/public/site-images/1776136512230_pbsqj7cxjr.webp?quality=70&width=800&format=avif&resize=contain&v=1778307264662" alt="TocorimeRio">
+    <nav id="nav">
+        <div class="container nav-flex">
+            <a href="/" class="logo">
+                <img src="https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/render/image/public/site-images/1776136512230_pbsqj7cxjr.webp?quality=70&width=800&format=avif&resize=contain&v=1778307264662" alt="Toco">
                 <span>TocorimeRio</span>
-            </div>
-            
-            <div class="nav-actions">
-                <select class="control-select" id="lang-select" onchange="changeLanguage(this.value)">
-                    <option value="pt">Português</option>
-                    <option value="en">English</option>
-                    <option value="es">Español</option>
+            </a>
+            <div class="nav-controls">
+                <select id="lang" onchange="setLang(this.value)">
+                    <option value="pt">PT</option>
+                    <option value="en">EN</option>
+                    <option value="es">ES</option>
                 </select>
-                
-                <select class="control-select" id="currency-select" onchange="changeCurrency(this.value)">
+                <select id="curr">
                     <option value="BRL">R$ BRL</option>
                     <option value="USD">$ USD</option>
-                    <option value="EUR">€ EUR</option>
                 </select>
-
-                <a href="https://tocorimerio.com/match/brasil-vs-panam-2026-05-31" target="_blank" rel="noopener" class="btn-main" id="nav-cta">
-                    Comprar Ingresso
-                </a>
+                <a href="https://tocorimerio.com/match/brasil-vs-panam-2026-05-31" class="btn" style="padding: 10px 24px; font-size: 13px;" id="nav-cta"></a>
             </div>
         </div>
-    </header-nav>
+    </nav>
 
-    <!-- HERO SECTION -->
-    <section class="hero">
-        <div class="hero-bg"></div>
-        <div class="hero-overlay"></div>
-        <div class="hero-content">
-            <div class="hero-pill reveal" id="hero-eyebrow"></div>
+    <main>
+        <section class="hero">
+            <div class="hero-media"></div>
+            <div class="hero-vignette"></div>
+            <div class="glow" style="top: -10%; left: -10%;"></div>
             
-            <div class="match-card reveal">
-                <div class="team">
-                    <img class="team-crest" src="https://ruacloirelfsbejduefa.supabase.co/storage/v1/object/public/crests/e996b731-bddd-4da8-972d-0080b80186ea/mandante.png" alt="Brasil">
-                    <div class="team-country" id="team-br-sub">Brasil</div>
-                    <div class="team-name" id="team-br">Brasil</div>
+            <div class="container">
+                <div class="hero-eyebrow" id="eyebrow"></div>
+                
+                <div class="match-display">
+                    <div class="team">
+                        <img src="https://ruacloirelfsbejduefa.supabase.co/storage/v1/object/public/crests/e996b731-bddd-4da8-972d-0080b80186ea/mandante.png" class="crest">
+                        <div class="team-role" id="br-role"></div>
+                        <div class="team-name" id="br-name"></div>
+                    </div>
+                    <div class="vs">VS</div>
+                    <div class="team away">
+                        <img src="https://ruacloirelfsbejduefa.supabase.co/storage/v1/object/public/crests/e996b731-bddd-4da8-972d-0080b80186ea/visitante.png" class="crest">
+                        <div class="team-role" id="pan-role"></div>
+                        <div class="team-name" id="pan-name"></div>
+                    </div>
                 </div>
-                <div class="vs-wrap">
-                    <div class="vs-line"></div>
-                    <div class="vs-label">VS</div>
-                    <div class="vs-line"></div>
-                </div>
-                <div class="team">
-                    <img class="team-crest" src="https://ruacloirelfsbejduefa.supabase.co/storage/v1/object/public/crests/e996b731-bddd-4da8-972d-0080b80186ea/visitante.png" alt="Panamá">
-                    <div class="team-country" id="team-pan-sub">Panamá</div>
-                    <div class="team-name" id="team-pan">Panamá</div>
+
+                <h1 class="headline" id="headline"></h1>
+
+                <div class="meta-grid">
+                    <div class="meta-item"><span id="m-date"></span></div>
+                    <div class="meta-item"><span id="m-time"></span></div>
+                    <div class="meta-item"><span id="m-venue"></span></div>
                 </div>
             </div>
+        </section>
 
-            <div class="hero-headline reveal" id="hero-headline"></div>
+        <section class="sectors">
+            <div class="container">
+                <div class="section-header">
+                    <div class="eyebrow" id="s-eyebrow"></div>
+                    <h2 class="h2" id="s-title"></h2>
+                    <p class="headline" style="font-size: 18px;" id="s-desc"></p>
+                </div>
 
-            <div class="meta-chips reveal">
-                <div class="chip"><span id="meta-date"></span></div>
-                <div class="chip"><span id="meta-time"></span></div>
-                <div class="chip"><span id="meta-venue"></span></div>
-                <div class="chip"><span id="meta-gates"></span></div>
+                <div class="bento-grid" id="grid"></div>
             </div>
-        </div>
-    </section>
+        </section>
+    </main>
 
-    <!-- SECTORS SECTION -->
-    <section class="section container" id="sectors">
-        <div class="section-header reveal">
-            <div class="eyebrow" id="sectors-eyebrow"></div>
-            <h2 class="section-h" id="sectors-title"></h2>
-            <p class="section-sub" id="sectors-desc"></p>
-        </div>
-
-        <div class="sectors-grid" id="sectors-grid">
-            <!-- Generated via JS -->
-        </div>
-    </section>
-
-    <!-- INFO STRIP -->
-    <section class="info-strip">
-        <div class="container info-strip-inner reveal">
-            <div class="info-col">
-                <span class="info-col-label" id="log-bio-label"></span>
-                <span class="info-col-val" style="color: var(--yellow)" id="log-bio-val"></span>
-                <span class="info-col-sub" id="log-bio-sub"></span>
-            </div>
-            <div class="info-col">
-                <span class="info-col-label" id="log-sale-label"></span>
-                <span class="info-col-val" id="log-sale-val"></span>
-                <span class="info-col-sub" id="log-sale-sub"></span>
-            </div>
-            <div class="info-col">
-                <span class="info-col-label" id="log-docs-label"></span>
-                <span class="info-col-val" id="log-docs-val"></span>
-                <span class="info-col-sub" id="log-docs-sub"></span>
-            </div>
-        </div>
-    </section>
-
-    <!-- FOOTER -->
     <footer>
         <div class="container">
-            <div class="footer-logo reveal">
-                <img src="https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/render/image/public/site-images/1776136512230_pbsqj7cxjr.webp?quality=70&width=800&format=avif&resize=contain&v=1778307264662" alt="TocorimeRio" style="height: 48px;">
-                <span>TocorimeRio</span>
+            <span class="footer-logo">TocorimeRio</span>
+            <div class="footer-links">
+                <span class="f-link" id="f-pt" onclick="setLang('pt')">PT</span>
+                <span class="f-link" id="f-en" onclick="setLang('en')">EN</span>
+                <span class="f-link" id="f-es" onclick="setLang('es')">ES</span>
             </div>
-            
-            <div class="lang-footer reveal">
-                <span class="lang-link" onclick="changeLanguage('pt')" id="lang-pt">PT</span>
-                <span class="lang-link" onclick="changeLanguage('en')" id="lang-en">EN</span>
-                <span class="lang-link" onclick="changeLanguage('es')" id="lang-es">ES</span>
-            </div>
-
-            <p class="footer-copy reveal" id="footer-text"></p>
-            <p style="font-size: 11px; opacity: 0.4; letter-spacing: 0.05em;" class="reveal">© 2026 TOCORIMERIO. ALL RIGHTS RESERVED.</p>
+            <p id="f-copy" style="color: var(--muted); font-size: 14px; max-width: 600px; margin: 0 auto;"></p>
         </div>
     </footer>
 
     <script>
-        const translations = {
+        const data = {
             pt: {
-                title: "Brasil vs Panamá | Maracanã 2026",
-                desc: "Garanta seu pacote para o último jogo da Seleção no Brasil antes da Copa do Mundo.",
-                hero_eyebrow: "Amistoso Oficial • Pré-Copa do Mundo 2026",
-                hero_headline: "A **despedida histórica** da Seleção no Maracanã — último jogo em solo brasileiro antes da **Copa do Mundo 2026**",
-                br: "Brasil", br_sub: "Mandante", pan: "Panamá", pan_sub: "Visitante",
-                date: "📅 31 de Maio, 2026", time: "⏰ 18h30 (Brasília)", venue: "🏟️ Maracanã, Rio", gates: "🌍 Portões: 15h30",
-                sectors_eyebrow: "Ingressos Oficiais",
-                sectors_title: "Escolha seu setor no Maracanã",
-                sectors_desc: "Selecione seu setor — nosso pacote inclui o ingresso + traslado ida/volta + guia bilíngue.",
-                nav_cta: "Comprar Ingresso",
-                unavailable: "Ainda não disponível",
-                btn_unavailable: "Indisponível",
-                perk_premium: "Setor premium", perk_view: "Visão central", perk_value: "Mais procurado",
-                log_bio_label: "⚠️ Biometria Facial", log_bio_val: "Obrigatória", log_bio_sub: "Cadastro na Bepass",
-                log_sale_label: "🎫 Venda Geral", log_sale_val: "tocorimerio.com", log_sale_sub: "Ingressos garantidos",
-                log_docs_label: "📋 Documentos", log_docs_val: "RG ou Passaporte", log_docs_sub: "Doc. com foto",
-                footer_text: "Oferecemos experiências autênticas e seguras para viajantes internacionais no Rio de Janeiro.",
+                eyebrow: "Amistoso Oficial • Pré-Copa 2026",
+                headline: "A **despedida histórica** da Seleção no Maracanã — último jogo em solo brasileiro antes da **Copa do Mundo 2026**",
+                br: "Brasil", br_r: "Mandante", pan: "Panamá", pan_r: "Visitante",
+                date: "📅 31 de Maio", time: "⏰ 18h30 BRT", venue: "🏟️ Maracanã",
+                s_eyebrow: "Ingressos Oficiais", s_title: "Escolha seu setor", s_desc: "Pacotes exclusivos com transfer e guia bilíngue incluídos.",
+                cta: "Comprar Ingresso", unavailable: "Ainda não disponível",
+                f_copy: "Experiências premium para viajantes internacionais no Rio.",
                 sectors: [
-                    { name: "Leste Inferior", desc: "Visão privilegiada do campo", premium: true, perks: ["perk_premium", "perk_view"] },
-                    { name: "Oeste Inferior", desc: "Setor central e coberto", premium: false, perks: ["perk_premium", "perk_view"] },
-                    { name: "Leste Superior", desc: "Visão panorâmica", premium: false, perks: ["perk_view", "perk_value"] },
-                    { name: "Norte / Sul", desc: "Atrás dos gols", premium: false, perks: ["perk_value"] }
+                    { name: "Leste Inferior", desc: "Visão privilegiada central", premium: true, tags: ["Premium", "Central"] },
+                    { name: "Oeste Inferior", desc: "Setor VIP coberto", premium: false, tags: ["Conforto", "VIP"] },
+                    { name: "Leste Superior", desc: "Visão panorâmica", premium: false, tags: ["Panorâmico"] },
+                    { name: "Norte / Sul", desc: "Clima de torcida", premium: false, tags: ["Popular"] }
                 ]
             },
             en: {
-                title: "Brazil vs Panama | Maracanã 2026",
-                desc: "Secure your package for the National Team's final home game before the World Cup.",
-                hero_eyebrow: "Official Friendly • Pre-World Cup 2026",
-                hero_headline: "The **historic farewell** of the National Team at Maracanã — last game on Brazilian soil before the **2026 World Cup**",
-                br: "Brazil", br_sub: "Home", pan: "Panama", pan_sub: "Away",
-                date: "📅 May 31, 2026", time: "⏰ 6:30 PM (Brasília)", venue: "🏟️ Maracanã Stadium", gates: "🌍 Gates: 3:30 PM",
-                sectors_eyebrow: "Official Tickets",
-                sectors_title: "Choose your sector at Maracanã",
-                sectors_desc: "Select your sector — our package includes the ticket + round-trip transfer + bilingual guide.",
-                nav_cta: "Buy Ticket",
-                unavailable: "Not available yet",
-                btn_unavailable: "Unavailable",
-                perk_premium: "Premium sector", perk_view: "Central view", perk_value: "Most popular",
-                log_bio_label: "⚠️ Facial Biometrics", log_bio_val: "Mandatory", log_bio_sub: "Registration at Bepass",
-                log_sale_label: "🎫 General Sale", log_sale_val: "tocorimerio.com", log_sale_sub: "Guaranteed tickets",
-                log_docs_label: "📋 Documents", log_docs_val: "ID or Passport", log_docs_sub: "Photo ID required",
-                footer_text: "We offer authentic and safe experiences for international travelers in Rio de Janeiro.",
+                eyebrow: "Official Friendly • Pre-World Cup 2026",
+                headline: "The **historic farewell** of the National Team at Maracanã — last game on Brazilian soil before the **2026 World Cup**",
+                br: "Brazil", br_r: "Home", pan: "Panama", pan_r: "Away",
+                date: "📅 May 31", time: "⏰ 6:30 PM BRT", venue: "🏟️ Maracanã",
+                s_eyebrow: "Official Tickets", s_title: "Select your sector", s_desc: "Exclusive packages with luxury transfer and bilingual guide.",
+                cta: "Buy Ticket", unavailable: "Not available yet",
+                f_copy: "Premium experiences for international travelers in Rio.",
                 sectors: [
-                    { name: "Lower East", desc: "Privileged pitch view", premium: true, perks: ["perk_premium", "perk_view"] },
-                    { name: "Lower West", desc: "Central and covered sector", premium: false, perks: ["perk_premium", "perk_view"] },
-                    { name: "Upper East", desc: "Panoramic view", premium: false, perks: ["perk_view", "perk_value"] },
-                    { name: "North / South", desc: "Behind the goals", premium: false, perks: ["perk_value"] }
+                    { name: "Lower East", desc: "Privileged central view", premium: true, tags: ["Premium", "Central"] },
+                    { name: "Lower West", desc: "VIP covered sector", premium: false, tags: ["Comfort", "VIP"] },
+                    { name: "Upper East", desc: "Panoramic view", premium: false, tags: ["Panoramic"] },
+                    { name: "North / South", desc: "Crowd atmosphere", premium: false, tags: ["Popular"] }
                 ]
             },
             es: {
-                title: "Brasil vs Panamá | Maracanã 2026",
-                desc: "Asegura tu paquete para el último partido de la Selección en Brasil antes del Mundial.",
-                hero_eyebrow: "Amistoso Oficial • Pre-Copa del Mundo 2026",
-                hero_headline: "La **despedida histórica** de la Selección en el Maracanã — último partido en suelo brasileño antes de la **Copa del Mundo 2026**",
-                br: "Brasil", br_sub: "Local", pan: "Panamá", pan_sub: "Visitante",
-                date: "📅 31 de Mayo, 2026", time: "⏰ 18h30 (Brasilia)", venue: "🏟️ Estadio Maracanã", gates: "🌍 Puertas: 15h30",
-                sectors_eyebrow: "Entradas Oficiales",
-                sectors_title: "Elige tu sector en el Maracanã",
-                sectors_desc: "Selecciona tu sector — nuestro paquete incluye la entrada + traslado ida/vuelta + guía bilingüe.",
-                nav_cta: "Comprar Entrada",
-                unavailable: "Aún no disponible",
-                btn_unavailable: "No disponible",
-                perk_premium: "Sector premium", perk_view: "Vista central", perk_value: "Más buscado",
-                log_bio_label: "⚠️ Biometría Facial", log_bio_val: "Obligatoria", log_bio_sub: "Registro en Bepass",
-                log_sale_label: "🎫 Venta General", log_sale_val: "tocorimerio.com", log_sale_sub: "Entradas garantizadas",
-                log_docs_label: "📋 Documentos", log_docs_val: "DNI o Pasaporte", log_docs_sub: "Doc. con foto",
-                footer_text: "Ofrecemos experiencias auténticas y seguras para viajeros internacionales en Río de Janeiro.",
+                eyebrow: "Amistoso Oficial • Pre-Mundial 2026",
+                headline: "La **despedida histórica** de la Selección en el Maracanã — último partido en suelo brasileño antes de la **Copa del Mundo 2026**",
+                br: "Brasil", br_r: "Local", pan: "Panamá", pan_r: "Visitante",
+                date: "📅 31 de Mayo", time: "⏰ 18h30 BRT", venue: "🏟️ Maracanã",
+                s_eyebrow: "Entradas Oficiales", s_title: "Elige tu sector", s_desc: "Paquetes exclusivos con traslado de lujo y guía bilingüe.",
+                cta: "Comprar Entrada", unavailable: "Aún no disponible",
+                f_copy: "Experiencias premium para viajeros internacionales en Río.",
                 sectors: [
-                    { name: "Leste Inferior", desc: "Vista privilegiada del campo", premium: true, perks: ["perk_premium", "perk_view"] },
-                    { name: "Oeste Inferior", desc: "Sector central y cubierto", premium: false, perks: ["perk_premium", "perk_view"] },
-                    { name: "Leste Superior", desc: "Vista panorámica", premium: false, perks: ["perk_view", "perk_value"] },
-                    { name: "Norte / Sur", desc: "Detrás de los arcos", premium: false, perks: ["perk_value"] }
+                    { name: "Leste Inferior", desc: "Vista privilegiada central", premium: true, tags: ["Premium", "Central"] },
+                    { name: "Oeste Inferior", desc: "Sector VIP cubierto", premium: false, tags: ["Confort", "VIP"] },
+                    { name: "Leste Superior", desc: "Vista panorámica", premium: false, tags: ["Panorámico"] },
+                    { name: "Norte / Sur", desc: "Clima de hinchada", premium: false, tags: ["Popular"] }
                 ]
             }
         };
 
-        let currentLang = 'pt';
-        let currentCurrency = 'BRL';
+        let lang = 'pt';
+        
+        function setLang(l) {
+            lang = l;
+            const t = data[lang];
+            document.getElementById('eyebrow').innerText = t.eyebrow;
+            document.getElementById('headline').innerHTML = t.headline.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+            document.getElementById('br-name').innerText = t.br;
+            document.getElementById('br-role').innerText = t.br_r;
+            document.getElementById('pan-name').innerText = t.pan;
+            document.getElementById('pan-role').innerText = t.pan_r;
+            document.getElementById('m-date').innerText = t.date;
+            document.getElementById('m-time').innerText = t.time;
+            document.getElementById('m-venue').innerText = t.venue;
+            document.getElementById('s-eyebrow').innerText = t.s_eyebrow;
+            document.getElementById('s-title').innerText = t.s_title;
+            document.getElementById('s-desc').innerText = t.s_desc;
+            document.getElementById('f-copy').innerText = t.f_copy;
+            document.getElementById('nav-cta').innerText = t.cta;
+            document.getElementById('lang').value = lang;
 
-        function renderBold(text) {
-            if (!text) return "";
-            return text.replace(/\*\*(.*?)\*\*/g, '<span class="yellow">$1</span>');
-        }
-
-        function updateUI() {
-            const t = translations[currentLang];
-            
-            // Meta
-            document.title = t.title;
-            document.getElementById('meta-title').innerText = t.title;
-            document.getElementById('meta-desc').setAttribute('content', t.desc);
-
-            // Hero
-            document.getElementById('hero-eyebrow').innerText = t.hero_eyebrow;
-            document.getElementById('hero-headline').innerHTML = renderBold(t.hero_headline);
-            document.getElementById('team-br').innerText = t.br;
-            document.getElementById('team-br-sub').innerText = t.br_sub;
-            document.getElementById('team-pan').innerText = t.pan;
-            document.getElementById('team-pan-sub').innerText = t.pan_sub;
-            document.getElementById('meta-date').innerText = t.date;
-            document.getElementById('meta-time').innerText = t.time;
-            document.getElementById('meta-venue').innerText = t.venue;
-            document.getElementById('meta-gates').innerText = t.gates;
-
-            // Nav
-            document.getElementById('nav-cta').innerText = t.nav_cta;
-
-            // Sectors Header
-            document.getElementById('sectors-eyebrow').innerText = t.sectors_eyebrow;
-            document.getElementById('sectors-title').innerText = t.sectors_title;
-            document.getElementById('sectors-desc').innerText = t.sectors_desc;
-
-            // Info Strip
-            document.getElementById('log-bio-label').innerText = t.log_bio_label;
-            document.getElementById('log-bio-val').innerText = t.log_bio_val;
-            document.getElementById('log-bio-sub').innerText = t.log_bio_sub;
-            document.getElementById('log-sale-label').innerText = t.log_sale_label;
-            document.getElementById('log-sale-val').innerText = t.log_sale_val;
-            document.getElementById('log-sale-sub').innerText = t.log_sale_sub;
-            document.getElementById('log-docs-label').innerText = t.log_docs_label;
-            document.getElementById('log-docs-val').innerText = t.log_docs_val;
-            document.getElementById('log-docs-sub').innerText = t.log_docs_sub;
-
-            // Footer
-            document.getElementById('footer-text').innerText = t.footer_text;
-            
-            // Languages Footer Active
-            ['pt', 'en', 'es'].forEach(l => {
-                document.getElementById(`lang-${l}`).classList.toggle('active', currentLang === l);
-            });
-
-            // Grid
-            const grid = document.getElementById('sectors-grid');
+            const grid = document.getElementById('grid');
             grid.innerHTML = t.sectors.map(s => `
-                <div class="sector-card ${s.premium ? 'premium' : ''} reveal in">
-                    <div class="sector-top">
-                        <div class="sector-name">${s.name}</div>
-                        <div class="sector-desc">${s.desc}</div>
+                <div class="card ${s.premium ? 'premium' : 'small'}">
+                    <div class="card-name">${s.name}</div>
+                    <div class="card-desc">${s.desc}</div>
+                    <div class="card-price">${t.unavailable}</div>
+                    <div class="card-tags">
+                        ${s.tags.map(tag => `<span class="tag ${s.premium ? 'accent' : ''}">${tag}</span>`).join('')}
                     </div>
-                    <div class="sector-price">${t.unavailable}</div>
-                    <div class="sector-perks">
-                        ${s.perks.map(p => `<span class="perk-tag ${p === 'perk_premium' ? 'highlight' : ''}">${t[p]}</span>`).join('')}
-                    </div>
-                    <div class="sector-cta">${t.btn_unavailable}</div>
                 </div>
             `).join('');
 
-            // Ticker
-            const tickerItems = [t.hero_eyebrow, t.log_sale_sub, t.log_bio_label + " " + t.log_bio_val];
             const tickerTrack = document.getElementById('ticker-track');
-            const tickerHtml = [...tickerItems, ...tickerItems, ...tickerItems].map(item => `
-                <div class="ticker-item">${item}</div><div class="ticker-dot"></div>
-            `).join('');
-            tickerTrack.innerHTML = tickerHtml + tickerHtml;
+            const items = [t.eyebrow, t.s_eyebrow, t.date + " " + t.time];
+            tickerTrack.innerHTML = [...items, ...items, ...items, ...items].map(i => `<div class="ticker-item">${i}</div><div class="ticker-dot"></div>`).join('');
+
+            document.querySelectorAll('.f-link').forEach(el => el.classList.remove('active'));
+            document.getElementById('f-' + lang).classList.add('active');
         }
 
-        function changeLanguage(lang) {
-            currentLang = lang;
-            document.getElementById('lang-select').value = lang;
-            updateUI();
-        }
+        // CURSOR LOGIC - Design Spell
+        const cursor = document.getElementById('cursor');
+        const follower = document.getElementById('cursor-follower');
+        
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.transform = `translate3d(${e.clientX - 10}px, ${e.clientY - 10}px, 0)`;
+            follower.style.transform = `translate3d(${e.clientX - 20}px, ${e.clientY - 20}px, 0)`;
+        });
 
-        function changeCurrency(curr) {
-            currentCurrency = curr;
-            // Currency conversion logic would go here if prices were available
-            updateUI();
-        }
-
-        // SCROLL REVEAL
-        window.addEventListener('scroll', () => {
-            const nav = document.getElementById('navbar');
-            if (window.scrollY > 80) nav.classList.add('scrolled');
-            else nav.classList.remove('scrolled');
-
-            const reveals = document.querySelectorAll('.reveal');
-            reveals.forEach(el => {
-                const rect = el.getBoundingClientRect();
-                if (rect.top < window.innerHeight * 0.9) {
-                    el.classList.add('in');
-                }
+        document.querySelectorAll('a, button, select, .f-link').forEach(el => {
+            el.addEventListener('mouseenter', () => {
+                cursor.style.transform += ' scale(3)';
+                cursor.style.opacity = '0.3';
+            });
+            el.addEventListener('mouseleave', () => {
+                cursor.style.transform = cursor.style.transform.replace(' scale(3)', '');
+                cursor.style.opacity = '1';
             });
         });
 
-        // INITIALIZE
-        updateUI();
-        setTimeout(() => {
-            document.querySelectorAll('.reveal').forEach(el => {
-                const rect = el.getBoundingClientRect();
-                if (rect.top < window.innerHeight) el.classList.add('in');
-            });
-        }, 100);
+        window.addEventListener('scroll', () => {
+            const nav = document.getElementById('nav');
+            if (window.scrollY > 50) nav.classList.add('scrolled');
+            else nav.classList.remove('scrolled');
+        });
+
+        setLang('pt');
     </script>
 </body>
 </html>
