@@ -1029,9 +1029,9 @@ const BrasilPanamaMaracana = () => {
             </div>
           </div>
 
-          <h1 className="hero-headline reveal" style={{ fontSize: 'clamp(32px, 5vw, 64px)', lineHeight: 1.1, fontWeight: 800 }}>
+          <p className="hero-headline reveal">
             {renderBoldText(t('bp_hero_headline'))}
-          </h1>
+          </p>
 
           <div className="meta-chips">
             <div className="chip"><span className="chip-icon">📅</span> {t('bp_meta_date')}</div>
