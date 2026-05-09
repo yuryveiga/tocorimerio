@@ -87,6 +87,13 @@ const BrasilPanamaMaracana = () => {
     };
   }, []);
 
+  const sectors = [
+    { nameKey: 'bp_sector_leste_inf', descKey: 'bp_sector_leste_inf_desc', premium: true, perks: ['bp_perk_padrão', 'bp_perk_vista'] },
+    { nameKey: 'bp_sector_oeste_inf', descKey: 'bp_sector_oeste_inf_desc', premium: false, perks: ['bp_perk_padrão', 'bp_perk_vista'] },
+    { nameKey: 'bp_sector_leste_sup', descKey: 'bp_sector_leste_sup_desc', premium: false, perks: ['bp_perk_vista', 'bp_perk_best_value'] },
+    { nameKey: 'bp_sector_norte_sul', descKey: 'bp_sector_norte_sul_desc', premium: false, perks: ['bp_perk_best_value'] },
+  ];
+
   return (
     <div className="brasil-panama-page">
       <Helmet>
@@ -601,11 +608,8 @@ const BrasilPanamaMaracana = () => {
         .brasil-panama-page .sectors-grid {
           display: grid;
           grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-          gap: 2px;
-          background: var(--border);
-          border-radius: var(--radius);
-          overflow: hidden;
-          max-width: 960px;
+          gap: 24px;
+          max-width: 1200px;
           margin: 0 auto;
         }
         .brasil-panama-page .sector-card {
@@ -1136,31 +1140,30 @@ const BrasilPanamaMaracana = () => {
           </div>
 
           <div className="sectors-grid">
-            <div className="sector-card premium">
-              <div className="sector-top">
-                <span className="sector-name">{t('bp_sector_padrão')}</span>
-                <span className="sector-location">{t('bp_sector_padrão_desc')}</span>
-              </div>
-              <div className="sector-price-row">
-                <div className="sector-price-main">
-                  <span className="sector-label-sm">{t('bp_label_inteira')}</span>
-                  <span className="sector-price"><sup>R$</sup>{t('bp_sector_padrão_price')}</span>
+            {sectors.map((sector, idx) => (
+              <div key={idx} className={`sector-card reveal ${sector.premium ? 'premium' : ''}`} style={{ transitionDelay: `${idx * 0.1}s` }}>
+                <div className="sector-top">
+                  <span className="sector-name">{t(sector.nameKey)}</span>
+                  <span className="sector-location">{t(sector.descKey)}</span>
                 </div>
-                <div className="sector-price-half">
-                  <span>{t('bp_label_meia')}</span>
-                  R$ 550
+                <div className="sector-price-row" style={{ minHeight: '80px', display: 'flex', alignItems: 'center' }}>
+                  <div className="sector-price-main">
+                    <span className="sector-price" style={{ fontSize: '1.4rem', color: 'var(--muted)' }}>
+                      {t('bp_status_indisponivel')}
+                    </span>
+                  </div>
                 </div>
+                <div className="sector-divider"></div>
+                <div className="sector-perks">
+                  {sector.perks.map((perk, pIdx) => (
+                    <span key={pIdx} className={`perk-tag ${perk.includes('padrão') ? 'green' : ''}`}>{t(perk)}</span>
+                  ))}
+                </div>
+                <button disabled className="sector-cta" style={{ opacity: 0.6, cursor: 'not-allowed', background: 'var(--ink-3)', color: 'var(--muted)' }}>
+                  {t('bp_status_indisponivel')}
+                </button>
               </div>
-              <div className="sector-divider"></div>
-              <div className="sector-perks">
-                <span className="perk-tag green">{t('bp_perk_padrão')}</span>
-                <span className="perk-tag">{t('bp_perk_vista')}</span>
-                <span className="perk-tag">{t('bp_perk_best_value')}</span>
-              </div>
-              <a href="https://tocorimerio.com/match/brasil-vs-panam-2026-05-31" target="_blank" rel="noopener" className="sector-cta filled">
-                {t('bp_select_sector', { sector: t('bp_sector_padrão') })}
-              </a>
-            </div>
+            ))}
           </div>
 
           <div className="addon-note">
