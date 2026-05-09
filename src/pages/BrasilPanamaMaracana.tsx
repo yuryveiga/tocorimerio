@@ -1186,7 +1186,7 @@ const BrasilPanamaMaracana = () => {
               <h2 className="section-h">{t('bp_inc_title')}</h2>
               <p className="section-sub">{t('bp_inc_desc')}</p>
               <br /><br />
-              <a href="#sectors" className="btn-main" style={{ display: 'inline-flex' }}>
+              <a href="https://tocorimerio.com/match/brasil-vs-panam-2026-05-31" target="_blank" rel="noopener" className="btn-main" style={{ display: 'inline-flex' }}>
                 <span>🎟️</span> {t('bp_inc_cta')}
               </a>
             </div>
