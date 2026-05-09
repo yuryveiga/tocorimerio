@@ -27,8 +27,12 @@ jobs:
           cache: 'npm'
       - name: Install dependencies
         run: npm install
+      - name: Install Playwright browser
+        run: npx playwright install --with-deps chromium
       - name: Build
         run: npm run build
+      - name: Prerender for SEO
+        run: npm run prerender
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
