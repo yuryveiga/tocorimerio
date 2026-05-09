@@ -129,7 +129,7 @@ export const generateSportsEventSchema = (params: {
   }),
 });
 
-export const generateLocalBusinessSchema = (siteTitle: string, description: string, imageUrl?: string) => {
+export const generateLocalBusinessSchema = (siteTitle: string, description: string, imageUrl?: string, telephone?: string) => {
   return {
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
@@ -137,7 +137,7 @@ export const generateLocalBusinessSchema = (siteTitle: string, description: stri
     "image": imageUrl || `${BASE_URL}/og-image.png`,
     "description": description,
     "url": BASE_URL,
-    "telephone": "+5521999999999",
+    ...(telephone ? { "telephone": telephone } : {}),
     "priceRange": "$$",
     "address": {
       "@type": "PostalAddress",

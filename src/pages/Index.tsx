@@ -22,8 +22,14 @@ const Footer = lazy(() => import("@/components/Footer").then(m => ({ default: m.
 const SectionLoader = () => <div className="h-40 w-full flex items-center justify-center"><div className="w-8 h-8 border-4 border-primary border-t-transparent rounded-full animate-spin" /></div>;
 
 const Index = () => {
-  const { siteSettings, images } = useSiteData();
+  const { siteSettings, images, socialMedia } = useSiteData();
   const { language } = useLocale();
+  const whatsappSocial = socialMedia.find((s) => s.platform?.toLowerCase().includes('whatsapp'));
+  const businessPhone = whatsappSocial?.url
+    ? (whatsappSocial.url.startsWith('http')
+        ? '+' + whatsappSocial.url.replace(/[^\d]/g, '')
+        : whatsappSocial.url)
+    : undefined;
   const siteTitle = siteSettings?.site_title || (language === 'pt' ? "Passeios Privativos Exclusivos no Rio de Janeiro | Experiências Locais Autênticas" : language === 'es' ? "Tours Privados Exclusivos en Río de Janeiro | Experiencias Locales Auténticas" : "Exclusive Private Tours in Rio de Janeiro | Authentic Local Experiences");
   const siteDescription = siteSettings?.site_description || (language === 'pt' ? "Descubra o melhor do Rio de Janeiro com nossos guias especialistas. Tours privativos e personalizados para garantir segurança e exclusividade." : language === 'es' ? "Descubra lo mejor de Río de Janeiro con nuestros guías expertos. Tours privados y personalizados para garantizar seguridad y exclusividad." : "Discover the best of Rio de Janeiro with our expert guides. Private and personalized tours to ensure safety and exclusivity.");
 
@@ -46,7 +52,7 @@ const Index = () => {
         <meta name="twitter:title" content={siteTitle} />
         <meta name="twitter:description" content={siteDescription} />
         <script type="application/ld+json">
-          {JSON.stringify(generateLocalBusinessSchema("Tocorime Rio", siteDescription, images?.hero_bg))}
+          {JSON.stringify(generateLocalBusinessSchema("Tocorime Rio", siteDescription, images?.hero_bg, businessPhone))}
         </script>
       </Helmet>
       <Header />
