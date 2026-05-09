@@ -53,9 +53,10 @@ export function Footer() {
   const contactPhone = phoneSocial?.url || whatsappSocial?.url || "";
   
   const cleanPhone = contactPhone.replace(/[^\d+]/g, "");
+  const message = encodeURIComponent("Olá, vim pelo site");
   const waLink = contactPhone.startsWith('http') 
-    ? contactPhone 
-    : (whatsappSocial ? `https://wa.me/${cleanPhone.replace('+', '')}` : `tel:${cleanPhone}`);
+    ? `${contactPhone}${contactPhone.includes('?') ? '&' : '?'}text=${message}`
+    : (whatsappSocial ? `https://wa.me/${cleanPhone.replace('+', '')}?text=${message}` : `tel:${cleanPhone}`);
 
   const logoUrl = images["logo"] || "https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images//images__1_-removebg-preview.png";
 

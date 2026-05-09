@@ -51,9 +51,10 @@ export function FloatingButtons() {
   const handleWhatsApp = () => {
     if (!whatsapp) return;
     const cleanNumber = whatsapp.url.replace(/[^\d+]/g, "");
+    const message = encodeURIComponent("Olá, vim pelo site");
     const url = whatsapp.url.startsWith('http') 
-      ? whatsapp.url 
-      : `https://wa.me/${cleanNumber.replace('+', '')}`;
+      ? `${whatsapp.url}${whatsapp.url.includes('?') ? '&' : '?'}text=${message}`
+      : `https://wa.me/${cleanNumber.replace('+', '')}?text=${message}`;
     window.open(url, '_blank', 'noopener,noreferrer');
   };
 

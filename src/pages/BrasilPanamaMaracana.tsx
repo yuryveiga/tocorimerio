@@ -1347,7 +1347,7 @@ const BrasilPanamaMaracana = () => {
           Oferecemos experiências autênticas e seguras para viajantes internacionais no Rio de Janeiro.
         </p>
         <div style={{ display: 'flex', justifyContent: 'center', gap: '16px' }}>
-          <a href={`https://wa.me/5521970702523`} target="_blank" rel="noopener" className="btn-main">
+          <a href={`https://wa.me/5521970702523?text=${encodeURIComponent("Olá, vim pelo site")}`} target="_blank" rel="noopener" className="btn-main">
             WhatsApp Support
           </a>
         </div>
