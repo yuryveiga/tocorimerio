@@ -19,6 +19,22 @@ if (!supabaseUrl || !supabaseKey) {
 
 const supabase = createClient(supabaseUrl, supabaseKey);
 
+// Partner project for Maracanã matches (same as src/hooks/useMatches.ts)
+const PARTNER_URL = "https://mwxbskzggzznxvkwgrnz.supabase.co";
+const PARTNER_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im13eGJza3pnZ3p6bnh2a3dncm56Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzMzNjE5OTUsImV4cCI6MjA4ODkzNzk5NX0.EFfaaN79uifOMgFdIZlQ5C8c-HQH-YodNGWf0MEcf9o";
+const partnerSupabase = createClient(PARTNER_URL, PARTNER_KEY);
+
+const slugify = (text) =>
+  String(text || "")
+    .toLowerCase()
+    .trim()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/[^\w\s-]/g, "")
+    .replace(/[\s_]+/g, "-")
+    .replace(/-+/g, "-")
+    .replace(/^-+|-+$/g, "");
+
 async function startServer() {
   const app = express();
   
@@ -49,12 +65,20 @@ async function fetchDynamicRoutes() {
   }
 
   // Fetch tours
-  const { data: tours } = await supabase.from('tours').select('id, slug');
+  const { data: tours } = await supabase.from('tours').select('id, slug, category, is_active');
   if (tours) {
-    tours.forEach(tour => {
+    const activeTours = tours.filter(t => t.is_active !== false);
+    activeTours.forEach(tour => {
       routes.push(`/passeio/${tour.id}`);
       if (tour.slug) routes.push(`/passeio/${tour.slug}`);
     });
+    // Category landing pages
+    const cats = new Set();
+    activeTours.forEach((t) => {
+      const s = slugify(t.category);
+      if (s) cats.add(s);
+    });
+    cats.forEach((c) => routes.push(`/passeios/${c}`));
   }
 
   // Fetch pages
@@ -63,6 +87,23 @@ async function fetchDynamicRoutes() {
     pages.forEach(page => {
         if (!routes.includes(page.href)) routes.push(page.href);
     });
+  }
+
+  // Fetch Maracanã matches from partner project
+  try {
+    const { data: matches } = await partnerSupabase
+      .from('matches')
+      .select('id, slug, hidden');
+    if (matches) {
+      const visible = matches.filter(m => !m.hidden);
+      visible.forEach((m) => {
+        const key = m.slug || m.id;
+        if (key) routes.push(`/jogo/${key}`);
+      });
+      console.log(`Added ${visible.length} match landing pages.`);
+    }
+  } catch (e) {
+    console.warn('Could not fetch matches from partner:', e.message);
   }
 
   return routes;
