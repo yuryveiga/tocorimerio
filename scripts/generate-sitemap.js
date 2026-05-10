@@ -17,6 +17,22 @@ if (!supabaseUrl || !supabaseKey) {
 
 const supabase = createClient(supabaseUrl, supabaseKey);
 
+// Partner project for Maracanã matches
+const PARTNER_URL = 'https://mwxbskzggzznxvkwgrnz.supabase.co';
+const PARTNER_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im13eGJza3pnZ3p6bnh2a3dncm56Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzMzNjE5OTUsImV4cCI6MjA4ODkzNzk5NX0.EFfaaN79uifOMgFdIZlQ5C8c-HQH-YodNGWf0MEcf9o';
+const partnerSupabase = createClient(PARTNER_URL, PARTNER_KEY);
+
+const slugify = (text) =>
+  String(text || '')
+    .toLowerCase()
+    .trim()
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .replace(/[^\w\s-]/g, '')
+    .replace(/[\s_]+/g, '-')
+    .replace(/-+/g, '-')
+    .replace(/^-+|-+$/g, '');
+
 async function generateSitemap() {
   console.log('Generating dynamic sitemap...');
 
@@ -24,7 +40,7 @@ async function generateSitemap() {
     // Fetch Tours
     const { data: tours, error: toursError } = await supabase
       .from('tours')
-      .select('id, slug, updated_at')
+      .select('id, slug, updated_at, category')
       .eq('is_active', true);
 
     if (toursError) {
@@ -75,6 +91,43 @@ async function generateSitemap() {
       xml += `  </url>\n`;
     });
 
+    // Category landing pages
+    const cats = new Set();
+    tours.forEach(t => {
+      const s = slugify(t.category);
+      if (s) cats.add(s);
+    });
+    cats.forEach(c => {
+      xml += `  <url>\n`;
+      xml += `    <loc>${siteUrl}/passeios/${c}</loc>\n`;
+      xml += `    <lastmod>${new Date().toISOString().split('T')[0]}</lastmod>\n`;
+      xml += `    <changefreq>weekly</changefreq>\n`;
+      xml += `    <priority>0.7</priority>\n`;
+      xml += `  </url>\n`;
+    });
+
+    // Maracanã matches from partner
+    let matchesCount = 0;
+    try {
+      const { data: matches } = await partnerSupabase
+        .from('matches')
+        .select('id, slug, updated_at, hidden');
+      const visible = (matches || []).filter(m => !m.hidden);
+      visible.forEach(m => {
+        const key = m.slug || m.id;
+        if (!key) return;
+        xml += `  <url>\n`;
+        xml += `    <loc>${siteUrl}/jogo/${key}</loc>\n`;
+        xml += `    <lastmod>${(m.updated_at || new Date().toISOString()).split('T')[0]}</lastmod>\n`;
+        xml += `    <changefreq>weekly</changefreq>\n`;
+        xml += `    <priority>0.9</priority>\n`;
+        xml += `  </url>\n`;
+      });
+      matchesCount = visible.length;
+    } catch (e) {
+      console.warn('Could not fetch matches:', e.message);
+    }
+
     // Blog Posts
     posts.forEach(post => {
       xml += `  <url>\n`;
@@ -90,7 +143,7 @@ async function generateSitemap() {
     const publicPath = path.join(__dirname, '../public/sitemap.xml');
     fs.writeFileSync(publicPath, xml);
     console.log(`Sitemap generated successfully at ${publicPath}`);
-    console.log(`Added ${tours.length} tours and ${posts.length} blog posts.`);
+    console.log(`Added ${tours.length} tours, ${cats.size} categories, ${matchesCount} matches and ${posts.length} blog posts.`);
 
   } catch (error) {
     console.error('Error generating sitemap:', error);

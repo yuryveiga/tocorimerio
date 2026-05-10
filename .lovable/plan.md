@@ -1,25 +1,70 @@
-## Problema
+## Objetivo
 
-A página **Admin → Análise de Visitas** mostra no máximo 1000 visitas e perde tudo antes de ~07/05/2026, mesmo havendo 5.198 registros no banco desde 18/04.
+Gerar automaticamente, a cada deploy, uma página HTML estática indexável pelo Google para:
+- Cada **jogo** ativo do Maracanã (vindos do Supabase do parceiro)
+- Cada **passeio** ativo (já existe — vamos reforçar SEO)
+- Cada **categoria** de passeio (ex: `/passeios/city-tour`, `/passeios/maracana`)
 
-Causa: o PostgREST do Supabase limita cada resposta a 1000 linhas por padrão. A query atual em `src/pages/AdminAnalytics.tsx` pede `.limit(10000)` mas o servidor ignora e devolve só 1000 (as mais recentes, por causa do `order desc`).
+Todas as páginas usam o prerender React existente (visual idêntico ao site) e o CTA principal aponta para o anúncio interno (`/match/:slug` ou `/passeio/:slug`).
 
-## Correção
+## O que muda
 
-Trocar a busca única por **paginação em loop** usando `.range(from, to)` até esgotar os dados, respeitando o filtro de período já selecionado pelo usuário (7d / 30d / 90d / Tudo).
+### 1. Prerender — incluir jogos e categorias
 
-Mudanças em `src/pages/AdminAnalytics.tsx`:
+`scripts/prerender.js`:
+- Buscar jogos no Supabase do parceiro (mesmo cliente já usado em `useMatches.ts`) e adicionar `/jogo/:slug` à lista de rotas.
+- Agrupar passeios por `category` e adicionar `/passeios/:categoria-slug` para cada categoria distinta.
+- Manter o pipeline atual (Playwright → `dist/<rota>/index.html`).
 
-1. Mover o fetch para dentro do efeito que depende de `range` (hoje busca tudo de uma vez sem filtro de data no servidor).
-2. Aplicar filtro `.gte("created_at", cutoffISO)` quando o range não for "all" — reduz volume e acelera.
-3. Paginar em blocos de 1000 com `.range(offset, offset+999)` em loop até a página voltar com menos de 1000 itens.
-4. Para o range "all", manter um teto de segurança (ex.: 50.000) para não travar o navegador caso o volume cresça muito.
-5. Pequeno indicador de "carregando histórico…" enquanto pagina (opcional, só usar o `loading` existente).
+### 2. Nova rota e página de landing do jogo
 
-Sem alterações de schema, RLS, edge functions ou outras telas.
+- Adicionar rota `/jogo/:slug` no `src/App.tsx`.
+- Criar `src/pages/JogoLanding.tsx`:
+  - Busca o jogo via `useMatches` (filtra pelo slug).
+  - Renderiza H1, descrição, data, estádio, times, logos, preço, JSON-LD `SportsEvent`.
+  - Meta tags via `react-helmet-async` (title, description, canonical, OG, Twitter).
+  - CTA grande "Ver disponibilidade e comprar" → `/match/:slug` (página real já existente em `MatchDetail.tsx`).
+  - Seções com `included_json`, `bring_json`, etc. para conteúdo rico (bom para SEO).
 
-## Resultado esperado
+### 3. Nova rota e página de landing por categoria
 
-- Total de Visitas reflete o número real (hoje ~5.198).
-- Visitas anteriores a 07/05 voltam a aparecer nos gráficos de país, páginas, referrers e linha do tempo.
-- Filtros 7d/30d/90d/Tudo continuam funcionando, agora batendo no servidor.
+- Adicionar rota `/passeios/:categoria` no `src/App.tsx`.
+- Criar `src/pages/PasseiosCategoria.tsx`:
+  - Busca passeios da categoria e renderiza grid de cards.
+  - Title/meta otimizados ("City Tour Rio de Janeiro — Tocorime" etc.).
+  - Cada card → `/passeio/:slug`.
+
+### 4. Sitemap
+
+- Atualizar `public/sitemap.xml` (e/ou a edge function `supabase/functions/sitemap/index.ts`) para incluir `/jogo/:slug` e `/passeios/:categoria` dinamicamente.
+
+### 5. Reforço SEO nos passeios já prerenderizados
+
+- Conferir em `PasseioDetalhe.tsx` se `<title>`, meta description, canonical e JSON-LD `TouristTrip`/`Product` estão presentes; se não, adicionar.
+
+## Detalhes técnicos
+
+```text
+dist/
+├── jogo/
+│   ├── flamengo-vs-vasco/index.html
+│   └── fluminense-vs-bolivar/index.html
+├── passeio/
+│   ├── cristo-redentor/index.html      (já existe)
+│   └── ...
+└── passeios/
+    ├── city-tour/index.html
+    ├── maracana/index.html
+    └── trilhas/index.html
+```
+
+- Concorrência do Playwright fica em 3 (igual hoje) para não estourar memória; jogos podem ser dezenas, então o build vai ficar ~1–3 min mais longo.
+- Slugs de categoria gerados com `slugify()` (`src/utils/slugify.ts`).
+- `JogoLanding` reusa o mesmo `useMatches` para evitar nova lógica de fetch e manter cache.
+- Nenhuma mudança de schema, RLS ou edge function obrigatória além do sitemap.
+
+## Não está no escopo
+
+- Páginas HTML 100% estáticas separadas do React (descartado — prerender já entrega isso).
+- Mudar destino do CTA para checkout direto (mantém fluxo atual via página de detalhe).
+- Tradução automática das landings (ficam em PT inicialmente; i18n pode ser fase 2).
