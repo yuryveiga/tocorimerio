@@ -1,56 +1,25 @@
-# Plano: Página índice de passeios indexável
+## Problema
 
-## Objetivo
-- Criar a rota `/passeio` listando todos os passeios ativos do Supabase.
-- Garantir que essa página seja gerada como HTML estático no deploy (indexável pelo Google).
-- Ao clicar em um passeio, abrir a página de detalhe já existente (`/passeio/:slug` ou `/passeio/:id`).
-- Confirmar que `/maracanã-calendário` continua sendo prerenderizada (sem mudanças além de garantir presença no sitemap).
+A página **Admin → Análise de Visitas** mostra no máximo 1000 visitas e perde tudo antes de ~07/05/2026, mesmo havendo 5.198 registros no banco desde 18/04.
 
-## O que será feito
+Causa: o PostgREST do Supabase limita cada resposta a 1000 linhas por padrão. A query atual em `src/pages/AdminAnalytics.tsx` pede `.limit(10000)` mas o servidor ignora e devolve só 1000 (as mais recentes, por causa do `order desc`).
 
-### 1. Nova página `src/pages/PasseiosIndex.tsx`
-- Busca todos os tours ativos via Supabase (`tours` onde `is_active = true`, ordenados por `sort_order`).
-- Layout em grid reaproveitando o componente `TourItem` que já é usado na home (consistência visual + zero retrabalho).
-- Cada card linka para `/passeio/{slug || id}` — a página de detalhe atual `PasseioDetalhe.tsx`.
-- Header e Footer padrão do site.
-- Suporte aos 3 idiomas (pt/en/es) via `useLocale`.
+## Correção
 
-### 2. SEO completo
-- `<title>`: "Todos os Passeios no Rio de Janeiro | Tocorime Rio"
-- Meta description, canonical, hreflang (pt/en/es).
-- H1 único: "Passeios no Rio de Janeiro".
-- JSON-LD `ItemList` com todos os passeios (nome, imagem, URL, preço).
-- Open Graph + Twitter card.
+Trocar a busca única por **paginação em loop** usando `.range(from, to)` até esgotar os dados, respeitando o filtro de período já selecionado pelo usuário (7d / 30d / 90d / Tudo).
 
-### 3. Registrar rota no React Router
-- Adicionar `<Route path="/passeio" element={<PasseiosIndex />} />` em `src/App.tsx`, antes da rota `/passeio/:id`.
+Mudanças em `src/pages/AdminAnalytics.tsx`:
 
-### 4. Incluir no prerender
-- Adicionar `/passeio` à lista de rotas em `scripts/prerender.js`.
-- Resultado: `dist/passeio/index.html` com HTML completo + dados de todos os tours já renderizados.
+1. Mover o fetch para dentro do efeito que depende de `range` (hoje busca tudo de uma vez sem filtro de data no servidor).
+2. Aplicar filtro `.gte("created_at", cutoffISO)` quando o range não for "all" — reduz volume e acelera.
+3. Paginar em blocos de 1000 com `.range(offset, offset+999)` em loop até a página voltar com menos de 1000 itens.
+4. Para o range "all", manter um teto de segurança (ex.: 50.000) para não travar o navegador caso o volume cresça muito.
+5. Pequeno indicador de "carregando histórico…" enquanto pagina (opcional, só usar o `loading` existente).
 
-### 5. Sitemap
-- Adicionar `/passeio` ao `public/sitemap.xml` (ou ao gerador `scripts/generate-sitemap.js` se for dinâmico).
+Sem alterações de schema, RLS, edge functions ou outras telas.
 
-### 6. Calendário do Maracanã
-- Não criar HTML separado. A página `/maracanã-calendário` já é prerenderizada pelo `scripts/prerender.js` no deploy do GitHub Actions.
-- Apenas verificar se está listada no `sitemap.xml`; se não estiver, adicionar.
+## Resultado esperado
 
-## Detalhes técnicos
-
-- **Stack**: React + Vite + Supabase + React Router (sem mudanças de stack).
-- **Data fetching**: hook similar ao já existente para tours (provavelmente `useSiteData` ou consulta direta com `supabase.from('tours')`).
-- **Prerender**: o Playwright já espera o React renderizar conteúdo real antes de salvar, então a lista de tours estará no HTML final.
-- **Links internos**: `<Link to={...}>` do React Router — ao clicar, navegação SPA normal abre a página de detalhe.
-
-## Arquivos afetados
-
-- `src/pages/PasseiosIndex.tsx` (novo)
-- `src/App.tsx` (adicionar rota)
-- `scripts/prerender.js` (adicionar `/passeio` à lista de rotas)
-- `public/sitemap.xml` (adicionar URL)
-
-## Fora do escopo
-- Filtros, ordenação por preço ou busca (pode ser adicionado depois se quiser).
-- Mudanças nas páginas de detalhe `/passeio/:id`.
-- Criar HTML "puro" separado para o calendário do Maracanã.
+- Total de Visitas reflete o número real (hoje ~5.198).
+- Visitas anteriores a 07/05 voltam a aparecer nos gráficos de país, páginas, referrers e linha do tempo.
+- Filtros 7d/30d/90d/Tudo continuam funcionando, agora batendo no servidor.

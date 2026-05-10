@@ -76,21 +76,43 @@ const AdminAnalytics = () => {
   useEffect(() => {
     const fetchAnalytics = async () => {
       setLoading(true);
-      const { data, error } = await supabase
-        .from("site_visits")
-        .select("*")
-        .order("created_at", { ascending: false })
-        .limit(10000);
+      try {
+        const days = RANGE_DAYS[range];
+        const cutoffISO = days
+          ? new Date(Date.now() - days * 24 * 60 * 60 * 1000).toISOString()
+          : null;
 
-      if (error) {
-        console.error("Error fetching analytics:", error);
-      } else {
-        setAllVisits((data as Visit[]) || []);
+        const PAGE = 1000;
+        const HARD_CAP = 50000;
+        let from = 0;
+        const all: Visit[] = [];
+
+        while (from < HARD_CAP) {
+          let q = supabase
+            .from("site_visits")
+            .select("*")
+            .order("created_at", { ascending: false })
+            .range(from, from + PAGE - 1);
+          if (cutoffISO) q = q.gte("created_at", cutoffISO);
+
+          const { data, error } = await q;
+          if (error) {
+            console.error("Error fetching analytics:", error);
+            break;
+          }
+          const batch = (data as Visit[]) || [];
+          all.push(...batch);
+          if (batch.length < PAGE) break;
+          from += PAGE;
+        }
+
+        setAllVisits(all);
+      } finally {
+        setLoading(false);
       }
-      setLoading(false);
     };
     fetchAnalytics();
-  }, []);
+  }, [range]);
 
   const stats = useMemo(() => {
     // Filter out admin pages and apply date range
