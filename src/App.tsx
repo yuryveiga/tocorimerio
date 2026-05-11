@@ -51,7 +51,7 @@ const FluminenseBolivarLibertadores = lazy(() => import("./pages/FluminenseBoliv
 const PasseiosIndex = lazy(() => import("./pages/PasseiosIndex"));
 const BrasilPanamaMaracana = lazy(() => import("./pages/BrasilPanamaMaracana"));
 const JogoLanding = lazy(() => import("./pages/JogoLanding"));
-const OurTours = lazy(() => import("./pages/OurTours"));
+
 const PasseiosCategoria = lazy(() => import("./pages/PasseiosCategoria"));
 
 const PageLoader = () => <div className="min-h-screen flex items-center justify-center bg-background"><div className="w-12 h-12 border-4 border-primary border-t-transparent rounded-full animate-spin" /></div>;
@@ -110,7 +110,7 @@ const App = ({ queryClient: externalQueryClient }: { queryClient?: QueryClient }
                       <Route path="/passeios/:categoria" element={<PasseiosCategoria />} />
                       <Route path="/passeio/:id" element={<PasseioDetalhe />} />
                       <Route path="/match/:id" element={<MatchDetail />} />
-                      <Route path="/our-tours" element={<OurTours />} />
+
                       <Route path="/jogo/:id" element={<JogoLanding />} />
                       <Route path="/flamengo-x-vasco-maracana" element={<FlamengoVascoMaracana />} />
                       <Route path="/fluminense-bolivar-libertadores" element={<FluminenseBolivarLibertadores />} />

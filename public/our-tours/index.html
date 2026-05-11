@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Best Tours in Rio de Janeiro | Tocorime Rio</title>
+    <meta name="description" content="Discover the best experiences in Rio de Janeiro. City tours, Christ the Redeemer, Sugarloaf, Maracanã tickets and private experiences with local bilingual guides.">
+    <link rel="canonical" href="https://tocorimerio.com/our-tours">
+    
+    <!-- Open Graph / SEO -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://tocorimerio.com/our-tours">
+    <meta property="og:title" content="Our Best Tours in Rio de Janeiro | Tocorime Rio">
+    <meta property="og:description" content="Discover the best experiences in Rio de Janeiro. City tours, Christ the Redeemer, Sugarloaf, Maracanã tickets and private experiences with local bilingual guides.">
+    <meta property="og:image" content="https://mwxbskzggzznxvkwgrnz.supabase.co/storage/v1/object/public/site-images/rio-hero.jpg">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,700;0,800;1,700&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#2D5A27',
+                        accent: '#E5A244',
+                        background: '#ffffff',
+                        foreground: '#0f172a',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fade-in {
+            animation: fadeIn 0.6s ease-out forwards;
+        }
+        .tour-card img {
+            transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .tour-card:hover img {
+            transform: scale(1.05);
+        }
+        [id] { scroll-margin-top: 100px; }
+        .hero-gradient {
+            background: radial-gradient(circle at 50% 50%, rgba(45, 90, 39, 0.05) 0%, rgba(255, 255, 255, 1) 70%);
+        }
+    </style>
+</head>
+<body class="bg-background text-foreground font-sans selection:bg-primary/20 hero-gradient">
+
+    <!-- Header -->
+    <header class="fixed top-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-md border-b border-gray-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <a href="/" class="flex items-center gap-2">
+                <img src="https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images//images__1_-removebg-preview.png" alt="Tocorime Rio" class="h-10 w-auto">
+            </a>
+            <nav class="hidden md:flex items-center gap-8">
+                <a href="/#tours" class="text-sm font-semibold hover:text-primary transition-colors">Tours</a>
+                <a href="/maracana-calendario" class="text-sm font-semibold hover:text-primary transition-colors">Maracanã</a>
+                <a href="/blog" class="text-sm font-semibold hover:text-primary transition-colors">Blog</a>
+                <a href="https://wa.me/5521995624596" class="bg-primary text-white px-6 py-2.5 rounded-full text-sm font-bold hover:bg-primary/90 transition-all shadow-lg shadow-primary/20">Contact Us</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="relative pt-40 pb-20 overflow-hidden">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center animate-fade-in">
+                <h1 class="font-serif text-5xl md:text-7xl font-bold text-foreground mb-8 leading-tight">
+                    Experience Rio <br>
+                    <span class="text-primary italic">Like a Local</span>
+                </h1>
+                <p class="text-gray-500 text-lg md:text-xl max-w-2xl mx-auto mb-12 leading-relaxed">
+                    Carefully curated private experiences with expert bilingual guides. 
+                    Unforgettable memories in the Marvelous City.
+                </p>
+                <div class="flex flex-wrap justify-center gap-4 mb-12">
+                    <a href="#tours" class="bg-primary text-white px-10 py-4 rounded-full text-lg font-bold hover:bg-primary/90 transition-all shadow-xl shadow-primary/20">View All Tours</a>
+                    <a href="https://wa.me/5521995624596?text=I'm%20interested%20in%20private%20tours" class="bg-white border border-gray-200 text-foreground px-10 py-4 rounded-full text-lg font-bold hover:bg-gray-50 transition-all">Quick Inquiry</a>
+                </div>
+
+                <div class="flex items-center justify-center gap-6 pt-6 border-t border-gray-100 max-w-xs mx-auto">
+                    <span class="text-[10px] font-black text-gray-400 uppercase tracking-widest">Other versions:</span>
+                    <a href="/passeio" class="text-xs font-bold hover:text-primary transition-colors">🇧🇷 PT</a>
+                    <a href="/passeio" class="text-xs font-bold hover:text-primary transition-colors">🇪🇸 ES</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tours Grid -->
+        <section id="tours" class="py-12">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    
+                    <!-- Tour 1 -->
+                    <div class="tour-card group bg-white rounded-[2.5rem] border border-gray-100 overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-500">
+                        <div class="relative h-64 overflow-hidden">
+                            <img src="https://mwxbskzggzznxvkwgrnz.supabase.co/storage/v1/object/public/site-images/rio-hero.jpg" alt="Christ & Sugarloaf" class="w-full h-full object-cover" loading="lazy">
+                            <div class="absolute top-4 left-4">
+                                <span class="bg-white/90 backdrop-blur-md px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest text-primary">City Tour</span>
+                            </div>
+                        </div>
+                        <div class="p-8">
+                            <h3 class="font-serif text-2xl font-bold mb-3 group-hover:text-primary transition-colors">The Best of Rio</h3>
+                            <p class="text-gray-400 text-sm mb-6 line-clamp-2">Visit Christ the Redeemer, Sugarloaf Mountain, Selarón Steps and more in one day.</p>
+                            <div class="flex items-center justify-between pt-6 border-t border-gray-50">
+                                <span class="text-xl font-black text-foreground">Private Tour</span>
+                                <a href="/passeio/um-dia-no-rio" class="w-12 h-12 rounded-full bg-gray-50 flex items-center justify-center group-hover:bg-primary group-hover:text-white transition-all">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tour 2 -->
+                    <div class="tour-card group bg-white rounded-[2.5rem] border border-gray-100 overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-500">
+                        <div class="relative h-64 overflow-hidden">
+                            <img src="https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/maracana-hero.jpg" alt="Maracana Stadium" class="w-full h-full object-cover" loading="lazy">
+                            <div class="absolute top-4 left-4">
+                                <span class="bg-white/90 backdrop-blur-md px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest text-primary">Football</span>
+                            </div>
+                        </div>
+                        <div class="p-8">
+                            <h3 class="font-serif text-2xl font-bold mb-3 group-hover:text-primary transition-colors">Maracanã Experience</h3>
+                            <p class="text-gray-400 text-sm mb-6 line-clamp-2">Live the passion of Brazilian football with premium tickets and transfers.</p>
+                            <div class="flex items-center justify-between pt-6 border-t border-gray-50">
+                                <span class="text-xl font-black text-foreground">Tickets + Guide</span>
+                                <a href="/maracana-calendario" class="w-12 h-12 rounded-full bg-gray-50 flex items-center justify-center group-hover:bg-primary group-hover:text-white transition-all">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tour 3 -->
+                    <div class="tour-card group bg-white rounded-[2.5rem] border border-gray-100 overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-500">
+                        <div class="relative h-64 overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1483728642387-6c3bdd6c93e5?q=80&w=2076&auto=format&fit=crop" alt="Tijuca Forest" class="w-full h-full object-cover" loading="lazy">
+                            <div class="absolute top-4 left-4">
+                                <span class="bg-white/90 backdrop-blur-md px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest text-primary">Nature</span>
+                            </div>
+                        </div>
+                        <div class="p-8">
+                            <h3 class="font-serif text-2xl font-bold mb-3 group-hover:text-primary transition-colors">Tijuca Rainforest</h3>
+                            <p class="text-gray-400 text-sm mb-6 line-clamp-2">Explore the world's largest urban forest with waterfalls and hidden viewpoints.</p>
+                            <div class="flex items-center justify-between pt-6 border-t border-gray-50">
+                                <span class="text-xl font-black text-foreground">Adventure</span>
+                                <a href="/passeio/floresta-da-tijuca" class="w-12 h-12 rounded-full bg-gray-50 flex items-center justify-center group-hover:bg-primary group-hover:text-white transition-all">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="py-24 bg-foreground text-white text-center">
+            <div class="max-w-3xl mx-auto px-4">
+                <h2 class="font-serif text-4xl md:text-5xl font-bold mb-8">Need a custom itinerary?</h2>
+                <a href="https://wa.me/5521995624596?text=Hello!%20I'm%20interested%20in%20a%20private%20tour" 
+                   class="inline-flex items-center gap-3 bg-primary text-white px-12 py-5 rounded-full text-lg font-bold hover:bg-primary/90 transition-all shadow-2xl shadow-primary/40 group">
+                    WhatsApp Support
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-gray-50 py-12 text-center">
+        <p class="text-gray-400 text-xs">&copy; 2026 Tocorime Rio. All rights reserved.</p>
+    </footer>
+
+</body>
+</html>
