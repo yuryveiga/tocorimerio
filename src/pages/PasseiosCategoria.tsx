@@ -6,7 +6,7 @@ import { Footer } from "@/components/Footer";
 import { TourItem, TourCardProps } from "@/components/TourItem";
 import { useSiteData } from "@/hooks/useSiteData";
 import { useLocale } from "@/contexts/LocaleContext";
-import { getCanonicalUrl, BASE_URL } from "@/utils/seo";
+import { getCanonicalUrl, BASE_URL, generateBreadcrumbSchema } from "@/utils/seo";
 import { slugify } from "@/utils/slugify";
 
 export default function PasseiosCategoria() {
@@ -55,6 +55,12 @@ export default function PasseiosCategoria() {
     })),
   };
 
+  const breadcrumbSchema = generateBreadcrumbSchema([
+    { name: "Início", path: "/" },
+    { name: "Passeios", path: "/passeio" },
+    { name: categoryName, path: `/passeios/${categoria}` },
+  ]);
+
   return (
     <div className="min-h-screen bg-background">
       <Helmet>
@@ -66,6 +72,7 @@ export default function PasseiosCategoria() {
         <meta property="og:title" content={title} />
         <meta property="og:description" content={description} />
         <script type="application/ld+json">{JSON.stringify(itemListSchema)}</script>
+        <script type="application/ld+json">{JSON.stringify(breadcrumbSchema)}</script>
       </Helmet>
 
       <Header />
