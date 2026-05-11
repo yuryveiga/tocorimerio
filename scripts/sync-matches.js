@@ -103,23 +103,43 @@ async function syncMatches() {
         });
       });
 
-      // Preparar dados para atualização
+      // Preparar dados para atualização (apenas colunas que existem no nosso banco)
       const updateData = {
-        ...match,
+        id: match.id,
+        home_team: match.home_team,
+        away_team: match.away_team,
+        match_date: match.match_date,
+        venue: match.venue,
+        stadium: match.stadium,
+        competition: match.competition,
+        slug: match.slug,
+        status: match.status,
+        price: match.price,
+        price_premium: match.price_premium,
+        available_spots: match.available_spots,
+        sold_count: match.sold_count,
+        home_team_logo: match.home_team_logo,
+        away_team_logo: match.away_team_logo,
+        image_url: match.image_url,
+        high_demand: match.high_demand,
+        includes_guide: match.includes_guide,
+        includes_ticket: match.includes_ticket,
+        includes_transfer: match.includes_transfer,
         custom_options_json: sectors,
         updated_at: new Date().toISOString()
       };
 
       // Mapear quadros para campos
       infoBoxes.forEach(box => {
-        const field = {
+        const fieldMap = {
           'INCLUDES': 'included_json',
           'NOT INCLUDED': 'not_included_json',
           'BRING': 'bring_json',
           "DON'T BRING": 'dont_bring_json',
           'ATTENTION': 'attention_json',
           'NOT SUITABLE FOR': 'not_suitable_json'
-        }[box.title];
+        };
+        const field = fieldMap[box.title];
         if (field) {
           updateData[field] = box.items;
         }
