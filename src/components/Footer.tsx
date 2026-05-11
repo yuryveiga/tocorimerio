@@ -108,6 +108,14 @@ export function Footer() {
               ))}
               <li className="pt-2">
                 <Link 
+                  to="/sitemap"
+                  className="text-[hsl(140,10%,96%)]/80 hover:text-[hsl(145,40%,40%)] transition-colors text-sm"
+                >
+                  {t("sitemap") || "Mapa do Site"}
+                </Link>
+              </li>
+              <li className="pt-1">
+                <Link 
                   to="/admin"
                   className="opacity-0 hover:opacity-100 transition-opacity text-[hsl(140,10%,96%)]/20 text-[10px] font-black uppercase tracking-widest cursor-default hover:cursor-pointer"
                 >

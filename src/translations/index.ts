@@ -96,6 +96,7 @@ export const translationsPt = {
   siga_nos: 'Siga-nos',
   direitos: 'Todos os direitos reservados.',
   turismo_sustentavel: 'Turismo Sustentável no Rio de Janeiro',
+  sitemap: 'Mapa do Site',
 
   // Weather
   planeje_passeio: 'Planeje seu passeio!',
@@ -445,6 +446,7 @@ export const translationsEn = {
   siga_nos: 'Follow Us',
   direitos: 'All rights reserved.',
   turismo_sustentavel: 'Sustainable Tourism in Rio de Janeiro',
+  sitemap: 'Sitemap',
 
   // Weather
   planeje_passeio: 'Plan your tour!',
@@ -794,6 +796,7 @@ export const translationsEs = {
   siga_nos: 'Síguenos',
   direitos: 'Todos os direitos reservados.',
   turismo_sustentavel: 'Turismo Sostenible en Río de Janeiro',
+  sitemap: 'Mapa del Sitio',
 
   // Weather
   planeje_passeio: '¡Planifica tu paseo!',

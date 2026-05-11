@@ -51,6 +51,8 @@ const FluminenseBolivarLibertadores = lazy(() => import("./pages/FluminenseBoliv
 const PasseiosIndex = lazy(() => import("./pages/PasseiosIndex"));
 const BrasilPanamaMaracana = lazy(() => import("./pages/BrasilPanamaMaracana"));
 const JogoLanding = lazy(() => import("./pages/JogoLanding"));
+const Sitemap = lazy(() => import("./pages/Sitemap"));
+
 
 const PasseiosCategoria = lazy(() => import("./pages/PasseiosCategoria"));
 
@@ -116,6 +118,7 @@ const App = ({ queryClient: externalQueryClient }: { queryClient?: QueryClient }
                       <Route path="/flamengo-x-vasco-maracana" element={<FlamengoVascoMaracana />} />
                       <Route path="/fluminense-bolivar-libertadores" element={<FluminenseBolivarLibertadores />} />
                       <Route path="/brasil-x-panama-maio-maracana" element={<BrasilPanamaMaracana />} />
+                      <Route path="/sitemap" element={<Sitemap />} />
                       <Route path="/:slug" element={<GenericPage />} />
                       <Route path="/admin/login" element={<AdminLogin />} />
                       <Route path="/admin/reset-password" element={<AdminResetPassword />} />
