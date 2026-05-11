@@ -91,7 +91,11 @@ export function ToursSection() {
           price: m.price,
           duration: "6-7 horas",
           max_group_size: 15,
-          image_url: "https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/render/image/public/site-images/1776136644074_ueljwux2xe.webp?quality=70&width=800&format=avif&resize=cover&v=1777777351048",
+          image_url: m.home_team?.toLowerCase().includes('flamengo') || m.away_team?.toLowerCase().includes('flamengo')
+            ? "https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images//fla capa.webp"
+            : m.home_team?.toLowerCase().includes('fluminense') || m.away_team?.toLowerCase().includes('fluminense')
+              ? "https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images//flu capa.webp"
+              : "https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/render/image/public/site-images/1776136644074_ueljwux2xe.webp?quality=70&width=800&format=avif&resize=cover&v=1777777351048",
           is_featured: true,
           category: 'CITY TOUR',
           category_en: 'CITY TOUR',
