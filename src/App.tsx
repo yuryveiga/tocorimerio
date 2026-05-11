@@ -94,9 +94,9 @@ const App = ({ queryClient: externalQueryClient }: { queryClient?: QueryClient }
                       <Route path="/blog/:slug" element={<BlogPost />} />
                       <Route path="/carrinho" element={<Cart />} />
                       <Route path="/confirmacao" element={<CheckoutSuccess />} />
-                      <Route path="/maracanã-calendário" element={<MaracanaCalendar />} />
-                      <Route path="/maracana-calendario" element={<Navigate to="/maracanã-calendário" replace />} />
-                      <Route path="/maracanacalendar" element={<Navigate to="/maracanã-calendário" replace />} />
+                      <Route path="/maracana-calendario" element={<MaracanaCalendar />} />
+                      <Route path="/maracanã-calendário" element={<Navigate to="/maracana-calendario" replace />} />
+                      <Route path="/maracanacalendar" element={<Navigate to="/maracana-calendario" replace />} />
                       <Route path="/passeio" element={<PasseiosIndex />} />
                       <Route path="/passeios" element={<Navigate to="/passeio" replace />} />
                       <Route path="/passeios/:categoria" element={<PasseiosCategoria />} />
