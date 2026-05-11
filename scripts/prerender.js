@@ -78,8 +78,11 @@ async function fetchDynamicRoutes() {
   if (tours) {
     const activeTours = tours.filter(t => t.is_active !== false);
     activeTours.forEach(tour => {
-      routes.push(`/passeio/${tour.id}`);
-      if (tour.slug) routes.push(`/passeio/${tour.slug}`);
+      let slug = tour.slug || tour.id;
+      if (slug.includes('niter-i') || slug.includes('niteroi')) {
+        slug = 'um-dia-em-niteroi';
+      }
+      routes.push(`/passeio/${slug}`);
     });
     // Category landing pages
     const cats = new Set();

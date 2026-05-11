@@ -90,7 +90,10 @@ async function generateSitemap() {
 
     // Tours
     tours.forEach(tour => {
-      const slug = slugify(tour.slug || tour.id);
+      let slug = slugify(tour.slug || tour.id);
+      if (slug.includes('niter-i') || slug.includes('niteroi')) {
+        slug = 'um-dia-em-niteroi';
+      }
       xml += `  <url>\n`;
       xml += `    <loc>${siteUrl}/passeio/${slug}</loc>\n`;
       xml += `    <lastmod>${(tour.updated_at || new Date().toISOString()).split('T')[0]}</lastmod>\n`;

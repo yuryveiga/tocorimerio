@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { useMatches } from "@/hooks/useMatches";
-import { getCanonicalUrl, generateSportsEventSchema, generateBreadcrumbSchema, cleanMatchSlug } from "@/utils/seo";
+import { getCanonicalUrl, generateSportsEventSchema, generateBreadcrumbsSchema, cleanMatchSlug } from "@/utils/seo";
 import { slugify } from "@/utils/slugify";
 import { getMatchDateInRio, getMatchHour } from "@/lib/dateUtils";
 import { format } from "date-fns";
@@ -53,10 +53,10 @@ export default function JogoLanding() {
     offerCurrency: "BRL",
   });
 
-  const breadcrumbSchema = generateBreadcrumbSchema([
-    { name: "Início", path: "/" },
-    { name: "Maracanã", path: "/maracana-calendario" },
-    { name: `${match.home_team} x ${match.away_team}`, path: `/jogo/${cleanSlug}` },
+  const breadcrumbSchema = generateBreadcrumbsSchema([
+    { name: "Início", url: getCanonicalUrl("/") },
+    { name: "Maracanã", url: getCanonicalUrl("/maracana-calendario") },
+    { name: `${match.home_team} x ${match.away_team}`, url: getCanonicalUrl(`/jogo/${cleanSlug}`) },
   ]);
 
   const included = (match.included_json || []).map((i: any) => i.text).filter(Boolean);

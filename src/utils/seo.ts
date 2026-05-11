@@ -50,34 +50,7 @@ export const uncleanMatchSlug = (slug: string = "") => {
   return dirty;
 };
 
-/**
- * Gera um BreadcrumbList JSON-LD válido.
- * Cada ListItem recebe @id, position e name. Itens sem name/url são descartados.
- */
-export const generateBreadcrumbSchema = (
-  items: { name: string; path: string }[]
-) => {
-  const validItems = items.filter((i) => i && i.name && i.path);
-  return {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    "itemListElement": validItems.map((item, idx) => {
-      const url = getCanonicalUrl(item.path);
-      return {
-        "@type": "ListItem",
-        "position": idx + 1,
-        "name": item.name,
-        "item": {
-          "@id": url,
-          "name": item.name,
-        },
-      };
-    }),
-  };
-};
-
-/**
- * Gera as tags hreflang para SEO multilíngue.
+export const getHreflangLinks = (path: string = "") => {
  * O site é uma SPA sem prefixo de idioma na URL, então apontamos
  * todas as variantes para a mesma URL canônica + x-default.
  * Isso sinaliza ao Google que existem versões traduzidas no mesmo path.
@@ -287,7 +260,7 @@ export const generateTourPackageSchema = (
  * Filtra itens sem URL ou nome para evitar erros de nó pai vazio.
  */
 export const generateBreadcrumbsSchema = (items: { name: string; url: string }[]) => {
-  const validItems = items.filter(item => item.name && item.url);
+  const validItems = items.filter(item => item && item.name && item.url && item.url !== "");
   
   return {
     "@context": "https://schema.org",
@@ -296,7 +269,11 @@ export const generateBreadcrumbsSchema = (items: { name: string; url: string }[]
       "@type": "ListItem",
       "position": index + 1,
       "name": item.name,
-      "item": item.url
+      "item": {
+        "@type": "WebPage",
+        "@id": item.url,
+        "name": item.name
+      }
     }))
   };
 };

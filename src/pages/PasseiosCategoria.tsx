@@ -6,7 +6,7 @@ import { Footer } from "@/components/Footer";
 import { TourItem, TourCardProps } from "@/components/TourItem";
 import { useSiteData } from "@/hooks/useSiteData";
 import { useLocale } from "@/contexts/LocaleContext";
-import { getCanonicalUrl, BASE_URL, generateBreadcrumbSchema } from "@/utils/seo";
+import { getCanonicalUrl, BASE_URL, generateBreadcrumbsSchema } from "@/utils/seo";
 import { slugify } from "@/utils/slugify";
 
 export default function PasseiosCategoria() {
@@ -55,10 +55,10 @@ export default function PasseiosCategoria() {
     })),
   };
 
-  const breadcrumbSchema = generateBreadcrumbSchema([
-    { name: "Início", path: "/" },
-    { name: "Passeios", path: "/passeio" },
-    { name: categoryName, path: `/passeios/${categoria}` },
+  const breadcrumbSchema = generateBreadcrumbsSchema([
+    { name: "Início", url: getCanonicalUrl("/") },
+    { name: "Passeios", url: getCanonicalUrl("/passeio") },
+    { name: categoryName, url: getCanonicalUrl(`/passeios/${categoria}`) },
   ]);
 
   return (
