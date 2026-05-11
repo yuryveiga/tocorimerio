@@ -274,24 +274,9 @@ const BlogPost = () => {
             "@context": "https://schema.org",
             "@type": "BreadcrumbList",
             "itemListElement": [
-              {
-                "@type": "ListItem",
-                "position": 1,
-                "name": t("inicio"),
-                "item": "https://tocorimerio.com/"
-              },
-              {
-                "@type": "ListItem",
-                "position": 2,
-                "name": "Blog",
-                "item": "https://tocorimerio.com/blog"
-              },
-              {
-                "@type": "ListItem",
-                "position": 3,
-                "name": title,
-                "item": `https://tocorimerio.com/blog/${post.slug}`
-              }
+              { "@type": "ListItem", "position": 1, "name": t("inicio"), "item": { "@id": getCanonicalUrl("/"), "name": t("inicio") } },
+              { "@type": "ListItem", "position": 2, "name": "Blog", "item": { "@id": getCanonicalUrl("/blog"), "name": "Blog" } },
+              { "@type": "ListItem", "position": 3, "name": title, "item": { "@id": getCanonicalUrl(`/blog/${post.slug}`), "name": title } }
             ]
           })}
         </script>
