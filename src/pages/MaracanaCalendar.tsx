@@ -185,7 +185,7 @@ const MaracanaCalendar = () => {
                         return (
                           <Link 
                             key={match.id} 
-                            to={`/match/${cleanMatchSlug(match.slug || match.id)}`}
+                            to={`/match/${match.slug || match.id}`}
                             className={`block p-2 rounded-lg text-xs leading-tight border transition-all shadow-sm hover:scale-[1.02] active:scale-95 ${match.high_demand ? 'bg-orange-500/10 border-orange-500/30' : 'bg-primary/10 border-primary/30'}`}
                           >
                           {isLastChance && (

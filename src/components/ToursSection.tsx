@@ -96,7 +96,7 @@ export function ToursSection() {
           category: 'CITY TOUR',
           category_en: 'CITY TOUR',
           category_es: 'CITY TOUR',
-          external_url: `/match/${cleanMatchSlug(m.slug || m.id)}`,
+          external_url: `/match/${m.slug || m.id}`,
           included_json: language === 'pt' ? ["Ingresso", "Guia", "Transfer"] : language === 'es' ? ["Entrada", "Guía", "Traslado"] : ["Ticket", "Guide", "Transfer"],
           pricing_model: 'fixed',
           match_date: m.match_date

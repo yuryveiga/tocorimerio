@@ -33,6 +33,24 @@ export const cleanMatchSlug = (slug: string = "") => {
 };
 
 /**
+ * Converte um slug limpo de volta para o formato "sujo" esperado pelo banco do parceiro.
+ */
+export const uncleanMatchSlug = (slug: string = "") => {
+  if (!slug) return "";
+  const reverseFixes: Record<string, string> = {
+    'vitoria': 'vitria',
+    'operario': 'operrio',
+    'ferroviario': 'ferrovirio',
+    'sao-paulo': 'so-paulo',
+  };
+  let dirty = slug;
+  Object.keys(reverseFixes).forEach(good => {
+    dirty = dirty.replace(new RegExp(good, 'g'), reverseFixes[good]);
+  });
+  return dirty;
+};
+
+/**
  * Gera um BreadcrumbList JSON-LD válido.
  * Cada ListItem recebe @id, position e name. Itens sem name/url são descartados.
  */

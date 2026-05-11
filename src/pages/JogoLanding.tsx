@@ -36,7 +36,7 @@ export default function JogoLanding() {
   const description = `Ingresso + transfer + guia bilíngue para ${match.home_team} x ${match.away_team} em ${formattedDate} às ${hour} no ${match.stadium || "Maracanã"}. Reserve agora! ✓`;
   const cleanSlug = slugify(match.slug || `${match.home_team}-vs-${match.away_team}`) || match.id;
   const canonical = getCanonicalUrl(`/jogo/${cleanSlug}`);
-  const matchUrl = `/match/${cleanMatchSlug(match.slug || match.id)}`;
+  const matchUrl = `/match/${match.slug || match.id}`;
   const minPrice = match.min_price || match.price || 0;
 
   const schema = generateSportsEventSchema({

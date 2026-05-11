@@ -98,10 +98,10 @@ const App = ({ queryClient: externalQueryClient }: { queryClient?: QueryClient }
                       <Route path="/maracanã-calendário" element={<Navigate to="/maracana-calendario" replace />} />
                       <Route path="/maracanacalendar" element={<Navigate to="/maracana-calendario" replace />} />
                       
-                      {/* Redirecionamentos para slugs corrompidos (Match) */}
-                      <Route path="/match/fluminense-vs-operrio-ferrovirio-2026-05-12" element={<Navigate to="/match/fluminense-vs-operario-ferroviario-2026-05-12" replace />} />
-                      <Route path="/match/fluminense-vs-so-paulo-2026-05-16" element={<Navigate to="/match/fluminense-vs-sao-paulo-2026-05-16" replace />} />
-                      <Route path="/match/vitria-vs-fluminense-2026-06-01" element={<Navigate to="/match/vitoria-vs-fluminense-2026-06-01" replace />} />
+                      {/* Redirecionamentos para slugs corrompidos (Match) - De Limpo para Sujo conforme pedido */}
+                      <Route path="/match/fluminense-vs-operario-ferroviario-2026-05-12" element={<Navigate to="/match/fluminense-vs-operrio-ferrovirio-2026-05-12" replace />} />
+                      <Route path="/match/fluminense-vs-sao-paulo-2026-05-16" element={<Navigate to="/match/fluminense-vs-so-paulo-2026-05-16" replace />} />
+                      <Route path="/match/vitoria-vs-fluminense-2026-06-01" element={<Navigate to="/match/vitria-vs-fluminense-2026-06-01" replace />} />
 
                       <Route path="/passeio" element={<PasseiosIndex />} />
                       <Route path="/passeios" element={<Navigate to="/passeio" replace />} />

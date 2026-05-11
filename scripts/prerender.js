@@ -106,18 +106,6 @@ async function fetchDynamicRoutes() {
       const visible = matches.filter(m => !m.hidden);
       visible.forEach((m) => {
         let key = slugify(m.slug || `${m.home_team || ''}-vs-${m.away_team || ''}`) || m.id;
-        
-        // Apply manual fixes (same as sitemap)
-        const slugFixes = {
-          'vitria': 'vitoria',
-          'operrio': 'operario',
-          'ferrovirio': 'ferroviario',
-          'so-paulo': 'sao-paulo',
-        };
-        Object.keys(slugFixes).forEach(bad => {
-          key = key.replace(new RegExp(bad, 'g'), slugFixes[bad]);
-        });
-
         if (key) routes.push(`/match/${key}`);
       });
       console.log(`Added ${visible.length} match landing pages.`);

@@ -34,12 +34,7 @@ const slugify = (text) =>
     .replace(/-+/g, '-')
     .replace(/^-+|-+$/g, '');
 
-const slugFixes = {
-  'vitria': 'vitoria',
-  'operrio': 'operario',
-  'ferrovirio': 'ferroviario',
-  'so-paulo': 'sao-paulo',
-};
+
 
 async function generateSitemap() {
   console.log('Generating dynamic sitemap...');
@@ -127,11 +122,6 @@ async function generateSitemap() {
       const visible = (matches || []).filter(m => !m.hidden);
       visible.forEach(m => {
         let key = slugify(m.slug || `${m.home_team || ''}-vs-${m.away_team || ''}`) || m.id;
-        
-        // Apply manual fixes
-        Object.keys(slugFixes).forEach(bad => {
-          key = key.replace(new RegExp(bad, 'g'), slugFixes[bad]);
-        });
 
         if (!key) return;
         xml += `  <url>\n`;

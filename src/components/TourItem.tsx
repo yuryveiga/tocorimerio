@@ -85,7 +85,7 @@ export const TourItem = memo(({ tour }: { tour: TourCardProps }) => {
     return baseItems;
   }, [language, tour]);
 
-  const href = tour.external_url || `/passeio/${cleanMatchSlug(tour.slug || tour.id)}`;
+  const href = tour.external_url || `/passeio/${tour.slug || tour.id}`;
   const isExternal = !!tour.external_url;
 
   const CardContent = (
