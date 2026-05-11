@@ -50,7 +50,8 @@ export const uncleanMatchSlug = (slug: string = "") => {
   return dirty;
 };
 
-export const getHreflangLinks = (path: string = "") => {
+/**
+ * Gera as tags hreflang para SEO multilíngue.
  * O site é uma SPA sem prefixo de idioma na URL, então apontamos
  * todas as variantes para a mesma URL canônica + x-default.
  * Isso sinaliza ao Google que existem versões traduzidas no mesmo path.
