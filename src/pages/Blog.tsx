@@ -88,6 +88,7 @@ const Blog = () => {
                 <Link 
                   key={post.id} 
                   to={post.slug}
+                  data-blog-card
                   className="bg-card border rounded-2xl overflow-hidden hover:shadow-lg transition-all group flex flex-col"
                 >
                   <div className="aspect-video relative overflow-hidden bg-muted">

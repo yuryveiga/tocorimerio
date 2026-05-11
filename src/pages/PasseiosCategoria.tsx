@@ -101,7 +101,9 @@ export default function PasseiosCategoria() {
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {sorted.map((tour) => (
-                <TourItem key={tour.id} tour={tour as unknown as TourCardProps} />
+                <div key={tour.id} data-tour-card>
+                  <TourItem tour={tour as unknown as TourCardProps} />
+                </div>
               ))}
             </div>
           )}

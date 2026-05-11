@@ -50,6 +50,7 @@ export const YouMayAlsoLike = ({ excludeId }: { excludeId?: string }) => {
             {items.map((tour) => (
               <div
                 key={tour.id}
+                data-tour-card
                 className="pl-6 shrink-0 grow-0 basis-full sm:basis-1/2 lg:basis-1/3 xl:basis-1/4"
               >
                 <TourItem tour={tour as unknown as TourCardProps} />

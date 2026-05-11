@@ -376,7 +376,7 @@ export default function MatchDetail() {
       
       <Header />
       
-      <main className="pt-24 pb-20">
+      <main className="pt-24 pb-20" data-match-detail>
         {/* Hero Section */}
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-12">
            <div className="relative w-full aspect-video rounded-[3rem] overflow-hidden shadow-2xl border border-white/10">

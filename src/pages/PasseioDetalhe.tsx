@@ -408,7 +408,7 @@ export function PasseioDetalhe() {
   };
 
   return (
-    <main className="min-h-screen bg-background font-sans overflow-x-hidden">
+    <main className="min-h-screen bg-background font-sans overflow-x-hidden" data-tour-detail>
       <Helmet>
         <title>{translatedTitle} | {siteTitle}</title>
         <meta name="description" content={generateOptimizedMetaDescription(translatedShortDesc, translatedTitle, language)} />
@@ -1263,7 +1263,7 @@ export function PasseioDetalhe() {
             <CarouselContent className="-ml-4 pb-8">
               {relatedTours.map((item) => (
                 <CarouselItem key={item.id} className="pl-4 basis-full sm:basis-1/2 lg:basis-1/3 xl:basis-1/4">
-                  <div className="h-full transition-transform hover:scale-[1.02] duration-300">
+                  <div className="h-full transition-transform hover:scale-[1.02] duration-300" data-tour-card>
                     <TourItem tour={item as any} />
                   </div>
                 </CarouselItem>

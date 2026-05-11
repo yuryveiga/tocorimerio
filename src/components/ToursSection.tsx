@@ -153,7 +153,11 @@ export function ToursSection() {
             </div>
           ) : displayTours.length > 0 ? (
             <div className={`grid grid-cols-1 md:grid-cols-2 ${gridColsClass} gap-8`}>
-              {displayTours.slice(0, count).map((tour) => <TourItem key={`${activeTab}-${tour.id}`} tour={tour as TourCardProps} />)}
+              {displayTours.slice(0, count).map((tour) => (
+                <div key={`${activeTab}-${tour.id}`} data-tour-card>
+                  <TourItem tour={tour as TourCardProps} />
+                </div>
+              ))}
             </div>
           ) : (
             <p className="text-center text-muted-foreground">{language === 'pt' ? 'Nenhum passeio disponível' : 'No tours available'}</p>

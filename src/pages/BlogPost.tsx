@@ -288,7 +288,7 @@ const BlogPost = () => {
       
       <Header />
       
-      <main className="flex-1">
+      <main className="flex-1" data-blog-post>
         {blogHeroStyle === "hero" ? (
           <>
             {/* HERO SECTION FOR BLOG POST - NEW STYLE */}
@@ -555,7 +555,7 @@ const BlogPost = () => {
                       
                     return sortedTours.map((tour) => (
                       <CarouselItem key={tour.id} className="pl-4 basis-full sm:basis-1/2 lg:basis-1/4">
-                        <div className="p-1">
+                        <div className="p-1" data-tour-card>
                           <TourItem tour={tour} />
                         </div>
                       </CarouselItem>
