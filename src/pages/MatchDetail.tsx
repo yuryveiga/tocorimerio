@@ -26,7 +26,7 @@ import { Label } from "@/components/ui/label";
 import { supabase as localSupabase } from "@/integrations/supabase/client";
 import { OptimizedImage } from "@/components/OptimizedImage";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
-import { getCanonicalUrl } from "@/utils/seo";
+import { getCanonicalUrl, cleanMatchSlug } from "@/utils/seo";
 import { LovableMatch } from "@/types";
 import { WhyChooseUs } from "@/components/WhyChooseUs";
 import { PaymentLogos } from "@/components/PaymentLogos";
@@ -54,6 +54,14 @@ export default function MatchDetail() {
     queryFn: async () => {
       if (!id) return null;
       
+      // Auto-redirect if slug is dirty
+      const cleanId = cleanMatchSlug(id);
+      if (cleanId !== id) {
+        console.log(`Dirty slug detected: ${id} -> ${cleanId}. Redirecting...`);
+        navigate(`/match/${cleanId}`, { replace: true });
+        return null;
+      }
+
       const isUuid = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(id);
       let query = partnerSupabase.from("matches").select("*");
       
@@ -363,8 +371,8 @@ export default function MatchDetail() {
         <title>{translatedTitle} | Maracanã Matchday Experience</title>
         <meta name="description" content={`Assista ao vivo ${match.home_team} x ${match.away_team} no Maracanã com transporte e guia incluso.`} />
         <meta property="og:title" content={`${translatedTitle} | ${siteTitle}`} />
-        <meta property="og:url" content={getCanonicalUrl(`/match/${match.slug || match.id}`)} />
-        <link rel="canonical" href={getCanonicalUrl(`/match/${match.slug || match.id}`)} />
+        <meta property="og:url" content={getCanonicalUrl(`/match/${cleanMatchSlug(match.slug || match.id)}`)} />
+        <link rel="canonical" href={getCanonicalUrl(`/match/${cleanMatchSlug(match.slug || match.id)}`)} />
         {jsonLd && <script type="application/ld+json">{JSON.stringify(jsonLd)}</script>}
       </Helmet>
       

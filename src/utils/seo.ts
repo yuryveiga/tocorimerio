@@ -15,6 +15,24 @@ export const getCanonicalUrl = (path: string = "") => {
 };
 
 /**
+ * Corrige slugs de jogos vindos do parceiro que possuem caracteres corrompidos.
+ */
+export const cleanMatchSlug = (slug: string = "") => {
+  if (!slug) return "";
+  const slugFixes: Record<string, string> = {
+    'vitria': 'vitoria',
+    'operrio': 'operario',
+    'ferrovirio': 'ferroviario',
+    'so-paulo': 'sao-paulo',
+  };
+  let clean = slug;
+  Object.keys(slugFixes).forEach(bad => {
+    clean = clean.replace(new RegExp(bad, 'g'), slugFixes[bad]);
+  });
+  return clean;
+};
+
+/**
  * Gera um BreadcrumbList JSON-LD válido.
  * Cada ListItem recebe @id, position e name. Itens sem name/url são descartados.
  */

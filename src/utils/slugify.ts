@@ -5,7 +5,7 @@
 export const slugify = (text: string): string => {
   if (!text) return "";
   
-  return text
+  const slug = text
     .toString()
     .toLowerCase()
     .trim()
@@ -16,4 +16,19 @@ export const slugify = (text: string): string => {
     .replace(/-+/g, "-") // Replace multiple hyphens with a single one
     .replace(/^-+/, "") // Trim hyphens from the start
     .replace(/-+$/, ""); // Trim hyphens from the end
+
+  // Manual fixes for corrupted partner data
+  const slugFixes: Record<string, string> = {
+    'vitria': 'vitoria',
+    'operrio': 'operario',
+    'ferrovirio': 'ferroviario',
+    'so-paulo': 'sao-paulo',
+  };
+  
+  let clean = slug;
+  Object.keys(slugFixes).forEach(bad => {
+    clean = clean.replace(new RegExp(bad, 'g'), slugFixes[bad]);
+  });
+  
+  return clean;
 };

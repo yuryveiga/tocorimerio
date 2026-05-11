@@ -14,7 +14,7 @@ import { MapPin, ArrowRight, Bus, Ticket, UserCheck, Clock, Camera, Users, Chevr
 import { useState, useMemo, useEffect } from "react";
 import { Helmet } from "react-helmet-async";
 import { useSiteData } from "@/hooks/useSiteData";
-import { getCanonicalUrl, getHreflangLinks, generateBreadcrumbsSchema } from "@/utils/seo";
+import { getCanonicalUrl, getHreflangLinks, generateBreadcrumbsSchema, cleanMatchSlug } from "@/utils/seo";
 
 const localeMap: Record<string, Locale> = { pt: ptBR, en: enUS, es };
 
@@ -182,12 +182,12 @@ const MaracanaCalendar = () => {
                       const hoursUntilMatch = (matchDateRio.getTime() - new Date().getTime()) / (1000 * 60 * 60);
                       const isLastChance = hoursUntilMatch <= 48 && hoursUntilMatch > 0;
                       
-                      return (
-                        <Link 
-                          key={match.id} 
-                          to={`/match/${match.slug || match.id}`}
-                          className={`block p-2 rounded-lg text-xs leading-tight border transition-all shadow-sm hover:scale-[1.02] active:scale-95 ${match.high_demand ? 'bg-orange-500/10 border-orange-500/30' : 'bg-primary/10 border-primary/30'}`}
-                        >
+                        return (
+                          <Link 
+                            key={match.id} 
+                            to={`/match/${cleanMatchSlug(match.slug || match.id)}`}
+                            className={`block p-2 rounded-lg text-xs leading-tight border transition-all shadow-sm hover:scale-[1.02] active:scale-95 ${match.high_demand ? 'bg-orange-500/10 border-orange-500/30' : 'bg-primary/10 border-primary/30'}`}
+                          >
                           {isLastChance && (
                             <span className="block text-[8px] font-black text-destructive uppercase animate-pulse mb-1">
                               LAST CHANCE
