@@ -8,6 +8,9 @@ Allow: /
 # Disallow admin and private areas
 Disallow: /admin/
 Disallow: /api/
+Disallow: /carrinho
+Disallow: /confirmacao
+Disallow: /checkout
 
 # Crawl delay for aggressive bots
 Crawl-delay: 1
