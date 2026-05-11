@@ -202,19 +202,19 @@ export function PasseioDetalhe() {
         "@type": "ListItem",
         "position": 1,
         "name": t("inicio"),
-        "item": getCanonicalUrl("/")
+        "item": { "@id": getCanonicalUrl("/"), "name": t("inicio") }
       },
       {
         "@type": "ListItem",
         "position": 2,
         "name": t("passeios"),
-        "item": getCanonicalUrl("/#tours")
+        "item": { "@id": getCanonicalUrl("/passeio"), "name": t("passeios") }
       },
       {
         "@type": "ListItem",
         "position": 3,
         "name": translatedTitle,
-        "item": canonicalUrl
+        "item": { "@id": canonicalUrl, "name": translatedTitle }
       }
     ]
   };
