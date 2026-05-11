@@ -4,14 +4,36 @@ import { useSiteData } from "@/hooks/useSiteData";
 import { useLocale } from "@/contexts/LocaleContext";
 import { OptimizedImage } from "./OptimizedImage";
 import { PaymentLogos } from "./PaymentLogos";
+import { useQuery } from "@tanstack/react-query";
+import { supabase } from "@/integrations/supabase/client";
+import { slugify } from "@/utils/slugify";
 
 const iconMap: Record<string, React.ElementType> = {
   Instagram, MapPin, Phone, Mail, Music, Facebook, Youtube,
 };
 
 export function Footer() {
-  const { pages, socialMedia, images, siteSettings } = useSiteData();
+  const { pages, socialMedia, images, siteSettings, tours } = useSiteData();
   const { t, language } = useLocale();
+
+  // Recent blog posts for internal linking / SEO
+  const { data: recentPosts = [] } = useQuery({
+    queryKey: ["footer-recent-posts"],
+    queryFn: async () => {
+      const { data } = await supabase
+        .from("blog_posts")
+        .select("slug, title, title_en, title_es")
+        .eq("is_published", true)
+        .order("created_at", { ascending: false })
+        .limit(5);
+      return data || [];
+    },
+    staleTime: 1000 * 60 * 30,
+  });
+
+  const categories = Array.from(
+    new Set((tours || []).map((tt: any) => tt?.category).filter(Boolean))
+  ).slice(0, 6) as string[];
 
   const aboutDescKey = language === 'pt' ? 'about_desc' : `about_desc_${language}`;
   const footerDesc = siteSettings[aboutDescKey] || siteSettings['about_desc'] || t("footer_desc");
