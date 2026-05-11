@@ -60,10 +60,11 @@ export function TourFormDialog({
                 {editing.id ? "Ajustar Detalhes do Passeio" : "Criar Experiência Premium"}
               </DialogTitle>
               <TabsList className="w-full justify-start gap-4 bg-transparent border-none p-0 mb-[-1px] overflow-x-auto">
-                <TabsTrigger value="content" className="data-[state=active]:border-b-2 data-[state=active]:border-primary rounded-none px-6 py-3 font-bold">Conteúdo Base</TabsTrigger>
-                <TabsTrigger value="info" className="data-[state=active]:border-b-2 data-[state=active]:border-primary rounded-none px-6 py-3 font-bold">Informações</TabsTrigger>
-                <TabsTrigger value="gallery" className="data-[state=active]:border-b-2 data-[state=active]:border-primary rounded-none px-6 py-3 font-bold">Imagens</TabsTrigger>
-                <TabsTrigger value="settings" className="data-[state=active]:border-b-2 data-[state=active]:border-primary rounded-none px-6 py-3 font-bold">Configurações</TabsTrigger>
+                <TabsTrigger value="content" className="rounded-none border-b-2 border-transparent data-[state=active]:border-primary data-[state=active]:bg-transparent px-6 py-4 font-black uppercase tracking-widest text-xs transition-all">Conteúdo Base</TabsTrigger>
+                <TabsTrigger value="info" className="rounded-none border-b-2 border-transparent data-[state=active]:border-primary data-[state=active]:bg-transparent px-6 py-4 font-black uppercase tracking-widest text-xs transition-all">Informações</TabsTrigger>
+                <TabsTrigger value="grid" className="rounded-none border-b-2 border-transparent data-[state=active]:border-primary data-[state=active]:bg-transparent px-6 py-4 font-black uppercase tracking-widest text-xs transition-all">Grid</TabsTrigger>
+                <TabsTrigger value="gallery" className="rounded-none border-b-2 border-transparent data-[state=active]:border-primary data-[state=active]:bg-transparent px-6 py-4 font-black uppercase tracking-widest text-xs transition-all">Galeria</TabsTrigger>
+                <TabsTrigger value="settings" className="rounded-none border-b-2 border-transparent data-[state=active]:border-primary data-[state=active]:bg-transparent px-6 py-4 font-black uppercase tracking-widest text-xs transition-all">Configurações</TabsTrigger>
               </TabsList>
             </DialogHeader>
 
@@ -221,29 +222,34 @@ export function TourFormDialog({
                   />
                 </TabsContent>
 
-                {/* GALLERY TAB */}
-                <TabsContent value="gallery" className="m-0 space-y-12">
-                  <div className="space-y-4">
-                    <h3 className="font-black text-xs uppercase tracking-widest text-primary bg-primary/5 p-4 rounded-xl inline-block">Galeria 1: Mosaico do Topo (5 Fotos)</h3>
+                {/* GRID TAB */}
+                <TabsContent value="grid" className="m-0 space-y-6">
+                  <div className="bg-primary/5 p-6 rounded-[32px] border border-primary/10">
+                    <h3 className="font-black text-lg mb-2">Mosaico do Topo (Grid)</h3>
+                    <p className="text-muted-foreground text-sm mb-6">Estas 5 fotos formam o mosaico principal no topo da página do passeio.</p>
                     <TourGalleryTab 
                       form={form} 
                       handleFileUpload={handleFileUpload} 
                       isUploading={isUploading} 
                       galleryImages={galleryImages} 
                       fieldName="images_json"
-                      title="Fotos do Mosaico (Topo)"
+                      title="Fotos do Mosaico"
                     />
                   </div>
+                </TabsContent>
 
-                  <div className="pt-12 border-t space-y-4">
-                    <h3 className="font-black text-xs uppercase tracking-widest text-blue-600 bg-blue-50 p-4 rounded-xl inline-block">Galeria 2: Carrossel do Rodapé</h3>
+                {/* GALLERY TAB */}
+                <TabsContent value="gallery" className="m-0 space-y-6">
+                  <div className="bg-blue-50/50 p-6 rounded-[32px] border border-blue-100">
+                    <h3 className="font-black text-lg mb-2 text-blue-700">Carrossel de Fotos (Galeria)</h3>
+                    <p className="text-muted-foreground text-sm mb-6">Estas fotos aparecem no carrossel deslizante no rodapé da página.</p>
                     <TourGalleryTab 
                       form={form} 
                       handleFileUpload={handleFileUpload} 
                       isUploading={isUploading} 
                       galleryImages={galleryImages} 
                       fieldName="carousel_images_json"
-                      title="Fotos do Carrossel (Rodapé)"
+                      title="Fotos da Galeria"
                     />
                   </div>
                 </TabsContent>
