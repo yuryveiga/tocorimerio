@@ -54,7 +54,15 @@ async function startServer() {
 }
 
 async function fetchDynamicRoutes() {
-  const routes = ['/', '/blog', '/passeio', '/maracana-calendario', '/Fluminense-bolivar-libertadores'];
+  const routes = [
+    '/', 
+    '/blog', 
+    '/passeio', 
+    '/maracana-calendario', 
+    '/flamengo-x-vasco-maracana',
+    '/fluminense-bolivar-libertadores',
+    '/brasil-x-panama-maio-maracana'
+  ];
 
   console.log('Fetching dynamic routes from Supabase...');
   
@@ -97,8 +105,20 @@ async function fetchDynamicRoutes() {
     if (matches) {
       const visible = matches.filter(m => !m.hidden);
       visible.forEach((m) => {
-        const key = slugify(m.slug || `${m.home_team || ''}-vs-${m.away_team || ''}`) || m.id;
-        if (key) routes.push(`/jogo/${key}`);
+        let key = slugify(m.slug || `${m.home_team || ''}-vs-${m.away_team || ''}`) || m.id;
+        
+        // Apply manual fixes (same as sitemap)
+        const slugFixes = {
+          'vitria': 'vitoria',
+          'operrio': 'operario',
+          'ferrovirio': 'ferroviario',
+          'so-paulo': 'sao-paulo',
+        };
+        Object.keys(slugFixes).forEach(bad => {
+          key = key.replace(new RegExp(bad, 'g'), slugFixes[bad]);
+        });
+
+        if (key) routes.push(`/match/${key}`);
       });
       console.log(`Added ${visible.length} match landing pages.`);
     }
