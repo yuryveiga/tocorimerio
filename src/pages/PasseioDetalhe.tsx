@@ -92,6 +92,7 @@ export function PasseioDetalhe() {
   const { t, language, formatPrice } = useLocale();
   const { addToCart } = useCart();
   const [selectedPeriod, setSelectedPeriod] = useState('morning');
+  const [selectedLocation, setSelectedLocation] = useState('tijuca');
   const [selectedDate, setSelectedDate] = useState("");
   const [quantity, setQuantity] = useState(1);
   const [weather, setWeather] = useState<{ temp: number; condition: string; humidity: number; wind: number } | null>(null);
@@ -362,7 +363,7 @@ export function PasseioDetalhe() {
       price: currentUnitPrice,
       image_url: getOptimizedImage(tour.image_url || "", 800),
       date: selectedDate,
-      period: selectedPeriod,
+      period: `${selectedLocation === 'tijuca' ? 'Tijuca' : 'Copacabana'} - ${selectedPeriod === 'morning' ? 'Diurno' : 'Noturno'}`,
       isPrivate: isPrivate,
       quantity: quantity,
       pricing_model: tour.pricing_model,
@@ -749,74 +750,98 @@ export function PasseioDetalhe() {
                      <div className="w-2 h-10 bg-primary rounded-full" />
                      {language === 'pt' ? 'Escolha sua Experiência' : language === 'es' ? 'Elige tu Experiencia' : 'Choose your Experience'}
                    </h2>
-                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                     <button 
-                       onClick={() => setSelectedPeriod('morning')}
-                       className={`group relative p-8 rounded-[2rem] border-2 transition-all flex flex-col items-center text-center gap-4 ${
-                         selectedPeriod === 'morning' 
-                           ? "border-primary bg-primary/5 shadow-xl ring-4 ring-primary/5" 
-                           : "border-border bg-card hover:border-primary/30 hover:bg-muted/30"
-                       }`}
-                     >
-                       <div className={`w-14 h-14 rounded-2xl flex items-center justify-center transition-all ${
-                         selectedPeriod === 'morning' ? "bg-primary text-white scale-110" : "bg-primary/10 text-primary"
-                       }`}>
-                         <Sunrise className="w-8 h-8" />
-                       </div>
-                       <div>
-                         <span className={`block text-lg font-black uppercase tracking-widest ${selectedPeriod === 'morning' ? "text-primary" : "text-foreground"}`}>
-                           {language === 'pt' ? 'Tijuca' : language === 'es' ? 'Tijuca' : 'Tijuca'}
+                   <div className="space-y-4">
+                     <h3 className="text-xs font-black uppercase tracking-widest text-muted-foreground">{language === 'pt' ? '1. Escolha o Bairro' : '1. Choose Neighborhood'}</h3>
+                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                       <button 
+                         onClick={() => setSelectedLocation('tijuca')}
+                         className={`group relative p-6 rounded-[1.5rem] border-2 transition-all flex flex-col items-center text-center gap-2 ${
+                           selectedLocation === 'tijuca' 
+                             ? "border-primary bg-primary/5 shadow-lg ring-2 ring-primary/5" 
+                             : "border-border bg-card hover:border-primary/20 hover:bg-muted/30"
+                         }`}
+                       >
+                         <span className={`block text-lg font-black uppercase tracking-widest ${selectedLocation === 'tijuca' ? "text-primary" : "text-foreground"}`}>
+                           Tijuca
                          </span>
-                         <span className="text-[10px] font-bold text-muted-foreground uppercase tracking-tighter opacity-70">
-                           {language === 'pt' ? 'Bares Tradicionais' : language === 'es' ? 'Bares Tradicionales' : 'Traditional Bars'}
+                         {selectedLocation === 'tijuca' && (
+                           <div className="absolute top-3 right-3 w-5 h-5 rounded-full bg-primary flex items-center justify-center text-white shadow-lg">
+                             <Check className="w-3 h-3" />
+                           </div>
+                         )}
+                       </button>
+                       
+                       <button 
+                         onClick={() => setSelectedLocation('copacabana')}
+                         className={`group relative p-6 rounded-[1.5rem] border-2 transition-all flex flex-col items-center text-center gap-2 ${
+                           selectedLocation === 'copacabana' 
+                             ? "border-primary bg-primary/5 shadow-lg ring-2 ring-primary/5" 
+                             : "border-border bg-card hover:border-primary/20 hover:bg-muted/30"
+                         }`}
+                       >
+                         <span className={`block text-lg font-black uppercase tracking-widest ${selectedLocation === 'copacabana' ? "text-primary" : "text-foreground"}`}>
+                           Copacabana
                          </span>
-                       </div>
-                       {selectedPeriod === 'morning' && (
-                         <div className="absolute top-4 right-4 w-6 h-6 rounded-full bg-primary flex items-center justify-center text-white shadow-lg">
-                           <Check className="w-4 h-4" />
+                         {selectedLocation === 'copacabana' && (
+                           <div className="absolute top-3 right-3 w-5 h-5 rounded-full bg-primary flex items-center justify-center text-white shadow-lg">
+                             <Check className="w-3 h-3" />
+                           </div>
+                         )}
+                       </button>
+                     </div>
+                   </div>
+
+                   <div className="space-y-4">
+                     <h3 className="text-xs font-black uppercase tracking-widest text-muted-foreground">{language === 'pt' ? '2. Escolha o Horário' : '2. Choose Time'}</h3>
+                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                       <button 
+                         onClick={() => setSelectedPeriod('morning')}
+                         className={`group relative p-6 rounded-[1.5rem] border-2 transition-all flex flex-col items-center text-center gap-2 ${
+                           selectedPeriod === 'morning' 
+                             ? "border-primary bg-primary/5 shadow-lg ring-2 ring-primary/5" 
+                             : "border-border bg-card hover:border-primary/20 hover:bg-muted/30"
+                         }`}
+                       >
+                         <div className={`w-10 h-10 rounded-xl flex items-center justify-center transition-all ${
+                           selectedPeriod === 'morning' ? "bg-primary text-white scale-110" : "bg-primary/10 text-primary"
+                         }`}>
+                           <Sunrise className="w-6 h-6" />
                          </div>
-                       )}
-                     </button>
-                     
-                     <button 
-                       onClick={() => setSelectedPeriod('night')}
-                       className={`group relative p-8 rounded-[2rem] border-2 transition-all flex flex-col items-center text-center gap-4 ${
-                         selectedPeriod === 'night' 
-                           ? "border-primary bg-primary/5 shadow-xl ring-4 ring-primary/5" 
-                           : "border-border bg-card hover:border-primary/30 hover:bg-muted/30"
-                       }`}
-                     >
-                       <div className={`w-14 h-14 rounded-2xl flex items-center justify-center transition-all ${
-                         selectedPeriod === 'night' ? "bg-primary text-white scale-110" : "bg-primary/10 text-primary"
-                       }`}>
-                         <Moon className="w-8 h-8" />
-                       </div>
-                       <div>
-                         <span className={`block text-lg font-black uppercase tracking-widest ${selectedPeriod === 'night' ? "text-primary" : "text-foreground"}`}>
-                           {language === 'pt' ? 'Copacabana' : language === 'es' ? 'Copacabana' : 'Copacabana'}
+                         <span className={`block text-sm font-black uppercase tracking-widest ${selectedPeriod === 'morning' ? "text-primary" : "text-foreground"}`}>
+                           {language === 'pt' ? 'Diurno' : 'Daytime'}
                          </span>
-                         <span className="text-[10px] font-bold text-muted-foreground uppercase tracking-tighter opacity-70">
-                           {language === 'pt' ? 'Vibrante e Boêmio' : language === 'es' ? 'Vibrante y Bohemio' : 'Vibrant & Bohemian'}
-                         </span>
-                       </div>
-                       {selectedPeriod === 'night' && (
-                         <div className="absolute top-4 right-4 w-6 h-6 rounded-full bg-primary flex items-center justify-center text-white shadow-lg">
-                           <Check className="w-4 h-4" />
+                       </button>
+                       
+                       <button 
+                         onClick={() => setSelectedPeriod('night')}
+                         className={`group relative p-6 rounded-[1.5rem] border-2 transition-all flex flex-col items-center text-center gap-2 ${
+                           selectedPeriod === 'night' 
+                             ? "border-primary bg-primary/5 shadow-lg ring-2 ring-primary/5" 
+                             : "border-border bg-card hover:border-primary/20 hover:bg-muted/30"
+                         }`}
+                       >
+                         <div className={`w-10 h-10 rounded-xl flex items-center justify-center transition-all ${
+                           selectedPeriod === 'night' ? "bg-primary text-white scale-110" : "bg-primary/10 text-primary"
+                         }`}>
+                           <Moon className="w-6 h-6" />
                          </div>
-                       )}
-                     </button>
+                         <span className={`block text-sm font-black uppercase tracking-widest ${selectedPeriod === 'night' ? "text-primary" : "text-foreground"}`}>
+                           {language === 'pt' ? 'Noturno' : 'Nighttime'}
+                         </span>
+                       </button>
+                     </div>
                    </div>
 
                    {/* Displaying selected bars */}
-                   {((selectedPeriod === 'morning' ? (tour as any).bares_diurnos : (tour as any).bares_noturnos) as string) && (
+                   {((selectedLocation === 'tijuca' ? (tour as any).bares_diurnos : (tour as any).bares_noturnos) as string) && (
                      <div className="pt-8 border-t border-primary/10 animate-in fade-in slide-in-from-top-4 duration-500">
                        <h3 className="text-xs font-black uppercase tracking-[0.2em] text-primary mb-4 flex items-center gap-3">
                          <Utensils className="w-4 h-4" />
-                         {language === 'pt' ? 'Roteiro Sugerido de Bares' : language === 'es' ? 'Ruta Sugerida de Bares' : 'Suggested Bar Route'}
+                         {language === 'pt' ? `Roteiro Sugerido: Bares de ${selectedLocation === 'tijuca' ? 'Tijuca' : 'Copacabana'}` : `Suggested Route: ${selectedLocation === 'tijuca' ? 'Tijuca' : 'Copacabana'} Bars`}
                        </h3>
                        <div className="bg-muted/30 rounded-3xl p-6 border border-primary/5">
                          <p className="text-foreground/80 text-sm leading-relaxed whitespace-pre-line font-medium">
-                           {selectedPeriod === 'morning' ? (tour as any).bares_diurnos : (tour as any).bares_noturnos}
+                           {selectedLocation === 'tijuca' ? (tour as any).bares_diurnos : (tour as any).bares_noturnos}
                          </p>
                        </div>
                      </div>
