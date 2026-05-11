@@ -277,21 +277,21 @@ export function TourFormDialog({
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div className="space-y-2">
                           <Label className="text-xs font-bold uppercase text-muted-foreground flex items-center gap-2">
-                            <Sunrise className="w-4 h-4 text-orange-500" /> Bares Diurnos
+                            <Sunrise className="w-4 h-4 text-orange-500" /> Bares da Tijuca
                           </Label>
                           <textarea 
                             {...form.register("bares_diurnos")}
-                            placeholder="Lista de bares para o tour diurno..."
+                            placeholder="Lista de bares para o tour na Tijuca..."
                             className="w-full min-h-[100px] rounded-xl border p-4 text-sm font-sans focus:ring-primary" 
                           />
                         </div>
                         <div className="space-y-2">
                           <Label className="text-xs font-bold uppercase text-muted-foreground flex items-center gap-2">
-                            <Moon className="w-4 h-4 text-indigo-500" /> Bares Noturnos
+                            <Moon className="w-4 h-4 text-indigo-500" /> Bares de Copacabana
                           </Label>
                           <textarea 
                             {...form.register("bares_noturnos")}
-                            placeholder="Lista de bares para o tour noturno..."
+                            placeholder="Lista de bares para o tour em Copacabana..."
                             className="w-full min-h-[100px] rounded-xl border p-4 text-sm font-sans focus:ring-primary" 
                           />
                         </div>

@@ -765,10 +765,10 @@ export function PasseioDetalhe() {
                        </div>
                        <div>
                          <span className={`block text-lg font-black uppercase tracking-widest ${selectedPeriod === 'morning' ? "text-primary" : "text-foreground"}`}>
-                           {language === 'pt' ? 'Diurno' : language === 'es' ? 'Diurno' : 'Daytime'}
+                           {language === 'pt' ? 'Tijuca' : language === 'es' ? 'Tijuca' : 'Tijuca'}
                          </span>
                          <span className="text-[10px] font-bold text-muted-foreground uppercase tracking-tighter opacity-70">
-                           {language === 'pt' ? 'Tradicional e Histórico' : language === 'es' ? 'Tradicional e Histórico' : 'Traditional & Historic'}
+                           {language === 'pt' ? 'Bares Tradicionais' : language === 'es' ? 'Bares Tradicionales' : 'Traditional Bars'}
                          </span>
                        </div>
                        {selectedPeriod === 'morning' && (
@@ -793,7 +793,7 @@ export function PasseioDetalhe() {
                        </div>
                        <div>
                          <span className={`block text-lg font-black uppercase tracking-widest ${selectedPeriod === 'night' ? "text-primary" : "text-foreground"}`}>
-                           {language === 'pt' ? 'Noturno' : language === 'es' ? 'Nocturno' : 'Nighttime'}
+                           {language === 'pt' ? 'Copacabana' : language === 'es' ? 'Copacabana' : 'Copacabana'}
                          </span>
                          <span className="text-[10px] font-bold text-muted-foreground uppercase tracking-tighter opacity-70">
                            {language === 'pt' ? 'Vibrante e Boêmio' : language === 'es' ? 'Vibrante y Bohemio' : 'Vibrant & Bohemian'}
