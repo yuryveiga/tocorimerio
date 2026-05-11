@@ -1,15 +1,43 @@
 export const BASE_URL = "https://tocorimerio.com";
 
 /**
- * Gera uma URL canônica limpa, removendo barras finais e parâmetros de consulta.
+ * Gera uma URL canônica limpa: HTTPS, sem www, sem barra final, sem query.
  * @param path O caminho da página (ex: "/blog/meu-post")
  * @returns A URL canônica completa
  */
 export const getCanonicalUrl = (path: string = "") => {
-  const cleanPath = path.startsWith("/") ? path : `/${path}`;
+  // Strip query string and hash if accidentally included
+  const noQuery = String(path || "").split("?")[0].split("#")[0];
+  const cleanPath = noQuery.startsWith("/") ? noQuery : `/${noQuery}`;
   // Remove trailing slash unless it's just the root
-  const finalPath = cleanPath === "/" ? "" : cleanPath.replace(/\/$/, "");
+  const finalPath = cleanPath === "/" ? "" : cleanPath.replace(/\/+$/g, "");
   return `${BASE_URL}${finalPath}`;
+};
+
+/**
+ * Gera um BreadcrumbList JSON-LD válido.
+ * Cada ListItem recebe @id, position e name. Itens sem name/url são descartados.
+ */
+export const generateBreadcrumbSchema = (
+  items: { name: string; path: string }[]
+) => {
+  const validItems = items.filter((i) => i && i.name && i.path);
+  return {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": validItems.map((item, idx) => {
+      const url = getCanonicalUrl(item.path);
+      return {
+        "@type": "ListItem",
+        "position": idx + 1,
+        "name": item.name,
+        "item": {
+          "@id": url,
+          "name": item.name,
+        },
+      };
+    }),
+  };
 };
 
 /**
@@ -109,6 +137,10 @@ export const generateSportsEventSchema = (params: {
   "homeTeam": { "@type": "SportsTeam", "name": params.homeTeam },
   "awayTeam": { "@type": "SportsTeam", "name": params.awayTeam },
   "competitor": [
+    { "@type": "SportsTeam", "name": params.homeTeam },
+    { "@type": "SportsTeam", "name": params.awayTeam },
+  ],
+  "performer": [
     { "@type": "SportsTeam", "name": params.homeTeam },
     { "@type": "SportsTeam", "name": params.awayTeam },
   ],
