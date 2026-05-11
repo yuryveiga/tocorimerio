@@ -24,14 +24,22 @@ const partnerSupabase = createClient(PARTNER_URL, PARTNER_KEY);
 
 const slugify = (text) =>
   String(text || '')
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '') // Remove acentos
+    .replace(/[^\x00-\x7F]/g, '')   // Remove qualquer caracter no-ASCII restante
     .toLowerCase()
     .trim()
-    .normalize('NFD')
-    .replace(/[\u0300-\u036f]/g, '')
     .replace(/[^\w\s-]/g, '')
     .replace(/[\s_]+/g, '-')
     .replace(/-+/g, '-')
     .replace(/^-+|-+$/g, '');
+
+const slugFixes = {
+  'vitria': 'vitoria',
+  'operrio': 'operario',
+  'ferrovirio': 'ferroviario',
+  'so-paulo': 'sao-paulo'
+};
 
 async function generateSitemap() {
   console.log('Generating dynamic sitemap...');
@@ -86,12 +94,7 @@ async function generateSitemap() {
 
     // Tours
     tours.forEach(tour => {
-      const slug = (tour.slug || tour.id || '')
-        .toString()
-        .toLowerCase()
-        .normalize('NFD')
-        .replace(/[\u0300-\u036f]/g, '')
-        .replace(/\/$/, '');
+      const slug = slugify(tour.slug || tour.id);
       xml += `  <url>\n`;
       xml += `    <loc>${siteUrl}/passeio/${slug}</loc>\n`;
       xml += `    <lastmod>${(tour.updated_at || new Date().toISOString()).split('T')[0]}</lastmod>\n`;
@@ -123,7 +126,13 @@ async function generateSitemap() {
         .select('id, slug, updated_at, hidden, home_team, away_team');
       const visible = (matches || []).filter(m => !m.hidden);
       visible.forEach(m => {
-        const key = slugify(m.slug || `${m.home_team || ''}-vs-${m.away_team || ''}`) || m.id;
+        let key = slugify(m.slug || `${m.home_team || ''}-vs-${m.away_team || ''}`) || m.id;
+        
+        // Apply manual fixes
+        Object.keys(slugFixes).forEach(bad => {
+          key = key.replace(new RegExp(bad, 'g'), slugFixes[bad]);
+        });
+
         if (!key) return;
         xml += `  <url>\n`;
         xml += `    <loc>${siteUrl}/jogo/${key}</loc>\n`;
@@ -139,7 +148,7 @@ async function generateSitemap() {
 
     // Blog Posts
     posts.forEach(post => {
-      const slug = post.slug.toLowerCase().replace(/\/$/, '');
+      const slug = slugify(post.slug);
       xml += `  <url>\n`;
       xml += `    <loc>${siteUrl}/blog/${slug}</loc>\n`;
       xml += `    <lastmod>${(post.updated_at || new Date().toISOString()).split('T')[0]}</lastmod>\n`;
