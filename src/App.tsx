@@ -106,6 +106,7 @@ const App = ({ queryClient: externalQueryClient }: { queryClient?: QueryClient }
                       <Route path="/match/vitoria-vs-fluminense-2026-06-01" element={<Navigate to="/match/vitria-vs-fluminense-2026-06-01" replace />} />
 
                       <Route path="/passeio" element={<PasseiosIndex />} />
+                      <Route path="/our-tours" element={<PasseiosIndex />} />
                       <Route path="/passeios" element={<Navigate to="/passeio" replace />} />
                       <Route path="/passeios/:categoria" element={<PasseiosCategoria />} />
                       <Route path="/passeio/:id" element={<PasseioDetalhe />} />
