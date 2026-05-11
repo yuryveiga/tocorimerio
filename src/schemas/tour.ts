@@ -41,6 +41,7 @@ export const tourSchema = z.object({
   faq_json_en: z.array(jsonFieldItemSchema).optional().default([]),
   faq_json_es: z.array(jsonFieldItemSchema).optional().default([]),
   images_json: z.array(z.string()).optional().default([]),
+  carousel_images_json: z.array(z.string()).optional().default([]),
   difficulty: z.string().optional().default("Leve"),
   difficulty_en: z.string().optional().default(""),
   difficulty_es: z.string().optional().default(""),

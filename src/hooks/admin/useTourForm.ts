@@ -33,6 +33,7 @@ export function useTourForm(initialData: Partial<LovableTour> | null, onSuccess:
       youtube_video_url: "",
       external_url: "",
       pricing_model: "fixed",
+      carousel_images_json: [],
       ...initialData,
     } as TourFormValues,
   });
@@ -58,6 +59,7 @@ export function useTourForm(initialData: Partial<LovableTour> | null, onSuccess:
         youtube_video_url: "",
         external_url: "",
         pricing_model: "fixed",
+        carousel_images_json: [],
         ...initialData,
       } as TourFormValues);
     }
@@ -177,18 +179,18 @@ export function useTourForm(initialData: Partial<LovableTour> | null, onSuccess:
     }
   };
 
-  const handleFileUpload = async (files: FileList | null) => {
+  const handleFileUpload = async (files: FileList | null, fieldName: "images_json" | "carousel_images_json" = "images_json") => {
     if (!files || files.length === 0) return;
     setIsUploading(true);
     try {
-      const currentImages = form.getValues("images_json") || [];
+      const currentImages = form.getValues(fieldName) || [];
       const newImages = [...currentImages];
       for (const file of Array.from(files)) {
         const url = await uploadLovableFile(file);
         if (url) newImages.push(url);
       }
-      form.setValue("images_json", newImages);
-      if (!form.getValues("image_url")) {
+      form.setValue(fieldName, newImages);
+      if (!form.getValues("image_url") && fieldName === "images_json") {
         form.setValue("image_url", newImages[0]);
       }
       toast({ title: "Imagens carregadas!" });

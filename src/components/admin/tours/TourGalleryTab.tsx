@@ -10,18 +10,22 @@ import { LovableSiteImage } from "@/integrations/lovable/client";
 
 interface TourGalleryTabProps {
   form: UseFormReturn<TourFormValues>;
-  handleFileUpload: (files: FileList | null) => Promise<void>;
+  handleFileUpload: (files: FileList | null, fieldName?: "images_json" | "carousel_images_json") => Promise<void>;
   isUploading: boolean;
   galleryImages: LovableSiteImage[];
+  fieldName?: "images_json" | "carousel_images_json";
+  title?: string;
 }
 
 export function TourGalleryTab({ 
   form, 
   handleFileUpload, 
   isUploading, 
-  galleryImages 
+  galleryImages,
+  fieldName = "images_json",
+  title = "Galeria de Fotos"
 }: TourGalleryTabProps) {
-  const images = form.watch("images_json") || [];
+  const images = form.watch(fieldName) || [];
   const mainImage = form.watch("image_url");
 
   const setMainImage = (url: string) => {
@@ -31,16 +35,16 @@ export function TourGalleryTab({
   const removeImage = (index: number) => {
     const newImages = [...images];
     const removed = newImages.splice(index, 1)[0];
-    form.setValue("images_json", newImages);
-    if (mainImage === removed) {
+    form.setValue(fieldName, newImages);
+    if (mainImage === removed && fieldName === "images_json") {
       form.setValue("image_url", newImages[0] || "");
     }
   };
 
   const addFromSiteGallery = (url: string) => {
     if (!images.includes(url)) {
-      form.setValue("images_json", [...images, url]);
-      if (!mainImage) form.setValue("image_url", url);
+      form.setValue(fieldName, [...images, url]);
+      if (!mainImage && fieldName === "images_json") form.setValue("image_url", url);
     }
   };
 
@@ -49,18 +53,18 @@ export function TourGalleryTab({
       <div className="p-12 border-4 border-dashed rounded-[40px] bg-muted/20 flex flex-col items-center justify-center gap-4 transition-all hover:bg-muted/30 text-center relative group">
         <Upload className="w-10 h-10 text-primary" />
         <div>
-          <h4 className="font-black text-xl">Galeria de Fotos</h4>
+          <h4 className="font-black text-xl">{title}</h4>
           <p className="text-sm text-muted-foreground mt-2">Arraste fotos ou clique para carregar.</p>
           <Input 
             type="file" 
             multiple 
             accept="image/*" 
-            onChange={(e) => handleFileUpload(e.target.files)} 
+            onChange={(e) => handleFileUpload(e.target.files, fieldName)} 
             className="hidden" 
-            id="tour-files-upload" 
+            id={`tour-files-upload-${fieldName}`} 
             disabled={isUploading} 
           />
-          <Label htmlFor="tour-files-upload" className="absolute inset-0 cursor-pointer opacity-0" />
+          <Label htmlFor={`tour-files-upload-${fieldName}`} className="absolute inset-0 cursor-pointer opacity-0" />
         </div>
       </div>
       

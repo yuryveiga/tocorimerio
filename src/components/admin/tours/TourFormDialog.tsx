@@ -222,13 +222,30 @@ export function TourFormDialog({
                 </TabsContent>
 
                 {/* GALLERY TAB */}
-                <TabsContent value="gallery" className="m-0">
-                  <TourGalleryTab 
-                    form={form} 
-                    handleFileUpload={handleFileUpload} 
-                    isUploading={isUploading} 
-                    galleryImages={galleryImages} 
-                  />
+                <TabsContent value="gallery" className="m-0 space-y-12">
+                  <div className="space-y-4">
+                    <h3 className="font-black text-xs uppercase tracking-widest text-primary bg-primary/5 p-4 rounded-xl inline-block">Galeria 1: Mosaico do Topo (5 Fotos)</h3>
+                    <TourGalleryTab 
+                      form={form} 
+                      handleFileUpload={handleFileUpload} 
+                      isUploading={isUploading} 
+                      galleryImages={galleryImages} 
+                      fieldName="images_json"
+                      title="Fotos do Mosaico (Topo)"
+                    />
+                  </div>
+
+                  <div className="pt-12 border-t space-y-4">
+                    <h3 className="font-black text-xs uppercase tracking-widest text-blue-600 bg-blue-50 p-4 rounded-xl inline-block">Galeria 2: Carrossel do Rodapé</h3>
+                    <TourGalleryTab 
+                      form={form} 
+                      handleFileUpload={handleFileUpload} 
+                      isUploading={isUploading} 
+                      galleryImages={galleryImages} 
+                      fieldName="carousel_images_json"
+                      title="Fotos do Carrossel (Rodapé)"
+                    />
+                  </div>
                 </TabsContent>
 
                 {/* SETTINGS TAB */}
