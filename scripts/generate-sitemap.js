@@ -68,6 +68,7 @@ async function generateSitemap() {
       { url: '/sobre', priority: 0.7, changefreq: 'monthly' },
       { url: '/contato', priority: 0.7, changefreq: 'monthly' },
       { url: '/passeio', priority: 0.8, changefreq: 'weekly' },
+      { url: '/our-tours', priority: 0.9, changefreq: 'weekly' },
       { url: '/maracana-calendario', priority: 0.9, changefreq: 'daily' },
       { url: '/flamengo-x-vasco-maracana', priority: 0.8, changefreq: 'daily' },
       { url: '/fluminense-bolivar-libertadores', priority: 0.8, changefreq: 'daily' },

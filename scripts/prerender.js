@@ -58,6 +58,7 @@ async function fetchDynamicRoutes() {
     '/', 
     '/blog', 
     '/passeio', 
+    '/our-tours',
     '/maracana-calendario', 
     '/flamengo-x-vasco-maracana',
     '/fluminense-bolivar-libertadores',

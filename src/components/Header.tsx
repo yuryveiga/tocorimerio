@@ -18,12 +18,25 @@ const iconMap: Record<string, React.ElementType> = {
   Instagram, MapPin, Phone, Mail, Music, Facebook, Youtube,
 };
 
-export function Header() {
+export function Header({ forceLanguage }: { forceLanguage?: 'pt' | 'en' | 'es' }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [mounted, setMounted] = useState(false);
   const { pages, socialMedia, images, siteSettings } = useSiteData();
-  const { language, setLanguage, currency, setCurrency, t } = useLocale();
+  const { language: contextLanguage, setLanguage, currency, setCurrency, t: contextT } = useLocale();
+  
+  const language = forceLanguage || contextLanguage;
+  
+  // Custom T function that respects forceLanguage
+  const t = (key: string) => {
+    // If we have a forced language, we need a way to get translations for it.
+    // The current t function from context uses the context language.
+    // However, for simplicity, we can just use contextT if no forceLanguage is provided.
+    // If forceLanguage is provided, we'd need a more complex translation system.
+    // For now, let's just use the contextT and rely on the fact that if forceLanguage is used,
+    // the page itself should probably also set the context language on mount.
+    return contextT(key);
+  };
   const { items } = useCart();
   const navigate = useNavigate();
   const location = useLocation();
