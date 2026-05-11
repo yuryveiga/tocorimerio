@@ -1018,7 +1018,7 @@ const BrasilPanamaMaracana = () => {
               {currency === 'BRL' ? 'R$' : currency === 'USD' ? '$' : '€'} {currency}
             </button>
           </div>
-          <a href="https://tocorimerio.com/match/brasil-vs-panam-2026-05-31" target="_blank" rel="noopener" className="nav-btn">
+          <a href="https://tocorimerio.com/match/brasil-vs-panama-2026-05-31" target="_blank" rel="noopener" className="nav-btn">
             {t('bp_inc_cta')}
           </a>
         </div>
@@ -1258,7 +1258,7 @@ const BrasilPanamaMaracana = () => {
             </div>
             
             <div style={{ textAlign: 'center', marginTop: '48px' }} className="reveal">
-              <a href="https://tocorimerio.com/match/brasil-vs-panam-2026-05-31" target="_blank" rel="noopener" className="btn-main" style={{ display: 'inline-flex' }}>
+              <a href="https://tocorimerio.com/match/brasil-vs-panama-2026-05-31" target="_blank" rel="noopener" className="btn-main" style={{ display: 'inline-flex' }}>
                 <span>🎟️</span> {t('bp_inc_cta')}
               </a>
             </div>

@@ -38,7 +38,7 @@ const slugFixes = {
   'vitria': 'vitoria',
   'operrio': 'operario',
   'ferrovirio': 'ferroviario',
-  'so-paulo': 'sao-paulo'
+  'so-paulo': 'sao-paulo',
 };
 
 async function generateSitemap() {
@@ -135,7 +135,7 @@ async function generateSitemap() {
 
         if (!key) return;
         xml += `  <url>\n`;
-        xml += `    <loc>${siteUrl}/jogo/${key}</loc>\n`;
+        xml += `    <loc>${siteUrl}/match/${key}</loc>\n`;
         xml += `    <lastmod>${(m.updated_at || new Date().toISOString()).split('T')[0]}</lastmod>\n`;
         xml += `    <changefreq>weekly</changefreq>\n`;
         xml += `    <priority>0.9</priority>\n`;
