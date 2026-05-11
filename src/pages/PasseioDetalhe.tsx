@@ -205,7 +205,7 @@ export function PasseioDetalhe() {
 
   const breadcrumbsLd = generateBreadcrumbsSchema([
     { name: t("inicio"), url: getCanonicalUrl("/") },
-    { name: t("passeios"), url: getCanonicalUrl("/passeio") },
+    { name: t("passeios"), url: getCanonicalUrl("/#tours") },
     { name: translatedTitle, url: canonicalUrl }
   ]);
 
