@@ -92,9 +92,9 @@ const FluminenseBolivarLibertadores = () => {
             "@context": "https://schema.org",
             "@type": "BreadcrumbList",
             "itemListElement": [
-              { "@type": "ListItem", "position": 1, "name": "Home", "item": getCanonicalUrl("/") },
-              { "@type": "ListItem", "position": 2, "name": "Maracanã Matchday", "item": getCanonicalUrl("/passeio/maracanã-matchday") },
-              { "@type": "ListItem", "position": 3, "name": "Fluminense vs Bolívar", "item": getCanonicalUrl(PAGE_PATH) },
+              { "@type": "ListItem", "position": 1, "name": "Home", "item": { "@id": getCanonicalUrl("/"), "name": "Home" } },
+              { "@type": "ListItem", "position": 2, "name": "Maracanã Matchday", "item": { "@id": getCanonicalUrl("/passeio/maracana-matchday"), "name": "Maracanã Matchday" } },
+              { "@type": "ListItem", "position": 3, "name": "Fluminense vs Bolívar", "item": { "@id": getCanonicalUrl(PAGE_PATH), "name": "Fluminense vs Bolívar" } },
             ],
           })}
         </script>
