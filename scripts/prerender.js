@@ -35,9 +35,35 @@ const slugify = (text) =>
     .replace(/-+/g, "-")
     .replace(/^-+|-+$/g, "");
 
+// Seletores específicos por rota: o prerender só salva o HTML quando
+// esse elemento estiver visível na página, garantindo que os dados
+// do Supabase já carregaram antes do snapshot.
+const ROUTE_SELECTORS = {
+  '/our-tours': '[data-tour-card]',
+  '/passeio': '[data-tour-card]',
+  '/blog': '[data-blog-card]',
+  '/maracana-calendario': '[data-match-card]',
+};
+
+// Rotas de categoria e passeio individuais também esperam pelo card de tour
+const ROUTE_SELECTOR_PATTERNS = [
+  { pattern: /^\/passeios\//, selector: '[data-tour-card]' },
+  { pattern: /^\/passeio\//, selector: '[data-tour-detail]' },
+  { pattern: /^\/blog\//, selector: '[data-blog-post]' },
+  { pattern: /^\/match\//, selector: '[data-match-detail]' },
+];
+
+function getSelectorForRoute(route) {
+  if (ROUTE_SELECTORS[route]) return ROUTE_SELECTORS[route];
+  for (const { pattern, selector } of ROUTE_SELECTOR_PATTERNS) {
+    if (pattern.test(route)) return selector;
+  }
+  return null;
+}
+
 async function startServer() {
   const app = express();
-  
+
   // Serve static files from dist
   app.use(express.static(distPath));
 
@@ -55,18 +81,18 @@ async function startServer() {
 
 async function fetchDynamicRoutes() {
   const routes = [
-    '/', 
-    '/blog', 
-    '/passeio', 
+    '/',
+    '/blog',
+    '/passeio',
     '/our-tours',
-    '/maracana-calendario', 
+    '/maracana-calendario',
     '/flamengo-x-vasco-maracana',
     '/fluminense-bolivar-libertadores',
     '/brasil-x-panama-maio-maracana'
   ];
 
   console.log('Fetching dynamic routes from Supabase...');
-  
+
   // Fetch blog posts
   const { data: posts } = await supabase.from('blog_posts').select('slug').eq('is_published', true);
   if (posts) {
@@ -97,7 +123,7 @@ async function fetchDynamicRoutes() {
   const { data: pages } = await supabase.from('pages').select('href').eq('is_visible', true);
   if (pages) {
     pages.forEach(page => {
-        if (!routes.includes(page.href)) routes.push(page.href);
+      if (!routes.includes(page.href)) routes.push(page.href);
     });
   }
 
@@ -125,12 +151,12 @@ async function prerender() {
   console.log('Starting prerender process...');
   const { server, port } = await startServer();
   const baseUrl = `http://localhost:${port}`;
-  
+
   const routes = await fetchDynamicRoutes();
   console.log(`Found ${routes.length} routes to prerender.`);
 
   const browser = await chromium.launch({ headless: true });
-  const CONCURRENCY = 3; // Reduced concurrency to save resources
+  const CONCURRENCY = 3;
   const results = { ok: 0, fail: 0, failed: [] };
 
   for (let i = 0; i < routes.length; i += CONCURRENCY) {
@@ -149,11 +175,12 @@ async function prerender() {
         }
         return route.continue();
       });
-      
+
       console.log(`Prerendering ${route}...`);
       try {
         await page.goto(`${baseUrl}${route}`, { waitUntil: 'load', timeout: 60000 });
-        // Wait for React to render real content (root must have children) and network to settle
+
+        // Wait for React to render real content
         await page.waitForFunction(
           () => {
             const root = document.getElementById('root');
@@ -161,7 +188,19 @@ async function prerender() {
           },
           { timeout: 30000 }
         ).catch(() => console.warn(`  ⚠ ${route}: content wait timeout, saving anyway`));
-        await page.waitForLoadState('networkidle', { timeout: 15000 }).catch(() => {});
+
+        // Wait for network to settle
+        await page.waitForLoadState('networkidle', { timeout: 20000 }).catch(() => { });
+
+        // Wait for route-specific selector (garante que dados do Supabase carregaram)
+        const selector = getSelectorForRoute(route);
+        if (selector) {
+          console.log(`  ⏳ ${route}: aguardando seletor "${selector}"...`);
+          await page.waitForSelector(selector, { timeout: 20000 })
+            .then(() => console.log(`  ✓ ${route}: seletor encontrado`))
+            .catch(() => console.warn(`  ⚠ ${route}: seletor "${selector}" não encontrado — verifique se o atributo data-* está no componente`));
+        }
+
         // Extra settle for Helmet to flush meta tags
         await page.waitForTimeout(500);
 
@@ -174,14 +213,14 @@ async function prerender() {
         });
 
         let content = await page.content();
-        
-        const savePath = route === '/' 
+
+        const savePath = route === '/'
           ? path.join(distPath, 'index.html')
           : path.join(distPath, decodeURI(route), 'index.html');
-        
+
         const dirPath = path.dirname(savePath);
         await fs.mkdir(dirPath, { recursive: true });
-        
+
         await fs.writeFile(savePath, content);
         console.log(`✓ Saved ${savePath}`);
         results.ok++;
