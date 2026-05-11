@@ -4,14 +4,36 @@ import { useSiteData } from "@/hooks/useSiteData";
 import { useLocale } from "@/contexts/LocaleContext";
 import { OptimizedImage } from "./OptimizedImage";
 import { PaymentLogos } from "./PaymentLogos";
+import { useQuery } from "@tanstack/react-query";
+import { supabase } from "@/integrations/supabase/client";
+import { slugify } from "@/utils/slugify";
 
 const iconMap: Record<string, React.ElementType> = {
   Instagram, MapPin, Phone, Mail, Music, Facebook, Youtube,
 };
 
 export function Footer() {
-  const { pages, socialMedia, images, siteSettings } = useSiteData();
+  const { pages, socialMedia, images, siteSettings, tours } = useSiteData();
   const { t, language } = useLocale();
+
+  // Recent blog posts for internal linking / SEO
+  const { data: recentPosts = [] } = useQuery({
+    queryKey: ["footer-recent-posts"],
+    queryFn: async () => {
+      const { data } = await supabase
+        .from("blog_posts")
+        .select("slug, title, title_en, title_es")
+        .eq("is_published", true)
+        .order("created_at", { ascending: false })
+        .limit(5);
+      return data || [];
+    },
+    staleTime: 1000 * 60 * 30,
+  });
+
+  const categories = Array.from(
+    new Set((tours || []).map((tt: any) => tt?.category).filter(Boolean))
+  ).slice(0, 6) as string[];
 
   const aboutDescKey = language === 'pt' ? 'about_desc' : `about_desc_${language}`;
   const footerDesc = siteSettings[aboutDescKey] || siteSettings['about_desc'] || t("footer_desc");
@@ -190,6 +212,62 @@ export function Footer() {
         </div>
 
         <div className="mt-12 pt-8 border-t border-[hsl(145,15%,22%)]">
+          {/* SEO: Internal linking — categories + recent blog posts */}
+          {(categories.length > 0 || recentPosts.length > 0) && (
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 pb-8 mb-8 border-b border-[hsl(145,15%,22%)]">
+              {categories.length > 0 && (
+                <div>
+                  <h3 className="font-semibold text-base mb-4 font-sans">
+                    {language === 'pt' ? 'Categorias de Passeios' : language === 'es' ? 'Categorías de Tours' : 'Tour Categories'}
+                  </h3>
+                  <ul className="grid grid-cols-2 gap-2 font-sans">
+                    {categories.map((cat) => (
+                      <li key={cat}>
+                        <Link
+                          to={`/passeios/${slugify(cat)}`}
+                          className="text-[hsl(140,10%,96%)]/70 hover:text-[hsl(145,40%,40%)] transition-colors text-sm capitalize"
+                        >
+                          {cat.toLowerCase()}
+                        </Link>
+                      </li>
+                    ))}
+                    <li>
+                      <Link to="/maracana-calendario" className="text-[hsl(140,10%,96%)]/70 hover:text-[hsl(145,40%,40%)] transition-colors text-sm">
+                        {language === 'pt' ? 'Jogos no Maracanã' : language === 'es' ? 'Partidos en Maracanã' : 'Maracanã Matches'}
+                      </Link>
+                    </li>
+                  </ul>
+                </div>
+              )}
+              {recentPosts.length > 0 && (
+                <div>
+                  <h3 className="font-semibold text-base mb-4 font-sans">
+                    {language === 'pt' ? 'Do Blog' : language === 'es' ? 'Del Blog' : 'From the Blog'}
+                  </h3>
+                  <ul className="space-y-2 font-sans">
+                    {recentPosts.map((p: any) => {
+                      const title = (language === 'en' && p.title_en) || (language === 'es' && p.title_es) || p.title;
+                      return (
+                        <li key={p.slug}>
+                          <Link
+                            to={`/blog/${p.slug}`}
+                            className="text-[hsl(140,10%,96%)]/70 hover:text-[hsl(145,40%,40%)] transition-colors text-sm line-clamp-1"
+                          >
+                            {title}
+                          </Link>
+                        </li>
+                      );
+                    })}
+                    <li>
+                      <Link to="/blog" className="text-[hsl(145,40%,50%)] hover:text-[hsl(145,40%,60%)] transition-colors text-sm font-medium">
+                        {language === 'pt' ? 'Ver todos os posts →' : language === 'es' ? 'Ver todas las publicaciones →' : 'View all posts →'}
+                      </Link>
+                    </li>
+                  </ul>
+                </div>
+              )}
+            </div>
+          )}
           <div className="flex flex-col md:flex-row items-center justify-between gap-8">
             <div className="flex flex-col gap-2 md:w-1/3">
               <p className="text-[hsl(140,10%,96%)]/60 text-sm font-sans">&copy; 2026 Tocorime Rio. {t("direitos")}</p>

@@ -64,8 +64,8 @@ async function generateSitemap() {
       { url: '/blog', priority: 0.9, changefreq: 'weekly' },
       { url: '/sobre', priority: 0.7, changefreq: 'monthly' },
       { url: '/contato', priority: 0.7, changefreq: 'monthly' },
-      { url: '/passeios', priority: 0.8, changefreq: 'weekly' },
-      { url: '/carrinho', priority: 0.6, changefreq: 'weekly' },
+      { url: '/passeio', priority: 0.8, changefreq: 'weekly' },
+      { url: '/maracana-calendario', priority: 0.9, changefreq: 'daily' },
     ];
 
     let xml = `<?xml version="1.0" encoding="UTF-8"?>\n`;
@@ -83,8 +83,13 @@ async function generateSitemap() {
 
     // Tours
     tours.forEach(tour => {
+      const slug = (tour.slug || tour.id || '')
+        .toString()
+        .toLowerCase()
+        .normalize('NFD')
+        .replace(/[\u0300-\u036f]/g, '');
       xml += `  <url>\n`;
-      xml += `    <loc>${siteUrl}/passeio/${tour.slug || tour.id}</loc>\n`;
+      xml += `    <loc>${siteUrl}/passeio/${slug}</loc>\n`;
       xml += `    <lastmod>${(tour.updated_at || new Date().toISOString()).split('T')[0]}</lastmod>\n`;
       xml += `    <changefreq>weekly</changefreq>\n`;
       xml += `    <priority>0.8</priority>\n`;
@@ -111,10 +116,10 @@ async function generateSitemap() {
     try {
       const { data: matches } = await partnerSupabase
         .from('matches')
-        .select('id, slug, updated_at, hidden');
+        .select('id, slug, updated_at, hidden, home_team, away_team');
       const visible = (matches || []).filter(m => !m.hidden);
       visible.forEach(m => {
-        const key = m.slug || m.id;
+        const key = slugify(m.slug || `${m.home_team || ''}-vs-${m.away_team || ''}`) || m.id;
         if (!key) return;
         xml += `  <url>\n`;
         xml += `    <loc>${siteUrl}/jogo/${key}</loc>\n`;

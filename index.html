@@ -70,6 +70,30 @@ experts. Private, safe, and tailored exclusively for you.">
 
   <body>
     <div id="root"><!--ssr-outlet--></div>
+    <script>
+      // SEO: força HTTPS, sem www, sem barra final (best-effort no client p/ SPA estático)
+      (function () {
+        try {
+          var l = window.location;
+          var host = l.hostname;
+          var needsRedirect = false;
+          var newHost = host;
+          var newProto = l.protocol;
+          var newPath = l.pathname;
+
+          if (host === 'www.tocorimerio.com') { newHost = 'tocorimerio.com'; needsRedirect = true; }
+          if (l.protocol === 'http:' && (host === 'tocorimerio.com' || host === 'www.tocorimerio.com')) {
+            newProto = 'https:'; needsRedirect = true;
+          }
+          if (newPath.length > 1 && newPath.endsWith('/')) {
+            newPath = newPath.replace(/\/+$/, ''); needsRedirect = true;
+          }
+          if (needsRedirect) {
+            window.location.replace(newProto + '//' + newHost + newPath + l.search + l.hash);
+          }
+        } catch (e) { /* noop */ }
+      })();
+    </script>
     <script type="module" src="/src/main.tsx"></script>
 
 

@@ -54,7 +54,7 @@ async function startServer() {
 }
 
 async function fetchDynamicRoutes() {
-  const routes = ['/', '/blog', '/carrinho', '/passeio', '/maracanã-calendário', '/Fluminense-bolivar-libertadores'];
+  const routes = ['/', '/blog', '/passeio', '/maracana-calendario', '/Fluminense-bolivar-libertadores'];
 
   console.log('Fetching dynamic routes from Supabase...');
   
@@ -93,11 +93,11 @@ async function fetchDynamicRoutes() {
   try {
     const { data: matches } = await partnerSupabase
       .from('matches')
-      .select('id, slug, hidden');
+      .select('id, slug, hidden, home_team, away_team');
     if (matches) {
       const visible = matches.filter(m => !m.hidden);
       visible.forEach((m) => {
-        const key = m.slug || m.id;
+        const key = slugify(m.slug || `${m.home_team || ''}-vs-${m.away_team || ''}`) || m.id;
         if (key) routes.push(`/jogo/${key}`);
       });
       console.log(`Added ${visible.length} match landing pages.`);

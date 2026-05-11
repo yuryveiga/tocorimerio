@@ -5,7 +5,8 @@ import { Button } from "@/components/ui/button";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { useMatches } from "@/hooks/useMatches";
-import { getCanonicalUrl, generateSportsEventSchema } from "@/utils/seo";
+import { getCanonicalUrl, generateSportsEventSchema, generateBreadcrumbSchema } from "@/utils/seo";
+import { slugify } from "@/utils/slugify";
 import { getMatchDateInRio, getMatchHour } from "@/lib/dateUtils";
 import { format } from "date-fns";
 import { ptBR } from "date-fns/locale";
@@ -25,7 +26,7 @@ export default function JogoLanding() {
   const match = matches?.find((m) => m.slug === id || m.id === id);
 
   if (!match) {
-    return <Navigate to="/maracanã-calendário" replace />;
+    return <Navigate to="/maracana-calendario" replace />;
   }
 
   const dateRio = getMatchDateInRio(match.match_date);
@@ -33,7 +34,8 @@ export default function JogoLanding() {
   const hour = getMatchHour(match.match_date);
   const title = `${match.home_team} x ${match.away_team} no Maracanã - ${format(dateRio, "dd/MM/yyyy")} | Tocorime Rio`;
   const description = `Ingresso + transfer + guia bilíngue para ${match.home_team} x ${match.away_team} em ${formattedDate} às ${hour} no ${match.stadium || "Maracanã"}. Reserve agora! ✓`;
-  const canonical = getCanonicalUrl(`/jogo/${match.slug || match.id}`);
+  const cleanSlug = slugify(match.slug || `${match.home_team}-vs-${match.away_team}`) || match.id;
+  const canonical = getCanonicalUrl(`/jogo/${cleanSlug}`);
   const matchUrl = `/match/${match.slug || match.id}`;
   const minPrice = match.min_price || match.price || 0;
 
@@ -51,6 +53,12 @@ export default function JogoLanding() {
     offerCurrency: "BRL",
   });
 
+  const breadcrumbSchema = generateBreadcrumbSchema([
+    { name: "Início", path: "/" },
+    { name: "Maracanã", path: "/maracana-calendario" },
+    { name: `${match.home_team} x ${match.away_team}`, path: `/jogo/${cleanSlug}` },
+  ]);
+
   const included = (match.included_json || []).map((i: any) => i.text).filter(Boolean);
 
   return (
@@ -66,6 +74,7 @@ export default function JogoLanding() {
         {match.home_team_logo && <meta property="og:image" content={match.home_team_logo} />}
         <meta name="twitter:card" content="summary_large_image" />
         <script type="application/ld+json">{JSON.stringify(schema)}</script>
+        <script type="application/ld+json">{JSON.stringify(breadcrumbSchema)}</script>
       </Helmet>
 
       <Header />

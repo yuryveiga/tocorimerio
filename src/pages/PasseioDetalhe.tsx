@@ -36,6 +36,7 @@ import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover
 import { format, parseISO, isPast, isToday } from "date-fns";
 import { ptBR, enUS, es as esLocale } from "date-fns/locale";
 import { getCanonicalUrl, BASE_URL, generateTouristAttractionSchema, generateTourPackageSchema, generateFAQSchema, generateOptimizedMetaDescription, getHreflangLinks } from "@/utils/seo";
+import { slugify } from "@/utils/slugify";
 
 
 import { WeatherSection } from "@/components/WeatherSection";
@@ -176,7 +177,15 @@ export function PasseioDetalhe() {
 
   const highlights = (translatedHighlights as { icon: string; text: string }[]) || [];
   const faqItems = (translatedFaq as { q: string; a: string }[]) || [];
-  const canonicalUrl = getCanonicalUrl(`/passeio/${tour?.slug || tour?.id}`);
+  const cleanSlug = tour?.slug ? slugify(tour.slug) : tour?.id;
+  const canonicalUrl = getCanonicalUrl(`/passeio/${cleanSlug || tour?.id}`);
+
+  // Auto-redirect from accented/legacy slug to clean ASCII slug
+  useEffect(() => {
+    if (tour?.slug && id && id !== cleanSlug && id === tour.slug) {
+      navigate(`/passeio/${cleanSlug}`, { replace: true });
+    }
+  }, [tour, id, cleanSlug, navigate]);
 
   const jsonLd = tour ? {
     "@context": "https://schema.org",
@@ -202,19 +211,19 @@ export function PasseioDetalhe() {
         "@type": "ListItem",
         "position": 1,
         "name": t("inicio"),
-        "item": getCanonicalUrl("/")
+        "item": { "@id": getCanonicalUrl("/"), "name": t("inicio") }
       },
       {
         "@type": "ListItem",
         "position": 2,
         "name": t("passeios"),
-        "item": getCanonicalUrl("/#tours")
+        "item": { "@id": getCanonicalUrl("/passeio"), "name": t("passeios") }
       },
       {
         "@type": "ListItem",
         "position": 3,
         "name": translatedTitle,
-        "item": canonicalUrl
+        "item": { "@id": canonicalUrl, "name": translatedTitle }
       }
     ]
   };
