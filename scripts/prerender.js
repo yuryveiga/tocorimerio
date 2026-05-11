@@ -97,7 +97,7 @@ async function fetchDynamicRoutes() {
     if (matches) {
       const visible = matches.filter(m => !m.hidden);
       visible.forEach((m) => {
-        const key = m.slug || m.id;
+        const key = slugify(m.slug || `${m.home_team || ''}-vs-${m.away_team || ''}`) || m.id;
         if (key) routes.push(`/jogo/${key}`);
       });
       console.log(`Added ${visible.length} match landing pages.`);
