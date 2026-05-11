@@ -5,19 +5,26 @@ import { TourItem, TourCardProps } from "@/components/TourItem";
 import { useSiteData } from "@/hooks/useSiteData";
 import { getCanonicalUrl } from "@/utils/seo";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, MapPin, Star, ShieldCheck, Users } from "lucide-react";
+import { ArrowRight, MapPin, Star, ShieldCheck, Users, Phone } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { useLocale } from "@/contexts/LocaleContext";
 
 const OurTours = () => {
-  const { tours, isLoading } = useSiteData();
+  const { tours, isLoading, socialMedia } = useSiteData();
   const { setLanguage } = useLocale();
   const navigate = useNavigate();
 
   useEffect(() => {
     setLanguage('en');
   }, [setLanguage]);
+
+  // Dynamic WhatsApp Link
+  const whatsappSocial = socialMedia.find(s => s.platform.toLowerCase().includes('whatsapp'));
+  const contactPhone = whatsappSocial?.url || "5521995624596";
+  const cleanPhone = contactPhone.replace(/[^\d+]/g, "").replace('https://wa.me/', '');
+  const waMessage = encodeURIComponent("Hello! I'm interested in booking a private tour in Rio.");
+  const waLink = `https://wa.me/${cleanPhone}?text=${waMessage}`;
 
   // Filter and sort tours for the English landing page
   const sortedTours = [...(tours || [])]
@@ -155,7 +162,7 @@ const OurTours = () => {
               Contact us via WhatsApp for a personalized quote.
             </p>
             <Button asChild size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground rounded-full h-14 px-10 text-lg">
-              <a href="https://wa.me/5521999999999" target="_blank" rel="noopener noreferrer">
+              <a href={waLink} target="_blank" rel="noopener noreferrer">
                 Contact Our Experts
                 <ArrowRight className="w-5 h-5 ml-2" />
               </a>
