@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { useLocale } from "@/contexts/LocaleContext";
+import { getCanonicalUrl, getHreflangLinks, generateSportsEventSchema, generateBreadcrumbsSchema } from "@/utils/seo";
 
 const TARGET_DATE = new Date('2026-05-31T18:30:00-03:00');
+const PAGE_PATH = "/brasil-x-panama-maio-maracana";
 
 const BrasilPanamaMaracana = () => {
   const { t, language, setLanguage, currency, setCurrency } = useLocale();
@@ -99,6 +101,38 @@ const BrasilPanamaMaracana = () => {
       <Helmet>
         <title>{t('bp_title')}</title>
         <meta name="description" content={t('bp_desc')} />
+        <link rel="canonical" href={getCanonicalUrl(PAGE_PATH)} />
+        {getHreflangLinks(PAGE_PATH).map((l) => (
+          <link key={l.hreflang} rel="alternate" hrefLang={l.hreflang} href={l.href} />
+        ))}
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content={getCanonicalUrl(PAGE_PATH)} />
+        <meta property="og:title" content={t('bp_title')} />
+        <meta property="og:description" content={t('bp_desc')} />
+        <meta property="og:site_name" content="Tocorime Rio" />
+        <meta name="twitter:card" content="summary_large_image" />
+
+        <script type="application/ld+json">
+          {JSON.stringify(generateSportsEventSchema({
+            name: "Brasil vs Panamá — Amigável Internacional 2026",
+            description: "Partida amistosa entre Brasil e Panamá no Estádio do Maracanã, Rio de Janeiro.",
+            startDate: TARGET_DATE.toISOString(),
+            url: getCanonicalUrl(PAGE_PATH),
+            homeTeam: "Brasil",
+            awayTeam: "Panamá",
+            venueName: "Estádio do Maracanã",
+            offerUrl: "https://tocorimerio.com/match/brasil-vs-panama-2026-05-31",
+          }))}
+        </script>
+
+        <script type="application/ld+json">
+          {JSON.stringify(generateBreadcrumbsSchema([
+            { name: t("inicio"), url: getCanonicalUrl("/") },
+            { name: "Maracanã Matchday", url: getCanonicalUrl("/passeio/maracana-matchday") },
+            { name: "Brasil vs Panamá", url: getCanonicalUrl(PAGE_PATH) },
+          ]))}
+        </script>
+
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,700;0,900;1,700&display=swap" rel="stylesheet" />
       </Helmet>

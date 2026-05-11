@@ -3,6 +3,7 @@ import { Helmet } from "react-helmet-async";
 import { Carousel, CarouselContent, CarouselItem, CarouselPrevious, CarouselNext } from "@/components/ui/carousel";
 import { Calendar, MapPin, Star, Check, Clock, Bus, Users, ShieldCheck, Hotel, Headphones, Ticket, Wine, ChevronDown, Flame, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { getCanonicalUrl, getHreflangLinks, generateSportsEventSchema, generateBreadcrumbsSchema } from "@/utils/seo";
 import heroImg from "@/assets/maracana-hero.jpg";
 import fansImg from "@/assets/maracana-fans.jpg";
 import skylineImg from "@/assets/rio-skyline.jpg";
@@ -11,6 +12,7 @@ const Footer = lazy(() => import("@/components/Footer").then(m => ({ default: m.
 
 const BOOKING_URL = "https://tocorimerio.com/match/flamengo-vs-vasco-da-gama-2026-05-03";
 const MATCH_DATE = new Date("2026-05-03T16:00:00-03:00");
+const PAGE_PATH = "/flamengo-x-vasco-maracana";
 
 // ========= Countdown =========
 function useCountdown(target: Date) {
@@ -126,18 +128,40 @@ const FlamengoVascoMaracana = () => {
         <meta property="og:description" content="Match ticket + executive transfer + multilingual guide. From US$114.52 per person." />
         <meta property="og:image" content={heroImg} />
         <meta property="og:type" content="website" />
-        <link rel="canonical" href="https://tocorimerio.com/flamengo-x-vasco-maracana" />
-        <link rel="alternate" hrefLang="pt-BR" href="https://tocorimerio.com/flamengo-x-vasco-maracana" />
-        <link rel="alternate" hrefLang="en" href="https://tocorimerio.com/flamengo-x-vasco-maracana" />
-        <link rel="alternate" hrefLang="es" href="https://tocorimerio.com/flamengo-x-vasco-maracana" />
-        <link rel="alternate" hrefLang="x-default" href="https://tocorimerio.com/flamengo-x-vasco-maracana" />
-        <meta property="og:url" content="https://tocorimerio.com/flamengo-x-vasco-maracana" />
+        <link rel="canonical" href={getCanonicalUrl(PAGE_PATH)} />
+        {getHreflangLinks(PAGE_PATH).map((l) => (
+          <link key={l.hreflang} rel="alternate" hrefLang={l.hreflang} href={l.href} />
+        ))}
+        <meta property="og:url" content={getCanonicalUrl(PAGE_PATH)} />
         <meta property="og:site_name" content="Tocorime Rio" />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Flamengo vs Vasco — Maracanã Matchday Experience" />
         <meta name="twitter:description" content="Match ticket + executive transfer + multilingual guide. From US$114.52 per person." />
         <meta name="twitter:image" content={heroImg} />
         
+        <script type="application/ld+json">
+          {JSON.stringify(generateSportsEventSchema({
+            name: "Flamengo vs Vasco — Campeonato Brasileiro 2026",
+            description: "Clássico dos Milhões entre Flamengo e Vasco no Estádio do Maracanã, Rio de Janeiro.",
+            startDate: MATCH_DATE.toISOString(),
+            url: getCanonicalUrl(PAGE_PATH),
+            homeTeam: "Flamengo",
+            awayTeam: "Vasco da Gama",
+            venueName: "Estádio do Maracanã",
+            offerUrl: BOOKING_URL,
+            offerPrice: 114.52,
+            offerCurrency: "USD"
+          }))}
+        </script>
+
+        <script type="application/ld+json">
+          {JSON.stringify(generateBreadcrumbsSchema([
+            { name: "Home", url: getCanonicalUrl("/") },
+            { name: "Maracanã Matchday", url: getCanonicalUrl("/passeio/maracana-matchday") },
+            { name: "Flamengo vs Vasco", url: getCanonicalUrl(PAGE_PATH) },
+          ]))}
+        </script>
+
         {/* Google tag (gtag.js) */}
         <script async src="https://www.googletagmanager.com/gtag/js?id=AW-18075082892"></script>
         <script>

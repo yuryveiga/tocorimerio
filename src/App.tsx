@@ -104,7 +104,7 @@ const App = ({ queryClient: externalQueryClient }: { queryClient?: QueryClient }
                       <Route path="/match/:id" element={<MatchDetail />} />
                       <Route path="/jogo/:id" element={<JogoLanding />} />
                       <Route path="/flamengo-x-vasco-maracana" element={<FlamengoVascoMaracana />} />
-                      <Route path="/Fluminense-bolivar-libertadores" element={<FluminenseBolivarLibertadores />} />
+                      <Route path="/fluminense-bolivar-libertadores" element={<FluminenseBolivarLibertadores />} />
                       <Route path="/brasil-x-panama-maio-maracana" element={<BrasilPanamaMaracana />} />
                       <Route path="/:slug" element={<GenericPage />} />
                       <Route path="/admin/login" element={<AdminLogin />} />

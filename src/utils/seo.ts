@@ -136,11 +136,11 @@ export const generateSportsEventSchema = (params: {
   },
   "homeTeam": { "@type": "SportsTeam", "name": params.homeTeam },
   "awayTeam": { "@type": "SportsTeam", "name": params.awayTeam },
-  "competitor": [
+  "performer": [
     { "@type": "SportsTeam", "name": params.homeTeam },
     { "@type": "SportsTeam", "name": params.awayTeam },
   ],
-  "performer": [
+  "competitor": [
     { "@type": "SportsTeam", "name": params.homeTeam },
     { "@type": "SportsTeam", "name": params.awayTeam },
   ],
@@ -243,6 +243,25 @@ export const generateTourPackageSchema = (
       "bestRating": "5",
       "ratingCount": "128"
     }
+  };
+};
+
+/**
+ * Gera schema de BreadcrumbList válido.
+ * Filtra itens sem URL ou nome para evitar erros de nó pai vazio.
+ */
+export const generateBreadcrumbsSchema = (items: { name: string; url: string }[]) => {
+  const validItems = items.filter(item => item.name && item.url);
+  
+  return {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": validItems.map((item, index) => ({
+      "@type": "ListItem",
+      "position": index + 1,
+      "name": item.name,
+      "item": item.url
+    }))
   };
 };
 export const generateFAQSchema = (faqs: { q: string; a: string }[]) => {

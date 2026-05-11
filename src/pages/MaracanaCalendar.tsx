@@ -14,7 +14,7 @@ import { MapPin, ArrowRight, Bus, Ticket, UserCheck, Clock, Camera, Users, Chevr
 import { useState, useMemo, useEffect } from "react";
 import { Helmet } from "react-helmet-async";
 import { useSiteData } from "@/hooks/useSiteData";
-import { getCanonicalUrl, getHreflangLinks } from "@/utils/seo";
+import { getCanonicalUrl, getHreflangLinks, generateBreadcrumbsSchema } from "@/utils/seo";
 
 const localeMap: Record<string, Locale> = { pt: ptBR, en: enUS, es };
 
@@ -99,6 +99,12 @@ const MaracanaCalendar = () => {
         <meta property="og:description" content="Calendário completo de partidas no Maracanã. Planeje sua visita com datas, horários e pacotes." />
         <meta property="og:site_name" content="Tocorime Rio" />
         <meta name="twitter:card" content="summary_large_image" />
+        <script type="application/ld+json">
+          {JSON.stringify(generateBreadcrumbsSchema([
+            { name: language === 'pt' ? 'Início' : 'Home', url: getCanonicalUrl("/") },
+            { name: language === 'pt' ? 'Calendário Maracanã' : 'Maracanã Calendar', url: getCanonicalUrl("/maracana-calendario") },
+          ]))}
+        </script>
       </Helmet>
       
       <Header />

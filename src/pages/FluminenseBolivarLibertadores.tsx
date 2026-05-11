@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import { Helmet } from "react-helmet-async";
 import bolivarCrest from "@/assets/bolivar-crest.png";
-import { getCanonicalUrl, generateSportsEventSchema } from "@/utils/seo";
+import { getCanonicalUrl, generateSportsEventSchema, generateBreadcrumbsSchema } from "@/utils/seo";
 
 const TARGET_DATE = new Date('2026-05-19T21:30:00-03:00');
 const BOOKING_URL = "https://tocorimerio.com/match/fluminense-vs-bolivar-2026-05-19";
-const PAGE_PATH = "/Fluminense-bolivar-libertadores";
+const PAGE_PATH = "/fluminense-bolivar-libertadores";
 
 const FluminenseBolivarLibertadores = () => {
   const [timeLeft, setTimeLeft] = useState({
@@ -88,15 +88,11 @@ const FluminenseBolivarLibertadores = () => {
           }))}
         </script>
         <script type="application/ld+json">
-          {JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "BreadcrumbList",
-            "itemListElement": [
-              { "@type": "ListItem", "position": 1, "name": "Home", "item": { "@id": getCanonicalUrl("/"), "name": "Home" } },
-              { "@type": "ListItem", "position": 2, "name": "Maracanã Matchday", "item": { "@id": getCanonicalUrl("/passeio/maracana-matchday"), "name": "Maracanã Matchday" } },
-              { "@type": "ListItem", "position": 3, "name": "Fluminense vs Bolívar", "item": { "@id": getCanonicalUrl(PAGE_PATH), "name": "Fluminense vs Bolívar" } },
-            ],
-          })}
+          {JSON.stringify(generateBreadcrumbsSchema([
+            { name: "Home", url: getCanonicalUrl("/") },
+            { name: "Maracanã Matchday", url: getCanonicalUrl("/passeio/maracana-matchday") },
+            { name: "Fluminense vs Bolívar", url: getCanonicalUrl(PAGE_PATH) },
+          ]))}
         </script>
         <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:ital,wght@0,400;0,600;0,700;1,400&family=Barlow:wght@400;500&display=swap" rel="stylesheet" />
       </Helmet>

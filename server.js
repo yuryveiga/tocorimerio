@@ -8,6 +8,49 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url))
 async function createServer() {
   const app = express()
 
+  // Redirection Middleware
+  app.use((req, res, next) => {
+    const host = req.get('host') || '';
+    const url = req.url;
+    
+    // 1. Redirect HTTP to HTTPS (for production environments with proxy)
+    const isHttp = req.headers['x-forwarded-proto'] === 'http';
+    
+    // 2. Redirect WWW to Non-WWW
+    const isWww = host.startsWith('www.');
+    
+    // 3. Trailing Slash Removal
+    const hasTrailingSlash = url.length > 1 && url.endsWith('/');
+    
+    // 4. Accent/Special Character Cleaning (ASCII only)
+    const decodedUrl = decodeURIComponent(url);
+    const normalizedUrl = decodedUrl.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+    const isAccented = decodedUrl !== normalizedUrl;
+
+    if (isHttp || isWww || hasTrailingSlash || isAccented) {
+      let newHost = host;
+      if (isWww) newHost = host.slice(4);
+      
+      let newUrl = url;
+      if (isAccented) {
+        newUrl = encodeURIComponent(normalizedUrl).replace(/%2F/g, '/');
+      }
+      if (newUrl.length > 1 && newUrl.endsWith('/')) {
+        newUrl = newUrl.slice(0, -1);
+      }
+
+      // Final Check: ensure we are not redirecting to the same URL (infinite loop)
+      const target = `https://${newHost}${newUrl}`;
+      const current = `https://${host}${url}`;
+      
+      if (target !== current) {
+        return res.redirect(301, target);
+      }
+    }
+    
+    next();
+  });
+
   // Security Headers Middleware
   app.use((req, res, next) => {
     res.setHeader("Content-Security-Policy", "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://www.google-analytics.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https: blob:; connect-src 'self' https: wss:; frame-src 'self' https:;");

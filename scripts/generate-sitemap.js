@@ -60,12 +60,15 @@ async function generateSitemap() {
     }
 
     const staticPages = [
-      { url: '/', priority: 1.0, changefreq: 'daily' },
+      { url: '', priority: 1.0, changefreq: 'daily' },
       { url: '/blog', priority: 0.9, changefreq: 'weekly' },
       { url: '/sobre', priority: 0.7, changefreq: 'monthly' },
       { url: '/contato', priority: 0.7, changefreq: 'monthly' },
       { url: '/passeio', priority: 0.8, changefreq: 'weekly' },
       { url: '/maracana-calendario', priority: 0.9, changefreq: 'daily' },
+      { url: '/flamengo-x-vasco-maracana', priority: 0.8, changefreq: 'daily' },
+      { url: '/fluminense-bolivar-libertadores', priority: 0.8, changefreq: 'daily' },
+      { url: '/brasil-x-panama-maio-maracana', priority: 0.8, changefreq: 'daily' },
     ];
 
     let xml = `<?xml version="1.0" encoding="UTF-8"?>\n`;
@@ -74,7 +77,7 @@ async function generateSitemap() {
     // Static Pages
     staticPages.forEach(page => {
       xml += `  <url>\n`;
-      xml += `    <loc>${siteUrl}${page.url}</loc>\n`;
+      xml += `    <loc>${siteUrl}${page.url.toLowerCase()}</loc>\n`;
       xml += `    <lastmod>${new Date().toISOString().split('T')[0]}</lastmod>\n`;
       xml += `    <changefreq>${page.changefreq}</changefreq>\n`;
       xml += `    <priority>${page.priority}</priority>\n`;
@@ -87,7 +90,8 @@ async function generateSitemap() {
         .toString()
         .toLowerCase()
         .normalize('NFD')
-        .replace(/[\u0300-\u036f]/g, '');
+        .replace(/[\u0300-\u036f]/g, '')
+        .replace(/\/$/, '');
       xml += `  <url>\n`;
       xml += `    <loc>${siteUrl}/passeio/${slug}</loc>\n`;
       xml += `    <lastmod>${(tour.updated_at || new Date().toISOString()).split('T')[0]}</lastmod>\n`;
@@ -135,8 +139,9 @@ async function generateSitemap() {
 
     // Blog Posts
     posts.forEach(post => {
+      const slug = post.slug.toLowerCase().replace(/\/$/, '');
       xml += `  <url>\n`;
-      xml += `    <loc>${siteUrl}/blog/${post.slug}</loc>\n`;
+      xml += `    <loc>${siteUrl}/blog/${slug}</loc>\n`;
       xml += `    <lastmod>${(post.updated_at || new Date().toISOString()).split('T')[0]}</lastmod>\n`;
       xml += `    <changefreq>monthly</changefreq>\n`;
       xml += `    <priority>0.8</priority>\n`;

@@ -17,7 +17,7 @@ import { Button } from "@/components/ui/button";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 import "react-quill-new/dist/quill.snow.css";
 import { OptimizedImage } from "@/components/OptimizedImage";
-import { getCanonicalUrl, generateOptimizedMetaDescription, getHreflangLinks, generateArticleSchema } from "@/utils/seo";
+import { getCanonicalUrl, generateOptimizedMetaDescription, getHreflangLinks, generateArticleSchema, generateBreadcrumbsSchema } from "@/utils/seo";
 
 const InlineCTA = () => {
   const { t, language } = useLocale();
@@ -270,15 +270,11 @@ const BlogPost = () => {
         </script>
 
         <script type="application/ld+json">
-          {JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "BreadcrumbList",
-            "itemListElement": [
-              { "@type": "ListItem", "position": 1, "name": t("inicio"), "item": { "@id": getCanonicalUrl("/"), "name": t("inicio") } },
-              { "@type": "ListItem", "position": 2, "name": "Blog", "item": { "@id": getCanonicalUrl("/blog"), "name": "Blog" } },
-              { "@type": "ListItem", "position": 3, "name": title, "item": { "@id": getCanonicalUrl(`/blog/${post.slug}`), "name": title } }
-            ]
-          })}
+          {JSON.stringify(generateBreadcrumbsSchema([
+            { name: t("inicio"), url: getCanonicalUrl("/") },
+            { name: "Blog", url: getCanonicalUrl("/blog") },
+            { name: title, url: getCanonicalUrl(`/blog/${post.slug}`) }
+          ]))}
         </script>
 
         {/* Twitter */}

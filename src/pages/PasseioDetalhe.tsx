@@ -35,7 +35,7 @@ import { Calendar as CalendarUI } from "@/components/ui/calendar";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { format, parseISO, isPast, isToday } from "date-fns";
 import { ptBR, enUS, es as esLocale } from "date-fns/locale";
-import { getCanonicalUrl, BASE_URL, generateTouristAttractionSchema, generateTourPackageSchema, generateFAQSchema, generateOptimizedMetaDescription, getHreflangLinks } from "@/utils/seo";
+import { getCanonicalUrl, BASE_URL, generateTouristAttractionSchema, generateTourPackageSchema, generateFAQSchema, generateOptimizedMetaDescription, getHreflangLinks, generateBreadcrumbsSchema } from "@/utils/seo";
 import { slugify } from "@/utils/slugify";
 
 
@@ -203,30 +203,11 @@ export function PasseioDetalhe() {
   } : null;
 
 
-  const breadcrumbsLd = {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    "itemListElement": [
-      {
-        "@type": "ListItem",
-        "position": 1,
-        "name": t("inicio"),
-        "item": { "@id": getCanonicalUrl("/"), "name": t("inicio") }
-      },
-      {
-        "@type": "ListItem",
-        "position": 2,
-        "name": t("passeios"),
-        "item": { "@id": getCanonicalUrl("/passeio"), "name": t("passeios") }
-      },
-      {
-        "@type": "ListItem",
-        "position": 3,
-        "name": translatedTitle,
-        "item": { "@id": canonicalUrl, "name": translatedTitle }
-      }
-    ]
-  };
+  const breadcrumbsLd = generateBreadcrumbsSchema([
+    { name: t("inicio"), url: getCanonicalUrl("/") },
+    { name: t("passeios"), url: getCanonicalUrl("/#tours") },
+    { name: translatedTitle, url: canonicalUrl }
+  ]);
 
   const reviewsRef = useRef<HTMLDivElement>(null);
  
