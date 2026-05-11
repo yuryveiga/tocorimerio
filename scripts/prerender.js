@@ -93,7 +93,7 @@ async function fetchDynamicRoutes() {
   try {
     const { data: matches } = await partnerSupabase
       .from('matches')
-      .select('id, slug, hidden');
+      .select('id, slug, hidden, home_team, away_team');
     if (matches) {
       const visible = matches.filter(m => !m.hidden);
       visible.forEach((m) => {
