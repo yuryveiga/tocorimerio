@@ -177,7 +177,15 @@ export function PasseioDetalhe() {
 
   const highlights = (translatedHighlights as { icon: string; text: string }[]) || [];
   const faqItems = (translatedFaq as { q: string; a: string }[]) || [];
-  const canonicalUrl = getCanonicalUrl(`/passeio/${tour?.slug || tour?.id}`);
+  const cleanSlug = tour?.slug ? slugify(tour.slug) : tour?.id;
+  const canonicalUrl = getCanonicalUrl(`/passeio/${cleanSlug || tour?.id}`);
+
+  // Auto-redirect from accented/legacy slug to clean ASCII slug
+  useEffect(() => {
+    if (tour?.slug && id && id !== cleanSlug && id === tour.slug) {
+      navigate(`/passeio/${cleanSlug}`, { replace: true });
+    }
+  }, [tour, id, cleanSlug, navigate]);
 
   const jsonLd = tour ? {
     "@context": "https://schema.org",
