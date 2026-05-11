@@ -3,6 +3,18 @@ import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 
+// Tenta carregar o .env se o arquivo existir (Node 20.12+)
+if (fs.existsSync('.env')) {
+  try {
+    // eslint-disable-next-line no-undef
+    if (typeof process.loadEnvFile === 'function') {
+      process.loadEnvFile('.env');
+    }
+  } catch (e) {
+    console.warn("Aviso: Não foi possível carregar o arquivo .env automaticamente.", e.message);
+  }
+}
+
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
@@ -11,7 +23,7 @@ const supabaseKey = process.env.VITE_SUPABASE_PUBLISHABLE_KEY;
 const siteUrl = 'https://tocorimerio.com'; // Definitive production URL
 
 if (!supabaseUrl || !supabaseKey) {
-  console.error('Supabase credentials not found in environment variables.');
+  console.error('Supabase credentials not found in environment variables (VITE_SUPABASE_URL, VITE_SUPABASE_PUBLISHABLE_KEY).');
   process.exit(1);
 }
 

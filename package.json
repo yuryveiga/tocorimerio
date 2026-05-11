@@ -13,10 +13,10 @@
     "preview": "vite preview",
     "test": "vitest run",
     "test:watch": "vitest",
-    "sitemap": "node --env-file=.env scripts/generate-sitemap.js",
-    "prerender": "npx playwright install chromium && node --env-file=.env scripts/prerender.js",
+    "sitemap": "node scripts/generate-sitemap.js",
+    "prerender": "npx playwright install chromium && node scripts/prerender.js",
     "postbuild": "npm run sitemap",
-    "sync:matches": "node --env-file=.env scripts/sync-matches.js"
+    "sync:matches": "node scripts/sync-matches.js"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.10.0",

@@ -1,9 +1,22 @@
 import fs from 'node:fs/promises';
+import { existsSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import express from 'express';
 import { chromium } from 'playwright';
 import { createClient } from '@supabase/supabase-js';
+
+// Tenta carregar o .env se o arquivo existir (Node 20.12+)
+if (existsSync('.env')) {
+  try {
+    // eslint-disable-next-line no-undef
+    if (typeof process.loadEnvFile === 'function') {
+      process.loadEnvFile('.env');
+    }
+  } catch (e) {
+    console.warn("Aviso: Não foi possível carregar o arquivo .env automaticamente.", e.message);
+  }
+}
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const distPath = path.resolve(__dirname, '../dist');
@@ -13,7 +26,8 @@ const supabaseUrl = process.env.VITE_SUPABASE_URL;
 const supabaseKey = process.env.VITE_SUPABASE_PUBLISHABLE_KEY || process.env.VITE_SUPABASE_ANON_KEY;
 
 if (!supabaseUrl || !supabaseKey) {
-  console.error("Missing Supabase credentials. Did you run with --env-file=.env?");
+  console.error("ERRO: Credenciais do Supabase não encontradas (VITE_SUPABASE_URL, VITE_SUPABASE_PUBLISHABLE_KEY).");
+  console.log("Certifique-se de que o arquivo .env existe localmente ou que os Secrets estão configurados no GitHub.");
   process.exit(1);
 }
 
