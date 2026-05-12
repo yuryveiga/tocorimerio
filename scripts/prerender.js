@@ -171,7 +171,7 @@ async function prerender() {
 
   const browser = await chromium.launch({ headless: true });
   const CONCURRENCY = 3;
-  const results = { ok: 0, fail: 0, failed: [] };
+  const results = { ok: 0, fail: 0, failed: [], emptySelector: [] };
 
   for (let i = 0; i < routes.length; i += CONCURRENCY) {
     const batch = routes.slice(i, i + CONCURRENCY);
@@ -208,11 +208,24 @@ async function prerender() {
 
         // Wait for route-specific selector (garante que dados do Supabase carregaram)
         const selector = getSelectorForRoute(route);
+        let selectorOk = !selector;
         if (selector) {
           console.log(`  ⏳ ${route}: aguardando seletor "${selector}"...`);
-          await page.waitForSelector(selector, { timeout: 20000 })
-            .then(() => console.log(`  ✓ ${route}: seletor encontrado`))
-            .catch(() => console.warn(`  ⚠ ${route}: seletor "${selector}" não encontrado — verifique se o atributo data-* está no componente`));
+          try {
+            await page.waitForSelector(selector, { timeout: 30000 });
+            console.log(`  ✓ ${route}: seletor encontrado`);
+            selectorOk = true;
+          } catch {
+            console.warn(`  ⚠ ${route}: seletor "${selector}" NÃO encontrado em 30s — pulando para evitar salvar HTML vazio`);
+            results.emptySelector.push(route);
+          }
+        }
+
+        // Se a rota exigia um seletor e ele não apareceu, NÃO sobrescreve
+        // o index.html da rota (evita publicar página em branco).
+        if (!selectorOk) {
+          await page.close();
+          return;
         }
 
         // Extra settle for Helmet to flush meta tags
@@ -252,6 +265,10 @@ async function prerender() {
   server.close();
   console.log(`\nPrerendering complete! ✓ ${results.ok} ok, ✗ ${results.fail} failed`);
   if (results.failed.length) console.log('Failed routes:', results.failed);
+  if (results.emptySelector.length) {
+    console.warn(`\n⚠ ${results.emptySelector.length} rotas pularam o save (seletor não apareceu):`);
+    results.emptySelector.forEach(r => console.warn(`   - ${r}`));
+  }
 }
 
 prerender().catch(console.error);
