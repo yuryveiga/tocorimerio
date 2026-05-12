@@ -5,7 +5,8 @@ import { Helmet } from "react-helmet-async";
 import { ChevronRight, Map, Globe, Newspaper, Ticket, Info, Home } from "lucide-react";
 
 const Sitemap = () => {
-  const { tours, blogPosts, pages } = useSiteData();
+  const { tours, pages } = useSiteData();
+  const blogPosts: Array<{ slug: string; title?: string; title_en?: string; title_es?: string }> = [];
   const { t, language } = useLocale();
 
   const getLabel = (item: any, field: string = 'title') => {
@@ -54,7 +55,7 @@ const Sitemap = () => {
       icon: <Info className="w-5 h-5 text-primary" />,
       links: pages.map(page => ({
         label: getLabel(page),
-        href: `/${page.slug}`
+        href: page.href
       }))
     }
   ];
