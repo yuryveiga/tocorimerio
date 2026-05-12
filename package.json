@@ -14,8 +14,9 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "sitemap": "node scripts/generate-sitemap.js",
+    "spa-fallback": "node scripts/spa-fallback.js",
     "prerender": "npx playwright install chromium && node scripts/prerender.js",
-    "postbuild": "npm run sitemap",
+    "postbuild": "npm run sitemap && npm run spa-fallback",
     "sync:matches": "node scripts/sync-matches.js"
   },
   "dependencies": {
