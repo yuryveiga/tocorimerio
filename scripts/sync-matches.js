@@ -1,27 +1,23 @@
 import { createClient } from '@supabase/supabase-js';
 import { chromium } from 'playwright';
-import fs from 'fs';
+import { loadEnv } from './load-env.js';
 
-// Tenta carregar o .env se o arquivo existir (Node 20.12+)
-// Em CI (GitHub Actions), as variáveis já estão no ambiente
-if (fs.existsSync('.env')) {
-  try {
-    // eslint-disable-next-line no-undef
-    if (typeof process.loadEnvFile === 'function') {
-      process.loadEnvFile('.env');
-    }
-  } catch (e) {
-    console.warn("Aviso: Não foi possível carregar o arquivo .env automaticamente.", e.message);
-  }
-}
+await loadEnv();
 
 // Configurações do Supabase local (Tocorime)
 const LOCAL_SUPABASE_URL = process.env.VITE_SUPABASE_URL;
-const LOCAL_SUPABASE_ANON_KEY = process.env.VITE_SUPABASE_PUBLISHABLE_KEY; 
+const LOCAL_SUPABASE_ANON_KEY = process.env.VITE_SUPABASE_PUBLISHABLE_KEY;
 
 if (!LOCAL_SUPABASE_URL || !LOCAL_SUPABASE_ANON_KEY) {
   console.error("ERRO: Variáveis de ambiente VITE_SUPABASE_URL ou VITE_SUPABASE_PUBLISHABLE_KEY não encontradas.");
-  console.log("Certifique-se de que o arquivo .env existe localmente ou que os Secrets estão configurados no GitHub.");
+  console.error("");
+  console.error("Possíveis causas e soluções:");
+  console.error("  • Local: crie um arquivo .env na raiz do projeto com:");
+  console.error("      VITE_SUPABASE_URL=https://...");
+  console.error("      VITE_SUPABASE_PUBLISHABLE_KEY=eyJ...");
+  console.error("  • GitHub Actions: configure os Secrets do repositório:");
+  console.error("      VITE_SUPABASE_URL e VITE_SUPABASE_PUBLISHABLE_KEY");
+  console.error("      em Settings > Secrets and variables > Actions");
   process.exit(1);
 }
 
