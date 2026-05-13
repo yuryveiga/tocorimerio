@@ -2,18 +2,9 @@ import { createClient } from '@supabase/supabase-js';
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import { loadEnv } from './load-env.js';
 
-// Tenta carregar o .env se o arquivo existir (Node 20.12+)
-if (fs.existsSync('.env')) {
-  try {
-    // eslint-disable-next-line no-undef
-    if (typeof process.loadEnvFile === 'function') {
-      process.loadEnvFile('.env');
-    }
-  } catch (e) {
-    console.warn("Aviso: Não foi possível carregar o arquivo .env automaticamente.", e.message);
-  }
-}
+await loadEnv();
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -24,6 +15,13 @@ const siteUrl = 'https://tocorimerio.com'; // Definitive production URL
 
 if (!supabaseUrl || !supabaseKey) {
   console.error('Supabase credentials not found in environment variables (VITE_SUPABASE_URL, VITE_SUPABASE_PUBLISHABLE_KEY).');
+  console.error('Possíveis causas e soluções:');
+  console.error('  • Local: crie um arquivo .env na raiz do projeto com:');
+  console.error('      VITE_SUPABASE_URL=https://...');
+  console.error('      VITE_SUPABASE_PUBLISHABLE_KEY=eyJ...');
+  console.error('  • GitHub Actions: configure os Secrets do repositório:');
+  console.error('      VITE_SUPABASE_URL e VITE_SUPABASE_PUBLISHABLE_KEY');
+  console.error('      em Settings > Secrets and variables > Actions');
   process.exit(1);
 }
 
