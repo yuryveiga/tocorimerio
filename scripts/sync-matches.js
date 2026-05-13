@@ -1,62 +1,8 @@
 import { createClient } from '@supabase/supabase-js';
 import { chromium } from 'playwright';
-import fs from 'fs';
-import path from 'path';
-import { fileURLToPath } from 'url';
+import { loadEnv } from './load-env.js';
 
-const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const rootDir = path.resolve(__dirname, '..');
-const envPath = path.join(rootDir, '.env');
-
-// Tenta carregar variáveis do .env de forma robusta
-function loadEnvFile(filePath) {
-  if (!fs.existsSync(filePath)) return;
-  try {
-    const content = fs.readFileSync(filePath, 'utf8');
-    const lines = content.split(/\r?\n/);
-    for (const line of lines) {
-      const trimmed = line.trim();
-      if (!trimmed || trimmed.startsWith('#')) continue;
-      const eq = trimmed.indexOf('=');
-      if (eq === -1) continue;
-      const key = trimmed.slice(0, eq).trim();
-      let value = trimmed.slice(eq + 1).trim();
-      // Remove aspas simples ou duplas ao redor
-      if ((value.startsWith('"') && value.endsWith('"')) || (value.startsWith("'") && value.endsWith("'"))) {
-        value = value.slice(1, -1);
-      }
-      if (!(key in process.env)) {
-        process.env[key] = value;
-      }
-    }
-  } catch (e) {
-    console.warn('Aviso: não foi possível fazer parse manual do .env:', e.message);
-  }
-}
-
-// 1. Se já existirem no ambiente (CI/GitHub Actions), não precisa fazer nada
-if (!process.env.VITE_SUPABASE_URL || !process.env.VITE_SUPABASE_PUBLISHABLE_KEY) {
-  // 2. Tentar dotenv se disponível
-  try {
-    const dotenv = await import('dotenv');
-    if (fs.existsSync(envPath)) {
-      dotenv.default?.config?.({ path: envPath }) || dotenv.config?.({ path: envPath });
-    }
-  } catch {
-    /* dotenv não disponível, seguir para fallback */
-  }
-}
-
-// 3. Fallback: parse manual do .env
-if (!process.env.VITE_SUPABASE_URL || !process.env.VITE_SUPABASE_PUBLISHABLE_KEY) {
-  loadEnvFile(envPath);
-  // Tentar também process.loadEnvFile nativo
-  try {
-    if (typeof process.loadEnvFile === 'function' && fs.existsSync(envPath)) {
-      process.loadEnvFile(envPath);
-    }
-  } catch { /* ignore */ }
-}
+await loadEnv();
 
 // Configurações do Supabase local (Tocorime)
 const LOCAL_SUPABASE_URL = process.env.VITE_SUPABASE_URL;
