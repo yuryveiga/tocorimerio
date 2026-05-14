@@ -59,13 +59,29 @@ const BrasilPanamaMaracana = () => {
     enabled: !!match?.id,
   });
 
+  const sectors = [
+    { id: 'oeste_sup', nameKey: 'bp_sector_oeste_sup', descKey: 'bp_sector_oeste_sup_desc', premium: true, perks: ['bp_perk_padrão', 'bp_perk_vista'] },
+    { id: 'leste_inf', nameKey: 'bp_sector_leste_inf', descKey: 'bp_sector_leste_inf_desc', premium: true, perks: ['bp_perk_padrão', 'bp_perk_vista'] },
+    { id: 'oeste_inf', nameKey: 'bp_sector_oeste_inf', descKey: 'bp_sector_oeste_inf_desc', premium: false, perks: ['bp_perk_padrão', 'bp_perk_vista'] },
+    { id: 'leste_sup', nameKey: 'bp_sector_leste_sup', descKey: 'bp_sector_leste_sup_desc', premium: false, perks: ['bp_perk_vista', 'bp_perk_best_value'] },
+    { id: 'norte_sul', nameKey: 'bp_sector_norte_sul', descKey: 'bp_sector_norte_sul_desc', premium: false, perks: ['bp_perk_best_value'] },
+  ];
+
   const finalSectors = useMemo(() => {
     if (!partnerPackages || partnerPackages.length === 0) return [];
     
     return partnerPackages.map((p: any) => {
       const pt = p.package_type;
-      const title = language === 'en' ? (pt?.name_en || pt?.name_pt) : language === 'es' ? (pt?.name_es || pt?.name_pt) : pt?.name_pt;
-      const description = language === 'en' ? pt?.description_en : language === 'es' ? pt?.description_es : pt?.description_pt;
+      const slug = pt?.slug || '';
+      
+      // Try to match DB slug with our local sectors for better names
+      const matchedSector = sectors.find(s => {
+        const idParts = s.id.split('_');
+        return idParts.every(part => slug.toLowerCase().includes(part));
+      });
+
+      const title = matchedSector ? t(matchedSector.nameKey) : (language === 'en' ? (pt?.name_en || pt?.name_pt) : language === 'es' ? (pt?.name_es || pt?.name_pt) : pt?.name_pt);
+      const description = matchedSector ? t(matchedSector.descKey) : (language === 'en' ? pt?.description_en : language === 'es' ? pt?.description_es : pt?.description_pt);
       const remaining = Math.max(0, (p.total_stock || 0) - (p.sold_count || 0));
       
       return {
@@ -74,8 +90,8 @@ const BrasilPanamaMaracana = () => {
         description,
         remaining,
         is_on_request: p.is_on_request,
-        premium: pt?.slug?.includes('premium') || pt?.slug?.includes('club') || pt?.slug?.includes('mais'),
-        perks: [] as string[]
+        premium: pt?.slug?.includes('premium') || pt?.slug?.includes('club') || pt?.slug?.includes('mais') || matchedSector?.premium,
+        perks: matchedSector?.perks || []
       };
     });
   }, [partnerPackages, language]);
@@ -153,18 +169,28 @@ const BrasilPanamaMaracana = () => {
     };
   }, []);
 
-  const sectors = [
-    { nameKey: 'bp_sector_leste_inf', descKey: 'bp_sector_leste_inf_desc', premium: true, perks: ['bp_perk_padrão', 'bp_perk_vista'] },
-    { nameKey: 'bp_sector_oeste_inf', descKey: 'bp_sector_oeste_inf_desc', premium: false, perks: ['bp_perk_padrão', 'bp_perk_vista'] },
-    { nameKey: 'bp_sector_leste_sup', descKey: 'bp_sector_leste_sup_desc', premium: false, perks: ['bp_perk_vista', 'bp_perk_best_value'] },
-    { nameKey: 'bp_sector_norte_sul', descKey: 'bp_sector_norte_sul_desc', premium: false, perks: ['bp_perk_best_value'] },
-  ];
 
   return (
     <div className="brasil-panama-page">
       <Helmet>
-        <title>{t('bp_title')}</title>
-        <meta name="description" content={t('bp_desc')} />
+        <title>{t('bp_meta_title')}</title>
+        <meta name="description" content={t('bp_meta_desc')} />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+        <style>
+          {`
+            @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap');
+
+            .brasil-panama-page {
+              background: var(--ink);
+              color: var(--white);
+              overflow-x: hidden;
+              font-family: 'Outfit', sans-serif;
+              -webkit-font-smoothing: antialiased;
+            }
+          `}
+        </style>
         <link rel="canonical" href={getCanonicalUrl(PAGE_PATH)} />
         {getHreflangLinks(PAGE_PATH).map((l) => (
           <link key={l.hreflang} rel="alternate" hrefLang={l.hreflang} href={l.href} />
@@ -459,11 +485,12 @@ const BrasilPanamaMaracana = () => {
           filter: drop-shadow(0 8px 24px rgba(0,0,0,0.5));
         }
         .brasil-panama-page .team-name {
-          font-family: 'Playfair Display', serif;
-          font-size: clamp(24px, 5.5vw, 52px);
+          font-family: 'Outfit', sans-serif;
+          font-size: clamp(24px, 5.5vw, 64px);
           font-weight: 900;
-          letter-spacing: -0.02em;
-          line-height: 1;
+          letter-spacing: -0.04em;
+          line-height: 0.9;
+          text-transform: uppercase;
         }
         .brasil-panama-page .team-name.brazil { color: var(--yellow); }
         .brasil-panama-page .team-name.panama { color: var(--white); opacity: 0.75; }
@@ -536,12 +563,13 @@ const BrasilPanamaMaracana = () => {
           min-width: 72px;
         }
         .brasil-panama-page .cd-num {
-          font-family: 'Playfair Display', serif;
+          font-family: 'Outfit', sans-serif;
           font-size: clamp(28px, 5vw, 42px);
-          font-weight: 900;
+          font-weight: 800;
           line-height: 1;
           color: var(--yellow);
           font-variant-numeric: tabular-nums;
+          letter-spacing: -0.02em;
         }
         .brasil-panama-page .cd-label {
           font-size: 9px;
@@ -551,9 +579,9 @@ const BrasilPanamaMaracana = () => {
           color: var(--muted);
         }
         .brasil-panama-page .cd-colon {
-          font-family: 'Playfair Display', serif;
+          font-family: 'Outfit', sans-serif;
           font-size: 36px;
-          font-weight: 900;
+          font-weight: 800;
           color: var(--muted-2);
           align-self: flex-start;
           padding-top: 14px;
@@ -656,13 +684,14 @@ const BrasilPanamaMaracana = () => {
           border-radius: 2px;
         }
         .brasil-panama-page .section-h {
-          font-family: 'Playfair Display', serif;
-          font-size: clamp(28px, 4.5vw, 46px);
-          font-weight: 900;
-          line-height: 1.12;
-          letter-spacing: -0.02em;
+          font-family: 'Outfit', sans-serif;
+          font-size: clamp(28px, 4.5vw, 56px);
+          font-weight: 800;
+          line-height: 1;
+          letter-spacing: -0.04em;
           margin-bottom: 18px;
           text-align: inherit;
+          text-transform: uppercase;
         }
         .brasil-panama-page .section-sub {
           font-size: 16px;
@@ -699,10 +728,72 @@ const BrasilPanamaMaracana = () => {
 
         .brasil-panama-page .stadium-map {
           position: relative;
-          max-width: 640px;
-          margin: 0 auto 56px;
+          max-width: 720px;
+          margin: 0 auto 72px;
+          padding: 20px;
+          background: radial-gradient(circle at 50% 50%, rgba(42,157,143,0.08) 0%, transparent 75%);
+          border-radius: 40px;
         }
-        .brasil-panama-page .stadium-svg { width: 100%; }
+        .brasil-panama-page .stadium-svg { 
+          width: 100%; 
+          height: auto;
+          filter: drop-shadow(0 20px 40px rgba(0,0,0,0.4));
+        }
+        .brasil-panama-page .sector-path {
+          fill: var(--ink-3);
+          stroke: var(--border-2);
+          stroke-width: 1.5;
+          transition: all 0.3s ease;
+          cursor: pointer;
+        }
+        .brasil-panama-page .sector-path:hover {
+          fill: var(--ink-4);
+          stroke: var(--muted);
+        }
+        .brasil-panama-page .sector-path.active {
+          fill: rgba(42,157,143,0.15);
+          stroke: var(--teal);
+          stroke-width: 2.5;
+        }
+        .brasil-panama-page .sector-path.highlight {
+          fill: rgba(244,196,48,0.2);
+          stroke: var(--yellow);
+          stroke-width: 3;
+          filter: drop-shadow(0 0 8px rgba(244,196,48,0.4));
+        }
+        .brasil-panama-page .pitch {
+          fill: #1a4d2e;
+          stroke: rgba(255,255,255,0.2);
+          stroke-width: 1;
+        }
+        .brasil-panama-page .pitch-lines {
+          fill: none;
+          stroke: rgba(255,255,255,0.3);
+          stroke-width: 1;
+        }
+        .brasil-panama-page .stadium-label {
+          font-size: 9px;
+          font-weight: 800;
+          fill: var(--muted-2);
+          text-transform: uppercase;
+          letter-spacing: 0.12em;
+          pointer-events: none;
+          transition: fill 0.3s;
+        }
+        .brasil-panama-page .stadium-label.active {
+          fill: var(--muted);
+        }
+        .brasil-panama-page .stadium-label.highlight {
+          fill: var(--yellow);
+          font-size: 10px;
+          text-shadow: 0 0 10px rgba(244,196,48,0.3);
+        }
+        .brasil-panama-page .stadium-compass {
+          font-size: 10px;
+          font-weight: 800;
+          fill: var(--muted-2);
+          opacity: 0.5;
+        }
 
         .brasil-panama-page .sectors-grid {
           display: grid;
@@ -763,17 +854,19 @@ const BrasilPanamaMaracana = () => {
           color: var(--muted);
         }
         .brasil-panama-page .sector-price {
-          font-family: 'Playfair Display', serif;
-          font-size: 34px;
-          font-weight: 900;
-          line-height: 1;
+          font-family: 'Outfit', sans-serif;
+          font-size: 42px;
+          font-weight: 800;
+          line-height: 0.9;
           color: var(--yellow);
+          letter-spacing: -0.04em;
         }
         .brasil-panama-page .sector-price sup {
-          font-family: 'Sora', sans-serif;
-          font-size: 14px;
+          font-family: 'Outfit', sans-serif;
+          font-size: 16px;
           font-weight: 700;
           vertical-align: super;
+          margin-right: 2px;
         }
         .brasil-panama-page .sector-price-half {
           font-size: 14px;
@@ -917,11 +1010,12 @@ const BrasilPanamaMaracana = () => {
           margin-bottom: 44px;
         }
         .brasil-panama-page .rating-big {
-          font-family: 'Playfair Display', serif;
-          font-size: 52px;
-          font-weight: 900;
+          font-family: 'Outfit', sans-serif;
+          font-size: 64px;
+          font-weight: 800;
           color: var(--yellow);
-          line-height: 1;
+          line-height: 0.9;
+          letter-spacing: -0.04em;
         }
         .brasil-panama-page .rating-right { text-align: left; }
         .brasil-panama-page .stars-row { color: var(--yellow); font-size: 18px; letter-spacing: 2px; }
@@ -972,13 +1066,14 @@ const BrasilPanamaMaracana = () => {
         }
         .brasil-panama-page .step-card:hover { background: var(--ink-3); }
         .brasil-panama-page .step-num {
-          font-family: 'Playfair Display', serif;
-          font-size: 56px;
+          font-family: 'Outfit', sans-serif;
+          font-size: 72px;
           font-weight: 900;
-          color: rgba(42,157,143,0.12);
-          line-height: 1;
+          color: rgba(42,157,143,0.1);
+          line-height: 0.8;
           position: absolute;
-          top: 16px; right: 16px;
+          top: 10px; right: 10px;
+          letter-spacing: -0.05em;
         }
         .brasil-panama-page .step-icon { font-size: 28px; margin-bottom: 16px; }
         .brasil-panama-page .step-title {
@@ -1238,6 +1333,63 @@ const BrasilPanamaMaracana = () => {
             <div className="eyebrow">{t('bp_sectors_eyebrow')}</div>
             <h2 className="section-h">{t('bp_sectors_title')}</h2>
             <p className="section-sub">{t('bp_sectors_desc')}</p>
+          </div>
+
+          <div className="stadium-map reveal">
+            <svg viewBox="0 0 800 560" className="stadium-svg">
+              {/* Background Glows */}
+              <defs>
+                <radialGradient id="pitch-grad" cx="50%" cy="50%" r="50%">
+                  <stop offset="0%" stopColor="#1e5135" />
+                  <stop offset="100%" stopColor="#143d28" />
+                </radialGradient>
+                <filter id="glow">
+                  <feGaussianBlur stdDeviation="2.5" result="coloredBlur"/>
+                  <feMerge>
+                    <feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/>
+                  </feMerge>
+                </filter>
+              </defs>
+
+              {/* Pitch */}
+              <rect x="220" y="160" width="360" height="240" className="pitch" style={{ fill: 'url(#pitch-grad)' }} rx="4" />
+              {/* Pitch Lines */}
+              <rect x="230" y="170" width="340" height="220" className="pitch-lines" fill="none" strokeWidth="1" />
+              <line x1="400" y1="170" x2="400" y2="390" className="pitch-lines" />
+              <circle cx="400" cy="280" r="45" className="pitch-lines" fill="none" />
+              <circle cx="400" cy="280" r="2" className="pitch-lines" fill="white" />
+              {/* Penalty Areas */}
+              <rect x="230" y="220" width="50" height="120" className="pitch-lines" fill="none" />
+              <rect x="520" y="220" width="50" height="120" className="pitch-lines" fill="none" />
+              <rect x="230" y="250" width="20" height="60" className="pitch-lines" fill="none" />
+              <rect x="550" y="250" width="20" height="60" className="pitch-lines" fill="none" />
+              {/* Goals */}
+              <path d="M220,265 L215,265 L215,295 L220,295" fill="none" stroke="white" strokeWidth="2" opacity="0.6" />
+              <path d="M580,265 L585,265 L585,295 L580,295" fill="none" stroke="white" strokeWidth="2" opacity="0.6" />
+
+              {/* Sectors - Norte (Left Goal) */}
+              <path d="M200,180 Q140,280 200,380 L160,400 Q90,280 160,160 Z" className="sector-path active" id="sector-norte" />
+              <text x="145" y="280" className="stadium-label active" transform="rotate(-90, 145, 280)" textAnchor="middle">Norte (Gols)</text>
+
+              {/* Sectors - Sul (Right Goal) */}
+              <path d="M600,180 Q660,280 600,380 L640,400 Q710,280 640,160 Z" className="sector-path active" id="sector-sul" />
+              <text x="655" y="280" className="stadium-label active" transform="rotate(90, 655, 280)" textAnchor="middle">Sul (Gols)</text>
+
+              {/* Sectors - Leste (Top Sideline) */}
+              <path d="M220,140 L580,140 Q400,100 220,140" className="sector-path active" id="sector-leste-inf" />
+              <path d="M200,90 L600,90 Q400,30 200,90" className="sector-path active" id="sector-leste-sup" />
+              <text x="400" y="125" className="stadium-label active" textAnchor="middle">Leste Inferior (Central)</text>
+              <text x="400" y="75" className="stadium-label active" textAnchor="middle">Leste Superior (Panorâmico)</text>
+
+              {/* Sectors - Oeste (Bottom Sideline) */}
+              <path d="M220,420 L580,420 Q400,460 220,420" className="sector-path active" id="sector-oeste-inf" />
+              <path d="M200,470 L600,470 Q400,530 200,470" className="sector-path highlight" id="sector-oeste-sup" />
+              <text x="400" y="435" className="stadium-label active" textAnchor="middle">Oeste Inferior (Premium)</text>
+              <text x="400" y="505" className="stadium-label highlight" textAnchor="middle">Oeste Superior (Visão Central)</text>
+
+              {/* Compass / Orientation Markers */}
+              <text x="400" y="550" className="stadium-compass" textAnchor="middle">Tribuna de Imprensa / Oeste</text>
+            </svg>
           </div>
 
           <div className="sectors-grid">
