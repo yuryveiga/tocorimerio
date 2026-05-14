@@ -1,13 +1,23 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import { Helmet } from "react-helmet-async";
 import { useLocale } from "@/contexts/LocaleContext";
+import { useQuery } from "@tanstack/react-query";
+import { createClient } from "@supabase/supabase-js";
+import { useCurrency } from "@/contexts/CurrencyContext";
 import { getCanonicalUrl, getHreflangLinks, generateSportsEventSchema, generateBreadcrumbsSchema } from "@/utils/seo";
+import { LovableMatch } from "@/types";
+
+// Partner Project Config
+const MARACANA_PROJECT_URL = "https://mwxbskzggzznxvkwgrnz.supabase.co";
+const MARACANA_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im13eGJza3pnZ3p6bnh2a3dncm56Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzMzNjE5OTUsImV4cCI6MjA4ODkzNzk5NX0.EFfaaN79uifOMgFdIZlQ5C8c-HQH-YodNGWf0MEcf9o";
+const partnerSupabase = createClient(MARACANA_PROJECT_URL, MARACANA_ANON_KEY);
 
 const TARGET_DATE = new Date('2026-05-31T18:30:00-03:00');
 const PAGE_PATH = "/brasil-x-panama-maio-maracana";
 
 const BrasilPanamaMaracana = () => {
-  const { t, language, setLanguage, currency, setCurrency } = useLocale();
+  const { t, language, setLanguage, currency, setCurrency, formatPrice } = useLocale();
+  const { rates } = useCurrency();
   const [timeLeft, setTimeLeft] = useState({
     days: "—",
     hours: "—",
@@ -15,6 +25,60 @@ const BrasilPanamaMaracana = () => {
     seconds: "—",
     isLive: false
   });
+
+  const MATCH_SLUG = "brasil-vs-panam-2026-05-31";
+
+  const { data: match } = useQuery({
+    queryKey: ["partner-match", MATCH_SLUG],
+    queryFn: async () => {
+      const { data, error } = await partnerSupabase
+        .from("matches")
+        .select("*")
+        .eq("slug", MATCH_SLUG)
+        .single();
+      
+      if (error) throw error;
+      return data as LovableMatch;
+    }
+  });
+
+  const { data: partnerPackages } = useQuery({
+    queryKey: ["partner-packages", match?.id],
+    queryFn: async () => {
+      if (!match?.id) return [];
+      const { data, error } = await partnerSupabase
+        .from("match_packages")
+        .select("id, price_brl, price_usd, price_eur, price_gbp, total_stock, sold_count, is_active, is_on_request, package_type:package_type_id (id, slug, display_order, name_pt, name_en, name_es, description_pt, description_en, description_es, badge_pt, badge_en, badge_es, highlight_color, includes_transfer, includes_food, includes_drinks, includes_parking_access)")
+        .eq("match_id", match.id);
+      
+      if (error) return [];
+      return (data || [])
+        .filter((p: any) => p.is_active && (p.price_brl ?? 0) > 0)
+        .sort((a: any, b: any) => (a.package_type?.display_order ?? 99) - (b.package_type?.display_order ?? 99));
+    },
+    enabled: !!match?.id,
+  });
+
+  const finalSectors = useMemo(() => {
+    if (!partnerPackages || partnerPackages.length === 0) return [];
+    
+    return partnerPackages.map((p: any) => {
+      const pt = p.package_type;
+      const title = language === 'en' ? (pt?.name_en || pt?.name_pt) : language === 'es' ? (pt?.name_es || pt?.name_pt) : pt?.name_pt;
+      const description = language === 'en' ? pt?.description_en : language === 'es' ? pt?.description_es : pt?.description_pt;
+      const remaining = Math.max(0, (p.total_stock || 0) - (p.sold_count || 0));
+      
+      return {
+        name: title || "Setor",
+        price: Number(p.price_brl) || 0,
+        description,
+        remaining,
+        is_on_request: p.is_on_request,
+        premium: pt?.slug?.includes('premium') || pt?.slug?.includes('club') || pt?.slug?.includes('mais'),
+        perks: [] as string[]
+      };
+    });
+  }, [partnerPackages, language]);
 
   const renderBoldText = (text: string) => {
     if (!text) return "";
@@ -121,7 +185,7 @@ const BrasilPanamaMaracana = () => {
             homeTeam: "Brasil",
             awayTeam: "Panamá",
             venueName: "Estádio do Maracanã",
-            offerUrl: "https://tocorimerio.com/match/brasil-vs-panama-2026-05-31",
+            offerUrl: `https://tocorimerio.com/match/${MATCH_SLUG}`,
           }))}
         </script>
 
@@ -1018,7 +1082,7 @@ const BrasilPanamaMaracana = () => {
               {currency === 'BRL' ? 'R$' : currency === 'USD' ? '$' : '€'} {currency}
             </button>
           </div>
-          <a href="https://tocorimerio.com/match/brasil-vs-panama-2026-05-31" target="_blank" rel="noopener" className="nav-btn">
+          <a href={`https://tocorimerio.com/match/${MATCH_SLUG}`} target="_blank" rel="noopener" className="nav-btn">
             {t('bp_inc_cta')}
           </a>
         </div>
@@ -1177,30 +1241,76 @@ const BrasilPanamaMaracana = () => {
           </div>
 
           <div className="sectors-grid">
-            {sectors.map((sector, idx) => (
-              <div key={idx} className={`sector-card reveal ${sector.premium ? 'premium' : ''}`} style={{ transitionDelay: `${idx * 0.1}s` }}>
-                <div className="sector-top">
-                  <span className="sector-name">{t(sector.nameKey)}</span>
-                  <span className="sector-location">{t(sector.descKey)}</span>
-                </div>
-                <div className="sector-price-row" style={{ minHeight: '80px', display: 'flex', alignItems: 'center' }}>
-                  <div className="sector-price-main">
-                    <span className="sector-price" style={{ fontSize: '1.4rem', color: 'var(--muted)' }}>
-                      {t('bp_status_indisponivel')}
-                    </span>
+            {finalSectors.length > 0 ? (
+              finalSectors.map((sector: any, idx: number) => {
+                const isSoldOut = sector.remaining <= 0 && !sector.is_on_request;
+                const matchUrl = `https://tocorimerio.com/match/${MATCH_SLUG}`;
+                
+                return (
+                  <div key={idx} className={`sector-card reveal ${sector.premium ? 'premium' : ''}`} style={{ transitionDelay: `${idx * 0.1}s` }}>
+                    <div className="sector-top">
+                      <span className="sector-name">{sector.name}</span>
+                      <span className="sector-location">{sector.description}</span>
+                    </div>
+                    <div className="sector-price-row" style={{ minHeight: '80px', display: 'flex', alignItems: 'center' }}>
+                      <div className="sector-price-main">
+                        {sector.is_on_request ? (
+                          <span className="sector-price" style={{ fontSize: '1.4rem' }}>
+                            {language === 'pt' ? 'Sob Consulta' : 'Upon Request'}
+                          </span>
+                        ) : (
+                          <span className="sector-price">
+                            {formatPrice(sector.price)}
+                          </span>
+                        )}
+                      </div>
+                    </div>
+                    <div className="sector-divider"></div>
+                    <div className="sector-perks">
+                      {sector.premium && <span className="perk-tag green">{t('bp_perk_padrão')}</span>}
+                      <span className="perk-tag">{t('bp_perk_vista')}</span>
+                      {sector.remaining > 0 && sector.remaining <= 5 && (
+                        <span className="perk-tag" style={{ color: '#ff4d4f', borderColor: '#ff4d4f' }}>
+                          {language === 'pt' ? `Restam ${sector.remaining}` : `Only ${sector.remaining} left`}
+                        </span>
+                      )}
+                    </div>
+                    <a 
+                      href={matchUrl} 
+                      className="sector-cta filled"
+                      style={isSoldOut ? { opacity: 0.6, cursor: 'not-allowed', background: 'var(--ink-3)', color: 'var(--muted)' } : {}}
+                    >
+                      {isSoldOut ? t('bp_status_indisponivel') : t('bp_inc_cta')}
+                    </a>
                   </div>
+                );
+              })
+            ) : (
+              sectors.map((sector, idx) => (
+                <div key={idx} className={`sector-card reveal ${sector.premium ? 'premium' : ''}`} style={{ transitionDelay: `${idx * 0.1}s` }}>
+                  <div className="sector-top">
+                    <span className="sector-name">{t(sector.nameKey)}</span>
+                    <span className="sector-location">{t(sector.descKey)}</span>
+                  </div>
+                  <div className="sector-price-row" style={{ minHeight: '80px', display: 'flex', alignItems: 'center' }}>
+                    <div className="sector-price-main">
+                      <span className="sector-price" style={{ fontSize: '1.4rem', color: 'var(--muted)' }}>
+                        {t('bp_status_indisponivel')}
+                      </span>
+                    </div>
+                  </div>
+                  <div className="sector-divider"></div>
+                  <div className="sector-perks">
+                    {sector.perks.map((perk, pIdx) => (
+                      <span key={pIdx} className={`perk-tag ${perk.includes('padrão') ? 'green' : ''}`}>{t(perk)}</span>
+                    ))}
+                  </div>
+                  <button disabled className="sector-cta" style={{ opacity: 0.6, cursor: 'not-allowed', background: 'var(--ink-3)', color: 'var(--muted)' }}>
+                    {t('bp_status_indisponivel')}
+                  </button>
                 </div>
-                <div className="sector-divider"></div>
-                <div className="sector-perks">
-                  {sector.perks.map((perk, pIdx) => (
-                    <span key={pIdx} className={`perk-tag ${perk.includes('padrão') ? 'green' : ''}`}>{t(perk)}</span>
-                  ))}
-                </div>
-                <button disabled className="sector-cta" style={{ opacity: 0.6, cursor: 'not-allowed', background: 'var(--ink-3)', color: 'var(--muted)' }}>
-                  {t('bp_status_indisponivel')}
-                </button>
-              </div>
-            ))}
+              ))
+            )}
           </div>
 
           <div className="addon-note">
@@ -1258,7 +1368,7 @@ const BrasilPanamaMaracana = () => {
             </div>
             
             <div style={{ textAlign: 'center', marginTop: '48px' }} className="reveal">
-              <a href="https://tocorimerio.com/match/brasil-vs-panama-2026-05-31" target="_blank" rel="noopener" className="btn-main" style={{ display: 'inline-flex' }}>
+              <a href={`https://tocorimerio.com/match/${MATCH_SLUG}`} target="_blank" rel="noopener" className="btn-main" style={{ display: 'inline-flex' }}>
                 <span>🎟️</span> {t('bp_inc_cta')}
               </a>
             </div>
