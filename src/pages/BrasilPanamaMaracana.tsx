@@ -1070,79 +1070,7 @@ const BrasilPanamaMaracana = () => {
         .brasil-panama-page .reveal-d4 { transition-delay: 0.32s; }
         .brasil-panama-page .reveal-d5 { transition-delay: 0.40s; }
 
-        /* STADIUM MAP */
-        .stadium-map-container {
-          max-width: 800px;
-          margin: 0 auto 64px;
-          position: relative;
-          background: rgba(255,255,255,0.02);
-          border: 1px solid var(--border);
-          border-radius: 40px;
-          padding: 48px;
-          box-shadow: inset 0 0 100px rgba(0,0,0,0.5);
-        }
-        .stadium-svg {
-          width: 100%;
-          height: auto;
-          display: block;
-          filter: drop-shadow(0 20px 60px rgba(0,0,0,0.6));
-        }
-        .sector-path {
-          cursor: pointer;
-          transition: all 0.4s cubic-bezier(0.16,1,0.3,1);
-          stroke: rgba(255,255,255,0.05);
-          stroke-width: 1;
-        }
-        .sector-path:hover {
-          filter: brightness(1.2) saturate(1.1);
-          stroke: rgba(255,255,255,0.4);
-          transform: scale(1.02);
-          transform-origin: center;
-        }
-        .map-label {
-          fill: var(--muted);
-          font-size: 11px;
-          font-weight: 800;
-          letter-spacing: 0.2em;
-          text-shadow: 0 2px 4px rgba(0,0,0,0.5);
-          pointer-events: none;
-        }
-        .map-legend {
-          display: flex;
-          flex-wrap: wrap;
-          justify-content: center;
-          gap: 24px;
-          margin-top: 40px;
-          padding-top: 32px;
-          border-top: 1px solid var(--border);
-        }
-        .legend-item {
-          display: flex;
-          align-items: center;
-          gap: 10px;
-          font-size: 11px;
-          font-weight: 700;
-          color: var(--muted);
-          text-transform: uppercase;
-          letter-spacing: 0.1em;
-        }
-        .legend-dot {
-          width: 10px;
-          height: 10px;
-          border-radius: 50%;
-          box-shadow: 0 0 10px rgba(255,255,255,0.1);
-        }
 
-        @media (max-width: 640px) {
-          .stadium-map-container {
-            padding: 32px 16px;
-            border-radius: 24px;
-            margin-bottom: 40px;
-          }
-          .map-label { font-size: 9px; }
-          .map-legend { gap: 16px; }
-          .legend-item { font-size: 9px; }
-        }
 
         @media (max-width: 640px) {
           .brasil-panama-page nav { top: 38px; padding: 12px 16px; }
@@ -1499,7 +1427,7 @@ const BrasilPanamaMaracana = () => {
             <p className="section-sub">{t('bp_inc_desc')}</p>
           </div>
 
-          <div className="included-layout" style={{ gridTemplateColumns: '1fr', maxWidth: '960px' }}>
+          <div className="included-layout" style={{ gridTemplateColumns: '1fr', maxWidth: '960px', margin: '0 auto' }}>
             <div className="includes-list" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '24px' }}>
               <div className="include-row reveal">
                 <div className="inc-icon-wrap">🎟️</div>
@@ -1636,10 +1564,10 @@ const BrasilPanamaMaracana = () => {
 
       {/* FINAL CTA */}
       <section className="final-cta" id="book">
-        <div className="reveal">
+        <div className="reveal" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
           <div className="eyebrow" style={{ justifyContent: 'center' }}>{t('bp_final_vagas')}</div>
-          <h2 className="section-h">{renderBoldText(t('bp_final_title'))}</h2>
-          <p className="final-cta-sub">{renderBoldText(t('bp_final_desc'))}</p>
+          <h2 className="section-h" style={{ textAlign: 'center' }}>{renderBoldText(t('bp_final_title'))}</h2>
+          <p className="final-cta-sub" style={{ textAlign: 'center' }}>{renderBoldText(t('bp_final_desc'))}</p>
           <div style={{ display: 'flex', gap: '14px', justifyContent: 'center', flexWrap: 'wrap' }}>
             <a className="btn-main" href="#sectors" style={{ fontSize: '17px', padding: '18px 42px' }}>
               <span>🎟️</span> {t('bp_view_sectors')}
