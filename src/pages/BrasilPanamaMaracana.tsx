@@ -702,14 +702,17 @@ const BrasilPanamaMaracana = () => {
 
         /* SECTOR CARDS NEW DESIGN */
         .brasil-panama-page .sectors-grid {
-          display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(320px, 450px));
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: center;
           gap: 32px;
           max-width: 1200px;
           margin: 0 auto;
-          justify-content: center;
+          width: 100%;
         }
         .brasil-panama-page .sector-card {
+          flex: 1 1 360px;
+          max-width: 450px;
           background: var(--ink-2);
           border: 1px solid var(--border);
           border-radius: var(--radius);
@@ -962,14 +965,17 @@ const BrasilPanamaMaracana = () => {
         .brasil-panama-page .stars-row { color: var(--yellow); font-size: 18px; letter-spacing: 2px; }
         .brasil-panama-page .rating-count { font-size: 13px; color: var(--muted); margin-top: 2px; }
         .brasil-panama-page .reviews-grid {
-          display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(280px, 400px));
-          gap: 24px;
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: center;
+          gap: 32px;
           max-width: 1200px;
           margin: 0 auto;
-          justify-content: center;
+          width: 100%;
         }
         .brasil-panama-page .review-card {
+          flex: 1 1 320px;
+          max-width: 400px;
           background: var(--ink-2);
           border: 1px solid var(--border);
           border-radius: var(--radius);
@@ -1430,9 +1436,9 @@ const BrasilPanamaMaracana = () => {
             <p className="section-sub">{t('bp_inc_desc')}</p>
           </div>
 
-          <div className="included-layout" style={{ gridTemplateColumns: '1fr', maxWidth: '1200px', margin: '0 auto' }}>
-            <div className="includes-list" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 400px))', gap: '32px', justifyContent: 'center' }}>
-              <div className="include-row reveal">
+          <div className="included-layout" style={{ maxWidth: '1200px', margin: '0 auto', width: '100%' }}>
+            <div className="includes-list" style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '32px', width: '100%' }}>
+              <div className="include-row reveal" style={{ flex: '1 1 300px', maxWidth: '400px' }}>
                 <div className="inc-icon-wrap">🎟️</div>
                 <div className="inc-body">
                   <div className="inc-title">{t('bp_inc_item1_title')}</div>
@@ -1486,7 +1492,7 @@ const BrasilPanamaMaracana = () => {
             <p className="section-sub">{t('bp_how_desc')}</p>
           </div>
 
-          <div className="steps-grid reveal reveal-d1">
+          <div className="steps-grid reveal reveal-d1" style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center' }}>
             <div className="step-card">
               <div className="step-num">01</div>
               <div className="step-icon">📋</div>
