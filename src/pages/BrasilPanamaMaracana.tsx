@@ -741,14 +741,32 @@ const BrasilPanamaMaracana = () => {
         }
         .brasil-panama-page .sector-top { display: flex; flex-direction: column; gap: 4px; }
         .brasil-panama-page .sector-name {
-          font-size: 16px;
-          font-weight: 700;
+          font-size: 18px;
+          font-weight: 800;
           color: var(--white);
+          letter-spacing: -0.01em;
         }
         .brasil-panama-page .sector-location {
-          font-size: 12px;
+          font-size: 13px;
           color: var(--muted);
-          font-weight: 400;
+          font-weight: 500;
+          line-height: 1.5;
+        }
+        .brasil-panama-page .sector-diagram {
+          margin: 4px -6px 0;
+          padding: 14px 12px 10px;
+          background: radial-gradient(ellipse at 50% 40%, rgba(42,157,143,0.08), rgba(0,0,0,0) 70%), rgba(255,255,255,0.02);
+          border: 1px solid var(--border);
+          border-radius: var(--radius-sm);
+        }
+        .brasil-panama-page .sector-diagram-caption {
+          margin-top: 6px;
+          text-align: center;
+          font-size: 10px;
+          font-weight: 600;
+          letter-spacing: 0.12em;
+          text-transform: uppercase;
+          color: var(--muted-2);
         }
         .brasil-panama-page .sector-price-row {
           display: flex;
