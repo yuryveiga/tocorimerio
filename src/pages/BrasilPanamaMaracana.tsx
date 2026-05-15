@@ -1285,7 +1285,7 @@ const BrasilPanamaMaracana = () => {
             <p className="section-sub">{t('bp_sectors_desc')}</p>
           </div>
 
-          <div className="sectors-grid">
+          <div className="sectors-grid" style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '32px', width: '100%', margin: '0 auto' }}>
             {finalSectors.length > 0 ? (
               finalSectors.map((sector: any, idx: number) => {
                 const isSoldOut = sector.remaining <= 0 && !sector.is_on_request;
@@ -1436,8 +1436,8 @@ const BrasilPanamaMaracana = () => {
             <p className="section-sub">{t('bp_inc_desc')}</p>
           </div>
 
-          <div className="included-layout" style={{ maxWidth: '1200px', margin: '0 auto', width: '100%' }}>
-            <div className="includes-list" style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '32px', width: '100%' }}>
+          <div className="included-layout" style={{ maxWidth: '1200px', margin: '0 auto', width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+            <div className="includes-list" style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '32px', width: '100%', margin: '0 auto' }}>
               <div className="include-row reveal" style={{ flex: '1 1 300px', maxWidth: '400px' }}>
                 <div className="inc-icon-wrap">🎟️</div>
                 <div className="inc-body">
