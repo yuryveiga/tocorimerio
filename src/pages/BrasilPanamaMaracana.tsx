@@ -6,7 +6,6 @@ import { createClient } from "@supabase/supabase-js";
 import { useCurrency } from "@/contexts/CurrencyContext";
 import { getCanonicalUrl, getHreflangLinks, generateSportsEventSchema, generateBreadcrumbsSchema } from "@/utils/seo";
 import { LovableMatch } from "@/types";
-import { MaracanaStadiumDiagram } from "@/components/MaracanaStadiumDiagram";
 import { buildWhatsappLink } from "@/lib/whatsappMessage";
 
 // Partner Project Config
@@ -61,7 +60,6 @@ const BrasilPanamaMaracana = () => {
     enabled: !!match?.id,
   });
 
-  const [hoveredSector, setHoveredSector] = useState<string | null>(null);
 
   const finalSectors = useMemo(() => {
     if (!partnerPackages || partnerPackages.length === 0) return [];
@@ -702,139 +700,152 @@ const BrasilPanamaMaracana = () => {
         .brasil-panama-page .sectors-header { max-width: 640px; margin: 0 auto 52px; text-align: center; display: flex; flex-direction: column; align-items: center; }
         .brasil-panama-page .section-header-center { text-align: center; margin-bottom: 52px; display: flex; flex-direction: column; align-items: center; }
 
-        .brasil-panama-page .stadium-map {
-          position: relative;
-          max-width: 640px;
-          margin: 0 auto 56px;
-        }
-        .brasil-panama-page .stadium-svg { width: 100%; }
-
+        /* SECTOR CARDS NEW DESIGN */
         .brasil-panama-page .sectors-grid {
           display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-          gap: 24px;
+          grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+          gap: 32px;
           max-width: 1200px;
           margin: 0 auto;
         }
         .brasil-panama-page .sector-card {
           background: var(--ink-2);
-          padding: 28px 28px 24px;
+          border: 1px solid var(--border);
+          border-radius: var(--radius);
+          padding: 32px;
           position: relative;
-          cursor: default;
-          transition: background 0.25s;
           display: flex;
           flex-direction: column;
-          gap: 20px;
+          gap: 24px;
+          transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
         }
-        .brasil-panama-page .sector-card:hover { background: var(--ink-3); }
+        .brasil-panama-page .sector-card:hover {
+          background: var(--ink-3);
+          transform: translateY(-8px);
+          border-color: var(--teal);
+          box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+        }
         .brasil-panama-page .sector-card.premium {
-          background: linear-gradient(135deg, rgba(42,157,143,0.1) 0%, var(--ink-2) 60%);
+          border: 1px solid rgba(42,157,143,0.3);
+          background: linear-gradient(135deg, rgba(42,157,143,0.05) 0%, var(--ink-2) 100%);
         }
-        .brasil-panama-page .sector-card.premium::before {
-          content: 'BEST VALUE';
-          position: absolute;
-          top: 0; right: 24px;
-          background: var(--teal);
-          color: var(--white);
-          font-size: 9px;
+        .brasil-panama-page .sector-header-row {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+        }
+        .brasil-panama-page .sector-badge {
+          background: var(--ink-4);
+          border: 1px solid var(--border-2);
+          color: var(--muted);
+          font-size: 10px;
           font-weight: 800;
-          letter-spacing: 0.16em;
-          padding: 4px 10px;
-          border-radius: 0 0 6px 6px;
+          letter-spacing: 0.1em;
+          text-transform: uppercase;
+          padding: 4px 12px;
+          border-radius: 100px;
         }
-        .brasil-panama-page .sector-top { display: flex; flex-direction: column; gap: 4px; }
+        .brasil-panama-page .sector-card.premium .sector-badge {
+          background: rgba(42,157,143,0.1);
+          border-color: var(--teal);
+          color: var(--teal);
+        }
+        .brasil-panama-page .sector-urgency {
+          font-size: 11px;
+          font-weight: 700;
+          color: #ff4d4f;
+        }
+        .brasil-panama-page .sector-top {
+          display: flex;
+          gap: 20px;
+          align-items: center;
+        }
+        .brasil-panama-page .sector-icon-wrap {
+          width: 52px;
+          height: 52px;
+          background: var(--ink-3);
+          border: 1px solid var(--border-2);
+          border-radius: 12px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-size: 24px;
+        }
+        .brasil-panama-page .sector-name-wrap {
+          display: flex;
+          flex-direction: column;
+          gap: 4px;
+        }
         .brasil-panama-page .sector-name {
-          font-size: 18px;
+          font-size: 20px;
           font-weight: 800;
           color: var(--white);
-          letter-spacing: -0.01em;
         }
         .brasil-panama-page .sector-location {
           font-size: 13px;
           color: var(--muted);
-          font-weight: 500;
-          line-height: 1.5;
         }
-        .brasil-panama-page .sector-diagram {
-          margin: 4px -6px 0;
-          padding: 14px 12px 10px;
-          background: radial-gradient(ellipse at 50% 40%, rgba(42,157,143,0.08), rgba(0,0,0,0) 70%), rgba(255,255,255,0.02);
-          border: 1px solid var(--border);
-          border-radius: var(--radius-sm);
-        }
-        .brasil-panama-page .sector-diagram-caption {
-          margin-top: 6px;
-          text-align: center;
-          font-size: 10px;
-          font-weight: 600;
-          letter-spacing: 0.12em;
-          text-transform: uppercase;
-          color: var(--muted-2);
-        }
-        .brasil-panama-page .sector-price-row {
+        .brasil-panama-page .sector-price-section {
           display: flex;
-          align-items: flex-end;
-          justify-content: space-between;
-          gap: 8px;
-        }
-        .brasil-panama-page .sector-price-main { display: flex; flex-direction: column; gap: 2px; }
-        .brasil-panama-page .sector-label-sm {
-          font-size: 10px;
-          font-weight: 600;
-          letter-spacing: 0.1em;
-          text-transform: uppercase;
-          color: var(--muted);
+          flex-direction: column;
+          gap: 4px;
         }
         .brasil-panama-page .sector-price {
           font-family: 'Playfair Display', serif;
-          font-size: 34px;
+          font-size: 40px;
           font-weight: 900;
-          line-height: 1;
           color: var(--yellow);
+          line-height: 1;
         }
-        .brasil-panama-page .sector-price sup {
-          font-family: 'Sora', sans-serif;
+        .brasil-panama-page .sector-price-sub {
+          font-size: 12px;
+          color: var(--muted-2);
+          font-weight: 500;
+        }
+        .brasil-panama-page .sector-features {
+          display: flex;
+          flex-direction: column;
+          gap: 12px;
+          flex: 1;
+        }
+        .brasil-panama-page .feature-item {
+          display: flex;
+          gap: 12px;
+          align-items: flex-start;
           font-size: 14px;
-          font-weight: 700;
-          vertical-align: super;
-        }
-        .brasil-panama-page .sector-price-half {
-          font-size: 14px;
-          font-weight: 600;
           color: var(--muted);
-          text-align: right;
-          line-height: 1.3;
+          line-height: 1.4;
         }
-        .brasil-panama-page .sector-price-half span { display: block; font-size: 10px; color: var(--muted-2); }
-        .brasil-panama-page .sector-divider { height: 1px; background: var(--border); }
-        .brasil-panama-page .sector-perks { display: flex; flex-wrap: wrap; gap: 6px; }
-        .brasil-panama-page .perk-tag {
-          font-size: 11px;
-          font-weight: 600;
-          background: var(--ink-4);
-          border: 1px solid var(--border-2);
-          padding: 4px 10px;
-          border-radius: 100px;
-          color: var(--muted);
+        .brasil-panama-page .feature-item .check {
+          color: var(--teal);
+          font-weight: 800;
+          flex-shrink: 0;
         }
-        .brasil-panama-page .perk-tag.green { border-color: rgba(42,157,143,0.3); color: var(--teal); background: rgba(42,157,143,0.08); }
-        .brasil-panama-page .sector-cta {
-          display: block;
-          text-align: center;
-          padding: 11px;
+        .brasil-panama-page .sector-cta-new {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          padding: 16px;
+          background: var(--teal);
+          color: var(--white);
           border-radius: var(--radius-sm);
-          font-size: 13px;
-          font-weight: 700;
-          letter-spacing: 0.04em;
+          font-size: 14px;
+          font-weight: 800;
           transition: all 0.2s;
+          text-decoration: none;
+          border: none;
+          width: 100%;
+          cursor: pointer;
         }
-        .brasil-panama-page .sector-cta.filled { background: var(--teal); color: var(--white); }
-        .brasil-panama-page .sector-cta.filled:hover { background: var(--teal-dark); }
-        .brasil-panama-page .sector-cta.outline {
-          border: 1px solid var(--border-2);
-          color: var(--muted);
+        .brasil-panama-page .sector-cta-new:hover {
+          background: var(--teal-dark);
+          transform: scale(1.02);
         }
-        .brasil-panama-page .sector-cta.outline:hover { border-color: var(--teal); color: var(--teal); }
+        .brasil-panama-page .sector-divider {
+          height: 1px;
+          background: var(--border);
+          margin: 8px 0;
+        }
 
         .brasil-panama-page .addon-note {
           margin: 20px auto 0;
@@ -1337,279 +1348,134 @@ const BrasilPanamaMaracana = () => {
             <p className="section-sub">{t('bp_sectors_desc')}</p>
           </div>
 
-          <div className="stadium-map-container reveal">
-            <svg viewBox="0 0 800 500" className="stadium-svg" xmlns="http://www.w3.org/2000/svg">
-              <defs>
-                <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
-                  <feGaussianBlur stdDeviation="5" result="blur" />
-                  <feComposite in="SourceGraphic" in2="blur" operator="over" />
-                </filter>
-                <linearGradient id="pitch-grad" x1="0%" y1="0%" x2="0%" y2="100%">
-                  <stop offset="0%" stopColor="#2D5A27" />
-                  <stop offset="100%" stopColor="#1E3F1A" />
-                </linearGradient>
-              </defs>
-
-              {/* SECTOR GROUPS */}
-              <g className="stadium-sectors" transform="translate(400, 250)">
-                {/* NORTE - TOP */}
-                <path 
-                  className={`sector-path ${hoveredSector?.includes('norte') ? 'active' : ''}`}
-                  d="M-150,-180 Q0,-280 150,-180 L120,-150 Q0,-220 -120,-150 Z" 
-                  fill="#009C3B" 
-                  opacity={!hoveredSector || hoveredSector.includes('norte') ? "0.85" : "0.3"}
-                  onMouseEnter={() => setHoveredSector('norte')}
-                  onMouseLeave={() => setHoveredSector(null)}
-                >
-                  <title>Setor Norte</title>
-                </path>
-                
-                {/* SUL - BOTTOM */}
-                <path 
-                  className={`sector-path ${hoveredSector?.includes('sul') ? 'active' : ''}`}
-                  d="M-150,180 Q0,280 150,180 L120,150 Q0,220 -120,150 Z" 
-                  fill="#F4C430" 
-                  opacity={!hoveredSector || hoveredSector.includes('sul') ? "0.85" : "0.3"}
-                  onMouseEnter={() => setHoveredSector('sul')}
-                  onMouseLeave={() => setHoveredSector(null)}
-                >
-                  <title>Setor Sul</title>
-                </path>
-
-                {/* OESTE SUPERIOR */}
-                <path 
-                  className={`sector-path ${hoveredSector === 'oeste-superior' ? 'active' : ''}`}
-                  d="M-155,-180 Q-280,0 -155,180 L-130,155 Q-220,0 -130,-155 Z" 
-                  fill="#003087" 
-                  opacity={!hoveredSector || hoveredSector === 'oeste-superior' ? "0.6" : "0.3"}
-                  onMouseEnter={() => setHoveredSector('oeste-superior')}
-                  onMouseLeave={() => setHoveredSector(null)}
-                >
-                  <title>Oeste Superior</title>
-                </path>
-
-                {/* CAMAROTES OESTE - THIN STRIP */}
-                <path 
-                  className={`sector-path ${hoveredSector === 'camarotes' ? 'active' : ''}`}
-                  d="M-130,-155 Q-220,0 -130,155 L-115,140 Q-180,0 -115,-140 Z" 
-                  fill="#8E9AAF" 
-                  opacity={!hoveredSector || hoveredSector === 'camarotes' ? "0.8" : "0.3"}
-                  onMouseEnter={() => setHoveredSector('camarotes')}
-                  onMouseLeave={() => setHoveredSector(null)}
-                >
-                  <title>Camarotes Oeste</title>
-                </path>
-
-                {/* OESTE INFERIOR (SPLIT FOR MARACANÃ MAIS) */}
-                <path 
-                  className={`sector-path ${hoveredSector === 'oeste-inferior' ? 'active' : ''}`}
-                  d="M-115,-140 Q-180,-70 -115,-60 L-75,-50 Q-120,-70 -75,-105 Z M-115,60 Q-180,70 -115,140 L-75,105 Q-120,70 -75,50 Z" 
-                  fill="#003087" 
-                  opacity={!hoveredSector || hoveredSector === 'oeste-inferior' ? "0.9" : "0.3"}
-                  onMouseEnter={() => setHoveredSector('oeste-inferior')}
-                  onMouseLeave={() => setHoveredSector(null)}
-                >
-                  <title>Oeste Inferior</title>
-                </path>
-
-                {/* MARACANÃ MAIS - CENTER OF OESTE INFERIOR */}
-                <path 
-                  className={`sector-path ${hoveredSector?.includes('mais') ? 'active' : ''}`}
-                  d="M-115,-60 Q-135,0 -115,60 L-75,50 Q-95,0 -75,-50 Z" 
-                  fill="#FF007A" 
-                  opacity={!hoveredSector || hoveredSector.includes('mais') ? "1" : "0.3"}
-                  filter={!hoveredSector || hoveredSector.includes('mais') ? "url(#glow)" : "none"}
-                  onMouseEnter={() => setHoveredSector('maracana-mais')}
-                  onMouseLeave={() => setHoveredSector(null)}
-                >
-                  <title>Maracanã Mais</title>
-                </path>
-
-                {/* LESTE SUPERIOR */}
-                <path 
-                  className={`sector-path ${hoveredSector === 'leste-superior' ? 'active' : ''}`}
-                  d="M155,-180 Q280,0 155,180 L130,155 Q220,0 130,-155 Z" 
-                  fill="#E63946" 
-                  opacity={!hoveredSector || hoveredSector === 'leste-superior' ? "0.6" : "0.3"}
-                  onMouseEnter={() => setHoveredSector('leste-superior')}
-                  onMouseLeave={() => setHoveredSector(null)}
-                >
-                  <title>Leste Superior</title>
-                </path>
-
-                {/* CAMAROTES LESTE - THIN STRIP */}
-                <path 
-                  className={`sector-path ${hoveredSector === 'camarotes' ? 'active' : ''}`}
-                  d="M130,-155 Q220,0 130,155 L115,140 Q180,0 115,-140 Z" 
-                  fill="#8E9AAF" 
-                  opacity={!hoveredSector || hoveredSector === 'camarotes' ? "0.8" : "0.3"}
-                  onMouseEnter={() => setHoveredSector('camarotes')}
-                  onMouseLeave={() => setHoveredSector(null)}
-                >
-                  <title>Camarotes Leste</title>
-                </path>
-
-                {/* LESTE INFERIOR */}
-                <path 
-                  className={`sector-path ${hoveredSector === 'leste-inferior' ? 'active' : ''}`}
-                  d="M115,-140 Q180,0 115,140 L75,105 Q120,0 75,-105 Z" 
-                  fill="#E63946" 
-                  opacity={!hoveredSector || hoveredSector === 'leste-inferior' ? "0.9" : "0.3"}
-                  onMouseEnter={() => setHoveredSector('leste-inferior')}
-                  onMouseLeave={() => setHoveredSector(null)}
-                >
-                  <title>Leste Inferior</title>
-                </path>
-              </g>
-
-              {/* GRASS PITCH (VERTICAL) */}
-              <rect x="375" y="200" width="50" height="100" fill="url(#pitch-grad)" rx="2" />
-              <rect x="378" y="203" width="44" height="94" fill="none" stroke="rgba(255,255,255,0.2)" strokeWidth="1" />
-              <line x1="375" y1="250" x2="425" y2="250" stroke="rgba(255,255,255,0.2)" strokeWidth="1" />
-              <circle cx="400" cy="250" r="10" fill="none" stroke="rgba(255,255,255,0.2)" strokeWidth="1" />
-
-              {/* LABELS */}
-              <g className="stadium-labels" pointerEvents="none">
-                <text x="400" y="40" textAnchor="middle" className="map-label" style={{ opacity: !hoveredSector || hoveredSector.includes('norte') ? 1 : 0.4 }}>NORTE</text>
-                <text x="400" y="485" textAnchor="middle" className="map-label" style={{ opacity: !hoveredSector || hoveredSector.includes('sul') ? 1 : 0.4 }}>SUL</text>
-                <text x="660" y="255" textAnchor="middle" className="map-label" transform="rotate(90, 660, 255)" style={{ opacity: !hoveredSector || hoveredSector.includes('leste') ? 1 : 0.4 }}>LESTE</text>
-                <text x="140" y="255" textAnchor="middle" className="map-label" transform="rotate(-90, 140, 255)" style={{ opacity: !hoveredSector || hoveredSector.includes('oeste') ? 1 : 0.4 }}>OESTE</text>
-              </g>
-            </svg>
-
-            <div className="map-legend">
-              <div className={`legend-item ${hoveredSector?.includes('norte') ? 'active' : ''}`} onMouseEnter={() => setHoveredSector('norte')} onMouseLeave={() => setHoveredSector(null)}>
-                <span className="legend-dot" style={{ background: '#009C3B' }}></span> {language === 'pt' ? 'Norte' : 'North'}
-              </div>
-              <div className={`legend-item ${hoveredSector?.includes('sul') ? 'active' : ''}`} onMouseEnter={() => setHoveredSector('sul')} onMouseLeave={() => setHoveredSector(null)}>
-                <span className="legend-dot" style={{ background: '#F4C430' }}></span> {language === 'pt' ? 'Sul' : 'South'}
-              </div>
-              <div className={`legend-item ${hoveredSector?.includes('leste') ? 'active' : ''}`} onMouseEnter={() => setHoveredSector('leste-inferior')} onMouseLeave={() => setHoveredSector(null)}>
-                <span className="legend-dot" style={{ background: '#E63946' }}></span> {language === 'pt' ? 'Leste' : 'East'}
-              </div>
-              <div className={`legend-item ${hoveredSector?.includes('oeste') ? 'active' : ''}`} onMouseEnter={() => setHoveredSector('oeste-inferior')} onMouseLeave={() => setHoveredSector(null)}>
-                <span className="legend-dot" style={{ background: '#003087' }}></span> {language === 'pt' ? 'Oeste' : 'West'}
-              </div>
-              <div className={`legend-item ${hoveredSector?.includes('mais') ? 'active' : ''}`} onMouseEnter={() => setHoveredSector('maracana-mais')} onMouseLeave={() => setHoveredSector(null)}>
-                <span className="legend-dot" style={{ background: '#FF007A' }}></span> Maracanã Mais
-              </div>
-            </div>
-          </div>
           <div className="sectors-grid">
             {finalSectors.length > 0 ? (
               finalSectors.map((sector: any, idx: number) => {
                 const isSoldOut = sector.remaining <= 0 && !sector.is_on_request;
                 const matchUrl = `https://tocorimerio.com/match/${MATCH_SLUG}`;
-                const isHovered = hoveredSector && (
-                  sector.id === hoveredSector || 
-                  (hoveredSector === 'norte' && sector.id?.includes('norte')) ||
-                  (hoveredSector === 'sul' && sector.id?.includes('sul')) ||
-                  (hoveredSector === 'leste-superior' && sector.id?.includes('leste-superior')) ||
-                  (hoveredSector === 'leste-inferior' && sector.id?.includes('leste-inferior')) ||
-                  (hoveredSector === 'oeste-superior' && sector.id?.includes('oeste-superior')) ||
-                  (hoveredSector === 'oeste-inferior' && sector.id?.includes('oeste-inferior')) ||
-                  (hoveredSector === 'maracana-mais' && sector.id?.includes('mais'))
-                );
                 
+                // Determine category badge
+                let badge = "";
+                if (sector.id?.includes('mais')) badge = "VIP & Hospitality";
+                else if (sector.id?.includes('camarote')) badge = "Executive";
+                else if (sector.id?.includes('inferior')) badge = "Premium View";
+                else badge = "Popular";
+
                 return (
                   <div 
                     key={idx} 
-                    className={`sector-card reveal ${sector.premium ? 'premium' : ''} ${isHovered ? 'hovered' : ''}`} 
-                    style={{ 
-                      transitionDelay: `${idx * 0.1}s`,
-                      border: isHovered ? '1px solid var(--teal)' : '1px solid var(--border)',
-                      boxShadow: isHovered ? '0 12px 24px rgba(42,157,143,0.15)' : 'none'
-                    }}
-                    onMouseEnter={() => setHoveredSector(sector.id)}
-                    onMouseLeave={() => setHoveredSector(null)}
+                    className={`sector-card reveal ${sector.premium ? 'premium' : ''}`} 
+                    style={{ transitionDelay: `${idx * 0.1}s` }}
                   >
-                    <div className="sector-top">
-                      <span className="sector-name">{sector.name}</span>
-                      <span className="sector-location">{sector.description}</span>
-                    </div>
-                    <div className="sector-diagram">
-                      <MaracanaStadiumDiagram sectorName={sector.name} />
-                      <div className="sector-diagram-caption">
-                        {language === 'en' ? 'Your view at the Maracanã' : language === 'es' ? 'Tu vista en el Maracaná' : 'Sua vista no Maracanã'}
-                      </div>
-                    </div>
-                    <div className="sector-price-row" style={{ minHeight: '80px', display: 'flex', alignItems: 'center' }}>
-                      <div className="sector-price-main">
-                        {sector.is_on_request ? (
-                          <span className="sector-price" style={{ fontSize: '1.4rem' }}>
-                            {language === 'pt' ? 'Sob Consulta' : 'Upon Request'}
-                          </span>
-                        ) : (
-                          <span className="sector-price">
-                            {formatPrice(sector.price)}
-                          </span>
-                        )}
-                      </div>
-                    </div>
-                    <div className="sector-divider"></div>
-                    <div className="sector-perks">
-                      {sector.premium && <span className="perk-tag green">{t('bp_perk_padrão')}</span>}
-                      <span className="perk-tag">{t('bp_perk_vista')}</span>
+                    <div className="sector-header-row">
+                      <div className="sector-badge">{badge}</div>
                       {sector.remaining > 0 && sector.remaining <= 5 && (
-                        <span className="perk-tag" style={{ color: '#ff4d4f', borderColor: '#ff4d4f' }}>
-                          {language === 'pt' ? `Restam ${sector.remaining}` : `Only ${sector.remaining} left`}
-                        </span>
+                        <div className="sector-urgency">
+                          {language === 'pt' ? `Apenas ${sector.remaining} restam` : `Only ${sector.remaining} left`}
+                        </div>
                       )}
                     </div>
+
+                    <div className="sector-top">
+                      <div className="sector-icon-wrap">
+                        {sector.id?.includes('mais') ? '👑' : sector.id?.includes('camarote') ? '🥂' : '⚽'}
+                      </div>
+                      <div className="sector-name-wrap">
+                        <span className="sector-name">{sector.name}</span>
+                        <span className="sector-location">{sector.description}</span>
+                      </div>
+                    </div>
+
+                    <div className="sector-price-section">
+                      <div className="sector-price">
+                        {sector.is_on_request ? (
+                          <span style={{ fontSize: '1.8rem' }}>{language === 'pt' ? 'Sob Consulta' : 'Upon Request'}</span>
+                        ) : (
+                          formatPrice(sector.price)
+                        )}
+                      </div>
+                      <div className="sector-price-sub">{language === 'pt' ? 'por pessoa' : 'per person'}</div>
+                    </div>
+
+                    <div className="sector-divider"></div>
+
+                    <div className="sector-features">
+                      <div className="feature-item">
+                        <span className="check">✓</span>
+                        <span>{t('bp_inc_item1_title')}</span>
+                      </div>
+                      <div className="feature-item">
+                        <span className="check">✓</span>
+                        <span>{t('bp_inc_item2_title')}</span>
+                      </div>
+                      <div className="feature-item">
+                        <span className="check">✓</span>
+                        <span>{t('bp_inc_item4_title')}</span>
+                      </div>
+                      {sector.premium && (
+                        <div className="feature-item">
+                          <span className="check">✓</span>
+                          <span>{t('bp_perk_padrão')}</span>
+                        </div>
+                      )}
+                    </div>
+
                     <a 
                       href={matchUrl} 
-                      className="sector-cta filled"
+                      className="sector-cta-new"
                       style={isSoldOut ? { opacity: 0.6, cursor: 'not-allowed', background: 'var(--ink-3)', color: 'var(--muted)' } : {}}
                     >
-                      {isSoldOut ? t('bp_status_indisponivel') : t('bp_inc_cta')}
+                      {isSoldOut ? t('bp_status_indisponivel') : (language === 'pt' ? 'Selecionar →' : 'Select →')}
                     </a>
                   </div>
                 );
               })
             ) : (
               sectors.map((sector, idx) => {
-                const isHovered = hoveredSector && (
-                  sector.id === hoveredSector || 
-                  (hoveredSector === 'norte' && sector.id?.includes('norte')) ||
-                  (hoveredSector === 'sul' && sector.id?.includes('sul'))
-                );
+                let badge = "";
+                if (sector.id?.includes('mais')) badge = "VIP & Hospitality";
+                else if (sector.id?.includes('camarote')) badge = "Executive";
+                else if (sector.id?.includes('inferior')) badge = "Premium View";
+                else badge = "Popular";
 
                 return (
                   <div 
                     key={idx} 
-                    className={`sector-card reveal ${sector.premium ? 'premium' : ''} ${isHovered ? 'hovered' : ''}`} 
-                    style={{ 
-                      transitionDelay: `${idx * 0.1}s`,
-                      border: isHovered ? '1px solid var(--teal)' : '1px solid var(--border)',
-                      boxShadow: isHovered ? '0 12px 24px rgba(42,157,143,0.15)' : 'none'
-                    }}
-                    onMouseEnter={() => setHoveredSector(sector.id)}
-                    onMouseLeave={() => setHoveredSector(null)}
+                    className={`sector-card reveal ${sector.premium ? 'premium' : ''}`} 
+                    style={{ transitionDelay: `${idx * 0.1}s` }}
                   >
+                    <div className="sector-header-row">
+                      <div className="sector-badge">{badge}</div>
+                    </div>
+
                     <div className="sector-top">
-                      <span className="sector-name">{t(sector.nameKey)}</span>
-                      <span className="sector-location">{t(sector.descKey)}</span>
-                    </div>
-                    <div className="sector-diagram">
-                      <MaracanaStadiumDiagram sectorName={t(sector.nameKey)} />
-                      <div className="sector-diagram-caption">
-                        {language === 'en' ? 'Your view at the Maracanã' : language === 'es' ? 'Tu vista en el Maracaná' : 'Sua vista no Maracanã'}
+                      <div className="sector-icon-wrap">
+                        {sector.id?.includes('mais') ? '👑' : sector.id?.includes('camarote') ? '🥂' : '⚽'}
+                      </div>
+                      <div className="sector-name-wrap">
+                        <span className="sector-name">{t(sector.nameKey)}</span>
+                        <span className="sector-location">{t(sector.descKey)}</span>
                       </div>
                     </div>
-                    <div className="sector-price-row" style={{ minHeight: '80px', display: 'flex', alignItems: 'center' }}>
-                      <div className="sector-price-main">
-                        <span className="sector-price" style={{ fontSize: '1.4rem', color: 'var(--muted)' }}>
-                          {t('bp_status_indisponivel')}
-                        </span>
+
+                    <div className="sector-price-section">
+                      <div className="sector-price" style={{ fontSize: '1.8rem', color: 'var(--muted)' }}>
+                        {t('bp_status_indisponivel')}
                       </div>
                     </div>
+
                     <div className="sector-divider"></div>
-                    <div className="sector-perks">
+
+                    <div className="sector-features">
                       {sector.perks.map((perk, pIdx) => (
-                        <span key={pIdx} className={`perk-tag ${perk.includes('padrão') ? 'green' : ''}`}>{t(perk)}</span>
+                        <div key={pIdx} className="feature-item">
+                          <span className="check">✓</span>
+                          <span>{t(perk)}</span>
+                        </div>
                       ))}
                     </div>
-                    <button disabled className="sector-cta" style={{ opacity: 0.6, cursor: 'not-allowed', background: 'var(--ink-3)', color: 'var(--muted)' }}>
+
+                    <button disabled className="sector-cta-new" style={{ opacity: 0.6, cursor: 'not-allowed', background: 'var(--ink-3)', color: 'var(--muted)' }}>
                       {t('bp_status_indisponivel')}
                     </button>
                   </div>
