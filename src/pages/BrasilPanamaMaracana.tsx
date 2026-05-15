@@ -1272,6 +1272,12 @@ const BrasilPanamaMaracana = () => {
                       <span className="sector-name">{sector.name}</span>
                       <span className="sector-location">{sector.description}</span>
                     </div>
+                    <div className="sector-diagram">
+                      <MaracanaStadiumDiagram sectorName={sector.name} />
+                      <div className="sector-diagram-caption">
+                        {language === 'en' ? 'Your view at the Maracanã' : language === 'es' ? 'Tu vista en el Maracaná' : 'Sua vista no Maracanã'}
+                      </div>
+                    </div>
                     <div className="sector-price-row" style={{ minHeight: '80px', display: 'flex', alignItems: 'center' }}>
                       <div className="sector-price-main">
                         {sector.is_on_request ? (
@@ -1311,6 +1317,12 @@ const BrasilPanamaMaracana = () => {
                   <div className="sector-top">
                     <span className="sector-name">{t(sector.nameKey)}</span>
                     <span className="sector-location">{t(sector.descKey)}</span>
+                  </div>
+                  <div className="sector-diagram">
+                    <MaracanaStadiumDiagram sectorName={t(sector.nameKey)} />
+                    <div className="sector-diagram-caption">
+                      {language === 'en' ? 'Your view at the Maracanã' : language === 'es' ? 'Tu vista en el Maracaná' : 'Sua vista no Maracanã'}
+                    </div>
                   </div>
                   <div className="sector-price-row" style={{ minHeight: '80px', display: 'flex', alignItems: 'center' }}>
                     <div className="sector-price-main">
