@@ -1495,7 +1495,7 @@ const BrasilPanamaMaracana = () => {
               </div>
             </div>
           </div>
-
+          <div className="sectors-grid">
             {finalSectors.length > 0 ? (
               finalSectors.map((sector: any, idx: number) => {
                 const isSoldOut = sector.remaining <= 0 && !sector.is_on_request;
@@ -1595,7 +1595,6 @@ const BrasilPanamaMaracana = () => {
                       <div className="sector-diagram-caption">
                         {language === 'en' ? 'Your view at the Maracanã' : language === 'es' ? 'Tu vista en el Maracaná' : 'Sua vista no Maracanã'}
                       </div>
-                    </div>
                     </div>
                     <div className="sector-price-row" style={{ minHeight: '80px', display: 'flex', alignItems: 'center' }}>
                       <div className="sector-price-main">
