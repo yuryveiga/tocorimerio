@@ -6,6 +6,8 @@ import { createClient } from "@supabase/supabase-js";
 import { useCurrency } from "@/contexts/CurrencyContext";
 import { getCanonicalUrl, getHreflangLinks, generateSportsEventSchema, generateBreadcrumbsSchema } from "@/utils/seo";
 import { LovableMatch } from "@/types";
+import { MaracanaStadiumDiagram } from "@/components/MaracanaStadiumDiagram";
+import { buildWhatsappLink } from "@/lib/whatsappMessage";
 
 // Partner Project Config
 const MARACANA_PROJECT_URL = "https://mwxbskzggzznxvkwgrnz.supabase.co";
@@ -1491,7 +1493,7 @@ const BrasilPanamaMaracana = () => {
           Oferecemos experiências autênticas e seguras para viajantes internacionais no Rio de Janeiro.
         </p>
         <div style={{ display: 'flex', justifyContent: 'center', gap: '16px' }}>
-          <a href={`https://wa.me/5521970702523?text=${encodeURIComponent("Olá, vim pelo site")}`} target="_blank" rel="noopener" className="btn-main">
+          <a href={buildWhatsappLink("5521970702523", language)} target="_blank" rel="noopener" className="btn-main">
             WhatsApp Support
           </a>
         </div>
