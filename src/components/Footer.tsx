@@ -4,6 +4,7 @@ import { useSiteData } from "@/hooks/useSiteData";
 import { useLocale } from "@/contexts/LocaleContext";
 import { OptimizedImage } from "./OptimizedImage";
 import { PaymentLogos } from "./PaymentLogos";
+import { buildWhatsappLink } from "@/lib/whatsappMessage";
 
 const iconMap: Record<string, React.ElementType> = {
   Instagram, MapPin, Phone, Mail, Music, Facebook, Youtube,

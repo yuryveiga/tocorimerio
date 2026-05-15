@@ -9,6 +9,7 @@ import { useToast } from "@/hooks/use-toast";
 import { useLocale } from "@/contexts/LocaleContext";
 import { useSiteData } from "@/hooks/useSiteData";
 import { supabase } from "@/integrations/supabase/client";
+import { buildWhatsappLink } from "@/lib/whatsappMessage";
 
 export function ContactSection() {
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -21,11 +22,7 @@ export function ContactSection() {
   
   const contactEmail = emailSocial?.url || "";
   const contactPhone = whatsappSocial?.url || "";
-  const cleanPhone = contactPhone.replace(/[^\d+]/g, "");
-  const message = encodeURIComponent("Olá, vim pelo site");
-  const waLink = contactPhone.startsWith('http') 
-    ? `${contactPhone}${contactPhone.includes('?') ? '&' : '?'}text=${message}`
-    : `https://wa.me/${cleanPhone.replace('+', '')}?text=${message}`;
+  const waLink = contactPhone ? buildWhatsappLink(contactPhone, language) : '';
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
