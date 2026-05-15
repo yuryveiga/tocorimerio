@@ -703,10 +703,11 @@ const BrasilPanamaMaracana = () => {
         /* SECTOR CARDS NEW DESIGN */
         .brasil-panama-page .sectors-grid {
           display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+          grid-template-columns: repeat(auto-fit, minmax(320px, 450px));
           gap: 32px;
           max-width: 1200px;
           margin: 0 auto;
+          justify-content: center;
         }
         .brasil-panama-page .sector-card {
           background: var(--ink-2);
@@ -962,10 +963,11 @@ const BrasilPanamaMaracana = () => {
         .brasil-panama-page .rating-count { font-size: 13px; color: var(--muted); margin-top: 2px; }
         .brasil-panama-page .reviews-grid {
           display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-          gap: 16px;
-          max-width: 960px;
+          grid-template-columns: repeat(auto-fit, minmax(280px, 400px));
+          gap: 24px;
+          max-width: 1200px;
           margin: 0 auto;
+          justify-content: center;
         }
         .brasil-panama-page .review-card {
           background: var(--ink-2);
@@ -990,13 +992,14 @@ const BrasilPanamaMaracana = () => {
 
         .brasil-panama-page .steps-grid {
           display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+          grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
           gap: 2px;
           background: var(--border);
           border-radius: var(--radius);
           overflow: hidden;
-          max-width: 960px;
+          max-width: 1200px;
           margin: 52px auto 0;
+          justify-content: center;
         }
         .brasil-panama-page .step-card {
           background: var(--ink-2);
@@ -1427,8 +1430,8 @@ const BrasilPanamaMaracana = () => {
             <p className="section-sub">{t('bp_inc_desc')}</p>
           </div>
 
-          <div className="included-layout" style={{ gridTemplateColumns: '1fr', maxWidth: '960px', margin: '0 auto' }}>
-            <div className="includes-list" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '24px' }}>
+          <div className="included-layout" style={{ gridTemplateColumns: '1fr', maxWidth: '1200px', margin: '0 auto' }}>
+            <div className="includes-list" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 400px))', gap: '32px', justifyContent: 'center' }}>
               <div className="include-row reveal">
                 <div className="inc-icon-wrap">🎟️</div>
                 <div className="inc-body">
