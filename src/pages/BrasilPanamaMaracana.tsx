@@ -1436,9 +1436,9 @@ const BrasilPanamaMaracana = () => {
             <p className="section-sub">{t('bp_inc_desc')}</p>
           </div>
 
-          <div className="included-layout reveal">
-            <div className="includes-list">
-              <div className="include-row reveal" style={{ flex: '1 1 300px', maxWidth: '400px' }}>
+          <div className="included-layout" style={{ gridTemplateColumns: '1fr', maxWidth: '960px' }}>
+            <div className="includes-list" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '24px' }}>
+              <div className="include-row reveal">
                 <div className="inc-icon-wrap">🎟️</div>
                 <div className="inc-body">
                   <div className="inc-title">{t('bp_inc_item1_title')}</div>
@@ -1475,7 +1475,7 @@ const BrasilPanamaMaracana = () => {
               </div>
             </div>
             
-            <div style={{ textAlign: 'center', marginTop: '48px' }}>
+            <div style={{ textAlign: 'center', marginTop: '48px' }} className="reveal">
               <a href={`https://tocorimerio.com/match/${MATCH_SLUG}`} target="_blank" rel="noopener" className="btn-main" style={{ display: 'inline-flex' }}>
                 <span>🎟️</span> {t('bp_inc_cta')}
               </a>
@@ -1492,7 +1492,7 @@ const BrasilPanamaMaracana = () => {
             <p className="section-sub">{t('bp_how_desc')}</p>
           </div>
 
-          <div className="steps-grid">
+          <div className="steps-grid reveal reveal-d1">
             <div className="step-card">
               <div className="step-num">01</div>
               <div className="step-icon">📋</div>
