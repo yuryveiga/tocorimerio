@@ -4,6 +4,7 @@ import { useSiteData } from "@/hooks/useSiteData";
 import { useLocale } from "@/contexts/LocaleContext";
 import { OptimizedImage } from "./OptimizedImage";
 import { PaymentLogos } from "./PaymentLogos";
+import { buildWhatsappLink } from "@/lib/whatsappMessage";
 
 const iconMap: Record<string, React.ElementType> = {
   Instagram, MapPin, Phone, Mail, Music, Facebook, Youtube,
@@ -55,10 +56,11 @@ export function Footer() {
   const contactPhone = phoneSocial?.url || whatsappSocial?.url || "";
   
   const cleanPhone = contactPhone.replace(/[^\d+]/g, "");
-  const message = encodeURIComponent("Olá, vim pelo site");
-  const waLink = contactPhone.startsWith('http') 
-    ? `${contactPhone}${contactPhone.includes('?') ? '&' : '?'}text=${message}`
-    : (whatsappSocial ? `https://wa.me/${cleanPhone.replace('+', '')}?text=${message}` : `tel:${cleanPhone}`);
+  const waLink = contactPhone
+    ? (whatsappSocial || contactPhone.startsWith('http')
+        ? buildWhatsappLink(contactPhone, language)
+        : `tel:${cleanPhone}`)
+    : '';
 
   const logoUrl = images["logo"] || "https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images//images__1_-removebg-preview.png";
 

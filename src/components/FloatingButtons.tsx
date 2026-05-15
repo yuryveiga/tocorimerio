@@ -2,6 +2,7 @@ import { useEffect, useMemo } from "react";
 import { useLocation } from "react-router-dom";
 import { useSiteData } from "@/hooks/useSiteData";
 import { useLocale } from "@/contexts/LocaleContext";
+import { buildWhatsappLink } from "@/lib/whatsappMessage";
 
 export function FloatingButtons() {
   const { socialMedia } = useSiteData();
@@ -50,11 +51,7 @@ export function FloatingButtons() {
 
   const handleWhatsApp = () => {
     if (!whatsapp) return;
-    const cleanNumber = whatsapp.url.replace(/[^\d+]/g, "");
-    const message = encodeURIComponent("Olá, vim pelo site");
-    const url = whatsapp.url.startsWith('http') 
-      ? `${whatsapp.url}${whatsapp.url.includes('?') ? '&' : '?'}text=${message}`
-      : `https://wa.me/${cleanNumber.replace('+', '')}?text=${message}`;
+    const url = buildWhatsappLink(whatsapp.url, language);
     window.open(url, '_blank', 'noopener,noreferrer');
   };
 

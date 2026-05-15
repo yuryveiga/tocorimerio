@@ -6,6 +6,8 @@ import { createClient } from "@supabase/supabase-js";
 import { useCurrency } from "@/contexts/CurrencyContext";
 import { getCanonicalUrl, getHreflangLinks, generateSportsEventSchema, generateBreadcrumbsSchema } from "@/utils/seo";
 import { LovableMatch } from "@/types";
+import { MaracanaStadiumDiagram } from "@/components/MaracanaStadiumDiagram";
+import { buildWhatsappLink } from "@/lib/whatsappMessage";
 
 // Partner Project Config
 const MARACANA_PROJECT_URL = "https://mwxbskzggzznxvkwgrnz.supabase.co";
@@ -739,14 +741,32 @@ const BrasilPanamaMaracana = () => {
         }
         .brasil-panama-page .sector-top { display: flex; flex-direction: column; gap: 4px; }
         .brasil-panama-page .sector-name {
-          font-size: 16px;
-          font-weight: 700;
+          font-size: 18px;
+          font-weight: 800;
           color: var(--white);
+          letter-spacing: -0.01em;
         }
         .brasil-panama-page .sector-location {
-          font-size: 12px;
+          font-size: 13px;
           color: var(--muted);
-          font-weight: 400;
+          font-weight: 500;
+          line-height: 1.5;
+        }
+        .brasil-panama-page .sector-diagram {
+          margin: 4px -6px 0;
+          padding: 14px 12px 10px;
+          background: radial-gradient(ellipse at 50% 40%, rgba(42,157,143,0.08), rgba(0,0,0,0) 70%), rgba(255,255,255,0.02);
+          border: 1px solid var(--border);
+          border-radius: var(--radius-sm);
+        }
+        .brasil-panama-page .sector-diagram-caption {
+          margin-top: 6px;
+          text-align: center;
+          font-size: 10px;
+          font-weight: 600;
+          letter-spacing: 0.12em;
+          text-transform: uppercase;
+          color: var(--muted-2);
         }
         .brasil-panama-page .sector-price-row {
           display: flex;
@@ -1252,6 +1272,12 @@ const BrasilPanamaMaracana = () => {
                       <span className="sector-name">{sector.name}</span>
                       <span className="sector-location">{sector.description}</span>
                     </div>
+                    <div className="sector-diagram">
+                      <MaracanaStadiumDiagram sectorName={sector.name} />
+                      <div className="sector-diagram-caption">
+                        {language === 'en' ? 'Your view at the Maracanã' : language === 'es' ? 'Tu vista en el Maracaná' : 'Sua vista no Maracanã'}
+                      </div>
+                    </div>
                     <div className="sector-price-row" style={{ minHeight: '80px', display: 'flex', alignItems: 'center' }}>
                       <div className="sector-price-main">
                         {sector.is_on_request ? (
@@ -1291,6 +1317,12 @@ const BrasilPanamaMaracana = () => {
                   <div className="sector-top">
                     <span className="sector-name">{t(sector.nameKey)}</span>
                     <span className="sector-location">{t(sector.descKey)}</span>
+                  </div>
+                  <div className="sector-diagram">
+                    <MaracanaStadiumDiagram sectorName={t(sector.nameKey)} />
+                    <div className="sector-diagram-caption">
+                      {language === 'en' ? 'Your view at the Maracanã' : language === 'es' ? 'Tu vista en el Maracaná' : 'Sua vista no Maracanã'}
+                    </div>
                   </div>
                   <div className="sector-price-row" style={{ minHeight: '80px', display: 'flex', alignItems: 'center' }}>
                     <div className="sector-price-main">
@@ -1491,7 +1523,7 @@ const BrasilPanamaMaracana = () => {
           Oferecemos experiências autênticas e seguras para viajantes internacionais no Rio de Janeiro.
         </p>
         <div style={{ display: 'flex', justifyContent: 'center', gap: '16px' }}>
-          <a href={`https://wa.me/5521970702523?text=${encodeURIComponent("Olá, vim pelo site")}`} target="_blank" rel="noopener" className="btn-main">
+          <a href={buildWhatsappLink("5521970702523", language)} target="_blank" rel="noopener" className="btn-main">
             WhatsApp Support
           </a>
         </div>
