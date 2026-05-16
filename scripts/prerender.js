@@ -75,6 +75,23 @@ function getSelectorForRoute(route) {
 async function startServer() {
   const app = express();
 
+  // Fix MIME type for .js files on Windows
+  app.use((req, res, next) => {
+    if (req.url.endsWith('.js')) {
+      res.type('application/javascript');
+    }
+    next();
+  });
+
+  // Always serve index.html for any request that looks like a route (doesn't have an extension)
+  // this ensures we always start from a clean shell during prerender.
+  app.use((req, res, next) => {
+    if (!req.url.includes('.') || req.url.endsWith('.html')) {
+      return res.sendFile(path.join(distPath, 'index.html'));
+    }
+    next();
+  });
+
   // Serve static files from dist
   app.use(express.static(distPath));
 
@@ -93,16 +110,23 @@ async function startServer() {
 async function fetchDynamicRoutes() {
   const routes = [
     '/',
+    '/about',
+    '/faq',
+    '/contact',
     '/blog',
     '/passeio',
+    '/maracana-matchday',
     '/our-tours',
-    '/maracana-calendario',
+    '/sitemap',
     '/flamengo-x-vasco-maracana',
     '/fluminense-bolivar-libertadores',
     '/brasil-x-panama-maio-maracana'
   ];
 
   console.log('Fetching dynamic routes from Supabase...');
+
+
+
 
   // Fetch blog posts
   const { data: posts } = await supabase.from('blog_posts').select('slug').eq('is_published', true);
@@ -174,6 +198,20 @@ async function prerender() {
     const batch = routes.slice(i, i + CONCURRENCY);
     await Promise.all(batch.map(async (route) => {
       const page = await browser.newPage();
+      
+      // Log browser console messages
+      page.on('console', msg => {
+        const type = msg.type();
+        const text = msg.text();
+        if (type === 'error') console.error(`  [BROWSER ERROR] ${route}: ${text}`);
+        else if (type === 'warning') console.warn(`  [BROWSER WARN] ${route}: ${text}`);
+        // else console.log(`  [BROWSER LOG] ${route}: ${text}`);
+      });
+
+      page.on('pageerror', err => {
+        console.error(`  [BROWSER CRASH] ${route}: ${err.message}`);
+      });
+
       // Block heavy assets and trackers to speed up rendering (keep CSS/JS!)
       await page.route('**/*', (route) => {
         const url = route.request().url();
@@ -217,6 +255,8 @@ async function prerender() {
             results.emptySelector.push(route);
           }
         }
+
+
 
         // Se a rota exigia um seletor e ele não apareceu, NÃO sobrescreve
         // o index.html da rota (evita publicar página em branco).
