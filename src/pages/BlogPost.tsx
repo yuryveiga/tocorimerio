@@ -550,10 +550,39 @@ const BlogPost = () => {
               >
                 <CarouselContent className="-ml-4">
                   {(() => {
-                    const sortedTours = tours
-                      .sort((a, b) => (b.is_featured ? 1 : 0) - (a.is_featured ? 1 : 0));
+                    const postKeywords = (title + " " + excerpt + " " + content).toLowerCase();
+                    
+                    const scoredTours = tours
+                      .filter(t => t.is_active !== false)
+                      .map(tour => {
+                        let score = 0;
+                        const tourTitle = (tour.title || "").toLowerCase();
+                        const tourSlug = (tour.slug || "").toLowerCase();
+                        const tourDesc = (tour.short_description || "").toLowerCase();
+
+                        // Match slug in content
+                        if (postKeywords.includes(tourSlug)) score += 100;
+                        
+                        // Match title in content
+                        if (postKeywords.includes(tourTitle)) score += 50;
+                        
+                        // Title word matches
+                        const tourTitleWords = tourTitle.split(' ').filter(w => w.length > 3);
+                        tourTitleWords.forEach(word => {
+                          if (postKeywords.includes(word)) score += 10;
+                        });
+
+                        // Featured bonus
+                        if (tour.is_featured) score += 5;
+
+                        return { tour, score };
+                      })
+                      .sort((a, b) => b.score - a.score || (b.tour.is_featured ? 1 : 0) - (a.tour.is_featured ? 1 : 0));
                       
-                    return sortedTours.map((tour) => (
+                    // If no matches, fallback to featured tours
+                    const finalTours = scoredTours.map(item => item.tour);
+
+                    return finalTours.map((tour) => (
                       <CarouselItem key={tour.id} className="pl-4 basis-full sm:basis-1/2 lg:basis-1/4">
                         <div className="p-1" data-tour-card>
                           <TourItem tour={tour} />

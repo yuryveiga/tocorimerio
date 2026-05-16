@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
-import { ChevronDown, Star, ArrowRight, ShieldCheck, Award, Lock, Flame } from "lucide-react";
+import { ChevronDown, ArrowRight, ShieldCheck, Award, Lock, Flame } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useSiteData } from "@/hooks/useSiteData";
 import { useLocale } from "@/contexts/LocaleContext";
+import { SocialProof } from "./SocialProof";
 
 export function HeroSection() {
   const { images, siteSettings, socialMedia } = useSiteData();
@@ -72,12 +73,7 @@ export function HeroSection() {
   );
 
   const SocialProofChip = ({ light = true }: { light?: boolean }) => (
-    <div className={`inline-flex items-center gap-2 rounded-full px-4 py-1.5 mb-6 ${light ? 'bg-white/10 backdrop-blur-sm text-white border border-white/20' : 'bg-primary/10 text-primary border border-primary/20'}`}>
-      <Star className="w-4 h-4 fill-yellow-400 text-yellow-400" />
-      <span className="text-xs sm:text-sm font-bold font-sans">
-        4.9 · {t('social_proof_chip')} · TripAdvisor
-      </span>
-    </div>
+    <SocialProof light={light} className="mb-6" />
   );
 
   const Audience = ({ light = true }: { light?: boolean }) => (

@@ -21,6 +21,7 @@ import { OptimizedImage } from "@/components/OptimizedImage";
 import { getTourMinPrice } from "@/utils/pricing";
 import { UrgencyBadges } from "@/components/UrgencyBadges";
 import { PaymentLogos } from "@/components/PaymentLogos";
+import { SocialProof } from "@/components/SocialProof";
 import { 
   Carousel, 
   CarouselContent, 
@@ -452,10 +453,11 @@ export function PasseioDetalhe() {
         
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-8">
           <div className="space-y-4">
-            <div className="flex items-center gap-3">
+            <div className="flex flex-wrap items-center gap-3">
                <span className="text-primary font-black uppercase tracking-[0.2em] text-[10px] px-3 py-1 bg-primary/10 rounded-full border border-primary/20">{translatedCategory}</span>
                <span className="text-accent font-black uppercase tracking-[0.2em] text-[10px] px-3 py-1 bg-accent/10 rounded-full border border-accent/20">Private & Exclusive</span>
                {tour.is_featured && <span className="bg-amber-100 text-amber-700 font-black text-[10px] px-3 py-1 rounded-full border border-amber-200 uppercase tracking-widest">{t("destaque")}</span>}
+               <SocialProof light={false} />
             </div>
             <h1 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-black text-foreground leading-[1.1] tracking-tight">
                {translatedTitle}
