@@ -20,6 +20,7 @@ import { toast } from "sonner";
 import { format, parseISO } from "date-fns";
 import { ptBR, enUS, es } from "date-fns/locale";
 import { getMatchDateInRio, getMatchHour } from "@/lib/dateUtils";
+import { buildMatchExperienceContent } from "@/lib/matchExperienceText";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -283,11 +284,38 @@ export default function MatchDetail() {
 
   const siteTitle = siteSettings?.site_title?.split('|')[0].trim() || "Eco-Wanderlust";
 
+  const experience = match
+    ? buildMatchExperienceContent({
+        homeTeam: match.home_team,
+        awayTeam: match.away_team,
+        matchDate: match.match_date,
+        stadium: match.stadium || match.venue,
+        competition: match.competition,
+        language,
+      })
+    : null;
+
+  const longDescription = match
+    ? (language === "pt"
+        ? match.description_pt
+        : language === "en"
+        ? match.description_en
+        : match.description_pt) || experience?.plain || ""
+    : "";
+
+  const metaDescription = match
+    ? (language === "pt"
+        ? `${match.home_team} x ${match.away_team} no Maracanã: ingresso oficial + transfer executivo + guia bilíngue. Reserve sua experiência matchday com a Tocorime Rio. ✓`
+        : language === "es"
+        ? `${match.home_team} vs ${match.away_team} en el Maracanã: entrada oficial + traslado ejecutivo + guía bilingüe. Reserva tu experiencia matchday con Tocorime Rio. ✓`
+        : `${match.home_team} vs ${match.away_team} at Maracanã: official ticket + executive transfer + bilingual guide. Book your matchday experience with Tocorime Rio. ✓`)
+    : "";
+
   const jsonLd = match ? {
     "@context": "https://schema.org",
     "@type": "Product",
     "name": `${match.home_team} x ${match.away_team} | Maracanã Matchday Experience`,
-    "description": `Assista ao vivo ${match.home_team} x ${match.away_team} no Maracanã com transporte e guia incluso.`,
+    "description": longDescription.slice(0, 5000),
     "image": images['maracana_hero'] || "https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images//WhatsApp Image 2026-04-14 at 15.41.21.jpeg",
     "sku": match.slug || match.id,
     "brand": {
@@ -367,7 +395,7 @@ export default function MatchDetail() {
     <div className="min-h-screen bg-background">
       <Helmet>
         <title>{translatedTitle} | Maracanã Matchday Experience</title>
-        <meta name="description" content={`Assista ao vivo ${match.home_team} x ${match.away_team} no Maracanã com transporte e guia incluso.`} />
+        <meta name="description" content={metaDescription} />
         <meta property="og:title" content={`${translatedTitle} | ${siteTitle}`} />
         <meta property="og:url" content={getCanonicalUrl(`/match/${match.slug || match.id}`)} />
         <link rel="canonical" href={getCanonicalUrl(`/match/${match.slug || match.id}`)} />
@@ -419,11 +447,38 @@ export default function MatchDetail() {
                        <div className="w-2 h-10 bg-primary rounded-full" />
                        {t('sobre_evento')}
                     </h2>
-                    <div className="text-lg text-muted-foreground leading-relaxed font-medium whitespace-pre-wrap">
-                       {language === 'pt' ? (match.description_pt || t('matchday_fallback')) : 
-                        language === 'en' ? (match.description_en || t('matchday_fallback')) : 
-                        (match.description_es || match.description_pt || t('matchday_fallback'))}
-                    </div>
+                     {(() => {
+                        const dbDesc =
+                          language === "pt"
+                            ? match.description_pt
+                            : language === "en"
+                            ? match.description_en
+                            : match.description_pt;
+                        if (dbDesc && dbDesc.trim().length > 0) {
+                           return (
+                              <div className="text-lg text-muted-foreground leading-relaxed font-medium whitespace-pre-wrap">
+                                 {dbDesc}
+                              </div>
+                           );
+                        }
+                        return (
+                           <div className="space-y-6">
+                              <p className="text-lg text-muted-foreground leading-relaxed font-medium">
+                                 {experience?.intro}
+                              </p>
+                              {experience?.sections.map((section) => (
+                                 <div key={section.heading} className="space-y-3">
+                                    <h3 className="text-xl font-serif font-bold text-foreground">
+                                       {section.heading}
+                                    </h3>
+                                    <p className="text-base text-muted-foreground leading-relaxed">
+                                       {section.body}
+                                    </p>
+                                 </div>
+                              ))}
+                           </div>
+                        );
+                     })()}
                  </section>
 
                  <section className="space-y-6">
