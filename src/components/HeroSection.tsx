@@ -26,7 +26,7 @@ export function HeroSection() {
     images["hero_bg_3"]
   ].filter(Boolean);
 
-  const heroBgs = availableBgs.length > 0 ? availableBgs : ["https://images.unsplash.com/photo-1483729558449-99ef09a8c325?q=80&w=2070"];
+  const heroBgs = availableBgs.length > 0 ? availableBgs : ["https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776157066514_2zl4bonrweg.webp"];
 
   useEffect(() => {
     if (heroBgs.length <= 1) return;
@@ -127,7 +127,18 @@ export function HeroSection() {
           key={index}
           className={`absolute inset-0 transition-opacity duration-1000 bg-cover bg-center bg-no-repeat ${index === currentBg ? 'opacity-100' : 'opacity-0'}`}
           style={{ backgroundImage: `url(${bg})` }}
-        />
+        >
+          {/* Hidden <img> so the browser preload scanner can fetch the image.
+              fetchpriority="high" on index 0 tells the browser this is LCP-critical. */}
+          <img
+            src={bg}
+            alt=""
+            aria-hidden="true"
+            className="absolute inset-0 w-full h-full object-cover opacity-0 pointer-events-none select-none"
+            fetchPriority={index === 0 ? "high" : "low"}
+            loading={index === 0 ? "eager" : "lazy"}
+          />
+        </div>
       ))}
       <div className="absolute inset-0 bg-black/50" />
       <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-background via-background/20 to-transparent z-[5]" />
