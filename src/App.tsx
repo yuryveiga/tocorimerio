@@ -18,48 +18,55 @@ import { ErrorBoundary } from "./components/ErrorBoundary";
 import { ScrollToHash } from "./components/ScrollToHash";
 import { MobileStickyCTA } from "./components/MobileStickyCTA";
 
+// ─── Eagerly loaded (home page only) ─────────────────────────────────────────
 import Index from "./pages/Index";
-import PasseioDetalhe from "./pages/PasseioDetalhe";
-import BlogPost from "./pages/BlogPost";
-const NotFound = lazy(() => import("./pages/NotFound"));
-const AdminLogin = lazy(() => import("./pages/AdminLogin"));
-const AdminResetPassword = lazy(() => import("./pages/AdminResetPassword"));
-const AdminLayout = lazy(() => import("./pages/AdminLayout"));
-const AdminDashboard = lazy(() => import("./pages/AdminDashboard"));
-const AdminTours = lazy(() => import("./pages/AdminTours"));
-const AdminPages = lazy(() => import("./pages/AdminPages"));
-const AdminImages = lazy(() => import("./pages/AdminImages"));
-const AdminSocial = lazy(() => import("./pages/AdminSocial"));
-const AdminGallery = lazy(() => import("./pages/AdminGallery"));
-const AdminBlog = lazy(() => import("./pages/AdminBlog"));
-const AdminHero = lazy(() => import("./pages/AdminHero"));
-const AdminTheme = lazy(() => import("./pages/AdminTheme"));
-const AdminUsers = lazy(() => import("./pages/AdminUsers"));
-const AdminSales = lazy(() => import("./pages/AdminSales"));
-const AdminSimulator = lazy(() => import("./pages/AdminSimulator"));
-const AdminCalendar = lazy(() => import("./pages/AdminCalendar"));
-const AdminAnalytics = lazy(() => import("./pages/AdminAnalytics"));
 
-const Blog = lazy(() => import("./pages/Blog"));
-const Cart = lazy(() => import("./pages/Cart"));
-const MaracanaCalendar = lazy(() => import("./pages/MaracanaCalendar"));
-const GenericPage = lazy(() => import("./pages/GenericPage"));
-const CheckoutSuccess = lazy(() => import("./pages/CheckoutSuccess"));
-const MatchDetail = lazy(() => import("./pages/MatchDetail"));
-const FlamengoVascoMaracana = lazy(() => import("./pages/FlamengoVascoMaracana"));
+// ─── Lazily loaded pages (split from main bundle) ─────────────────────────────
+const PasseioDetalhe         = lazy(() => import("./pages/PasseioDetalhe"));
+const BlogPost               = lazy(() => import("./pages/BlogPost"));
+const NotFound               = lazy(() => import("./pages/NotFound"));
+const AdminLogin             = lazy(() => import("./pages/AdminLogin"));
+const AdminResetPassword     = lazy(() => import("./pages/AdminResetPassword"));
+const AdminLayout            = lazy(() => import("./pages/AdminLayout"));
+const AdminDashboard         = lazy(() => import("./pages/AdminDashboard"));
+const AdminTours             = lazy(() => import("./pages/AdminTours"));
+const AdminPages             = lazy(() => import("./pages/AdminPages"));
+const AdminImages            = lazy(() => import("./pages/AdminImages"));
+const AdminSocial            = lazy(() => import("./pages/AdminSocial"));
+const AdminGallery           = lazy(() => import("./pages/AdminGallery"));
+const AdminBlog              = lazy(() => import("./pages/AdminBlog"));
+const AdminHero              = lazy(() => import("./pages/AdminHero"));
+const AdminTheme             = lazy(() => import("./pages/AdminTheme"));
+const AdminUsers             = lazy(() => import("./pages/AdminUsers"));
+const AdminSales             = lazy(() => import("./pages/AdminSales"));
+const AdminSimulator         = lazy(() => import("./pages/AdminSimulator"));
+const AdminCalendar          = lazy(() => import("./pages/AdminCalendar"));
+const AdminAnalytics         = lazy(() => import("./pages/AdminAnalytics"));
+const Blog                   = lazy(() => import("./pages/Blog"));
+const Cart                   = lazy(() => import("./pages/Cart"));
+const MaracanaCalendar       = lazy(() => import("./pages/MaracanaCalendar"));
+const GenericPage            = lazy(() => import("./pages/GenericPage"));
+const CheckoutSuccess        = lazy(() => import("./pages/CheckoutSuccess"));
+const MatchDetail            = lazy(() => import("./pages/MatchDetail"));
+const FlamengoVascoMaracana  = lazy(() => import("./pages/FlamengoVascoMaracana"));
 const FluminenseBolivarLibertadores = lazy(() => import("./pages/FluminenseBolivarLibertadores"));
-const PasseiosIndex = lazy(() => import("./pages/PasseiosIndex"));
-const BrasilPanamaMaracana = lazy(() => import("./pages/BrasilPanamaMaracana"));
-const JogoLanding = lazy(() => import("./pages/JogoLanding"));
-const Sitemap = lazy(() => import("./pages/Sitemap"));
-
-
-const PasseiosCategoria = lazy(() => import("./pages/PasseiosCategoria"));
+const PasseiosIndex          = lazy(() => import("./pages/PasseiosIndex"));
+const BrasilPanamaMaracana   = lazy(() => import("./pages/BrasilPanamaMaracana"));
+const JogoLanding            = lazy(() => import("./pages/JogoLanding"));
+const Sitemap                = lazy(() => import("./pages/Sitemap"));
+const PasseiosCategoria      = lazy(() => import("./pages/PasseiosCategoria"));
 
 const PageLoader = () => <div className="min-h-screen flex items-center justify-center bg-background"><div className="w-12 h-12 border-4 border-primary border-t-transparent rounded-full animate-spin" /></div>;
 
+// Deferred analytics — runs after first paint to avoid blocking main thread
 const AnalyticsTracker = () => {
+  const [ready, setReady] = useState(false);
+  useEffect(() => {
+    const id = requestAnimationFrame(() => setReady(true));
+    return () => cancelAnimationFrame(id);
+  }, []);
   useAnalytics();
+  if (!ready) return null;
   return null;
 };
 
@@ -88,9 +95,13 @@ const App = ({ queryClient: externalQueryClient }: { queryClient?: QueryClient }
               <LocaleProvider>
                 <CartProvider>
                   <AnalyticsTracker />
-                  <Suspense fallback={<PageLoader />}>
+                  {/* UI shell: no fallback to avoid layout shift */}
+                  <Suspense fallback={null}>
                     <MobileStickyCTA />
                     <FloatingButtons />
+                  </Suspense>
+                  {/* Page content: show spinner while lazy chunk loads */}
+                  <Suspense fallback={<PageLoader />}>
                     <Routes>
                       <Route path="/" element={<Index />} />
                       <Route path="/blog" element={<Blog />} />
