@@ -1,70 +1,53 @@
-## Objetivo
+## Contexto
 
-Gerar automaticamente, a cada deploy, uma página HTML estática indexável pelo Google para:
-- Cada **jogo** ativo do Maracanã (vindos do Supabase do parceiro)
-- Cada **passeio** ativo (já existe — vamos reforçar SEO)
-- Cada **categoria** de passeio (ex: `/passeios/city-tour`, `/passeios/maracana`)
+Em `src/pages/MatchDetail.tsx` (linha ~420) existe o bloco **"Sobre a Experiência / About the Experience"** que renderiza:
 
-Todas as páginas usam o prerender React existente (visual idêntico ao site) e o CTA principal aponta para o anúncio interno (`/match/:slug` ou `/passeio/:slug`).
-
-## O que muda
-
-### 1. Prerender — incluir jogos e categorias
-
-`scripts/prerender.js`:
-- Buscar jogos no Supabase do parceiro (mesmo cliente já usado em `useMatches.ts`) e adicionar `/jogo/:slug` à lista de rotas.
-- Agrupar passeios por `category` e adicionar `/passeios/:categoria-slug` para cada categoria distinta.
-- Manter o pipeline atual (Playwright → `dist/<rota>/index.html`).
-
-### 2. Nova rota e página de landing do jogo
-
-- Adicionar rota `/jogo/:slug` no `src/App.tsx`.
-- Criar `src/pages/JogoLanding.tsx`:
-  - Busca o jogo via `useMatches` (filtra pelo slug).
-  - Renderiza H1, descrição, data, estádio, times, logos, preço, JSON-LD `SportsEvent`.
-  - Meta tags via `react-helmet-async` (title, description, canonical, OG, Twitter).
-  - CTA grande "Ver disponibilidade e comprar" → `/match/:slug` (página real já existente em `MatchDetail.tsx`).
-  - Seções com `included_json`, `bring_json`, etc. para conteúdo rico (bom para SEO).
-
-### 3. Nova rota e página de landing por categoria
-
-- Adicionar rota `/passeios/:categoria` no `src/App.tsx`.
-- Criar `src/pages/PasseiosCategoria.tsx`:
-  - Busca passeios da categoria e renderiza grid de cards.
-  - Title/meta otimizados ("City Tour Rio de Janeiro — Tocorime" etc.).
-  - Cada card → `/passeio/:slug`.
-
-### 4. Sitemap
-
-- Atualizar `public/sitemap.xml` (e/ou a edge function `supabase/functions/sitemap/index.ts`) para incluir `/jogo/:slug` e `/passeios/:categoria` dinamicamente.
-
-### 5. Reforço SEO nos passeios já prerenderizados
-
-- Conferir em `PasseioDetalhe.tsx` se `<title>`, meta description, canonical e JSON-LD `TouristTrip`/`Product` estão presentes; se não, adicionar.
-
-## Detalhes técnicos
-
-```text
-dist/
-├── jogo/
-│   ├── flamengo-vs-vasco/index.html
-│   └── fluminense-vs-bolivar/index.html
-├── passeio/
-│   ├── cristo-redentor/index.html      (já existe)
-│   └── ...
-└── passeios/
-    ├── city-tour/index.html
-    ├── maracana/index.html
-    └── trilhas/index.html
+```
+match.description_pt/en/es  ||  t('matchday_fallback')
 ```
 
-- Concorrência do Playwright fica em 3 (igual hoje) para não estourar memória; jogos podem ser dezenas, então o build vai ficar ~1–3 min mais longo.
-- Slugs de categoria gerados com `slugify()` (`src/utils/slugify.ts`).
-- `JogoLanding` reusa o mesmo `useMatches` para evitar nova lógica de fetch e manter cache.
-- Nenhuma mudança de schema, RLS ou edge function obrigatória além do sitemap.
+Checagem no banco: **todos os 17 jogos ativos têm `description_pt` e `description_en` vazios**. Ou seja, **100% das páginas hoje mostram o mesmo fallback genérico de ~50 palavras** — perda enorme de SEO (conteúdo duplicado entre páginas + texto curto demais).
 
-## Não está no escopo
+## Objetivo
 
-- Páginas HTML 100% estáticas separadas do React (descartado — prerender já entrega isso).
-- Mudar destino do CTA para checkout direto (mantém fluxo atual via página de detalhe).
-- Tradução automática das landings (ficam em PT inicialmente; i18n pode ser fase 2).
+Substituir o fallback por um texto **dinâmico de 300–500 palavras por idioma (PT/EN/ES)** que:
+
+- **Personaliza por jogo** (injeta `home_team`, `away_team`, data, estádio, competição) — assim cada página tem texto único, evitando duplicate content.
+- Mira palavras-chave reais validadas no Semrush: **maracana tour** (3.600/mês), **maracana tickets**, **flamengo tickets**, **rio de janeiro tours** (140/mês), **private tour rio de janeiro**.
+- Estrutura semântica: parágrafo intro + 2–3 `<h3>` (What's included / Why book with us / The Maracanã experience) — Google adora subtítulos.
+- Inclui sinais de confiança: CADASTUR, guia bilíngue, transfer executivo, desde 2011.
+- CTA natural no final (link interno para `#packages` da própria página).
+
+## Arquivos
+
+**Criar** `src/lib/matchExperienceText.ts` — função pura:
+
+```ts
+buildMatchExperienceText({
+  homeTeam, awayTeam, matchDate, stadium, competition?, language
+}): { intro: string; sections: { heading: string; body: string }[] }
+```
+
+Internamente: templates por idioma com placeholders (`{home}`, `{away}`, `{date}`, `{rival_context}` etc.). Total entre 350–450 palavras renderizadas.
+
+**Editar** `src/pages/MatchDetail.tsx` (apenas o bloco "Sobre a Experiência", ~linhas 418–428):
+
+- Se `match.description_xx` existir no banco → usa o do banco (admin pode sobrescrever quando quiser).
+- Senão → chama `buildMatchExperienceText(...)` e renderiza intro + h3/parágrafos com classes Tailwind existentes (`prose`/`text-muted-foreground`).
+
+**Editar** `src/translations/index.ts` — remover ou encurtar `matchday_fallback` (não será mais usado como conteúdo principal, vira apenas safety net curto).
+
+## Boost extra de SEO (mesmo escopo, baixo custo)
+
+- Atualizar a `meta description` da página (linha 370) para incluir nome dos times + "Maracanã tickets + transfer + bilingual guide" — hoje é genérica e em PT só.
+- Atualizar o `SportsEvent` JSON-LD (`generateSportsEventSchema`) para usar o novo `description` longo (Google usa pra entender contexto do evento).
+
+## Não mexer
+
+- Layout/design do bloco (mesmo container, mesma tipografia).
+- Estrutura do banco (descrições manuais continuam funcionando como override).
+- Outras páginas estáticas (`BrasilPanamaMaracana`, `FlamengoVascoMaracana`, `FluminenseBolivarLibertadores`) — têm texto próprio e ficam de fora.
+
+## Resultado esperado
+
+17 páginas de jogo passam a ter **350–450 palavras únicas e otimizadas** cada (em 3 idiomas), com keywords de alto volume e estrutura semântica — sem precisar escrever texto manual por jogo nem mudar a espinha dorsal do site.
