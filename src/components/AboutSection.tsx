@@ -5,9 +5,9 @@ import { OptimizedImage } from "./OptimizedImage";
 
 const DEFAULT_IMAGES = [
   'https://images.unsplash.com/photo-1483729558449-99ef09a8c325?q=80&w=800', // Rio Aerial
-  'https://images.unsplash.com/photo-1544735088-355523feee4a?q=80&w=800', // Beach
-  'https://images.unsplash.com/photo-1516834611397-8d633eaec5c0?q=80&w=600', // Forest
-  'https://images.unsplash.com/photo-1596402184320-417d7178b2cd?q=80&w=800', // Culture
+  'https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/render/image/public/site-images/1776156723884_o0fq7cpn2n.webp?quality=70&width=800&format=avif&resize=contain&v=1778909407943',
+  'https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/render/image/public/site-images/1776156617814_tf6xmvip0z9.webp?quality=70&width=800&format=avif&resize=contain&v=1778909407943',
+  'https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/render/image/public/site-images/1776156762554_2bnx5enpd8d.webp?quality=70&width=800&format=avif&resize=contain&v=1778909407943',
 ];
 
 export function AboutSection() {
