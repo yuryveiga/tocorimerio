@@ -3,7 +3,10 @@
  */
 export function isOptimizable(url: string): boolean {
   if (!url) return false;
-  return url.includes("images.unsplash.com") || url.includes("supabase.co/storage/v1/object/public");
+  // Only Unsplash supports free image transformation via query params.
+  // Supabase /render/image/public/ requires the Image Transformation add-on
+  // which is NOT enabled on this project — attempting it causes 400 errors.
+  return url.includes("images.unsplash.com");
 }
 
 /**
@@ -41,14 +44,9 @@ export function getOptimizedImage(
     return `${baseUrl}?q=${quality}${widthParam}${heightParam}${fmt}${versionParam}&fit=crop`;
   }
  
-  // Supabase Storage Optimization (Resize API)
-  if (url.includes("supabase.co/storage/v1/object/public")) {
-    if (url.includes("/object/public/")) {
-        const renderUrl = url.replace("/object/public/", "/render/image/public/");
-        const fmt = format ? `&format=${format}` : "";
-        const sbResize = `&resize=${fit}`;
-        return `${renderUrl}?quality=${quality}${sbWidthParam}${sbHeightParam}${fmt}${sbResize}${versionParam}`;
-    }
+  // Supabase Storage — return as-is (Image Transformation API not enabled on this project)
+  if (url.includes("supabase.co")) {
+    return url;
   }
 
   // Add version to other URLs if provided (ONLY for non-local assets to avoid preload mismatch)
