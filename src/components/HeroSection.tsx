@@ -20,13 +20,18 @@ export function HeroSection() {
   const siteName = siteSettings['site_name'] || 'Tocorime Rio';
   const logoUrl = siteSettings?.logo_url || images['logo'];
 
+  // Default shown immediately — no API wait (critical for LCP)
+  const DEFAULT_HERO = "https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776157066514_2zl4bonrweg.webp";
+
   const availableBgs = [
     images["hero_bg"],
     images["hero_bg_2"],
     images["hero_bg_3"]
   ].filter(Boolean);
 
-  const heroBgs = availableBgs.length > 0 ? availableBgs : ["https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776157066514_2zl4bonrweg.webp"];
+  // If admin hasn't set any images yet, show the default immediately.
+  // Once the API resolves, availableBgs will have real URLs and override.
+  const heroBgs = availableBgs.length > 0 ? availableBgs : [DEFAULT_HERO];
 
   useEffect(() => {
     if (heroBgs.length <= 1) return;

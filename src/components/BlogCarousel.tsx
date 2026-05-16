@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { fetchLovable, LovableBlogPost } from "@/integrations/lovable/client";
@@ -20,12 +20,30 @@ export function BlogCarousel() {
   const { t, language } = useLocale();
   const { images } = useSiteData();
   const fallbackImage = images.hero_bg || "/placeholder.svg";
+  const sectionRef = useRef<HTMLElement>(null);
+  const fetchedRef = useRef(false);
 
+  // ── Defer fetch until section enters viewport (keeps 364KB off the critical path)
   useEffect(() => {
-    fetchLovable<LovableBlogPost>("blog_posts").then((data) => {
-      setPosts(data.filter(p => p.is_published));
-      setIsLoading(false);
-    }).catch(() => setIsLoading(false));
+    const el = sectionRef.current;
+    if (!el) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting && !fetchedRef.current) {
+          fetchedRef.current = true;
+          fetchLovable<LovableBlogPost>("blog_posts").then((data) => {
+            setPosts(data.filter(p => p.is_published));
+            setIsLoading(false);
+          }).catch(() => setIsLoading(false));
+          observer.disconnect();
+        }
+      },
+      { rootMargin: "300px" } // start fetching 300px before section is visible
+    );
+
+    observer.observe(el);
+    return () => observer.disconnect();
   }, []);
 
   const getTranslated = (post: LovableBlogPost, field: 'title' | 'content'): string => {
@@ -36,10 +54,10 @@ export function BlogCarousel() {
     return post[field] as string;
   };
 
-  if (isLoading || posts.length === 0) return null;
+  if (isLoading || posts.length === 0) return <section ref={sectionRef} className="bg-[#FF8A5B] py-16 md:py-24" />;
 
   return (
-    <section className="bg-[#FF8A5B] py-16 md:py-24 overflow-hidden relative">
+    <section ref={sectionRef} className="bg-[#FF8A5B] py-16 md:py-24 overflow-hidden relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col lg:flex-row items-center gap-12">
           {/* Left Side: Content */}
