@@ -216,11 +216,13 @@ async function prerender() {
       await page.route('**/*', (route) => {
         const url = route.request().url();
         const type = route.request().resourceType();
+        // Abort font/image/media requests — fulfill with empty body causes
+        // "Failed to decode" warnings; abort is cleaner.
         if (type === 'image' || type === 'font' || type === 'media') {
-          return route.fulfill({ status: 200, body: '' });
+          return route.abort();
         }
         if (/google-analytics|googletagmanager|doubleclick|facebook\.net|hotjar|clarity/.test(url)) {
-          return route.fulfill({ status: 200, body: '' });
+          return route.abort();
         }
         return route.continue();
       });
