@@ -220,7 +220,8 @@ async function prerender() {
         if (type === 'image' || type === 'font' || type === 'media') {
           return route.fulfill({ status: 204, body: '' });
         }
-        if (/google-analytics|googletagmanager|doubleclick|facebook\.net|hotjar|clarity/.test(url)) {
+        // Block heavy widgets and trackers
+        if (/google-analytics|googletagmanager|doubleclick|facebook\.net|hotjar|clarity|elfsightcdn\.com/.test(url)) {
           return route.fulfill({ status: 204, body: '' });
         }
         return route.continue();
