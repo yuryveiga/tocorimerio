@@ -4,7 +4,7 @@ import { fetchLovable, LovableTour, LovablePage, LovableSiteImage, LovableSocial
 
 const fallbackTours: LovableTour[] = [
   { id: "1", title: "City Tour Rio Completo", short_description: "Conheça os pontos turísticos mais icônicos do Rio de Janeiro.", price: 250, duration: "8 horas", max_group_size: 15, image_url: "/placeholder.svg", is_featured: true, category: "City Tour", is_active: true, sort_order: 1 },
-  { id: "2", title: "Arraial do Cabo", short_description: "Descubra o Caribe Brasileiro com águas cristalinas.", price: 180, duration: "12 horas", max_group_size: 20, image_url: "https://images.unsplash.com/photo-1516834611397-8d633eaec5c0?q=80&w=1200", is_featured: true, category: "Praia", is_active: true, sort_order: 2 },
+  { id: "2", title: "Arraial do Cabo", short_description: "Descubra o Caribe Brasileiro com águas cristalinas.", price: 180, duration: "12 horas", max_group_size: 20, image_url: "/placeholder.svg", is_featured: true, category: "Praia", is_active: true, sort_order: 2 },
   { id: "3", title: "Angra dos Reis", short_description: "Navegue pelas ilhas paradisíacas de Angra dos Reis.", price: 200, duration: "10 horas", max_group_size: 25, image_url: "/placeholder.svg", is_featured: true, category: "Barco", is_active: true, sort_order: 3 },
 ];
 
