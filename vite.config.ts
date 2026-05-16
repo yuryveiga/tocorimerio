@@ -18,29 +18,16 @@ export default defineConfig(({ mode }) => ({
     rollupOptions: {
       output: {
         manualChunks(id) {
-          // Keep React + its ecosystem together to avoid TDZ initialization errors.
-          // Splitting react into its own chunk causes "Cannot access X before initialization"
-          // when other chunks reference React context before the react chunk executes.
-          if (
-            id.includes('node_modules/react/') ||
-            id.includes('node_modules/react-dom/') ||
-            id.includes('node_modules/react-router') ||
-            id.includes('node_modules/scheduler/')
-          ) return 'react-vendor';
-
-          // Heavy UI libraries — safe to split because they don't init React context
-          if (id.includes('@radix-ui')) return 'radix';
-          if (id.includes('framer-motion')) return 'motion';
-          if (id.includes('embla-carousel')) return 'carousel';
-          if (id.includes('recharts') || id.includes('d3-')) return 'charts';
-
-          // Data layer — no React dependency issues
-          if (id.includes('@supabase')) return 'supabase';
-          if (id.includes('@tanstack')) return 'query';
+          // Group all node_modules into a single vendor chunk.
+          // This is the most stable way to avoid "Cannot access X before initialization"
+          // while still keeping the main app bundle small and cacheable.
+          if (id.includes('node_modules')) {
+            return 'vendor';
+          }
         },
       },
     },
-    chunkSizeWarningLimit: 500,
+    chunkSizeWarningLimit: 1000,
   },
   resolve: {
     alias: {

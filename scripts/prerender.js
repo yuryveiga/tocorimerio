@@ -213,19 +213,13 @@ async function prerender() {
       });
 
       // Block heavy assets and trackers to speed up rendering (keep CSS/JS!)
-      await page.route('**/*', (route) => {
-        const url = route.request().url();
-        const type = route.request().resourceType();
-        // Abort font/image/media requests — fulfill with empty body causes
-        // "Failed to decode" warnings; abort is cleaner.
+        // Block heavy assets and trackers to speed up rendering (keep CSS/JS!)
         if (type === 'image' || type === 'font' || type === 'media') {
-          return route.abort();
+          return route.fulfill({ status: 204, body: '' });
         }
         if (/google-analytics|googletagmanager|doubleclick|facebook\.net|hotjar|clarity/.test(url)) {
-          return route.abort();
+          return route.fulfill({ status: 204, body: '' });
         }
-        return route.continue();
-      });
 
       console.log(`Prerendering ${route}...`);
       try {
