@@ -17,11 +17,25 @@ export default defineConfig(({ mode }) => ({
   build: {
     rollupOptions: {
       output: {
-        // Letting Vite handle chunking automatically for better stability
-      }
-
+        manualChunks(id) {
+          // Radix UI components — large, rarely changes
+          if (id.includes('@radix-ui')) return 'radix';
+          // Recharts — heavy charting library
+          if (id.includes('recharts') || id.includes('d3-')) return 'charts';
+          // Framer Motion — animation library
+          if (id.includes('framer-motion')) return 'motion';
+          // Embla Carousel
+          if (id.includes('embla-carousel')) return 'carousel';
+          // React core — always cache separately
+          if (id.includes('node_modules/react/') || id.includes('node_modules/react-dom/')) return 'react';
+          // Supabase client
+          if (id.includes('@supabase')) return 'supabase';
+          // TanStack Query
+          if (id.includes('@tanstack')) return 'query';
+        },
+      },
     },
-    chunkSizeWarningLimit: 1000,
+    chunkSizeWarningLimit: 500,
   },
   resolve: {
     alias: {

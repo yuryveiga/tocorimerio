@@ -52,18 +52,11 @@ experts. Private, safe, and tailored exclusively for you.">
 experts. Private, safe, and tailored exclusively for you.">
   <meta name="twitter:description" content="Discover the Real Rio. Skip the tourist traps and explore the Marvelous City with local
 experts. Private, safe, and tailored exclusively for you.">
-  <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=AW-18075082892"></script>
+  <!-- Analytics: gtag stub — scripts loaded deferred after page load -->
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-
-    gtag('config', 'AW-18075082892');
-  </script>
-  <!-- Event snippet for Visualização de página conversion page -->
-  <script>
-    gtag('event', 'conversion', {'send_to': 'AW-16608678123/RUoyCMK0_qEbEOuh0e89'});
   </script>
 </head>
 
@@ -109,22 +102,30 @@ experts. Private, safe, and tailored exclusively for you.">
     </script>
     <script>
       window.addEventListener('load', function() {
-        const loadGTM = () => {
-          const script = document.createElement('script');
-          script.async = true;
-          script.src = "https://www.googletagmanager.com/gtag/js?id=G-R4PH55B7S7";
-          document.body.appendChild(script);
-          
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
-          gtag('js', new Date());
-          gtag('config', 'G-R4PH55B7S7');
+        var loadAnalytics = function() {
+          // Load GA4
+          var s1 = document.createElement('script');
+          s1.async = true;
+          s1.src = 'https://www.googletagmanager.com/gtag/js?id=G-R4PH55B7S7';
+          document.head.appendChild(s1);
+
+          // Load Google Ads
+          var s2 = document.createElement('script');
+          s2.async = true;
+          s2.src = 'https://www.googletagmanager.com/gtag/js?id=AW-18075082892';
+          document.head.appendChild(s2);
+
+          s1.onload = function() {
+            gtag('config', 'G-R4PH55B7S7');
+            gtag('config', 'AW-18075082892');
+            gtag('event', 'conversion', {'send_to': 'AW-16608678123/RUoyCMK0_qEbEOuh0e89'});
+          };
         };
 
         if ('requestIdleCallback' in window) {
-          requestIdleCallback(() => setTimeout(loadGTM, 3000));
+          requestIdleCallback(function() { setTimeout(loadAnalytics, 2000); });
         } else {
-          setTimeout(loadGTM, 5000);
+          setTimeout(loadAnalytics, 4000);
         }
       });
     </script>

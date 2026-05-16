@@ -1,10 +1,11 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { useLocale } from "@/contexts/LocaleContext";
 import { useSiteData } from "@/hooks/useSiteData";
 
 export function ReviewsSection() {
   const { t } = useLocale();
   const { socialMedia } = useSiteData();
+  const sectionRef = useRef<HTMLElement>(null);
 
   const tripAdvisorSocial = socialMedia.find(s =>
     s.platform.toLowerCase().includes('tripadvisor') && s.is_active !== false
@@ -12,22 +13,29 @@ export function ReviewsSection() {
   const tripAdvisorUrl = tripAdvisorSocial?.url || "https://www.tripadvisor.com.br/";
 
   useEffect(() => {
-    // Load Elfsight platform script
-    const script = document.createElement("script");
-    script.src = "https://elfsightcdn.com/platform.js";
-    script.async = true;
-    document.body.appendChild(script);
+    const el = sectionRef.current;
+    if (!el) return;
 
-    return () => {
-      // Clean up script on unmount
-      if (document.body.contains(script)) {
-        document.body.removeChild(script);
-      }
-    };
+    // Load Elfsight only when the section enters the viewport
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting) {
+          const script = document.createElement("script");
+          script.src = "https://elfsightcdn.com/platform.js";
+          script.async = true;
+          document.body.appendChild(script);
+          observer.disconnect();
+        }
+      },
+      { rootMargin: "400px" }
+    );
+
+    observer.observe(el);
+    return () => observer.disconnect();
   }, []);
 
   return (
-    <section id="reviews" className="py-20 bg-muted/30">
+    <section ref={sectionRef} id="reviews" className="py-20 bg-muted/30">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-serif font-bold text-foreground mb-4 text-balance">
