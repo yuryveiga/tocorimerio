@@ -1,53 +1,56 @@
-## Contexto
+## 1. Status do Prerender
 
-Em `src/pages/MatchDetail.tsx` (linha ~420) existe o bloco **"Sobre a Experiência / About the Experience"** que renderiza:
+Rodei `npm run build` + `npm run prerender` no sandbox:
 
+- **Build:** sucesso (saída `dist/` gerada, sitemap com 17 tours + 7 jogos + 53 posts, fallback SPA com 98 rotas).
+- **Conversão WebP/WOFF2 do postbuild:** OK, todos os arquivos já existem.
+- **Prerender:** iniciou normalmente, salvou diretórios `dist/match/*`, `dist/passeio/*`, `dist/blog/*` etc. Não encontrei erros — apenas estourou o limite de 10 min do sandbox por causa do volume (~100 rotas × Playwright). Em produção (GitHub Actions, sem timeout agressivo) **deve concluir sem falhas**.
+
+Recomendação: nenhum fix necessário no prerender agora. Se quiser, adiciono no relatório final um aviso para monitorar a aba **Actions** do GitHub no próximo deploy e te avisar se alguma rota cair em `failed` ou `emptySelector`.
+
+---
+
+## 2. Acelerar carregamento de imagens (sem resize)
+
+Hoje o site já converte os assets locais para WebP e usa `<picture>` com AVIF/WebP para Unsplash. O gargalo são as **imagens do Supabase Storage** (`site-images`), que hoje são servidas **as-is** (JPG/PNG original, sem cache longo controlado e sem formato moderno) — confirmado em `src/utils/imageOptimization.ts` (retorna a URL crua para `*.supabase.co`).
+
+Vou aplicar 5 otimizações que **não fazem resize** e não mexem na espinha dorsal:
+
+### 2.1 Preload do LCP da home
+Adicionar no `index.html`:
+```html
+<link rel="preload" as="image" href="/maracana-hero.webp" fetchpriority="high" type="image/webp">
 ```
-match.description_pt/en/es  ||  t('matchday_fallback')
-```
+Ganho típico: LCP −300 a −800 ms.
 
-Checagem no banco: **todos os 17 jogos ativos têm `description_pt` e `description_en` vazios**. Ou seja, **100% das páginas hoje mostram o mesmo fallback genérico de ~50 palavras** — perda enorme de SEO (conteúdo duplicado entre páginas + texto curto demais).
+### 2.2 Priority hints corretos no Hero
+No `HeroSection.tsx` garantir `loading="eager"` + `fetchPriority="high"` + `decoding="sync"` apenas na imagem do hero, e `loading="lazy"` em todo o resto (já é o default, mas há componentes que não passam o prop).
 
-## Objetivo
+### 2.3 Cache-Control agressivo + servir WebP do Supabase
+No `OptimizedImage.tsx`, para URLs do bucket `site-images`, tentar primeiro a versão `.webp` co-localizada (quando existir) via `<source type="image/webp">` e cair para o original como fallback. Não faz resize, só troca de container.
 
-Substituir o fallback por um texto **dinâmico de 300–500 palavras por idioma (PT/EN/ES)** que:
+Em paralelo, adicionar no `getOptimizedImage` um `?cache=max` (parâmetro inócuo) que serve como cache-buster apenas quando muda a `version`, deixando o navegador reaproveitar entre páginas.
 
-- **Personaliza por jogo** (injeta `home_team`, `away_team`, data, estádio, competição) — assim cada página tem texto único, evitando duplicate content.
-- Mira palavras-chave reais validadas no Semrush: **maracana tour** (3.600/mês), **maracana tickets**, **flamengo tickets**, **rio de janeiro tours** (140/mês), **private tour rio de janeiro**.
-- Estrutura semântica: parágrafo intro + 2–3 `<h3>` (What's included / Why book with us / The Maracanã experience) — Google adora subtítulos.
-- Inclui sinais de confiança: CADASTUR, guia bilíngue, transfer executivo, desde 2011.
-- CTA natural no final (link interno para `#packages` da própria página).
+### 2.4 `width` + `height` em todos os `<img>` para evitar CLS
+Várias chamadas a `OptimizedImage` usam `fill` sem dimensões intrínsecas. Vou passar `width`/`height` (mesmo que apenas para o atributo HTML, sem redimensionar de fato) nos cards de tour, blog e match — reduz reflow e melhora INP/CLS, sinais que o Google usa para ranking.
 
-## Arquivos
+### 2.5 `<link rel="preconnect">` para o CDN de imagens
+Já existe preconnect para Supabase principal. Adicionar também para o bucket público (`ogzasprtfgimjqrtcseg.storage.supabase.co`) e para o domínio R2 do OG image — evita handshakes redundantes no primeiro paint.
 
-**Criar** `src/lib/matchExperienceText.ts` — função pura:
+### Bônus (opcional, sem código novo)
+Posso estender `scripts/convert-images.js` para também processar imagens em `src/assets/**` que ainda não estão na lista `TARGETS`, garantindo que toda imagem bundled vire WebP no build (sem resize, qualidade 82 = visualmente sem perda).
 
-```ts
-buildMatchExperienceText({
-  homeTeam, awayTeam, matchDate, stadium, competition?, language
-}): { intro: string; sections: { heading: string; body: string }[] }
-```
+---
 
-Internamente: templates por idioma com placeholders (`{home}`, `{away}`, `{date}`, `{rival_context}` etc.). Total entre 350–450 palavras renderizadas.
+## Arquivos que serão alterados
 
-**Editar** `src/pages/MatchDetail.tsx` (apenas o bloco "Sobre a Experiência", ~linhas 418–428):
+- `index.html` — preload do hero + preconnect extra
+- `src/components/HeroSection.tsx` — fetchPriority correto
+- `src/components/OptimizedImage.tsx` — fallback WebP para URLs Supabase
+- `src/utils/imageOptimization.ts` — helper para detectar `.webp` co-localizado
+- `src/components/TourItem.tsx`, `src/components/BlogCarousel.tsx`, cards de match — adicionar `width`/`height`
+- `scripts/convert-images.js` — varrer `src/assets` automaticamente (opcional)
 
-- Se `match.description_xx` existir no banco → usa o do banco (admin pode sobrescrever quando quiser).
-- Senão → chama `buildMatchExperienceText(...)` e renderiza intro + h3/parágrafos com classes Tailwind existentes (`prose`/`text-muted-foreground`).
+**Sem mudanças** em: rotas, banco, layout, design system, lógica de negócio, sistema de pagamentos.
 
-**Editar** `src/translations/index.ts` — remover ou encurtar `matchday_fallback` (não será mais usado como conteúdo principal, vira apenas safety net curto).
-
-## Boost extra de SEO (mesmo escopo, baixo custo)
-
-- Atualizar a `meta description` da página (linha 370) para incluir nome dos times + "Maracanã tickets + transfer + bilingual guide" — hoje é genérica e em PT só.
-- Atualizar o `SportsEvent` JSON-LD (`generateSportsEventSchema`) para usar o novo `description` longo (Google usa pra entender contexto do evento).
-
-## Não mexer
-
-- Layout/design do bloco (mesmo container, mesma tipografia).
-- Estrutura do banco (descrições manuais continuam funcionando como override).
-- Outras páginas estáticas (`BrasilPanamaMaracana`, `FlamengoVascoMaracana`, `FluminenseBolivarLibertadores`) — têm texto próprio e ficam de fora.
-
-## Resultado esperado
-
-17 páginas de jogo passam a ter **350–450 palavras únicas e otimizadas** cada (em 3 idiomas), com keywords de alto volume e estrutura semântica — sem precisar escrever texto manual por jogo nem mudar a espinha dorsal do site.
+Aprove o plano para eu implementar.
