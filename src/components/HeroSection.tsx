@@ -139,9 +139,12 @@ export function HeroSection() {
             src={bg}
             alt=""
             aria-hidden="true"
+            width={1920}
+            height={1080}
             className="absolute inset-0 w-full h-full object-cover opacity-0 pointer-events-none select-none"
             fetchPriority={index === 0 ? "high" : "low"}
             loading={index === 0 ? "eager" : "lazy"}
+            decoding={index === 0 ? "sync" : "async"}
           />
         </div>
       ))}
