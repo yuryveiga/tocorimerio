@@ -63,6 +63,10 @@ export function getOptimizedImage(
  */
 export function getBlurPlaceholder(url: string, fit: 'cover' | 'contain' = 'cover', height?: number, version?: string | number): string {
   if (!url) return "";
+  // Only generate a real LQIP for URLs we can actually resize.
+  // For Supabase / local assets, returning the full URL would waste bandwidth
+  // by loading the same image twice — skip the blur layer instead.
+  if (!isOptimizable(url)) return "";
   // tiny width (20px) and low quality (10) for maximum blur efficiency
   return getOptimizedImage(url, 20, 10, 'webp', fit, height, version);
 }
