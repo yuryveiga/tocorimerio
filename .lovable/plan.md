@@ -1,56 +1,52 @@
-## 1. Status do Prerender
+# Otimizações PageSpeed (cache + imagens + CSS bloqueante)
 
-Rodei `npm run build` + `npm run prerender` no sandbox:
+Site hospedado no GitHub Pages com domínio custom `tocorimerio.com`. Algumas limitações de cache vêm do GH Pages (não permite headers custom), então as ações abaixo focam no que dá para controlar de fato.
 
-- **Build:** sucesso (saída `dist/` gerada, sitemap com 17 tours + 7 jogos + 53 posts, fallback SPA com 98 rotas).
-- **Conversão WebP/WOFF2 do postbuild:** OK, todos os arquivos já existem.
-- **Prerender:** iniciou normalmente, salvou diretórios `dist/match/*`, `dist/passeio/*`, `dist/blog/*` etc. Não encontrei erros — apenas estourou o limite de 10 min do sandbox por causa do volume (~100 rotas × Playwright). Em produção (GitHub Actions, sem timeout agressivo) **deve concluir sem falhas**.
+## 1. Ciclos de vida de cache (~44 KiB)
 
-Recomendação: nenhum fix necessário no prerender agora. Se quiser, adiciono no relatório final um aviso para monitorar a aba **Actions** do GitHub no próximo deploy e te avisar se alguma rota cair em `failed` ou `emptySelector`.
+O PageSpeed reclama porque o GH Pages serve quase tudo com `Cache-Control: max-age=600` (10 min). Não dá para mudar headers no GH Pages, mas podemos:
 
----
+- **Reduzir o que precisa ser revalidado** trocando `manifest.json`, `favicon.png`, `cadastur-logo.png`, `robots.txt` e outros estáticos para nomes versionados ou referenciá-los com `?v=hash` controlado pelo Vite.
+- **Servir imagens do Storage (Supabase) com `Cache-Control: public, max-age=31536000, immutable`** no upload. Hoje o bucket `site-images` usa o default (3600s). Atualizar:
+  - Os uploads novos no admin (`src/pages/AdminImages.tsx`, `AdminHero.tsx`, `AdminGallery.tsx`, `tours/TourGalleryTab.tsx`, `AdminBlog.tsx`) passam `cacheControl: '31536000'` ao chamar `supabase.storage.from(...).upload(...)`.
+  - Rodar um script único (`scripts/refresh-cache-headers.ts`) que faz `update` em todos os arquivos atuais do bucket aplicando `cacheControl: '31536000'`.
+- **Aumentar o cache do sitemap edge function** (já é dinâmico) adicionando `Cache-Control: public, max-age=3600` na resposta.
 
-## 2. Acelerar carregamento de imagens (sem resize)
+> Observação: para ir além disso seria preciso migrar de GH Pages para Cloudflare Pages/Netlify (suportam `_headers`). Posso preparar isso depois se quiser.
 
-Hoje o site já converte os assets locais para WebP e usa `<picture>` com AVIF/WebP para Unsplash. O gargalo são as **imagens do Supabase Storage** (`site-images`), que hoje são servidas **as-is** (JPG/PNG original, sem cache longo controlado e sem formato moderno) — confirmado em `src/utils/imageOptimization.ts` (retorna a URL crua para `*.supabase.co`).
+## 2. Entrega de imagens (~4 MiB)
 
-Vou aplicar 5 otimizações que **não fazem resize** e não mexem na espinha dorsal:
+Imagens do bucket são servidas no tamanho/qualidade original (sem Image Transformation API). Vamos reduzir o peso bruto sem mexer em resize visual:
 
-### 2.1 Preload do LCP da home
-Adicionar no `index.html`:
-```html
-<link rel="preload" as="image" href="/maracana-hero.webp" fetchpriority="high" type="image/webp">
-```
-Ganho típico: LCP −300 a −800 ms.
+- **Recompressão em massa** do bucket `site-images`: um script Node (`scripts/recompress-bucket.ts`) baixa cada imagem, recomprime com `sharp` em WebP qualidade 78 (perto de visualmente lossless, ~40–55% menor), e faz upload de volta com o mesmo path + `cacheControl: '31536000'`. Não altera dimensões, então os layouts continuam idênticos.
+- **Hero LCP**: a `maracana-hero.webp` local (public/) e a versão do Storage também passam pelo mesmo passo.
+- Garantir que o `<link rel="preload">` da hero use exatamente a URL renderizada (já está alinhado).
+- Adicionar `width`/`height` intrínsecos no `<img>` da hero (evita CLS, melhora INP).
 
-### 2.2 Priority hints corretos no Hero
-No `HeroSection.tsx` garantir `loading="eager"` + `fetchPriority="high"` + `decoding="sync"` apenas na imagem do hero, e `loading="lazy"` em todo o resto (já é o default, mas há componentes que não passam o prop).
+## 3. CSS bloqueante (`index-*.css` 19 KiB + `vendor-*.css` 4 KiB)
 
-### 2.3 Cache-Control agressivo + servir WebP do Supabase
-No `OptimizedImage.tsx`, para URLs do bucket `site-images`, tentar primeiro a versão `.webp` co-localizada (quando existir) via `<source type="image/webp">` e cair para o original como fallback. Não faz resize, só troca de container.
+São os 2 CSS gerados pelo Vite que travam o first paint. Plano:
 
-Em paralelo, adicionar no `getOptimizedImage` um `?cache=max` (parâmetro inócuo) que serve como cache-buster apenas quando muda a `version`, deixando o navegador reaproveitar entre páginas.
+- **Inline do CSS crítico**: adicionar o plugin `vite-plugin-critical` (ou `beasties`) no `vite.config.ts` para extrair o CSS above-the-fold de cada rota e injetar inline em `<style>` no HTML pré-renderizado. O CSS completo continua carregando de forma assíncrona (`rel="preload" as="style" onload="this.rel='stylesheet'"`).
+- Como o site já roda `npm run prerender` (Playwright) no deploy, o inline pode acontecer como pós-processamento: script `scripts/inline-critical-css.js` que, depois do prerender, percorre cada `dist/**/*.html`, extrai o CSS usado por aquele HTML (via `beasties` ou `critters`) e re-escreve o arquivo.
+- Adicionar passo `node scripts/inline-critical-css.js` no `.github/workflows/deploy.yml` logo depois do prerender.
 
-### 2.4 `width` + `height` em todos os `<img>` para evitar CLS
-Várias chamadas a `OptimizedImage` usam `fill` sem dimensões intrínsecas. Vou passar `width`/`height` (mesmo que apenas para o atributo HTML, sem redimensionar de fato) nos cards de tour, blog e match — reduz reflow e melhora INP/CLS, sinais que o Google usa para ranking.
+## Arquivos a tocar
 
-### 2.5 `<link rel="preconnect">` para o CDN de imagens
-Já existe preconnect para Supabase principal. Adicionar também para o bucket público (`ogzasprtfgimjqrtcseg.storage.supabase.co`) e para o domínio R2 do OG image — evita handshakes redundantes no primeiro paint.
+- `src/pages/AdminImages.tsx`, `AdminHero.tsx`, `AdminGallery.tsx`, `tours/TourGalleryTab.tsx`, `AdminBlog.tsx` — passar `cacheControl` no upload.
+- `supabase/functions/sitemap/index.ts` — header de cache.
+- Novos: `scripts/recompress-bucket.ts`, `scripts/refresh-cache-headers.ts`, `scripts/inline-critical-css.js`.
+- `vite.config.ts` — plugin de critical CSS (se optarmos pela versão integrada) **ou** só usar `beasties` no pós-build.
+- `.github/workflows/deploy.yml` — passo extra para inline de CSS crítico.
+- `src/components/HeroSection.tsx` — `width`/`height` no `<img>` da hero.
 
-### Bônus (opcional, sem código novo)
-Posso estender `scripts/convert-images.js` para também processar imagens em `src/assets/**` que ainda não estão na lista `TARGETS`, garantindo que toda imagem bundled vire WebP no build (sem resize, qualidade 82 = visualmente sem perda).
+## Ganhos esperados
 
----
+- Cache: economia ~44 KiB em visitas repetidas + imagens do Storage com 1 ano de cache.
+- Imagens: redução ~30–50% no peso total (~2 MiB a menos no primeiro load).
+- CSS bloqueante: −150 a −350 ms no FCP/LCP no mobile 4G.
 
-## Arquivos que serão alterados
+## Fora de escopo
 
-- `index.html` — preload do hero + preconnect extra
-- `src/components/HeroSection.tsx` — fetchPriority correto
-- `src/components/OptimizedImage.tsx` — fallback WebP para URLs Supabase
-- `src/utils/imageOptimization.ts` — helper para detectar `.webp` co-localizado
-- `src/components/TourItem.tsx`, `src/components/BlogCarousel.tsx`, cards de match — adicionar `width`/`height`
-- `scripts/convert-images.js` — varrer `src/assets` automaticamente (opcional)
-
-**Sem mudanças** em: rotas, banco, layout, design system, lógica de negócio, sistema de pagamentos.
-
-Aprove o plano para eu implementar.
+- Migração de hosting (GH Pages → Cloudflare/Netlify) para poder definir headers HTTP. Posso planejar separadamente se quiser ir mais fundo no cache.
+- Mudanças de layout, design ou regras de negócio.

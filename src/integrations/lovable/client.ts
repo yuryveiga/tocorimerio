@@ -14,7 +14,10 @@ export async function uploadLovableFile(file: File): Promise<string | null> {
     
     const { error: uploadError } = await supabase.storage
       .from('site-images')
-      .upload(fileName, optimizedFile);
+      .upload(fileName, optimizedFile, {
+        cacheControl: '31536000', // 1 year — filename is unique, safe to cache forever
+        contentType: 'image/webp',
+      });
 
     if (uploadError) {
       toast.error(`ERRO DE BUCKET (Storage): ${uploadError.message}`);
