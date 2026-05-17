@@ -17,6 +17,8 @@
     "convert:images": "node scripts/convert-images.js",
     "convert:fonts": "node scripts/convert-fonts.js",
     "postbuild": "npm run convert:images && npm run convert:fonts && npm run sitemap && npm run spa-fallback",
+    "inline:critical": "node scripts/inline-critical-css.js",
+    "recompress:bucket": "node scripts/recompress-bucket.js",
     "sync:matches": "node scripts/sync-matches.js"
   },
   "dependencies": {
