@@ -229,6 +229,86 @@ async function prerender() {
           return route.continue();
         }
 
+        // Mock currency exchange rates API response to avoid fetch/parse errors
+        if (url.includes('open.er-api.com')) {
+          return route.fulfill({
+            status: 200,
+            contentType: 'application/json',
+            body: JSON.stringify({
+              result: 'success',
+              base_code: 'BRL',
+              rates: { BRL: 1.0, USD: 0.20, EUR: 0.18 }
+            })
+          });
+        }
+
+        // Mock Open-Meteo Weather forecast APIs to avoid fetch/parse errors
+        if (url.includes('api.open-meteo.com')) {
+          // Daily forecast API (PasseioDetalhe.tsx)
+          if (url.includes('daily=')) {
+            const times = [];
+            const tempsMax = [];
+            const tempsMin = [];
+            const codes = [];
+            const today = new Date();
+            for (let i = 0; i < 20; i++) {
+              const d = new Date(today);
+              d.setDate(today.getDate() + i - 2);
+              times.push(d.toISOString().split('T')[0]);
+              tempsMax.push(28.0);
+              tempsMin.push(20.0);
+              codes.push(0); // clear sky
+            }
+            return route.fulfill({
+              status: 200,
+              contentType: 'application/json',
+              body: JSON.stringify({
+                daily: {
+                  time: times,
+                  temperature_2m_max: tempsMax,
+                  temperature_2m_min: tempsMin,
+                  weathercode: codes
+                }
+              })
+            });
+          }
+          // Hourly forecast API (WeatherSection.tsx)
+          if (url.includes('hourly=')) {
+            const times = [];
+            const temps = [];
+            const codes = [];
+            const winds = [];
+            const humidities = [];
+            const today = new Date();
+            for (let day = -2; day < 10; day++) {
+              const d = new Date(today);
+              d.setDate(today.getDate() + day);
+              const dateStr = d.toISOString().split('T')[0];
+              for (let hour = 0; hour < 24; hour++) {
+                const hourStr = hour.toString().padStart(2, '0');
+                times.push(`${dateStr}T${hourStr}:00`);
+                temps.push(25.0);
+                codes.push(0);
+                winds.push(12.0);
+                humidities.push(70);
+              }
+            }
+            return route.fulfill({
+              status: 200,
+              contentType: 'application/json',
+              body: JSON.stringify({
+                hourly: {
+                  time: times,
+                  temperature_2m: temps,
+                  weather_code: codes,
+                  wind_speed_10m: winds,
+                  relative_humidity_2m: humidities
+                }
+              })
+            });
+          }
+        }
+
         // Fulfill external stylesheets with empty body to avoid CSS network/parse errors
         if (type === 'stylesheet' || url.includes('fonts.googleapis.com')) {
           return route.fulfill({ status: 200, contentType: 'text/css', body: '' });
