@@ -3,6 +3,21 @@ import { getOptimizedImage, getBlurPlaceholder, isOptimizable } from "@/utils/im
 import { cn } from "@/lib/utils";
 import { useSiteData } from "@/hooks/useSiteData";
 
+const SRCSET_WIDTHS = [400, 800, 1200, 1600];
+
+function buildSrcSet(
+  src: string,
+  quality: number,
+  fit: "cover" | "contain",
+  height: number | undefined,
+  version: string | number | undefined,
+  fmt?: "webp" | "avif"
+) {
+  return SRCSET_WIDTHS
+    .map((w) => `${getOptimizedImage(src, w, quality, fmt, fit, height, version)} ${w}w`)
+    .join(", ");
+}
+
 interface OptimizedImageProps {
   src: string;
   alt: string;
@@ -72,16 +87,14 @@ export const OptimizedImage = memo(function OptimizedImage({
     }
   }, [finalSrc]);
 
-  const getSrcSet = (fmt?: 'webp' | 'avif') => {
-    if (!optimizable) return undefined;
-    const widths = [400, 800, 1200, 1600];
-    return widths
-      .map(w => `${getOptimizedImage(src, w, quality, fmt, fit, height, version)} ${w}w`)
-      .join(", ");
-  };
- 
-  const srcSetAvif = useMemo(() => getSrcSet('avif'), [src, quality, fit, height, version, optimizable]);
-  const srcSetWebp = useMemo(() => getSrcSet('webp'), [src, quality, fit, height, version, optimizable]);
+  const srcSetAvif = useMemo(
+    () => (optimizable ? buildSrcSet(src, quality, fit, height, version, "avif") : undefined),
+    [src, quality, fit, height, version, optimizable]
+  );
+  const srcSetWebp = useMemo(
+    () => (optimizable ? buildSrcSet(src, quality, fit, height, version, "webp") : undefined),
+    [src, quality, fit, height, version, optimizable]
+  );
  
   return (
     <div className={cn(
