@@ -110,12 +110,8 @@ async function startServer() {
 async function fetchDynamicRoutes() {
   const routes = [
     '/',
-    '/about',
-    '/faq',
-    '/contact',
     '/blog',
     '/passeio',
-    '/maracana-matchday',
     '/our-tours',
     '/sitemap',
     '/flamengo-x-vasco-maracana',
@@ -158,7 +154,9 @@ async function fetchDynamicRoutes() {
   const { data: pages } = await supabase.from('pages').select('href').eq('is_visible', true);
   if (pages) {
     pages.forEach(page => {
-      if (!routes.includes(page.href)) routes.push(page.href);
+      if (page.href && page.href.startsWith('/') && !page.href.includes('#') && !routes.includes(page.href)) {
+        routes.push(page.href);
+      }
     });
   }
 
@@ -209,22 +207,35 @@ async function prerender() {
       });
 
       page.on('pageerror', err => {
-        console.error(`  [BROWSER CRASH] ${route}: ${err.message}`);
+        console.error(`  [BROWSER CRASH] ${route}: ${err.stack || err.message}`);
       });
 
-      // Block heavy assets and trackers to speed up rendering (keep CSS/JS!)
+      // Strict sandbox isolation: allow only localhost and Supabase, block/mock everything else
       await page.route('**/*', (route) => {
         const url = route.request().url();
         const type = route.request().resourceType();
         
-        if (type === 'image' || type === 'font' || type === 'media') {
-          return route.fulfill({ status: 204, body: '' });
+        // Always allow local dev server requests
+        if (url.startsWith('http://localhost') || url.startsWith('http://127.0.0.1')) {
+          // Block local heavy assets to speed up load time
+          if (type === 'image' || type === 'font' || type === 'media') {
+            return route.fulfill({ status: 204, body: '' });
+          }
+          return route.continue();
         }
-        // Block heavy widgets and trackers
-        if (/google-analytics|googletagmanager|doubleclick|facebook\.net|hotjar|clarity|elfsightcdn\.com/.test(url)) {
-          return route.fulfill({ status: 204, body: '' });
+
+        // Always allow Supabase API requests so dynamic database fetches succeed
+        if (url.includes('supabase.co')) {
+          return route.continue();
         }
-        return route.continue();
+
+        // Fulfill external stylesheets with empty body to avoid CSS network/parse errors
+        if (type === 'stylesheet' || url.includes('fonts.googleapis.com')) {
+          return route.fulfill({ status: 200, contentType: 'text/css', body: '' });
+        }
+
+        // Block all other external requests (YouTube iframes, trackers, CDNs) with 204
+        return route.fulfill({ status: 204, body: '' });
       });
 
       console.log(`Prerendering ${route}...`);
