@@ -58,17 +58,17 @@ const Index = () => {
       <Header />
       <HeroSection />
       
-      <Suspense fallback={<SectionLoader />}>
-        <ToursSection />
-        <WhyChooseUs />
-        <ViewFadeIn><ReviewsSection /></ViewFadeIn>
-        <ViewFadeIn><WeatherSection /></ViewFadeIn>
-        <ViewFadeIn><AboutSection /></ViewFadeIn>
-        <ViewFadeIn><ContactSection /></ViewFadeIn>
-        <ViewFadeIn><GallerySection /></ViewFadeIn>
-        <ViewFadeIn><BlogCarousel /></ViewFadeIn>
-        <Footer />
-      </Suspense>
+      {/* Each lazy section in its own Suspense so a slow chunk
+          doesn't hold back the others from rendering. */}
+      <Suspense fallback={<SectionLoader />}><ToursSection /></Suspense>
+      <Suspense fallback={<SectionLoader />}><WhyChooseUs /></Suspense>
+      <Suspense fallback={null}><ViewFadeIn><ReviewsSection /></ViewFadeIn></Suspense>
+      <Suspense fallback={null}><ViewFadeIn><WeatherSection /></ViewFadeIn></Suspense>
+      <Suspense fallback={null}><ViewFadeIn><AboutSection /></ViewFadeIn></Suspense>
+      <Suspense fallback={null}><ViewFadeIn><ContactSection /></ViewFadeIn></Suspense>
+      <Suspense fallback={null}><ViewFadeIn><GallerySection /></ViewFadeIn></Suspense>
+      <Suspense fallback={null}><ViewFadeIn><BlogCarousel /></ViewFadeIn></Suspense>
+      <Suspense fallback={null}><Footer /></Suspense>
     </main>
   );
 };
