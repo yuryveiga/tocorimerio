@@ -16,7 +16,9 @@
     "prerender": "node scripts/prerender.js",
     "convert:images": "node scripts/convert-images.js",
     "convert:fonts": "node scripts/convert-fonts.js",
-    "postbuild": "npm run convert:images && npm run convert:fonts && npm run sitemap && npm run spa-fallback",
+    "postbuild": "npm run convert:images && npm run convert:fonts && npm run sitemap && npm run spa-fallback && npm run inline:critical",
+    "inline:critical": "node scripts/inline-critical-css.js",
+    "recompress:bucket": "node scripts/recompress-bucket.js",
     "sync:matches": "node scripts/sync-matches.js"
   },
   "dependencies": {
@@ -58,7 +60,6 @@
     "date-fns": "^3.6.0",
     "dompurify": "^3.4.1",
     "embla-carousel-react": "^8.6.0",
-
     "framer-motion": "^12.38.0",
     "input-otp": "^1.4.2",
     "lucide-react": "^0.462.0",
@@ -92,6 +93,7 @@
     "@types/react-dom": "^18.3.7",
     "@vitejs/plugin-react-swc": "^3.11.0",
     "autoprefixer": "^10.4.21",
+    "beasties": "^0.4.2",
     "dotenv": "^17.4.2",
     "express": "^5.2.1",
     "eslint": "^9.32.0",

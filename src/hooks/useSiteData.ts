@@ -121,15 +121,16 @@ export function useSiteData() {
     siteSettings: settingsQuery.data || cachedSettings,
     isLoading,
     isError: toursQuery.isError || pagesQuery.isError || imagesQuery.isError,
-    version: imagesQuery.dataUpdatedAt || settingsQuery.dataUpdatedAt || 0,
+    // version is bumped only when images refetch; settings refetches don't
+    // need to invalidate every cached <img> in the tree.
+    version: imagesQuery.dataUpdatedAt || 0,
   }), [
     toursQuery.data, 
     pagesQuery.data, 
     imagesQuery.data, 
     imagesQuery.dataUpdatedAt,
     socialQuery.data, 
-    settingsQuery.data, 
-    settingsQuery.dataUpdatedAt,
+    settingsQuery.data,
     isLoading, 
     cachedSettings,
     toursQuery.isError,

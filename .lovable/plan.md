@@ -1,53 +1,68 @@
-## Contexto
+# Plano: Simplificar código e melhorar desempenho (sem mudar funções)
 
-Em `src/pages/MatchDetail.tsx` (linha ~420) existe o bloco **"Sobre a Experiência / About the Experience"** que renderiza:
+Hoje o site funciona, mas todo o `node_modules` vira **um único `vendor.js`** (veja `vite.config.ts` — `manualChunks: () => 'vendor'`). Isso significa que a home baixa e parseia bibliotecas que só são usadas em páginas internas/admin (recharts, react-quill, framer-motion, embla, canvas-confetti, dompurify, date-fns inteiro, etc.). Esse é o maior ganho de performance disponível sem mexer em features.
 
-```
-match.description_pt/en/es  ||  t('matchday_fallback')
-```
+## O que muda
 
-Checagem no banco: **todos os 17 jogos ativos têm `description_pt` e `description_en` vazios**. Ou seja, **100% das páginas hoje mostram o mesmo fallback genérico de ~50 palavras** — perda enorme de SEO (conteúdo duplicado entre páginas + texto curto demais).
+### 1. Quebrar o vendor chunk em grupos coerentes
+Em `vite.config.ts`, substituir o `manualChunks` atual por agrupamentos por uso real:
 
-## Objetivo
+- `react-vendor` → react, react-dom, react-router-dom, react-helmet-async
+- `query` → @tanstack/react-query, @supabase/supabase-js
+- `radix-core` → radix usados na home (tooltip, dialog, dropdown, toast, slot, label)
+- `radix-extra` → demais radix (usados em admin/forms)
+- `charts` → recharts (só admin/analytics)
+- `editor` → react-quill-new + quill-image-resize-module-react + dompurify (só admin/blog)
+- `motion` → framer-motion (poucos lugares)
+- `carousel` → embla-carousel-react
+- `confetti` → canvas-confetti
+- `forms` → react-hook-form, @hookform/resolvers, zod
+- `icons` → lucide-react
+- demais `node_modules` → `vendor`
 
-Substituir o fallback por um texto **dinâmico de 300–500 palavras por idioma (PT/EN/ES)** que:
+Resultado esperado: a home deixa de baixar ~300–500 KB de JS que não usa.
 
-- **Personaliza por jogo** (injeta `home_team`, `away_team`, data, estádio, competição) — assim cada página tem texto único, evitando duplicate content.
-- Mira palavras-chave reais validadas no Semrush: **maracana tour** (3.600/mês), **maracana tickets**, **flamengo tickets**, **rio de janeiro tours** (140/mês), **private tour rio de janeiro**.
-- Estrutura semântica: parágrafo intro + 2–3 `<h3>` (What's included / Why book with us / The Maracanã experience) — Google adora subtítulos.
-- Inclui sinais de confiança: CADASTUR, guia bilíngue, transfer executivo, desde 2011.
-- CTA natural no final (link interno para `#packages` da própria página).
+### 2. Lazy-load de provedores que só servem páginas internas
+Em `src/App.tsx`, `CartProvider`, `CurrencyProvider` e `LocaleProvider` são montados sempre, mas só são realmente consumidos por páginas/checkout/admin. Manter os providers no topo (para não quebrar nada), mas:
+- garantir que seus arquivos não importem bibliotecas pesadas no escopo top-level (auditar `src/contexts/*` e mover qualquer import pesado para dentro de funções/handlers).
+- mover `useAnalytics` para dentro do `requestIdleCallback` que já existe no `index.html`, deixando `AnalyticsTracker` apenas como hook condicional após `ready`.
 
-## Arquivos
+### 3. Limpeza de dependências desnecessárias
+- Remover `express` do `dependencies` (SPA estática, não é usado em runtime — apenas inflar `bun.lock` / análises).
+- Confirmar com `rg` se `canvas-confetti`, `framer-motion`, `react-resizable-panels`, `vaul`, `input-otp`, `react-day-picker`, `next-themes` ainda têm uso. Remover os sem nenhuma referência. (Apenas remoção de imports órfãos; nada que esteja em uso é tocado.)
 
-**Criar** `src/lib/matchExperienceText.ts` — função pura:
+### 4. Index.tsx: dividir Suspense da dobra
+Hoje `ToursSection`, `WhyChooseUs`, `Reviews`, `Weather`, `About`, `Contact`, `Gallery`, `BlogCarousel`, `Footer` ficam todos sob **um único `<Suspense>`** — qualquer chunk lento atrasa todos. Trocar por um `<Suspense>` por bloco lazy (ou agrupar só os 2 primeiros above-the-fold). Isso permite que o navegador pinte cada seção assim que seu chunk chega.
 
-```ts
-buildMatchExperienceText({
-  homeTeam, awayTeam, matchDate, stadium, competition?, language
-}): { intro: string; sections: { heading: string; body: string }[] }
-```
+### 5. CSS e fontes
+- Confirmar que `scripts/inline-critical-css.js` está realmente sendo executado no deploy (`postbuild` atual não chama `inline:critical`; só o workflow do GitHub chama). Mover `inline:critical` para o `postbuild` para que rode também em previews/Lovable, eliminando o CSS render-blocking citado no relatório.
+- Verificar duplicidade entre fontes auto-hospedadas (`/fonts/*.woff2`) e qualquer `@import` de Google Fonts em `src/index.css`. Se houver `@import`, removê-lo.
 
-Internamente: templates por idioma com placeholders (`{home}`, `{away}`, `{date}`, `{rival_context}` etc.). Total entre 350–450 palavras renderizadas.
+### 6. Service Worker
+O `public/service-worker.js` apenas se desregistra e o `index.html` também desregistra qualquer SW. Manter o `index.html` e remover o arquivo `service-worker.js` (e a referência no `manifest.json` se houver) — simplifica e evita um request 200 desnecessário.
 
-**Editar** `src/pages/MatchDetail.tsx` (apenas o bloco "Sobre a Experiência", ~linhas 418–428):
+### 7. Pequenas simplificações de código (sem mudar comportamento)
+- Em `src/hooks/useSiteData.ts`, o `useSiteData` combinado faz 5 hooks e re-memoiza um objeto enorme com 12 dependências. Manter a API pública, mas o `version` pode passar a ser só `imagesQuery.dataUpdatedAt` (settings raramente muda a UI visual) — reduz re-renders globais a cada refetch de settings.
+- `OptimizedImage`: a função `getSrcSet` é recriada a cada render; mover para fora do componente (puro) — micro-otimização e leitura mais simples.
 
-- Se `match.description_xx` existir no banco → usa o do banco (admin pode sobrescrever quando quiser).
-- Senão → chama `buildMatchExperienceText(...)` e renderiza intro + h3/parágrafos com classes Tailwind existentes (`prose`/`text-muted-foreground`).
+## Detalhes técnicos
 
-**Editar** `src/translations/index.ts` — remover ou encurtar `matchday_fallback` (não será mais usado como conteúdo principal, vira apenas safety net curto).
+Arquivos tocados:
+- `vite.config.ts` — novo `manualChunks` mapeado por id.
+- `package.json` — remover deps órfãs; mover `inline:critical` para `postbuild`.
+- `src/App.tsx` — auditoria de imports top-level; analytics 100% deferido.
+- `src/pages/Index.tsx` — múltiplos `<Suspense>` em vez de um só.
+- `src/index.css` — remover `@import` de Google Fonts se existir.
+- `src/hooks/useSiteData.ts` — simplificar `version` e dependências do `useMemo`.
+- `src/components/OptimizedImage.tsx` — extrair helpers puros.
+- `public/service-worker.js` — apagar.
 
-## Boost extra de SEO (mesmo escopo, baixo custo)
+Não tocados (fora de escopo): lógica de tours, checkout, admin, Supabase schema, RLS, edge functions, conteúdo, SEO tags.
 
-- Atualizar a `meta description` da página (linha 370) para incluir nome dos times + "Maracanã tickets + transfer + bilingual guide" — hoje é genérica e em PT só.
-- Atualizar o `SportsEvent` JSON-LD (`generateSportsEventSchema`) para usar o novo `description` longo (Google usa pra entender contexto do evento).
+## Ganhos esperados (relatório PageSpeed)
+- **Render-blocking requests** resolvido pelo critical CSS inlined rodando em todo build.
+- **JS na home** cai significativamente (split do vendor).
+- **LCP/FCP** melhora porque o thread principal fica livre antes (menos parse/eval de libs não usadas).
+- **Cache eficiente** já foi tratado anteriormente (uploads com `cacheControl: 31536000`); a recompressão do bucket continua disponível via `npm run recompress:bucket`.
 
-## Não mexer
-
-- Layout/design do bloco (mesmo container, mesma tipografia).
-- Estrutura do banco (descrições manuais continuam funcionando como override).
-- Outras páginas estáticas (`BrasilPanamaMaracana`, `FlamengoVascoMaracana`, `FluminenseBolivarLibertadores`) — têm texto próprio e ficam de fora.
-
-## Resultado esperado
-
-17 páginas de jogo passam a ter **350–450 palavras únicas e otimizadas** cada (em 3 idiomas), com keywords de alto volume e estrutura semântica — sem precisar escrever texto manual por jogo nem mudar a espinha dorsal do site.
+Nenhuma rota, formulário, pagamento, e-mail ou comportamento muda — só a forma como o código é empacotado e entregue.

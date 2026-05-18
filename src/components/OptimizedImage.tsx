@@ -1,7 +1,22 @@
-import React, { useState, useEffect, memo, useMemo } from "react";
+import React, { useState, useEffect, useRef, memo, useMemo } from "react";
 import { getOptimizedImage, getBlurPlaceholder, isOptimizable } from "@/utils/imageOptimization";
 import { cn } from "@/lib/utils";
 import { useSiteData } from "@/hooks/useSiteData";
+
+const SRCSET_WIDTHS = [400, 800, 1200, 1600];
+
+function buildSrcSet(
+  src: string,
+  quality: number,
+  fit: "cover" | "contain",
+  height: number | undefined,
+  version: string | number | undefined,
+  fmt?: "webp" | "avif"
+) {
+  return SRCSET_WIDTHS
+    .map((w) => `${getOptimizedImage(src, w, quality, fmt, fit, height, version)} ${w}w`)
+    .join(", ");
+}
 
 interface OptimizedImageProps {
   src: string;
@@ -38,32 +53,48 @@ export const OptimizedImage = memo(function OptimizedImage({
   version: propVersion,
   showBlur = true,
 }: OptimizedImageProps) {
-  const [isLoaded, setIsLoaded] = useState(false);
-  const [blurSrc, setBlurSrc] = useState("");
   const { version: siteVersion } = useSiteData();
   
   const version = propVersion || siteVersion;
   const optimizable = useMemo(() => isOptimizable(src), [src]);
   const shouldShowBlur = showBlur && fetchPriority !== "high";
 
-  useEffect(() => {
-    if (src && shouldShowBlur) {
-      setBlurSrc(getBlurPlaceholder(src, fit, height, version));
-      // Reset load state if src changes
-      setIsLoaded(false);
-    }
-  }, [src, fit, height, version, shouldShowBlur]);
+  const finalSrc = useMemo(
+    () => getOptimizedImage(src, width, quality, undefined, fit, height, version),
+    [src, width, quality, fit, height, version]
+  );
+  const blurSrc = useMemo(
+    () => (shouldShowBlur ? getBlurPlaceholder(src, fit, height, version) : ""),
+    [src, fit, height, version, shouldShowBlur]
+  );
 
-  const getSrcSet = (fmt?: 'webp' | 'avif') => {
-    if (!optimizable) return undefined;
-    const widths = [400, 800, 1200, 1600];
-    return widths
-      .map(w => `${getOptimizedImage(src, w, quality, fmt, fit, height, version)} ${w}w`)
-      .join(", ");
-  };
- 
-  const srcSetAvif = useMemo(() => getSrcSet('avif'), [src, quality, fit, height, version, optimizable]);
-  const srcSetWebp = useMemo(() => getSrcSet('webp'), [src, quality, fit, height, version, optimizable]);
+  // Only reset loaded state when the actual <img src> URL changes.
+  // Version bumps that don't change the URL (e.g. Supabase URLs returned as-is)
+  // would otherwise hide the image forever, since onLoad won't re-fire.
+  const [isLoaded, setIsLoaded] = useState(true);
+  const prevSrcRef = useRef(finalSrc);
+  if (prevSrcRef.current !== finalSrc) {
+    prevSrcRef.current = finalSrc;
+    // Will trigger a re-render with isLoaded=false; onLoad/onError will flip it back.
+    setIsLoaded(false);
+  }
+
+  const imgRef = useRef<HTMLImageElement | null>(null);
+  // Cover the case where the image is already in cache and onLoad never fires.
+  useEffect(() => {
+    if (imgRef.current?.complete && imgRef.current.naturalWidth > 0) {
+      setIsLoaded(true);
+    }
+  }, [finalSrc]);
+
+  const srcSetAvif = useMemo(
+    () => (optimizable ? buildSrcSet(src, quality, fit, height, version, "avif") : undefined),
+    [src, quality, fit, height, version, optimizable]
+  );
+  const srcSetWebp = useMemo(
+    () => (optimizable ? buildSrcSet(src, quality, fit, height, version, "webp") : undefined),
+    [src, quality, fit, height, version, optimizable]
+  );
  
   return (
     <div className={cn(
@@ -102,7 +133,8 @@ export const OptimizedImage = memo(function OptimizedImage({
           </>
         )}
         <img
-          src={getOptimizedImage(src, width, quality, undefined, fit, height, version)}
+          ref={imgRef}
+          src={finalSrc}
           alt={alt}
           onLoad={(e) => {
             const img = e.currentTarget;
@@ -111,6 +143,7 @@ export const OptimizedImage = memo(function OptimizedImage({
             }
             setIsLoaded(true);
           }}
+          onError={() => setIsLoaded(true)}
           loading={loading}
           fetchPriority={fetchPriority}
           decoding={decoding}
