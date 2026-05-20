@@ -641,6 +641,11 @@ const BrasilPanamaMaracana = () => {
 
         .brasil-panama-page .section { padding: 96px 24px; }
         .brasil-panama-page .section-alt { background: var(--ink-2); }
+        .brasil-panama-page .container {
+          max-width: 1200px;
+          margin: 0 auto;
+          width: 100%;
+        }
         .brasil-panama-page .eyebrow {
           display: inline-flex; align-items: center; gap: 8px;
           font-size: 11px;
