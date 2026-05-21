@@ -7,7 +7,7 @@ import { useToast } from "@/hooks/use-toast";
 import { toast as sonnerToast } from "sonner";
 import { fetchLovable, insertLovable, updateLovable, deleteLovable, LovableSale, LovableTour } from "@/integrations/lovable/client";
 import { supabase } from "@/integrations/supabase/client";
-import { Plus, Pencil, Trash2, DollarSign, Check, X, Square, CheckSquare, CreditCard, Users } from "lucide-react";
+import { Plus, Pencil, Trash2, DollarSign, Check, X, Square, CheckSquare, CreditCard, Users, RefreshCw, Loader2 } from "lucide-react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { DeleteConfirmDialog } from "@/components/admin/DeleteConfirmDialog";
 import SaleDetailDialog from "@/components/admin/SaleDetailDialog";
@@ -25,8 +25,51 @@ const AdminSales = () => {
   const [filter, setFilter] = useState<'all' | 'pending' | 'paid' | 'cancelled' | 'archived'>('all');
   const [itemToDelete, setItemToDelete] = useState<string | null>(null);
   const [isBulkDeleteOpen, setIsBulkDeleteOpen] = useState(false);
+  const [isSyncing, setIsSyncing] = useState(false);
 
   const { toast } = useToast();
+
+  const handleSyncStripe = async () => {
+    setIsSyncing(true);
+    toast({ title: "Sincronizando com Stripe...", description: "Buscando pagamentos confirmados recentemente..." });
+
+    try {
+      const { data, error } = await supabase.functions.invoke("sync-stripe", {
+        method: "POST",
+        body: { limit: 50 }
+      });
+
+      if (error) throw error;
+
+      if (data?.success) {
+        const count = data.syncedCount || 0;
+        if (count > 0) {
+          toast({
+            title: "Sincronização concluída!",
+            description: `${count} venda(s) atualizada(s) para paga(s).`,
+          });
+          await loadData();
+        } else {
+          toast({
+            title: "Sincronização concluída",
+            description: "Nenhum novo pagamento pendente encontrado no Stripe.",
+          });
+        }
+      } else {
+        throw new Error(data?.error || "Resposta inválida do servidor");
+      }
+    } catch (err: unknown) {
+      console.error("Erro ao sincronizar Stripe:", err);
+      const message = err instanceof Error ? err.message : "Não foi possível sincronizar com o Stripe.";
+      toast({
+        title: "Erro na sincronização",
+        description: message,
+        variant: "destructive"
+      });
+    } finally {
+      setIsSyncing(false);
+    }
+  };
   const salesRef = useRef<LovableSale[]>([]);
 
   const playNotificationSound = useCallback((type: 'new' | 'paid' | 'cancel') => {
@@ -261,6 +304,19 @@ const AdminSales = () => {
       <div className="flex items-center justify-between mb-6">
         <h1 className="font-serif text-3xl font-bold text-foreground">Vendas</h1>
         <div className="flex gap-2">
+          <Button 
+            onClick={handleSyncStripe} 
+            disabled={isSyncing}
+            variant="outline" 
+            className="border-primary text-primary hover:bg-primary/10"
+          >
+            {isSyncing ? (
+              <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+            ) : (
+              <RefreshCw className="w-4 h-4 mr-2" />
+            )}
+            Sincronizar Stripe
+          </Button>
           <Button onClick={() => setStripeDialogOpen(true)} variant="outline" className="border-primary text-primary hover:bg-primary/10">
             <CreditCard className="w-4 h-4 mr-2" /> Criar link do Stripe
           </Button>
