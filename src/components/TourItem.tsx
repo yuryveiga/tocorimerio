@@ -110,10 +110,10 @@ export const TourItem = memo(({ tour }: { tour: TourCardProps }) => {
         {tour.match_date && (
           <div className="absolute bottom-4 left-4 bg-white/90 backdrop-blur-md text-primary px-3 py-2 rounded-xl shadow-xl border border-primary/20 z-10 flex flex-col items-center min-w-[60px]">
             <span className="text-[10px] font-black uppercase tracking-widest leading-none mb-1 opacity-70">
-              {new Date(tour.match_date).toLocaleDateString(language === 'pt' ? 'pt-BR' : language === 'es' ? 'es-ES' : 'en-US', { month: 'short' })}
+              {new Date(tour.match_date).toLocaleDateString(language === 'pt' ? 'pt-BR' : language === 'es' ? 'es-ES' : 'en-US', { month: 'short', timeZone: 'America/Sao_Paulo' })}
             </span>
             <span className="text-2xl font-black leading-none">
-              {new Date(tour.match_date).getUTCDate()}
+              {new Date(tour.match_date).toLocaleDateString('en-US', { day: 'numeric', timeZone: 'America/Sao_Paulo' })}
             </span>
           </div>
         )}
