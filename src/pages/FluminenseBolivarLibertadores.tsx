@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import bolivarCrest from "@/assets/bolivar-crest.png";
 import { getCanonicalUrl, generateSportsEventSchema, generateBreadcrumbsSchema } from "@/utils/seo";
@@ -8,6 +9,15 @@ const BOOKING_URL = "https://tocorimerio.com/match/fluminense-vs-bolivar-2026-05
 const PAGE_PATH = "/fluminense-bolivar-libertadores";
 
 const FluminenseBolivarLibertadores = () => {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      navigate('/maracana-calendario');
+    }, 3000);
+    return () => clearTimeout(timer);
+  }, [navigate]);
+
   const [timeLeft, setTimeLeft] = useState({
     days: "00",
     hours: "00",

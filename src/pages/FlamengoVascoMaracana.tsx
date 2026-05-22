@@ -1,4 +1,5 @@
 import { lazy, Suspense, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import { Carousel, CarouselContent, CarouselItem, CarouselPrevious, CarouselNext } from "@/components/ui/carousel";
 import { Calendar, MapPin, Star, Check, Clock, Bus, Users, ShieldCheck, Hotel, Headphones, Ticket, Wine, ChevronDown, Flame, ArrowRight } from "lucide-react";
@@ -116,8 +117,15 @@ const youtubeVideos = [
 
 const FlamengoVascoMaracana = () => {
   const { days, hours, minutes, seconds } = useCountdown(MATCH_DATE);
-
   const [activeVideo, setActiveVideo] = useState<string | null>(null);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      navigate('/maracana-calendario');
+    }, 3000);
+    return () => clearTimeout(timer);
+  }, [navigate]);
 
   return (
     <div className="bg-[#0a0a0a] text-white min-h-screen">
