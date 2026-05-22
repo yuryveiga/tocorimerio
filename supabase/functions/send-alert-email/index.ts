@@ -106,10 +106,22 @@ Deno.serve(async (req) => {
       </html>
     `
 
-    // Handle multiple recipients if 'to' is a comma-separated string
-    const recipients = typeof to === 'string' && to.includes(',') 
-      ? to.split(',').map(email => email.trim())
-      : to;
+    // Handle multiple recipients if 'to' is a comma/semicolon-separated string.
+    // Filter to keep only valid-looking email addresses.
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const rawList = Array.isArray(to)
+      ? to
+      : String(to).split(/[,;\n]/);
+    const recipients = rawList
+      .map((e: string) => String(e).trim())
+      .filter((e: string) => emailRegex.test(e));
+
+    if (recipients.length === 0) {
+      console.error('No valid recipients after parsing:', to);
+      return new Response(JSON.stringify({ error: 'No valid recipients', raw: to }), { status: 400, headers: corsHeaders });
+    }
+
+    console.log('Sending email to:', recipients, 'isCustomerCopy:', isCustomerCopy);
 
     const response = await fetch('https://api.resend.com/emails', {
       method: 'POST',
@@ -120,7 +132,7 @@ Deno.serve(async (req) => {
       body: JSON.stringify({
         from: 'Tocorime Rio <reservas@tocorimerio.com>',
         to: recipients,
-        reply_to: replyTo,
+        ...(replyTo ? { reply_to: replyTo } : {}),
         subject: subject,
         html: htmlContent
       })
