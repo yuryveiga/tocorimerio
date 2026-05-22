@@ -32,6 +32,13 @@ const CheckoutSuccess = () => {
 
       try {
         const saleIds = JSON.parse(saleIdsStr);
+
+        // Trigger Stripe sync as a fallback in case the webhook didn't fire.
+        // This guarantees the sale gets marked as paid + notifications sent.
+        supabase.functions.invoke("sync-stripe", { body: { limit: 20 } }).catch((e) => {
+          console.warn("sync-stripe invocation failed:", e);
+        });
+
         const { data, error } = await supabase
           .from("sales")
           .select("*")
