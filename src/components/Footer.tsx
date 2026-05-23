@@ -154,18 +154,30 @@ export function Footer() {
             
             <div className="flex items-center gap-2 mt-auto">
               <img
-                src="https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/render/image/public/site-images/redes/tripadvisor_dark_bg.png?width=150&quality=80&resize=contain"
+                src="/logos/tripadvisor.webp"
                 alt="TripAdvisor"
+                width="96"
+                height="32"
+                loading="lazy"
+                decoding="async"
                 className="w-24 h-auto opacity-80 hover:opacity-100 hover:scale-110 transition-all duration-300 cursor-pointer object-contain"
               />
               <img
-                src="https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/render/image/public/site-images/redes/airbnb_dark_bg.png?width=150&quality=80&resize=contain"
+                src="/logos/airbnb.webp"
                 alt="Airbnb"
+                width="96"
+                height="32"
+                loading="lazy"
+                decoding="async"
                 className="w-24 h-auto opacity-80 hover:opacity-100 hover:scale-110 transition-all duration-300 cursor-pointer object-contain"
               />
               <img
-                src="https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/render/image/public/site-images/redes/google_reviews_dark_bg.png?width=150&quality=80&resize=contain"
+                src="/logos/google_reviews.webp"
                 alt="Google Reviews"
+                width="96"
+                height="32"
+                loading="lazy"
+                decoding="async"
                 className="w-24 h-auto opacity-80 hover:opacity-100 hover:scale-110 transition-all duration-300 cursor-pointer object-contain"
               />
             </div>
