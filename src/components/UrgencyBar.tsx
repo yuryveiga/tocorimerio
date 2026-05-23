@@ -7,16 +7,17 @@ const HIDE_FOR_MS = 24 * 60 * 60 * 1000; // 24h
 
 export function UrgencyBar() {
   const { t } = useLocale();
-  const [visible, setVisible] = useState(false);
+  // Start visible to avoid CLS — hide synchronously if dismissed.
+  const [visible, setVisible] = useState(true);
 
   useEffect(() => {
     try {
       const dismissed = localStorage.getItem(STORAGE_KEY);
-      if (!dismissed || Date.now() - Number(dismissed) > HIDE_FOR_MS) {
-        setVisible(true);
+      if (dismissed && Date.now() - Number(dismissed) <= HIDE_FOR_MS) {
+        setVisible(false);
       }
     } catch {
-      setVisible(true);
+      // keep visible
     }
   }, []);
 
