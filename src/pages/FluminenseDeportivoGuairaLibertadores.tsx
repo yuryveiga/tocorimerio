@@ -1,6 +1,11 @@
 import MatchLandingPage from "@/components/MatchLandingPage";
 import { useLocale } from "@/contexts/LocaleContext";
 
+const youtubeVideos = [
+  { id: "-jRfvnBfytM", title: "Fluminense no Maracanã | Emoção Pura!" },
+  { id: "dACXIZKx7xs", title: "Unbelievable Atmosphere at Maracanã" },
+];
+
 export default function FluminenseDeportivoGuairaLibertadores() {
   const { t } = useLocale();
   return (
@@ -10,6 +15,8 @@ export default function FluminenseDeportivoGuairaLibertadores() {
       pageTitle={t("fluminense_guaira_title")}
       pageDescription={t("fluminense_guaira_desc")}
       accentClass="from-emerald-700 via-emerald-800 to-red-900"
+      heroBackground="/maracana-hero.jpg"
+      youtubeVideos={youtubeVideos}
     />
   );
 }

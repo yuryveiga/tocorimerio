@@ -13,6 +13,8 @@ import { getMatchDateInRio, getMatchHour } from "@/lib/dateUtils";
 import { format } from "date-fns";
 import { ptBR, enUS, es as esLocale } from "date-fns/locale";
 import { useLocale } from "@/contexts/LocaleContext";
+import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
+import { Play } from "lucide-react";
 
 const MARACANA_URL = "https://mwxbskzggzznxvkwgrnz.supabase.co";
 const MARACANA_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im13eGJza3pnZ3p6bnh2a3dncm56Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzMzNjE5OTUsImV4cCI6MjA4ODkzNzk5NX0.EFfaaN79uifOMgFdIZlQ5C8c-HQH-YodNGWf0MEcf9o";
@@ -26,7 +28,11 @@ interface Pkg {
   package_type: {
     slug: string;
     name_pt: string;
+    name_en?: string;
+    name_es?: string;
     description_pt: string;
+    description_en?: string;
+    description_es?: string;
     badge_pt: string | null;
     highlight_color: string | null;
     display_order: number;
@@ -46,7 +52,7 @@ function usePackages(matchId: string | undefined) {
       const { data, error } = await maracana
         .from("match_packages")
         .select(`id, price_brl, total_stock, sold_count, is_active,
-                 package_type:package_types(slug, name_pt, description_pt, badge_pt, highlight_color, display_order, includes_transfer, includes_parking_access, includes_food, includes_chopp, requires_biometrics)`)
+                 package_type:package_types(slug, name_pt, name_en, name_es, description_pt, description_en, description_es, badge_pt, badge_en, badge_es, highlight_color, display_order, includes_transfer, includes_parking_access, includes_food, includes_chopp, requires_biometrics)`)
         .eq("match_id", matchId)
         .eq("is_active", true);
       if (error) throw error;
@@ -84,6 +90,7 @@ interface Props {
   pageDescription: string;
   heroBackground?: string;
   accentClass?: string; // e.g. "from-green-600 to-green-800"
+  youtubeVideos?: { id: string; title: string }[];
 }
 
 export default function MatchLandingPage({
@@ -93,11 +100,13 @@ export default function MatchLandingPage({
   pageDescription,
   heroBackground,
   accentClass = "from-primary to-primary/70",
+  youtubeVideos,
 }: Props) {
-  const { t, language } = useLocale();
+  const { t, language, formatPrice } = useLocale();
   const { data: matches, isLoading } = useMatches();
   const match = matches?.find((m) => m.slug === matchSlug);
   const { data: packages } = usePackages(match?.id);
+  const [activeVideo, setActiveVideo] = useState<string | null>(null);
 
   const target = match ? new Date(match.match_date) : new Date();
   const cd = useCountdown(target);
@@ -165,19 +174,27 @@ export default function MatchLandingPage({
 
       {/* HERO */}
       <section
-        className={`relative pt-28 pb-16 px-4 sm:px-6 lg:px-8 overflow-hidden bg-gradient-to-br ${accentClass} text-white`}
-        style={
-          heroBackground
-            ? {
-                backgroundImage: `linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.78)), url('${heroBackground}')`,
-                backgroundSize: "cover",
-                backgroundPosition: "center",
-              }
-            : undefined
-        }
+        className={`relative pt-32 pb-24 px-4 sm:px-6 lg:px-8 overflow-hidden bg-gradient-to-br ${accentClass} text-white min-h-[85vh] flex flex-col justify-center`}
       >
+        {/* Background Image & Overlay */}
+        <div 
+          className="absolute inset-0 z-0 opacity-40 mix-blend-overlay"
+          style={{
+            backgroundImage: `url('${heroBackground || "/maracana-hero.webp"}')`,
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+          }}
+        />
+        <div className="absolute inset-0 z-0 bg-gradient-to-t from-background via-background/60 to-transparent" />
+        
+        {/* Animated Orbs */}
+        <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none opacity-50">
+          <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] rounded-full bg-primary/30 blur-[100px] animate-pulse" />
+          <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] rounded-full bg-primary/20 blur-[100px] animate-pulse" style={{ animationDelay: '2s' }} />
+        </div>
+
         <div className="max-w-5xl mx-auto text-center relative z-10">
-          <p className="inline-block text-xs sm:text-sm font-semibold tracking-[0.2em] uppercase bg-white/15 backdrop-blur px-4 py-1.5 rounded-full mb-6">
+          <p className="inline-block text-xs sm:text-sm font-bold tracking-[0.2em] uppercase bg-black/40 border border-white/10 backdrop-blur-md px-6 py-2 rounded-full mb-8 shadow-lg">
             {match.competition || t("mlp_jogo_maracana")}
           </p>
 
@@ -218,12 +235,12 @@ export default function MatchLandingPage({
             </div>
           )}
 
-          <div className="inline-flex flex-col items-center bg-white/10 backdrop-blur border border-white/20 rounded-2xl px-8 py-6 mb-2">
-            <p className="text-xs uppercase tracking-widest opacity-80 mb-1">{t("mlp_a_partir_de")}</p>
-            <p className="text-4xl sm:text-5xl font-bold mb-4">
-              R$ {Number(minPrice).toLocaleString("pt-BR", { minimumFractionDigits: 2 })}
+          <div className="inline-flex flex-col items-center bg-black/40 backdrop-blur-xl border border-white/10 rounded-3xl p-8 mb-2 shadow-2xl hover:scale-105 transition-transform duration-300">
+            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-white/70 mb-2">{t("mlp_a_partir_de")}</p>
+            <p className="text-5xl sm:text-6xl font-black mb-6 text-transparent bg-clip-text bg-gradient-to-r from-white to-white/70">
+              {formatPrice(minPrice)}
             </p>
-            <Button asChild size="lg" variant="secondary" className="text-base font-bold">
+            <Button asChild size="lg" className="w-full text-lg font-bold h-14 rounded-full bg-white text-black hover:bg-white/90 shadow-[0_0_40px_rgba(255,255,255,0.3)]">
               <Link to={matchUrl}>
                 {t("mlp_reservar_agora")} <ArrowRight className="w-5 h-5 ml-2" />
               </Link>
@@ -275,21 +292,34 @@ export default function MatchLandingPage({
                 const pt = p.package_type!;
                 const remaining = (p.total_stock || 0) - (p.sold_count || 0);
                 const lowStock = remaining > 0 && remaining <= 5;
+                const isPremium = pt.slug?.includes('premium') || pt.slug?.includes('club');
+                
+                const title = language === 'en' && pt.name_en ? pt.name_en : language === 'es' && pt.name_es ? pt.name_es : pt.name_pt;
+                const description = language === 'en' && pt.description_en ? pt.description_en : language === 'es' && pt.description_es ? pt.description_es : pt.description_pt;
+
                 return (
                   <div
                     key={p.id}
-                    className="relative bg-card border border-border rounded-2xl p-6 flex flex-col hover:shadow-lg hover:-translate-y-1 transition-all"
+                    className={`relative bg-card rounded-3xl p-8 flex flex-col transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl ${
+                      isPremium 
+                        ? 'border-2 shadow-xl' 
+                        : 'border border-border shadow-lg'
+                    }`}
+                    style={isPremium ? { borderColor: pt.highlight_color || 'hsl(var(--primary))' } : {}}
                   >
+                    {isPremium && (
+                      <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent rounded-3xl pointer-events-none" />
+                    )}
                     {pt.badge_pt && (
                       <span
-                        className="absolute -top-3 left-6 text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-full text-white"
+                        className="absolute -top-4 right-8 text-[10px] font-black uppercase tracking-widest px-4 py-1.5 rounded-full text-white shadow-lg"
                         style={{ background: pt.highlight_color || "hsl(var(--primary))" }}
                       >
                         {pt.badge_pt}
                       </span>
                     )}
-                    <h3 className="font-serif text-xl font-bold mb-2 mt-2">{pt.name_pt}</h3>
-                    <p className="text-sm text-muted-foreground mb-4 flex-1">{pt.description_pt}</p>
+                    <h3 className="font-serif text-2xl font-bold mb-3 mt-2">{title}</h3>
+                    <p className="text-sm text-muted-foreground mb-6 flex-1">{description}</p>
 
                     <ul className="space-y-1.5 mb-5 text-sm">
                       {pt.includes_transfer && (
@@ -310,18 +340,27 @@ export default function MatchLandingPage({
                       )}
                     </ul>
 
-                    <div className="border-t border-border pt-4 mt-auto">
-                      <p className="text-xs text-muted-foreground uppercase tracking-wider">{t("mlp_por_pessoa")}</p>
-                      <p className="text-3xl font-bold text-primary mb-3">
-                        R$ {Number(p.price_brl).toLocaleString("pt-BR", { minimumFractionDigits: 2 })}
-                      </p>
+                    <div className="pt-6 border-t border-border/50">
                       {lowStock && (
-                        <p className="text-xs text-destructive font-semibold mb-2">
-                          {remaining === 1 ? t("mlp_vagas_restantes_1") : t("mlp_vagas_restantes_n").replace("{n}", remaining.toString())}
+                        <p className="text-xs font-bold text-destructive mb-3 animate-pulse bg-destructive/10 inline-block px-2 py-1 rounded">
+                          {t("mlp_restam_apenas").replace("{n}", remaining.toString())}
                         </p>
                       )}
-                      <Button asChild className="w-full">
-                        <Link to={matchUrl}>{t("mlp_reservar_setor")}</Link>
+                      <div className="flex items-end justify-between mb-6">
+                        <div>
+                          <p className="text-xs uppercase tracking-wider text-muted-foreground font-semibold mb-1">{t("mlp_valor_por_pessoa")}</p>
+                          <p className="text-3xl font-black">{formatPrice(p.price_brl)}</p>
+                        </div>
+                      </div>
+                      
+                      <Button 
+                        asChild 
+                        className="w-full h-12 text-base font-bold rounded-xl shadow-lg transition-all hover:scale-[1.02]"
+                        style={isPremium ? { background: pt.highlight_color || 'hsl(var(--primary))' } : {}}
+                      >
+                        <Link to={matchUrl}>
+                          {t("mlp_selecionar")} <ArrowRight className="w-5 h-5 ml-2" />
+                        </Link>
                       </Button>
                     </div>
                   </div>
@@ -331,6 +370,71 @@ export default function MatchLandingPage({
           )}
         </div>
       </section>
+
+      {/* YOUTUBE VIDEO GALLERY */}
+      {youtubeVideos && youtubeVideos.length > 0 && (
+        <section className="py-16 px-4 sm:px-6 lg:px-8 bg-black/40 border-t border-white/5">
+          <div className="max-w-6xl mx-auto">
+            <div className="text-center mb-12">
+              <h2 className="font-serif text-3xl sm:text-4xl font-bold mb-3">
+                {t("mlp_videos_experiencia") || "Vídeos da Experiência"}
+              </h2>
+              <p className="text-muted-foreground max-w-2xl mx-auto">
+                {t("mlp_videos_desc") || "Sinta a emoção do Maracanã antes mesmo de chegar ao estádio."}
+              </p>
+            </div>
+
+            <Carousel className="w-full">
+              <CarouselContent>
+                {youtubeVideos.map((v) => (
+                  <CarouselItem key={v.id} className="basis-full sm:basis-1/2 md:basis-1/3 lg:basis-1/4">
+                    <div className="group block rounded-2xl overflow-hidden bg-card border border-border hover:border-primary/50 transition-all h-full shadow-lg">
+                      <div className="relative aspect-[9/16] bg-black">
+                        {activeVideo === v.id ? (
+                          <iframe
+                            src={`https://www.youtube.com/embed/${v.id}?autoplay=1&rel=0&modestbranding=1`}
+                            title={v.title}
+                            className="absolute inset-0 w-full h-full border-0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowFullScreen
+                          />
+                        ) : (
+                          <button
+                            type="button"
+                            onClick={() => setActiveVideo(v.id)}
+                            className="absolute inset-0 w-full h-full group"
+                          >
+                            <img
+                              src={`https://img.youtube.com/vi/${v.id}/hqdefault.jpg`}
+                              alt={v.title}
+                              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-80 group-hover:opacity-100"
+                              loading="lazy"
+                            />
+                            <div className="absolute inset-0 bg-black/30 group-hover:bg-black/10 transition-colors flex items-center justify-center">
+                              <div className="w-14 h-14 rounded-full bg-primary flex items-center justify-center shadow-lg transform group-hover:scale-110 transition-transform duration-300">
+                                <Play className="w-6 h-6 text-primary-foreground fill-current ml-1" />
+                              </div>
+                            </div>
+                          </button>
+                        )}
+                      </div>
+                      <div className="p-4 bg-card/80 backdrop-blur-sm border-t border-border">
+                        <p className="font-semibold text-sm line-clamp-2" title={v.title}>
+                          {v.title}
+                        </p>
+                      </div>
+                    </div>
+                  </CarouselItem>
+                ))}
+              </CarouselContent>
+              <div className="hidden sm:block">
+                <CarouselPrevious className="-left-4 sm:-left-12 bg-card hover:bg-primary hover:text-primary-foreground border-border" />
+                <CarouselNext className="-right-4 sm:-right-12 bg-card hover:bg-primary hover:text-primary-foreground border-border" />
+              </div>
+            </Carousel>
+          </div>
+        </section>
+      )}
 
       {/* FINAL CTA */}
       <section className="py-16 px-4 sm:px-6 lg:px-8 bg-primary/5 border-t border-primary/20">

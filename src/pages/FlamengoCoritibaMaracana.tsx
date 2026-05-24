@@ -1,6 +1,12 @@
 import MatchLandingPage from "@/components/MatchLandingPage";
 import { useLocale } from "@/contexts/LocaleContext";
 
+const youtubeVideos = [
+  { id: "AeFVFfV1Ad0", title: "Maracanã Magic: Flamengo vs. Santos" },
+  { id: "-jRfvnBfytM", title: "Fla x Flu 2026 | Pure Emotion at Maracanã!" },
+  { id: "dACXIZKx7xs", title: "Unbelievable Atmosphere! Flamengo vs Madureira" },
+];
+
 export default function FlamengoCoritibaMaracana() {
   const { t } = useLocale();
   return (
@@ -10,6 +16,8 @@ export default function FlamengoCoritibaMaracana() {
       pageTitle={t("flamengo_coritiba_title")}
       pageDescription={t("flamengo_coritiba_desc")}
       accentClass="from-red-700 via-red-900 to-black"
+      heroBackground="/maracana-hero.webp"
+      youtubeVideos={youtubeVideos}
     />
   );
 }
