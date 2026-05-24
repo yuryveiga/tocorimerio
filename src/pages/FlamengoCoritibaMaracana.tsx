@@ -1,5 +1,6 @@
 import MatchLandingPage from "@/components/MatchLandingPage";
 import { useLocale } from "@/contexts/LocaleContext";
+import fansImg from "@/assets/maracana-fans.jpg";
 
 const youtubeVideos = [
   { id: "AeFVFfV1Ad0", title: "Maracanã Magic: Flamengo vs. Santos" },
@@ -16,7 +17,7 @@ export default function FlamengoCoritibaMaracana() {
       pageTitle={t("flamengo_coritiba_title")}
       pageDescription={t("flamengo_coritiba_desc")}
       accentClass="from-red-700 via-red-900 to-black"
-      heroBackground="/maracana-hero.webp"
+      heroBackground={fansImg}
       youtubeVideos={youtubeVideos}
     />
   );

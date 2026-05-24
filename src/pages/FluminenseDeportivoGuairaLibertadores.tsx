@@ -15,7 +15,7 @@ export default function FluminenseDeportivoGuairaLibertadores() {
       pageTitle={t("fluminense_guaira_title")}
       pageDescription={t("fluminense_guaira_desc")}
       accentClass="from-emerald-700 via-emerald-800 to-red-900"
-      heroBackground="/maracana-hero.jpg"
+      heroBackground="https://lncimg.lance.com.br/cdn-cgi/image/width=1600,quality=80,fit=cover,format=webp/uploads/2016/10/19/5807e137e598d.jpeg"
       youtubeVideos={youtubeVideos}
     />
   );
