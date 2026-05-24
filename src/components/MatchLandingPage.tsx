@@ -109,7 +109,7 @@ export default function MatchLandingPage({
   const match = matches?.find((m) => m.slug === matchSlug);
   const { data: packages } = usePackages(match?.id);
   const [activeVideo, setActiveVideo] = useState<string | null>(null);
-  const { tours } = useSiteData();
+  const { tours, maracanaGallery } = useSiteData();
 
   // Stable shuffle - only runs once when tours load, not on every render
   const randomTours = useMemo(() => {
@@ -121,21 +121,30 @@ export default function MatchLandingPage({
     return eligible.slice(0, 4);
   }, [tours]);
 
-  // Gallery images: prioritize team-specific photos, then fallback to generic
+  // Gallery: use football/maracana photos from Supabase first, then team + local assets
   const galleryImages = useMemo(() => {
     const imgs: string[] = [];
-    if (heroBackground) imgs.push(typeof heroBackground === 'string' ? heroBackground : (heroBackground as any)?.src || heroBackground);
-    if (match?.home_team_logo) imgs.push(match.home_team_logo);
-    if (match?.away_team_logo) imgs.push(match.away_team_logo);
-    // Always include Maracanã atmosphere shots
-    imgs.push("/maracana-fans.jpg");
-    imgs.push("https://lncimg.lance.com.br/cdn-cgi/image/width=1600,quality=80,fit=cover,format=webp/uploads/2016/10/19/5807e137e598d.jpeg");
-    imgs.push("/maracana-hero.webp");
-    // Deduplicate and filter logos (small team badge images don't look good full-width)
-    return [...new Set(imgs)].filter(
-      (src) => src && !src.includes('crests.football-data.org') && !src.includes('bolivar-crest')
-    ).slice(0, 5);
-  }, [match, heroBackground]);
+    // 1. Fotos da categoria futebol do Supabase (gallery__maracana)
+    if (maracanaGallery && maracanaGallery.length > 0) {
+      maracanaGallery.forEach((img: { url: string }) => { if (img.url) imgs.push(img.url); });
+    }
+    // 2. Hero background da página (foto do time)
+    if (heroBackground) {
+      const src = typeof heroBackground === 'string' ? heroBackground : (heroBackground as any)?.src || String(heroBackground);
+      if (!imgs.includes(src)) imgs.push(src);
+    }
+    // 3. Fallbacks locais se não houver fotos suficientes
+    const fallbacks = [
+      "/maracana-fans.jpg",
+      "https://lncimg.lance.com.br/cdn-cgi/image/width=1600,quality=80,fit=cover,format=webp/uploads/2016/10/19/5807e137e598d.jpeg",
+      "/maracana-hero.webp",
+    ];
+    fallbacks.forEach(f => { if (!imgs.includes(f)) imgs.push(f); });
+    // Filtrar logos pequenos
+    return imgs
+      .filter(src => src && !src.includes('crests.football-data.org') && !src.includes('bolivar-crest'))
+      .slice(0, 8);
+  }, [match, heroBackground, maracanaGallery]);
 
   const target = match ? new Date(match.match_date) : new Date();
   const cd = useCountdown(target);

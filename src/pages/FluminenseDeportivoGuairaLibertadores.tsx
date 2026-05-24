@@ -1,7 +1,11 @@
 import MatchLandingPage from "@/components/MatchLandingPage";
 import { useLocale } from "@/contexts/LocaleContext";
 
+// Vídeos do canal @maracanatalks - atualizados em 2026-05-24
 const youtubeVideos = [
+  { id: "3OYS_tp4Eog", title: "Fluminense vs São Paulo: Inside Maracanã Stadium! 🇧🇷🔥" },
+  { id: "-h8fKbucMO8", title: "This is Brazilian Football! 🇧🇷⚽" },
+  { id: "zXv4wE2-iSQ", title: "Flamengo vs Vasco Matchday Experience 🇧🇷⚽" },
   { id: "-jRfvnBfytM", title: "Fluminense no Maracanã | Emoção Pura!" },
   { id: "dACXIZKx7xs", title: "Unbelievable Atmosphere at Maracanã" },
 ];
