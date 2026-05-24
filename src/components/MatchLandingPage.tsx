@@ -15,6 +15,8 @@ import { ptBR, enUS, es as esLocale } from "date-fns/locale";
 import { useLocale } from "@/contexts/LocaleContext";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 import { Play } from "lucide-react";
+import { useSiteData } from "@/hooks/useSiteData";
+import { TourItem, TourCardProps } from "@/components/TourItem";
 
 const MARACANA_URL = "https://mwxbskzggzznxvkwgrnz.supabase.co";
 const MARACANA_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im13eGJza3pnZ3p6bnh2a3dncm56Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzMzNjE5OTUsImV4cCI6MjA4ODkzNzk5NX0.EFfaaN79uifOMgFdIZlQ5C8c-HQH-YodNGWf0MEcf9o";
@@ -107,6 +109,19 @@ export default function MatchLandingPage({
   const match = matches?.find((m) => m.slug === matchSlug);
   const { data: packages } = usePackages(match?.id);
   const [activeVideo, setActiveVideo] = useState<string | null>(null);
+  const { tours } = useSiteData();
+
+  const randomTours = tours
+    .filter((t: any) => !t.title?.includes("Maracanã MatchDay"))
+    .sort(() => 0.5 - Math.random())
+    .slice(0, 4);
+
+  const galleryImages = [
+    "/maracana-hero.webp",
+    "/maracana-fans.jpg",
+    "https://lncimg.lance.com.br/cdn-cgi/image/width=1600,quality=80,fit=cover,format=webp/uploads/2016/10/19/5807e137e598d.jpeg",
+    "/maracana-hero.jpg"
+  ];
 
   const target = match ? new Date(match.match_date) : new Date();
   const cd = useCountdown(target);
@@ -424,6 +439,66 @@ export default function MatchLandingPage({
                         </p>
                       </div>
                     </div>
+                  </CarouselItem>
+                ))}
+              </CarouselContent>
+              <div className="hidden sm:block">
+                <CarouselPrevious className="-left-4 sm:-left-12 bg-card hover:bg-primary hover:text-primary-foreground border-border" />
+                <CarouselNext className="-right-4 sm:-right-12 bg-card hover:bg-primary hover:text-primary-foreground border-border" />
+              </div>
+            </Carousel>
+          </div>
+        </section>
+      )}
+
+      {/* GALLERY CAROUSEL */}
+      <section className="py-16 px-4 sm:px-6 lg:px-8 bg-muted/30">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-10">
+            <h2 className="font-serif text-3xl sm:text-4xl font-bold mb-3">
+              {language === 'pt' ? 'Galeria de Fotos' : language === 'es' ? 'Galería de Fotos' : 'Photo Gallery'}
+            </h2>
+            <p className="text-muted-foreground max-w-2xl mx-auto">
+              {language === 'pt' ? 'Veja a festa das torcidas no Maracanã.' : language === 'es' ? 'Mira la fiesta de la afición en el Maracaná.' : 'See the fan party at Maracanã.'}
+            </p>
+          </div>
+
+          <Carousel className="w-full">
+            <CarouselContent>
+              {galleryImages.map((img, i) => (
+                <CarouselItem key={i} className="basis-full sm:basis-1/2 md:basis-1/3">
+                  <div className="rounded-2xl overflow-hidden shadow-lg h-[250px]">
+                    <img src={img} alt="Maracana Gallery" className="w-full h-full object-cover hover:scale-105 transition-transform duration-500" loading="lazy" />
+                  </div>
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+            <div className="hidden sm:block">
+              <CarouselPrevious className="-left-4 sm:-left-12 bg-card hover:bg-primary hover:text-primary-foreground border-border" />
+              <CarouselNext className="-right-4 sm:-right-12 bg-card hover:bg-primary hover:text-primary-foreground border-border" />
+            </div>
+          </Carousel>
+        </div>
+      </section>
+
+      {/* YOU MAY ALSO LIKE */}
+      {randomTours.length > 0 && (
+        <section className="py-16 px-4 sm:px-6 lg:px-8 bg-background border-t border-border/50">
+          <div className="max-w-7xl mx-auto">
+            <div className="text-center mb-10">
+              <h2 className="font-serif text-3xl sm:text-4xl font-bold mb-3">
+                {language === 'pt' ? 'Você também pode gostar' : language === 'es' ? 'También te puede gustar' : 'You May Also Like'}
+              </h2>
+              <p className="text-muted-foreground max-w-2xl mx-auto">
+                {language === 'pt' ? 'Explore outros passeios imperdíveis no Rio de Janeiro.' : language === 'es' ? 'Explora otros tours imperdibles en Río de Janeiro.' : 'Explore other must-see tours in Rio de Janeiro.'}
+              </p>
+            </div>
+
+            <Carousel className="w-full">
+              <CarouselContent>
+                {randomTours.map((tour) => (
+                  <CarouselItem key={tour.id} className="basis-full sm:basis-1/2 md:basis-1/3 lg:basis-1/4">
+                    <TourItem tour={tour as TourCardProps} />
                   </CarouselItem>
                 ))}
               </CarouselContent>
