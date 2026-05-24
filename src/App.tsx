@@ -50,6 +50,8 @@ const CheckoutSuccess        = lazy(() => import("./pages/CheckoutSuccess"));
 const MatchDetail            = lazy(() => import("./pages/MatchDetail"));
 const FlamengoVascoMaracana  = lazy(() => import("./pages/FlamengoVascoMaracana"));
 const FluminenseBolivarLibertadores = lazy(() => import("./pages/FluminenseBolivarLibertadores"));
+const FluminenseDeportivoGuairaLibertadores = lazy(() => import("./pages/FluminenseDeportivoGuairaLibertadores"));
+const FlamengoCoritibaMaracana = lazy(() => import("./pages/FlamengoCoritibaMaracana"));
 const PasseiosIndex          = lazy(() => import("./pages/PasseiosIndex"));
 const BrasilPanamaMaracana   = lazy(() => import("./pages/BrasilPanamaMaracana"));
 const JogoLanding            = lazy(() => import("./pages/JogoLanding"));
@@ -128,6 +130,8 @@ const App = ({ queryClient: externalQueryClient }: { queryClient?: QueryClient }
                       <Route path="/jogo/:id" element={<JogoLanding />} />
                       <Route path="/flamengo-x-vasco-maracana" element={<FlamengoVascoMaracana />} />
                       <Route path="/fluminense-bolivar-libertadores" element={<FluminenseBolivarLibertadores />} />
+                      <Route path="/fluminense-x-deportivo-guaira-libertadores" element={<FluminenseDeportivoGuairaLibertadores />} />
+                      <Route path="/flamengo-x-coritiba-maracana" element={<FlamengoCoritibaMaracana />} />
                       <Route path="/brasil-x-panama-maio-maracana" element={<BrasilPanamaMaracana />} />
                       <Route path="/sitemap" element={<Sitemap />} />
                       <Route path="/:slug" element={<GenericPage />} />
