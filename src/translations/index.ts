@@ -346,6 +346,37 @@ export const translationsPt = {
   bp_final_desc: "Brasil vs Panamá — o último jogo em casa antes da **Copa do Mundo 2026**. Não perca.",
   bp_final_wa: "Falar no WhatsApp",
   bp_final_note: "🔒 Ingressos oficiais · Transfer incluso · Guia bilingue · Suporte 24h",
+
+  // Match Landing Page Common
+  mlp_jogo_maracana: "Jogo no Maracanã",
+  mlp_a_partir_de: "A partir de",
+  mlp_reservar_agora: "Reservar agora",
+  mlp_pagamento_seguro: "Pagamento seguro",
+  mlp_5_star: "5★ TripAdvisor",
+  mlp_guia_bilingue: "Guia bilíngue",
+  mlp_ingresso_garantido: "Ingresso garantido",
+  mlp_setores_pacotes: "Setores e Pacotes",
+  mlp_escolha_experiencia: "Escolha sua experiência",
+  mlp_setores_disponiveis: "Setores disponíveis para {home} x {away}. Preços por pessoa em reais.",
+  mlp_carregando_setores: "Carregando setores disponíveis…",
+  mlp_transfer_ida_volta: "Transfer ida e volta",
+  mlp_acesso_estacionamento: "Acesso pelo estacionamento",
+  mlp_comidas_inclusas: "Comidas inclusas",
+  mlp_chopp_liberado: "Chopp Brahma liberado",
+  mlp_sem_biometria: "Sem biometria",
+  mlp_por_pessoa: "Por pessoa",
+  mlp_vagas_restantes_1: "Apenas 1 vaga restante",
+  mlp_vagas_restantes_n: "Apenas {n} vagas restantes",
+  mlp_reservar_setor: "Reservar este setor",
+  mlp_garanta_experiencia: "Garanta sua experiência no Maracanã",
+  mlp_vagas_limitadas: "Vagas limitadas para {home} x {away}. Reserve agora e viva a emoção do maior estádio do Brasil.",
+  mlp_ver_disponibilidade: "Ver disponibilidade e reservar",
+
+  // Specific matches
+  flamengo_coritiba_title: "Flamengo x Coritiba no Maracanã | Ingressos + Transfer | Tocorime Rio",
+  flamengo_coritiba_desc: "Garanta seu ingresso para Flamengo x Coritiba no Maracanã. Pacotes com transfer, guia bilíngue e setores premium incluindo Maracanã Club. Reserve já!",
+  fluminense_guaira_title: "Fluminense x Deportivo La Guaíra no Maracanã | Ingressos + Transfer | Tocorime Rio",
+  fluminense_guaira_desc: "Garanta seu ingresso para Fluminense x Deportivo La Guaíra no Maracanã. Pacotes com transfer, guia bilíngue e setores premium. Reserve já!",
 };
 
 export const translationsEn = {
@@ -696,6 +727,37 @@ export const translationsEn = {
   bp_final_desc: "Brazil vs Panama — the last home game before the **2026 World Cup**. Don't miss out.",
   bp_final_wa: "Chat on WhatsApp",
   bp_final_note: "🔒 Official tickets · Transfer included · Bilingual guide · 24h Support",
+
+  // Match Landing Page Common
+  mlp_jogo_maracana: "Match at Maracanã",
+  mlp_a_partir_de: "From",
+  mlp_reservar_agora: "Book now",
+  mlp_pagamento_seguro: "Secure payment",
+  mlp_5_star: "5★ TripAdvisor",
+  mlp_guia_bilingue: "Bilingual guide",
+  mlp_ingresso_garantido: "Guaranteed ticket",
+  mlp_setores_pacotes: "Sectors and Packages",
+  mlp_escolha_experiencia: "Choose your experience",
+  mlp_setores_disponiveis: "Available sectors for {home} vs {away}. Prices per person in BRL.",
+  mlp_carregando_setores: "Loading available sectors…",
+  mlp_transfer_ida_volta: "Round-trip transfer",
+  mlp_acesso_estacionamento: "Parking access",
+  mlp_comidas_inclusas: "Food included",
+  mlp_chopp_liberado: "Unlimited draft beer",
+  mlp_sem_biometria: "No biometrics needed",
+  mlp_por_pessoa: "Per person",
+  mlp_vagas_restantes_1: "Only 1 spot left",
+  mlp_vagas_restantes_n: "Only {n} spots left",
+  mlp_reservar_setor: "Book this sector",
+  mlp_garanta_experiencia: "Secure your experience at Maracanã",
+  mlp_vagas_limitadas: "Limited spots for {home} vs {away}. Book now and feel the thrill of Brazil's largest stadium.",
+  mlp_ver_disponibilidade: "Check availability and book",
+
+  // Specific matches
+  flamengo_coritiba_title: "Flamengo vs Coritiba at Maracanã | Tickets + Transfer | Tocorime Rio",
+  flamengo_coritiba_desc: "Get your ticket for Flamengo vs Coritiba at Maracanã. Packages with transfer, bilingual guide, and premium sectors including Maracanã Club. Book now!",
+  fluminense_guaira_title: "Fluminense vs Deportivo La Guaíra at Maracanã | Tickets + Transfer | Tocorime Rio",
+  fluminense_guaira_desc: "Get your ticket for Fluminense vs Deportivo La Guaíra at Maracanã. Packages with transfer, bilingual guide, and premium sectors. Book now!",
 };
 
 export const translationsEs = {
@@ -1046,4 +1108,35 @@ export const translationsEs = {
   bp_final_desc: "Brasil vs Panamá — o último partido en casa antes del **Mundial 2026**. No te lo pierdas.",
   bp_final_wa: "Hablar por WhatsApp",
   bp_final_note: "🔒 Entradas oficiales · Traslado incluido · Guía bilingüe · Soporte 24h",
+
+  // Match Landing Page Common
+  mlp_jogo_maracana: "Partido en el Maracaná",
+  mlp_a_partir_de: "A partir de",
+  mlp_reservar_agora: "Reservar ahora",
+  mlp_pagamento_seguro: "Pago seguro",
+  mlp_5_star: "5★ TripAdvisor",
+  mlp_guia_bilingue: "Guía bilingüe",
+  mlp_ingresso_garantido: "Entrada garantizada",
+  mlp_setores_pacotes: "Sectores y Paquetes",
+  mlp_escolha_experiencia: "Elige tu experiencia",
+  mlp_setores_disponiveis: "Sectores disponibles para {home} vs {away}. Precios por persona en reales.",
+  mlp_carregando_setores: "Cargando sectores disponibles…",
+  mlp_transfer_ida_volta: "Traslado ida y vuelta",
+  mlp_acesso_estacionamento: "Acceso por el estacionamiento",
+  mlp_comidas_inclusas: "Comida incluida",
+  mlp_chopp_liberado: "Cerveza libre",
+  mlp_sem_biometria: "Sin biometría",
+  mlp_por_pessoa: "Por persona",
+  mlp_vagas_restantes_1: "Solo queda 1 plaza",
+  mlp_vagas_restantes_n: "Solo quedan {n} plazas",
+  mlp_reservar_setor: "Reservar este sector",
+  mlp_garanta_experiencia: "Asegura tu experiencia en el Maracaná",
+  mlp_vagas_limitadas: "Plazas limitadas para {home} vs {away}. Reserva ahora y vive la emoción del estadio más grande de Brasil.",
+  mlp_ver_disponibilidade: "Ver disponibilidad y reservar",
+
+  // Specific matches
+  flamengo_coritiba_title: "Flamengo vs Coritiba en el Maracaná | Entradas + Traslado | Tocorime Rio",
+  flamengo_coritiba_desc: "Asegura tu entrada para Flamengo vs Coritiba en el Maracaná. Paquetes con traslado, guía bilingüe y sectores premium, incluyendo Maracanã Club. ¡Reserva ya!",
+  fluminense_guaira_title: "Fluminense vs Deportivo La Guaíra en el Maracaná | Entradas + Traslado | Tocorime Rio",
+  fluminense_guaira_desc: "Asegura tu entrada para Fluminense vs Deportivo La Guaíra en el Maracaná. Paquetes con traslado, guía bilingüe y sectores premium. ¡Reserva ya!",
 };
