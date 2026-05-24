@@ -1,6 +1,5 @@
 import MatchLandingPage from "@/components/MatchLandingPage";
 import { useLocale } from "@/contexts/LocaleContext";
-import fansImg from "@/assets/maracana-fans.jpg";
 
 // Vídeos do canal @maracanatalks - atualizados em 2026-05-24
 const youtubeVideos = [
@@ -21,7 +20,7 @@ export default function FlamengoCoritibaMaracana() {
       pageTitle={t("flamengo_coritiba_title")}
       pageDescription={t("flamengo_coritiba_desc")}
       accentClass="from-red-700 via-red-900 to-black"
-      heroBackground={fansImg}
+      heroBackground="/maracana-fans.jpg"
       youtubeVideos={youtubeVideos}
     />
   );
