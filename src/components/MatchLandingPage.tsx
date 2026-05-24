@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import { Link, Navigate } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import { createClient } from "@supabase/supabase-js";
@@ -111,17 +111,31 @@ export default function MatchLandingPage({
   const [activeVideo, setActiveVideo] = useState<string | null>(null);
   const { tours } = useSiteData();
 
-  const randomTours = tours
-    .filter((t: any) => !t.title?.includes("Maracanã MatchDay"))
-    .sort(() => 0.5 - Math.random())
-    .slice(0, 4);
+  // Stable shuffle - only runs once when tours load, not on every render
+  const randomTours = useMemo(() => {
+    const eligible = tours.filter((t: any) => !t.title?.includes("Maracanã MatchDay"));
+    for (let i = eligible.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [eligible[i], eligible[j]] = [eligible[j], eligible[i]];
+    }
+    return eligible.slice(0, 4);
+  }, [tours]);
 
-  const galleryImages = [
-    "/maracana-hero.webp",
-    "/maracana-fans.jpg",
-    "https://lncimg.lance.com.br/cdn-cgi/image/width=1600,quality=80,fit=cover,format=webp/uploads/2016/10/19/5807e137e598d.jpeg",
-    "/maracana-hero.jpg"
-  ];
+  // Gallery images: prioritize team-specific photos, then fallback to generic
+  const galleryImages = useMemo(() => {
+    const imgs: string[] = [];
+    if (heroBackground) imgs.push(typeof heroBackground === 'string' ? heroBackground : (heroBackground as any)?.src || heroBackground);
+    if (match?.home_team_logo) imgs.push(match.home_team_logo);
+    if (match?.away_team_logo) imgs.push(match.away_team_logo);
+    // Always include Maracanã atmosphere shots
+    imgs.push("/maracana-fans.jpg");
+    imgs.push("https://lncimg.lance.com.br/cdn-cgi/image/width=1600,quality=80,fit=cover,format=webp/uploads/2016/10/19/5807e137e598d.jpeg");
+    imgs.push("/maracana-hero.webp");
+    // Deduplicate and filter logos (small team badge images don't look good full-width)
+    return [...new Set(imgs)].filter(
+      (src) => src && !src.includes('crests.football-data.org') && !src.includes('bolivar-crest')
+    ).slice(0, 5);
+  }, [match, heroBackground]);
 
   const target = match ? new Date(match.match_date) : new Date();
   const cd = useCountdown(target);
