@@ -24,7 +24,7 @@ if (!url || !key) {
 }
 
 const BUCKET = "site-images";
-const QUALITY = 78;
+const QUALITY = 65;
 const supabase = createClient(url, key);
 
 async function listAll() {
