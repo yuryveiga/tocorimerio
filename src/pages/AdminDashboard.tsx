@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Map, Globe, Sparkles, Loader2, DollarSign, Users, CalendarCheck, CalendarClock, Save, LayoutGrid, FileText, Image, Share2 } from "lucide-react";
+import { Map, Globe, Sparkles, Loader2, DollarSign, Users, CalendarCheck, CalendarClock, Save, LayoutGrid, Trophy } from "lucide-react";
 import { ChangePassword } from "@/components/admin/ChangePassword";
 import { BulkTranslateCard } from "@/components/admin/BulkTranslateCard";
 import { fetchLovable, updateLovable, insertLovable, LovableSiteSetting, LovableSale, LovableTour } from "@/integrations/lovable/client";
@@ -138,6 +138,23 @@ const AdminDashboard = () => {
     }
   };
 
+  const handleToggleCopaMundo = async (checked: boolean) => {
+    const newValue = checked ? "true" : "false";
+    setSettings({ ...settings, world_cup_mode: newValue });
+    try {
+      const settingRecord = settingsList.find(s => s.key === 'world_cup_mode');
+      if (settingRecord?.id) {
+        await updateLovable("site_settings", settingRecord.id, { value: newValue });
+      } else {
+        const newRecord = await insertLovable<LovableSiteSetting>("site_settings", { key: 'world_cup_mode', value: newValue });
+        setSettingsList([...settingsList, newRecord]);
+      }
+      toast({ title: checked ? "⚽️ Modo Copa do Mundo ativado! Vai Brasil! 🏆" : "Modo Copa do Mundo desativado." });
+    } catch (err) {
+      toast({ title: "Erro ao atualizar", variant: "destructive" });
+    }
+  };
+
   const formatCurrency = (v: number) => new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(v);
 
   const cards = [
@@ -151,8 +168,45 @@ const AdminDashboard = () => {
     { label: "Euro Hoje", value: `R$ ${(1 / (rates.EUR || 0.16)).toFixed(2)}`, icon: Globe, color: "bg-indigo-100 text-indigo-600" },
   ];
 
+  const isCopaMode = settings['world_cup_mode'] === 'true';
+
   return (
     <div className="space-y-8 pb-12 font-sans">
+
+      {/* ─── Copa do Mundo 2026 Banner ─────────────────────────────── */}
+      {isCopaMode && (
+        <div className="copa-banner relative overflow-hidden rounded-3xl p-1">
+          {/* Gradient background */}
+          <div className="absolute inset-0 rounded-3xl bg-gradient-to-r from-green-700 via-yellow-400 to-green-700" />
+          {/* Subtle inner shine */}
+          <div className="absolute inset-0 rounded-3xl bg-gradient-to-b from-white/20 to-transparent" />
+
+          {/* Floating soccer balls */}
+          <span className="copa-float-ball absolute top-3 left-5 text-5xl opacity-50">⚽️</span>
+          <span className="copa-float-ball absolute top-2 right-10 text-4xl opacity-40">⚽️</span>
+          <span className="copa-float-ball absolute bottom-2 left-1/4 text-3xl opacity-30">⚽️</span>
+          <span className="copa-float-ball absolute bottom-1 right-1/3 text-4xl opacity-40">⚽️</span>
+
+          {/* Spinning stars */}
+          <span className="copa-star absolute top-4 left-1/3 text-2xl opacity-70">⭐</span>
+          <span className="copa-star absolute bottom-4 right-1/4 text-xl opacity-60">⭐</span>
+          <span className="copa-star absolute top-2 right-1/2 text-lg opacity-50">⭐</span>
+
+          {/* Content */}
+          <div className="relative z-10 py-6 px-8 text-center">
+            <p className="text-[11px] font-black uppercase tracking-[0.4em] text-green-900/70 mb-1">
+              🇧🇷 Painel Administrativo
+            </p>
+            <h2 className="copa-shimmer-text text-3xl sm:text-4xl font-black tracking-tight leading-tight">
+              🏆 COPA DO MUNDO 2026 🏆
+            </h2>
+            <p className="text-green-900/60 font-semibold mt-1.5 text-sm">
+              Modo especial ativado &bull; Vai Brasil! 🇧🇷⚽️
+            </p>
+          </div>
+        </div>
+      )}
+
       <h1 className="font-serif text-3xl font-bold text-foreground">Dashboard</h1>
       
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-6">
@@ -330,6 +384,53 @@ const AdminDashboard = () => {
               <div className="bg-orange-50 border border-orange-200 p-4 rounded-xl flex gap-3">
                 <Sparkles className="w-5 h-5 text-orange-500 shrink-0 mt-0.5" />
                 <p className="text-xs text-orange-800 italic">Dica: Desative se quiser uma aparência mais clean, sem elementos de escassez e prova social nos passeios.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Copa do Mundo 2026 Mode */}
+        <div className={`bg-card border-2 rounded-3xl p-8 shadow-sm space-y-6 flex flex-col justify-between transition-all duration-500 ${
+          isCopaMode ? 'border-yellow-400 copa-card-active' : 'border-green-200'
+        }`}>
+          <div>
+            <div className="flex items-center gap-3 mb-4">
+              <Trophy className={`w-7 h-7 transition-colors duration-300 ${
+                isCopaMode ? 'text-yellow-500' : 'text-green-600'
+              }`} />
+              <h2 className="text-2xl font-bold font-serif">Copa do Mundo</h2>
+              {isCopaMode && <span className="text-lg copa-star">🏆</span>}
+            </div>
+            <div className="space-y-4">
+              <div className={`flex items-center justify-between p-4 rounded-2xl border transition-all duration-300 ${
+                isCopaMode
+                  ? 'bg-gradient-to-r from-green-50 to-yellow-50 border-yellow-200'
+                  : 'bg-green-50 border-green-100'
+              }`}>
+                <div className="space-y-0.5">
+                  <Label className="text-base font-bold text-foreground">Modo Copa do Mundo 2026</Label>
+                  <p className="text-sm text-muted-foreground">Ativa um banner e decorações festivas no painel.</p>
+                </div>
+                <Switch
+                  checked={isCopaMode}
+                  onCheckedChange={handleToggleCopaMundo}
+                />
+              </div>
+              <div className={`border p-4 rounded-xl flex gap-3 transition-all duration-300 ${
+                isCopaMode
+                  ? 'bg-yellow-50 border-yellow-200'
+                  : 'bg-green-50 border-green-200'
+              }`}>
+                <Trophy className={`w-5 h-5 shrink-0 mt-0.5 ${
+                  isCopaMode ? 'text-yellow-500' : 'text-green-600'
+                }`} />
+                <p className={`text-xs italic ${
+                  isCopaMode ? 'text-yellow-800' : 'text-green-800'
+                }`}>
+                  {isCopaMode
+                    ? '⚽️ Vai Brasil! O painel está no clima da Copa 2026! 🏆🇧🇷'
+                    : 'Ative para entrar no clima da Copa do Mundo 2026!'}
+                </p>
               </div>
             </div>
           </div>

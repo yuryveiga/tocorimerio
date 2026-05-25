@@ -47,3 +47,80 @@
 .dark .ql-snow .ql-picker {
   color: #fff;
 }
+
+/* ─── Copa do Mundo 2026 Mode ────────────────────────────────────────────── */
+@keyframes copa-float {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  25%       { transform: translateY(-14px) rotate(90deg); }
+  50%       { transform: translateY(-7px)  rotate(180deg); }
+  75%       { transform: translateY(-20px) rotate(270deg); }
+}
+
+@keyframes copa-shimmer {
+  0%   { background-position: -300% center; }
+  100% { background-position:  300% center; }
+}
+
+@keyframes copa-pulse-glow {
+  0%, 100% { box-shadow: 0 0 0 0   rgba(234,179,8,0.5), 0 0 24px 4px rgba(22,163,74,0.15); }
+  50%       { box-shadow: 0 0 0 10px rgba(234,179,8,0),   0 0 40px 8px rgba(22,163,74,0.25); }
+}
+
+@keyframes copa-star-spin {
+  0%   { transform: rotate(0deg)   scale(1);    opacity: 0.8; }
+  50%  { transform: rotate(180deg) scale(1.3);  opacity: 1;   }
+  100% { transform: rotate(360deg) scale(1);    opacity: 0.8; }
+}
+
+@keyframes copa-banner-slide {
+  from { opacity: 0; transform: translateY(-16px) scale(0.97); }
+  to   { opacity: 1; transform: translateY(0)     scale(1);    }
+}
+
+/* Floating soccer ball */
+.copa-float-ball {
+  animation: copa-float 4s ease-in-out infinite;
+  pointer-events: none;
+  user-select: none;
+  line-height: 1;
+}
+.copa-float-ball:nth-child(2) { animation-delay: -1.2s; animation-duration: 5.2s; }
+.copa-float-ball:nth-child(3) { animation-delay: -2.4s; animation-duration: 3.8s; }
+.copa-float-ball:nth-child(4) { animation-delay: -0.7s; animation-duration: 4.7s; }
+
+/* Spinning star */
+.copa-star {
+  animation: copa-star-spin 3s linear infinite;
+  display: inline-block;
+  pointer-events: none;
+  user-select: none;
+}
+.copa-star:nth-child(2) { animation-delay: -1s; }
+.copa-star:nth-child(3) { animation-delay: -2s; }
+
+/* Shimmer text */
+.copa-shimmer-text {
+  background: linear-gradient(90deg,
+    #15803d,
+    #eab308,
+    #fbbf24,
+    #15803d,
+    #eab308,
+    #15803d
+  );
+  background-size: 300% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: copa-shimmer 4s linear infinite;
+}
+
+/* Banner entry animation */
+.copa-banner {
+  animation: copa-banner-slide 0.5s ease-out both, copa-pulse-glow 2.5s ease-in-out infinite;
+}
+
+/* Card glow when Copa mode is on */
+.copa-card-active {
+  animation: copa-pulse-glow 2.5s ease-in-out infinite;
+}
