@@ -24,7 +24,9 @@ if (!url || !key) {
 }
 
 const BUCKET = "site-images";
-const QUALITY = 65;
+const QUALITY = 72;
+const MAX_DIMENSION = 1920;
+const BACKUP_PREFIX = "originals/";
 const supabase = createClient(url, key);
 
 async function listAll() {
@@ -48,9 +50,17 @@ function isImage(name) {
   return /\.(jpe?g|png|webp|avif|gif)$/i.test(name);
 }
 
+async function backupExists(name) {
+  const { data } = await supabase.storage
+    .from(BUCKET)
+    .list(BACKUP_PREFIX, { limit: 1, search: name });
+  return !!(data && data.find((f) => f.name === name));
+}
+
 async function processOne(file) {
   const name = file.name;
   if (!isImage(name)) return { name, status: "skip-nonimage" };
+  if (name.startsWith(BACKUP_PREFIX)) return { name, status: "skip-backup" };
 
   const { data: blob, error: dlErr } = await supabase.storage
     .from(BUCKET)
@@ -60,10 +70,36 @@ async function processOne(file) {
   const srcBuf = Buffer.from(await blob.arrayBuffer());
   const srcSize = srcBuf.length;
 
-  let outBuf;
+  // Backup the original (idempotent) before any destructive operation.
   try {
-    outBuf = await sharp(srcBuf, { failOn: "none" })
-      .rotate()
+    if (!(await backupExists(name))) {
+      const { error: bkErr } = await supabase.storage
+        .from(BUCKET)
+        .upload(BACKUP_PREFIX + name, srcBuf, {
+          cacheControl: "31536000",
+          upsert: false,
+          contentType: blob.type || "application/octet-stream",
+        });
+      if (bkErr && !/exists/i.test(bkErr.message)) {
+        return { name, status: "fail-backup", error: bkErr.message };
+      }
+    }
+  } catch (e) {
+    return { name, status: "fail-backup", error: e.message };
+  }
+
+  let outBuf;
+  let meta;
+  try {
+    const pipeline = sharp(srcBuf, { failOn: "none" }).rotate();
+    meta = await pipeline.metadata();
+    outBuf = await pipeline
+      .resize({
+        width: MAX_DIMENSION,
+        height: MAX_DIMENSION,
+        fit: "inside",
+        withoutEnlargement: true,
+      })
       .webp({ quality: QUALITY, effort: 6, smartSubsample: true })
       .toBuffer();
   } catch (e) {
@@ -73,8 +109,11 @@ async function processOne(file) {
   const savings = srcSize - outBuf.length;
   const savingsPct = (savings / srcSize) * 100;
 
-  // Only re-upload if we save at least 5% AND at least 5 KiB.
-  if (savings < 5 * 1024 || savingsPct < 5) {
+  const wasResized =
+    meta && (meta.width > MAX_DIMENSION || meta.height > MAX_DIMENSION);
+
+  // Only re-upload if we save at least 5% AND at least 5 KiB, OR we resized.
+  if (!wasResized && (savings < 5 * 1024 || savingsPct < 5)) {
     // Still refresh cache header even if we don't recompress.
     const { error: upErr } = await supabase.storage
       .from(BUCKET)
@@ -107,12 +146,18 @@ async function processOne(file) {
     outSize: outBuf.length,
     savings,
     savingsPct,
+    resized: wasResized,
+    origW: meta?.width,
+    origH: meta?.height,
   };
 }
 
 async function main() {
-  console.log(`\n🗜  Recompressing bucket "${BUCKET}" (WebP q=${QUALITY}, no resize)…\n`);
-  const files = await listAll();
+  console.log(
+    `\n🗜  Resizing+recompressing bucket "${BUCKET}" (WebP q=${QUALITY}, max ${MAX_DIMENSION}px)…\n`,
+  );
+  const all = await listAll();
+  const files = all.filter((f) => !f.name.startsWith(BACKUP_PREFIX));
   console.log(`Found ${files.length} files.\n`);
 
   let totalBefore = 0;
@@ -128,14 +173,17 @@ async function main() {
       totalBefore += r.srcSize;
       totalAfter += r.outSize;
       touched++;
+      const dim = r.resized ? ` resized ${r.origW}x${r.origH}→fit ${MAX_DIMENSION}` : "";
       console.log(
-        `${tag} ✅ ${r.name}  ${(r.srcSize / 1024).toFixed(0)}KB → ${(r.outSize / 1024).toFixed(0)}KB  (-${r.savingsPct.toFixed(1)}%)`,
+        `${tag} ✅ ${r.name}  ${(r.srcSize / 1024).toFixed(0)}KB → ${(r.outSize / 1024).toFixed(0)}KB  (-${r.savingsPct.toFixed(1)}%)${dim}`,
       );
     } else if (r.status === "cache-only") {
       cacheOnly++;
       console.log(`${tag} 🪵 ${r.name}  cache refreshed (no recompress)`);
     } else if (r.status === "skip-nonimage") {
       console.log(`${tag} ⏭  ${r.name}  (not an image)`);
+    } else if (r.status === "skip-backup") {
+      // silent
     } else {
       failed++;
       console.warn(`${tag} ❌ ${r.name}  ${r.status}: ${r.error || ""}`);
