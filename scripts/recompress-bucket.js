@@ -24,7 +24,7 @@ if (!url || !key) {
 }
 
 const BUCKET = "site-images";
-const QUALITY = 78;
+const QUALITY = 65;
 const supabase = createClient(url, key);
 
 async function listAll() {
@@ -64,7 +64,7 @@ async function processOne(file) {
   try {
     outBuf = await sharp(srcBuf, { failOn: "none" })
       .rotate()
-      .webp({ quality: QUALITY, effort: 5 })
+      .webp({ quality: QUALITY, effort: 6, smartSubsample: true })
       .toBuffer();
   } catch (e) {
     return { name, status: "fail-encode", error: e.message };
