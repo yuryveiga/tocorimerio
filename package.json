@@ -16,6 +16,7 @@
     "prerender": "node scripts/prerender.js",
     "convert:images": "node scripts/convert-images.js",
     "convert:fonts": "node scripts/convert-fonts.js",
+    "prebuild": "npm run sitemap",
     "postbuild": "npm run convert:images && npm run convert:fonts && npm run sitemap && npm run spa-fallback && npm run inline:critical",
     "inline:critical": "node scripts/inline-critical-css.js",
     "recompress:bucket": "node scripts/recompress-bucket.js",
