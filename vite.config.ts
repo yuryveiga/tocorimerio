@@ -20,7 +20,12 @@ export default defineConfig(({ mode }) => ({
         manualChunks(id) {
           if (!id.includes('node_modules')) return;
 
-          // React ecosystem, data layers, and all UI primitives — ship together to guarantee
+          // Split heavy libs out of the React core vendor bundle so they can load
+          // in parallel and be evicted from the critical path when not needed.
+          if (id.includes('lucide-react')) return 'icons';
+          if (id.includes('@supabase/')) return 'supabase';
+
+          // React ecosystem, data layers, and Radix primitives — ship together to guarantee
           // initialization order (avoids "X is not a function" / createContext crashes
           // that happen when Radix/Tanstack/other libs load before React is ready).
           if (
@@ -30,9 +35,7 @@ export default defineConfig(({ mode }) => ({
             id.includes('/react-helmet-async/') ||
             id.includes('/scheduler/') ||
             id.includes('@tanstack/') ||
-            id.includes('@supabase/') ||
             id.includes('@radix-ui/') ||
-            id.includes('lucide-react') ||
             id.includes('class-variance-authority') ||
             id.includes('clsx') ||
             id.includes('tailwind-merge')
