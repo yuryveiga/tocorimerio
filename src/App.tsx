@@ -64,11 +64,35 @@ const PageLoader = () => <div className="min-h-screen flex items-center justify-
 const AnalyticsTracker = () => {
   const [ready, setReady] = useState(false);
   useEffect(() => {
-    const id = requestAnimationFrame(() => setReady(true));
-    return () => cancelAnimationFrame(id);
+    // Defer analytics ~3.5s after mount to stay off the critical path.
+    // Uses requestIdleCallback when available, with a setTimeout fallback.
+    const w = window as any;
+    let idleId: number | undefined;
+    let timeoutId: number | undefined;
+    const schedule = () => {
+      if (typeof w.requestIdleCallback === "function") {
+        idleId = w.requestIdleCallback(() => setReady(true), { timeout: 5000 });
+      } else {
+        timeoutId = window.setTimeout(() => setReady(true), 3500);
+      }
+    };
+    timeoutId = window.setTimeout(schedule, 3500);
+    return () => {
+      if (idleId && typeof w.cancelIdleCallback === "function") w.cancelIdleCallback(idleId);
+      if (timeoutId) window.clearTimeout(timeoutId);
+    };
   }, []);
+  // Only call the analytics hook once we're ready — keeps the
+  // Supabase auth.getSession() + edge function fetch out of the
+  // initial paint critical path.
+  if (ready) {
+    return <AnalyticsRunner />;
+  }
+  return null;
+};
+
+const AnalyticsRunner = () => {
   useAnalytics();
-  if (!ready) return null;
   return null;
 };
 
