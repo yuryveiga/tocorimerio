@@ -158,7 +158,11 @@ export function ToursSection() {
           ) : displayTours.length > 0 ? (
             <div className={`grid grid-cols-1 md:grid-cols-2 ${gridColsClass} gap-8`}>
               {displayTours.slice(0, count).map((tour) => (
-                <div key={`${activeTab}-${tour.id}`} data-tour-card>
+                <div
+                  key={`${activeTab}-${tour.id}`}
+                  data-tour-card
+                  style={{ contentVisibility: 'auto', containIntrinsicSize: '480px' }}
+                >
                   <TourItem tour={tour as TourCardProps} />
                 </div>
               ))}
