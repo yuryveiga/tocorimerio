@@ -199,8 +199,19 @@ async function generateSitemap() {
 
     xml += `</urlset>`;
 
+    // Write to public/ (for local dev and git tracking)
     const publicPath = path.join(__dirname, '../public/sitemap.xml');
     fs.writeFileSync(publicPath, xml);
+    console.log(`✅ Sitemap written to ${publicPath}`);
+
+    // Write to dist/ (for production deploy — postbuild runs after vite build)
+    const distPath = path.join(__dirname, '../dist/sitemap.xml');
+    if (fs.existsSync(path.dirname(distPath))) {
+      fs.writeFileSync(distPath, xml);
+      console.log(`✅ Sitemap written to ${distPath}`);
+    } else {
+      console.warn(`⚠️  dist/ not found, skipping dist/sitemap.xml (run after build)`);
+    }
 
     // Dedicated image sitemap (alternative submission format that GSC understands directly)
     let imgXml = `<?xml version="1.0" encoding="UTF-8"?>\n`;
@@ -225,14 +236,27 @@ async function generateSitemap() {
     const imgPath = path.join(__dirname, '../public/sitemap-images.xml');
     fs.writeFileSync(imgPath, imgXml);
 
+    // Write image sitemap to dist/ as well
+    const distImgPath = path.join(__dirname, '../dist/sitemap-images.xml');
+    if (fs.existsSync(path.dirname(distImgPath))) {
+      fs.writeFileSync(distImgPath, imgXml);
+      console.log(`✅ Image sitemap written to ${distImgPath}`);
+    }
+
     // Sitemap index pointing to both
     const today = new Date().toISOString().split('T')[0];
     const indexXml = `<?xml version="1.0" encoding="UTF-8"?>\n<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n  <sitemap><loc>${siteUrl}/sitemap.xml</loc><lastmod>${today}</lastmod></sitemap>\n  <sitemap><loc>${siteUrl}/sitemap-images.xml</loc><lastmod>${today}</lastmod></sitemap>\n</sitemapindex>\n`;
-    fs.writeFileSync(path.join(__dirname, '../public/sitemap-index.xml'), indexXml);
+    const indexPath = path.join(__dirname, '../public/sitemap-index.xml');
+    fs.writeFileSync(indexPath, indexXml);
 
-    console.log(`Sitemap generated at ${publicPath}`);
-    console.log(`Image sitemap generated at ${imgPath} (${imgCount} images)`);
-    console.log(`Added ${tours.length} tours, ${cats.size} categories, ${matchesCount} matches and ${posts.length} blog posts.`);
+    // Write sitemap index to dist/ as well
+    const distIndexPath = path.join(__dirname, '../dist/sitemap-index.xml');
+    if (fs.existsSync(path.dirname(distIndexPath))) {
+      fs.writeFileSync(distIndexPath, indexXml);
+    }
+
+    console.log(`✅ Image sitemap written to ${imgPath} (${imgCount} images)`);
+    console.log(`📄 Total: ${tours.length} tours, ${cats.size} categories, ${matchesCount} matches, ${posts.length} blog posts.`);
 
   } catch (error) {
     console.error('Error generating sitemap:', error);
