@@ -53,7 +53,7 @@ async function generateSitemap() {
     // Fetch Tours
     const { data: tours, error: toursError } = await supabase
       .from('tours')
-      .select('id, slug, updated_at, category')
+      .select('id, slug, title, updated_at, category, image_url, carousel_images_json, images_json')
       .eq('is_active', true);
 
     if (toursError) {
@@ -64,7 +64,7 @@ async function generateSitemap() {
     // Fetch Blog Posts
     const { data: posts, error: postsError } = await supabase
       .from('blog_posts')
-      .select('slug, updated_at')
+      .select('slug, title, excerpt, updated_at, image_url')
       .eq('is_published', true);
 
     if (postsError) {
@@ -85,8 +85,40 @@ async function generateSitemap() {
       { url: '/brasil-x-panama-maio-maracana', priority: 0.8, changefreq: 'daily' },
     ];
 
+    const escapeXml = (s) => String(s || '')
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&apos;');
+
+    const collectImages = (...sources) => {
+      const urls = new Set();
+      for (const src of sources) {
+        if (!src) continue;
+        if (typeof src === 'string') {
+          if (src.startsWith('http')) urls.add(src);
+        } else if (Array.isArray(src)) {
+          src.forEach((item) => {
+            if (typeof item === 'string' && item.startsWith('http')) urls.add(item);
+            else if (item && typeof item === 'object') {
+              const u = item.url || item.src || item.image_url || item.image;
+              if (typeof u === 'string' && u.startsWith('http')) urls.add(u);
+            }
+          });
+        }
+      }
+      return [...urls];
+    };
+
+    const imageBlock = (urls, caption) => urls.slice(0, 1000).map((u) =>
+      `    <image:image>\n      <image:loc>${escapeXml(u)}</image:loc>\n` +
+      (caption ? `      <image:caption>${escapeXml(caption)}</image:caption>\n` : '') +
+      `    </image:image>\n`
+    ).join('');
+
     let xml = `<?xml version="1.0" encoding="UTF-8"?>\n`;
-    xml += `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n`;
+    xml += `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">\n`;
 
     // Static Pages
     staticPages.forEach(page => {
@@ -109,6 +141,8 @@ async function generateSitemap() {
       xml += `    <lastmod>${(tour.updated_at || new Date().toISOString()).split('T')[0]}</lastmod>\n`;
       xml += `    <changefreq>weekly</changefreq>\n`;
       xml += `    <priority>0.8</priority>\n`;
+      const tourImages = collectImages(tour.image_url, tour.carousel_images_json, tour.images_json);
+      xml += imageBlock(tourImages, tour.title);
       xml += `  </url>\n`;
     });
 
@@ -158,6 +192,8 @@ async function generateSitemap() {
       xml += `    <lastmod>${(post.updated_at || new Date().toISOString()).split('T')[0]}</lastmod>\n`;
       xml += `    <changefreq>monthly</changefreq>\n`;
       xml += `    <priority>0.8</priority>\n`;
+      const postImages = collectImages(post.image_url);
+      xml += imageBlock(postImages, post.title || post.excerpt);
       xml += `  </url>\n`;
     });
 
@@ -165,7 +201,37 @@ async function generateSitemap() {
 
     const publicPath = path.join(__dirname, '../public/sitemap.xml');
     fs.writeFileSync(publicPath, xml);
-    console.log(`Sitemap generated successfully at ${publicPath}`);
+
+    // Dedicated image sitemap (alternative submission format that GSC understands directly)
+    let imgXml = `<?xml version="1.0" encoding="UTF-8"?>\n`;
+    imgXml += `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">\n`;
+    let imgCount = 0;
+    tours.forEach((tour) => {
+      let slug = slugify(tour.slug || tour.id);
+      if (slug.includes('niter-i') || slug.includes('niteroi')) slug = 'um-dia-em-niteroi';
+      const urls = collectImages(tour.image_url, tour.carousel_images_json, tour.images_json);
+      if (!urls.length) return;
+      imgXml += `  <url>\n    <loc>${siteUrl}/passeio/${slug}</loc>\n${imageBlock(urls, tour.title)}  </url>\n`;
+      imgCount += urls.length;
+    });
+    posts.forEach((post) => {
+      const slug = slugify(post.slug);
+      const urls = collectImages(post.image_url);
+      if (!urls.length) return;
+      imgXml += `  <url>\n    <loc>${siteUrl}/blog/${slug}</loc>\n${imageBlock(urls, post.title || post.excerpt)}  </url>\n`;
+      imgCount += urls.length;
+    });
+    imgXml += `</urlset>`;
+    const imgPath = path.join(__dirname, '../public/sitemap-images.xml');
+    fs.writeFileSync(imgPath, imgXml);
+
+    // Sitemap index pointing to both
+    const today = new Date().toISOString().split('T')[0];
+    const indexXml = `<?xml version="1.0" encoding="UTF-8"?>\n<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n  <sitemap><loc>${siteUrl}/sitemap.xml</loc><lastmod>${today}</lastmod></sitemap>\n  <sitemap><loc>${siteUrl}/sitemap-images.xml</loc><lastmod>${today}</lastmod></sitemap>\n</sitemapindex>\n`;
+    fs.writeFileSync(path.join(__dirname, '../public/sitemap-index.xml'), indexXml);
+
+    console.log(`Sitemap generated at ${publicPath}`);
+    console.log(`Image sitemap generated at ${imgPath} (${imgCount} images)`);
     console.log(`Added ${tours.length} tours, ${cats.size} categories, ${matchesCount} matches and ${posts.length} blog posts.`);
 
   } catch (error) {
