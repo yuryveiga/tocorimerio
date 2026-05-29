@@ -1,70 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
-    <loc>https://tocorimerio.com</loc>
-    <lastmod>2026-05-29</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>1</priority>
-  </url>
-  <url>
-    <loc>https://tocorimerio.com/blog</loc>
-    <lastmod>2026-05-29</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://tocorimerio.com/sobre</loc>
-    <lastmod>2026-05-29</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://tocorimerio.com/contato</loc>
-    <lastmod>2026-05-29</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://tocorimerio.com/passeio</loc>
-    <lastmod>2026-05-29</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://tocorimerio.com/our-tours</loc>
-    <lastmod>2026-05-29</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://tocorimerio.com/maracana-calendario</loc>
-    <lastmod>2026-05-29</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://tocorimerio.com/flamengo-x-vasco-maracana</loc>
-    <lastmod>2026-05-29</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://tocorimerio.com/fluminense-bolivar-libertadores</loc>
-    <lastmod>2026-05-29</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://tocorimerio.com/brasil-x-panama-maio-maracana</loc>
-    <lastmod>2026-05-29</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
     <loc>https://tocorimerio.com/passeio/rio-de-janeiro-excurs-o-a-p-com-degusta-o-de-caf</loc>
-    <lastmod>2026-05-19</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
     <image:image>
       <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1779159875780_uic9ace5if9.webp</image:loc>
       <image:caption>Rio de Janeiro: excursão a pé com degustação de café</image:caption>
@@ -116,9 +53,6 @@
   </url>
   <url>
     <loc>https://tocorimerio.com/passeio/costao-pao-de-acucar</loc>
-    <lastmod>2026-04-21</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
     <image:image>
       <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776136895488_l56izoo8xns.webp</image:loc>
       <image:caption>Costão do Pão de Açúcar</image:caption>
@@ -186,9 +120,6 @@
   </url>
   <url>
     <loc>https://tocorimerio.com/passeio/escalada-rocha-rio</loc>
-    <lastmod>2026-04-19</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
     <image:image>
       <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776137001629_5d14am30d8s.webp</image:loc>
       <image:caption>Escalada em Rocha</image:caption>
@@ -248,9 +179,6 @@
   </url>
   <url>
     <loc>https://tocorimerio.com/passeio/sunset-sailing-rio</loc>
-    <lastmod>2026-04-28</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
     <image:image>
       <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776178439310_p7ohei4s7y.webp</image:loc>
       <image:caption>Sailing Rio - Baia de Guanabara</image:caption>
@@ -286,9 +214,6 @@
   </url>
   <url>
     <loc>https://tocorimerio.com/passeio/trilha-da-pedra-bonita</loc>
-    <lastmod>2026-05-05</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
     <image:image>
       <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776136712107_6xijoeck267.webp</image:loc>
       <image:caption>Trilha da Pedra Bonita</image:caption>
@@ -384,9 +309,6 @@
   </url>
   <url>
     <loc>https://tocorimerio.com/passeio/maracana-matchday</loc>
-    <lastmod>2026-05-11</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
     <image:image>
       <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776136644074_ueljwux2xe.webp</image:loc>
       <image:caption>Maracanã MatchDay</image:caption>
@@ -398,9 +320,6 @@
   </url>
   <url>
     <loc>https://tocorimerio.com/passeio/cachoeiras-horto</loc>
-    <lastmod>2026-05-03</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
     <image:image>
       <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776136935433_iyan1f2zuk.webp</image:loc>
       <image:caption>Rota das Cachoeiras do Horto</image:caption>
@@ -468,9 +387,6 @@
   </url>
   <url>
     <loc>https://tocorimerio.com/passeio/favela-rio-tour-rocinha</loc>
-    <lastmod>2026-04-25</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
     <image:image>
       <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776266405320_eflqqt6g2do.webp</image:loc>
       <image:caption>Favela Rio Tour: Rocinha</image:caption>
@@ -514,9 +430,6 @@
   </url>
   <url>
     <loc>https://tocorimerio.com/passeio/cristo-redentor-pao-de-acucar</loc>
-    <lastmod>2026-04-17</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
     <image:image>
       <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776178624017_85tdzxr4lnn.webp</image:loc>
       <image:caption>City Tour Expresso</image:caption>
@@ -572,9 +485,6 @@
   </url>
   <url>
     <loc>https://tocorimerio.com/passeio/pequena-frica-experience-hist-ria-cultura-e-resist-ncia-no-cora-o-do-rio</loc>
-    <lastmod>2026-05-19</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
     <image:image>
       <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1778591867340_0vmfaoduhgwe.webp</image:loc>
       <image:caption>Pequena África Experience – História, Cultura e Resistência no Coração do Rio</image:caption>
@@ -658,9 +568,6 @@
   </url>
   <url>
     <loc>https://tocorimerio.com/passeio/tour-pe-centro-historico</loc>
-    <lastmod>2026-04-17</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
     <image:image>
       <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776136780115_5cor918wqko.webp</image:loc>
       <image:caption>Tour a Pé pelo Centro Histórico</image:caption>
@@ -720,9 +627,6 @@
   </url>
   <url>
     <loc>https://tocorimerio.com/passeio/city-tour-rio-completo</loc>
-    <lastmod>2026-05-03</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
     <image:image>
       <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776269176989_0zgv08vhwp5.webp</image:loc>
       <image:caption>City Tour Rio Completo!</image:caption>
@@ -786,9 +690,6 @@
   </url>
   <url>
     <loc>https://tocorimerio.com/passeio/praias-selvagens-guaratiba</loc>
-    <lastmod>2026-04-17</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
     <image:image>
       <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776137037153_8q6mve9es2m.webp</image:loc>
       <image:caption>Travessia das Praias Selvagens</image:caption>
@@ -844,9 +745,6 @@
   </url>
   <url>
     <loc>https://tocorimerio.com/passeio/transfer-aeroporto-cidade</loc>
-    <lastmod>2026-04-27</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
     <image:image>
       <image:loc>https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?q=80&amp;w=1200</image:loc>
       <image:caption>Transfers (Aeroporto e Cidade)</image:caption>
@@ -866,9 +764,6 @@
   </url>
   <url>
     <loc>https://tocorimerio.com/passeio/pedra-da-gavea-trilha</loc>
-    <lastmod>2026-04-18</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
     <image:image>
       <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776136847390_169n24rnud8.webp</image:loc>
       <image:caption>Pedra da Gávea</image:caption>
@@ -936,9 +831,6 @@
   </url>
   <url>
     <loc>https://tocorimerio.com/passeio/um-dia-em-niteroi</loc>
-    <lastmod>2026-05-11</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
     <image:image>
       <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776136562967_sx7ro9vibbj.webp</image:loc>
       <image:caption>Um dia em Niterói</image:caption>
@@ -1006,9 +898,6 @@
   </url>
   <url>
     <loc>https://tocorimerio.com/passeio/boteco-tour</loc>
-    <lastmod>2026-05-11</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
     <image:image>
       <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776599317480_d0dfd123ekj.webp</image:loc>
       <image:caption>Boteco Tour</image:caption>
@@ -1088,9 +977,6 @@
   </url>
   <url>
     <loc>https://tocorimerio.com/passeio/sailing-rio-ilhas-cagarras</loc>
-    <lastmod>2026-04-28</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
     <image:image>
       <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776178359892_6dl8jjedune.webp</image:loc>
       <image:caption>Sailing Rio - Ilhas Cagarras</image:caption>
@@ -1141,40 +1027,7 @@
     </image:image>
   </url>
   <url>
-    <loc>https://tocorimerio.com/passeios/city-tour</loc>
-    <lastmod>2026-05-29</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://tocorimerio.com/passeios/trilha</loc>
-    <lastmod>2026-05-29</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://tocorimerio.com/passeios/um-dia</loc>
-    <lastmod>2026-05-29</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://tocorimerio.com/match/brasil-vs-panam-2026-05-31</loc>
-    <lastmod>2026-05-28</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://tocorimerio.com/match/flamengo-vs-coritiba-2026-05-30</loc>
-    <lastmod>2026-05-21</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
     <loc>https://tocorimerio.com/blog/melhores-pontos-por-do-sol-rio</loc>
-    <lastmod>2026-04-10</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
     <image:image>
       <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776155714004_99sa4cr5p.webp</image:loc>
       <image:caption>Os 5 Melhores Pontos para Ver o Pôr do Sol no Rio de Janeiro</image:caption>
@@ -1182,9 +1035,6 @@
   </url>
   <url>
     <loc>https://tocorimerio.com/blog/how-to-buy-maracana-tickets-as-a-foreigner</loc>
-    <lastmod>2026-04-21</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
     <image:image>
       <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776794057243_b2z6k1uypav.webp</image:loc>
       <image:caption>Como Comprar Ingressos para o Maracanã sendo Estrangeiro</image:caption>
@@ -1192,9 +1042,6 @@
   </url>
   <url>
     <loc>https://tocorimerio.com/blog/rio-de-janeiro-in-3-days-itinerary-by-a</loc>
-    <lastmod>2026-05-16</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
     <image:image>
       <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1778895822797_8mkddunm3it.webp</image:loc>
       <image:caption> Rio de Janeiro em 3 dias: Itinerário feito por um guia local (2026)</image:caption>
@@ -1202,9 +1049,6 @@
   </url>
   <url>
     <loc>https://tocorimerio.com/blog/carnaval-rio-guia-definitivo</loc>
-    <lastmod>2026-04-10</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
     <image:image>
       <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1775696779659_sdj1p6tvg3a.png</image:loc>
       <image:caption>Carnaval no Rio: O Guia Definitivo para Aproveitar como um Carioca</image:caption>
@@ -1212,9 +1056,6 @@
   </url>
   <url>
     <loc>https://tocorimerio.com/blog/rio-imperial-cultura-historia</loc>
-    <lastmod>2026-04-10</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
     <image:image>
       <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776154933416_1jovl3o2i6si.webp</image:loc>
       <image:caption>Cultura e História: Um Mergulho no Passado Imperial do Rio</image:caption>
@@ -1222,9 +1063,6 @@
   </url>
   <url>
     <loc>https://tocorimerio.com/blog/how-to-visit-maracana-safely-tourists</loc>
-    <lastmod>2026-04-25</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
     <image:image>
       <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776438887419_50kfhcm5ojt.webp</image:loc>
       <image:caption>Como visitar o Maracanã com segurança: o guia completo para turistas estrangeiros</image:caption>
@@ -1232,9 +1070,6 @@
   </url>
   <url>
     <loc>https://tocorimerio.com/blog/private-vs-group-tours-why-exclusivity-matters-in-rio</loc>
-    <lastmod>2026-04-21</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
     <image:image>
       <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776795346132_r84icju1vzn.webp</image:loc>
       <image:caption>Tours Privados vs. em Grupo: Por que a Exclusividade Importa no Rio</image:caption>
@@ -1242,9 +1077,6 @@
   </url>
   <url>
     <loc>https://tocorimerio.com/blog/passeios-imperdiveis-rio-de-janeiro</loc>
-    <lastmod>2026-04-09</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
     <image:image>
       <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1775696777437_krbzk3ifuo.png</image:loc>
       <image:caption>Passeios Imperdíveis no Rio de Janeiro: Experiências Para Todos os Estilos</image:caption>
@@ -1252,9 +1084,6 @@
   </url>
   <url>
     <loc>https://tocorimerio.com/blog/things-to-do-in-rio-de-janeiro-when-it-rains</loc>
-    <lastmod>2026-05-16</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
     <image:image>
       <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1778893799536_6dpfsl0oe6k.webp</image:loc>
       <image:caption>O que fazer em Rio de Janeiro quando chove (guia 2026)</image:caption>
@@ -1262,9 +1091,6 @@
   </url>
   <url>
     <loc>https://tocorimerio.com/blog/melhores-trilhas-rio-de-janeiro</loc>
-    <lastmod>2026-04-10</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
     <image:image>
       <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776155088676_9t8wqvy9q2a.webp</image:loc>
       <image:caption>As 3 Melhores Trilhas para Ver o Rio de Cima</image:caption>
@@ -1272,9 +1098,6 @@
   </url>
   <url>
     <loc>https://tocorimerio.com/blog/packing-list-for-rio-from-beach-to-rainforest</loc>
-    <lastmod>2026-04-21</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
     <image:image>
       <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776795501321_2kuhhczlms.webp</image:loc>
       <image:caption>O Que Levar na Mala para o Rio: Da Praia à Floresta Tropical</image:caption>
@@ -1282,9 +1105,6 @@
   </url>
   <url>
     <loc>https://tocorimerio.com/blog/dicas-seguranca-transporte-rio</loc>
-    <lastmod>2026-04-05</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
     <image:image>
       <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776136527563_dzcmntxz28d.webp</image:loc>
       <image:caption>Dicas de Segurança e Transporte para Turistas no Rio</image:caption>
@@ -1292,9 +1112,6 @@
   </url>
   <url>
     <loc>https://tocorimerio.com/blog/gastronomia-carioca-pratos-tipicos</loc>
-    <lastmod>2026-04-10</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
     <image:image>
       <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776154873773_6061xrix9z7.webp</image:loc>
       <image:caption>Gastronomia Carioca: 5 Pratos que Você Precisa Provar</image:caption>
@@ -1302,9 +1119,6 @@
   </url>
   <url>
     <loc>https://tocorimerio.com/blog/rock-climbing-beginners-rio-de-janeiro</loc>
-    <lastmod>2026-04-25</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
     <image:image>
       <image:loc>https://images.unsplash.com/photo-1522163182402-834f871fd851?w=1200&amp;q=80</image:loc>
       <image:caption>Escalada para iniciantes no Rio de Janeiro: por onde começar a escalar a serra carioca</image:caption>
@@ -1312,9 +1126,6 @@
   </url>
   <url>
     <loc>https://tocorimerio.com/blog/how-much-does-a-city-tour-in-rio-de-jane</loc>
-    <lastmod>2026-05-16</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
     <image:image>
       <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1778894147868_wgmcbdzag5.webp</image:loc>
       <image:caption>Quanto custa um city tour em Rio de Janeiro? (Guia completo de 2026)</image:caption>
@@ -1322,9 +1133,6 @@
   </url>
   <url>
     <loc>https://tocorimerio.com/blog/where-to-watch-the-2026-world-cup-in-rio</loc>
-    <lastmod>2026-05-19</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
     <image:image>
       <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1779149093302_9dvl0y6ueo7.webp</image:loc>
       <image:caption>Copa do Mundo 2026 em Rio de Janeiro: Fan Fests, melhores bares, onde ficar e guia completo</image:caption>
@@ -1332,9 +1140,6 @@
   </url>
   <url>
     <loc>https://tocorimerio.com/blog/the-best-months-to-visit-rio-for-hiking-and-outdoor-activities</loc>
-    <lastmod>2026-04-21</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
     <image:image>
       <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776795733435_l6lqgufjqg.webp</image:loc>
       <image:caption>Os Melhores Meses para Visitar o Rio: Trilhas e Atividades ao Ar Livre</image:caption>
@@ -1342,9 +1147,6 @@
   </url>
   <url>
     <loc>https://tocorimerio.com/blog/melhores-mirantes-gratuitos-rj</loc>
-    <lastmod>2026-04-05</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
     <image:image>
       <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776444389833_5q228qpzgfu.webp</image:loc>
       <image:caption>Os 3 Melhores Mirantes Gratuitos no Rio de Janeiro</image:caption>
@@ -1352,9 +1154,6 @@
   </url>
   <url>
     <loc>https://tocorimerio.com/blog/pedra-da-gavea-hike-guide</loc>
-    <lastmod>2026-04-25</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
     <image:image>
       <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776155090896_e0ha15pe0yu.webp</image:loc>
       <image:caption>Caminhada na Pedra da Gávea: é realmente perigosa? Tudo o que você precisa saber antes de partir</image:caption>
@@ -1362,9 +1161,6 @@
   </url>
   <url>
     <loc>https://tocorimerio.com/blog/roteiro-de-3-dias-no-rio-de-janeiro</loc>
-    <lastmod>2026-04-09</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
     <image:image>
       <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1775696766664_76lcnnpl2ca.png</image:loc>
       <image:caption>Roteiro de 3 Dias no Rio de Janeiro: Aproveite Cada Minuto da Cidade Maravilhosa</image:caption>
@@ -1372,9 +1168,6 @@
   </url>
   <url>
     <loc>https://tocorimerio.com/blog/what-to-do-in-rio-when-it-rains</loc>
-    <lastmod>2026-04-25</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
     <image:image>
       <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776154873773_6061xrix9z7.webp</image:loc>
       <image:caption>O que fazer no Rio quando chove: 7 experiências culturais e gastronômicas que não exigem sol</image:caption>
@@ -1382,9 +1175,6 @@
   </url>
   <url>
     <loc>https://tocorimerio.com/blog/watch-a-match-at-maracana-why-you-shouldnt-go-alone</loc>
-    <lastmod>2026-04-21</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
     <image:image>
       <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776792731605_1j9usvzlsrp.webp</image:loc>
       <image:caption>Assistir a um Jogo no Maracanã: Por Que Você Não Deve Ir Sozinho</image:caption>
@@ -1392,9 +1182,6 @@
   </url>
   <url>
     <loc>https://tocorimerio.com/blog/the-best-way-to-see-rio-why-a-classic-schooner-beats-the-crowds</loc>
-    <lastmod>2026-04-21</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
     <image:image>
       <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776797339345_loiuzsq3u8.webp</image:loc>
       <image:caption>A Melhor Maneira de Ver o Rio: Por que um Veleiro Clássico Vence as Multidões</image:caption>
@@ -1402,9 +1189,6 @@
   </url>
   <url>
     <loc>https://tocorimerio.com/blog/rio-safety-guide-for-us-european-travelers</loc>
-    <lastmod>2026-04-21</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
     <image:image>
       <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776793004416_ov0fzyy2ctk.webp</image:loc>
       <image:caption>Guia de Segurança no Rio para Viajantes dos EUA e Europa</image:caption>
@@ -1412,9 +1196,6 @@
   </url>
   <url>
     <loc>https://tocorimerio.com/blog/buzios-cabo-frio-regiao-dos-lagos</loc>
-    <lastmod>2026-04-10</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
     <image:image>
       <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1775696760353_ms1kvra8fha.png</image:loc>
       <image:caption>Búzios e Cabo Frio: O Charme e a Agitação da Região dos Lagos</image:caption>
@@ -1422,9 +1203,6 @@
   </url>
   <url>
     <loc>https://tocorimerio.com/blog/the-best-specialty-coffee-shops-in-the-center-of-rio-de-janeiro</loc>
-    <lastmod>2026-05-19</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
     <image:image>
       <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1779158659742_gn9o1u3egy.webp</image:loc>
       <image:caption>As melhores cafeterias especializadas no centro de Rio de Janeiro: um guia para viajantes</image:caption>
@@ -1432,9 +1210,6 @@
   </url>
   <url>
     <loc>https://tocorimerio.com/blog/a-journey-through-history-sailing-the-waters-of-guanabara-bay</loc>
-    <lastmod>2026-04-21</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
     <image:image>
       <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776136539659_dhflxgmz62g.webp</image:loc>
       <image:caption>Uma Jornada Pela História: Navegando pelas Águas da Baía de Guanabara</image:caption>
@@ -1442,9 +1217,6 @@
   </url>
   <url>
     <loc>https://tocorimerio.com/blog/onde-comer-no-rio-gastronomia</loc>
-    <lastmod>2026-04-05</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
     <image:image>
       <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1775701360748_19elgcf090q.png</image:loc>
       <image:caption>Onde Comer no Rio: Gastronomia e Sabores Cariocas</image:caption>
@@ -1452,9 +1224,6 @@
   </url>
   <url>
     <loc>https://tocorimerio.com/blog/uma-noite-de-idolos-no-maraca-a-experiencia-de-estar-no-maracana-quando-o-mengao-mandou-ver-no-medellin</loc>
-    <lastmod>2026-04-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
     <image:image>
       <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776438009912_4j3x8ipzfup.webp</image:loc>
       <image:caption>Uma Noite de Ídolos no Maraca - A experiência de estar no Maracanã quando o Mengão mandou ver no Medellín</image:caption>
@@ -1462,9 +1231,6 @@
   </url>
   <url>
     <loc>https://tocorimerio.com/blog/how-to-visit-christ-the-redeemer-in-2026</loc>
-    <lastmod>2026-05-16</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
     <image:image>
       <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1778894432271_job7bzodl6s.webp</image:loc>
       <image:caption>Como visitar o Cristo Redentor em 2026: ingressos, horários e dicas</image:caption>
@@ -1472,9 +1238,6 @@
   </url>
   <url>
     <loc>https://tocorimerio.com/blog/the-best-private-rooftops-and-views-in-rio-avoid-the-crowds</loc>
-    <lastmod>2026-04-21</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
     <image:image>
       <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776793148489_g3rc5yilrj.webp</image:loc>
       <image:caption>Os Melhores Rooftops e Vistas Privadas no Rio: Fuja das Multidões</image:caption>
@@ -1482,9 +1245,6 @@
   </url>
   <url>
     <loc>https://tocorimerio.com/blog/o-que-fazer-no-rio-de-janeiro-10-experiencias-que-voce-nao-pode-perder</loc>
-    <lastmod>2026-04-09</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
     <image:image>
       <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1775696781922_xxs40z6z3q.png</image:loc>
       <image:caption>O Que Fazer no Rio de Janeiro: 10 Experiências Que Você Não Pode Perder</image:caption>
@@ -1492,9 +1252,6 @@
   </url>
   <url>
     <loc>https://tocorimerio.com/blog/trilhas-no-rio-de-janeiro</loc>
-    <lastmod>2026-04-09</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
     <image:image>
       <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776155661937_gt95mex1i.webp</image:loc>
       <image:caption>Trilhas no Rio de Janeiro: Os Melhores Caminhos Para Quem Ama a Natureza</image:caption>
@@ -1502,9 +1259,6 @@
   </url>
   <url>
     <loc>https://tocorimerio.com/blog/melhor-epoca-visitar-rio-de-janeiro</loc>
-    <lastmod>2026-04-10</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
     <image:image>
       <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776449767100_shj8j2w059.webp</image:loc>
       <image:caption>Planejando sua Viagem: Qual a melhor época para visitar o Rio?</image:caption>
@@ -1512,9 +1266,6 @@
   </url>
   <url>
     <loc>https://tocorimerio.com/blog/o-renascimento-verde-a-incrivel-historia-do-reflorestamento-da-floresta-da-tijuca</loc>
-    <lastmod>2026-04-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
     <image:image>
       <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776444378668_vzexl1lplmt.webp</image:loc>
       <image:caption>O Renascimento Verde: A Incrível História do Reflorestamento da Floresta da Tijuca</image:caption>
@@ -1522,9 +1273,6 @@
   </url>
   <url>
     <loc>https://tocorimerio.com/blog/rio-de-janeiro-with-kids-3-day-itinerary</loc>
-    <lastmod>2026-04-25</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
     <image:image>
       <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776155669769_oliiwanq76n.webp</image:loc>
       <image:caption>Rio de Janeiro com crianças: um roteiro familiar de 3 dias que não cansa ninguém</image:caption>
@@ -1532,9 +1280,6 @@
   </url>
   <url>
     <loc>https://tocorimerio.com/blog/sunset-sailing-in-rio-the-ultimate-romantic-experience</loc>
-    <lastmod>2026-04-21</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
     <image:image>
       <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776178596659_lwvnl9j555.webp</image:loc>
       <image:caption>Velejar ao Pôr do Sol no Rio: A Experiência Romântica Definitiva</image:caption>
@@ -1542,9 +1287,6 @@
   </url>
   <url>
     <loc>https://tocorimerio.com/blog/is-it-safe-to-do-a-favela-tour-in-rocinh</loc>
-    <lastmod>2026-05-16</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
     <image:image>
       <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1778894804590_m8kbakxff.webp</image:loc>
       <image:caption>É seguro fazer um passeio pelas favelas de Rocinha? Um guia honesto (2026)</image:caption>
@@ -1552,9 +1294,6 @@
   </url>
   <url>
     <loc>https://tocorimerio.com/blog/hiking-in-rio-a-premium-guide-to-tijuca-forest</loc>
-    <lastmod>2026-04-21</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
     <image:image>
       <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776793316010_tsjj5cm27zg.webp</image:loc>
       <image:caption>Trilhas no Rio: Um Guia Premium para a Floresta da Tijuca</image:caption>
@@ -1562,9 +1301,6 @@
   </url>
   <url>
     <loc>https://tocorimerio.com/blog/beyond-the-beach-discovering-rios-hidden-gems-by-sea</loc>
-    <lastmod>2026-04-21</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
     <image:image>
       <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776178598223_s0w825hcry.webp</image:loc>
       <image:caption>Além da Praia: Descobrindo os Tesouros Escondidos do Rio pelo Mar</image:caption>
@@ -1572,9 +1308,6 @@
   </url>
   <url>
     <loc>https://tocorimerio.com/blog/free-hikes-vs-guided-tours-rio</loc>
-    <lastmod>2026-04-25</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
     <image:image>
       <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776155715338_sjykr9pmjzh.webp</image:loc>
       <image:caption>Caminhadas gratuitas x visitas guiadas no Rio de Janeiro: quando um guia realmente vale a pena?</image:caption>
@@ -1582,9 +1315,6 @@
   </url>
   <url>
     <loc>https://tocorimerio.com/blog/roteiro-3-dias-rio-de-janeiro</loc>
-    <lastmod>2026-04-05</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
     <image:image>
       <image:loc>https://images.unsplash.com/photo-1516306580123-e6e52b1b7b5f?q=80&amp;w=1200</image:loc>
       <image:caption>Roteiro de 3 Dias para Aproveitar a Cidade Maravilhosa</image:caption>
@@ -1592,9 +1322,6 @@
   </url>
   <url>
     <loc>https://tocorimerio.com/blog/praias-do-rio-de-janeiro</loc>
-    <lastmod>2026-04-09</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
     <image:image>
       <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1775696770274_874g00vopl.png</image:loc>
       <image:caption>Praias do Rio de Janeiro: Um Guia Completo das Melhores da Cidade</image:caption>
@@ -1602,9 +1329,6 @@
   </url>
   <url>
     <loc>https://tocorimerio.com/blog/little-africa-pequena-africa-rios-most-s</loc>
-    <lastmod>2026-05-19</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
     <image:image>
       <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1779160947654_pbpugm65kpd.webp</image:loc>
       <image:caption>Pequena África: o bairro mais emocionante de Rio do qual você nunca ouviu falar</image:caption>
@@ -1612,9 +1336,6 @@
   </url>
   <url>
     <loc>https://tocorimerio.com/blog/rio-de-janeiro-com-criancas-roteiro</loc>
-    <lastmod>2026-04-10</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
     <image:image>
       <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1775696762432_5pvc517qd7s.png</image:loc>
       <image:caption>Rio com Crianças: Roteiro Completo para uma Viagem em Família</image:caption>
@@ -1622,9 +1343,6 @@
   </url>
   <url>
     <loc>https://tocorimerio.com/blog/traveling-to-rio-with-kids-how-to-make-it-stress-free</loc>
-    <lastmod>2026-04-21</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
     <image:image>
       <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776793485811_dff51sqnmgh.webp</image:loc>
       <image:caption>Viajando para o Rio com Crianças: Como Ter uma Viagem Sem Estresse</image:caption>
@@ -1632,9 +1350,6 @@
   </url>
   <url>
     <loc>https://tocorimerio.com/blog/the-maracana-stadium-a-comprehensive-history-of-brazils-greatest-sporting-temple-and-its-connection-to-the-fifa-world-cup</loc>
-    <lastmod>2026-05-25</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
     <image:image>
       <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776136526338_h2rbfgwm9q.webp</image:loc>
       <image:caption>O Estádio do Maracanã: uma história abrangente do maior templo do esporte no Brasil e sua conexão com a Copa do Mundo FIFA</image:caption>
@@ -1642,9 +1357,6 @@
   </url>
   <url>
     <loc>https://tocorimerio.com/blog/rio-alem-do-obvio-lugares-secretos</loc>
-    <lastmod>2026-04-10</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
     <image:image>
       <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776136532621_bydozzr39nb.webp</image:loc>
       <image:caption>Rio Além do Óbvio: 5 Lugares Secretos para Fugir da Multidão</image:caption>
@@ -1652,9 +1364,6 @@
   </url>
   <url>
     <loc>https://tocorimerio.com/blog/best-tours-in-rio-de-janeiro-for-3-days</loc>
-    <lastmod>2026-05-16</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
     <image:image>
       <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1778894977064_ykg8x6762l.webp</image:loc>
       <image:caption>Melhores Passeios em Rio de Janeiro por 3 Dias: O Itinerário Perfeito (2026)</image:caption>
@@ -1662,9 +1371,6 @@
   </url>
   <url>
     <loc>https://tocorimerio.com/blog/best-sunset-spots-rio-de-janeiro</loc>
-    <lastmod>2026-04-25</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
     <image:image>
       <image:loc>https://images.unsplash.com/photo-1516306580123-e6e52b1b7b5f?w=1200&amp;q=80</image:loc>
       <image:caption>Pôr do sol no Rio de Janeiro: os 5 melhores lugares (incluindo um ângulo secreto que quase ninguém conhece)</image:caption>
@@ -1672,9 +1378,6 @@
   </url>
   <url>
     <loc>https://tocorimerio.com/blog/what-to-wear-hiking-and-beach-rio-de-janeiro</loc>
-    <lastmod>2026-04-25</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
     <image:image>
       <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776155088676_9t8wqvy9q2a.webp</image:loc>
       <image:caption>O que vestir para um dia de caminhada e praia no Rio de Janeiro: o guia de malas para quem vem pela primeira vez</image:caption>
@@ -1682,9 +1385,6 @@
   </url>
   <url>
     <loc>https://tocorimerio.com/blog/sustainability-and-craftsmanship-the-soul-of-the-tocorime</loc>
-    <lastmod>2026-04-21</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
     <image:image>
       <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776798363880_akz7xx35db4.webp</image:loc>
       <image:caption>Sustentabilidade e Artesanato: A Alma do Tocorime</image:caption>
@@ -1692,9 +1392,6 @@
   </url>
   <url>
     <loc>https://tocorimerio.com/blog/christ-the-redeemer-without-the-crowds</loc>
-    <lastmod>2026-04-25</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
     <image:image>
       <image:loc>https://images.unsplash.com/photo-1593995863951-57c27e518295?w=1200&amp;q=80</image:loc>
       <image:caption>Cristo Redentor Sem Filas: O Guia Definitivo de Horários e Acesso</image:caption>
@@ -1702,9 +1399,6 @@
   </url>
   <url>
     <loc>https://tocorimerio.com/blog/best-feijoada-rio-de-janeiro-tourists</loc>
-    <lastmod>2026-04-25</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
     <image:image>
       <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1777144245848_af37x43rp8q.webp</image:loc>
       <image:caption>Onde comer a melhor feijoada do Rio de Janeiro (e como evitar as armadilhas para turistas)</image:caption>
@@ -1712,9 +1406,6 @@
   </url>
   <url>
     <loc>https://tocorimerio.com/blog/is-rio-de-janeiro-safe-for-foreign-tourists</loc>
-    <lastmod>2026-04-21</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
     <image:image>
       <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776793811854_ijozzt5l1.webp</image:loc>
       <image:caption>O Rio de Janeiro é Seguro para Turistas Estrangeiros?</image:caption>
@@ -1722,9 +1413,6 @@
   </url>
   <url>
     <loc>https://tocorimerio.com/blog/guia-arraial-do-cabo-caribe-brasileiro</loc>
-    <lastmod>2026-04-10</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
     <image:image>
       <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776136539659_dhflxgmz62g.webp</image:loc>
       <image:caption>Arraial do Cabo: Um Guia Completo para o &quot;Caribe Brasileiro&quot;</image:caption>
@@ -1732,9 +1420,6 @@
   </url>
   <url>
     <loc>https://tocorimerio.com/blog/how-to-get-tickets-for-maracana-the-comp</loc>
-    <lastmod>2026-05-16</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
     <image:image>
       <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1778895384294_t4y9rz1bgyd.webp</image:loc>
       <image:caption>Como conseguir ingressos para o Maracanã: o guia completo (2026)</image:caption>

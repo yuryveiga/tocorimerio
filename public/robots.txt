@@ -1,5 +1,6 @@
 # Sitemap
 Sitemap: https://tocorimerio.com/sitemap.xml
+Sitemap: https://tocorimerio.com/sitemap-images.xml
 
 # User agents
 User-agent: *
