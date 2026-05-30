@@ -1,5 +1,10 @@
 import { useState, useEffect } from "react";
-import { ChevronDown, ArrowRight, ShieldCheck, Award, Lock, Flame } from "lucide-react";
+import ChevronDown from "lucide-react/dist/esm/icons/chevron-down";
+import ArrowRight from "lucide-react/dist/esm/icons/arrow-right";
+import ShieldCheck from "lucide-react/dist/esm/icons/shield-check";
+import Award from "lucide-react/dist/esm/icons/award";
+import Lock from "lucide-react/dist/esm/icons/lock";
+import Flame from "lucide-react/dist/esm/icons/flame";
 import { Button } from "@/components/ui/button";
 import { useSiteData } from "@/hooks/useSiteData";
 import { useLocale } from "@/contexts/LocaleContext";

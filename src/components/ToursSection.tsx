@@ -1,6 +1,6 @@
 import { useState, memo, useMemo } from "react";
 import { Link } from "react-router-dom";
-import { Clock, Users, Star, ArrowRight, Check } from "lucide-react";
+// (icons used by ToursSection itself are none — TourItem uses its own)
 import { Button } from "@/components/ui/button";
 import { useSiteData } from "@/hooks/useSiteData";
 import { useLocale } from "@/contexts/LocaleContext";

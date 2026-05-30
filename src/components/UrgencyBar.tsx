@@ -1,5 +1,8 @@
 import { useEffect, useState } from "react";
-import { X, Flame, ShieldCheck, Star } from "lucide-react";
+import X from "lucide-react/dist/esm/icons/x";
+import Flame from "lucide-react/dist/esm/icons/flame";
+import ShieldCheck from "lucide-react/dist/esm/icons/shield-check";
+import Star from "lucide-react/dist/esm/icons/star";
 import { useLocale } from "@/contexts/LocaleContext";
 
 const STORAGE_KEY = "urgency_bar_dismissed_at";

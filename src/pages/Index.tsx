@@ -1,4 +1,5 @@
 import { lazy, Suspense } from "react";
+import { LazyMount } from "@/components/LazyMount";
 import { Helmet } from "react-helmet-async";
 import { Header } from "@/components/Header";
 import { HeroSection } from "@/components/HeroSection";
@@ -71,13 +72,13 @@ const Index = () => {
           doesn't hold back the others from rendering. */}
       <Suspense fallback={<SectionLoader />}><ToursSection /></Suspense>
       <Suspense fallback={<SectionLoader />}><WhyChooseUs /></Suspense>
-      <Suspense fallback={null}><ViewFadeIn><ReviewsSection /></ViewFadeIn></Suspense>
-      <Suspense fallback={null}><ViewFadeIn><WeatherSection /></ViewFadeIn></Suspense>
-      <Suspense fallback={null}><ViewFadeIn><AboutSection /></ViewFadeIn></Suspense>
-      <Suspense fallback={null}><ViewFadeIn><ContactSection /></ViewFadeIn></Suspense>
-      <Suspense fallback={null}><ViewFadeIn><GallerySection /></ViewFadeIn></Suspense>
-      <Suspense fallback={null}><ViewFadeIn><BlogCarousel /></ViewFadeIn></Suspense>
-      <Suspense fallback={null}><Footer /></Suspense>
+      <LazyMount minHeight={500}><Suspense fallback={null}><ReviewsSection /></Suspense></LazyMount>
+      <LazyMount minHeight={400}><Suspense fallback={null}><WeatherSection /></Suspense></LazyMount>
+      <LazyMount minHeight={500}><Suspense fallback={null}><AboutSection /></Suspense></LazyMount>
+      <LazyMount minHeight={500}><Suspense fallback={null}><ContactSection /></Suspense></LazyMount>
+      <LazyMount minHeight={600}><Suspense fallback={null}><GallerySection /></Suspense></LazyMount>
+      <LazyMount minHeight={500}><Suspense fallback={null}><BlogCarousel /></Suspense></LazyMount>
+      <LazyMount minHeight={300}><Suspense fallback={null}><Footer /></Suspense></LazyMount>
     </main>
   );
 };

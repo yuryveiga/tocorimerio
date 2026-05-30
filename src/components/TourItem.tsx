@@ -1,6 +1,10 @@
 import { memo, useMemo } from "react";
 import { Link } from "react-router-dom";
-import { Clock, Users, Star, ArrowRight, Check } from "lucide-react";
+import Clock from "lucide-react/dist/esm/icons/clock";
+import Users from "lucide-react/dist/esm/icons/users";
+import Star from "lucide-react/dist/esm/icons/star";
+import ArrowRight from "lucide-react/dist/esm/icons/arrow-right";
+import Check from "lucide-react/dist/esm/icons/check";
 import { Button } from "@/components/ui/button";
 import { useSiteData } from "@/hooks/useSiteData";
 import { useLocale } from "@/contexts/LocaleContext";
