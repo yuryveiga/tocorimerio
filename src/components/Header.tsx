@@ -178,7 +178,7 @@ export function Header({ forceLanguage }: { forceLanguage?: 'pt' | 'en' | 'es' }
             ))}
           </nav>
 
-          <div className="hidden lg:flex items-center gap-6">
+          <div className="hidden lg:flex items-center gap-6 min-w-[260px] justify-end">
             {mounted && (
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
