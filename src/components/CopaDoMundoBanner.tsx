@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
-import { X, Trophy } from "lucide-react";
+import X from "lucide-react/dist/esm/icons/x";
+import Trophy from "lucide-react/dist/esm/icons/trophy";
 import { useSiteSettings } from "@/hooks/useSiteData";
 
 const DISMISS_KEY = "copa_banner_dismissed_at";

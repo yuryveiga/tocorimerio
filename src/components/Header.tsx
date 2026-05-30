@@ -1,6 +1,17 @@
 import { useState, useEffect, useMemo } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
-import { Menu, X, Instagram, MapPin, Phone, Mail, Music, Facebook, Youtube, Globe, DollarSign, ShoppingCart, ChevronDown } from "lucide-react";
+import Menu from "lucide-react/dist/esm/icons/menu";
+import X from "lucide-react/dist/esm/icons/x";
+import Instagram from "lucide-react/dist/esm/icons/instagram";
+import MapPin from "lucide-react/dist/esm/icons/map-pin";
+import Phone from "lucide-react/dist/esm/icons/phone";
+import Mail from "lucide-react/dist/esm/icons/mail";
+import Music from "lucide-react/dist/esm/icons/music";
+import Facebook from "lucide-react/dist/esm/icons/facebook";
+import Youtube from "lucide-react/dist/esm/icons/youtube";
+import Globe from "lucide-react/dist/esm/icons/globe";
+import ShoppingCart from "lucide-react/dist/esm/icons/shopping-cart";
+import ChevronDown from "lucide-react/dist/esm/icons/chevron-down";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,

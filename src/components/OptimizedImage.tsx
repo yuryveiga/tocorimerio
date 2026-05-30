@@ -3,7 +3,7 @@ import { getOptimizedImage, getBlurPlaceholder, isOptimizable } from "@/utils/im
 import { cn } from "@/lib/utils";
 import { useSiteData } from "@/hooks/useSiteData";
 
-const SRCSET_WIDTHS = [400, 800, 1200, 1600];
+const SRCSET_WIDTHS = [320, 480, 800, 1200, 1600];
 
 function buildSrcSet(
   src: string,
@@ -40,7 +40,7 @@ export const OptimizedImage = memo(function OptimizedImage({
   src,
   alt,
   width = 800,
-  quality = 70,
+  quality = 60,
   className,
   containerClassName,
   loading = "lazy",

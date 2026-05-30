@@ -1,6 +1,7 @@
 import { useLocale } from "@/contexts/LocaleContext";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Calendar } from "lucide-react";
+import ArrowRight from "lucide-react/dist/esm/icons/arrow-right";
+import Calendar from "lucide-react/dist/esm/icons/calendar";
 import { useLocation, Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 
