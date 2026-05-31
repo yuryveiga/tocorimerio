@@ -225,11 +225,15 @@ export const generateTourPackageSchema = (
   currency: string = "BRL"
 ) => {
   return {
-    "@type": "TourPackage",
+    "@type": "Product",
     "name": name,
     "description": description,
     "image": imageUrl,
     "url": url,
+    "brand": {
+      "@type": "Organization",
+      "name": "Tocorime Rio"
+    },
     "offers": {
       "@type": "Offer",
       "price": price,
