@@ -225,27 +225,21 @@ export const generateTourPackageSchema = (
   currency: string = "BRL"
 ) => {
   return {
-    "@type": "TourPackage",
+    "@type": "Product",
     "name": name,
     "description": description,
     "image": imageUrl,
     "url": url,
+    "brand": {
+      "@type": "Organization",
+      "name": "Tocorime Rio"
+    },
     "offers": {
       "@type": "Offer",
       "price": price,
       "priceCurrency": currency,
       "availability": "https://schema.org/InStock",
       "url": url
-    },
-    "provider": {
-      "@type": "Organization",
-      "name": "Tocorime Rio",
-      "url": BASE_URL
-    },
-    "performer": {
-      "@type": "Organization",
-      "name": "Tocorime Rio",
-      "url": BASE_URL
     },
     "aggregateRating": {
       "@type": "AggregateRating",
