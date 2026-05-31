@@ -241,16 +241,6 @@ export const generateTourPackageSchema = (
       "availability": "https://schema.org/InStock",
       "url": url
     },
-    "provider": {
-      "@type": "Organization",
-      "name": "Tocorime Rio",
-      "url": BASE_URL
-    },
-    "performer": {
-      "@type": "Organization",
-      "name": "Tocorime Rio",
-      "url": BASE_URL
-    },
     "aggregateRating": {
       "@type": "AggregateRating",
       "ratingValue": "5.0",
