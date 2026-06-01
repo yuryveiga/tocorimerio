@@ -1309,6 +1309,8 @@ export function PasseioDetalhe() {
       </section>
 
 
+      <YouMayAlsoLike excludeId={tour?.id} />
+
       <Footer />
 
       {/* Lightbox Overlay */}
