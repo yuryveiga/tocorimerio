@@ -41,6 +41,7 @@ import { slugify } from "@/utils/slugify";
 
 
 import { WeatherSection } from "@/components/WeatherSection";
+import { YouMayAlsoLike } from "@/components/YouMayAlsoLike";
 
 const getYouTubeEmbedUrl = (url: string) => {
   if (!url) return "";
@@ -1307,6 +1308,8 @@ export function PasseioDetalhe() {
         </div>
       </section>
 
+
+      <YouMayAlsoLike excludeId={tour?.id} />
 
       <Footer />
 
