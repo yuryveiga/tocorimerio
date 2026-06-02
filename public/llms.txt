@@ -1,0 +1,26 @@
+# Tocorime Rio
+
+> Private & custom tours and Maracanã football match tickets in Rio de Janeiro. Skip the tourist traps and explore the Marvelous City with bilingual local experts. Tours, trilhas, city tours and exclusive experiences tailored exclusively for you.
+
+Tocorime Rio is a boutique tour operator based in Rio de Janeiro, Brazil. The site showcases curated private tours across the city — from iconic landmarks like Christ the Redeemer and Sugarloaf Mountain to hidden local gems — alongside official football match ticket packages for Maracanã Stadium (Flamengo, Fluminense, Vasco and the Brazilian national team). Content is available in Portuguese, English and Spanish.
+
+## Pages
+
+- [/](/): Homepage. Overview of private tours, Maracanã match tickets, travel blog highlights and featured experiences.
+- [/passeio](/passeio): Complete catalogue of tours, city tours, hiking trails and exclusive experiences in Rio de Janeiro.
+- [/passeios/cultura](/passeios/cultura): Culture & history tour category (example of a category page).
+- [/passeio/cristo-redentor-e-pao-de-acucar](/passeio/cristo-redentor-e-pao-de-acucar): Example tour detail page — Christ the Redeemer + Sugarloaf Mountain private tour.
+- [/blog](/blog): Travel blog with tips, itineraries and local insights about Rio de Janeiro.
+- [/blog/roteiro-5-dias-rio-de-janeiro](/blog/roteiro-5-dias-rio-de-janeiro): Example blog post — 5-day Rio itinerary.
+- [/maracana-calendario](/maracana-calendario): Maracanã Stadium match calendar and upcoming games schedule.
+- [/match/flamengo-vs-vasco-2026-07-05](/match/flamengo-vs-vasco-2026-07-05): Example match detail page with ticketing options.
+- [/jogo/flamengo-vs-vasco-2026-07-05](/jogo/flamengo-vs-vasco-2026-07-05): Example game landing page with tickets and hospitality packages.
+- [/flamengo-x-vasco-maracana](/flamengo-x-vasco-maracana): Dedicated landing page for the Flamengo vs Vasco match at Maracanã.
+- [/fluminense-bolivar-libertadores](/fluminense-bolivar-libertadores): Dedicated landing page for the Fluminense vs Bolívar Libertadores match.
+- [/fluminense-x-deportivo-guaira-libertadores](/fluminense-x-deportivo-guaira-libertadores): Dedicated landing page for the Fluminense vs Deportivo Guairá Libertadores match.
+- [/flamengo-x-coritiba-maracana](/flamengo-x-coritiba-maracana): Dedicated landing page for the Flamengo vs Coritiba match at Maracanã.
+- [/brasil-x-panama-maio-maracana](/brasil-x-panama-maio-maracana): Dedicated landing page for the Brazil vs Panama match at Maracanã.
+
+## Optional
+
+- [/sitemap](/sitemap): Human-readable sitemap listing all public pages on the site.
