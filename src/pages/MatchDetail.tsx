@@ -397,7 +397,15 @@ export default function MatchDetail() {
         <title>{translatedTitle} | Maracanã Matchday Experience</title>
         <meta name="description" content={metaDescription} />
         <meta property="og:title" content={`${translatedTitle} | ${siteTitle}`} />
+        <meta property="og:description" content={metaDescription} />
+        <meta property="og:type" content="website" />
         <meta property="og:url" content={getCanonicalUrl(`/match/${match.slug || match.id}`)} />
+        <meta property="og:image" content={(match as any).banner_url || (match as any).image_url || "https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/og-image.jpg"} />
+        <meta property="og:image:alt" content={`${translatedTitle} — Maracanã`} />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={`${translatedTitle} | ${siteTitle}`} />
+        <meta name="twitter:description" content={metaDescription} />
+        <meta name="twitter:image" content={(match as any).banner_url || (match as any).image_url || "https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/og-image.jpg"} />
         <link rel="canonical" href={getCanonicalUrl(`/match/${match.slug || match.id}`)} />
         {jsonLd && <script type="application/ld+json">{JSON.stringify(jsonLd)}</script>}
       </Helmet>
