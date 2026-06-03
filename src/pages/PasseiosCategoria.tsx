@@ -39,6 +39,15 @@ const CATEGORY_INTROS: Record<string, { pt: { h2: string; p: string[] }; en: { h
   },
 };
 
+const CATEGORY_SEO: Record<string, { title: string; description: string; ogTitle: string; ogDescription: string }> = {
+  "city-tour": {
+    title: "City Tour in Rio de Janeiro | Private Guided Tours | Tocorime Rio",
+    description: "Explore Rio de Janeiro with a local guide on a private, tailored city tour. Christ the Redeemer, Sugar Loaf, favelas & more. Rated 5.0 on TripAdvisor.",
+    ogTitle: "City Tour in Rio de Janeiro — Private Tours with Local Guide",
+    ogDescription: "Discover the real Rio de Janeiro: private city tours, bilingual guides, and custom itineraries. From Christ the Redeemer to the Historic Center — unforgettable experiences await.",
+  },
+};
+
 interface IntroParagraphsProps {
   paragraphs: string[];
   language: string;
@@ -111,19 +120,27 @@ export default function PasseiosCategoria({ categoriaOverride, pathOverride }: P
   const categoryName = filtered[0]?.category || categoria || "";
   const intro = categoria ? CATEGORY_INTROS[categoria] : undefined;
   const introContent = intro ? intro[language] || intro.en : undefined;
-  const title =
-    language === "pt"
+
+  const seo = categoria ? CATEGORY_SEO[categoria] : undefined;
+
+  const title = seo
+    ? seo.title
+    : language === "pt"
       ? `${categoryName} no Rio de Janeiro | Tocorime Rio`
       : language === "es"
-      ? `${categoryName} en Río de Janeiro | Tocorime Rio`
-      : `${categoryName} in Rio de Janeiro | Tocorime Rio`;
+        ? `${categoryName} en Río de Janeiro | Tocorime Rio`
+        : `${categoryName} in Rio de Janeiro | Tocorime Rio`;
 
-  const description =
-    language === "pt"
+  const description = seo
+    ? seo.description
+    : language === "pt"
       ? `Confira todas as opções de ${categoryName} no Rio de Janeiro: roteiros completos, guias bilíngues e atendimento premium.`
       : language === "es"
-      ? `Mira todas las opciones de ${categoryName} en Río de Janeiro: itinerarios completos, guías bilingües y atención premium.`
-      : `Explore all ${categoryName} options in Rio de Janeiro: complete itineraries, bilingual guides and premium service.`;
+        ? `Mira todas las opciones de ${categoryName} en Río de Janeiro: itinerarios completos, guías bilingües y atención premium.`
+        : `Explore all ${categoryName} options in Rio de Janeiro: complete itineraries, bilingual guides and premium service.`;
+
+  const ogTitle = seo ? seo.ogTitle : title;
+  const ogDescription = seo ? seo.ogDescription : description;
 
   const canonical = getCanonicalUrl(pathOverride || `/passeios/${categoria}`);
 
@@ -154,8 +171,8 @@ export default function PasseiosCategoria({ categoriaOverride, pathOverride }: P
         <link rel="canonical" href={canonical} />
         <meta property="og:type" content="website" />
         <meta property="og:url" content={canonical} />
-        <meta property="og:title" content={title} />
-        <meta property="og:description" content={description} />
+        <meta property="og:title" content={ogTitle} />
+        <meta property="og:description" content={ogDescription} />
         <script type="application/ld+json">{JSON.stringify(itemListSchema)}</script>
         <script type="application/ld+json">{JSON.stringify(breadcrumbSchema)}</script>
       </Helmet>
