@@ -9,8 +9,14 @@ import { useLocale } from "@/contexts/LocaleContext";
 import { getCanonicalUrl, BASE_URL, generateBreadcrumbsSchema } from "@/utils/seo";
 import { slugify } from "@/utils/slugify";
 
-export default function PasseiosCategoria() {
-  const { categoria } = useParams<{ categoria: string }>();
+interface PasseiosCategoriaProps {
+  categoriaOverride?: string;
+  pathOverride?: string;
+}
+
+export default function PasseiosCategoria({ categoriaOverride, pathOverride }: PasseiosCategoriaProps = {}) {
+  const params = useParams<{ categoria: string }>();
+  const categoria = categoriaOverride || params.categoria;
   const { tours, isLoading } = useSiteData();
   const { language } = useLocale();
 
@@ -40,7 +46,7 @@ export default function PasseiosCategoria() {
       ? `Mira todas las opciones de ${categoryName} en Río de Janeiro: itinerarios completos, guías bilingües y atención premium.`
       : `Explore all ${categoryName} options in Rio de Janeiro: complete itineraries, bilingual guides and premium service.`;
 
-  const canonical = getCanonicalUrl(`/passeios/${categoria}`);
+  const canonical = getCanonicalUrl(pathOverride || `/passeios/${categoria}`);
 
   const itemListSchema = {
     "@context": "https://schema.org",
