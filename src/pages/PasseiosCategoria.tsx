@@ -1,6 +1,7 @@
 import { useParams, Navigate, Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
-import { ArrowLeft } from "lucide-react";
+import { useState } from "react";
+import { ArrowLeft, ChevronDown, ChevronUp } from "lucide-react";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { TourItem, TourCardProps } from "@/components/TourItem";
@@ -37,6 +38,53 @@ const CATEGORY_INTROS: Record<string, { pt: { h2: string; p: string[] }; en: { h
     },
   },
 };
+
+interface IntroParagraphsProps {
+  paragraphs: string[];
+  language: string;
+}
+
+function IntroParagraphs({ paragraphs, language }: IntroParagraphsProps) {
+  const [expanded, setExpanded] = useState(false);
+  const readMoreLabel =
+    language === "pt" ? "Ler mais" : language === "es" ? "Leer más" : "Read more";
+  const readLessLabel =
+    language === "pt" ? "Ler menos" : language === "es" ? "Leer menos" : "Read less";
+
+  if (paragraphs.length <= 1) {
+    return <p>{paragraphs[0]}</p>;
+  }
+
+  return (
+    <>
+      <p>{paragraphs[0]}</p>
+
+      {expanded && (
+        <>
+          {paragraphs.slice(1).map((p, i) => (
+            <p key={i + 1}>{p}</p>
+          ))}
+        </>
+      )}
+
+      <button
+        onClick={() => setExpanded((v) => !v)}
+        className="inline-flex items-center gap-1.5 mt-2 text-primary hover:text-primary/80 font-medium text-sm transition-colors focus:outline-none focus:underline"
+        type="button"
+      >
+        {expanded ? (
+          <>
+            {readLessLabel} <ChevronUp className="w-4 h-4" />
+          </>
+        ) : (
+          <>
+            {readMoreLabel} <ChevronDown className="w-4 h-4" />
+          </>
+        )}
+      </button>
+    </>
+  );
+}
 
 interface PasseiosCategoriaProps {
   categoriaOverride?: string;
@@ -130,14 +178,17 @@ export default function PasseiosCategoria({ categoriaOverride, pathOverride }: P
           </header>
 
           {introContent && (
-            <section className="max-w-3xl mx-auto mb-12 text-left">
-              <h2 className="font-serif text-2xl sm:text-3xl font-bold text-foreground mb-4">
-                {introContent.h2}
-              </h2>
-              <div className="space-y-4 text-muted-foreground leading-relaxed">
-                {introContent.p.map((paragraph, i) => (
-                  <p key={i}>{paragraph}</p>
-                ))}
+            <section className="max-w-3xl mx-auto mb-12">
+              <div className="relative bg-accent/30 border-l-4 border-primary pl-6 pr-6 py-6 rounded-r-xl">
+                <h2 className="font-serif text-2xl sm:text-3xl font-bold text-foreground mb-4">
+                  {introContent.h2}
+                </h2>
+                <div className="space-y-4 text-muted-foreground leading-relaxed">
+                  <IntroParagraphs
+                    paragraphs={introContent.p}
+                    language={language}
+                  />
+                </div>
               </div>
             </section>
           )}
