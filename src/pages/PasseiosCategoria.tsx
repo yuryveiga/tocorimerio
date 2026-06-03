@@ -120,19 +120,27 @@ export default function PasseiosCategoria({ categoriaOverride, pathOverride }: P
   const categoryName = filtered[0]?.category || categoria || "";
   const intro = categoria ? CATEGORY_INTROS[categoria] : undefined;
   const introContent = intro ? intro[language] || intro.en : undefined;
-  const title =
-    language === "pt"
+
+  const seo = categoria ? CATEGORY_SEO[categoria] : undefined;
+
+  const title = seo
+    ? seo.title
+    : language === "pt"
       ? `${categoryName} no Rio de Janeiro | Tocorime Rio`
       : language === "es"
-      ? `${categoryName} en Río de Janeiro | Tocorime Rio`
-      : `${categoryName} in Rio de Janeiro | Tocorime Rio`;
+        ? `${categoryName} en Río de Janeiro | Tocorime Rio`
+        : `${categoryName} in Rio de Janeiro | Tocorime Rio`;
 
-  const description =
-    language === "pt"
+  const description = seo
+    ? seo.description
+    : language === "pt"
       ? `Confira todas as opções de ${categoryName} no Rio de Janeiro: roteiros completos, guias bilíngues e atendimento premium.`
       : language === "es"
-      ? `Mira todas las opciones de ${categoryName} en Río de Janeiro: itinerarios completos, guías bilingües y atención premium.`
-      : `Explore all ${categoryName} options in Rio de Janeiro: complete itineraries, bilingual guides and premium service.`;
+        ? `Mira todas las opciones de ${categoryName} en Río de Janeiro: itinerarios completos, guías bilingües y atención premium.`
+        : `Explore all ${categoryName} options in Rio de Janeiro: complete itineraries, bilingual guides and premium service.`;
+
+  const ogTitle = seo ? seo.ogTitle : title;
+  const ogDescription = seo ? seo.ogDescription : description;
 
   const canonical = getCanonicalUrl(pathOverride || `/passeios/${categoria}`);
 
