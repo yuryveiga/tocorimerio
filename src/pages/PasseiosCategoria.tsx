@@ -171,8 +171,8 @@ export default function PasseiosCategoria({ categoriaOverride, pathOverride }: P
         <link rel="canonical" href={canonical} />
         <meta property="og:type" content="website" />
         <meta property="og:url" content={canonical} />
-        <meta property="og:title" content={title} />
-        <meta property="og:description" content={description} />
+        <meta property="og:title" content={ogTitle} />
+        <meta property="og:description" content={ogDescription} />
         <script type="application/ld+json">{JSON.stringify(itemListSchema)}</script>
         <script type="application/ld+json">{JSON.stringify(breadcrumbSchema)}</script>
       </Helmet>
