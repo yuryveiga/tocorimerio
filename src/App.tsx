@@ -148,6 +148,9 @@ const App = ({ queryClient: externalQueryClient }: { queryClient?: QueryClient }
                       <Route path="/our-tours" element={<PasseiosIndex />} />
                       <Route path="/passeios" element={<Navigate to="/passeio" replace />} />
                       <Route path="/passeios/:categoria" element={<PasseiosCategoria />} />
+                      <Route path="/city-tour" element={<PasseiosCategoria categoriaOverride="city-tour" pathOverride="/city-tour" />} />
+                      <Route path="/hiking" element={<PasseiosCategoria categoriaOverride="trilha" pathOverride="/hiking" />} />
+                      <Route path="/one-day" element={<PasseiosCategoria categoriaOverride="um-dia" pathOverride="/one-day" />} />
                       <Route path="/passeio/:id" element={<PasseioDetalhe />} />
                       <Route path="/match/:id" element={<MatchDetail />} />
 
