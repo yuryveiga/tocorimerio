@@ -53,12 +53,20 @@ const FluminenseBolivarLibertadores = lazy(() => import("./pages/FluminenseBoliv
 const FluminenseDeportivoGuairaLibertadores = lazy(() => import("./pages/FluminenseDeportivoGuairaLibertadores"));
 const FlamengoCoritibaMaracana = lazy(() => import("./pages/FlamengoCoritibaMaracana"));
 const PasseiosIndex          = lazy(() => import("./pages/PasseiosIndex"));
-const BrasilPanamaMaracana   = lazy(() => import("./pages/BrasilPanamaMaracana"));
+// BrasilPanamaMaracana removida — redirecionada para /#tours
 const JogoLanding            = lazy(() => import("./pages/JogoLanding"));
 const Sitemap                = lazy(() => import("./pages/Sitemap"));
 const PasseiosCategoria      = lazy(() => import("./pages/PasseiosCategoria"));
 
 const PageLoader = () => <div className="min-h-screen flex items-center justify-center bg-background"><div className="w-12 h-12 border-4 border-primary border-t-transparent rounded-full animate-spin" /></div>;
+
+// Redireciona para a home com hash, usando window.location para garantir o scroll ao anchor
+const RedirectToHash = ({ hash }: { hash: string }) => {
+  useEffect(() => {
+    window.location.replace(`/${hash}`);
+  }, [hash]);
+  return <PageLoader />;
+};
 
 // Deferred analytics — runs after first paint to avoid blocking main thread
 const AnalyticsTracker = () => {
@@ -159,7 +167,7 @@ const App = ({ queryClient: externalQueryClient }: { queryClient?: QueryClient }
                       <Route path="/fluminense-bolivar-libertadores" element={<FluminenseBolivarLibertadores />} />
                       <Route path="/fluminense-x-deportivo-guaira-libertadores" element={<FluminenseDeportivoGuairaLibertadores />} />
                       <Route path="/flamengo-x-coritiba-maracana" element={<FlamengoCoritibaMaracana />} />
-                      <Route path="/brasil-x-panama-maio-maracana" element={<BrasilPanamaMaracana />} />
+                      <Route path="/brasil-x-panama-maio-maracana" element={<RedirectToHash hash="#tours" />} />
                       <Route path="/sitemap" element={<Sitemap />} />
                       <Route path="/:slug" element={<GenericPage />} />
                       <Route path="/admin/login" element={<AdminLogin />} />
