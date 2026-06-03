@@ -9,6 +9,35 @@ import { useLocale } from "@/contexts/LocaleContext";
 import { getCanonicalUrl, BASE_URL, generateBreadcrumbsSchema } from "@/utils/seo";
 import { slugify } from "@/utils/slugify";
 
+const CATEGORY_INTROS: Record<string, { pt: { h2: string; p: string[] }; en: { h2: string; p: string[] }; es: { h2: string; p: string[] } }> = {
+  "city-tour": {
+    pt: {
+      h2: "O que é um City Tour no Rio de Janeiro?",
+      p: [
+        "O city tour no Rio de Janeiro é a melhor forma de descobrir a Cidade Maravilhosa de verdade — com guia local, transporte privativo e roteiro sob medida para o seu grupo. Em poucas horas, você visita os cartões-postais mais icônicos do Rio, como o Cristo Redentor, o Pão de Açúcar e o Mirante Dona Marta, enquanto mergulha na história, na cultura e na energia única que fazem do Rio uma das cidades mais fascinantes do mundo.",
+        "Diferente dos passeios em grupo lotados, nossos city tours privados em Rio de Janeiro garantem atenção exclusiva, flexibilidade de horários e a liberdade de explorar cada atração no seu próprio ritmo. Seja um tour completo pelo Rio, um passeio pelo Centro Histórico, uma experiência cultural na Rocinha ou uma aventura náutica pela Baía de Guanabara — cada roteiro é pensado para transformar sua visita ao Rio de Janeiro em uma memória inesquecível.",
+        "Com guias bilíngues apaixonados pela cidade, transfer incluso e avaliação 5.0 no TripAdvisor, a Tocorime Rio oferece os melhores city tours no Rio de Janeiro para famílias, casais e viajantes que buscam autenticidade, segurança e conforto.",
+      ],
+    },
+    en: {
+      h2: "What is a City Tour in Rio de Janeiro?",
+      p: [
+        "A city tour in Rio de Janeiro is the best way to truly discover the Marvelous City — with a local guide, private transportation and a custom-made itinerary for your group. In just a few hours, you visit Rio's most iconic landmarks, such as Christ the Redeemer, Sugarloaf Mountain and Mirante Dona Marta, while diving into the history, culture and unique energy that make Rio one of the most fascinating cities in the world.",
+        "Unlike crowded group tours, our private city tours in Rio de Janeiro guarantee exclusive attention, flexible schedules and the freedom to explore each attraction at your own pace. Whether it's a complete tour of Rio, a walk through the Historic Downtown, a cultural experience in Rocinha or a boat adventure across Guanabara Bay — every itinerary is designed to turn your visit to Rio de Janeiro into an unforgettable memory.",
+        "With bilingual guides passionate about the city, transfer included and a 5.0 rating on TripAdvisor, Tocorime Rio offers the best city tours in Rio de Janeiro for families, couples and travelers looking for authenticity, safety and comfort.",
+      ],
+    },
+    es: {
+      h2: "¿Qué es un City Tour en Río de Janeiro?",
+      p: [
+        "El city tour en Río de Janeiro es la mejor manera de descubrir de verdad la Ciudad Maravillosa — con guía local, transporte privado e itinerario hecho a la medida de tu grupo. En pocas horas, visitas las postales más icónicas de Río, como el Cristo Redentor, el Pan de Azúcar y el Mirante Dona Marta, mientras te sumerges en la historia, la cultura y la energía única que hacen de Río una de las ciudades más fascinantes del mundo.",
+        "A diferencia de los tours en grupo abarrotados, nuestros city tours privados en Río de Janeiro garantizan atención exclusiva, flexibilidad de horarios y la libertad de explorar cada atracción a tu propio ritmo. Ya sea un tour completo por Río, un paseo por el Centro Histórico, una experiencia cultural en la Rocinha o una aventura náutica por la Bahía de Guanabara — cada itinerario está pensado para transformar tu visita a Río de Janeiro en un recuerdo inolvidable.",
+        "Con guías bilingües apasionados por la ciudad, traslado incluido y una valoración de 5.0 en TripAdvisor, Tocorime Rio ofrece los mejores city tours en Río de Janeiro para familias, parejas y viajeros que buscan autenticidad, seguridad y comodidad.",
+      ],
+    },
+  },
+};
+
 interface PasseiosCategoriaProps {
   categoriaOverride?: string;
   pathOverride?: string;
@@ -32,6 +61,8 @@ export default function PasseiosCategoria({ categoriaOverride, pathOverride }: P
   });
 
   const categoryName = filtered[0]?.category || categoria || "";
+  const intro = categoria ? CATEGORY_INTROS[categoria] : undefined;
+  const introContent = intro ? intro[language] || intro.en : undefined;
   const title =
     language === "pt"
       ? `${categoryName} no Rio de Janeiro | Tocorime Rio`
@@ -97,6 +128,19 @@ export default function PasseiosCategoria({ categoriaOverride, pathOverride }: P
               {sorted.length} {sorted.length === 1 ? "experiência disponível" : "experiências disponíveis"}
             </p>
           </header>
+
+          {introContent && (
+            <section className="max-w-3xl mx-auto mb-12 text-left">
+              <h2 className="font-serif text-2xl sm:text-3xl font-bold text-foreground mb-4">
+                {introContent.h2}
+              </h2>
+              <div className="space-y-4 text-muted-foreground leading-relaxed">
+                {introContent.p.map((paragraph, i) => (
+                  <p key={i}>{paragraph}</p>
+                ))}
+              </div>
+            </section>
+          )}
 
           {isLoading ? (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
