@@ -39,6 +39,15 @@ const CATEGORY_INTROS: Record<string, { pt: { h2: string; p: string[] }; en: { h
   },
 };
 
+const CATEGORY_SEO: Record<string, { title: string; description: string; ogTitle: string; ogDescription: string }> = {
+  "city-tour": {
+    title: "City Tour in Rio de Janeiro | Private Guided Tours | Tocorime Rio",
+    description: "Explore Rio de Janeiro with a local guide on a private, tailored city tour. Christ the Redeemer, Sugar Loaf, favelas & more. Rated 5.0 on TripAdvisor.",
+    ogTitle: "City Tour in Rio de Janeiro — Private Tours with Local Guide",
+    ogDescription: "Discover the real Rio de Janeiro: private city tours, bilingual guides, and custom itineraries. From Christ the Redeemer to the Historic Center — unforgettable experiences await.",
+  },
+};
+
 interface IntroParagraphsProps {
   paragraphs: string[];
   language: string;
