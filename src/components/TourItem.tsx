@@ -101,7 +101,7 @@ export const TourItem = memo(({ tour }: { tour: TourCardProps }) => {
           width={600} 
           containerClassName="w-full h-full"
           fit="cover"
-          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" 
+          className="w-full h-full object-cover transition-transform duration-[900ms] ease-[cubic-bezier(0.2,0.8,0.2,1)] group-hover:scale-110" 
           loading="lazy" 
         />
         {tour.is_featured && (
@@ -207,7 +207,7 @@ export const TourItem = memo(({ tour }: { tour: TourCardProps }) => {
         href={href} 
         target="_blank" 
         rel="noopener noreferrer" 
-        className="block bg-card rounded-2xl overflow-hidden shadow-lg border border-border/50 group hover:shadow-xl transition-shadow duration-300 focus:outline-none focus:ring-2 focus:ring-primary"
+        className="tilt-card block bg-card rounded-2xl overflow-hidden shadow-lg border border-border/50 group hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-primary"
         aria-label={`${isExternal ? (language === 'pt' ? 'Saber mais sobre' : 'Learn more about') : t("reservar")} ${title}`}
       >
         {CardContent}
@@ -218,7 +218,7 @@ export const TourItem = memo(({ tour }: { tour: TourCardProps }) => {
   return (
     <Link 
       to={href} 
-      className="block bg-card rounded-2xl overflow-hidden shadow-lg border border-border/50 group hover:shadow-xl transition-shadow duration-300 focus:outline-none focus:ring-2 focus:ring-primary"
+      className="tilt-card block bg-card rounded-2xl overflow-hidden shadow-lg border border-border/50 group hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-primary"
       aria-label={`${t("reservar")} ${title}`}
     >
       {CardContent}

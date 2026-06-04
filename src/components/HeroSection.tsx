@@ -67,6 +67,19 @@ export function HeroSection() {
     }
   };
 
+  // Split heroTitle into per-word spans with staggered reveal animation.
+  const renderRevealTitle = () => (
+    <span className="title-reveal">
+      {heroTitle.split(/(\s+)/).map((word, i) =>
+        word.trim() === '' ? (
+          <span key={i} aria-hidden="true">{word}</span>
+        ) : (
+          <span key={i} style={{ animationDelay: `${0.1 + i * 0.06}s` }}>{word}</span>
+        )
+      )}
+    </span>
+  );
+
   // ======== Reusable hero content blocks (shared across all 3 styles) ========
   const MiniBrand = ({ light = true }: { light?: boolean }) => (
     <div className={`flex items-center justify-center gap-2.5 mb-4 ${light ? 'text-white/90' : 'text-foreground/85'}`}>
@@ -105,7 +118,7 @@ export function HeroSection() {
       <Button
         size="lg"
         onClick={handleWhatsAppClick}
-        className="group h-14 sm:h-12 text-base sm:text-lg px-8 font-bold font-sans bg-accent hover:bg-accent/90 text-accent-foreground shadow-[0_8px_30px_-4px_hsl(var(--accent)/0.5)] hover:shadow-[0_12px_40px_-4px_hsl(var(--accent)/0.7)] transition-all hover:scale-[1.02]"
+        className="shimmer-cta group h-14 sm:h-12 text-base sm:text-lg px-8 font-bold font-sans bg-accent hover:bg-accent/90 text-accent-foreground shadow-[0_8px_30px_-4px_hsl(var(--accent)/0.5)] hover:shadow-[0_12px_40px_-4px_hsl(var(--accent)/0.7)] transition-all hover:scale-[1.02]"
       >
         {language === 'pt' ? 'Tour Personalizado' : language === 'es' ? 'Tour Personalizado' : 'Custom Tour'}
         <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
@@ -136,7 +149,7 @@ export function HeroSection() {
         <div
           key={index}
           className={`absolute inset-0 transition-opacity duration-1000 bg-cover bg-center bg-no-repeat ${index === currentBg ? 'opacity-100' : 'opacity-0'}`}
-          style={{ backgroundImage: `url(${bg})` }}
+          style={{ backgroundImage: `url(${bg})`, animation: `ken-burns 14s ease-in-out ${index * 2}s infinite alternate`, willChange: 'transform' }}
         >
           {/* Hidden <img> so the browser preload scanner can fetch the image.
               fetchpriority="high" on index 0 tells the browser this is LCP-critical. */}
@@ -171,7 +184,7 @@ export function HeroSection() {
             <div className="flex justify-center"><SocialProofChip /></div>
 
             <h1 className="font-serif text-3xl sm:text-5xl md:text-6xl font-bold mb-4 text-white text-balance drop-shadow-lg leading-tight">
-              {heroTitle}
+              {renderRevealTitle()}
             </h1>
 
             <p className="text-base sm:text-lg text-white/90 max-w-2xl mx-auto mb-3 font-sans">
@@ -204,7 +217,7 @@ export function HeroSection() {
             <SocialProofChip light={false} />
 
             <h1 className="font-serif text-4xl sm:text-5xl lg:text-7xl font-extrabold mb-4 text-foreground text-balance leading-[1.05]">
-              {heroTitle}
+              {renderRevealTitle()}
             </h1>
 
             <p className="text-base sm:text-lg text-muted-foreground mb-3 font-sans leading-relaxed">
@@ -235,7 +248,7 @@ export function HeroSection() {
           <div className="flex justify-center"><SocialProofChip /></div>
 
           <h1 className="font-serif text-4xl sm:text-6xl lg:text-7xl font-bold mb-4 text-white text-balance drop-shadow-2xl leading-[1.05] tracking-tight">
-            {heroTitle}
+            {renderRevealTitle()}
           </h1>
 
           <p className="text-base sm:text-xl text-white/90 max-w-3xl mx-auto mb-3 font-sans drop-shadow">

@@ -1,51 +1,79 @@
-## Objetivo
 
-Reduzir o payload do site de ~58 MiB para ~10–15 MiB redimensionando as imagens do bucket `site-images` para no máximo 1920px de largura (mantendo aspect ratio), recodificadas em WebP q=72. Manter cópia das originais em `originals/` dentro do mesmo bucket antes de sobrescrever.
+# Elevação "Awwwards-tier" — alterações cirúrgicas
 
-## Diagnóstico
+Objetivo: deixar o site digno de prêmio (Awwwards / CSS Design Awards / SiteInspire) **sem mexer no layout**. Apenas micro-animações, transições e detalhes de polimento que a concorrência (operadoras de turismo no Rio) não tem.
 
-- As imagens do bucket têm 1–2 MB cada porque estão em resolução cheia (3000–4000px).
-- O componente `OptimizedImage` chama `getOptimizedImage`, mas para URLs do Supabase ele retorna a URL original sem transformação (Image Transformation API não está habilitada neste projeto — comentário explícito em `src/utils/imageOptimization.ts`).
-- A recompactação anterior (q=65) só reduziu marginalmente porque o problema dominante é a **resolução**, não a qualidade.
+## Princípios
 
-## Plano de execução
+- Layout intocado. Só adicionar camadas de movimento, textura e refinamento.
+- Performance first: tudo `transform`/`opacity`, `will-change` controlado, `prefers-reduced-motion` respeitado.
+- Identidade visual mantida: verde imperial + laranja sunset, Playfair + Poppins.
 
-### 1. Atualizar `scripts/recompress-bucket.js`
+---
 
-Transformar em script de **resize + backup**:
+## 1. Hero — primeira impressão "wow"
 
-- Para cada arquivo na raiz do bucket (ignorar o que já estiver em `originals/`):
-  1. Baixar o arquivo.
-  2. Se ainda não existir cópia em `originals/<nome>`, fazer upload da versão original para lá (backup idempotente).
-  3. Usar `sharp` com `.rotate().resize({ width: 1920, height: 1920, fit: "inside", withoutEnlargement: true }).webp({ quality: 72, effort: 6, smartSubsample: true })`.
-  4. Reupload no caminho original com `Cache-Control: public, max-age=31536000, immutable` e `contentType: image/webp`.
-  5. Pular se o arquivo já é ≤1920px e a recompressão não economiza ≥5% / ≥5 KiB.
-- Manter log de progresso `[i/N]`, total economizado, falhas.
-- Idempotente: rodar de novo não mexe em quem já foi processado.
+- **Ken Burns sutil** nas imagens do slideshow (zoom 1.0 → 1.08 em 6s sincronizado com o fade já existente).
+- **Parallax leve** no conteúdo do hero ao rolar (translateY/opacity baseado em scroll, máx. 40px).
+- **Reveal escalonado** do título: cada palavra do `<h1>` entra com blur→0 + translateY (stagger 60ms). Usar split por palavras, não letras (mantém SEO e performance).
+- **Cursor magnético** no CTA principal "Tour Personalizado" (deslocamento de 4–6px em direção ao cursor, só desktop).
+- **Brilho sutil** atravessando o botão accent a cada ~6s (shimmer já existe no CSS Copa, reutilizar com cor accent).
 
-### 2. Executar o script
+## 2. Cards de passeios — interação premium
 
-```
-SUPABASE_URL=$SUPABASE_URL SUPABASE_SERVICE_ROLE_KEY=$SUPABASE_SERVICE_ROLE_KEY \
-  node scripts/recompress-bucket.js
-```
+- **Tilt 3D leve** no hover (rotateX/Y máx. 4°, perspective 1000px). Só pointer:fine.
+- **Imagem com zoom + parallax interno**: imagem escala 1.06 e desliza 2% na direção oposta ao mouse.
+- **Overlay gradiente animado** revelando preço/CTA de baixo para cima no hover.
+- **Borda accent** que "desenha" ao redor do card no hover (clip-path animado ou border-beam do MagicUI).
 
-Roda em background (`nohup`) com log em `/tmp/resize.log`. ~742 arquivos, esperado 10–20 min.
+## 3. Scroll storytelling
 
-### 3. Verificar
+- **Reveal on scroll refinado**: substituir o `ViewFadeIn` atual (já existe) por variante com blur 8px→0 + translateY 24px→0, easing `cubic-bezier(.2,.8,.2,1)`, stagger automático entre filhos.
+- **Section anchors com "smooth + offset + highlight"**: ao chegar numa seção, um traço accent breve aparece sob o título (300ms).
+- **Marquee sutil** de selos de confiança (TripAdvisor 5.0, Cadastur, anos de operação) — uma faixa fininha entre hero e tours.
 
-- Conferir 3–5 imagens grandes (as listadas no Lighthouse) via `curl -sI` para confirmar novo tamanho.
-- Abrir o site em preview e checar que as imagens continuam exibindo normalmente (URLs não mudam — só o conteúdo).
+## 4. Tipografia viva
 
-## Notas técnicas
+- **Text-balance** já está; adicionar **kerning animado** nos h1/h2 quando entram em viewport (letter-spacing -0.04em → -0.02em em 600ms). Cria sensação de "respiração".
+- **Underline desenhada à mão** nos links de navegação (já existe `.story-link`, aplicar consistentemente no header e footer).
 
-- **URLs continuam idênticas** — nada muda no frontend, nenhum cache do navegador precisa ser invalidado manualmente (mas o `Cache-Control: immutable` faz com que clientes que já baixaram a versão antiga continuem com ela; isso é aceitável porque a próxima visita pega a nova).
-- **Backups em `originals/`**: ocupam o mesmo espaço das atuais (~+1 GB temporário). Posso adicionar um comando de limpeza depois que você validar visualmente.
-- **Sem alteração no código do app** (`OptimizedImage`, rotas, etc.).
-- 1920px é o maior `srcset` que `OptimizedImage` usaria (`SRCSET_WIDTHS = [400, 800, 1200, 1600]`), então não há perda visível mesmo em telas 4K.
+## 5. Quote de categoria (city-tour, hiking, one-day)
 
-## Ganho esperado
+- Substituir o blockquote estático por:
+  - Aspa decorativa enorme (Playfair, opacity 0.08) no canto.
+  - Texto entra com **typewriter sutil de primeira frase** (60ms/palavra, só uma vez por sessão).
+  - Botão "Ler mais" com chevron que **ricocheia** suavemente.
 
-- Imagens de 1–2 MB → 150–400 KB cada.
-- Payload total: 58 MiB → ~12–15 MiB.
-- LCP mobile: melhora significativa (a hero atual de ~800 KB cai para ~150 KB).
+## 6. Footer & detalhes finais
+
+- **Logo no header** com **micro-pulse** quando volta ao topo.
+- **WhatsApp flutuante**: já existe; adicionar **ping ring** (anel verde expandindo) a cada 8s para sinalizar disponibilidade.
+- **Cursor custom** discreto (ponto + ring) em desktop — opcional, ativável por flag.
+- **Page transitions** entre rotas: fade + slide 12px (300ms) usando wrapper no `<Outlet/>`.
+
+## 7. Detalhes "premiáveis"
+
+- **Noise overlay** (8% opacity) global — dá textura cinematográfica.
+- **Cor de seleção customizada** (`::selection` com accent).
+- **Scrollbar fina** verde imperial.
+- **Favicon animado** quando aba está inativa ("Volte! 🌴" no title).
+
+---
+
+## Como vamos executar
+
+Sugestão de pacote inicial **mínimo viável** (3 mudanças, ~baixo risco):
+
+1. Hero: Ken Burns + reveal escalonado do título + shimmer no CTA.
+2. Cards: tilt 3D + zoom de imagem + border-beam no hover.
+3. Global: ViewFadeIn com blur + noise overlay + ::selection + scrollbar.
+
+Se gostar, depois aplicamos o pacote 2 (parallax, marquee de selos, typewriter da quote) e o pacote 3 (page transitions, cursor magnético, ping no WhatsApp).
+
+## Pergunta antes de implementar
+
+Qual pacote você quer começar?
+- **A)** Só o pacote 1 (hero + cards + globais) — mais seguro.
+- **B)** Pacotes 1 + 2 — equilíbrio.
+- **C)** Tudo (1 + 2 + 3) — máximo impacto.
+- **D)** Escolher itens específicos da lista (me diga os números).
