@@ -177,7 +177,7 @@
   100% { transform: scale(1.08) translate(-1%, -1%); }
 }
 .ken-burns {
-  animation: ken-burns 12s ease-out forwards;
+  animation: ken-burns 14s ease-in-out infinite alternate;
   will-change: transform;
 }
 

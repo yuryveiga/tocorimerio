@@ -136,7 +136,7 @@ export function HeroSection() {
         <div
           key={index}
           className={`absolute inset-0 transition-opacity duration-1000 bg-cover bg-center bg-no-repeat ${index === currentBg ? 'opacity-100' : 'opacity-0'}`}
-          style={{ backgroundImage: `url(${bg})` }}
+          style={{ backgroundImage: `url(${bg})`, animation: `ken-burns 14s ease-in-out ${index * 2}s infinite alternate`, willChange: 'transform' }}
         >
           {/* Hidden <img> so the browser preload scanner can fetch the image.
               fetchpriority="high" on index 0 tells the browser this is LCP-critical. */}
