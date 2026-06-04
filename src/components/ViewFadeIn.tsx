@@ -52,8 +52,9 @@ export const ViewFadeIn = ({
       style={{
         opacity: isVisible ? 1 : 0,
         transform: getTransform(),
-        transition: `opacity 0.5s ease-out ${delay}s, transform 0.5s ease-out ${delay}s`,
-        willChange: 'opacity, transform'
+        filter: isVisible ? 'blur(0)' : 'blur(6px)',
+        transition: `opacity 0.7s cubic-bezier(0.2,0.8,0.2,1) ${delay}s, transform 0.7s cubic-bezier(0.2,0.8,0.2,1) ${delay}s, filter 0.7s ease-out ${delay}s`,
+        willChange: 'opacity, transform, filter'
       }}
     >
       {children}

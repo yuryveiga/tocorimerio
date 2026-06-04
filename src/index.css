@@ -150,6 +150,110 @@
   );
 }
 
+/* ─── Award-tier polish ───────────────────────────────────────────────────── */
+
+/* Custom selection */
+::selection {
+  background: hsl(var(--accent) / 0.85);
+  color: hsl(var(--accent-foreground));
+}
+
+/* Refined scrollbar (desktop) */
+@media (pointer: fine) {
+  ::-webkit-scrollbar { width: 10px; height: 10px; }
+  ::-webkit-scrollbar-track { background: hsl(var(--background)); }
+  ::-webkit-scrollbar-thumb {
+    background: hsl(var(--primary) / 0.35);
+    border-radius: 999px;
+    border: 2px solid hsl(var(--background));
+  }
+  ::-webkit-scrollbar-thumb:hover { background: hsl(var(--primary) / 0.6); }
+  html { scrollbar-color: hsl(var(--primary) / 0.4) hsl(var(--background)); scrollbar-width: thin; }
+}
+
+/* Ken Burns — slow zoom on hero slideshow images */
+@keyframes ken-burns {
+  0%   { transform: scale(1.0)  translate(0, 0); }
+  100% { transform: scale(1.08) translate(-1%, -1%); }
+}
+.ken-burns {
+  animation: ken-burns 12s ease-out forwards;
+  will-change: transform;
+}
+
+/* Accent shimmer sweep — for premium CTA buttons */
+@keyframes accent-shimmer {
+  0%   { transform: translateX(-150%) skewX(-20deg); }
+  100% { transform: translateX(250%)  skewX(-20deg); }
+}
+.shimmer-cta {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+.shimmer-cta::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.35) 50%, transparent 100%);
+  transform: translateX(-150%) skewX(-20deg);
+  animation: accent-shimmer 5s ease-in-out 1.5s infinite;
+  pointer-events: none;
+  z-index: 1;
+}
+.shimmer-cta > * { position: relative; z-index: 2; }
+
+/* Hero title word reveal — staggered blur + rise */
+@keyframes word-reveal {
+  0%   { opacity: 0; transform: translateY(0.6em); filter: blur(8px); }
+  100% { opacity: 1; transform: translateY(0);     filter: blur(0); }
+}
+.title-reveal > span {
+  display: inline-block;
+  opacity: 0;
+  animation: word-reveal 0.9s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+  will-change: opacity, transform, filter;
+}
+
+/* Subtle film-grain noise overlay (global) */
+.noise-overlay::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.05;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.6 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+}
+
+/* Premium card tilt: lift + micro rotate on hover (pure CSS, pointer:fine only) */
+@media (pointer: fine) {
+  .tilt-card {
+    transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1),
+                box-shadow 0.5s ease-out;
+    transform-style: preserve-3d;
+    will-change: transform;
+  }
+  .tilt-card:hover {
+    transform: perspective(1200px) translateY(-6px) rotateX(2deg) rotateY(-2deg);
+    box-shadow: 0 30px 60px -20px hsl(var(--primary) / 0.25),
+                0 18px 36px -18px hsl(var(--accent) / 0.18);
+  }
+}
+
+/* Respect user preference */
+@media (prefers-reduced-motion: reduce) {
+  .ken-burns,
+  .shimmer-cta::after,
+  .title-reveal > span,
+  .copa-float-ball,
+  .copa-star,
+  .copa-banner,
+  .copa-ticker-track { animation: none !important; }
+  .title-reveal > span { opacity: 1; filter: none; transform: none; }
+}
+
 
 /* ─── Copa do Mundo 2026 ──────────────────────────────────────────────────── */
 @keyframes copa-float {
