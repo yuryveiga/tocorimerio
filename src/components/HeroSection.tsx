@@ -67,6 +67,19 @@ export function HeroSection() {
     }
   };
 
+  // Split heroTitle into per-word spans with staggered reveal animation.
+  const renderRevealTitle = () => (
+    <span className="title-reveal">
+      {heroTitle.split(/(\s+)/).map((word, i) =>
+        word.trim() === '' ? (
+          <span key={i} aria-hidden="true">{word}</span>
+        ) : (
+          <span key={i} style={{ animationDelay: `${0.1 + i * 0.06}s` }}>{word}</span>
+        )
+      )}
+    </span>
+  );
+
   // ======== Reusable hero content blocks (shared across all 3 styles) ========
   const MiniBrand = ({ light = true }: { light?: boolean }) => (
     <div className={`flex items-center justify-center gap-2.5 mb-4 ${light ? 'text-white/90' : 'text-foreground/85'}`}>
@@ -105,7 +118,7 @@ export function HeroSection() {
       <Button
         size="lg"
         onClick={handleWhatsAppClick}
-        className="group h-14 sm:h-12 text-base sm:text-lg px-8 font-bold font-sans bg-accent hover:bg-accent/90 text-accent-foreground shadow-[0_8px_30px_-4px_hsl(var(--accent)/0.5)] hover:shadow-[0_12px_40px_-4px_hsl(var(--accent)/0.7)] transition-all hover:scale-[1.02]"
+        className="shimmer-cta group h-14 sm:h-12 text-base sm:text-lg px-8 font-bold font-sans bg-accent hover:bg-accent/90 text-accent-foreground shadow-[0_8px_30px_-4px_hsl(var(--accent)/0.5)] hover:shadow-[0_12px_40px_-4px_hsl(var(--accent)/0.7)] transition-all hover:scale-[1.02]"
       >
         {language === 'pt' ? 'Tour Personalizado' : language === 'es' ? 'Tour Personalizado' : 'Custom Tour'}
         <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
