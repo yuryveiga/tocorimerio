@@ -3,6 +3,7 @@ import { LazyMount } from "@/components/LazyMount";
 import { Helmet } from "react-helmet-async";
 import { Header } from "@/components/Header";
 import { HeroSection } from "@/components/HeroSection";
+import { TrustMarquee } from "@/components/TrustMarquee";
 import { UrgencyBar } from "@/components/UrgencyBar";
 import { CopaDoMundoBanner } from "@/components/CopaDoMundoBanner";
 import { useSiteData } from "@/hooks/useSiteData";
@@ -67,7 +68,8 @@ const Index = () => {
       <CopaDoMundoBanner />
       <Header />
       <HeroSection />
-      
+      <TrustMarquee />
+
       {/* Each lazy section in its own Suspense so a slow chunk
           doesn't hold back the others from rendering. */}
       <Suspense fallback={<SectionLoader />}><ToursSection /></Suspense>

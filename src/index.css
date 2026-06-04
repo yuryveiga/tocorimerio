@@ -352,3 +352,36 @@
   animation: copa-marquee 22s linear infinite;
 }
 .copa-ticker-track:hover { animation-play-state: paused; }
+
+/* ─── Trust marquee (infinite seamless scroll) ────────────────────────────── */
+@keyframes trust-marquee {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+.trust-marquee-track {
+  display: flex;
+  width: max-content;
+  animation: trust-marquee 38s linear infinite;
+  will-change: transform;
+}
+.trust-marquee-track:hover { animation-play-state: paused; }
+
+/* ─── Typewriter caret for category quote first sentence ──────────────────── */
+@keyframes caret-blink {
+  0%, 49%   { opacity: 1; }
+  50%, 100% { opacity: 0; }
+}
+.tw-caret {
+  display: inline-block;
+  width: 2px;
+  height: 1em;
+  background: hsl(var(--primary));
+  margin-left: 2px;
+  vertical-align: -0.15em;
+  animation: caret-blink 0.9s steps(1) infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .trust-marquee-track { animation: none !important; }
+  .tw-caret { animation: none !important; opacity: 0; }
+}

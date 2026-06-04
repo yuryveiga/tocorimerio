@@ -14,6 +14,7 @@ export function HeroSection() {
   const { images, siteSettings, socialMedia } = useSiteData();
   const { t, language } = useLocale();
   const [currentBg, setCurrentBg] = useState(0);
+  const [scrollY, setScrollY] = useState(0);
   const heroStyle = siteSettings['hero_style'] || "style1";
 
   const heroTitleKey = language === 'pt' ? 'hero_title' : `hero_title_${language}`;
@@ -45,6 +46,33 @@ export function HeroSection() {
     }, 6000);
     return () => clearInterval(interval);
   }, [heroBgs.length]);
+
+  // Subtle parallax — translate backgrounds + content while scrolling past hero.
+  useEffect(() => {
+    const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (prefersReduced) return;
+    let raf = 0;
+    const onScroll = () => {
+      if (raf) return;
+      raf = requestAnimationFrame(() => {
+        setScrollY(window.scrollY);
+        raf = 0;
+      });
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      if (raf) cancelAnimationFrame(raf);
+    };
+  }, []);
+
+  const contentParallax = {
+    transform: `translate3d(0, ${Math.min(scrollY * 0.18, 120)}px, 0)`,
+    opacity: Math.max(1 - scrollY / 600, 0),
+  };
+  const overlayParallax = {
+    transform: `translate3d(0, ${Math.min(scrollY * 0.08, 60)}px, 0)`,
+  };
 
   const scrollTo = (id: string) => {
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
@@ -176,7 +204,7 @@ export function HeroSection() {
     return (
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-black">
         {renderSlideshowBackgrounds()}
-        <div className="relative z-10 w-full max-w-4xl mx-auto px-4 sm:px-6 mt-16 animate-fade-in-up">
+        <div className="relative z-10 w-full max-w-4xl mx-auto px-4 sm:px-6 mt-16 animate-fade-in-up" style={contentParallax}>
           <div className="bg-background/10 backdrop-blur-md border border-white/20 rounded-3xl p-6 sm:p-12 text-center shadow-2xl relative overflow-hidden">
             <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-accent to-transparent opacity-60"></div>
 
@@ -205,13 +233,13 @@ export function HeroSection() {
   if (heroStyle === "style2") {
     return (
       <section className="relative min-h-[90vh] flex items-center overflow-hidden bg-background">
-        <div className="absolute inset-0 w-full lg:w-[70%] lg:left-[30%] z-0 h-[50vh] lg:h-full top-0 lg:top-0 mt-16 lg:mt-0">
+        <div className="absolute inset-0 w-full lg:w-[70%] lg:left-[30%] z-0 h-[50vh] lg:h-full top-0 lg:top-0 mt-16 lg:mt-0" style={overlayParallax}>
           {renderSlideshowBackgrounds()}
           <div className="absolute inset-y-0 left-0 bg-gradient-to-r from-background via-background/90 to-transparent w-full lg:w-64 z-10 hidden lg:block"></div>
           <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-background via-background/90 to-transparent h-32 z-10 block lg:hidden"></div>
         </div>
 
-        <div className="w-full lg:w-[55%] relative z-10 flex items-center justify-center p-6 sm:p-12 lg:p-20 bg-background lg:bg-transparent lg:bg-gradient-to-r lg:from-background lg:via-background lg:to-transparent mt-[50vh] lg:mt-0">
+        <div className="w-full lg:w-[55%] relative z-10 flex items-center justify-center p-6 sm:p-12 lg:p-20 bg-background lg:bg-transparent lg:bg-gradient-to-r lg:from-background lg:via-background lg:to-transparent mt-[50vh] lg:mt-0" style={contentParallax}>
           <div className="max-w-xl w-full text-center lg:text-left animate-fade-in-up">
             <div className="lg:justify-start"><MiniBrand light={false} /></div>
             <SocialProofChip light={false} />
@@ -242,7 +270,7 @@ export function HeroSection() {
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-black">
       {renderSlideshowBackgrounds()}
 
-      <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-white mt-16">
+      <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-white mt-16" style={contentParallax}>
         <div className="animate-fade-in-up">
           <MiniBrand />
           <div className="flex justify-center"><SocialProofChip /></div>

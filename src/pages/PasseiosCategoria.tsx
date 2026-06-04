@@ -1,6 +1,6 @@
 import { useParams, Navigate, Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
-import { useState } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { ArrowLeft, ChevronDown, ChevronUp } from "lucide-react";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
@@ -60,13 +60,65 @@ function IntroParagraphs({ paragraphs, language }: IntroParagraphsProps) {
   const readLessLabel =
     language === "pt" ? "Ler menos" : language === "es" ? "Leer menos" : "Read less";
 
+  // Split first paragraph into "first sentence" + "rest"
+  // First sentence = up to (and including) the first "." that is followed by a space or end.
+  const { firstSentence, restOfFirst } = useMemo(() => {
+    const p = paragraphs[0] || "";
+    const match = p.match(/^([\s\S]*?[.!?])(\s+[\s\S]*)?$/);
+    if (!match) return { firstSentence: p, restOfFirst: "" };
+    return { firstSentence: match[1], restOfFirst: match[2] || "" };
+  }, [paragraphs]);
+
+  // Typewriter on first sentence (skipped if reduced motion).
+  const [typed, setTyped] = useState(() => {
+    if (typeof window === "undefined") return firstSentence;
+    return window.matchMedia("(prefers-reduced-motion: reduce)").matches
+      ? firstSentence
+      : "";
+  });
+  const [typingDone, setTypingDone] = useState(typed === firstSentence);
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      setTyped(firstSentence);
+      setTypingDone(true);
+      return;
+    }
+    setTyped("");
+    setTypingDone(false);
+    let i = 0;
+    const total = firstSentence.length;
+    // Target ~3.2s for the full sentence regardless of length
+    const stepMs = Math.max(12, Math.min(40, Math.round(3200 / Math.max(total, 1))));
+    const id = window.setInterval(() => {
+      i += 1;
+      setTyped(firstSentence.slice(0, i));
+      if (i >= total) {
+        window.clearInterval(id);
+        setTypingDone(true);
+      }
+    }, stepMs);
+    return () => window.clearInterval(id);
+  }, [firstSentence]);
+
   if (paragraphs.length <= 1) {
-    return <p>{paragraphs[0]}</p>;
+    return (
+      <p>
+        <span>{typed}</span>
+        {!typingDone && <span className="tw-caret" aria-hidden="true" />}
+        {typingDone && restOfFirst}
+      </p>
+    );
   }
 
   return (
     <>
-      <p>{paragraphs[0]}</p>
+      <p>
+        <span>{typed}</span>
+        {!typingDone && <span className="tw-caret" aria-hidden="true" />}
+        {typingDone && restOfFirst}
+      </p>
 
       {expanded && (
         <>
