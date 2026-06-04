@@ -14,6 +14,7 @@ export function HeroSection() {
   const { images, siteSettings, socialMedia } = useSiteData();
   const { t, language } = useLocale();
   const [currentBg, setCurrentBg] = useState(0);
+  const [scrollY, setScrollY] = useState(0);
   const heroStyle = siteSettings['hero_style'] || "style1";
 
   const heroTitleKey = language === 'pt' ? 'hero_title' : `hero_title_${language}`;
@@ -45,6 +46,31 @@ export function HeroSection() {
     }, 6000);
     return () => clearInterval(interval);
   }, [heroBgs.length]);
+
+  // Subtle parallax — translate backgrounds + content while scrolling past hero.
+  useEffect(() => {
+    const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (prefersReduced) return;
+    let raf = 0;
+    const onScroll = () => {
+      if (raf) return;
+      raf = requestAnimationFrame(() => {
+        setScrollY(window.scrollY);
+        raf = 0;
+      });
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      if (raf) cancelAnimationFrame(raf);
+    };
+  }, []);
+
+  const bgParallax = `translate3d(0, ${Math.min(scrollY * 0.35, 240)}px, 0)`;
+  const contentParallax = {
+    transform: `translate3d(0, ${Math.min(scrollY * 0.18, 120)}px, 0)`,
+    opacity: Math.max(1 - scrollY / 600, 0),
+  };
 
   const scrollTo = (id: string) => {
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
@@ -149,7 +175,7 @@ export function HeroSection() {
         <div
           key={index}
           className={`absolute inset-0 transition-opacity duration-1000 bg-cover bg-center bg-no-repeat ${index === currentBg ? 'opacity-100' : 'opacity-0'}`}
-          style={{ backgroundImage: `url(${bg})`, animation: `ken-burns 14s ease-in-out ${index * 2}s infinite alternate`, willChange: 'transform' }}
+          style={{ backgroundImage: `url(${bg})`, animation: `ken-burns 14s ease-in-out ${index * 2}s infinite alternate`, willChange: 'transform', transform: bgParallax }}
         >
           {/* Hidden <img> so the browser preload scanner can fetch the image.
               fetchpriority="high" on index 0 tells the browser this is LCP-critical. */}
