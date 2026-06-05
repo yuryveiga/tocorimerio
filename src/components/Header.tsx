@@ -155,6 +155,7 @@ export function Header({ forceLanguage }: { forceLanguage?: 'pt' | 'en' | 'es' }
                 <span className="text-primary-foreground font-bold text-2xl font-sans">P</span>
               </div>
             )}
+            <span className={`font-serif font-bold tracking-tight transition-all duration-500 ${isScrolled ? "text-lg text-foreground" : "text-xl text-foreground"} hidden sm:block ml-1 group-hover:text-primary`}>Tocorime Rio</span>
           </Link>
 
           <nav className="hidden lg:flex items-center gap-6">

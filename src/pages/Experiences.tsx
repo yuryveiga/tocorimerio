@@ -1,5 +1,5 @@
 import { lazy, Suspense, useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import ArrowRight from "lucide-react/dist/esm/icons/arrow-right";
 import Star from "lucide-react/dist/esm/icons/star";
@@ -14,6 +14,7 @@ import Clock from "lucide-react/dist/esm/icons/clock";
 import { Button } from "@/components/ui/button";
 import { Header } from "@/components/Header";
 import { ViewFadeIn } from "@/components/ViewFadeIn";
+import { OptimizedImage } from "@/components/OptimizedImage";
 import { useSiteData } from "@/hooks/useSiteData";
 import { useLocale } from "@/contexts/LocaleContext";
 
@@ -30,8 +31,17 @@ const IMG_ONEDAY = "/Mac-niteroi.webp";
 
 export default function Experiences() {
   const { socialMedia } = useSiteData();
-  const { t } = useLocale();
+  const { t, language, setLanguage } = useLocale();
   const [scrollY, setScrollY] = useState(0);
+  const location = useLocation();
+
+  useEffect(() => {
+    const params = new URLSearchParams(location.search);
+    const lang = params.get("lang");
+    if (lang === "pt" || lang === "en" || lang === "es") {
+      setLanguage(lang);
+    }
+  }, [location.search, setLanguage]);
 
   const CATEGORIES = [
     {
@@ -99,12 +109,28 @@ export default function Experiences() {
       <Helmet>
         <title>{t("ex_meta_title")}</title>
         <meta name="description" content={t("ex_meta_desc")} />
-        <link rel="canonical" href="https://tocorimerio.com/experiences" />
+        <link rel="canonical" href={`https://tocorimerio.com/experiences${language !== 'en' ? `?lang=${language}` : ''}`} />
+        <link rel="alternate" hrefLang="en" href="https://tocorimerio.com/experiences" />
+        <link rel="alternate" hrefLang="pt" href="https://tocorimerio.com/experiences?lang=pt" />
+        <link rel="alternate" hrefLang="es" href="https://tocorimerio.com/experiences?lang=es" />
+        <link rel="alternate" hrefLang="x-default" href="https://tocorimerio.com/experiences" />
         <meta property="og:title" content={t("ex_og_title")} />
         <meta property="og:description" content={t("ex_og_desc")} />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://tocorimerio.com/experiences" />
+        <meta property="og:url" content={`https://tocorimerio.com/experiences${language !== 'en' ? `?lang=${language}` : ''}`} />
         <meta property="og:image" content={HERO_BG} />
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "TouristAttraction",
+            "name": "Tocorime Rio - Private Tours",
+            "aggregateRating": {
+              "@type": "AggregateRating",
+              "ratingValue": "5.0",
+              "reviewCount": "2000"
+            }
+          })}
+        </script>
       </Helmet>
 
       <Header />
@@ -151,7 +177,7 @@ export default function Experiences() {
               href={waUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="shimmer-cta inline-flex items-center justify-center gap-2 h-14 px-8 text-lg font-bold rounded-md bg-accent hover:bg-accent/90 text-accent-foreground shadow-[0_8px_30px_-4px_hsl(var(--accent)/0.5)] hover:shadow-[0_12px_40px_-4px_hsl(var(--accent)/0.7)] transition-all hover:scale-[1.02]"
+              className="shimmer-cta inline-flex items-center justify-center gap-2 h-14 px-8 text-lg font-bold rounded-md bg-accent hover:bg-accent/90 text-accent-foreground shadow-[0_8px_30px_-4px_hsl(var(--accent)/0.5)] hover:shadow-[0_12px_40px_-4px_hsl(var(--accent)/0.7)] transition-all hover:scale-[1.02] animate-[pulse_3s_ease-in-out_infinite]"
             >
               {t("ex_plan_trip")}
               <ArrowRight className="w-5 h-5" />
@@ -221,11 +247,9 @@ export default function Experiences() {
                   to={cat.slug}
                   className="tilt-card group block relative h-[480px] rounded-3xl overflow-hidden shadow-xl border border-border/40 focus:outline-none focus:ring-2 focus:ring-accent"
                 >
-                  <img
+                  <OptimizedImage
                     src={cat.image}
-                    alt={cat.label}
-                    loading="lazy"
-                    decoding="async"
+                    alt={`${cat.label} - Rio de Janeiro`}
                     className="absolute inset-0 w-full h-full object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-[1.10]"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-black/10" />
@@ -280,7 +304,7 @@ export default function Experiences() {
               href={waUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="shimmer-cta inline-flex items-center justify-center gap-2 h-14 px-10 text-lg font-bold rounded-md bg-accent hover:bg-accent/90 text-accent-foreground shadow-2xl transition-all hover:scale-[1.02]"
+              className="shimmer-cta inline-flex items-center justify-center gap-2 h-14 px-10 text-lg font-bold rounded-md bg-accent hover:bg-accent/90 text-accent-foreground shadow-[0_8px_30px_-4px_hsl(var(--accent)/0.5)] hover:shadow-[0_12px_40px_-4px_hsl(var(--accent)/0.7)] transition-all hover:scale-[1.02] animate-[pulse_3s_ease-in-out_infinite]"
             >
               {t("ex_promo_cta")}
               <ArrowRight className="w-5 h-5" />
@@ -308,11 +332,21 @@ export default function Experiences() {
               href={waUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="shimmer-cta inline-flex items-center justify-center gap-2 h-14 px-10 text-lg font-bold rounded-md bg-accent hover:bg-accent/90 text-accent-foreground shadow-[0_8px_30px_-4px_hsl(var(--accent)/0.5)] hover:shadow-[0_12px_40px_-4px_hsl(var(--accent)/0.7)] transition-all hover:scale-[1.02]"
+              className="shimmer-cta inline-flex items-center justify-center gap-2 h-14 px-10 text-lg font-bold rounded-md bg-accent hover:bg-accent/90 text-accent-foreground shadow-[0_8px_30px_-4px_hsl(var(--accent)/0.5)] hover:shadow-[0_12px_40px_-4px_hsl(var(--accent)/0.7)] transition-all hover:scale-[1.02] animate-[pulse_3s_ease-in-out_infinite]"
             >
               {t("ex_final_cta")}
               <ArrowRight className="w-5 h-5" />
             </a>
+            
+            {/* Inline trust strip for final CTA */}
+            <div className="mt-6 flex flex-wrap items-center justify-center gap-x-6 gap-y-3 text-muted-foreground text-sm font-medium">
+              <span className="inline-flex items-center gap-1.5">
+                {[0, 1, 2, 3, 4].map((i) => (
+                  <Star key={i} className="w-4 h-4 fill-accent text-accent" />
+                ))}
+                <span className="ml-1 text-foreground/80">{t("ex_trust_1")}</span>
+              </span>
+            </div>
           </ViewFadeIn>
         </div>
       </section>
