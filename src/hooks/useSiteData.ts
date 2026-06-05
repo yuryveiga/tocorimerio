@@ -8,7 +8,7 @@ const fallbackTours: LovableTour[] = [
   { id: "3", title: "Angra dos Reis", short_description: "Navegue pelas ilhas paradisíacas de Angra dos Reis.", price: 200, duration: "10 horas", max_group_size: 25, image_url: "/placeholder.svg", is_featured: true, category: "Barco", is_active: true, sort_order: 3 },
 ];
 
-const TOUR_LISTING_COLUMNS = "id,title,short_description,price,duration,max_group_size,image_url,is_featured,category,is_active,sort_order,slug,pricing_model,price_1_person,price_2_people,price_3_6_people,price_7_19_people,use_custom_options,custom_options_json,external_url,title_en,title_es,short_description_en,short_description_es,category_en,category_es,included_json,included_json_en,included_json_es";
+const TOUR_LISTING_COLUMNS = "id,title,short_description,price,duration,max_group_size,image_url,is_featured,category,is_active,sort_order,slug,pricing_model,price_1_person,price_2_people,price_3_6_people,price_7_19_people,use_custom_options,custom_options_json,tiered_pricing_json,external_url,title_en,title_es,short_description_en,short_description_es,category_en,category_es,included_json,included_json_en,included_json_es";
 
 export function useTours() {
   return useQuery({

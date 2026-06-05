@@ -145,7 +145,7 @@ export const TourItem = memo(({ tour }: { tour: TourCardProps }) => {
           return (
             <div className="absolute bottom-4 right-4 bg-primary/95 text-white px-4 py-2 rounded-xl shadow-2xl backdrop-blur-md border border-white/20 z-10 animate-fade-in flex flex-col items-end">
               <span className="text-[8px] font-black uppercase tracking-tighter opacity-70 leading-none mb-1">
-                {tour.pricing_model === 'group' ? t("por_grupo") : t("a_partir_de")}
+                {t("a_partir_de")}
               </span>
               <span className="text-xl font-black font-sans leading-none">
                 {formatPrice(minPrice)}
@@ -153,6 +153,7 @@ export const TourItem = memo(({ tour }: { tour: TourCardProps }) => {
             </div>
           );
         })()}
+
 
       </div>
       <div className="p-6 flex flex-col flex-grow">
