@@ -14,7 +14,7 @@ import {
 } from "@/components/ui/carousel";
 import { OptimizedImage } from "./OptimizedImage";
 
-export function BlogCarousel() {
+export function BlogCarousel({ title }: { title?: string }) {
   const [posts, setPosts] = useState<LovableBlogPost[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const { t, language } = useLocale();
@@ -63,7 +63,7 @@ export function BlogCarousel() {
           {/* Left Side: Content */}
           <div className="w-full lg:w-1/3 text-white z-10">
             <h2 className="font-serif text-4xl sm:text-5xl font-bold mb-6 leading-tight">
-              {t("inspirado_explorar")}
+              {title || t("inspirado_explorar")}
             </h2>
             <div className="w-full h-0.5 bg-white/30 mb-8 max-w-[280px]" />
             <p className="text-lg sm:text-xl font-sans lg:leading-relaxed text-white/90 mb-10">

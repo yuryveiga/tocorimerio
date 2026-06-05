@@ -15,53 +15,57 @@ import { Button } from "@/components/ui/button";
 import { Header } from "@/components/Header";
 import { ViewFadeIn } from "@/components/ViewFadeIn";
 import { useSiteData } from "@/hooks/useSiteData";
+import { useLocale } from "@/contexts/LocaleContext";
 
 const Footer = lazy(() => import("@/components/Footer").then(m => ({ default: m.Footer })));
 const ReviewsSection = lazy(() => import("@/components/ReviewsSection").then(m => ({ default: m.ReviewsSection })));
+const GallerySection = lazy(() => import("@/components/GallerySection").then(m => ({ default: m.GallerySection })));
+const BlogCarousel = lazy(() => import("@/components/BlogCarousel").then(m => ({ default: m.BlogCarousel })));
 
 // Hero + category fallback images (Rio-themed, royalty free)
 const HERO_BG = "/hero-experiences.jpg";
 const IMG_CITY = "https://images.unsplash.com/photo-1516306580123-e6e52b1b7b5f?q=80&w=1600&auto=format&fit=crop";
-const IMG_HIKING = "https://images.unsplash.com/photo-1551632811-561732d1e306?q=80&w=1600&auto=format&fit=crop";
+const IMG_HIKING = "https://images.unsplash.com/photo-1761325970855-9786c0164b68?q=80&w=1600&auto=format&fit=crop";
 const IMG_ONEDAY = "https://images.unsplash.com/photo-1544989164-31dc3c645987?q=80&w=1600&auto=format&fit=crop";
-
-const CATEGORIES = [
-  {
-    slug: "/passeios/city-tour",
-    label: "City Tour",
-    tag: "Most Popular",
-    icon: Building2,
-    desc: "Christ the Redeemer, Sugar Loaf, favela, samba & beaches — with a private local guide.",
-    image: IMG_CITY,
-  },
-  {
-    slug: "/passeios/hiking",
-    label: "Hiking",
-    tag: "For Adventurers",
-    icon: Mountain,
-    desc: "Climb iconic peaks — Pedra Bonita, Dois Irmãos, Pedra do Telégrafo — and beat the crowds at sunrise.",
-    image: IMG_HIKING,
-  },
-  {
-    slug: "/passeios/one-day",
-    label: "One Day Tours",
-    tag: "Day Trips",
-    icon: Sun,
-    desc: "Escape to paradise: Arraial do Cabo, Búzios, Ilha Grande or Petrópolis — all in a single day.",
-    image: IMG_ONEDAY,
-  },
-];
-
-const BADGES = [
-  { title: "5.0 on TripAdvisor", sub: "Travelers' Choice", icon: Award },
-  { title: "Airbnb Superhost", sub: "Top-rated experiences", icon: Star },
-  { title: "GetYourGuide Partner", sub: "Verified provider", icon: ShieldCheck },
-  { title: "Cadastur Certified", sub: "Official tour operator", icon: ShieldCheck },
-];
 
 export default function Experiences() {
   const { socialMedia } = useSiteData();
+  const { t } = useLocale();
   const [scrollY, setScrollY] = useState(0);
+
+  const CATEGORIES = [
+    {
+      slug: "/passeios/city-tour",
+      label: t("city_tours"),
+      tag: t("ex_tag_popular"),
+      icon: Building2,
+      desc: t("ex_cat_city_desc"),
+      image: IMG_CITY,
+    },
+    {
+      slug: "/passeios/hiking",
+      label: t("trilhas"),
+      tag: t("ex_tag_adventurers"),
+      icon: Mountain,
+      desc: t("ex_cat_hiking_desc"),
+      image: IMG_HIKING,
+    },
+    {
+      slug: "/passeios/one-day",
+      label: t("ex_cat_oneday_label"),
+      tag: t("ex_tag_daytrips"),
+      icon: Sun,
+      desc: t("ex_cat_oneday_desc"),
+      image: IMG_ONEDAY,
+    },
+  ];
+
+  const BADGES = [
+    { title: t("ex_badge1_title"), sub: t("ex_badge1_sub"), icon: Award },
+    { title: t("ex_badge2_title"), sub: t("ex_badge2_sub"), icon: Star },
+    { title: t("ex_badge3_title"), sub: t("ex_badge3_sub"), icon: ShieldCheck },
+    { title: t("ex_badge4_title"), sub: t("ex_badge4_sub"), icon: ShieldCheck },
+  ];
 
   useEffect(() => {
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -93,17 +97,11 @@ export default function Experiences() {
   return (
     <>
       <Helmet>
-        <title>Rio de Janeiro Experiences | Private Tours, Hiking & Day Trips | Tocorime Rio</title>
-        <meta
-          name="description"
-          content="Unforgettable private experiences in Rio de Janeiro: City Tour, Hiking & One-Day Trips. Rated 5.0 on TripAdvisor. Bilingual local guides. Book your Rio adventure now."
-        />
+        <title>{t("ex_meta_title")}</title>
+        <meta name="description" content={t("ex_meta_desc")} />
         <link rel="canonical" href="https://tocorimerio.com/experiences" />
-        <meta property="og:title" content="Rio de Janeiro Experiences — Private Tours with Local Guides" />
-        <meta
-          property="og:description"
-          content="Discover the real Rio with private city tours, hiking adventures and day trips. 5.0 on TripAdvisor. Bilingual guides. Tailor-made for your group."
-        />
+        <meta property="og:title" content={t("ex_og_title")} />
+        <meta property="og:description" content={t("ex_og_desc")} />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://tocorimerio.com/experiences" />
         <meta property="og:image" content={HERO_BG} />
@@ -134,22 +132,19 @@ export default function Experiences() {
         >
           <div className="inline-flex items-center gap-2 rounded-full bg-white/10 backdrop-blur-md border border-white/25 px-4 py-1.5 mb-6 text-xs font-bold uppercase tracking-[0.2em]">
             <Sparkles className="w-3.5 h-3.5 text-accent" />
-            Low season — Best time to visit Rio
+            {t("ex_low_season")}
           </div>
 
           <h1 className="title-reveal font-serif text-4xl sm:text-6xl lg:text-7xl font-bold mb-6 text-balance drop-shadow-2xl leading-[1.05] tracking-tight">
-            <span style={{ animationDelay: "0.1s" }}>Unforgettable</span>{" "}
-            <span style={{ animationDelay: "0.22s" }}>Experiences</span>{" "}
-            <span style={{ animationDelay: "0.34s" }}>in</span>{" "}
-            <span style={{ animationDelay: "0.46s" }}>Rio</span>{" "}
-            <span style={{ animationDelay: "0.58s" }}>de</span>{" "}
-            <span style={{ animationDelay: "0.70s" }}>Janeiro</span>
+            <span style={{ animationDelay: "0.1s" }}>{t("ex_hero_1")}</span>{" "}
+            <span style={{ animationDelay: "0.22s" }}>{t("ex_hero_2")}</span>{" "}
+            <span style={{ animationDelay: "0.34s" }}>{t("ex_hero_3")}</span>{" "}
+            <span style={{ animationDelay: "0.46s" }}>{t("ex_hero_4")}</span>{" "}
+            <span style={{ animationDelay: "0.58s" }}>{t("ex_hero_5")}</span>{" "}
+            <span style={{ animationDelay: "0.70s" }}>{t("ex_hero_6")}</span>
           </h1>
 
-          <p className="text-base sm:text-xl text-white/90 max-w-2xl mx-auto mb-8 font-sans">
-            Come live your best Rio moments — private tours, bilingual local guides,
-            and tailor-made itineraries. Rated <strong>5.0 on TripAdvisor</strong>.
-          </p>
+          <p className="text-base sm:text-xl text-white/90 max-w-2xl mx-auto mb-8 font-sans" dangerouslySetInnerHTML={{ __html: t("ex_hero_sub").replace('5.0', '<strong>5.0</strong>') }} />
 
           <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-3 sm:gap-4">
             <a
@@ -158,14 +153,14 @@ export default function Experiences() {
               rel="noopener noreferrer"
               className="shimmer-cta inline-flex items-center justify-center gap-2 h-14 px-8 text-lg font-bold rounded-md bg-accent hover:bg-accent/90 text-accent-foreground shadow-[0_8px_30px_-4px_hsl(var(--accent)/0.5)] hover:shadow-[0_12px_40px_-4px_hsl(var(--accent)/0.7)] transition-all hover:scale-[1.02]"
             >
-              Plan My Trip
+              {t("ex_plan_trip")}
               <ArrowRight className="w-5 h-5" />
             </a>
             <a
               href="#experiences"
               className="inline-flex items-center justify-center h-14 px-8 text-lg font-semibold rounded-md border-2 bg-white/10 backdrop-blur-sm border-white/40 text-white hover:bg-white hover:text-foreground transition-all"
             >
-              Explore Experiences
+              {t("ex_explore")}
             </a>
           </div>
 
@@ -175,10 +170,10 @@ export default function Experiences() {
               {[0, 1, 2, 3, 4].map((i) => (
                 <Star key={i} className="w-4 h-4 fill-accent text-accent" />
               ))}
-              <span className="ml-1">5.0 · 2,000+ travelers</span>
+              <span className="ml-1">{t("ex_trust_1")}</span>
             </span>
-            <span className="inline-flex items-center gap-1.5"><ShieldCheck className="w-4 h-4 text-accent" /> Cadastur certified</span>
-            <span className="inline-flex items-center gap-1.5"><MapPin className="w-4 h-4 text-accent" /> Local bilingual guides</span>
+            <span className="inline-flex items-center gap-1.5"><ShieldCheck className="w-4 h-4 text-accent" /> {t("ex_trust_2")}</span>
+            <span className="inline-flex items-center gap-1.5"><MapPin className="w-4 h-4 text-accent" /> {t("ex_trust_3")}</span>
           </div>
         </div>
       </section>
@@ -209,12 +204,12 @@ export default function Experiences() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <ViewFadeIn>
             <div className="text-center mb-14">
-              <p className="text-xs font-black uppercase tracking-[0.3em] text-accent mb-3">Choose your adventure</p>
+              <p className="text-xs font-black uppercase tracking-[0.3em] text-accent mb-3">{t("ex_mid_eyebrow")}</p>
               <h2 className="font-serif text-3xl md:text-5xl font-bold text-foreground mb-4 text-balance">
-                Three ways to fall in love with Rio
+                {t("ex_mid_title")}
               </h2>
               <p className="text-muted-foreground max-w-2xl mx-auto text-lg">
-                Each experience is private, tailor-made, and led by a passionate local. Pick the one that calls you.
+                {t("ex_mid_desc")}
               </p>
             </div>
           </ViewFadeIn>
@@ -258,7 +253,7 @@ export default function Experiences() {
                       {cat.desc}
                     </p>
                     <span className="inline-flex items-center gap-2 text-accent font-bold text-sm uppercase tracking-wide group-hover:gap-3 transition-all">
-                      View tours
+                      {t("ex_view_tours")}
                       <ArrowRight className="w-4 h-4" />
                     </span>
                   </div>
@@ -276,11 +271,10 @@ export default function Experiences() {
           <ViewFadeIn>
             <Clock className="w-10 h-10 mx-auto mb-6 text-accent" />
             <h2 className="font-serif text-3xl md:text-5xl font-bold mb-4 text-balance">
-              Visit Rio in the cheapest, sunniest season
+              {t("ex_promo_title")}
             </h2>
             <p className="text-lg md:text-xl text-primary-foreground/85 max-w-2xl mx-auto mb-8">
-              Skip the crowds, save up to 40% on flights and hotels, and enjoy clear skies.
-              Right now is the perfect window to book your Rio adventure.
+              {t("ex_promo_desc")}
             </p>
             <a
               href={waUrl}
@@ -288,7 +282,7 @@ export default function Experiences() {
               rel="noopener noreferrer"
               className="shimmer-cta inline-flex items-center justify-center gap-2 h-14 px-10 text-lg font-bold rounded-md bg-accent hover:bg-accent/90 text-accent-foreground shadow-2xl transition-all hover:scale-[1.02]"
             >
-              Get my custom quote
+              {t("ex_promo_cta")}
               <ArrowRight className="w-5 h-5" />
             </a>
           </ViewFadeIn>
@@ -305,11 +299,10 @@ export default function Experiences() {
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
           <ViewFadeIn>
             <h2 className="font-serif text-3xl md:text-5xl font-bold text-foreground mb-4 text-balance">
-              Come live your best Rio moments
+              {t("ex_final_title")}
             </h2>
             <p className="text-muted-foreground text-lg mb-8 max-w-xl mx-auto">
-              We craft every itinerary around you — your pace, your dates, your dreams.
-              Let's make this trip the one you'll talk about forever.
+              {t("ex_final_desc")}
             </p>
             <a
               href={waUrl}
@@ -317,12 +310,20 @@ export default function Experiences() {
               rel="noopener noreferrer"
               className="shimmer-cta inline-flex items-center justify-center gap-2 h-14 px-10 text-lg font-bold rounded-md bg-accent hover:bg-accent/90 text-accent-foreground shadow-[0_8px_30px_-4px_hsl(var(--accent)/0.5)] hover:shadow-[0_12px_40px_-4px_hsl(var(--accent)/0.7)] transition-all hover:scale-[1.02]"
             >
-              Chat with us on WhatsApp
+              {t("ex_final_cta")}
               <ArrowRight className="w-5 h-5" />
             </a>
           </ViewFadeIn>
         </div>
       </section>
+
+      <Suspense fallback={null}>
+        <GallerySection />
+      </Suspense>
+
+      <Suspense fallback={null}>
+        <BlogCarousel title={t("ex_blog_title")} />
+      </Suspense>
 
       <Suspense fallback={null}>
         <Footer />
