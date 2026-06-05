@@ -100,7 +100,7 @@ export function HeroSection() {
     <span className="title-reveal">
       {heroTitle.split(/(\s+)/).map((word, i) =>
         word.trim() === '' ? (
-          <span key={i} aria-hidden="true">{word}</span>
+          <React.Fragment key={i}>{word}</React.Fragment>
         ) : (
           <span key={i} style={{ animationDelay: `${0.1 + i * 0.06}s` }}>{word}</span>
         )
