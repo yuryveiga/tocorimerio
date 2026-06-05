@@ -425,6 +425,11 @@ export const translationsPt = {
   ex_final_desc: "Criamos cada roteiro em torno de você — seu ritmo, suas datas, seus sonhos. Vamos fazer dessa viagem a que você lembrará para sempre.",
   ex_final_cta: 'Falar conosco no WhatsApp',
   ex_blog_title: 'Quer dicas do RJ? Leia aqui',
+  ex_price_city: 'A partir de R$ 350',
+  ex_price_hiking: 'A partir de R$ 280',
+  ex_price_oneday: 'A partir de R$ 450',
+  ex_email_alt: 'Prefere enviar e-mail? Fale conosco',
+  last_spots_for: 'Últimas vagas para',
 };
 
 export const translationsEn = {
@@ -854,6 +859,11 @@ export const translationsEn = {
   ex_final_desc: "We craft every itinerary around you — your pace, your dates, your dreams. Let's make this trip the one you'll talk about forever.",
   ex_final_cta: 'Chat with us on WhatsApp',
   ex_blog_title: 'Want tips about Rio? Read here',
+  ex_price_city: 'From $70',
+  ex_price_hiking: 'From $55',
+  ex_price_oneday: 'From $90',
+  ex_email_alt: 'Prefer email? Contact us',
+  last_spots_for: 'Last spots for',
 };
 
 export const translationsEs = {
@@ -1283,4 +1293,9 @@ export const translationsEs = {
   ex_final_desc: "Diseñamos cada itinerario a tu alrededor — tu ritmo, tus fechas, tus sueños. Hagamos de este viaje el que recordarás por siempre.",
   ex_final_cta: 'Hablar por WhatsApp',
   ex_blog_title: '¿Quieres consejos sobre Río? Lee aquí',
+  ex_price_city: 'A partir de $70',
+  ex_price_hiking: 'A partir de $55',
+  ex_price_oneday: 'A partir de $90',
+  ex_email_alt: '¿Prefieres correo? Contáctanos',
+  last_spots_for: 'Últimos cupos para',
 };

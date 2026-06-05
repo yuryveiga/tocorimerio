@@ -11,6 +11,7 @@ import Sun from "lucide-react/dist/esm/icons/sun";
 import Mountain from "lucide-react/dist/esm/icons/mountain";
 import Building2 from "lucide-react/dist/esm/icons/building-2";
 import Clock from "lucide-react/dist/esm/icons/clock";
+import Heart from "lucide-react/dist/esm/icons/heart";
 import { Button } from "@/components/ui/button";
 import { Header } from "@/components/Header";
 import { ViewFadeIn } from "@/components/ViewFadeIn";
@@ -51,6 +52,7 @@ export default function Experiences() {
       icon: Building2,
       desc: t("ex_cat_city_desc"),
       image: IMG_CITY,
+      price: t("ex_price_city"),
     },
     {
       slug: "/passeios/hiking",
@@ -59,6 +61,7 @@ export default function Experiences() {
       icon: Mountain,
       desc: t("ex_cat_hiking_desc"),
       image: IMG_HIKING,
+      price: t("ex_price_hiking"),
     },
     {
       slug: "/passeios/one-day",
@@ -67,6 +70,7 @@ export default function Experiences() {
       icon: Sun,
       desc: t("ex_cat_oneday_desc"),
       image: IMG_ONEDAY,
+      price: t("ex_price_oneday"),
     },
   ];
 
@@ -74,7 +78,7 @@ export default function Experiences() {
     { title: t("ex_badge1_title"), sub: t("ex_badge1_sub"), icon: Award },
     { title: t("ex_badge2_title"), sub: t("ex_badge2_sub"), icon: Star },
     { title: t("ex_badge3_title"), sub: t("ex_badge3_sub"), icon: ShieldCheck },
-    { title: t("ex_badge4_title"), sub: t("ex_badge4_sub"), icon: ShieldCheck },
+    { title: t("ex_badge4_title"), sub: t("ex_badge4_sub"), icon: Heart },
   ];
 
   useEffect(() => {
@@ -146,7 +150,7 @@ export default function Experiences() {
             willChange: "transform",
           }}
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/55 to-black/80" />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/70 to-black/95" />
         <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-background to-transparent z-[5]" />
 
         <div
@@ -156,9 +160,14 @@ export default function Experiences() {
             opacity: Math.max(1 - scrollY / 700, 0),
           }}
         >
-          <div className="inline-flex items-center gap-2 rounded-full bg-white/10 backdrop-blur-md border border-white/25 px-4 py-1.5 mb-6 text-xs font-bold uppercase tracking-[0.2em]">
-            <Sparkles className="w-3.5 h-3.5 text-accent" />
-            {t("ex_low_season")}
+          <div className="flex flex-col items-center justify-center gap-2 mb-6">
+            <div className="inline-flex items-center gap-2 rounded-full bg-white/10 backdrop-blur-md border border-white/25 px-4 py-1.5 text-xs font-bold uppercase tracking-[0.2em]">
+              <Sparkles className="w-3.5 h-3.5 text-accent" />
+              {t("ex_low_season")}
+            </div>
+            <span className="text-sm font-semibold text-accent/90">
+              {t("last_spots_for")} <span className="capitalize">{new Date().toLocaleString(language, { month: 'long' })}</span>
+            </span>
           </div>
 
           <h1 className="title-reveal font-serif text-4xl sm:text-6xl lg:text-7xl font-bold mb-6 text-balance drop-shadow-2xl leading-[1.05] tracking-tight">
@@ -276,10 +285,15 @@ export default function Experiences() {
                     <p className="text-white/85 text-sm mb-4 leading-relaxed line-clamp-3">
                       {cat.desc}
                     </p>
-                    <span className="inline-flex items-center gap-2 text-accent font-bold text-sm uppercase tracking-wide group-hover:gap-3 transition-all">
-                      {t("ex_view_tours")}
-                      <ArrowRight className="w-4 h-4" />
-                    </span>
+                    <div className="flex items-center justify-between">
+                      <span className="inline-flex items-center gap-2 text-accent font-bold text-sm uppercase tracking-wide group-hover:gap-3 transition-all">
+                        {t("ex_view_tours")}
+                        <ArrowRight className="w-4 h-4" />
+                      </span>
+                      <span className="text-sm font-bold text-white bg-black/40 backdrop-blur-sm px-3 py-1 rounded-full border border-white/10">
+                        {cat.price}
+                      </span>
+                    </div>
                   </div>
                 </Link>
               </ViewFadeIn>
@@ -289,17 +303,25 @@ export default function Experiences() {
       </section>
 
       {/* ─── STRATEGIC PHRASE: Low season ──────────────────────────────────── */}
-      <section className="relative py-20 bg-primary text-primary-foreground overflow-hidden">
-        <div className="absolute inset-0 opacity-10 bg-[radial-gradient(circle_at_30%_20%,white,transparent_40%)]" />
-        <div className="relative max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <ViewFadeIn>
-            <Clock className="w-10 h-10 mx-auto mb-6 text-accent" />
-            <h2 className="font-serif text-3xl md:text-5xl font-bold mb-4 text-balance">
+      <section className="relative py-20 overflow-hidden">
+        <div className="absolute inset-0">
+          <OptimizedImage
+            src={IMG_CITY}
+            alt="Sunny Rio de Janeiro"
+            className="w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/70 to-black/40" />
+        </div>
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-10">
+          <ViewFadeIn className="max-w-2xl text-left text-white">
+            <h2 className="font-serif text-3xl md:text-5xl font-bold mb-4 text-balance drop-shadow-lg">
               {t("ex_promo_title")}
             </h2>
-            <p className="text-lg md:text-xl text-primary-foreground/85 max-w-2xl mx-auto mb-8">
+            <p className="text-lg md:text-xl text-white/85 mb-8">
               {t("ex_promo_desc")}
             </p>
+          </ViewFadeIn>
+          <ViewFadeIn delay={0.2} className="flex-shrink-0">
             <a
               href={waUrl}
               target="_blank"
@@ -338,6 +360,12 @@ export default function Experiences() {
               <ArrowRight className="w-5 h-5" />
             </a>
             
+            <div className="mt-4">
+              <a href="mailto:contato@tocorimerio.com" className="text-sm font-medium text-muted-foreground hover:text-accent transition-colors underline underline-offset-4">
+                {t("ex_email_alt")}
+              </a>
+            </div>
+
             {/* Inline trust strip for final CTA */}
             <div className="mt-6 flex flex-wrap items-center justify-center gap-x-6 gap-y-3 text-muted-foreground text-sm font-medium">
               <span className="inline-flex items-center gap-1.5">
