@@ -20,9 +20,9 @@ const Footer = lazy(() => import("@/components/Footer").then(m => ({ default: m.
 const ReviewsSection = lazy(() => import("@/components/ReviewsSection").then(m => ({ default: m.ReviewsSection })));
 
 // Hero + category fallback images (Rio-themed, royalty free)
-const HERO_BG = "https://images.unsplash.com/photo-1483729558449-99ef09a8c325?q=80&w=2400&auto=format&fit=crop";
+const HERO_BG = "/hero-experiences.jpg";
 const IMG_CITY = "https://images.unsplash.com/photo-1516306580123-e6e52b1b7b5f?q=80&w=1600&auto=format&fit=crop";
-const IMG_HIKING = "https://images.unsplash.com/photo-1591793271298-fc6e6f6cdf64?q=80&w=1600&auto=format&fit=crop";
+const IMG_HIKING = "https://images.unsplash.com/photo-1551632811-561732d1e306?q=80&w=1600&auto=format&fit=crop";
 const IMG_ONEDAY = "https://images.unsplash.com/photo-1544989164-31dc3c645987?q=80&w=1600&auto=format&fit=crop";
 
 const CATEGORIES = [
