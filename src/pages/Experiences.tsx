@@ -25,7 +25,7 @@ const BlogCarousel = lazy(() => import("@/components/BlogCarousel").then(m => ({
 // Hero + category fallback images (Rio-themed, royalty free)
 const HERO_BG = "/hero-experiences.jpg";
 const IMG_CITY = "https://images.unsplash.com/photo-1516306580123-e6e52b1b7b5f?q=80&w=1600&auto=format&fit=crop";
-const IMG_HIKING = "https://images.unsplash.com/photo-1761325970855-9786c0164b68?q=80&w=1600&auto=format&fit=crop";
+const IMG_HIKING = "/pedra-da-gavea-2-media.jpg";
 const IMG_ONEDAY = "https://images.unsplash.com/photo-1544989164-31dc3c645987?q=80&w=1600&auto=format&fit=crop";
 
 export default function Experiences() {
