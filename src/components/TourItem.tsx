@@ -139,21 +139,21 @@ export const TourItem = memo(({ tour }: { tour: TourCardProps }) => {
           );
         })()}
 
-        {!hidePrices && (tour.price > 0 || tour.pricing_model === 'custom' || tour.pricing_model === 'dynamic' || tour.pricing_model === 'tiered') && (
-          <div className="absolute bottom-4 right-4 bg-primary/95 text-white px-4 py-2 rounded-xl shadow-2xl backdrop-blur-md border border-white/20 z-10 animate-fade-in flex flex-col items-end">
-            <span className="text-[8px] font-black uppercase tracking-tighter opacity-70 leading-none mb-1">
-              {tour.pricing_model === 'group' ? t("por_grupo") : t("a_partir_de")}
-            </span>
-            <span className="text-xl font-black font-sans leading-none">
-              {formatPrice(getTourMinPrice(tour))}
-            </span>
-            {tour.pricing_model === 'tiered' && (
-              <span className="text-[7px] font-black uppercase tracking-widest opacity-70 mt-0.5">
-                📊 {language === 'pt' ? 'escalonado' : language === 'es' ? 'escalonado' : 'tiered'}
+        {!hidePrices && (() => {
+          const minPrice = getTourMinPrice(tour);
+          if (minPrice <= 0) return null;
+          return (
+            <div className="absolute bottom-4 right-4 bg-primary/95 text-white px-4 py-2 rounded-xl shadow-2xl backdrop-blur-md border border-white/20 z-10 animate-fade-in flex flex-col items-end">
+              <span className="text-[8px] font-black uppercase tracking-tighter opacity-70 leading-none mb-1">
+                {tour.pricing_model === 'group' ? t("por_grupo") : t("a_partir_de")}
               </span>
-            )}
-          </div>
-        )}
+              <span className="text-xl font-black font-sans leading-none">
+                {formatPrice(minPrice)}
+              </span>
+            </div>
+          );
+        })()}
+
       </div>
       <div className="p-6 flex flex-col flex-grow">
         <h3 className="font-serif text-xl font-semibold text-foreground mb-2 line-clamp-2 min-h-[3.5rem] group-hover:text-primary transition-colors">{title}</h3>
