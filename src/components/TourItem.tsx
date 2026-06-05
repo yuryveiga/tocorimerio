@@ -30,7 +30,7 @@ export type TourCardProps = {
   category_en?: string;
   category_es?: string;
   external_url?: string;
-  pricing_model?: 'fixed' | 'dynamic' | 'group' | 'custom';
+  pricing_model?: 'fixed' | 'dynamic' | 'group' | 'custom' | 'tiered';
   price_1_person?: number;
   price_2_people?: number;
   price_3_6_people?: number;
@@ -40,6 +40,7 @@ export type TourCardProps = {
   included_json?: Array<string | { text: string; title?: string }>;
   included_json_en?: Array<string | { text: string; title?: string }>;
   included_json_es?: Array<string | { text: string; title?: string }>;
+  tiered_pricing_json?: { min_people: number; max_people: number | null; price_per_person: number }[];
   match_date?: string;
 };
 
@@ -138,7 +139,7 @@ export const TourItem = memo(({ tour }: { tour: TourCardProps }) => {
           );
         })()}
 
-        {!hidePrices && (tour.price > 0 || tour.pricing_model === 'custom' || tour.pricing_model === 'dynamic') && (
+        {!hidePrices && (tour.price > 0 || tour.pricing_model === 'custom' || tour.pricing_model === 'dynamic' || tour.pricing_model === 'tiered') && (
           <div className="absolute bottom-4 right-4 bg-primary/95 text-white px-4 py-2 rounded-xl shadow-2xl backdrop-blur-md border border-white/20 z-10 animate-fade-in flex flex-col items-end">
             <span className="text-[8px] font-black uppercase tracking-tighter opacity-70 leading-none mb-1">
               {tour.pricing_model === 'group' ? t("por_grupo") : t("a_partir_de")}
@@ -146,6 +147,11 @@ export const TourItem = memo(({ tour }: { tour: TourCardProps }) => {
             <span className="text-xl font-black font-sans leading-none">
               {formatPrice(getTourMinPrice(tour))}
             </span>
+            {tour.pricing_model === 'tiered' && (
+              <span className="text-[7px] font-black uppercase tracking-widest opacity-70 mt-0.5">
+                📊 {language === 'pt' ? 'escalonado' : language === 'es' ? 'escalonado' : 'tiered'}
+              </span>
+            )}
           </div>
         )}
       </div>

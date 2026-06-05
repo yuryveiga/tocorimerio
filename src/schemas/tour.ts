@@ -50,7 +50,7 @@ export const tourSchema = z.object({
   meeting_point_address_es: z.string().optional().default(""),
   youtube_video_url: z.string().optional().default(""),
   external_url: z.string().optional().default(""),
-  pricing_model: z.enum(['fixed', 'dynamic', 'group', 'custom']).default('fixed'),
+  pricing_model: z.enum(['fixed', 'dynamic', 'group', 'custom', 'tiered']).default('fixed'),
   price_1_person: z.number().optional().default(0),
   price_2_people: z.number().optional().default(0),
   price_3_6_people: z.number().optional().default(0),
@@ -63,6 +63,11 @@ export const tourSchema = z.object({
   allows_open: z.boolean().optional().default(false),
   bares_diurnos: z.string().optional().default(""),
   bares_noturnos: z.string().optional().default(""),
+  tiered_pricing_json: z.array(z.object({
+    min_people: z.number().min(1),
+    max_people: z.number().nullable().default(null),
+    price_per_person: z.number().min(0),
+  })).optional().default([]),
 });
 
 export type TourFormValues = z.infer<typeof tourSchema>;

@@ -34,6 +34,7 @@ export function useTourForm(initialData: Partial<LovableTour> | null, onSuccess:
       external_url: "",
       pricing_model: "fixed",
       carousel_images_json: [],
+      tiered_pricing_json: [],
       ...initialData,
     } as TourFormValues,
   });
@@ -60,6 +61,7 @@ export function useTourForm(initialData: Partial<LovableTour> | null, onSuccess:
         external_url: "",
         pricing_model: "fixed",
         carousel_images_json: [],
+        tiered_pricing_json: [],
         ...initialData,
       } as TourFormValues);
     }

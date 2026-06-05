@@ -9,6 +9,7 @@ import { useTourForm } from "@/hooks/admin/useTourForm";
 import { LovableTour, LovableSiteImage, fetchLovable } from "@/integrations/lovable/client";
 import { TourJsonList } from "./TourJsonList";
 import { TourGalleryTab } from "./TourGalleryTab";
+import { TieredPricingEditor } from "./TieredPricingEditor";
 
 
 interface TourFormDialogProps {
@@ -281,6 +282,40 @@ export function TourFormDialog({
                       </select>
                     </div>
                   </div>
+
+                  {/* Modelo de preço */}
+                  <div className="space-y-3 bg-muted/20 p-6 rounded-2xl border">
+                    <Label className="text-xs font-black uppercase tracking-widest text-primary">Modelo de Precificação</Label>
+                    <div className="flex flex-wrap gap-3">
+                      {([
+                        { value: 'fixed',   label: '💰 Fixo' },
+                        { value: 'tiered',  label: '📊 Escalonado' },
+                        { value: 'dynamic', label: '⚡ Dinâmico (legado)' },
+                        { value: 'group',   label: '👥 Grupo' },
+                        { value: 'custom',  label: '🤝 Sob Consulta' },
+                      ] as const).map(opt => (
+                        <label key={opt.value} className="flex items-center gap-2 cursor-pointer bg-background border rounded-xl px-4 py-2 hover:border-primary transition-colors">
+                          <input
+                            type="radio"
+                            value={opt.value}
+                            {...form.register("pricing_model")}
+                            className="w-4 h-4 text-primary"
+                          />
+                          <span className="text-sm font-bold">{opt.label}</span>
+                        </label>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Editor de faixas — visível somente no modelo escalonado */}
+                  {form.watch("pricing_model") === 'tiered' && (
+                    <div className="bg-gradient-to-br from-primary/5 to-primary/10 p-6 rounded-[32px] border border-primary/20 space-y-4">
+                      <TieredPricingEditor
+                        value={form.watch("tiered_pricing_json") || []}
+                        onChange={(tiers) => form.setValue("tiered_pricing_json", tiers, { shouldDirty: true })}
+                      />
+                    </div>
+                  )}
 
                   <div className="flex gap-6 items-center bg-muted/20 p-6 rounded-2xl border">
                     <div className="flex items-center gap-2">

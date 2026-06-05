@@ -1,5 +1,11 @@
 import { Json } from "@/integrations/supabase/types";
 
+export type PricingTier = {
+  min_people: number;
+  max_people: number | null;
+  price_per_person: number;
+};
+
 export type LovableTour = {
   id: string;
   title: string;
@@ -46,7 +52,7 @@ export type LovableTour = {
   youtube_video_url?: string;
   external_url?: string;
   carousel_images_json?: string[];
-  pricing_model?: 'fixed' | 'dynamic' | 'group' | 'custom';
+  pricing_model?: 'fixed' | 'dynamic' | 'group' | 'custom' | 'tiered';
   price_1_person?: number;
   price_2_people?: number;
   price_3_6_people?: number;
@@ -56,6 +62,7 @@ export type LovableTour = {
   custom_options_json?: { title: string; price: number; positive_notices: string[]; negative_notices: string[] }[];
   bares_diurnos?: string;
   bares_noturnos?: string;
+  tiered_pricing_json?: PricingTier[];
 };
 
 export type LovablePage = {

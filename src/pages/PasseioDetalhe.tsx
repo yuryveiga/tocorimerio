@@ -18,7 +18,7 @@ import { toast } from "sonner";
 import { WhyChooseUs } from "@/components/WhyChooseUs";
 import { getOptimizedImage } from "@/utils/imageOptimization";
 import { OptimizedImage } from "@/components/OptimizedImage";
-import { getTourMinPrice } from "@/utils/pricing";
+import { getTourMinPrice, getTieredPrice } from "@/utils/pricing";
 import { UrgencyBadges } from "@/components/UrgencyBadges";
 import { PaymentLogos } from "@/components/PaymentLogos";
 import { SocialProof } from "@/components/SocialProof";
@@ -276,7 +276,12 @@ export function PasseioDetalhe() {
     const baseP = Number(tour.price) || 0;
 
     let basePrice = 0;
-    if (tour.pricing_model === 'dynamic') {
+    if (tour.pricing_model === 'tiered') {
+      basePrice = getTieredPrice(
+        (tour as any).tiered_pricing_json,
+        quantity
+      );
+    } else if (tour.pricing_model === 'dynamic') {
       if (quantity === 1) basePrice = p1;
       else if (quantity === 2) basePrice = p2;
       else if (quantity >= 3 && quantity <= 6) basePrice = p36;
@@ -1004,6 +1009,36 @@ export function PasseioDetalhe() {
                           </Button>
                         </div>
                       </div>
+
+                      {/* Tabela de faixas escalonadas */}
+                      {tour.pricing_model === 'tiered' && (tour as any).tiered_pricing_json?.length > 0 && (
+                        <div className="space-y-1 bg-primary/5 rounded-xl border border-primary/10 p-3">
+                          <span className="text-[9px] font-black uppercase tracking-widest text-primary block mb-2">
+                            📊 {language === 'pt' ? 'Preço por qtd.' : language === 'es' ? 'Precio por cant.' : 'Price by qty.'}
+                          </span>
+                          {[...(tour as any).tiered_pricing_json]
+                            .sort((a: any, b: any) => a.min_people - b.min_people)
+                            .map((tier: any, i: number) => {
+                              const isActive = quantity >= tier.min_people && (tier.max_people == null || quantity <= tier.max_people);
+                              const label = tier.max_people == null
+                                ? `${tier.min_people}+ ${language === 'pt' ? 'pessoas' : language === 'es' ? 'personas' : 'people'}`
+                                : tier.min_people === tier.max_people
+                                  ? `${tier.min_people} ${language === 'pt' ? 'pessoa' : language === 'es' ? 'persona' : 'person'}${tier.min_people > 1 ? (language === 'pt' ? 's' : language === 'es' ? 's' : 's') : ''}`
+                                  : `${tier.min_people}–${tier.max_people} ${language === 'pt' ? 'pessoas' : language === 'es' ? 'personas' : 'people'}`;
+                              return (
+                                <div
+                                  key={i}
+                                  className={`flex justify-between items-center px-2 py-1 rounded-lg text-xs transition-all ${
+                                    isActive ? 'bg-primary text-white font-black shadow-sm' : 'text-muted-foreground font-medium'
+                                  }`}
+                                >
+                                  <span>{label}</span>
+                                  <span>{formatPrice(tier.price_per_person)}/p</span>
+                                </div>
+                              );
+                            })}
+                        </div>
+                      )}
 
                       <div className="space-y-2">
                         <Label htmlFor="date-trigger" className="text-[10px] font-black uppercase text-muted-foreground tracking-widest cursor-pointer">{t("data_viagem")}</Label>
