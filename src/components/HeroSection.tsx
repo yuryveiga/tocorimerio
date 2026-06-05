@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import ChevronDown from "lucide-react/dist/esm/icons/chevron-down";
 import ArrowRight from "lucide-react/dist/esm/icons/arrow-right";
 import ShieldCheck from "lucide-react/dist/esm/icons/shield-check";
@@ -100,7 +100,7 @@ export function HeroSection() {
     <span className="title-reveal">
       {heroTitle.split(/(\s+)/).map((word, i) =>
         word.trim() === '' ? (
-          <span key={i} aria-hidden="true">{word}</span>
+          <React.Fragment key={i}>{word}</React.Fragment>
         ) : (
           <span key={i} style={{ animationDelay: `${0.1 + i * 0.06}s` }}>{word}</span>
         )
