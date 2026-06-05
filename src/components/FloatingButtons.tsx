@@ -69,7 +69,7 @@ export function FloatingButtons() {
       {whatsapp && (
         <button
           onClick={handleWhatsApp}
-          className="w-14 h-14 md:w-16 md:h-16 rounded-full bg-[#25D366] text-white shadow-2xl hover:scale-110 active:scale-95 transition-all flex items-center justify-center group relative"
+          className="whatsapp-ping w-14 h-14 md:w-16 md:h-16 rounded-full bg-[#25D366] text-white shadow-2xl hover:scale-110 active:scale-95 transition-all flex items-center justify-center group relative"
           aria-label="WhatsApp"
         >
           <svg viewBox="0 0 24 24" className="w-7 h-7 md:w-8 md:h-8" fill="currentColor">

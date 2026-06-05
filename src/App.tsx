@@ -17,6 +17,8 @@ import { BUILD_ID } from "./version";
 import { ErrorBoundary } from "./components/ErrorBoundary";
 import { ScrollToHash } from "./components/ScrollToHash";
 import { MobileStickyCTA } from "./components/MobileStickyCTA";
+import { MagneticCursor } from "./components/MagneticCursor";
+import { RouteFader } from "./components/RouteFader";
 
 // ─── Eagerly loaded (home page only) ─────────────────────────────────────────
 import Index from "./pages/Index";
@@ -57,6 +59,7 @@ const PasseiosIndex          = lazy(() => import("./pages/PasseiosIndex"));
 const JogoLanding            = lazy(() => import("./pages/JogoLanding"));
 const Sitemap                = lazy(() => import("./pages/Sitemap"));
 const PasseiosCategoria      = lazy(() => import("./pages/PasseiosCategoria"));
+const Experiences            = lazy(() => import("./pages/Experiences"));
 
 const PageLoader = () => <div className="min-h-screen flex items-center justify-center bg-background"><div className="w-12 h-12 border-4 border-primary border-t-transparent rounded-full animate-spin" /></div>;
 
@@ -133,9 +136,11 @@ const App = ({ queryClient: externalQueryClient }: { queryClient?: QueryClient }
                   <Suspense fallback={null}>
                     <MobileStickyCTA />
                     <FloatingButtons />
+                    <MagneticCursor />
                   </Suspense>
                   {/* Page content: show spinner while lazy chunk loads */}
                   <Suspense fallback={<PageLoader />}>
+                    <RouteFader>
                     <Routes>
                       <Route path="/" element={<Index />} />
                       <Route path="/blog" element={<Blog />} />
@@ -159,6 +164,7 @@ const App = ({ queryClient: externalQueryClient }: { queryClient?: QueryClient }
                       <Route path="/city-tour" element={<PasseiosCategoria categoriaOverride="city-tour" pathOverride="/city-tour" />} />
                       <Route path="/hiking" element={<PasseiosCategoria categoriaOverride="trilha" pathOverride="/hiking" />} />
                       <Route path="/one-day" element={<PasseiosCategoria categoriaOverride="um-dia" pathOverride="/one-day" />} />
+                      <Route path="/experiences" element={<Experiences />} />
                       <Route path="/passeio/:id" element={<PasseioDetalhe />} />
                       <Route path="/match/:id" element={<MatchDetail />} />
 
@@ -191,6 +197,7 @@ const App = ({ queryClient: externalQueryClient }: { queryClient?: QueryClient }
                       </Route>
                       <Route path="*" element={<Navigate to="/" replace />} />
                     </Routes>
+                    </RouteFader>
                   </Suspense>
                 </CartProvider>
               </LocaleProvider>

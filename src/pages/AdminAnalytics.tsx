@@ -16,7 +16,7 @@ import {
   Pie,
   Legend,
 } from "recharts";
-import { Loader2, Users, Eye, Globe, MousePointer2, Link2, Repeat } from "lucide-react";
+import { Loader2, Users, Eye, Globe, MousePointer2, Link2, Repeat, Map, BookOpen } from "lucide-react";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 type Visit = {
@@ -72,6 +72,30 @@ const AdminAnalytics = () => {
   const [loading, setLoading] = useState(true);
   const [allVisits, setAllVisits] = useState<Visit[]>([]);
   const [range, setRange] = useState<RangeKey>("30");
+  const [tourMap, setTourMap] = useState<Record<string, string>>({});
+  const [blogMap, setBlogMap] = useState<Record<string, string>>({});
+
+  // Fetch tours + blog_posts ONCE to translate slugs/ids into human-readable titles
+  useEffect(() => {
+    const loadTitles = async () => {
+      const [tours, posts] = await Promise.all([
+        supabase.from("tours").select("id,slug,title").limit(500),
+        supabase.from("blog_posts").select("slug,title").eq("is_published", true).limit(500),
+      ]);
+      const tMap: Record<string, string> = {};
+      (tours.data || []).forEach((t: any) => {
+        if (t.slug) tMap[t.slug] = t.title;
+        if (t.id) tMap[t.id] = t.title;
+      });
+      const bMap: Record<string, string> = {};
+      (posts.data || []).forEach((p: any) => {
+        if (p.slug) bMap[p.slug] = p.title;
+      });
+      setTourMap(tMap);
+      setBlogMap(bMap);
+    };
+    loadTitles();
+  }, []);
 
   useEffect(() => {
     const fetchAnalytics = async () => {
@@ -195,6 +219,32 @@ const AdminAnalytics = () => {
       .sort((a, b) => b.value - a.value)
       .slice(0, 6);
 
+    // Top tour (paths like /passeio/:slugOrId)
+    const tourCount: Record<string, number> = {};
+    visits.forEach((v) => {
+      const path = cleanPath(v.page_url);
+      if (!path) return;
+      const m = path.match(/^\/passeio\/([^/?#]+)/);
+      if (m) tourCount[m[1]] = (tourCount[m[1]] || 0) + 1;
+    });
+    const topTourEntry = Object.entries(tourCount).sort((a, b) => b[1] - a[1])[0];
+    const topTour = topTourEntry
+      ? { name: tourMap[topTourEntry[0]] || topTourEntry[0], views: topTourEntry[1] }
+      : null;
+
+    // Top blog post (paths like /blog/:slug)
+    const blogCount: Record<string, number> = {};
+    visits.forEach((v) => {
+      const path = cleanPath(v.page_url);
+      if (!path) return;
+      const m = path.match(/^\/blog\/([^/?#]+)/);
+      if (m) blogCount[m[1]] = (blogCount[m[1]] || 0) + 1;
+    });
+    const topBlogEntry = Object.entries(blogCount).sort((a, b) => b[1] - a[1])[0];
+    const topBlog = topBlogEntry
+      ? { name: blogMap[topBlogEntry[0]] || topBlogEntry[0], views: topBlogEntry[1] }
+      : null;
+
     return {
       totalVisits,
       uniqueVisitors,
@@ -203,8 +253,10 @@ const AdminAnalytics = () => {
       visitsByDay,
       visitsByCountry,
       topReferrers,
+      topTour,
+      topBlog,
     };
-  }, [allVisits, range]);
+  }, [allVisits, range, tourMap, blogMap]);
 
   if (loading) {
     return (
@@ -275,6 +327,46 @@ const AdminAnalytics = () => {
               {stats.visitsByCountry[0]?.name || "N/A"}
             </div>
             <p className="text-xs text-muted-foreground">País com mais tráfego</p>
+          </CardContent>
+        </Card>
+      </div>
+
+      {/* Highlight cards: most visited tour + most read blog post */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <Card className="border-primary/30 bg-gradient-to-br from-primary/5 to-transparent">
+          <CardHeader className="flex flex-row items-center justify-between pb-2">
+            <CardTitle className="text-sm font-medium flex items-center gap-2">
+              <Map className="w-4 h-4 text-primary" /> Passeio mais visitado
+            </CardTitle>
+            <span className="text-xs font-bold text-primary">
+              {stats.topTour ? `${stats.topTour.views} views` : ""}
+            </span>
+          </CardHeader>
+          <CardContent>
+            <div className="text-xl font-bold leading-tight line-clamp-2">
+              {stats.topTour?.name || "Sem dados no período"}
+            </div>
+            <p className="text-xs text-muted-foreground mt-1">
+              Página de passeio com mais acessos
+            </p>
+          </CardContent>
+        </Card>
+        <Card className="border-accent/30 bg-gradient-to-br from-accent/5 to-transparent">
+          <CardHeader className="flex flex-row items-center justify-between pb-2">
+            <CardTitle className="text-sm font-medium flex items-center gap-2">
+              <BookOpen className="w-4 h-4 text-accent" /> Post de blog mais lido
+            </CardTitle>
+            <span className="text-xs font-bold text-accent">
+              {stats.topBlog ? `${stats.topBlog.views} views` : ""}
+            </span>
+          </CardHeader>
+          <CardContent>
+            <div className="text-xl font-bold leading-tight line-clamp-2">
+              {stats.topBlog?.name || "Sem dados no período"}
+            </div>
+            <p className="text-xs text-muted-foreground mt-1">
+              Artigo com mais leituras
+            </p>
           </CardContent>
         </Card>
       </div>
