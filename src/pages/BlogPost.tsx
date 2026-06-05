@@ -607,6 +607,7 @@ const BlogPost = () => {
             </div>
           </div>
         </section>
+      </main>
       <Footer />
     </div>
   );
