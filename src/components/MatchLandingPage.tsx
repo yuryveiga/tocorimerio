@@ -504,36 +504,6 @@ export default function MatchLandingPage({
         </div>
       </section>
 
-      {/* YOU MAY ALSO LIKE */}
-      {randomTours.length > 0 && (
-        <section className="py-16 px-4 sm:px-6 lg:px-8 bg-background border-t border-border/50">
-          <div className="max-w-7xl mx-auto">
-            <div className="text-center mb-10">
-              <h2 className="font-serif text-3xl sm:text-4xl font-bold mb-3">
-                {language === 'pt' ? 'Você também pode gostar' : language === 'es' ? 'También te puede gustar' : 'You May Also Like'}
-              </h2>
-              <p className="text-muted-foreground max-w-2xl mx-auto">
-                {language === 'pt' ? 'Explore outros passeios imperdíveis no Rio de Janeiro.' : language === 'es' ? 'Explora otros tours imperdibles en Río de Janeiro.' : 'Explore other must-see tours in Rio de Janeiro.'}
-              </p>
-            </div>
-
-            <Carousel className="w-full">
-              <CarouselContent>
-                {randomTours.map((tour) => (
-                  <CarouselItem key={tour.id} className="basis-full sm:basis-1/2 md:basis-1/3 lg:basis-1/4">
-                    <TourItem tour={tour as TourCardProps} />
-                  </CarouselItem>
-                ))}
-              </CarouselContent>
-              <div className="hidden sm:block">
-                <CarouselPrevious className="-left-4 sm:-left-12 bg-card hover:bg-primary hover:text-primary-foreground border-border" />
-                <CarouselNext className="-right-4 sm:-right-12 bg-card hover:bg-primary hover:text-primary-foreground border-border" />
-              </div>
-            </Carousel>
-          </div>
-        </section>
-      )}
-
       {/* FINAL CTA */}
       <section className="py-16 px-4 sm:px-6 lg:px-8 bg-primary/5 border-t border-primary/20">
         <div className="max-w-3xl mx-auto text-center">

@@ -31,7 +31,6 @@ import { getCanonicalUrl, cleanMatchSlug, uncleanMatchSlug } from "@/utils/seo";
 import { LovableMatch } from "@/types";
 import { WhyChooseUs } from "@/components/WhyChooseUs";
 import { PaymentLogos } from "@/components/PaymentLogos";
-import { YouMayAlsoLike } from "@/components/YouMayAlsoLike";
 
 // Partner Project Config
 const MARACANA_PROJECT_URL = "https://mwxbskzggzznxvkwgrnz.supabase.co";
@@ -803,8 +802,6 @@ export default function MatchDetail() {
       ) : (
         <WhyChooseUs />
       )}
-
-      <YouMayAlsoLike />
 
       {/* TripAdvisor Reviews Carousel */}
       <section className="py-24 bg-muted/30 border-t border-border/50">

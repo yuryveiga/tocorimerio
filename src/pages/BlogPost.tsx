@@ -5,7 +5,6 @@ import DOMPurify from "dompurify";
 import { fetchLovable, LovableBlogPost } from "@/integrations/lovable/client";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
-import { YouMayAlsoLike } from "@/components/YouMayAlsoLike";
 import { Calendar, ArrowLeft, MessageCircle, Facebook, Link2, ArrowRight, Compass } from "lucide-react";
 import { format } from "date-fns";
 import { toast } from "sonner";
@@ -608,10 +607,6 @@ const BlogPost = () => {
             </div>
           </div>
         </section>
-      </main>
-
-      <YouMayAlsoLike />
-
       <Footer />
     </div>
   );
