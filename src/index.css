@@ -267,6 +267,73 @@
   .title-reveal > span { opacity: 1; filter: none; transform: none; }
 }
 
+/* ─── Pacote 3: Page transitions + Magnetic cursor + WhatsApp ping ─── */
+
+/* Route fade-in on every navigation */
+@keyframes route-fade-in {
+  from { opacity: 0; transform: translateY(8px); filter: blur(4px); }
+  to   { opacity: 1; transform: none;            filter: blur(0);  }
+}
+.route-fade { animation: route-fade-in 0.5s cubic-bezier(0.2, 0.8, 0.2, 1) both; }
+
+/* Magnetic custom cursor (desktop only via JS) */
+.mc-dot,
+.mc-ring {
+  position: fixed;
+  top: 0; left: 0;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0;
+  transition: opacity 0.25s ease-out, width 0.2s ease-out, height 0.2s ease-out,
+              background 0.2s ease-out, border-color 0.2s ease-out;
+  will-change: transform;
+  mix-blend-mode: difference;
+}
+.mc-dot {
+  width: 8px; height: 8px;
+  background: white;
+  border-radius: 9999px;
+}
+.mc-ring {
+  width: 36px; height: 36px;
+  border: 1.5px solid hsl(var(--accent));
+  border-radius: 9999px;
+  mix-blend-mode: normal;
+}
+.mc-ring.mc-ring--active {
+  width: 56px; height: 56px;
+  transform-origin: center;
+  border-color: hsl(var(--accent));
+  background: hsl(var(--accent) / 0.12);
+}
+/* Hide native cursor only on interactive elements when custom cursor is on */
+html.has-mc body { /* keep system cursor — custom cursor is additive, less risk */ }
+
+/* WhatsApp ping ring — pulses every ~8s */
+@keyframes whatsapp-ping {
+  0%, 90%, 100% { transform: scale(1); opacity: 0; }
+  92%           { transform: scale(1); opacity: 0.65; }
+  100%          { transform: scale(2.2); opacity: 0; }
+}
+.whatsapp-ping::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 9999px;
+  background: #25D366;
+  animation: whatsapp-ping 8s ease-out infinite;
+  pointer-events: none;
+  z-index: -1;
+}
+
+@media (pointer: coarse), (prefers-reduced-motion: reduce) {
+  .mc-dot, .mc-ring { display: none !important; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .route-fade { animation: none; }
+  .whatsapp-ping::before { animation: none; }
+}
+
 
 /* ─── Copa do Mundo 2026 ──────────────────────────────────────────────────── */
 @keyframes copa-float {
