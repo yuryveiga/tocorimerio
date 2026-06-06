@@ -311,7 +311,7 @@ export function TourFormDialog({
                   {form.watch("pricing_model") === 'tiered' && (
                     <div className="bg-gradient-to-br from-primary/5 to-primary/10 p-6 rounded-[32px] border border-primary/20 space-y-4">
                       <TieredPricingEditor
-                        value={form.watch("tiered_pricing_json") || []}
+                        value={(form.watch("tiered_pricing_json") || []) as any}
                         onChange={(tiers) => form.setValue("tiered_pricing_json", tiers, { shouldDirty: true })}
                       />
                     </div>
