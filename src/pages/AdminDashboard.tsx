@@ -121,6 +121,23 @@ const AdminDashboard = () => {
     }
   };
 
+  const handleToggleServiceFee = async (checked: boolean) => {
+    const newValue = checked ? "true" : "false";
+    setSettings({ ...settings, service_fee_enabled: newValue });
+    try {
+      const settingRecord = settingsList.find(s => s.key === 'service_fee_enabled');
+      if (settingRecord?.id) {
+        await updateLovable("site_settings", settingRecord.id, { value: newValue });
+      } else {
+        const newRecord = await insertLovable<LovableSiteSetting>("site_settings", { key: 'service_fee_enabled', value: newValue });
+        setSettingsList([...settingsList, newRecord]);
+      }
+      toast({ title: checked ? "Taxa de 5% ativada" : "Taxa de 5% desativada" });
+    } catch (err) {
+      toast({ title: "Erro ao atualizar taxa", variant: "destructive" });
+    }
+  };
+
   const handleToggleUrgency = async (checked: boolean) => {
     const newValue = checked ? "true" : "false";
     setSettings({ ...settings, hide_urgency: newValue });
