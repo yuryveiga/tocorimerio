@@ -198,9 +198,10 @@ export default function MatchDetail() {
       ? finalSectors[selectedSectorIdx].title
       : "Standard";
 
+    const feeEnabled = siteSettings?.['service_fee_enabled'] === 'true';
     const unitPrice = Math.round((basePrice * rate) * 100) / 100;
     const itemTotal = unitPrice * quantity;
-    const itemFee = Math.round((itemTotal * 0.05) * 100) / 100;
+    const itemFee = feeEnabled ? Math.round((itemTotal * 0.05) * 100) / 100 : 0;
     const totalWithFee = Math.round((itemTotal + itemFee) * 100) / 100;
 
     try {
@@ -243,7 +244,8 @@ export default function MatchDetail() {
             }],
             sale_ids: [saleData.id],
             customer: customerInfo,
-            currency: currentCurrency
+            currency: currentCurrency,
+            apply_fee: feeEnabled,
           }),
         }
       );

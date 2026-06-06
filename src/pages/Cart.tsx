@@ -30,7 +30,8 @@ const Cart = () => {
     window.scrollTo(0, 0);
   }, []);
   const [customerInfo, setCustomerInfo] = useState({ name: "", whatsapp: "", email: "" });
-    const serviceFee = total * 0.05;
+    const feeEnabled = siteSettings?.['service_fee_enabled'] === 'true';
+    const serviceFee = feeEnabled ? total * 0.05 : 0;
     const finalTotal = total + serviceFee;
 
     const handleCheckout = async () => {
@@ -54,7 +55,7 @@ const Cart = () => {
         // Agora rate é multiplicador (ex: 0.20 para USD)
         const convertedPrice = Math.round((item.price * rate) * 100) / 100;
         const itemTotal = convertedPrice * item.quantity;
-        const itemFee = Math.round((itemTotal * 0.05) * 100) / 100;
+        const itemFee = feeEnabled ? Math.round((itemTotal * 0.05) * 100) / 100 : 0;
         const totalWithFee = Math.round((itemTotal + itemFee) * 100) / 100;
 
         console.log(`Inserting sale for ${item.title}:`, {
@@ -106,7 +107,8 @@ const Cart = () => {
           })),
           sale_ids: saleIds,
           customer: customerInfo,
-          currency: currentCurrency
+          currency: currentCurrency,
+          apply_fee: feeEnabled,
         }
       });
 
@@ -304,10 +306,12 @@ const Cart = () => {
                     <span className="font-medium">{t("subtotal")}</span>
                     <span className="font-bold">{formatPrice(total)}</span>
                   </div>
-                  <div className="flex justify-between font-sans text-muted-foreground">
-                    <span className="font-medium">{t("taxas")} (5%)</span>
-                    <span className="font-bold">{formatPrice(serviceFee)}</span>
-                  </div>
+                  {feeEnabled && (
+                    <div className="flex justify-between font-sans text-muted-foreground">
+                      <span className="font-medium">{t("taxas")} (5%)</span>
+                      <span className="font-bold">{formatPrice(serviceFee)}</span>
+                    </div>
+                  )}
                   <div className="flex justify-between font-sans text-2xl font-black text-foreground border-t border-dashed pt-6">
                     <span>{t("total")}</span>
                     <span className="text-primary">{formatPrice(finalTotal)}</span>
