@@ -624,20 +624,29 @@ export default function MatchDetail() {
                                 </div>
                               )}
 
-                              <div className="pt-6 border-t border-dashed border-border space-y-2">
-                                 <div className="flex items-center justify-between text-muted-foreground">
-                                    <span className="text-[10px] font-black uppercase tracking-widest">{t('subtotal')}</span>
-                                    <span className="text-lg font-bold">{formatPrice((finalSectors && finalSectors[selectedSectorIdx] ? finalSectors[selectedSectorIdx].price : match.price) * quantity)}</span>
-                                 </div>
-                                 <div className="flex items-center justify-between text-muted-foreground">
-                                    <span className="text-[10px] font-black uppercase tracking-widest">{t('taxas')} (5%)</span>
-                                    <span className="text-lg font-bold">{formatPrice(((finalSectors && finalSectors[selectedSectorIdx] ? finalSectors[selectedSectorIdx].price : match.price) * quantity) * 0.05)}</span>
-                                 </div>
-                                 <div className="flex items-center justify-between pt-2">
-                                    <span className="text-[10px] font-black uppercase text-muted-foreground tracking-widest">{t('total')}</span>
-                                    <span className="text-2xl font-black text-foreground">{formatPrice(((finalSectors && finalSectors[selectedSectorIdx] ? finalSectors[selectedSectorIdx].price : match.price) * quantity) * 1.05)}</span>
-                                 </div>
-                              </div>
+                              {(() => {
+                                const baseP = (finalSectors && finalSectors[selectedSectorIdx] ? finalSectors[selectedSectorIdx].price : match.price) * quantity;
+                                const feeOn = siteSettings?.['service_fee_enabled'] === 'true';
+                                const feeAmt = feeOn ? baseP * 0.05 : 0;
+                                return (
+                                  <div className="pt-6 border-t border-dashed border-border space-y-2">
+                                    <div className="flex items-center justify-between text-muted-foreground">
+                                       <span className="text-[10px] font-black uppercase tracking-widest">{t('subtotal')}</span>
+                                       <span className="text-lg font-bold">{formatPrice(baseP)}</span>
+                                    </div>
+                                    {feeOn && (
+                                      <div className="flex items-center justify-between text-muted-foreground">
+                                         <span className="text-[10px] font-black uppercase tracking-widest">{t('taxas')} (5%)</span>
+                                         <span className="text-lg font-bold">{formatPrice(feeAmt)}</span>
+                                      </div>
+                                    )}
+                                    <div className="flex items-center justify-between pt-2">
+                                       <span className="text-[10px] font-black uppercase text-muted-foreground tracking-widest">{t('total')}</span>
+                                       <span className="text-2xl font-black text-foreground">{formatPrice(baseP + feeAmt)}</span>
+                                    </div>
+                                  </div>
+                                );
+                              })()}
 
                              <Button 
                                 onClick={() => setIsBookingModalOpen(true)}
