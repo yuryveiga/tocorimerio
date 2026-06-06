@@ -547,6 +547,7 @@ export type Database = {
           short_description_es: string | null
           slug: string | null
           sort_order: number
+          tiered_pricing_json: Json | null
           title: string
           title_en: string | null
           title_es: string | null
@@ -606,6 +607,7 @@ export type Database = {
           short_description_es?: string | null
           slug?: string | null
           sort_order?: number
+          tiered_pricing_json?: Json | null
           title: string
           title_en?: string | null
           title_es?: string | null
@@ -665,6 +667,7 @@ export type Database = {
           short_description_es?: string | null
           slug?: string | null
           sort_order?: number
+          tiered_pricing_json?: Json | null
           title?: string
           title_en?: string | null
           title_es?: string | null
