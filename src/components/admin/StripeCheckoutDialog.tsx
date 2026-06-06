@@ -31,7 +31,8 @@ export default function StripeCheckoutDialog({ open, onClose, tours }: Props) {
   const selectedTour = useMemo(() => tours.find(t => t.id === tourId), [tours, tourId]);
 
   const subtotal = pricePerPerson * quantity;
-  const total = subtotal * 1.05;
+  const fee = addFee ? subtotal * 0.05 : 0;
+  const total = subtotal + fee;
 
   const handleTourChange = (id: string) => {
     setTourId(id);
@@ -77,6 +78,7 @@ export default function StripeCheckoutDialog({ open, onClose, tours }: Props) {
             period: "",
           }],
           sale_ids: saleId ? [saleId] : [],
+          apply_fee: addFee,
         },
       });
 
@@ -190,13 +192,19 @@ export default function StripeCheckoutDialog({ open, onClose, tours }: Props) {
               <span>Subtotal:</span>
               <span className="font-medium">{formatCurrency(pricePerPerson * quantity)}</span>
             </div>
-            <div className="flex justify-between text-sm mt-1">
-              <span>Taxa de Serviço (5%):</span>
-              <span className="font-medium">{formatCurrency(pricePerPerson * quantity * 0.05)}</span>
+            <div className="flex items-center gap-2 mt-2">
+              <Checkbox id="add-fee" checked={addFee} onCheckedChange={(c) => setAddFee(c === true)} />
+              <Label htmlFor="add-fee" className="text-sm cursor-pointer">Cobrar taxa de serviço (5%)</Label>
             </div>
+            {addFee && (
+              <div className="flex justify-between text-sm mt-2">
+                <span>Taxa de Serviço (5%):</span>
+                <span className="font-medium">{formatCurrency(fee)}</span>
+              </div>
+            )}
             <div className="flex justify-between text-lg font-bold mt-2 pt-2 border-t border-primary/20">
               <span>Total Final:</span>
-              <span className="text-primary">{formatCurrency(pricePerPerson * quantity * 1.05)}</span>
+              <span className="text-primary">{formatCurrency(total)}</span>
             </div>
           </div>
 

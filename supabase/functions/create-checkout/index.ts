@@ -30,7 +30,7 @@ serve(async (req) => {
   }
 
   try {
-    const { items, sale_ids, customer, currency = "brl" } = await req.json();
+    const { items, sale_ids, customer, currency = "brl", apply_fee = false } = await req.json();
     const targetCurrency = currency.toLowerCase();
 
     const stripeKey = Deno.env.get("STRIPE_SECRET_KEY");
@@ -91,7 +91,7 @@ serve(async (req) => {
       return acc + Math.round(item.final_price * 100 * item.quantity);
     }, 0);
     
-    const feeCents = Math.round(subtotalCents * 0.05);
+    const feeCents = apply_fee ? Math.round(subtotalCents * 0.05) : 0;
     const totalCents = subtotalCents + feeCents;
 
     console.log(`Subtotal: ${subtotalCents} cents, Fee: ${feeCents} cents, Total: ${totalCents} cents`);

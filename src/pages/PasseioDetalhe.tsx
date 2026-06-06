@@ -976,8 +976,8 @@ export function PasseioDetalhe() {
                 {/* Share Buttons */}
                  <div className="bg-card rounded-[2.5rem] border border-primary/20 p-8 shadow-2xl relative overflow-hidden group">
                    <div className="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-full -mr-16 -mt-16 transition-transform group-hover:scale-150" />
-                    <div className="space-y-4">
-                      {!hidePrices ? (
+                     <div className="space-y-4">
+                       {(!hidePrices && tour.pricing_model !== 'custom') ? (
                         <>
                           <div className="space-y-2">
                             <div className="flex items-center justify-between">
@@ -1233,7 +1233,7 @@ export function PasseioDetalhe() {
       <div className={`fixed bottom-0 left-0 right-0 z-50 p-4 bg-background/80 backdrop-blur-xl border-t transform transition-transform duration-500 md:hidden ${showStickyBar ? "translate-y-0" : "translate-y-full"}`}>
         <div className="flex items-center justify-between gap-4">
           <div className="flex flex-col">
-            {!hidePrices ? (
+            {(!hidePrices && tour.pricing_model !== 'custom') ? (
               <>
                 <span className="text-[10px] font-bold text-muted-foreground uppercase">{t("a_partir_de")}</span>
                 <div className="flex items-baseline gap-1">
@@ -1252,7 +1252,8 @@ export function PasseioDetalhe() {
             if (!wa) return null;
             const cleanNumber = wa.url.replace(/[^\d+]/g, "").replace('+', '');
             const titleI18n = String((tour as Record<string, any>)[`title_${language}`] || tour.title || "");
-            const msg = hidePrices 
+            const isQuoteMode = hidePrices || tour.pricing_model === 'custom';
+            const msg = isQuoteMode 
               ? (language === 'pt' ? `Olá! Gostaria de um orçamento para o passeio: ${titleI18n}` : `Hello! I would like a quote for the tour: ${titleI18n}`)
               : t("wa_message").replace("{tour}", titleI18n);
             const href = wa.url.startsWith('http')
@@ -1263,10 +1264,10 @@ export function PasseioDetalhe() {
                 href={href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className={`flex-1 h-14 rounded-2xl font-black text-xs uppercase tracking-widest flex items-center justify-center gap-2 text-white shadow-lg ${hidePrices ? 'bg-[#25D366]' : 'bg-primary'}`}
+                className={`flex-1 h-14 rounded-2xl font-black text-xs uppercase tracking-widest flex items-center justify-center gap-2 text-white shadow-lg ${isQuoteMode ? 'bg-[#25D366]' : 'bg-primary'}`}
               >
-                {hidePrices ? <MessageSquare className="w-5 h-5" /> : <ShoppingCart className="w-5 h-5" />}
-                {hidePrices 
+                {isQuoteMode ? <MessageSquare className="w-5 h-5" /> : <ShoppingCart className="w-5 h-5" />}
+                {isQuoteMode 
                   ? (language === 'pt' ? 'ORÇAMENTO' : 'QUOTE') 
                   : t("reservar_agora")}
               </a>

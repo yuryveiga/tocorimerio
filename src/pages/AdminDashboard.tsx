@@ -121,6 +121,23 @@ const AdminDashboard = () => {
     }
   };
 
+  const handleToggleServiceFee = async (checked: boolean) => {
+    const newValue = checked ? "true" : "false";
+    setSettings({ ...settings, service_fee_enabled: newValue });
+    try {
+      const settingRecord = settingsList.find(s => s.key === 'service_fee_enabled');
+      if (settingRecord?.id) {
+        await updateLovable("site_settings", settingRecord.id, { value: newValue });
+      } else {
+        const newRecord = await insertLovable<LovableSiteSetting>("site_settings", { key: 'service_fee_enabled', value: newValue });
+        setSettingsList([...settingsList, newRecord]);
+      }
+      toast({ title: checked ? "Taxa de 5% ativada" : "Taxa de 5% desativada" });
+    } catch (err) {
+      toast({ title: "Erro ao atualizar taxa", variant: "destructive" });
+    }
+  };
+
   const handleToggleUrgency = async (checked: boolean) => {
     const newValue = checked ? "true" : "false";
     setSettings({ ...settings, hide_urgency: newValue });
@@ -358,6 +375,16 @@ const AdminDashboard = () => {
               <div className="bg-amber-50 border border-amber-200 p-4 rounded-xl flex gap-3">
                 <Sparkles className="w-5 h-5 text-amber-600 shrink-0 mt-0.5" />
                 <p className="text-xs text-amber-800 italic">Dica: Use esta opção se os preços estiverem em atualização ou se preferir atendimento direto.</p>
+              </div>
+              <div className="flex items-center justify-between p-4 bg-primary/5 rounded-2xl border border-primary/10">
+                <div className="space-y-0.5">
+                  <Label className="text-base font-bold text-foreground">Cobrar Taxa de Serviço (5%)</Label>
+                  <p className="text-sm text-muted-foreground">Quando ativada, soma 5% sobre o subtotal no carrinho, no detalhe do jogo e nos links manuais do Stripe.</p>
+                </div>
+                <Switch
+                  checked={settings['service_fee_enabled'] === 'true'}
+                  onCheckedChange={handleToggleServiceFee}
+                />
               </div>
             </div>
           </div>
