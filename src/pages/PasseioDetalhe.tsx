@@ -976,8 +976,8 @@ export function PasseioDetalhe() {
                 {/* Share Buttons */}
                  <div className="bg-card rounded-[2.5rem] border border-primary/20 p-8 shadow-2xl relative overflow-hidden group">
                    <div className="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-full -mr-16 -mt-16 transition-transform group-hover:scale-150" />
-                    <div className="space-y-4">
-                      {!hidePrices ? (
+                     <div className="space-y-4">
+                       {(!hidePrices && tour.pricing_model !== 'custom') ? (
                         <>
                           <div className="space-y-2">
                             <div className="flex items-center justify-between">
@@ -1233,7 +1233,7 @@ export function PasseioDetalhe() {
       <div className={`fixed bottom-0 left-0 right-0 z-50 p-4 bg-background/80 backdrop-blur-xl border-t transform transition-transform duration-500 md:hidden ${showStickyBar ? "translate-y-0" : "translate-y-full"}`}>
         <div className="flex items-center justify-between gap-4">
           <div className="flex flex-col">
-            {!hidePrices ? (
+            {(!hidePrices && tour.pricing_model !== 'custom') ? (
               <>
                 <span className="text-[10px] font-bold text-muted-foreground uppercase">{t("a_partir_de")}</span>
                 <div className="flex items-baseline gap-1">
