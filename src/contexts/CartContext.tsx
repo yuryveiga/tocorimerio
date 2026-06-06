@@ -10,7 +10,7 @@ export interface CartItem {
   period: string;
   isPrivate: boolean;
   quantity: number;
-  pricing_model?: 'fixed' | 'dynamic' | 'group' | 'custom';
+  pricing_model?: 'fixed' | 'dynamic' | 'group' | 'custom' | 'tiered';
   price_1_person?: number;
   price_2_people?: number;
   price_3_6_people?: number;
