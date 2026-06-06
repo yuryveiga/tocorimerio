@@ -1,9 +1,9 @@
 import { Json } from "@/integrations/supabase/types";
 
 export type PricingTier = {
-  min_people: number;
-  max_people: number | null;
-  price_per_person: number;
+  min_people?: number;
+  max_people?: number | null;
+  price_per_person?: number;
 };
 
 export type LovableTour = {
