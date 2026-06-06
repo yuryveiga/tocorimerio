@@ -1252,7 +1252,8 @@ export function PasseioDetalhe() {
             if (!wa) return null;
             const cleanNumber = wa.url.replace(/[^\d+]/g, "").replace('+', '');
             const titleI18n = String((tour as Record<string, any>)[`title_${language}`] || tour.title || "");
-            const msg = hidePrices 
+            const isQuoteMode = hidePrices || tour.pricing_model === 'custom';
+            const msg = isQuoteMode 
               ? (language === 'pt' ? `Olá! Gostaria de um orçamento para o passeio: ${titleI18n}` : `Hello! I would like a quote for the tour: ${titleI18n}`)
               : t("wa_message").replace("{tour}", titleI18n);
             const href = wa.url.startsWith('http')
@@ -1263,10 +1264,10 @@ export function PasseioDetalhe() {
                 href={href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className={`flex-1 h-14 rounded-2xl font-black text-xs uppercase tracking-widest flex items-center justify-center gap-2 text-white shadow-lg ${hidePrices ? 'bg-[#25D366]' : 'bg-primary'}`}
+                className={`flex-1 h-14 rounded-2xl font-black text-xs uppercase tracking-widest flex items-center justify-center gap-2 text-white shadow-lg ${isQuoteMode ? 'bg-[#25D366]' : 'bg-primary'}`}
               >
-                {hidePrices ? <MessageSquare className="w-5 h-5" /> : <ShoppingCart className="w-5 h-5" />}
-                {hidePrices 
+                {isQuoteMode ? <MessageSquare className="w-5 h-5" /> : <ShoppingCart className="w-5 h-5" />}
+                {isQuoteMode 
                   ? (language === 'pt' ? 'ORÇAMENTO' : 'QUOTE') 
                   : t("reservar_agora")}
               </a>
