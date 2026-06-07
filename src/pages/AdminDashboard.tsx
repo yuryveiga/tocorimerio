@@ -391,51 +391,39 @@ const AdminDashboard = () => {
           </div>
         </div>
 
-        {/* Copa do Mundo 2026 Mode */}
-        <div className={`bg-card border-2 rounded-3xl p-8 shadow-sm space-y-6 flex flex-col justify-between transition-all duration-500 ${
-          isCopaMode ? 'border-yellow-400 copa-card-active' : 'border-green-200'
-        }`}>
-          <div>
-            <div className="flex items-center gap-3 mb-4">
-              <Trophy className={`w-7 h-7 transition-colors duration-300 ${
-                isCopaMode ? 'text-yellow-500' : 'text-green-600'
-              }`} />
-              <h2 className="text-2xl font-bold font-serif">Copa do Mundo</h2>
-              {isCopaMode && <span className="text-lg copa-star">🏆</span>}
-            </div>
-            <div className="space-y-4">
-              <div className={`flex items-center justify-between p-4 rounded-2xl border transition-all duration-300 ${
-                isCopaMode
-                  ? 'bg-gradient-to-r from-green-50 to-yellow-50 border-yellow-200'
-                  : 'bg-green-50 border-green-100'
-              }`}>
-                <div className="space-y-0.5">
-                  <Label className="text-base font-bold text-foreground">Modo Copa do Mundo 2026</Label>
-                  <p className="text-sm text-muted-foreground">Ativa um banner e decorações festivas no painel.</p>
-                </div>
-                <Switch
-                  checked={isCopaMode}
-                  onCheckedChange={handleToggleCopaMundo}
+        {/* WhatsApp Floating Button Message */}
+        <div className="bg-card border-2 border-[#25D366]/30 rounded-3xl p-8 shadow-sm space-y-6 md:col-span-2">
+          <div className="flex items-center gap-3 mb-2">
+            <MessageCircle className="w-7 h-7 text-[#25D366]" />
+            <h2 className="text-2xl font-bold font-serif">Mensagem do Botão WhatsApp</h2>
+          </div>
+          <p className="text-sm text-muted-foreground">
+            Texto enviado automaticamente quando o cliente clica no botão flutuante do WhatsApp. Personalize para cada idioma. Deixe em branco para usar a mensagem padrão.
+          </p>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            {([
+              { code: 'pt', label: 'Português 🇧🇷' },
+              { code: 'en', label: 'English 🇺🇸' },
+              { code: 'es', label: 'Español 🇪🇸' },
+            ] as const).map(({ code, label }) => (
+              <div key={code} className="space-y-2">
+                <Label className="text-xs font-black uppercase tracking-widest text-muted-foreground">{label}</Label>
+                <Textarea
+                  value={settings[`whatsapp_msg_${code}`] ?? ''}
+                  onChange={(e) => setSettings({ ...settings, [`whatsapp_msg_${code}`]: e.target.value })}
+                  placeholder="Mensagem padrão será usada se vazio..."
+                  className="h-56 rounded-xl resize-none text-sm"
                 />
               </div>
-              <div className={`border p-4 rounded-xl flex gap-3 transition-all duration-300 ${
-                isCopaMode
-                  ? 'bg-yellow-50 border-yellow-200'
-                  : 'bg-green-50 border-green-200'
-              }`}>
-                <Trophy className={`w-5 h-5 shrink-0 mt-0.5 ${
-                  isCopaMode ? 'text-yellow-500' : 'text-green-600'
-                }`} />
-                <p className={`text-xs italic ${
-                  isCopaMode ? 'text-yellow-800' : 'text-green-800'
-                }`}>
-                  {isCopaMode
-                    ? '⚽️ Vai Brasil! O painel está no clima da Copa 2026! 🏆🇧🇷'
-                    : 'Ative para entrar no clima da Copa do Mundo 2026!'}
-                </p>
-              </div>
-            </div>
+            ))}
           </div>
+          <Button
+            onClick={handleSaveWhatsapp}
+            disabled={isSavingWhatsapp}
+            className="w-full h-12 rounded-xl font-bold bg-[#25D366] hover:bg-[#1ebe57] text-white"
+          >
+            {isSavingWhatsapp ? "Salvando..." : <><Save className="w-4 h-4 mr-2" /> Salvar Mensagens do WhatsApp</>}
+          </Button>
         </div>
 
         {/* Category Management */}
