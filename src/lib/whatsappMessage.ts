@@ -43,13 +43,13 @@ Mientras tanto, no dudes en enviarme:
 ¡Será un placer ayudarte a vivir una experiencia inolvidable en Río! ☀️🏖️`,
 };
 
-function getOverride(lang: string): string | null {
+function getOverride(): string | null {
   if (typeof window === 'undefined') return null;
   try {
     const raw = localStorage.getItem('site_settings');
     if (!raw) return null;
     const map = JSON.parse(raw) as Record<string, string>;
-    const val = map[`whatsapp_msg_${lang}`];
+    const val = map['whatsapp_msg'];
     return val && val.trim() ? val : null;
   } catch {
     return null;
@@ -59,7 +59,7 @@ function getOverride(lang: string): string | null {
 export function getWhatsappWelcomeMessage(language?: string): string {
   const lang = (language || 'pt').toLowerCase().slice(0, 2);
   const key = (lang in defaultMessages ? lang : 'pt') as keyof typeof defaultMessages;
-  return getOverride(key) || defaultMessages[key];
+  return getOverride() || defaultMessages[key];
 }
 
 export function buildWhatsappLink(phoneOrUrl: string, language?: string): string {

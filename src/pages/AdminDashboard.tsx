@@ -159,9 +159,8 @@ const AdminDashboard = () => {
   const handleSaveWhatsapp = async () => {
     setIsSavingWhatsapp(true);
     try {
-      const keys = ['whatsapp_msg_pt', 'whatsapp_msg_en', 'whatsapp_msg_es'];
-      for (const key of keys) {
-        if (settings[key] === undefined) continue;
+      const key = 'whatsapp_msg';
+      if (settings[key] !== undefined) {
         const settingRecord = settingsList.find(s => s.key === key);
         if (settingRecord?.id) {
           await updateLovable("site_settings", settingRecord.id, { value: settings[key] || "" });
@@ -175,9 +174,9 @@ const AdminDashboard = () => {
       const map: Record<string, string> = {};
       settingsData.forEach((s) => { map[s.key] = s.value; });
       try { localStorage.setItem('site_settings', JSON.stringify(map)); } catch { /* ok */ }
-      toast({ title: "Mensagens do WhatsApp salvas!" });
+      toast({ title: "Mensagem do WhatsApp salva!" });
     } catch (err) {
-      toast({ title: "Erro ao salvar mensagens", variant: "destructive" });
+      toast({ title: "Erro ao salvar mensagem", variant: "destructive" });
     } finally {
       setIsSavingWhatsapp(false);
     }
@@ -398,31 +397,23 @@ const AdminDashboard = () => {
             <h2 className="text-2xl font-bold font-serif">Mensagem do Botão WhatsApp</h2>
           </div>
           <p className="text-sm text-muted-foreground">
-            Texto enviado automaticamente quando o cliente clica no botão flutuante do WhatsApp. Personalize para cada idioma. Deixe em branco para usar a mensagem padrão.
+            Texto enviado automaticamente quando o cliente clica no botão flutuante do WhatsApp. A mesma mensagem será usada nos 3 idiomas. Deixe em branco para usar a mensagem padrão.
           </p>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            {([
-              { code: 'pt', label: 'Português 🇧🇷' },
-              { code: 'en', label: 'English 🇺🇸' },
-              { code: 'es', label: 'Español 🇪🇸' },
-            ] as const).map(({ code, label }) => (
-              <div key={code} className="space-y-2">
-                <Label className="text-xs font-black uppercase tracking-widest text-muted-foreground">{label}</Label>
-                <Textarea
-                  value={settings[`whatsapp_msg_${code}`] ?? ''}
-                  onChange={(e) => setSettings({ ...settings, [`whatsapp_msg_${code}`]: e.target.value })}
-                  placeholder="Mensagem padrão será usada se vazio..."
-                  className="h-56 rounded-xl resize-none text-sm"
-                />
-              </div>
-            ))}
+          <div className="space-y-2">
+            <Label className="text-xs font-black uppercase tracking-widest text-muted-foreground">Mensagem</Label>
+            <Textarea
+              value={settings['whatsapp_msg'] ?? ''}
+              onChange={(e) => setSettings({ ...settings, 'whatsapp_msg': e.target.value })}
+              placeholder="Mensagem padrão será usada se vazio..."
+              className="h-56 rounded-xl resize-none text-sm"
+            />
           </div>
           <Button
             onClick={handleSaveWhatsapp}
             disabled={isSavingWhatsapp}
             className="w-full h-12 rounded-xl font-bold bg-[#25D366] hover:bg-[#1ebe57] text-white"
           >
-            {isSavingWhatsapp ? "Salvando..." : <><Save className="w-4 h-4 mr-2" /> Salvar Mensagens do WhatsApp</>}
+            {isSavingWhatsapp ? "Salvando..." : <><Save className="w-4 h-4 mr-2" /> Salvar Mensagem do WhatsApp</>}
           </Button>
         </div>
 
