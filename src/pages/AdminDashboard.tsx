@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Map, Globe, Sparkles, Loader2, DollarSign, Users, CalendarCheck, CalendarClock, Save, LayoutGrid, Trophy } from "lucide-react";
+import { Map, Globe, Sparkles, Loader2, DollarSign, Users, CalendarCheck, CalendarClock, Save, LayoutGrid, MessageCircle } from "lucide-react";
 import { ChangePassword } from "@/components/admin/ChangePassword";
 import { BulkTranslateCard } from "@/components/admin/BulkTranslateCard";
 import { fetchLovable, updateLovable, insertLovable, LovableSiteSetting, LovableSale, LovableTour } from "@/integrations/lovable/client";
@@ -19,6 +19,7 @@ const AdminDashboard = () => {
   const [isSaving, setIsSaving] = useState(false);
   const [isSavingGeneral, setIsSavingGeneral] = useState(false);
   const [isTranslating, setIsTranslating] = useState(false);
+  const [isSavingWhatsapp, setIsSavingWhatsapp] = useState(false);
   const { toast } = useToast();
   const { rates } = useCurrency();
 
@@ -155,20 +156,30 @@ const AdminDashboard = () => {
     }
   };
 
-  const handleToggleCopaMundo = async (checked: boolean) => {
-    const newValue = checked ? "true" : "false";
-    setSettings({ ...settings, world_cup_mode: newValue });
+  const handleSaveWhatsapp = async () => {
+    setIsSavingWhatsapp(true);
     try {
-      const settingRecord = settingsList.find(s => s.key === 'world_cup_mode');
-      if (settingRecord?.id) {
-        await updateLovable("site_settings", settingRecord.id, { value: newValue });
-      } else {
-        const newRecord = await insertLovable<LovableSiteSetting>("site_settings", { key: 'world_cup_mode', value: newValue });
-        setSettingsList([...settingsList, newRecord]);
+      const keys = ['whatsapp_msg_pt', 'whatsapp_msg_en', 'whatsapp_msg_es'];
+      for (const key of keys) {
+        if (settings[key] === undefined) continue;
+        const settingRecord = settingsList.find(s => s.key === key);
+        if (settingRecord?.id) {
+          await updateLovable("site_settings", settingRecord.id, { value: settings[key] || "" });
+        } else {
+          await insertLovable("site_settings", { key, value: settings[key] || "" });
+        }
       }
-      toast({ title: checked ? "⚽️ Modo Copa do Mundo ativado! Vai Brasil! 🏆" : "Modo Copa do Mundo desativado." });
+      // Refresh local cache so the floating button picks up the new text immediately
+      const settingsData = await fetchLovable<LovableSiteSetting>("site_settings");
+      setSettingsList(settingsData);
+      const map: Record<string, string> = {};
+      settingsData.forEach((s) => { map[s.key] = s.value; });
+      try { localStorage.setItem('site_settings', JSON.stringify(map)); } catch { /* ok */ }
+      toast({ title: "Mensagens do WhatsApp salvas!" });
     } catch (err) {
-      toast({ title: "Erro ao atualizar", variant: "destructive" });
+      toast({ title: "Erro ao salvar mensagens", variant: "destructive" });
+    } finally {
+      setIsSavingWhatsapp(false);
     }
   };
 
@@ -185,44 +196,8 @@ const AdminDashboard = () => {
     { label: "Euro Hoje", value: `R$ ${(1 / (rates.EUR || 0.16)).toFixed(2)}`, icon: Globe, color: "bg-indigo-100 text-indigo-600" },
   ];
 
-  const isCopaMode = settings['world_cup_mode'] === 'true';
-
   return (
     <div className="space-y-8 pb-12 font-sans">
-
-      {/* ─── Copa do Mundo 2026 Banner ─────────────────────────────── */}
-      {isCopaMode && (
-        <div className="copa-banner relative overflow-hidden rounded-3xl p-1">
-          {/* Gradient background */}
-          <div className="absolute inset-0 rounded-3xl bg-gradient-to-r from-green-700 via-yellow-400 to-green-700" />
-          {/* Subtle inner shine */}
-          <div className="absolute inset-0 rounded-3xl bg-gradient-to-b from-white/20 to-transparent" />
-
-          {/* Floating soccer balls */}
-          <span className="copa-float-ball absolute top-3 left-5 text-5xl opacity-50">⚽️</span>
-          <span className="copa-float-ball absolute top-2 right-10 text-4xl opacity-40">⚽️</span>
-          <span className="copa-float-ball absolute bottom-2 left-1/4 text-3xl opacity-30">⚽️</span>
-          <span className="copa-float-ball absolute bottom-1 right-1/3 text-4xl opacity-40">⚽️</span>
-
-          {/* Spinning stars */}
-          <span className="copa-star absolute top-4 left-1/3 text-2xl opacity-70">⭐</span>
-          <span className="copa-star absolute bottom-4 right-1/4 text-xl opacity-60">⭐</span>
-          <span className="copa-star absolute top-2 right-1/2 text-lg opacity-50">⭐</span>
-
-          {/* Content */}
-          <div className="relative z-10 py-6 px-8 text-center">
-            <p className="text-[11px] font-black uppercase tracking-[0.4em] text-green-900/70 mb-1">
-              🇧🇷 Painel Administrativo
-            </p>
-            <h2 className="copa-shimmer-text text-3xl sm:text-4xl font-black tracking-tight leading-tight">
-              🏆 COPA DO MUNDO 2026 🏆
-            </h2>
-            <p className="text-green-900/60 font-semibold mt-1.5 text-sm">
-              Modo especial ativado &bull; Vai Brasil! 🇧🇷⚽️
-            </p>
-          </div>
-        </div>
-      )}
 
       <h1 className="font-serif text-3xl font-bold text-foreground">Dashboard</h1>
       
