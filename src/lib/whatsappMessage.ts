@@ -1,4 +1,4 @@
-const messages = {
+const defaultMessages = {
   pt: `Olá! 👋
 
 Seja bem-vindo à Tocorime Rio!
@@ -43,9 +43,23 @@ Mientras tanto, no dudes en enviarme:
 ¡Será un placer ayudarte a vivir una experiencia inolvidable en Río! ☀️🏖️`,
 };
 
+function getOverride(lang: string): string | null {
+  if (typeof window === 'undefined') return null;
+  try {
+    const raw = localStorage.getItem('site_settings');
+    if (!raw) return null;
+    const map = JSON.parse(raw) as Record<string, string>;
+    const val = map[`whatsapp_msg_${lang}`];
+    return val && val.trim() ? val : null;
+  } catch {
+    return null;
+  }
+}
+
 export function getWhatsappWelcomeMessage(language?: string): string {
   const lang = (language || 'pt').toLowerCase().slice(0, 2);
-  return messages[lang as keyof typeof messages] || messages.pt;
+  const key = (lang in defaultMessages ? lang : 'pt') as keyof typeof defaultMessages;
+  return getOverride(key) || defaultMessages[key];
 }
 
 export function buildWhatsappLink(phoneOrUrl: string, language?: string): string {

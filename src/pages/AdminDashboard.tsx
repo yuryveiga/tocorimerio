@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Map, Globe, Sparkles, Loader2, DollarSign, Users, CalendarCheck, CalendarClock, Save, LayoutGrid, Trophy } from "lucide-react";
+import { Map, Globe, Sparkles, Loader2, DollarSign, Users, CalendarCheck, CalendarClock, Save, LayoutGrid, MessageCircle } from "lucide-react";
 import { ChangePassword } from "@/components/admin/ChangePassword";
 import { BulkTranslateCard } from "@/components/admin/BulkTranslateCard";
 import { fetchLovable, updateLovable, insertLovable, LovableSiteSetting, LovableSale, LovableTour } from "@/integrations/lovable/client";
@@ -19,6 +19,7 @@ const AdminDashboard = () => {
   const [isSaving, setIsSaving] = useState(false);
   const [isSavingGeneral, setIsSavingGeneral] = useState(false);
   const [isTranslating, setIsTranslating] = useState(false);
+  const [isSavingWhatsapp, setIsSavingWhatsapp] = useState(false);
   const { toast } = useToast();
   const { rates } = useCurrency();
 
@@ -155,20 +156,30 @@ const AdminDashboard = () => {
     }
   };
 
-  const handleToggleCopaMundo = async (checked: boolean) => {
-    const newValue = checked ? "true" : "false";
-    setSettings({ ...settings, world_cup_mode: newValue });
+  const handleSaveWhatsapp = async () => {
+    setIsSavingWhatsapp(true);
     try {
-      const settingRecord = settingsList.find(s => s.key === 'world_cup_mode');
-      if (settingRecord?.id) {
-        await updateLovable("site_settings", settingRecord.id, { value: newValue });
-      } else {
-        const newRecord = await insertLovable<LovableSiteSetting>("site_settings", { key: 'world_cup_mode', value: newValue });
-        setSettingsList([...settingsList, newRecord]);
+      const keys = ['whatsapp_msg_pt', 'whatsapp_msg_en', 'whatsapp_msg_es'];
+      for (const key of keys) {
+        if (settings[key] === undefined) continue;
+        const settingRecord = settingsList.find(s => s.key === key);
+        if (settingRecord?.id) {
+          await updateLovable("site_settings", settingRecord.id, { value: settings[key] || "" });
+        } else {
+          await insertLovable("site_settings", { key, value: settings[key] || "" });
+        }
       }
-      toast({ title: checked ? "⚽️ Modo Copa do Mundo ativado! Vai Brasil! 🏆" : "Modo Copa do Mundo desativado." });
+      // Refresh local cache so the floating button picks up the new text immediately
+      const settingsData = await fetchLovable<LovableSiteSetting>("site_settings");
+      setSettingsList(settingsData);
+      const map: Record<string, string> = {};
+      settingsData.forEach((s) => { map[s.key] = s.value; });
+      try { localStorage.setItem('site_settings', JSON.stringify(map)); } catch { /* ok */ }
+      toast({ title: "Mensagens do WhatsApp salvas!" });
     } catch (err) {
-      toast({ title: "Erro ao atualizar", variant: "destructive" });
+      toast({ title: "Erro ao salvar mensagens", variant: "destructive" });
+    } finally {
+      setIsSavingWhatsapp(false);
     }
   };
 
@@ -185,44 +196,8 @@ const AdminDashboard = () => {
     { label: "Euro Hoje", value: `R$ ${(1 / (rates.EUR || 0.16)).toFixed(2)}`, icon: Globe, color: "bg-indigo-100 text-indigo-600" },
   ];
 
-  const isCopaMode = settings['world_cup_mode'] === 'true';
-
   return (
     <div className="space-y-8 pb-12 font-sans">
-
-      {/* ─── Copa do Mundo 2026 Banner ─────────────────────────────── */}
-      {isCopaMode && (
-        <div className="copa-banner relative overflow-hidden rounded-3xl p-1">
-          {/* Gradient background */}
-          <div className="absolute inset-0 rounded-3xl bg-gradient-to-r from-green-700 via-yellow-400 to-green-700" />
-          {/* Subtle inner shine */}
-          <div className="absolute inset-0 rounded-3xl bg-gradient-to-b from-white/20 to-transparent" />
-
-          {/* Floating soccer balls */}
-          <span className="copa-float-ball absolute top-3 left-5 text-5xl opacity-50">⚽️</span>
-          <span className="copa-float-ball absolute top-2 right-10 text-4xl opacity-40">⚽️</span>
-          <span className="copa-float-ball absolute bottom-2 left-1/4 text-3xl opacity-30">⚽️</span>
-          <span className="copa-float-ball absolute bottom-1 right-1/3 text-4xl opacity-40">⚽️</span>
-
-          {/* Spinning stars */}
-          <span className="copa-star absolute top-4 left-1/3 text-2xl opacity-70">⭐</span>
-          <span className="copa-star absolute bottom-4 right-1/4 text-xl opacity-60">⭐</span>
-          <span className="copa-star absolute top-2 right-1/2 text-lg opacity-50">⭐</span>
-
-          {/* Content */}
-          <div className="relative z-10 py-6 px-8 text-center">
-            <p className="text-[11px] font-black uppercase tracking-[0.4em] text-green-900/70 mb-1">
-              🇧🇷 Painel Administrativo
-            </p>
-            <h2 className="copa-shimmer-text text-3xl sm:text-4xl font-black tracking-tight leading-tight">
-              🏆 COPA DO MUNDO 2026 🏆
-            </h2>
-            <p className="text-green-900/60 font-semibold mt-1.5 text-sm">
-              Modo especial ativado &bull; Vai Brasil! 🇧🇷⚽️
-            </p>
-          </div>
-        </div>
-      )}
 
       <h1 className="font-serif text-3xl font-bold text-foreground">Dashboard</h1>
       
@@ -416,51 +391,39 @@ const AdminDashboard = () => {
           </div>
         </div>
 
-        {/* Copa do Mundo 2026 Mode */}
-        <div className={`bg-card border-2 rounded-3xl p-8 shadow-sm space-y-6 flex flex-col justify-between transition-all duration-500 ${
-          isCopaMode ? 'border-yellow-400 copa-card-active' : 'border-green-200'
-        }`}>
-          <div>
-            <div className="flex items-center gap-3 mb-4">
-              <Trophy className={`w-7 h-7 transition-colors duration-300 ${
-                isCopaMode ? 'text-yellow-500' : 'text-green-600'
-              }`} />
-              <h2 className="text-2xl font-bold font-serif">Copa do Mundo</h2>
-              {isCopaMode && <span className="text-lg copa-star">🏆</span>}
-            </div>
-            <div className="space-y-4">
-              <div className={`flex items-center justify-between p-4 rounded-2xl border transition-all duration-300 ${
-                isCopaMode
-                  ? 'bg-gradient-to-r from-green-50 to-yellow-50 border-yellow-200'
-                  : 'bg-green-50 border-green-100'
-              }`}>
-                <div className="space-y-0.5">
-                  <Label className="text-base font-bold text-foreground">Modo Copa do Mundo 2026</Label>
-                  <p className="text-sm text-muted-foreground">Ativa um banner e decorações festivas no painel.</p>
-                </div>
-                <Switch
-                  checked={isCopaMode}
-                  onCheckedChange={handleToggleCopaMundo}
+        {/* WhatsApp Floating Button Message */}
+        <div className="bg-card border-2 border-[#25D366]/30 rounded-3xl p-8 shadow-sm space-y-6 md:col-span-2">
+          <div className="flex items-center gap-3 mb-2">
+            <MessageCircle className="w-7 h-7 text-[#25D366]" />
+            <h2 className="text-2xl font-bold font-serif">Mensagem do Botão WhatsApp</h2>
+          </div>
+          <p className="text-sm text-muted-foreground">
+            Texto enviado automaticamente quando o cliente clica no botão flutuante do WhatsApp. Personalize para cada idioma. Deixe em branco para usar a mensagem padrão.
+          </p>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            {([
+              { code: 'pt', label: 'Português 🇧🇷' },
+              { code: 'en', label: 'English 🇺🇸' },
+              { code: 'es', label: 'Español 🇪🇸' },
+            ] as const).map(({ code, label }) => (
+              <div key={code} className="space-y-2">
+                <Label className="text-xs font-black uppercase tracking-widest text-muted-foreground">{label}</Label>
+                <Textarea
+                  value={settings[`whatsapp_msg_${code}`] ?? ''}
+                  onChange={(e) => setSettings({ ...settings, [`whatsapp_msg_${code}`]: e.target.value })}
+                  placeholder="Mensagem padrão será usada se vazio..."
+                  className="h-56 rounded-xl resize-none text-sm"
                 />
               </div>
-              <div className={`border p-4 rounded-xl flex gap-3 transition-all duration-300 ${
-                isCopaMode
-                  ? 'bg-yellow-50 border-yellow-200'
-                  : 'bg-green-50 border-green-200'
-              }`}>
-                <Trophy className={`w-5 h-5 shrink-0 mt-0.5 ${
-                  isCopaMode ? 'text-yellow-500' : 'text-green-600'
-                }`} />
-                <p className={`text-xs italic ${
-                  isCopaMode ? 'text-yellow-800' : 'text-green-800'
-                }`}>
-                  {isCopaMode
-                    ? '⚽️ Vai Brasil! O painel está no clima da Copa 2026! 🏆🇧🇷'
-                    : 'Ative para entrar no clima da Copa do Mundo 2026!'}
-                </p>
-              </div>
-            </div>
+            ))}
           </div>
+          <Button
+            onClick={handleSaveWhatsapp}
+            disabled={isSavingWhatsapp}
+            className="w-full h-12 rounded-xl font-bold bg-[#25D366] hover:bg-[#1ebe57] text-white"
+          >
+            {isSavingWhatsapp ? "Salvando..." : <><Save className="w-4 h-4 mr-2" /> Salvar Mensagens do WhatsApp</>}
+          </Button>
         </div>
 
         {/* Category Management */}
