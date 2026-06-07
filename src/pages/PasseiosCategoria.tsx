@@ -105,10 +105,10 @@ const CATEGORY_SEO: Record<string, { title: string; description: string; ogTitle
     ogDescription: "Explore Rio de Janeiro's stunning nature on a private guided hike. From Pedra da Gávea to wild beaches, certified guides lead you safely through the city's most breathtaking trails.",
   },
   "um-dia": {
-    title: "One-Day Tours in Rio de Janeiro | Day Trips | Tocorime Rio",
-    description: "Make the most of your time with our one-day tours in Rio de Janeiro. Private guides, custom itineraries and the city's highlights in a single day.",
-    ogTitle: "One-Day Tours in Rio de Janeiro — Best Day Trips with Local Guide",
-    ogDescription: "Experience the best of Rio in one day: private tours, bilingual guides and tailor-made itineraries. Perfect for cruise passengers and short visits.",
+    title: "One-Day Tours in Rio de Janeiro | Full-Day Private Tours | Tocorime Rio",
+    description: "Make the most of your day in Rio de Janeiro with a full-day private tour. Visit Niterói, iconic landmarks & hidden gems with a bilingual guide. Book now.",
+    ogTitle: "One-Day Tours in Rio de Janeiro — See the Best of the City in a Single Day",
+    ogDescription: "Don't waste a single hour in Rio. Our one-day private tours take you through the city's highlights and hidden treasures — with a bilingual guide, private transport, and no shortcuts.",
   },
 };
 
