@@ -1,4 +1,11 @@
-import { Star, ShieldCheck, Award, Lock, BadgeCheck, Users, MapPin, Clock } from "lucide-react";
+import Star from "lucide-react/dist/esm/icons/star";
+import ShieldCheck from "lucide-react/dist/esm/icons/shield-check";
+import Award from "lucide-react/dist/esm/icons/award";
+import Lock from "lucide-react/dist/esm/icons/lock";
+import BadgeCheck from "lucide-react/dist/esm/icons/badge-check";
+import Users from "lucide-react/dist/esm/icons/users";
+import MapPin from "lucide-react/dist/esm/icons/map-pin";
+import Clock from "lucide-react/dist/esm/icons/clock";
 import { useLocale } from "@/contexts/LocaleContext";
 
 /**
