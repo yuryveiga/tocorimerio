@@ -99,10 +99,10 @@ const CATEGORY_SEO: Record<string, { title: string; description: string; ogTitle
     ogDescription: "Discover the real Rio de Janeiro: private city tours, bilingual guides, and custom itineraries. From Christ the Redeemer to the Historic Center — unforgettable experiences await.",
   },
   "trilha": {
-    title: "Hiking in Rio de Janeiro | Trails & Adventures | Tocorime Rio",
-    description: "Explore the best hiking trails in Rio de Janeiro with expert local guides. Pedra da Gávea, Two Brothers, Tijuca Forest & more. Private and small-group tours.",
-    ogTitle: "Hiking in Rio de Janeiro — Guided Trails with Local Experts",
-    ogDescription: "Discover Rio's breathtaking trails: from Morro Dois Irmãos to Pedra da Gávea. Private guided hikes, bilingual experts and unforgettable views.",
+    title: "Hiking in Rio de Janeiro | Private Guided Trails | Tocorime Rio",
+    description: "Hike Rio de Janeiro's most iconic trails with a certified local guide. Pedra da Gávea, Sugarloaf, Tijuca Forest, rock climbing & more. Private & safe. Book now.",
+    ogTitle: "Hiking in Rio de Janeiro — Private Guided Trails with Local Experts",
+    ogDescription: "Explore Rio de Janeiro's stunning nature on a private guided hike. From Pedra da Gávea to wild beaches, certified guides lead you safely through the city's most breathtaking trails.",
   },
   "um-dia": {
     title: "One-Day Tours in Rio de Janeiro | Day Trips | Tocorime Rio",
