@@ -169,7 +169,13 @@ export default function PasseiosCategoria({ categoriaOverride, pathOverride }: P
     return (a.sort_order ?? 0) - (b.sort_order ?? 0);
   });
 
-  const categoryName = filtered[0]?.category || categoria || "";
+  const firstTour: any = filtered[0];
+  const categoryName =
+    (language === "en" && firstTour?.category_en) ||
+    (language === "es" && firstTour?.category_es) ||
+    firstTour?.category ||
+    categoria ||
+    "";
   const intro = categoria ? CATEGORY_INTROS[categoria] : undefined;
   const introContent = intro ? intro[language] || intro.en : undefined;
 
@@ -234,7 +240,12 @@ export default function PasseiosCategoria({ categoriaOverride, pathOverride }: P
       <main className="pt-24 pb-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <Link to="/passeio" className="inline-flex items-center gap-2 text-muted-foreground hover:text-primary mb-6 text-sm">
-            <ArrowLeft className="w-4 h-4" /> Todos os passeios
+            <ArrowLeft className="w-4 h-4" />{" "}
+            {language === "pt"
+              ? "Todos os passeios"
+              : language === "es"
+                ? "Todos los paseos"
+                : "All tours"}
           </Link>
 
           <header className="text-center mb-12">
@@ -242,7 +253,18 @@ export default function PasseiosCategoria({ categoriaOverride, pathOverride }: P
               {categoryName}
             </h1>
             <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-              {sorted.length} {sorted.length === 1 ? "experiência disponível" : "experiências disponíveis"}
+              {sorted.length}{" "}
+              {language === "pt"
+                ? sorted.length === 1
+                  ? "experiência disponível"
+                  : "experiências disponíveis"
+                : language === "es"
+                  ? sorted.length === 1
+                    ? "experiencia disponible"
+                    : "experiencias disponibles"
+                  : sorted.length === 1
+                    ? "experience available"
+                    : "experiences available"}
             </p>
           </header>
 
