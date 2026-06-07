@@ -37,7 +37,7 @@ const CATEGORY_INTROS: Record<string, { pt: { h2: string; p: string[] }; en: { h
       ],
     },
   },
-  "hiking": {
+  "trilha": {
     pt: {
       h2: "Trilhas no Rio de Janeiro: Natureza, Vistas e Aventura",
       p: [
@@ -63,7 +63,7 @@ const CATEGORY_INTROS: Record<string, { pt: { h2: string; p: string[] }; en: { h
       ],
     },
   },
-  "one-day": {
+  "um-dia": {
     pt: {
       h2: "Passeios de 1 Dia no Rio de Janeiro: O Melhor da Cidade em Poucas Horas",
       p: [
