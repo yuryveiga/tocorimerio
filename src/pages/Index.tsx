@@ -43,8 +43,8 @@ const Index = () => {
         <link
           rel="preload"
           as="image"
-          href="https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776157066514_2zl4bonrweg.webp"
-          type="image/webp"
+          href="https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776157066514_2zl4bonrweg.avif"
+          type="image/avif"
           fetchPriority="high"
         />
         <meta property="og:title" content={siteTitle} />
