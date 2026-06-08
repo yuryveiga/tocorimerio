@@ -27,7 +27,8 @@ export function HeroSection() {
   const logoUrl = siteSettings?.logo_url || images['logo'];
 
   // Default shown immediately — no API wait (critical for LCP)
-  const DEFAULT_HERO = "https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776157066514_2zl4bonrweg.webp";
+  // AVIF used as preload; <img>/CSS load this AVIF (~200KB vs ~258KB WebP, ~22% smaller).
+  const DEFAULT_HERO = "https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776157066514_2zl4bonrweg.avif";
 
   const availableBgs = [
     images["hero_bg"],
