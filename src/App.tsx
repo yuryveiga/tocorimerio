@@ -1,5 +1,5 @@
 // Force clean build after dependency cleanup
-import { lazy, Suspense, useState, useEffect } from "react";
+import { lazy, Suspense, useState, useEffect, type ReactNode } from "react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
 import { StaticRouter } from "react-router-dom/server";
@@ -111,7 +111,7 @@ const AnalyticsRunner = () => {
 
 // Mounts children after first paint + idle, so the UI shell (cursor,
 // floating WhatsApp, sticky CTA) stays off the critical path.
-const DeferUntilIdle = ({ children, delay = 1200 }: { children: React.ReactNode; delay?: number }) => {
+const DeferUntilIdle = ({ children, delay = 1200 }: { children: ReactNode; delay?: number }) => {
   const [ready, setReady] = useState(false);
   useEffect(() => {
     const w = window as any;
