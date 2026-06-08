@@ -1,5 +1,5 @@
 // Force clean build after dependency cleanup
-import { lazy, Suspense, useState, useEffect } from "react";
+import { lazy, Suspense, useState, useEffect, type ReactNode } from "react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
 import { StaticRouter } from "react-router-dom/server";
@@ -10,18 +10,20 @@ import { AuthProvider } from "@/hooks/useAuth";
 import { LocaleProvider } from "@/contexts/LocaleContext";
 import { CurrencyProvider } from "@/contexts/CurrencyContext";
 import { CartProvider } from "@/contexts/CartContext";
-import { FloatingButtons } from "./components/FloatingButtons";
 import { ThemeApplier } from "./components/ThemeApplier";
 import { useAnalytics } from "./hooks/useAnalytics";
 import { BUILD_ID } from "./version";
 import { ErrorBoundary } from "./components/ErrorBoundary";
 import { ScrollToHash } from "./components/ScrollToHash";
-import { MobileStickyCTA } from "./components/MobileStickyCTA";
-import { MagneticCursor } from "./components/MagneticCursor";
 import { RouteFader } from "./components/RouteFader";
 
 // ─── Eagerly loaded (home page only) ─────────────────────────────────────────
 import Index from "./pages/Index";
+
+// ─── Lazy UI shell (loads after first paint to reduce TBT/TTI) ───────────────
+const FloatingButtons = lazy(() => import("./components/FloatingButtons").then(m => ({ default: m.FloatingButtons })));
+const MobileStickyCTA = lazy(() => import("./components/MobileStickyCTA").then(m => ({ default: m.MobileStickyCTA })));
+const MagneticCursor  = lazy(() => import("./components/MagneticCursor").then(m => ({ default: m.MagneticCursor })));
 
 // ─── Lazily loaded pages (split from main bundle) ─────────────────────────────
 const PasseioDetalhe         = lazy(() => import("./pages/PasseioDetalhe"));
@@ -107,6 +109,30 @@ const AnalyticsRunner = () => {
   return null;
 };
 
+// Mounts children after first paint + idle, so the UI shell (cursor,
+// floating WhatsApp, sticky CTA) stays off the critical path.
+const DeferUntilIdle = ({ children, delay = 1200 }: { children: ReactNode; delay?: number }) => {
+  const [ready, setReady] = useState(false);
+  useEffect(() => {
+    const w = window as any;
+    let idleId: number | undefined;
+    let timeoutId: number | undefined;
+    const schedule = () => {
+      if (typeof w.requestIdleCallback === "function") {
+        idleId = w.requestIdleCallback(() => setReady(true), { timeout: 3000 });
+      } else {
+        timeoutId = window.setTimeout(() => setReady(true), delay);
+      }
+    };
+    timeoutId = window.setTimeout(schedule, delay);
+    return () => {
+      if (idleId && typeof w.cancelIdleCallback === "function") w.cancelIdleCallback(idleId);
+      if (timeoutId) window.clearTimeout(timeoutId);
+    };
+  }, [delay]);
+  return ready ? <>{children}</> : null;
+};
+
 const App = ({ queryClient: externalQueryClient }: { queryClient?: QueryClient }) => {
   const [queryClient] = useState(() => externalQueryClient || new QueryClient({
     defaultOptions: {
@@ -134,9 +160,11 @@ const App = ({ queryClient: externalQueryClient }: { queryClient?: QueryClient }
                   <AnalyticsTracker />
                   {/* UI shell: no fallback to avoid layout shift */}
                   <Suspense fallback={null}>
-                    <MobileStickyCTA />
-                    <FloatingButtons />
-                    <MagneticCursor />
+                    <DeferUntilIdle>
+                      <MobileStickyCTA />
+                      <FloatingButtons />
+                      <MagneticCursor />
+                    </DeferUntilIdle>
                   </Suspense>
                   {/* Page content: show spinner while lazy chunk loads */}
                   <Suspense fallback={<PageLoader />}>

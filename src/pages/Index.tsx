@@ -71,7 +71,7 @@ const Index = () => {
       {/* Each lazy section in its own Suspense so a slow chunk
           doesn't hold back the others from rendering. */}
       <Suspense fallback={<SectionLoader />}><ToursSection /></Suspense>
-      <Suspense fallback={<SectionLoader />}><WhyChooseUs /></Suspense>
+      <LazyMount minHeight={400}><Suspense fallback={null}><WhyChooseUs /></Suspense></LazyMount>
       <LazyMount minHeight={500}><Suspense fallback={null}><ReviewsSection /></Suspense></LazyMount>
       <LazyMount minHeight={400}><Suspense fallback={null}><WeatherSection /></Suspense></LazyMount>
       <LazyMount minHeight={500}><Suspense fallback={null}><AboutSection /></Suspense></LazyMount>
