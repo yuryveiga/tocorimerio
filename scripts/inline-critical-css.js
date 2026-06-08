@@ -32,11 +32,17 @@ async function main() {
   const beasties = new Beasties({
     path: distPath,
     publicPath: "/",
-    preload: "swap",
+    // swap-high: non-blocking preload + fetchpriority=high on the deferred sheet
+    preload: "swap-high",
     pruneSource: false,
     inlineFonts: false,
     fonts: false,
     compress: true,
+    // Only inline keyframes whose names appear in the critical CSS
+    keyframes: "critical",
+    // Drop inline <style> rules already covered by external CSS
+    reduceInlineStyles: true,
+    mergeStylesheets: true,
     logLevel: "warn",
   });
 
