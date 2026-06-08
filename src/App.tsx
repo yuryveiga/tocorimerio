@@ -109,6 +109,30 @@ const AnalyticsRunner = () => {
   return null;
 };
 
+// Mounts children after first paint + idle, so the UI shell (cursor,
+// floating WhatsApp, sticky CTA) stays off the critical path.
+const DeferUntilIdle = ({ children, delay = 1200 }: { children: React.ReactNode; delay?: number }) => {
+  const [ready, setReady] = useState(false);
+  useEffect(() => {
+    const w = window as any;
+    let idleId: number | undefined;
+    let timeoutId: number | undefined;
+    const schedule = () => {
+      if (typeof w.requestIdleCallback === "function") {
+        idleId = w.requestIdleCallback(() => setReady(true), { timeout: 3000 });
+      } else {
+        timeoutId = window.setTimeout(() => setReady(true), delay);
+      }
+    };
+    timeoutId = window.setTimeout(schedule, delay);
+    return () => {
+      if (idleId && typeof w.cancelIdleCallback === "function") w.cancelIdleCallback(idleId);
+      if (timeoutId) window.clearTimeout(timeoutId);
+    };
+  }, [delay]);
+  return ready ? <>{children}</> : null;
+};
+
 const App = ({ queryClient: externalQueryClient }: { queryClient?: QueryClient }) => {
   const [queryClient] = useState(() => externalQueryClient || new QueryClient({
     defaultOptions: {
@@ -136,9 +160,11 @@ const App = ({ queryClient: externalQueryClient }: { queryClient?: QueryClient }
                   <AnalyticsTracker />
                   {/* UI shell: no fallback to avoid layout shift */}
                   <Suspense fallback={null}>
-                    <MobileStickyCTA />
-                    <FloatingButtons />
-                    <MagneticCursor />
+                    <DeferUntilIdle>
+                      <MobileStickyCTA />
+                      <FloatingButtons />
+                      <MagneticCursor />
+                    </DeferUntilIdle>
                   </Suspense>
                   {/* Page content: show spinner while lazy chunk loads */}
                   <Suspense fallback={<PageLoader />}>
