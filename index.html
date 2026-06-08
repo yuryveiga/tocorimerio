@@ -40,6 +40,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!-- SEO Managed by React Helmet -->
     <title>Tocorime Rio | Private & Custom Rio Tours</title>
+
+    <!-- Critical CSS (anti-FOUC) — applied before app CSS to keep first paint stable -->
+    <style>
+      :root{--bg:#ffffff;--fg:#0f172a;--primary:#2A9D8F}
+      html,body{margin:0;padding:0;background:var(--bg);color:var(--fg);font-family:'Poppins',system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;-webkit-font-smoothing:antialiased}
+      h1,h2,h3{font-family:'Playfair Display',Georgia,serif;margin:0}
+      #root{min-height:100vh}
+      /* Hero placeholder color — avoids white flash before bg image paints */
+      main>section:first-of-type{background-color:#0b0f14}
+    </style>
     
   
   <meta name="description" content="Discover the Real Rio. Skip the tourist traps and explore the Marvelous City with local
