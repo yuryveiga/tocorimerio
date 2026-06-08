@@ -10,18 +10,20 @@ import { AuthProvider } from "@/hooks/useAuth";
 import { LocaleProvider } from "@/contexts/LocaleContext";
 import { CurrencyProvider } from "@/contexts/CurrencyContext";
 import { CartProvider } from "@/contexts/CartContext";
-import { FloatingButtons } from "./components/FloatingButtons";
 import { ThemeApplier } from "./components/ThemeApplier";
 import { useAnalytics } from "./hooks/useAnalytics";
 import { BUILD_ID } from "./version";
 import { ErrorBoundary } from "./components/ErrorBoundary";
 import { ScrollToHash } from "./components/ScrollToHash";
-import { MobileStickyCTA } from "./components/MobileStickyCTA";
-import { MagneticCursor } from "./components/MagneticCursor";
 import { RouteFader } from "./components/RouteFader";
 
 // ─── Eagerly loaded (home page only) ─────────────────────────────────────────
 import Index from "./pages/Index";
+
+// ─── Lazy UI shell (loads after first paint to reduce TBT/TTI) ───────────────
+const FloatingButtons = lazy(() => import("./components/FloatingButtons").then(m => ({ default: m.FloatingButtons })));
+const MobileStickyCTA = lazy(() => import("./components/MobileStickyCTA").then(m => ({ default: m.MobileStickyCTA })));
+const MagneticCursor  = lazy(() => import("./components/MagneticCursor").then(m => ({ default: m.MagneticCursor })));
 
 // ─── Lazily loaded pages (split from main bundle) ─────────────────────────────
 const PasseioDetalhe         = lazy(() => import("./pages/PasseioDetalhe"));
