@@ -11,14 +11,25 @@
     <link rel="preload" href="/fonts/Poppins-400.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="/fonts/Poppins-600.woff2" as="font" type="font/woff2" crossorigin>
 
-    <!-- Performance: Preload LCP hero image (default fallback used until admin images resolve) -->
-    <link
-      rel="preload"
-      as="image"
-      href="https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776157066514_2zl4bonrweg.avif"
-      type="image/avif"
-      fetchpriority="high"
-    >
+    <!-- Performance: Preload LCP hero image ONLY on the home route.
+         Other routes (blog, /admin, /passeio/*, etc.) don't render the
+         hero, so preloading it there wastes bandwidth and competes with
+         their own LCP candidate. -->
+    <script>
+      (function () {
+        try {
+          if (window.location.pathname === '/' || window.location.pathname === '') {
+            var l = document.createElement('link');
+            l.rel = 'preload';
+            l.as = 'image';
+            l.href = 'https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776157066514_2zl4bonrweg.avif';
+            l.type = 'image/avif';
+            l.setAttribute('fetchpriority', 'high');
+            document.head.appendChild(l);
+          }
+        } catch (e) { /* noop */ }
+      })();
+    </script>
 
 
 
