@@ -14,19 +14,48 @@
     <!-- Performance: Preload LCP hero image ONLY on the home route.
          Other routes (blog, /admin, /passeio/*, etc.) don't render the
          hero, so preloading it there wastes bandwidth and competes with
-         their own LCP candidate. -->
+         their own LCP candidate.
+         Also removes the preload on client-side navigation away from home. -->
     <script>
       (function () {
+        'use strict';
         try {
-          if (window.location.pathname === '/' || window.location.pathname === '') {
+          var HERO_PRELOAD_ID = 'hero-lcp-preload';
+          var HERO_URL = 'https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776157066514_2zl4bonrweg.avif';
+
+          function isHomePath() {
+            var p = window.location.pathname.replace(/\/+$/, '') || '/';
+            return p === '/' || p === '';
+          }
+
+          function injectHeroPreload() {
+            if (document.getElementById(HERO_PRELOAD_ID)) return;
             var l = document.createElement('link');
+            l.id = HERO_PRELOAD_ID;
             l.rel = 'preload';
             l.as = 'image';
-            l.href = 'https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776157066514_2zl4bonrweg.avif';
+            l.href = HERO_URL;
             l.type = 'image/avif';
             l.setAttribute('fetchpriority', 'high');
             document.head.appendChild(l);
           }
+
+          function removeHeroPreload() {
+            var el = document.getElementById(HERO_PRELOAD_ID);
+            if (el) el.remove();
+          }
+
+          // Initial page load
+          if (isHomePath()) {
+            injectHeroPreload();
+          }
+
+          // SPA navigation: remove preload when leaving home
+          window.addEventListener('popstate', function () {
+            if (!isHomePath()) {
+              removeHeroPreload();
+            }
+          });
         } catch (e) { /* noop */ }
       })();
     </script>
