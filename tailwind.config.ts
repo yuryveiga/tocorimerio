@@ -14,7 +14,7 @@ export default {
       },
     },
     fontFamily: {
-      sans: ['Poppins', 'system-ui', 'sans-serif'],
+      sans: ['Poppins', 'Poppins Fallback', 'system-ui', 'sans-serif'],
       serif: ['Playfair Display', 'Georgia', 'serif'],
     },
     extend: {
