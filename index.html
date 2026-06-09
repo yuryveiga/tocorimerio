@@ -7,25 +7,42 @@
 
 
     <!-- Performance: Preload critical self-hosted fonts (eliminates Google Fonts round-trip) -->
-    <link rel="preload" href="/fonts/PlayfairDisplay-700.woff2" as="font" type="font/woff2" crossorigin>
+    <!-- Poppins (400/600) é usado em TODAS as rotas (body, header, CTAs) — preload global. -->
     <link rel="preload" href="/fonts/Poppins-400.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="/fonts/Poppins-600.woff2" as="font" type="font/woff2" crossorigin>
 
-    <!-- Performance: Preload LCP hero image ONLY on the home route.
-         Other routes (blog, /admin, /passeio/*, etc.) don't render the
-         hero, so preloading it there wastes bandwidth and competes with
-         their own LCP candidate.
-         Also removes the preload on client-side navigation away from home. -->
+    <!-- Playfair 700 (serif H1/H2) só é usado em rotas marketing/conteúdo.
+         Rotas utilitárias e /admin/* não renderizam títulos serif acima da
+         dobra, então preloadar lá é desperdício. Hero AVIF idem: só home.
+         O script abaixo:
+           1. injeta preloads condicionalmente no load inicial;
+           2. remove-os em qualquer navegação SPA (pushState/replaceState/popstate)
+              que sai da rota que justificava o preload. -->
     <script>
       (function () {
         'use strict';
         try {
           var HERO_PRELOAD_ID = 'hero-lcp-preload';
+          var PLAYFAIR_PRELOAD_ID = 'playfair-700-preload';
           var HERO_URL = 'https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776157066514_2zl4bonrweg.avif';
+          var PLAYFAIR_URL = '/fonts/PlayfairDisplay-700.woff2';
+
+          // Rotas que NÃO precisam de Playfair (sem títulos serif acima da dobra).
+          // Tudo o que não bater aqui é considerado rota de marketing/conteúdo.
+          var NO_PLAYFAIR_PREFIXES = ['/admin', '/carrinho', '/confirmacao', '/sitemap'];
 
           function isHomePath() {
             var p = window.location.pathname.replace(/\/+$/, '') || '/';
             return p === '/' || p === '';
+          }
+
+          function needsPlayfair() {
+            var p = window.location.pathname.replace(/\/+$/, '') || '/';
+            for (var i = 0; i < NO_PLAYFAIR_PREFIXES.length; i++) {
+              var pref = NO_PLAYFAIR_PREFIXES[i];
+              if (p === pref || p.indexOf(pref + '/') === 0) return false;
+            }
+            return true;
           }
 
           function injectHeroPreload() {
@@ -45,17 +62,46 @@
             if (el) el.remove();
           }
 
-          // Initial page load
-          if (isHomePath()) {
-            injectHeroPreload();
+          function injectPlayfairPreload() {
+            if (document.getElementById(PLAYFAIR_PRELOAD_ID)) return;
+            var l = document.createElement('link');
+            l.id = PLAYFAIR_PRELOAD_ID;
+            l.rel = 'preload';
+            l.as = 'font';
+            l.type = 'font/woff2';
+            l.href = PLAYFAIR_URL;
+            l.crossOrigin = 'anonymous';
+            document.head.appendChild(l);
           }
 
-          // SPA navigation: remove preload when leaving home
-          window.addEventListener('popstate', function () {
-            if (!isHomePath()) {
-              removeHeroPreload();
-            }
+          function removePlayfairPreload() {
+            var el = document.getElementById(PLAYFAIR_PRELOAD_ID);
+            if (el) el.remove();
+          }
+
+          function syncPreloads() {
+            if (isHomePath()) injectHeroPreload(); else removeHeroPreload();
+            if (needsPlayfair()) injectPlayfairPreload(); else removePlayfairPreload();
+          }
+
+          // Initial page load
+          syncPreloads();
+
+          // Intercepta pushState/replaceState para emitir um evento que
+          // capturamos em qualquer navegação SPA (Link, navigate(), etc.).
+          var EVT = 'lov:locationchange';
+          ['pushState', 'replaceState'].forEach(function (k) {
+            var orig = history[k];
+            if (typeof orig !== 'function') return;
+            history[k] = function () {
+              var ret = orig.apply(this, arguments);
+              try { window.dispatchEvent(new Event(EVT)); } catch (_) {}
+              return ret;
+            };
           });
+
+          window.addEventListener('popstate', syncPreloads);
+          window.addEventListener(EVT, syncPreloads);
         } catch (e) { /* noop */ }
       })();
     </script>
