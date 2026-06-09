@@ -238,50 +238,109 @@ const BlogPost = () => {
         }
       `}</style>
       <Helmet>
-        <title>{title} | {siteTitle}</title>
-        <meta name="description" content={generateOptimizedMetaDescription(excerpt || content || title, title, language)} />
+        {post.slug.includes('rocinha') ? (
+          <>
+            <title>Rocinha Favela Tour Rio: Safe, Fun & Eye-Opening Guide</title>
+            <meta name="description" content="Is a Rocinha favela tour safe? Discover Rio's most authentic cultural experience with local expert guides. Private tours, real community access, no tourist traps." />
+            <meta name="keywords" content="Rocinha favela tour, Rio de Janeiro favela tour, safe favela tour Rio, guided tour Rocinha, favela tour for tourists, community tour Rio de Janeiro, responsible favela tourism, things to do in Rio de Janeiro, Rio de Janeiro private tours, Tocorime Rio" />
+            <meta name="robots" content="index, follow" />
+            <link rel="canonical" href="https://tocorimerio.com/blog/rocinha-favela-tour-rio-de-janeiro" />
 
-        
-        {/* Open Graph / Facebook */}
-        <meta property="og:type" content="article" />
-        <meta property="og:url" content={getCanonicalUrl(`/blog/${post.slug}`)} />
-        <meta property="og:title" content={`${title} | ${siteTitle}`} />
-        <meta property="og:description" content={generateOptimizedMetaDescription(excerpt || content || title, title, language)} />
-        <meta property="og:image" content={post.image_url || fallbackImage} />
-        <meta property="og:site_name" content="Tocorime Rio" />
-        <meta property="og:locale" content={language === 'pt' ? 'pt_BR' : language === 'es' ? 'es_ES' : 'en_US'} />
-        {post.created_at && <meta property="article:published_time" content={post.created_at} />}
-        {post.updated_at && <meta property="article:modified_time" content={post.updated_at} />}
+            {/* Open Graph (Facebook, WhatsApp, LinkedIn) */}
+            <meta property="og:type" content="article" />
+            <meta property="og:title" content="Rocinha Favela Tour Rio: Safe, Fun & Eye-Opening Guide" />
+            <meta property="og:description" content="Is a Rocinha favela tour safe? Discover Rio's most authentic cultural experience with local expert guides. Private tours, real community access, no tourist traps." />
+            <meta property="og:url" content="https://tocorimerio.com/blog/rocinha-favela-tour-rio-de-janeiro" />
+            <meta property="og:image" content="https://tocorimerio.com/images/blog/rocinha-favela-tour-cover.jpg" />
+            <meta property="og:image:alt" content="Guided favela tour in Rocinha, Rio de Janeiro with local expert" />
+            <meta property="og:locale" content="en_US" />
+            <meta property="og:site_name" content="Tocorime Rio" />
+            <meta property="article:published_time" content="2026-06-09" />
+            <meta property="article:author" content="Tocorime Rio" />
 
-        <link rel="canonical" href={getCanonicalUrl(`/blog/${post.slug}`)} />
-        {getHreflangLinks(`/blog/${post.slug}`).map((l) => (
-          <link key={l.hreflang} rel="alternate" hrefLang={l.hreflang} href={l.href} />
-        ))}
+            {/* Twitter Card */}
+            <meta name="twitter:card" content="summary_large_image" />
+            <meta name="twitter:title" content="Rocinha Favela Tour Rio: Safe, Fun & Eye-Opening Guide" />
+            <meta name="twitter:description" content="Is a Rocinha favela tour safe? Discover Rio's most authentic cultural experience with local expert guides. Private tours, real community access, no tourist traps." />
+            <meta name="twitter:image" content="https://tocorimerio.com/images/blog/rocinha-favela-tour-cover.jpg" />
 
-        <script type="application/ld+json">
-          {JSON.stringify(generateArticleSchema({
-            title,
-            description: excerpt || title,
-            imageUrl: post.image_url || fallbackImage,
-            url: getCanonicalUrl(`/blog/${post.slug}`),
-            datePublished: post.created_at,
-            dateModified: post.updated_at || post.created_at,
-          }))}
-        </script>
+            <script type="application/ld+json">
+              {`
+              {
+                "@context": "https://schema.org",
+                "@type": "BlogPosting",
+                "headline": "Rocinha Favela Tour Rio: Safe, Fun & Eye-Opening Guide",
+                "description": "Is a Rocinha favela tour safe? Discover Rio's most authentic cultural experience with local expert guides. Private tours, real community access, no tourist traps.",
+                "image": "https://tocorimerio.com/images/blog/rocinha-favela-tour-cover.jpg",
+                "author": {
+                  "@type": "Organization",
+                  "name": "Tocorime Rio",
+                  "url": "https://tocorimerio.com"
+                },
+                "publisher": {
+                  "@type": "Organization",
+                  "name": "Tocorime Rio",
+                  "logo": {
+                    "@type": "ImageObject",
+                    "url": "https://tocorimerio.com/logo.png"
+                  }
+                },
+                "datePublished": "2026-06-09",
+                "mainEntityOfPage": {
+                  "@type": "WebPage",
+                  "@id": "https://tocorimerio.com/blog/rocinha-favela-tour-rio-de-janeiro"
+                }
+              }
+              `}
+            </script>
+          </>
+        ) : (
+          <>
+            <title>{title} | {siteTitle}</title>
+            <meta name="description" content={generateOptimizedMetaDescription(excerpt || content || title, title, language)} />
 
-        <script type="application/ld+json">
-          {JSON.stringify(generateBreadcrumbsSchema([
-            { name: t("inicio"), url: getCanonicalUrl("/") },
-            { name: "Blog", url: getCanonicalUrl("/blog") },
-            { name: title, url: getCanonicalUrl(`/blog/${post.slug}`) }
-          ]))}
-        </script>
+            {/* Open Graph / Facebook */}
+            <meta property="og:type" content="article" />
+            <meta property="og:url" content={getCanonicalUrl(`/blog/${post.slug}`)} />
+            <meta property="og:title" content={`${title} | ${siteTitle}`} />
+            <meta property="og:description" content={generateOptimizedMetaDescription(excerpt || content || title, title, language)} />
+            <meta property="og:image" content={post.image_url || fallbackImage} />
+            <meta property="og:site_name" content="Tocorime Rio" />
+            <meta property="og:locale" content={language === 'pt' ? 'pt_BR' : language === 'es' ? 'es_ES' : 'en_US'} />
+            {post.created_at && <meta property="article:published_time" content={post.created_at} />}
+            {post.updated_at && <meta property="article:modified_time" content={post.updated_at} />}
 
-        {/* Twitter */}
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content={`${title} | ${siteTitle}`} />
-        <meta name="twitter:description" content={excerpt || title} />
-        <meta name="twitter:image" content={post.image_url || fallbackImage} />
+            <link rel="canonical" href={getCanonicalUrl(`/blog/${post.slug}`)} />
+            {getHreflangLinks(`/blog/${post.slug}`).map((l) => (
+              <link key={l.hreflang} rel="alternate" hrefLang={l.hreflang} href={l.href} />
+            ))}
+
+            <script type="application/ld+json">
+              {JSON.stringify(generateArticleSchema({
+                title,
+                description: excerpt || title,
+                imageUrl: post.image_url || fallbackImage,
+                url: getCanonicalUrl(`/blog/${post.slug}`),
+                datePublished: post.created_at,
+                dateModified: post.updated_at || post.created_at,
+              }))}
+            </script>
+
+            <script type="application/ld+json">
+              {JSON.stringify(generateBreadcrumbsSchema([
+                { name: t("inicio"), url: getCanonicalUrl("/") },
+                { name: "Blog", url: getCanonicalUrl("/blog") },
+                { name: title, url: getCanonicalUrl(`/blog/${post.slug}`) }
+              ]))}
+            </script>
+
+            {/* Twitter */}
+            <meta name="twitter:card" content="summary_large_image" />
+            <meta name="twitter:title" content={`${title} | ${siteTitle}`} />
+            <meta name="twitter:description" content={excerpt || title} />
+            <meta name="twitter:image" content={post.image_url || fallbackImage} />
+          </>
+        )}
 
         <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet" />
       </Helmet>
