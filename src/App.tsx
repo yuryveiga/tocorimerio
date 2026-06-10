@@ -12,6 +12,7 @@ import { CurrencyProvider } from "@/contexts/CurrencyContext";
 import { CartProvider } from "@/contexts/CartContext";
 import { ThemeApplier } from "./components/ThemeApplier";
 import { useAnalytics } from "./hooks/useAnalytics";
+import { usePerfMetrics } from "./hooks/usePerfMetrics";
 import { BUILD_ID } from "./version";
 import { ErrorBoundary } from "./components/ErrorBoundary";
 import { ScrollToHash } from "./components/ScrollToHash";
@@ -109,6 +110,13 @@ const AnalyticsRunner = () => {
   return null;
 };
 
+// Coleta LCP/CLS/TTFB/fontSwaps e loga em console + dispara
+// `lov:perfmetrics` para acompanhar o impacto dos preloads por rota.
+const PerfMetricsTracker = () => {
+  usePerfMetrics();
+  return null;
+};
+
 // Mounts children after first paint + idle, so the UI shell (cursor,
 // floating WhatsApp, sticky CTA) stays off the critical path.
 const DeferUntilIdle = ({ children, delay = 1200 }: { children: ReactNode; delay?: number }) => {
@@ -158,6 +166,7 @@ const App = ({ queryClient: externalQueryClient }: { queryClient?: QueryClient }
               <LocaleProvider>
                 <CartProvider>
                   <AnalyticsTracker />
+                  <PerfMetricsTracker />
                   {/* UI shell: no fallback to avoid layout shift */}
                   <Suspense fallback={null}>
                     <DeferUntilIdle>
