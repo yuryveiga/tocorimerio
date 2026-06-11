@@ -205,6 +205,12 @@ export function Header({ forceLanguage }: { forceLanguage?: 'pt' | 'en' | 'es' }
                   <DropdownMenuItem onClick={() => setLanguage('es')} className="gap-2 font-bold text-xs rounded-lg cursor-pointer">
                     <span>🇪🇸</span> Español
                   </DropdownMenuItem>
+                  <DropdownMenuItem onClick={() => setLanguage('zh-CN')} className="gap-2 font-bold text-xs rounded-lg cursor-pointer">
+                    <span>🇨🇳</span> 简体中文
+                  </DropdownMenuItem>
+                  <DropdownMenuItem onClick={() => setLanguage('zh-TW')} className="gap-2 font-bold text-xs rounded-lg cursor-pointer">
+                    <span>🇹🇼</span> 繁體中文
+                  </DropdownMenuItem>
                   
                   <div className="h-px bg-border/50 my-2" />
                   
@@ -217,6 +223,9 @@ export function Header({ forceLanguage }: { forceLanguage?: 'pt' | 'en' | 'es' }
                   </DropdownMenuItem>
                   <DropdownMenuItem onClick={() => setCurrency('EUR')} className="gap-2 font-bold text-xs rounded-lg cursor-pointer">
                     <span className="w-4 text-center">€</span> EUR
+                  </DropdownMenuItem>
+                  <DropdownMenuItem onClick={() => setCurrency('CNY')} className="gap-2 font-bold text-xs rounded-lg cursor-pointer">
+                    <span className="w-4 text-center">¥</span> CNY
                   </DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>
@@ -265,8 +274,8 @@ export function Header({ forceLanguage }: { forceLanguage?: 'pt' | 'en' | 'es' }
                       className="flex items-center gap-1 text-[10px] font-bold px-1.5 py-1 outline-none"
                       aria-label={language === 'pt' ? "Alterar idioma" : "Change language"}
                     >
-                      <span>{language === 'pt' ? '🇧🇷' : language === 'en' ? '🇺🇸' : '🇪🇸'}</span>
-                      <span className="uppercase">{language}</span>
+                      <span>{language === 'pt' ? '🇧🇷' : language === 'en' ? '🇺🇸' : language === 'es' ? '🇪🇸' : language === 'zh-CN' ? '🇨🇳' : '🇹🇼'}</span>
+                      <span className="uppercase">{language === 'zh-CN' ? 'ZH' : language === 'zh-TW' ? '繁' : language}</span>
                     </button>
                   </DropdownMenuTrigger>
                   <DropdownMenuContent align="start" className="w-[110px] rounded-xl p-1 shadow-xl border-primary/10">
@@ -279,6 +288,12 @@ export function Header({ forceLanguage }: { forceLanguage?: 'pt' | 'en' | 'es' }
                     <DropdownMenuItem onClick={() => setLanguage('es')} className="gap-2 font-bold text-[10px] rounded-lg cursor-pointer">
                       <span>🇪🇸</span> ES
                     </DropdownMenuItem>
+                    <DropdownMenuItem onClick={() => setLanguage('zh-CN')} className="gap-2 font-bold text-[10px] rounded-lg cursor-pointer">
+                      <span>🇨🇳</span> 简体
+                    </DropdownMenuItem>
+                    <DropdownMenuItem onClick={() => setLanguage('zh-TW')} className="gap-2 font-bold text-[10px] rounded-lg cursor-pointer">
+                      <span>🇹🇼</span> 繁體
+                    </DropdownMenuItem>
                   </DropdownMenuContent>
                 </DropdownMenu>
 
@@ -290,7 +305,7 @@ export function Header({ forceLanguage }: { forceLanguage?: 'pt' | 'en' | 'es' }
                       className="flex items-center gap-1 text-[10px] font-bold px-1.5 py-1 outline-none"
                       aria-label={language === 'pt' ? "Alterar moeda" : "Change currency"}
                     >
-                      <span>{currency === 'BRL' ? 'R$' : currency === 'USD' ? '$' : '€'}</span>
+                      <span>{currency === 'BRL' ? 'R$' : currency === 'USD' ? '$' : currency === 'EUR' ? '€' : '¥'}</span>
                     </button>
                   </DropdownMenuTrigger>
                   <DropdownMenuContent align="end" className="w-[110px] rounded-xl p-1 shadow-xl border-primary/10">
@@ -302,6 +317,9 @@ export function Header({ forceLanguage }: { forceLanguage?: 'pt' | 'en' | 'es' }
                     </DropdownMenuItem>
                     <DropdownMenuItem onClick={() => setCurrency('EUR')} className="gap-2 font-bold text-[10px] rounded-lg cursor-pointer">
                       <span>€</span> EUR
+                    </DropdownMenuItem>
+                    <DropdownMenuItem onClick={() => setCurrency('CNY')} className="gap-2 font-bold text-[10px] rounded-lg cursor-pointer">
+                      <span>¥</span> CNY
                     </DropdownMenuItem>
                   </DropdownMenuContent>
                 </DropdownMenu>
