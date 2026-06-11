@@ -1,11 +1,11 @@
 // Force refresh to resolve stale context issues
 import React, { createContext, useContext, useState, ReactNode, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { translationsPt, translationsEn, translationsEs } from "@/translations";
+import { translationsPt, translationsEn, translationsEs, translationsZhCN, translationsZhTW } from "@/translations";
 import { useCurrency } from './CurrencyContext';
 
-type Language = 'pt' | 'en' | 'es';
-type Currency = 'BRL' | 'USD' | 'EUR';
+type Language = 'pt' | 'en' | 'es' | 'zh-CN' | 'zh-TW';
+type Currency = 'BRL' | 'USD' | 'EUR' | 'CNY';
 
 interface LocaleContextType {
   language: Language;
@@ -25,7 +25,12 @@ export const LocaleProvider = ({ children }: { children: ReactNode }) => {
 
   useEffect(() => {
     if (typeof document !== 'undefined') {
-      document.documentElement.lang = language === 'pt' ? 'pt-BR' : language === 'es' ? 'es' : 'en';
+      document.documentElement.lang =
+        language === 'pt' ? 'pt-BR'
+        : language === 'es' ? 'es'
+        : language === 'zh-CN' ? 'zh-Hans'
+        : language === 'zh-TW' ? 'zh-Hant'
+        : 'en';
     }
   }, [language]);
 
@@ -33,9 +38,12 @@ export const LocaleProvider = ({ children }: { children: ReactNode }) => {
     const map: any = { 
       pt: translationsPt, 
       en: translationsEn, 
-      es: translationsEs 
+      es: translationsEs,
+      'zh-CN': translationsZhCN,
+      'zh-TW': translationsZhTW,
     };
-    return map[language][key] || key;
+    // Fallback to English when a key is missing in the chosen language.
+    return map[language]?.[key] || translationsEn[key as keyof typeof translationsEn] || key;
   };
 
   const formatPrice = (priceBrl: number) => {
@@ -45,8 +53,15 @@ export const LocaleProvider = ({ children }: { children: ReactNode }) => {
     // No LocaleContext antigo era priceBrl / rates[currency]
     // Para manter compatibilidade com a nova API que retorna multiplicadores:
     const converted = priceBrl * (rates[currency] || 1);
-    
-    return new Intl.NumberFormat(language === 'en' ? 'en-US' : language === 'es' ? 'es-ES' : 'pt-BR', {
+
+    const locale =
+      language === 'en' ? 'en-US'
+      : language === 'es' ? 'es-ES'
+      : language === 'zh-CN' ? 'zh-CN'
+      : language === 'zh-TW' ? 'zh-TW'
+      : 'pt-BR';
+
+    return new Intl.NumberFormat(locale, {
       style: 'currency',
       currency: currency,
     }).format(converted);
