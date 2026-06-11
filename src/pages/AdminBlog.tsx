@@ -178,16 +178,22 @@ const AdminBlog = () => {
     }
 
     setIsTranslating(true);
-    toast({ title: "Mágica em andamento...", description: "Traduzindo para Inglês e Espanhol..." });
+    toast({ title: "Mágica em andamento...", description: "Traduzindo para EN, ES, ZH-CN e ZH-TW..." });
 
     try {
-      const [titleEn, titleEs, contentEn, contentEs, excerptEn, excerptEs] = await Promise.all([
+      const [titleEn, titleEs, titleZhCN, titleZhTW, contentEn, contentEs, contentZhCN, contentZhTW, excerptEn, excerptEs, excerptZhCN, excerptZhTW] = await Promise.all([
         translateText(editing.title || "", "en"),
         translateText(editing.title || "", "es"),
+        translateText(editing.title || "", "zh"),
+        translateText(editing.title || "", "zh-TW"),
         translateHtml(editing.content || "", "en"),
         translateHtml(editing.content || "", "es"),
+        translateHtml(editing.content || "", "zh"),
+        translateHtml(editing.content || "", "zh-TW"),
         translateText(editing.excerpt || "", "en"),
-        translateText(editing.excerpt || "", "es")
+        translateText(editing.excerpt || "", "es"),
+        translateText(editing.excerpt || "", "zh"),
+        translateText(editing.excerpt || "", "zh-TW"),
       ]);
 
       setEditing(prev => {
@@ -196,14 +202,20 @@ const AdminBlog = () => {
           ...prev,
           title_en: titleEn,
           title_es: titleEs,
+          title_zh_cn: titleZhCN,
+          title_zh_tw: titleZhTW,
           content_en: contentEn,
           content_es: contentEs,
+          content_zh_cn: contentZhCN,
+          content_zh_tw: contentZhTW,
           excerpt_en: excerptEn,
-          excerpt_es: excerptEs
+          excerpt_es: excerptEs,
+          excerpt_zh_cn: excerptZhCN,
+          excerpt_zh_tw: excerptZhTW,
         } as Partial<LovableBlogPost>;
       });
       
-      toast({ title: "Sucesso!", description: "Tradução para Inglês e Espanhol concluída." });
+      toast({ title: "Sucesso!", description: "Tradução para EN, ES, ZH-CN e ZH-TW concluída." });
     } catch (err) {
       toast({ title: "Erro na tradução", description: "Tente novamente daqui a pouco.", variant: "destructive" });
     } finally {
@@ -498,7 +510,7 @@ const AdminBlog = () => {
 
                         <div className="mt-4 p-5 rounded-2xl bg-primary/5 border border-primary/10 space-y-3">
                            <h4 className="font-serif font-bold text-primary text-sm">Tradução Automática</h4>
-                           <Button onClick={() => autoTranslate()} disabled={isTranslating} variant="outline" size="sm" className="w-full h-9 font-bold bg-white text-xs">{isTranslating ? <Loader2 className="animate-spin w-3 mr-2" /> : <Sparkles className="w-3 mr-2" />}PT -&gt; EN/ES</Button>
+                           <Button onClick={() => autoTranslate()} disabled={isTranslating} variant="outline" size="sm" className="w-full h-9 font-bold bg-white text-xs">{isTranslating ? <Loader2 className="animate-spin w-3 mr-2" /> : <Sparkles className="w-3 mr-2" />}PT -&gt; EN / ES / ZH</Button>
                            <Button onClick={() => translateToPt()} disabled={isTranslating} variant="outline" size="sm" className="w-full h-9 font-bold bg-white text-xs">{isTranslating ? <Loader2 className="animate-spin w-3 mr-2" /> : <Sparkles className="w-3 mr-2 text-blue-600" />}EN -&gt; PT</Button>
                         </div>
                     </div>
@@ -511,13 +523,15 @@ const AdminBlog = () => {
                               <TabsTrigger value="pt" className="text-xs font-bold rounded-lg px-4">Português</TabsTrigger>
                               <TabsTrigger value="en" className="text-xs font-bold rounded-lg px-4">English</TabsTrigger>
                               <TabsTrigger value="es" className="text-xs font-bold rounded-lg px-4">Español</TabsTrigger>
+                              <TabsTrigger value="zh_cn" className="text-xs font-bold rounded-lg px-3">中文 (简)</TabsTrigger>
+                              <TabsTrigger value="zh_tw" className="text-xs font-bold rounded-lg px-3">中文 (繁)</TabsTrigger>
                            </TabsList>
                            
                            <div className="p-1 rounded-xl bg-primary/5 border border-primary/10 flex items-center gap-2">
                               <span className="text-[10px] font-bold text-primary px-3 uppercase tracking-wider">Mágica</span>
                               <Button onClick={() => autoTranslate()} disabled={isTranslating} variant="outline" size="sm" className="h-8 font-bold bg-white text-[10px] rounded-lg border-primary/20 hover:bg-primary/10 transition-all">
                                 {isTranslating ? <Loader2 className="animate-spin w-3 h-3 mr-2" /> : <Sparkles className="w-3 h-3 mr-2 text-primary" />}
-                                PT -&gt; EN/ES
+                                PT -&gt; EN/ES/ZH
                               </Button>
                               <Button onClick={() => translateToPt()} disabled={isTranslating} variant="outline" size="sm" className="h-8 font-bold bg-white text-[10px] rounded-lg border-primary/20 hover:bg-primary/10 transition-all">
                                 {isTranslating ? <Loader2 className="animate-spin w-3 h-3 mr-2" /> : <Sparkles className="w-3 h-3 mr-2 text-blue-600" />}
@@ -553,6 +567,26 @@ const AdminBlog = () => {
                             </div>
                             <div className="flex-1 flex flex-col overflow-hidden rounded-2xl shadow-sm border bg-white min-h-0">
                                <ReactQuill theme="snow" value={editing.content_es || ""} onChange={(val) => setEditing({ ...editing, content_es: val })} className="editor-container h-full" modules={modules} formats={formats} placeholder="Cuenta tu historia en español..." />
+                            </div>
+                         </TabsContent>
+
+                         <TabsContent value="zh_cn" className="flex-1 flex flex-col gap-6 overflow-hidden mt-0 data-[state=inactive]:hidden">
+                            <div className="space-y-2 shrink-0">
+                               <Label className="text-[10px] font-black uppercase tracking-widest" style={{color:'#dc2626'}}>标题 (简体中文)</Label>
+                               <Input value={(editing as any).title_zh_cn ?? ""} onChange={(e) => setEditing(prev => prev ? { ...prev, title_zh_cn: e.target.value } as any : prev)} className="h-14 text-xl font-serif font-bold border-none bg-white shadow-sm px-6 rounded-2xl" placeholder="简体中文标题..." />
+                            </div>
+                            <div className="flex-1 flex flex-col overflow-hidden rounded-2xl shadow-sm border bg-white min-h-0">
+                               <ReactQuill theme="snow" value={(editing as any).content_zh_cn || ""} onChange={(val) => setEditing(prev => prev ? { ...prev, content_zh_cn: val } as any : prev)} className="editor-container h-full" modules={modules} formats={formats} placeholder="用简体中文讲述您的故事..." />
+                            </div>
+                         </TabsContent>
+
+                         <TabsContent value="zh_tw" className="flex-1 flex flex-col gap-6 overflow-hidden mt-0 data-[state=inactive]:hidden">
+                            <div className="space-y-2 shrink-0">
+                               <Label className="text-[10px] font-black uppercase tracking-widest" style={{color:'#7c3aed'}}>標題 (繁體中文)</Label>
+                               <Input value={(editing as any).title_zh_tw ?? ""} onChange={(e) => setEditing(prev => prev ? { ...prev, title_zh_tw: e.target.value } as any : prev)} className="h-14 text-xl font-serif font-bold border-none bg-white shadow-sm px-6 rounded-2xl" placeholder="繁體中文標題..." />
+                            </div>
+                            <div className="flex-1 flex flex-col overflow-hidden rounded-2xl shadow-sm border bg-white min-h-0">
+                               <ReactQuill theme="snow" value={(editing as any).content_zh_tw || ""} onChange={(val) => setEditing(prev => prev ? { ...prev, content_zh_tw: val } as any : prev)} className="editor-container h-full" modules={modules} formats={formats} placeholder="用繁體中文講述您的故事..." />
                             </div>
                          </TabsContent>
                        </Tabs>
@@ -735,7 +769,7 @@ const AdminBlog = () => {
           <AlertDialogHeader>
             <AlertDialogTitle className="font-serif text-2xl">Tradução em Massa (Blog)</AlertDialogTitle>
             <AlertDialogDescription>
-              Deseja traduzir TODOS os posts para inglês e espanhol? Isso pode levar algum tempo.
+              Traduzirá para <strong>EN, ES, ZH-CN e ZH-TW</strong> apenas os posts que ainda <strong>não possuem tradução em chinês</strong>. Os já traduzidos serão ignorados.
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter className="gap-2 sm:gap-0 mt-4">
@@ -745,33 +779,44 @@ const AdminBlog = () => {
               onClick={async () => {
                 setIsTranslateAllConfirmOpen(false);
                 setIsTranslatingAll(true);
+                // Pula posts que já têm tradução em chinês
+                const pending = posts.filter((p: any) => !p.title_zh_cn);
+                if (pending.length === 0) {
+                  toast({ title: "Tudo já traduzido!", description: "Todos os posts já têm tradução em chinês." });
+                  setIsTranslatingAll(false);
+                  return;
+                }
                 let translated = 0;
-                for (const post of posts) {
+                for (const post of pending) {
                   try {
-                    const [titleEn, titleEs, excerptEn, excerptEs, contentEn, contentEs] = await Promise.all([
+                    const [titleEn, titleEs, titleZhCN, titleZhTW, excerptEn, excerptEs, excerptZhCN, excerptZhTW, contentEn, contentEs, contentZhCN, contentZhTW] = await Promise.all([
                       translateText(post.title || "", "en"),
                       translateText(post.title || "", "es"),
+                      translateText(post.title || "", "zh"),
+                      translateText(post.title || "", "zh-TW"),
                       translateText(post.excerpt || "", "en"),
                       translateText(post.excerpt || "", "es"),
+                      translateText(post.excerpt || "", "zh"),
+                      translateText(post.excerpt || "", "zh-TW"),
                       translateHtml(post.content || "", "en"),
                       translateHtml(post.content || "", "es"),
+                      translateHtml(post.content || "", "zh"),
+                      translateHtml(post.content || "", "zh-TW"),
                     ]);
                     await updateLovable("blog_posts", post.id, {
-                      title_en: titleEn,
-                      title_es: titleEs,
-                      excerpt_en: excerptEn,
-                      excerpt_es: excerptEs,
-                      content_en: contentEn,
-                      content_es: contentEs,
+                      title_en: titleEn, title_es: titleEs, title_zh_cn: titleZhCN, title_zh_tw: titleZhTW,
+                      excerpt_en: excerptEn, excerpt_es: excerptEs, excerpt_zh_cn: excerptZhCN, excerpt_zh_tw: excerptZhTW,
+                      content_en: contentEn, content_es: contentEs, content_zh_cn: contentZhCN, content_zh_tw: contentZhTW,
                     });
                     translated++;
+                    toast({ title: `✅ ${translated}/${pending.length} traduzidos`, description: post.title });
                     await new Promise(r => setTimeout(r, 300));
                   } catch (e) {
                     console.error("Error translating post:", post.id, e);
                   }
                 }
                 setIsTranslatingAll(false);
-                toast({ title: `${translated} posts traduzidos!` });
+                toast({ title: `${translated} posts traduzidos!`, description: "EN, ES, ZH-CN e ZH-TW" });
                 loadPosts();
               }}
             >

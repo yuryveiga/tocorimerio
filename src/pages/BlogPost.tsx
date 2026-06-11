@@ -89,10 +89,13 @@ const BlogPost = () => {
     toast.success(language === 'pt' ? 'Link copiado!' : language === 'es' ? '¡Enlace copiado!' : 'Link copied!');
   };
 
+  // Mapeia zh-CN → zh_cn, zh-TW → zh_tw para bater com nomes de coluna SQL
+  const langToCol = (lang: string) => lang.replace('-', '_').toLowerCase();
+
   const getTranslated = (field: keyof LovableBlogPost): string => {
     if (!post) return "";
     if (language === 'pt') return String(post[field] || "");
-    const translatedField = `${String(field)}_${language}` as keyof LovableBlogPost;
+    const translatedField = `${String(field)}_${langToCol(language)}` as keyof LovableBlogPost;
     const translated = (post as unknown as Record<string, string>)[translatedField];
     return String(translated || post[field] || "");
   };
