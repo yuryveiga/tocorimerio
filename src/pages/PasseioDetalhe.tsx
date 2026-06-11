@@ -111,10 +111,13 @@ export function PasseioDetalhe() {
   );
   const tripAdvisorUrl = tripAdvisorSocial?.url || "https://www.tripadvisor.com.br/";
 
+  // Mapeia códigos de idioma com hífen para nomes de coluna SQL válidos
+  const langToCol = (lang: string) => lang.replace('-', '_').toLowerCase();
+
   const getTranslated = useCallback((field: string) => {
     if (!tour) return "";
     if (language === 'pt') return (tour as Record<string, unknown>)[field];
-    const translatedField = `${field}_${language}`;
+    const translatedField = `${field}_${langToCol(language)}`;
     return (tour as Record<string, unknown>)[translatedField] || (tour as Record<string, unknown>)[field];
   }, [language, tour]);
 
@@ -129,7 +132,7 @@ export function PasseioDetalhe() {
   }, [tour, t, getTranslated]);
 
   const translatedDifficulty = useMemo(() => getTranslated('difficulty') as string, [getTranslated]);
-  const translatedItinerary = useMemo(() => getTranslated(`itinerary_json${language !== 'pt' ? `_${language}` : ""}`) as { time: string; description: string }[] || tour?.itinerary_json, [getTranslated, language, tour?.itinerary_json]);
+  const translatedItinerary = useMemo(() => getTranslated(`itinerary_json${language !== 'pt' ? `_${langToCol(language)}` : ""}`) as { time: string; description: string }[] || tour?.itinerary_json, [getTranslated, language, tour?.itinerary_json]);
   
   const displayedItinerary = useMemo(() => {
     if (!translatedItinerary) return [];
@@ -155,7 +158,7 @@ export function PasseioDetalhe() {
     return items;
   }, [translatedItinerary, selectedPeriod, translatedTitle]);
   const translatedIncluded = useMemo(() => {
-    const items = getTranslated(`included_json${language !== 'pt' ? `_${language}` : ""}`) || tour?.included_json;
+    const items = getTranslated(`included_json${language !== 'pt' ? `_${langToCol(language)}` : ""}`) || tour?.included_json;
     
     // Se for o passeio do Maracanã e não tiver itens, injeta os solicitados como fallback
     if (tour?.title?.includes('Maracanã MatchDay') && (!items || (Array.isArray(items) && items.length === 0))) {
@@ -166,8 +169,8 @@ export function PasseioDetalhe() {
     
     return items;
   }, [getTranslated, language, tour?.included_json, tour?.title]);
-  const translatedFaq = useMemo(() => getTranslated(`faq_json${language !== 'pt' ? `_${language}` : ""}`) || tour?.faq_json, [getTranslated, language, tour?.faq_json]);
-  const translatedHighlights = useMemo(() => getTranslated(`highlights_json${language !== 'pt' ? `_${language}` : ""}`) || tour?.highlights_json, [getTranslated, language, tour?.highlights_json]);
+  const translatedFaq = useMemo(() => getTranslated(`faq_json${language !== 'pt' ? `_${langToCol(language)}` : ""}`) || tour?.faq_json, [getTranslated, language, tour?.faq_json]);
+  const translatedHighlights = useMemo(() => getTranslated(`highlights_json${language !== 'pt' ? `_${langToCol(language)}` : ""}`) || tour?.highlights_json, [getTranslated, language, tour?.highlights_json]);
 
   const translateDuration = (duration: string) => {
     if (language === 'pt' || !duration) return duration;
