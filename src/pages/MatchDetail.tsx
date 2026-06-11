@@ -285,6 +285,10 @@ export default function MatchDetail() {
 
   const siteTitle = siteSettings?.site_title?.split('|')[0].trim() || "Eco-Wanderlust";
 
+  // Match copy is only authored in pt/en/es. Fall back to English for other languages (e.g. zh-CN, zh-TW).
+  const matchLang: "pt" | "en" | "es" =
+    language === "pt" || language === "es" ? language : "en";
+
   const experience = match
     ? buildMatchExperienceContent({
         homeTeam: match.home_team,
@@ -292,7 +296,7 @@ export default function MatchDetail() {
         matchDate: match.match_date,
         stadium: match.stadium || match.venue,
         competition: match.competition,
-        language,
+        language: matchLang,
       })
     : null;
 
