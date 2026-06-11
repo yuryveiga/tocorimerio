@@ -59,8 +59,45 @@ const cleanReferrer = (ref: string | null): string => {
   }
 };
 
-const getCountryName = (code: string): string => {
-  if (!code || code === "Desconhecido" || code.length > 2) return code;
+// Map legacy full country names (stored before normalization) to ISO codes
+const LEGACY_NAME_TO_CODE: Record<string, string> = {
+  "United States": "US",
+  "Brazil": "BR",
+  "Brasil": "BR",
+  "Argentina": "AR",
+  "Colombia": "CO",
+  "Mexico": "MX",
+  "México": "MX",
+  "Spain": "ES",
+  "España": "ES",
+  "Portugal": "PT",
+  "France": "FR",
+  "Germany": "DE",
+  "Italy": "IT",
+  "United Kingdom": "GB",
+  "Netherlands": "NL",
+  "Chile": "CL",
+  "Peru": "PE",
+  "Perú": "PE",
+  "Uruguay": "UY",
+  "Paraguay": "PY",
+  "Bolivia": "BO",
+  "Ecuador": "EC",
+  "Venezuela": "VE",
+  "Canada": "CA",
+  "Japan": "JP",
+  "China": "CN",
+  "India": "IN",
+  "Australia": "AU",
+  "Unknown": "Desconhecido",
+};
+
+const normalizeCountry = (raw: string | null): string => {
+  if (!raw) return "Desconhecido";
+  if (raw === "Unknown") return "Desconhecido";
+  const mapped = LEGACY_NAME_TO_CODE[raw];
+  const code = mapped || raw;
+  if (code.length !== 2) return code; // already a localized name or "Desconhecido"
   try {
     return new Intl.DisplayNames(['pt-BR'], { type: 'region' }).of(code.toUpperCase()) || code;
   } catch {
@@ -199,8 +236,7 @@ const AdminAnalytics = () => {
     // Countries
     const countryMap: Record<string, number> = {};
     visits.forEach((v) => {
-      const c = v.country || "Desconhecido";
-      const name = getCountryName(c);
+      const name = normalizeCountry(v.country);
       countryMap[name] = (countryMap[name] || 0) + 1;
     });
     const visitsByCountry = Object.entries(countryMap)
