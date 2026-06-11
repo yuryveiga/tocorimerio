@@ -1,6 +1,6 @@
 import { protect, restore } from "./translationProtector";
 
-export async function translateText(text: string, targetLang: 'en' | 'es' | 'pt', sourceLang: string = 'pt'): Promise<string> {
+export async function translateText(text: string, targetLang: string, sourceLang: string = 'pt'): Promise<string> {
   if (!text || text.trim() === "") return "";
   
   try {
