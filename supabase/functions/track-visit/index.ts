@@ -41,15 +41,16 @@ const resolveCountry = async (req: Request): Promise<string> => {
   try {
     const controller = new AbortController();
     const timeout = setTimeout(() => controller.abort(), 3000);
-    const res = await fetch(`https://ipapi.co/${ip}/country_name/`, {
+    const res = await fetch(`https://ipapi.co/${ip}/country/`, {
       signal: controller.signal,
       headers: { "User-Agent": "tocorimerio-analytics/1.0" },
     });
     clearTimeout(timeout);
     if (!res.ok) return "Unknown";
     const text = (await res.text()).trim();
-    if (!text || text.toLowerCase().includes("error") || text.length > 60) return "Unknown";
-    return text;
+    // Expect a 2-letter ISO code; anything else is treated as unknown.
+    if (!text || text.length !== 2 || !/^[A-Za-z]{2}$/.test(text)) return "Unknown";
+    return text.toUpperCase();
   } catch (e) {
     console.warn("Country lookup failed:", (e as Error).message);
     return "Unknown";
