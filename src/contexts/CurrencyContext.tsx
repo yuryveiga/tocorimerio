@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 
-type Currency = 'BRL' | 'USD' | 'EUR';
+type Currency = 'BRL' | 'USD' | 'EUR' | 'CNY';
 
 interface CurrencyContextType {
   rates: Record<Currency, number>;
@@ -12,6 +12,7 @@ const DEFAULT_RATES: Record<Currency, number> = {
   BRL: 1,
   USD: 0.20, // 1 USD = R$ 5,00
   EUR: 0.18, // 1 EUR = R$ 5,55
+  CNY: 1.30, // 1 CNY ≈ R$ 0,77 → 1 BRL ≈ 1,30 CNY
 };
 
 const CurrencyContext = createContext<CurrencyContextType | undefined>(undefined);
@@ -32,6 +33,7 @@ export const CurrencyProvider = ({ children }: { children: ReactNode }) => {
             BRL: 1,
             USD: data.rates.USD || DEFAULT_RATES.USD,
             EUR: data.rates.EUR || DEFAULT_RATES.EUR,
+            CNY: data.rates.CNY || DEFAULT_RATES.CNY,
           });
         }
       } catch (error) {
