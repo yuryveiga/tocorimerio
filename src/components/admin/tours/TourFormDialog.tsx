@@ -4,7 +4,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Sparkles, Loader2, ExternalLink, Youtube, MapPin, List, Info, Star, HelpCircle, Sunrise, Moon } from "lucide-react";
+import { Sparkles, Loader2, ExternalLink, Youtube, MapPin, List, Info, Star, HelpCircle, Sunrise, Moon, Link2, AlertTriangle } from "lucide-react";
 import { useTourForm } from "@/hooks/admin/useTourForm";
 import { LovableTour, LovableSiteImage, fetchLovable } from "@/integrations/lovable/client";
 import { TourJsonList } from "./TourJsonList";
@@ -326,6 +326,26 @@ export function TourFormDialog({
                       <input type="checkbox" {...form.register("is_featured")} id="is_featured" className="w-5 h-5" />
                       <Label htmlFor="is_featured" className="font-bold">Destaque na Home</Label>
                     </div>
+                  </div>
+
+                  {/* Slug */}
+                  <div className="space-y-3 bg-amber-50/60 p-6 rounded-2xl border border-amber-200">
+                    <Label className="text-[10px] font-black uppercase tracking-widest text-amber-700 flex items-center gap-2">
+                      <Link2 className="w-4 h-4" /> URL Slug
+                    </Label>
+                    <Input
+                      {...form.register("slug")}
+                      placeholder="ex: city-tour-rio-de-janeiro"
+                      className="h-12 border-amber-200 bg-white font-mono text-sm"
+                    />
+                    <p className="text-xs text-amber-700 flex items-start gap-1.5">
+                      <AlertTriangle className="w-3.5 h-3.5 mt-0.5 shrink-0" />
+                      <span>
+                        Alterar o slug muda a URL pública do passeio{" "}
+                        <span className="font-bold">(/passeio/seu-slug)</span> e pode afetar o SEO e links existentes.
+                        Use apenas letras minúsculas, números e hífens.
+                      </span>
+                    </p>
                   </div>
 
                   {/* Specific Boteco Tour Fields */}
