@@ -46,7 +46,7 @@ export default function Experiences() {
 
   const CATEGORIES = [
     {
-      slug: "/passeios/city-tour",
+      slug: "/city-tour",
       label: t("city_tours"),
       tag: t("ex_tag_popular"),
       icon: Building2,
@@ -55,7 +55,7 @@ export default function Experiences() {
       price: t("ex_price_city"),
     },
     {
-      slug: "/passeios/hiking",
+      slug: "/hiking",
       label: t("trilhas"),
       tag: t("ex_tag_adventurers"),
       icon: Mountain,
@@ -64,7 +64,7 @@ export default function Experiences() {
       price: t("ex_price_hiking"),
     },
     {
-      slug: "/passeios/one-day",
+      slug: "/one-day",
       label: t("ex_cat_oneday_label"),
       tag: t("ex_tag_daytrips"),
       icon: Sun,
