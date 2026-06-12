@@ -46,7 +46,7 @@ export async function translateText(text: string, targetLang: string, sourceLang
 /**
  * Helper to translate HTML content (experimental - tries to preserve tags)
  */
-export async function translateHtml(html: string, targetLang: 'en' | 'es' | 'pt', sourceLang: string = 'pt'): Promise<string> {
+export async function translateHtml(html: string, targetLang: string, sourceLang: string = 'pt'): Promise<string> {
   if (!html || html.trim() === "") return "";
 
   const parser = new DOMParser();
