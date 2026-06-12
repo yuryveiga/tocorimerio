@@ -19,10 +19,14 @@ export type Database = {
           content: string
           content_en: string | null
           content_es: string | null
+          content_zh_cn: string | null
+          content_zh_tw: string | null
           created_at: string
           excerpt: string | null
           excerpt_en: string | null
           excerpt_es: string | null
+          excerpt_zh_cn: string | null
+          excerpt_zh_tw: string | null
           id: string
           image_url: string | null
           is_published: boolean
@@ -30,16 +34,22 @@ export type Database = {
           title: string
           title_en: string | null
           title_es: string | null
+          title_zh_cn: string | null
+          title_zh_tw: string | null
           updated_at: string
         }
         Insert: {
           content: string
           content_en?: string | null
           content_es?: string | null
+          content_zh_cn?: string | null
+          content_zh_tw?: string | null
           created_at?: string
           excerpt?: string | null
           excerpt_en?: string | null
           excerpt_es?: string | null
+          excerpt_zh_cn?: string | null
+          excerpt_zh_tw?: string | null
           id?: string
           image_url?: string | null
           is_published?: boolean
@@ -47,16 +57,22 @@ export type Database = {
           title: string
           title_en?: string | null
           title_es?: string | null
+          title_zh_cn?: string | null
+          title_zh_tw?: string | null
           updated_at?: string
         }
         Update: {
           content?: string
           content_en?: string | null
           content_es?: string | null
+          content_zh_cn?: string | null
+          content_zh_tw?: string | null
           created_at?: string
           excerpt?: string | null
           excerpt_en?: string | null
           excerpt_es?: string | null
+          excerpt_zh_cn?: string | null
+          excerpt_zh_tw?: string | null
           id?: string
           image_url?: string | null
           is_published?: boolean
@@ -64,6 +80,8 @@ export type Database = {
           title?: string
           title_en?: string | null
           title_es?: string | null
+          title_zh_cn?: string | null
+          title_zh_tw?: string | null
           updated_at?: string
         }
         Relationships: []
@@ -505,37 +523,51 @@ export type Database = {
           category: string
           category_en: string | null
           category_es: string | null
+          category_zh_cn: string | null
+          category_zh_tw: string | null
           created_at: string
           custom_options_json: Json | null
           difficulty: string | null
           difficulty_en: string | null
           difficulty_es: string | null
+          difficulty_zh_cn: string | null
+          difficulty_zh_tw: string | null
           duration: string
           external_url: string | null
           faq_json: Json | null
           faq_json_en: Json | null
           faq_json_es: Json | null
+          faq_json_zh_cn: Json | null
+          faq_json_zh_tw: Json | null
           has_afternoon: boolean
           has_morning: boolean
           has_night: boolean
           highlights_json: Json | null
           highlights_json_en: Json | null
           highlights_json_es: Json | null
+          highlights_json_zh_cn: Json | null
+          highlights_json_zh_tw: Json | null
           id: string
           image_url: string
           images_json: Json | null
           included_json: Json | null
           included_json_en: Json | null
           included_json_es: Json | null
+          included_json_zh_cn: Json | null
+          included_json_zh_tw: Json | null
           is_active: boolean
           is_featured: boolean
           itinerary_json: Json | null
           itinerary_json_en: Json | null
           itinerary_json_es: Json | null
+          itinerary_json_zh_cn: Json | null
+          itinerary_json_zh_tw: Json | null
           max_group_size: number
           meeting_point_address: string | null
           meeting_point_address_en: string | null
           meeting_point_address_es: string | null
+          meeting_point_address_zh_cn: string | null
+          meeting_point_address_zh_tw: string | null
           price: number
           price_1_person: number | null
           price_2_people: number | null
@@ -545,12 +577,16 @@ export type Database = {
           short_description: string
           short_description_en: string | null
           short_description_es: string | null
+          short_description_zh_cn: string | null
+          short_description_zh_tw: string | null
           slug: string | null
           sort_order: number
           tiered_pricing_json: Json | null
           title: string
           title_en: string | null
           title_es: string | null
+          title_zh_cn: string | null
+          title_zh_tw: string | null
           updated_at: string
           use_custom_options: boolean
           youtube_video_url: string | null
@@ -565,37 +601,51 @@ export type Database = {
           category?: string
           category_en?: string | null
           category_es?: string | null
+          category_zh_cn?: string | null
+          category_zh_tw?: string | null
           created_at?: string
           custom_options_json?: Json | null
           difficulty?: string | null
           difficulty_en?: string | null
           difficulty_es?: string | null
+          difficulty_zh_cn?: string | null
+          difficulty_zh_tw?: string | null
           duration?: string
           external_url?: string | null
           faq_json?: Json | null
           faq_json_en?: Json | null
           faq_json_es?: Json | null
+          faq_json_zh_cn?: Json | null
+          faq_json_zh_tw?: Json | null
           has_afternoon?: boolean
           has_morning?: boolean
           has_night?: boolean
           highlights_json?: Json | null
           highlights_json_en?: Json | null
           highlights_json_es?: Json | null
+          highlights_json_zh_cn?: Json | null
+          highlights_json_zh_tw?: Json | null
           id?: string
           image_url?: string
           images_json?: Json | null
           included_json?: Json | null
           included_json_en?: Json | null
           included_json_es?: Json | null
+          included_json_zh_cn?: Json | null
+          included_json_zh_tw?: Json | null
           is_active?: boolean
           is_featured?: boolean
           itinerary_json?: Json | null
           itinerary_json_en?: Json | null
           itinerary_json_es?: Json | null
+          itinerary_json_zh_cn?: Json | null
+          itinerary_json_zh_tw?: Json | null
           max_group_size?: number
           meeting_point_address?: string | null
           meeting_point_address_en?: string | null
           meeting_point_address_es?: string | null
+          meeting_point_address_zh_cn?: string | null
+          meeting_point_address_zh_tw?: string | null
           price?: number
           price_1_person?: number | null
           price_2_people?: number | null
@@ -605,12 +655,16 @@ export type Database = {
           short_description?: string
           short_description_en?: string | null
           short_description_es?: string | null
+          short_description_zh_cn?: string | null
+          short_description_zh_tw?: string | null
           slug?: string | null
           sort_order?: number
           tiered_pricing_json?: Json | null
           title: string
           title_en?: string | null
           title_es?: string | null
+          title_zh_cn?: string | null
+          title_zh_tw?: string | null
           updated_at?: string
           use_custom_options?: boolean
           youtube_video_url?: string | null
@@ -625,37 +679,51 @@ export type Database = {
           category?: string
           category_en?: string | null
           category_es?: string | null
+          category_zh_cn?: string | null
+          category_zh_tw?: string | null
           created_at?: string
           custom_options_json?: Json | null
           difficulty?: string | null
           difficulty_en?: string | null
           difficulty_es?: string | null
+          difficulty_zh_cn?: string | null
+          difficulty_zh_tw?: string | null
           duration?: string
           external_url?: string | null
           faq_json?: Json | null
           faq_json_en?: Json | null
           faq_json_es?: Json | null
+          faq_json_zh_cn?: Json | null
+          faq_json_zh_tw?: Json | null
           has_afternoon?: boolean
           has_morning?: boolean
           has_night?: boolean
           highlights_json?: Json | null
           highlights_json_en?: Json | null
           highlights_json_es?: Json | null
+          highlights_json_zh_cn?: Json | null
+          highlights_json_zh_tw?: Json | null
           id?: string
           image_url?: string
           images_json?: Json | null
           included_json?: Json | null
           included_json_en?: Json | null
           included_json_es?: Json | null
+          included_json_zh_cn?: Json | null
+          included_json_zh_tw?: Json | null
           is_active?: boolean
           is_featured?: boolean
           itinerary_json?: Json | null
           itinerary_json_en?: Json | null
           itinerary_json_es?: Json | null
+          itinerary_json_zh_cn?: Json | null
+          itinerary_json_zh_tw?: Json | null
           max_group_size?: number
           meeting_point_address?: string | null
           meeting_point_address_en?: string | null
           meeting_point_address_es?: string | null
+          meeting_point_address_zh_cn?: string | null
+          meeting_point_address_zh_tw?: string | null
           price?: number
           price_1_person?: number | null
           price_2_people?: number | null
@@ -665,12 +733,16 @@ export type Database = {
           short_description?: string
           short_description_en?: string | null
           short_description_es?: string | null
+          short_description_zh_cn?: string | null
+          short_description_zh_tw?: string | null
           slug?: string | null
           sort_order?: number
           tiered_pricing_json?: Json | null
           title?: string
           title_en?: string | null
           title_es?: string | null
+          title_zh_cn?: string | null
+          title_zh_tw?: string | null
           updated_at?: string
           use_custom_options?: boolean
           youtube_video_url?: string | null
