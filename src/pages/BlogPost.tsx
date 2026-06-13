@@ -56,7 +56,7 @@ const BlogPost = () => {
   const [post, setPost] = useState<LovableBlogPost | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const { t, language } = useLocale();
-  const { siteSettings, images, tours } = useSiteData();
+  const { siteSettings, tours } = useSiteData();
 
   const dateLocale = language === 'en' ? enUS : language === 'es' ? es : ptBR;
   const siteTitle = siteSettings?.site_title?.split('|')[0].trim() || "Tocorime Rio";
