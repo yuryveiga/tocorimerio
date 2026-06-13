@@ -122,7 +122,7 @@ export default function Experiences() {
         <meta property="og:description" content={t("ex_og_desc")} />
         <meta property="og:type" content="website" />
         <meta property="og:url" content={`https://tocorimerio.com/experiences${language !== 'en' ? `?lang=${language}` : ''}`} />
-        <meta property="og:image" content={HERO_BG} />
+        <meta property="og:image" content="https://tocorimerio.com/hero-experiences.jpg" />
         <script type="application/ld+json">
           {JSON.stringify({
             "@context": "https://schema.org",
