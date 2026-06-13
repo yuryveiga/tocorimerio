@@ -60,7 +60,7 @@ const BlogPost = () => {
 
   const dateLocale = language === 'en' ? enUS : language === 'es' ? es : ptBR;
   const siteTitle = siteSettings?.site_title?.split('|')[0].trim() || "Tocorime Rio";
-  const fallbackImage = images.hero_bg || "/placeholder.svg";
+  const fallbackImage = `${getCanonicalUrl("")}/og-image.jpg`;
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -254,7 +254,7 @@ const BlogPost = () => {
             <meta property="og:title" content="Rocinha Favela Tour Rio: Safe, Fun & Eye-Opening Guide" />
             <meta property="og:description" content="Is a Rocinha favela tour safe? Discover Rio's most authentic cultural experience with local expert guides. Private tours, real community access, no tourist traps." />
             <meta property="og:url" content="https://tocorimerio.com/blog/rocinha-favela-tour-rio-de-janeiro" />
-            <meta property="og:image" content="https://tocorimerio.com/images/blog/rocinha-favela-tour-cover.jpg" />
+            <meta property="og:image" content={`${getCanonicalUrl("")}/og-image.jpg`} />
             <meta property="og:image:alt" content="Guided favela tour in Rocinha, Rio de Janeiro with local expert" />
             <meta property="og:locale" content="en_US" />
             <meta property="og:site_name" content="Tocorime Rio" />
@@ -265,7 +265,7 @@ const BlogPost = () => {
             <meta name="twitter:card" content="summary_large_image" />
             <meta name="twitter:title" content="Rocinha Favela Tour Rio: Safe, Fun & Eye-Opening Guide" />
             <meta name="twitter:description" content="Is a Rocinha favela tour safe? Discover Rio's most authentic cultural experience with local expert guides. Private tours, real community access, no tourist traps." />
-            <meta name="twitter:image" content="https://tocorimerio.com/images/blog/rocinha-favela-tour-cover.jpg" />
+            <meta name="twitter:image" content={`${getCanonicalUrl("")}/og-image.jpg`} />
 
             <script type="application/ld+json">
               {`
