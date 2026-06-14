@@ -63,6 +63,7 @@ const JogoLanding            = lazy(() => import("./pages/JogoLanding"));
 const Sitemap                = lazy(() => import("./pages/Sitemap"));
 const PasseiosCategoria      = lazy(() => import("./pages/PasseiosCategoria"));
 const Experiences            = lazy(() => import("./pages/Experiences"));
+const PrivateGuideRio        = lazy(() => import("./pages/PrivateGuideRio"));
 
 const PageLoader = () => <div className="min-h-screen flex items-center justify-center bg-background"><div className="w-12 h-12 border-4 border-primary border-t-transparent rounded-full animate-spin" /></div>;
 
