@@ -1,0 +1,299 @@
+import { useState, useEffect } from "react";
+import { Helmet } from "react-helmet-async";
+import { Link } from "react-router-dom";
+import { useSiteData } from "@/hooks/useSiteData";
+import { useCurrency } from "@/contexts/CurrencyContext";
+import { buildWhatsappLink } from "@/lib/whatsappMessage";
+import { supabase } from "@/integrations/supabase/client";
+import { useToast } from "@/hooks/use-toast";
+
+const HOURLY_BRL = 200;
+
+export default function PrivateGuideRio() {
+  const { socialMedia } = useSiteData();
+  const { convertBRL, loading: ratesLoading } = useCurrency();
+  const { toast } = useToast();
+
+  const emailSocial = socialMedia.find((s) => s.platform.toLowerCase() === "email");
+  const whatsappSocial = socialMedia.find((s) => s.platform.toLowerCase().includes("whatsapp"));
+  const contactEmail = emailSocial?.url || "";
+  const contactPhone = whatsappSocial?.url || "";
+  const waLink = contactPhone
+    ? buildWhatsappLink(contactPhone, "en") +
+      "&text=" + encodeURIComponent("Hi! I'd like to book a private hourly guide in Rio de Janeiro. Could you send me a quote?")
+    : "#";
+
+  const usdPrice = convertBRL(HOURLY_BRL, "USD");
+  const usdDisplay = ratesLoading ? "…" : `$${usdPrice.toFixed(0)}`;
+
+  const [submitting, setSubmitting] = useState(false);
+
+  useEffect(() => {
+    document.body.style.background = "#fff";
+    return () => { document.body.style.background = ""; };
+  }, []);
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (!contactEmail) {
+      toast({ title: "Error", description: "Contact email is not configured.", variant: "destructive" });
+      return;
+    }
+    setSubmitting(true);
+    const fd = new FormData(e.currentTarget);
+    try {
+      const { error } = await supabase.functions.invoke("send-contact-email", {
+        body: {
+          to: contactEmail,
+          senderName: fd.get("name") as string,
+          senderEmail: fd.get("email") as string,
+          senderPhone: (fd.get("phone") as string) || "",
+          tourInterest: "Private Hourly Guide in Rio",
+          message: fd.get("message") as string,
+        },
+      });
+      if (error) throw error;
+      toast({ title: "Message sent!", description: "We'll get back to you shortly." });
+      (e.target as HTMLFormElement).reset();
+    } catch (err) {
+      console.error(err);
+      toast({ title: "Could not send", description: "Please try again or use WhatsApp.", variant: "destructive" });
+    } finally {
+      setSubmitting(false);
+    }
+  };
+
+  return (
+    <>
+      <Helmet>
+        <html lang="en" />
+        <title>Private Hourly Guide in Rio de Janeiro | Tocorime Rio</title>
+        <meta name="description" content="Hire a licensed, bilingual private guide in Rio de Janeiro by the hour. Custom itineraries, total flexibility, 4h minimum." />
+        <link rel="canonical" href="https://tocorimerio.com/your-private-guide-in-rio" />
+        <meta property="og:title" content="Private Hourly Guide in Rio de Janeiro | Tocorime Rio" />
+        <meta property="og:description" content="A licensed, bilingual local guide at your full disposal — no fixed itineraries, no rush, no tourist traps." />
+        <meta property="og:url" content="https://tocorimerio.com/your-private-guide-in-rio" />
+        <meta property="og:image" content="https://tocorimerio.com/og-image.jpg" />
+      </Helmet>
+
+      <style>{`
+        .pg-root{--orange:#F4845F;--dark:#1C2B26;--green:#2A6B4A;--cream:#F7F4EF;--ink:#222;--muted:#6b6b6b;font-family:Georgia,'Times New Roman',serif;color:var(--ink);line-height:1.7;background:#fff;}
+        .pg-root *{box-sizing:border-box}
+        .pg-sans{font-family:'Helvetica Neue',Arial,sans-serif}
+        .pg-topbar{background:#F4845F;color:#fff;text-align:center;font-size:.8rem;padding:8px;font-family:'Helvetica Neue',sans-serif;letter-spacing:.5px}
+        .pg-header{display:flex;justify-content:space-between;align-items:center;padding:18px 6%;font-family:'Helvetica Neue',sans-serif}
+        .pg-logo{display:flex;align-items:center;gap:10px;font-weight:bold;font-size:1.2rem;color:#1C2B26;text-decoration:none}
+        .pg-logo-mark{width:32px;height:32px;border-radius:50%;background:conic-gradient(#F4845F,#F4C24F,#2A6B4A,#F4845F)}
+        .pg-nav a{margin-left:28px;text-decoration:none;color:#1C2B26;font-size:.95rem}
+        .pg-book-btn{background:#1C2B26;color:#fff !important;padding:10px 22px;border-radius:30px;text-decoration:none;font-size:.9rem}
+        .pg-hero{position:relative;min-height:560px;display:flex;align-items:center;justify-content:center;text-align:center;color:#fff;background:linear-gradient(rgba(20,30,25,.55),rgba(20,30,25,.55)),url('https://images.unsplash.com/photo-1483729558449-99ef09a8c325?q=80&w=1600&auto=format&fit=crop') center/cover no-repeat}
+        .pg-hero-inner{max-width:780px;padding:40px 20px}
+        .pg-hero-badge{font-family:'Helvetica Neue',sans-serif;font-size:.8rem;letter-spacing:2px;text-transform:uppercase;opacity:.85;margin-bottom:14px}
+        .pg-hero h1{font-size:3rem;margin-bottom:18px;font-weight:700;line-height:1.15}
+        .pg-hero p{font-family:'Helvetica Neue',sans-serif;font-size:1.1rem;max-width:600px;margin:0 auto 30px;opacity:.95}
+        .pg-cta-row{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;font-family:'Helvetica Neue',sans-serif}
+        .pg-cta-primary{background:#F4845F;color:#fff !important;font-weight:bold;padding:15px 34px;border-radius:30px;text-decoration:none;font-size:1rem}
+        .pg-cta-secondary{background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.6);color:#fff !important;padding:15px 34px;border-radius:30px;text-decoration:none;font-size:1rem}
+        .pg-strip{background:#F7F4EF;font-family:'Helvetica Neue',sans-serif;font-size:.85rem;color:#6b6b6b;display:flex;justify-content:center;gap:40px;flex-wrap:wrap;padding:16px 6%;text-align:center}
+        .pg-section{padding:80px 6%;max-width:1100px;margin:0 auto}
+        .pg-section-label{font-family:'Helvetica Neue',sans-serif;text-transform:uppercase;letter-spacing:2px;font-size:.8rem;color:#F4845F;text-align:center;margin-bottom:8px}
+        .pg-section h2{font-size:2.2rem;text-align:center;color:#1C2B26;margin-bottom:14px}
+        .pg-underline{width:60px;height:3px;background:#2A6B4A;margin:0 auto 30px}
+        .pg-lead{font-family:'Helvetica Neue',sans-serif;text-align:center;color:#6b6b6b;max-width:650px;margin:0 auto 50px;font-size:1.05rem}
+        .pg-features{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:30px;font-family:'Helvetica Neue',sans-serif}
+        .pg-feature{background:#F7F4EF;padding:34px;border-radius:16px}
+        .pg-feature .pg-icon{width:50px;height:50px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;font-size:1.4rem;margin-bottom:18px;box-shadow:0 4px 10px rgba(0,0,0,.04)}
+        .pg-feature h3{font-family:Georgia,serif;font-size:1.2rem;margin-bottom:10px;color:#1C2B26}
+        .pg-feature p{color:#6b6b6b;font-size:.95rem}
+        .pg-included-wrap{display:grid;grid-template-columns:1fr 1fr;gap:30px;font-family:'Helvetica Neue',sans-serif}
+        @media(max-width:700px){.pg-included-wrap{grid-template-columns:1fr}}
+        .pg-card{border-radius:16px;padding:34px}
+        .pg-card.yes{background:#eef6f0;border:1px solid #d6ecde}
+        .pg-card.no{background:#fbeee8;border:1px solid #f5dcd1}
+        .pg-card h3{font-family:Georgia,serif;margin-bottom:16px}
+        .pg-card ul{list-style:none;padding:0;margin:0}
+        .pg-card li{padding:8px 0;padding-left:28px;position:relative;color:#222;font-size:.95rem}
+        .pg-card.yes li::before{content:'✓';position:absolute;left:0;color:#2A6B4A;font-weight:bold}
+        .pg-card.no li::before{content:'✕';position:absolute;left:0;color:#F4845F;font-weight:bold}
+        .pg-steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:24px;font-family:'Helvetica Neue',sans-serif}
+        .pg-step{text-align:center;padding:30px 20px;border-radius:16px;background:#fff;border:1px solid #eee}
+        .pg-step .pg-num{width:44px;height:44px;border-radius:50%;background:#2A6B4A;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:bold;margin:0 auto 16px;font-family:Georgia,serif}
+        .pg-step h3{font-size:1.05rem;margin-bottom:8px;color:#1C2B26;font-family:Georgia,serif}
+        .pg-step p{color:#6b6b6b;font-size:.9rem}
+        .pg-price-banner{background:#1C2B26;color:#fff;border-radius:20px;padding:50px;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:30px;font-family:'Helvetica Neue',sans-serif}
+        .pg-price-banner .pg-left h2{color:#fff;text-align:left;margin-bottom:8px}
+        .pg-price-banner .pg-left p{color:#cfd8d4;max-width:420px}
+        .pg-price-tag{font-family:Georgia,serif;font-size:2.6rem;font-weight:bold;color:#F4845F;text-align:right}
+        .pg-price-tag span{font-size:1rem;color:#cfd8d4;font-family:'Helvetica Neue',sans-serif;display:block;margin-top:4px}
+        .pg-final{background:#F7F4EF;text-align:center;padding:90px 6%}
+        .pg-final h2{margin-bottom:14px;color:#1C2B26;font-size:2.2rem}
+        .pg-final p{font-family:'Helvetica Neue',sans-serif;color:#6b6b6b;max-width:550px;margin:0 auto 30px}
+        .pg-contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:30px;max-width:900px;margin:0 auto;text-align:left;font-family:'Helvetica Neue',sans-serif}
+        @media(max-width:700px){.pg-contact-grid{grid-template-columns:1fr}}
+        .pg-form{background:#fff;padding:30px;border-radius:16px;border:1px solid #eee;display:flex;flex-direction:column;gap:14px}
+        .pg-form label{font-size:.85rem;color:#1C2B26;font-weight:600;display:block;margin-bottom:6px}
+        .pg-form input,.pg-form textarea{width:100%;padding:12px 14px;border:1px solid #ddd;border-radius:10px;font-family:inherit;font-size:.95rem;background:#fff}
+        .pg-form button{background:#1C2B26;color:#fff;padding:14px;border-radius:30px;border:0;font-weight:bold;cursor:pointer;font-size:1rem}
+        .pg-form button:disabled{opacity:.6;cursor:not-allowed}
+        .pg-wa-card{background:#fff;padding:30px;border-radius:16px;border:1px solid #eee;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;gap:14px}
+        .pg-wa-card a{background:#25D366;color:#fff !important;padding:15px 30px;border-radius:30px;text-decoration:none;font-weight:bold}
+        .pg-footer{background:#1C2B26;color:#cfd8d4;padding:50px 6% 25px;font-family:'Helvetica Neue',sans-serif;text-align:center;font-size:.85rem}
+        .pg-footer .pg-brand{color:#fff;font-family:Georgia,serif;font-size:1.1rem;margin-bottom:10px}
+        @media(max-width:600px){.pg-hero h1{font-size:2.1rem}.pg-price-banner{padding:30px}.pg-price-tag{font-size:2rem;text-align:left}}
+      `}</style>
+
+      <div className="pg-root">
+        <div className="pg-topbar">★ 5.0 on TripAdvisor · Free cancellation up to 72h before · Limited availability this week</div>
+
+        <header className="pg-header">
+          <Link to="/" className="pg-logo"><span className="pg-logo-mark" /> Tocorime Rio</Link>
+          <nav className="pg-nav">
+            <Link to="/">Home</Link>
+            <Link to="/our-tours">Tours</Link>
+            <a href="#contact">Contact</a>
+            <a className="pg-book-btn" href={waLink} target="_blank" rel="noopener noreferrer">Book Now</a>
+          </nav>
+        </header>
+
+        <section className="pg-hero">
+          <div className="pg-hero-inner">
+            <div className="pg-hero-badge">Tocorime Rio · Private Experiences</div>
+            <h1>Your Private Guide in Rio de Janeiro</h1>
+            <p>Discover the Real Rio at your own pace. A licensed, bilingual local guide at your full disposal — no fixed itineraries, no rush, no tourist traps.</p>
+            <div className="pg-cta-row">
+              <a href="#contact" className="pg-cta-primary">Book Your Private Guide</a>
+              <a href="#how" className="pg-cta-secondary">How It Works</a>
+            </div>
+          </div>
+        </section>
+
+        <div className="pg-strip">
+          <span>★ 5.0 on TripAdvisor</span>
+          <span>Cadastur certified</span>
+          <span>Local bilingual guides</span>
+          <span>100% secure payment</span>
+          <span>+2,000 happy travelers</span>
+        </div>
+
+        <section className="pg-section">
+          <div className="pg-section-label">Private Hourly Guide</div>
+          <h2>Rio, Entirely On Your Terms</h2>
+          <div className="pg-underline" />
+          <p className="pg-lead">Whether you want to dig into local culture, hit the iconic spots, find the best restaurants, or simply have a trusted local handling logistics — you set the pace, we handle the way.</p>
+
+          <div className="pg-features">
+            <div className="pg-feature">
+              <div className="pg-icon">⏱</div>
+              <h3>Total Flexibility</h3>
+              <p>Hire for as many hours as you need, minimum 4 hours. Morning, afternoon, evening, or a full day exploring the city.</p>
+            </div>
+            <div className="pg-feature">
+              <div className="pg-icon">🗺</div>
+              <h3>Fully Customized Route</h3>
+              <p>We help you plan a smart, efficient itinerary — or simply accompany you through your own plans with real local insight.</p>
+            </div>
+            <div className="pg-feature">
+              <div className="pg-icon">🛡</div>
+              <h3>Safe, Stress-Free Logistics</h3>
+              <p>No language barriers, no wrong turns, no overpriced tourist traps — just a trusted local making sure your day runs smoothly.</p>
+            </div>
+          </div>
+        </section>
+
+        <section className="pg-section">
+          <div className="pg-section-label">The Details</div>
+          <h2>What's Included</h2>
+          <div className="pg-underline" />
+
+          <div className="pg-included-wrap">
+            <div className="pg-card yes">
+              <h3>Included ✅</h3>
+              <ul>
+                <li>Exclusive accompaniment by a licensed, certified guide</li>
+                <li>Personalized itinerary planning before your tour</li>
+                <li>Guide's choice of language: English, Portuguese or Spanish</li>
+                <li>Local recommendations and insider tips along the way</li>
+              </ul>
+            </div>
+            <div className="pg-card no">
+              <h3>Not Included ❌</h3>
+              <ul>
+                <li>Tickets to attractions (Christ the Redeemer, cable car, etc.)</li>
+                <li>Transportation, unless a private car add-on is booked</li>
+                <li>Meals for guest and guide during the tour</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <section className="pg-section" id="how">
+          <div className="pg-section-label">Booking</div>
+          <h2>How It Works</h2>
+          <div className="pg-underline" />
+
+          <div className="pg-steps">
+            <div className="pg-step"><div className="pg-num">1</div><h3>Choose Your Hours</h3><p>Pick your date and select how many hours you'd like — 4h, 6h, 8h or a custom block.</p></div>
+            <div className="pg-step"><div className="pg-num">2</div><h3>Share Your Interests</h3><p>Tell us your preferred language and what you'd love to experience in Rio.</p></div>
+            <div className="pg-step"><div className="pg-num">3</div><h3>Get Your Quote</h3><p>We confirm availability and send your personalized quote within hours.</p></div>
+            <div className="pg-step"><div className="pg-num">4</div><h3>Meet Your Guide</h3><p>Your guide arrives ready to show you Rio exactly the way you want it.</p></div>
+          </div>
+        </section>
+
+        <section className="pg-section">
+          <div className="pg-price-banner">
+            <div className="pg-left">
+              <h2>Starting from</h2>
+              <p>Hourly rates with a 4-hour minimum. Private, exclusive, and tailored entirely to you — the perfect way to make the most of your time in Rio.</p>
+            </div>
+            <div className="pg-price-tag">
+              {usdDisplay}
+              <span>per hour · ~R${HOURLY_BRL} · 4h minimum</span>
+            </div>
+          </div>
+        </section>
+
+        <section className="pg-final" id="contact">
+          <h2>Ready to Discover Rio Your Way?</h2>
+          <p>Send us a message on WhatsApp or fill in the form below — we'll put together your custom hourly guide experience, tailored exclusively for you.</p>
+
+          <div className="pg-contact-grid">
+            <div className="pg-wa-card">
+              <h3 style={{ fontFamily: "Georgia,serif", color: "#1C2B26" }}>Quickest reply</h3>
+              <p style={{ color: "#6b6b6b", fontSize: ".95rem" }}>Chat with us on WhatsApp and get a personalized quote within hours.</p>
+              {contactPhone ? (
+                <a href={waLink} target="_blank" rel="noopener noreferrer">Request a Quote on WhatsApp</a>
+              ) : (
+                <p style={{ color: "#6b6b6b" }}>WhatsApp coming soon.</p>
+              )}
+            </div>
+
+            <form className="pg-form" onSubmit={handleSubmit}>
+              <div>
+                <label htmlFor="pg-name">Name</label>
+                <input id="pg-name" name="name" required placeholder="Your full name" maxLength={100} />
+              </div>
+              <div>
+                <label htmlFor="pg-email">Email</label>
+                <input id="pg-email" name="email" type="email" required placeholder="you@email.com" maxLength={255} />
+              </div>
+              <div>
+                <label htmlFor="pg-phone">WhatsApp / Phone (optional)</label>
+                <input id="pg-phone" name="phone" placeholder="+1 555 123 4567" maxLength={40} />
+              </div>
+              <div>
+                <label htmlFor="pg-msg">Message</label>
+                <textarea id="pg-msg" name="message" required rows={4} placeholder="Tell us your dates, how many hours, and what you'd love to do in Rio." maxLength={1000} />
+              </div>
+              <button type="submit" disabled={submitting}>{submitting ? "Sending…" : "Send Request"}</button>
+            </form>
+          </div>
+        </section>
+
+        <footer className="pg-footer">
+          <div className="pg-brand">Tocorime Rio</div>
+          <div>Private &amp; Custom Rio de Janeiro Tours · © {new Date().getFullYear()} Tocorime Rio. All rights reserved.</div>
+        </footer>
+      </div>
+    </>
+  );
+}
