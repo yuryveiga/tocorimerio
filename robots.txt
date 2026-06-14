@@ -1,0 +1,17 @@
+# Sitemap
+Sitemap: https://tocorimerio.com/sitemap.xml
+Sitemap: https://tocorimerio.com/sitemap-images.xml
+
+# User agents
+User-agent: *
+Allow: /
+
+# Disallow admin and private areas
+Disallow: /admin/
+Disallow: /api/
+Disallow: /carrinho
+Disallow: /confirmacao
+Disallow: /checkout
+
+# Crawl delay for aggressive bots
+Crawl-delay: 1

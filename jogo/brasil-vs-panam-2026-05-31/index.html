@@ -1,0 +1,250 @@
+<!doctype html>
+<html lang="en" data-beasties-container>
+  <head>
+    <!-- Performance: Preconnect only to the most critical origins -->
+    <link rel="preconnect" href="https://ogzasprtfgimjqrtcseg.supabase.co">
+    <link rel="dns-prefetch" href="https://ogzasprtfgimjqrtcseg.supabase.co">
+
+
+    <!-- Performance: Preload critical self-hosted fonts (eliminates Google Fonts round-trip) -->
+    <!-- Poppins (400/600) é usado em TODAS as rotas (body, header, CTAs) — preload global. -->
+    <link rel="preload" href="/fonts/Poppins-400.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/fonts/Poppins-600.woff2" as="font" type="font/woff2" crossorigin>
+
+    <!-- Playfair 700 (serif H1/H2) só é usado em rotas marketing/conteúdo.
+         Rotas utilitárias e /admin/* não renderizam títulos serif acima da
+         dobra, então preloadar lá é desperdício. Hero AVIF idem: só home.
+         O script abaixo:
+           1. injeta preloads condicionalmente no load inicial;
+           2. remove-os em qualquer navegação SPA (pushState/replaceState/popstate)
+              que sai da rota que justificava o preload. -->
+    <script>
+      (function () {
+        'use strict';
+        try {
+          var HERO_PRELOAD_ID = 'hero-lcp-preload';
+          var PLAYFAIR_PRELOAD_ID = 'playfair-700-preload';
+          var HERO_URL = 'https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776157066514_2zl4bonrweg.avif';
+          var PLAYFAIR_URL = '/fonts/PlayfairDisplay-700.woff2';
+
+          // Rotas que NÃO precisam de Playfair (sem títulos serif acima da dobra).
+          // Tudo o que não bater aqui é considerado rota de marketing/conteúdo.
+          var NO_PLAYFAIR_PREFIXES = ['/admin', '/carrinho', '/confirmacao', '/sitemap'];
+
+          function isHomePath() {
+            var p = window.location.pathname.replace(/\/+$/, '') || '/';
+            return p === '/' || p === '';
+          }
+
+          function needsPlayfair() {
+            var p = window.location.pathname.replace(/\/+$/, '') || '/';
+            for (var i = 0; i < NO_PLAYFAIR_PREFIXES.length; i++) {
+              var pref = NO_PLAYFAIR_PREFIXES[i];
+              if (p === pref || p.indexOf(pref + '/') === 0) return false;
+            }
+            return true;
+          }
+
+          function injectHeroPreload() {
+            if (document.getElementById(HERO_PRELOAD_ID)) return;
+            var l = document.createElement('link');
+            l.id = HERO_PRELOAD_ID;
+            l.rel = 'preload';
+            l.as = 'image';
+            l.href = HERO_URL;
+            l.type = 'image/avif';
+            l.setAttribute('fetchpriority', 'high');
+            document.head.appendChild(l);
+          }
+
+          function removeHeroPreload() {
+            var el = document.getElementById(HERO_PRELOAD_ID);
+            if (el) el.remove();
+          }
+
+          function injectPlayfairPreload() {
+            if (document.getElementById(PLAYFAIR_PRELOAD_ID)) return;
+            var l = document.createElement('link');
+            l.id = PLAYFAIR_PRELOAD_ID;
+            l.rel = 'preload';
+            l.as = 'font';
+            l.type = 'font/woff2';
+            l.href = PLAYFAIR_URL;
+            l.crossOrigin = 'anonymous';
+            document.head.appendChild(l);
+          }
+
+          function removePlayfairPreload() {
+            var el = document.getElementById(PLAYFAIR_PRELOAD_ID);
+            if (el) el.remove();
+          }
+
+          function syncPreloads() {
+            if (isHomePath()) injectHeroPreload(); else removeHeroPreload();
+            if (needsPlayfair()) injectPlayfairPreload(); else removePlayfairPreload();
+          }
+
+          // Initial page load
+          syncPreloads();
+
+          // Intercepta pushState/replaceState para emitir um evento que
+          // capturamos em qualquer navegação SPA (Link, navigate(), etc.).
+          var EVT = 'lov:locationchange';
+          ['pushState', 'replaceState'].forEach(function (k) {
+            var orig = history[k];
+            if (typeof orig !== 'function') return;
+            history[k] = function () {
+              var ret = orig.apply(this, arguments);
+              try { window.dispatchEvent(new Event(EVT)); } catch (_) {}
+              return ret;
+            };
+          });
+
+          window.addEventListener('popstate', syncPreloads);
+          window.addEventListener(EVT, syncPreloads);
+        } catch (e) { /* noop */ }
+      })();
+    </script>
+
+
+
+
+    <!-- Favicons -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#2A9D8F">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="Tocorime Rio">
+
+
+
+
+    <meta name="google-site-verification" content="ois9-7NaU-ndvu21PYuT4HSI6wfI0pdt8mdu0p8riWA">
+    <meta name="robots" content="max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- SEO Managed by React Helmet -->
+    <title>Tocorime Rio | Private & Custom Rio Tours</title>
+
+    <!-- Critical CSS (anti-FOUC) — applied before app CSS to keep first paint stable -->
+    <style>:root{--bg:#ffffff;--fg:#0f172a;--primary:#2A9D8F}html,body{margin:0;padding:0;background:var(--bg);color:var(--fg);font-family:'Poppins','Poppins Fallback',system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;-webkit-font-smoothing:antialiased}#root{min-height:100vh}*,:before,:after{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgb(59 130 246 / .5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }*,:before,:after{box-sizing:border-box;border-width:0;border-style:solid;border-color:#e5e7eb}:before,:after{--tw-content:""}html{line-height:1.5;-webkit-text-size-adjust:100%;-moz-tab-size:4;-o-tab-size:4;tab-size:4;font-family:Poppins,Poppins Fallback,system-ui,sans-serif;font-feature-settings:normal;font-variation-settings:normal;-webkit-tap-highlight-color:transparent}body{margin:0;line-height:inherit}:root{--background:140 10% 96%;--foreground:140 20% 10%;--card:0 0% 100%;--card-foreground:140 20% 10%;--popover:0 0% 100%;--popover-foreground:140 20% 10%;--primary:145 45% 15%;--primary-foreground:140 10% 96%;--secondary:145 25% 25%;--secondary-foreground:140 10% 96%;--muted:140 10% 92%;--muted-foreground:140 10% 40%;--accent:18 80% 60%;--accent-foreground:140 10% 96%;--destructive:0 84.2% 60.2%;--destructive-foreground:210 40% 98%;--border:140 15% 85%;--input:140 10% 90%;--ring:18 80% 60%;--radius:1.25rem;--sidebar-background:145 30% 12%;--sidebar-foreground:140 10% 96%;--sidebar-primary:145 40% 40%;--sidebar-primary-foreground:140 10% 96%;--sidebar-accent:145 20% 20%;--sidebar-accent-foreground:140 10% 96%;--sidebar-border:145 15% 22%;--sidebar-ring:145 40% 40%}*{border-color:hsl(var(--border))}body{background-color:hsl(var(--background));font-family:Poppins,Poppins Fallback,system-ui,sans-serif;color:hsl(var(--foreground));position:relative}body:before{content:"";position:fixed;top:0;right:0;bottom:0;left:0;pointer-events:none;z-index:9999;opacity:.04;mix-blend-mode:overlay;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.6 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>")}@media (pointer: fine){html{scrollbar-color:hsl(var(--primary) / .4) hsl(var(--background));scrollbar-width:thin}}*,:before,:after{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgb(59 130 246 / .5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }*,:before,:after{box-sizing:border-box;border-width:0;border-style:solid;border-color:#e5e7eb}:before,:after{--tw-content:""}html{line-height:1.5;-webkit-text-size-adjust:100%;-moz-tab-size:4;-o-tab-size:4;tab-size:4;font-family:Poppins,Poppins Fallback,system-ui,sans-serif;font-feature-settings:normal;font-variation-settings:normal;-webkit-tap-highlight-color:transparent}body{margin:0;line-height:inherit}:root{--background:140 10% 96%;--foreground:140 20% 10%;--card:0 0% 100%;--card-foreground:140 20% 10%;--popover:0 0% 100%;--popover-foreground:140 20% 10%;--primary:145 45% 15%;--primary-foreground:140 10% 96%;--secondary:145 25% 25%;--secondary-foreground:140 10% 96%;--muted:140 10% 92%;--muted-foreground:140 10% 40%;--accent:18 80% 60%;--accent-foreground:140 10% 96%;--destructive:0 84.2% 60.2%;--destructive-foreground:210 40% 98%;--border:140 15% 85%;--input:140 10% 90%;--ring:18 80% 60%;--radius:1.25rem;--sidebar-background:145 30% 12%;--sidebar-foreground:140 10% 96%;--sidebar-primary:145 40% 40%;--sidebar-primary-foreground:140 10% 96%;--sidebar-accent:145 20% 20%;--sidebar-accent-foreground:140 10% 96%;--sidebar-border:145 15% 22%;--sidebar-ring:145 40% 40%}*{border-color:hsl(var(--border))}body{background-color:hsl(var(--background));font-family:Poppins,Poppins Fallback,system-ui,sans-serif;color:hsl(var(--foreground));position:relative}body:before{content:"";position:fixed;top:0;right:0;bottom:0;left:0;pointer-events:none;z-index:9999;opacity:.04;mix-blend-mode:overlay;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.6 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>")}@media (pointer: fine){html{scrollbar-color:hsl(var(--primary) / .4) hsl(var(--background));scrollbar-width:thin}}</style>
+    
+  
+  <meta name="description" content="Discover the Real Rio. Skip the tourist traps and explore the Marvelous City with local
+experts. Private, safe, and tailored exclusively for you.">
+  
+  <meta property="og:image" content="https://tocorimerio.com/og-image.jpg">
+  <meta property="og:image:width" content="1216">
+  <meta property="og:image:height" content="640">
+  <meta property="og:image:alt" content="Tocorime Rio — Private & Custom Rio de Janeiro Tours">
+  <meta name="twitter:image" content="https://tocorimerio.com/og-image.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta property="og:type" content="website">
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <!-- Analytics: gtag stub — scripts loaded deferred after page load -->
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+  </script>
+  
+  
+  
+  
+  <meta property="og:title" content="Tocorime Rio | Private & Custom Rio Tours">
+  <meta name="twitter:title" content="Tocorime Rio | Private & Custom Rio Tours">
+  <meta property="og:description" content="Discover the Real Rio. Skip the tourist traps and explore the Marvelous City with local
+experts. Private, safe, and tailored exclusively for you.">
+  <meta name="twitter:description" content="Discover the Real Rio. Skip the tourist traps and explore the Marvelous City with local
+experts. Private, safe, and tailored exclusively for you.">
+  <script type="module" crossorigin src="/assets/index-Bks20TxF.js"></script>
+  <link rel="modulepreload" crossorigin href="/assets/supabase-BgQJfCCH.js">
+  <link rel="modulepreload" crossorigin href="/assets/vendor-8laeIfBe.js">
+  <link rel="modulepreload" crossorigin href="/assets/icons-Cxz3YDqC.js">
+  <link rel="alternate stylesheet preload" crossorigin href="/assets/index-LY7KfhZt.css" title="styles" as="style" onload="this.title='';this.rel='stylesheet'"><noscript><link rel="alternate stylesheet preload" crossorigin href="/assets/index-LY7KfhZt.css" title="styles" as="style" onload="this.title='';this.rel='stylesheet'"><noscript><link rel="stylesheet" crossorigin href="/assets/index-LY7KfhZt.css"></noscript></noscript>
+</head>
+
+  <body>
+    <div id="root"></div>
+    <script>
+      // SEO: força HTTPS, sem www, sem barra final (best-effort no client p/ SPA estático)
+      (function () {
+        try {
+          var l = window.location;
+          var host = l.hostname;
+          var needsRedirect = false;
+          var newHost = host;
+          var newProto = l.protocol;
+          var newPath = l.pathname;
+
+          if (host === 'www.tocorimerio.com') { newHost = 'tocorimerio.com'; needsRedirect = true; }
+          if (l.protocol === 'http:' && (host === 'tocorimerio.com' || host === 'www.tocorimerio.com')) {
+            newProto = 'https:'; needsRedirect = true;
+          }
+          if (newPath.length > 1 && newPath.endsWith('/')) {
+            newPath = newPath.replace(/\/+$/, ''); needsRedirect = true;
+          }
+          if (needsRedirect) {
+            window.location.replace(newProto + '//' + newHost + newPath + l.search + l.hash);
+          }
+        } catch (e) { /* noop */ }
+      })();
+    </script>
+
+
+    <script>
+      (function() {
+        if ('serviceWorker' in navigator) {
+          navigator.serviceWorker.getRegistrations().then(function(registrations) {
+            for(let registration of registrations) {
+              registration.unregister();
+            }
+          });
+        }
+      })();
+    </script>
+    <script>
+      window.addEventListener('load', function() {
+        var loadAnalytics = function() {
+          // Load GA4
+          var s1 = document.createElement('script');
+          s1.async = true;
+          s1.src = 'https://www.googletagmanager.com/gtag/js?id=G-R4PH55B7S7';
+          document.head.appendChild(s1);
+
+          // Load Google Ads
+          var s2 = document.createElement('script');
+          s2.async = true;
+          s2.src = 'https://www.googletagmanager.com/gtag/js?id=AW-18075082892';
+          document.head.appendChild(s2);
+
+          s1.onload = function() {
+            gtag('config', 'G-R4PH55B7S7');
+            gtag('config', 'AW-18075082892');
+            gtag('event', 'conversion', {'send_to': 'AW-16608678123/RUoyCMK0_qEbEOuh0e89'});
+          };
+        };
+
+        if ('requestIdleCallback' in window) {
+          requestIdleCallback(function() { setTimeout(loadAnalytics, 2000); });
+        } else {
+          setTimeout(loadAnalytics, 4000);
+        }
+      });
+    </script>
+
+  </body>
+</html>
