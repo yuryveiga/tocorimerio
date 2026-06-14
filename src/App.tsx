@@ -203,6 +203,7 @@ const App = ({ queryClient: externalQueryClient }: { queryClient?: QueryClient }
                       <Route path="/hiking" element={<PasseiosCategoria categoriaOverride="trilha" pathOverride="/hiking" />} />
                       <Route path="/one-day" element={<PasseiosCategoria categoriaOverride="um-dia" pathOverride="/one-day" />} />
                       <Route path="/experiences" element={<Experiences />} />
+                      <Route path="/your-private-guide-in-rio" element={<PrivateGuideRio />} />
                       <Route path="/passeio/:id" element={<PasseioDetalhe />} />
                       <Route path="/match/:id" element={<MatchDetail />} />
 
