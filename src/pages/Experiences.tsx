@@ -126,8 +126,9 @@ export default function Experiences() {
         <script type="application/ld+json">
           {JSON.stringify({
             "@context": "https://schema.org",
-            "@type": "TouristAttraction",
+            "@type": "TravelAgency",
             "name": "Tocorime Rio - Private Tours",
+            "image": "https://tocorimerio.com/logo.png",
             "aggregateRating": {
               "@type": "AggregateRating",
               "ratingValue": "5.0",
