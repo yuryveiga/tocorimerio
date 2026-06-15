@@ -208,12 +208,18 @@ export default function PrivateGuideRio() {
               </div>
             </FadeUp>
             
-            <h1 className="font-serif font-normal text-5xl sm:text-6xl md:text-7xl lg:text-[6rem] leading-[1.02] tracking-tight mb-12">
+            <h1 className="font-serif font-normal text-5xl sm:text-6xl md:text-7xl lg:text-[5.5rem] leading-[1.02] tracking-tight mb-8">
               <div className="overflow-hidden"><RevealText delay={0.2}>Your Private Guide</RevealText></div>
-              <div className="overflow-hidden"><RevealText delay={0.3}><em className="text-[#E8B567] italic pr-4">in Rio</em>, hour by hour.</RevealText></div>
+              <div className="overflow-hidden"><RevealText delay={0.3}><em className="text-[#E8B567] italic pr-4">in Rio de Janeiro.</em></RevealText></div>
             </h1>
+
+            <FadeUp delay={0.4} className="max-w-2xl mb-12">
+              <p className="text-lg md:text-xl text-[#F4EFE6] font-light leading-relaxed opacity-95">
+                Skip the tourist traps and explore safely with a certified, bilingual local expert. A completely personalized itinerary designed around your interests, at your own pace.
+              </p>
+            </FadeUp>
             
-            <FadeUp delay={0.5} className="flex flex-col sm:flex-row gap-4 mt-8">
+            <FadeUp delay={0.5} className="flex flex-col sm:flex-row gap-4">
               <a href={waLink} target="_blank" rel="noopener noreferrer" className="group relative overflow-hidden bg-[#E8B567] text-[#14241F] px-8 py-5 text-[0.65rem] font-medium uppercase tracking-[0.2em] flex items-center justify-center gap-3">
                 <span className="absolute inset-0 w-full h-full bg-white -translate-x-full group-hover:translate-x-0 transition-transform duration-500 ease-[0.19,1,0.22,1]"></span>
                 <span className="relative flex items-center gap-3 z-10"><MessageCircle size={16} /> Chat on WhatsApp</span>
