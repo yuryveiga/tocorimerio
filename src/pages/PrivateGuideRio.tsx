@@ -84,7 +84,7 @@ export default function PrivateGuideRio() {
         .pg-topbar{border-bottom:1px solid rgba(20,36,31,.15);text-align:center;font-size:.7rem;padding:9px 20px;letter-spacing:.25em;text-transform:uppercase;color:var(--dark);background:var(--paper)}
         .pg-header{display:flex;justify-content:space-between;align-items:center;padding:22px 7%;border-bottom:1px solid rgba(20,36,31,.12)}
         .pg-logo{display:flex;align-items:center;gap:12px;font-family:'Playfair Display',serif;font-size:1.35rem;color:var(--dark);text-decoration:none;letter-spacing:.02em}
-        .pg-logo-mark{width:28px;height:28px;border-radius:50%;background:conic-gradient(var(--orange),#E8B567,var(--green),var(--orange))}
+        .pg-logo img{height:54px;width:auto;display:block}
         .pg-nav{display:flex;align-items:center;gap:34px}
         .pg-nav a{text-decoration:none;color:var(--dark);font-size:.78rem;text-transform:uppercase;letter-spacing:.2em}
         .pg-book-btn{border:1px solid var(--dark);padding:11px 22px !important;border-radius:0 !important;transition:all .2s}
@@ -201,7 +201,7 @@ export default function PrivateGuideRio() {
         <div className="pg-topbar">An Editorial Travel Journal · Volume I · Rio de Janeiro</div>
 
         <header className="pg-header">
-          <Link to="/" className="pg-logo"><span className="pg-logo-mark" /> Tocorime Rio</Link>
+          <Link to="/" className="pg-logo"><img src="/logo.png" alt="Tocorime Rio" /> <span>Tocorime Rio</span></Link>
           <nav className="pg-nav">
             <Link to="/">Home</Link>
             <Link to="/our-tours">Tours</Link>
@@ -363,7 +363,10 @@ export default function PrivateGuideRio() {
 
         <footer className="pg-footer">
           <div className="pg-footer-grid">
-            <div className="pg-brand">Tocorime Rio</div>
+            <div className="pg-brand" style={{display:'flex',alignItems:'center',gap:14}}>
+              <img src="/logo.png" alt="Tocorime Rio" style={{height:42,width:'auto',filter:'brightness(0) invert(1)',opacity:.95}} />
+              Tocorime Rio
+            </div>
             <div style={{letterSpacing:'.25em',textTransform:'uppercase',fontSize:'.7rem'}}>Private &amp; Custom · Rio de Janeiro</div>
           </div>
           <div className="pg-footer-copy">© {new Date().getFullYear()} Tocorime Rio · All rights reserved</div>
