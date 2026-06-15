@@ -362,8 +362,11 @@ export default function PrivateGuideRio() {
         </section>
 
         <footer className="pg-footer">
-          <div className="pg-brand">Tocorime Rio</div>
-          <div>Private &amp; Custom Rio de Janeiro Tours · © {new Date().getFullYear()} Tocorime Rio. All rights reserved.</div>
+          <div className="pg-footer-grid">
+            <div className="pg-brand">Tocorime Rio</div>
+            <div style={{letterSpacing:'.25em',textTransform:'uppercase',fontSize:'.7rem'}}>Private &amp; Custom · Rio de Janeiro</div>
+          </div>
+          <div className="pg-footer-copy">© {new Date().getFullYear()} Tocorime Rio · All rights reserved</div>
         </footer>
       </div>
     </>
