@@ -131,7 +131,7 @@ export default function PrivateGuideRio() {
         </Link>
         <nav className="hidden md:flex items-center gap-8">
           <Link to="/" className="text-[#14241F] text-xs uppercase tracking-[0.2em] hover:text-[#C8633F] transition-colors">Home</Link>
-          <Link to="/our-tours" className="text-[#14241F] text-xs uppercase tracking-[0.2em] hover:text-[#C8633F] transition-colors">Tours</Link>
+          <Link to="/experiences" className="text-[#14241F] text-xs uppercase tracking-[0.2em] hover:text-[#C8633F] transition-colors">Tours</Link>
           <a href="#contact" className="text-[#14241F] text-xs uppercase tracking-[0.2em] hover:text-[#C8633F] transition-colors">Contact</a>
           <a 
             href={waLink} 
