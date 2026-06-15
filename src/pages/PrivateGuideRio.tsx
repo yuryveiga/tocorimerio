@@ -268,14 +268,47 @@ export default function PrivateGuideRio() {
               </p>
             </FadeUp>
 
-            {/* Editorial Image injected */}
-            <div className="w-full h-[70vh] overflow-hidden bg-[#E8E4D9] relative" ref={imgRef1}>
-              <motion.img 
-                style={{ y: yImg1, scale: 1.15 }}
-                src="https://images.unsplash.com/photo-1590077428593-a55bb07c4665?q=80&w=1600&auto=format&fit=crop" 
-                alt="Copacabana details"
-                className="absolute inset-0 w-full h-full object-cover"
-              />
+            {/* Editorial Image Grid */}
+            <div className="grid grid-cols-2 md:grid-cols-3 auto-rows-[20vh] md:auto-rows-[25vh] gap-3 lg:gap-4 mt-8 mb-4" ref={imgRef1}>
+              <motion.div style={{ y: yImg1 }} className="col-span-2 row-span-2 overflow-hidden bg-[#E8E4D9] relative group">
+                <img 
+                  src="https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776449709807_2jtntizosth.webp" 
+                  alt="Rio Moments"
+                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
+                />
+              </motion.div>
+              
+              <div className="col-span-1 row-span-1 overflow-hidden bg-[#E8E4D9] relative group">
+                <img 
+                  src="https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1779633510849_1isznf8lppu.webp" 
+                  alt="Rio Details"
+                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
+                />
+              </div>
+
+              <div className="col-span-1 row-span-1 overflow-hidden bg-[#E8E4D9] relative group hidden md:block">
+                <img 
+                  src="https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776155353108_6itdq4lagzl.webp" 
+                  alt="Rio Atmosphere"
+                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
+                />
+              </div>
+
+              <div className="col-span-1 row-span-1 overflow-hidden bg-[#E8E4D9] relative group">
+                <img 
+                  src="https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776155616073_7bsda572n4r.webp" 
+                  alt="Rio Views"
+                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
+                />
+              </div>
+
+              <div className="col-span-1 md:col-span-2 row-span-1 overflow-hidden bg-[#E8E4D9] relative group">
+                <img 
+                  src="https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776178627858_v7p52s0zhet.webp" 
+                  alt="Rio Experience"
+                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
+                />
+              </div>
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-16">
