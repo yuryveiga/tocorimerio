@@ -190,12 +190,15 @@ export default function PrivateGuideRio() {
       {/* HERO */}
       <section ref={heroRef} className="relative min-h-[90vh] flex items-end text-white overflow-hidden bg-[#14241F]">
         <motion.div 
+          initial={{ scale: 1.25, filter: "brightness(0.2)" }}
+          animate={{ scale: 1.05, filter: "brightness(1)" }}
+          transition={{ duration: 2.5, ease: [0.19, 1, 0.22, 1] }}
           style={{ 
             y: yParallax,
             opacity: opacityParallax,
             backgroundImage: "url('https://imgmd.net/images/v1/guia/1698673/rio-de-janeiro-4-c.jpg')" 
           }} 
-          className="absolute inset-0 bg-cover bg-center origin-bottom z-0 scale-105"
+          className="absolute inset-0 bg-cover bg-center origin-bottom z-0"
         />
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#14241F]/40 to-[#14241F] z-10 pointer-events-none" />
 
