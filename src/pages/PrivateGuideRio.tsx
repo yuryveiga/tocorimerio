@@ -145,7 +145,7 @@ export default function PrivateGuideRio() {
       </header>
 
       {/* HERO */}
-      <section className="relative min-h-[85vh] flex items-end text-white bg-cover bg-center" style={{backgroundImage: "linear-gradient(180deg, rgba(20,36,31,0.2) 0%, rgba(20,36,31,0.4) 50%, rgba(20,36,31,0.85) 100%), url('https://images.unsplash.com/photo-1483729558449-99ef09a8c325?q=80&w=2000&auto=format&fit=crop')"}}>
+      <section className="relative min-h-[85vh] flex items-end text-white bg-cover bg-center" style={{backgroundImage: "linear-gradient(180deg, rgba(20,36,31,0.2) 0%, rgba(20,36,31,0.4) 50%, rgba(20,36,31,0.85) 100%), url('https://imgmd.net/images/v1/guia/1698673/rio-de-janeiro-4-c.jpg')"}}>
         <div className="w-full px-6 lg:px-[7%] pb-20 grid grid-cols-1 lg:grid-cols-12 gap-10 items-end">
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
