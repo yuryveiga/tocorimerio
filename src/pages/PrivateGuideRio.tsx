@@ -243,6 +243,75 @@ export default function PrivateGuideRio() {
         </div>
       </section>
 
+      {/* The Guide - Chapter 00 */}
+      <section className="py-32 lg:py-48 px-6 lg:px-12 max-w-[1800px] mx-auto border-b border-[#14241F]/10">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20 items-center">
+          
+          {/* Left: Photo */}
+          <div className="lg:col-span-5 relative">
+            <FadeUp>
+              <div className="relative overflow-hidden bg-[#E8E4D9] aspect-[3/4]">
+                <img 
+                  src="/__l5e/assets-v1/ff11c649-d82d-46b6-b474-e88118fed024/marius-guide.jpg"
+                  alt="Marius Dobbin — Private Guide in Rio de Janeiro"
+                  className="absolute inset-0 w-full h-full object-cover"
+                />
+              </div>
+              <div className="mt-6 flex items-center gap-4">
+                <div className="w-12 h-12 rounded-full bg-[#2A6B4A]/10 flex items-center justify-center">
+                  <img src="/cadastur-logo.png" alt="Cadastur Certified" className="w-8 h-8 object-contain" />
+                </div>
+                <div>
+                  <div className="text-[0.65rem] font-medium tracking-[0.2em] uppercase text-[#6e6e6e]">Certified</div>
+                  <div className="text-sm font-medium text-[#14241F]">Cadastur Active</div>
+                </div>
+              </div>
+            </FadeUp>
+          </div>
+
+          {/* Right: Text */}
+          <div className="lg:col-span-7">
+            <FadeUp>
+              <div className="flex items-center gap-4 text-[0.65rem] tracking-[0.3em] uppercase text-[#C8633F] mb-8">
+                <span className="font-serif italic text-3xl tracking-normal text-[#14241F] normal-case">00</span> The Guide
+              </div>
+              <h2 className="font-serif text-4xl lg:text-5xl leading-[1.05] tracking-tight text-[#14241F] mb-8">
+                Meet <em className="text-[#C8633F] italic">Marius Dobbin</em>,<br className="hidden lg:block"/> your local expert.
+              </h2>
+            </FadeUp>
+            
+            <FadeUp delay={0.1}>
+              <div className="space-y-5 text-base lg:text-lg text-[#3a3a3a] leading-[1.7] font-light">
+                <p>Olá! My name is <strong className="font-medium text-[#14241F]">Marius Dobbin</strong> and I am the founder of Tocorime Rio.</p>
+                <p>My passion for Rio de Janeiro began long before I worked in tourism. Born and raised in the city, I have always been fascinated by its unique energy, exuberant nature, vibrant culture, and, of course, the football that is part of the carioca soul.</p>
+                <p>Over the years, I turned this passion into a profession, dedicating myself to creating authentic experiences for travelers who want to know Rio de Janeiro beyond the traditional routes. My goal is to show not only the famous postcards but also the places, stories, flavors, and moments that make this city so special.</p>
+                <p>Through Tocorime Rio, I welcome visitors from all over the world and have the privilege of sharing unforgettable experiences — from the thrill of watching a match at Maracanã Stadium to adventures in Tijuca Forest, cultural walks through the historic center, trails, local gastronomy, and much more.</p>
+                <p>I believe that traveling is about creating connections. That is why every experience is planned with attention to detail, personalized service, and a commitment to making every visitor feel welcomed and safe during their stay.</p>
+                <p className="text-[#14241F] font-medium italic font-serif text-lg pt-2">Seja sua primeira vez no Rio ou uma visita de retorno, será um prazer ajudá-lo a descobrir o melhor da Cidade Maravilhosa.</p>
+              </div>
+            </FadeUp>
+
+            <FadeUp delay={0.2} className="mt-10 pt-8 border-t border-[#14241F]/10">
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-8">
+                <div>
+                  <div className="text-[0.65rem] font-medium tracking-[0.2em] uppercase text-[#6e6e6e] mb-2">Languages</div>
+                  <div className="text-[#14241F] font-medium">English & Spanish</div>
+                </div>
+                <div>
+                  <div className="text-[0.65rem] font-medium tracking-[0.2em] uppercase text-[#6e6e6e] mb-2">Experience</div>
+                  <div className="text-[#14241F] font-medium">20+ Years in Tourism</div>
+                </div>
+                <div>
+                  <div className="text-[0.65rem] font-medium tracking-[0.2em] uppercase text-[#6e6e6e] mb-2">Origin</div>
+                  <div className="text-[#14241F] font-medium">Born & Raised in Rio</div>
+                </div>
+              </div>
+            </FadeUp>
+          </div>
+
+        </div>
+      </section>
+
       {/* Marquee Strip */}
       <div className="flex justify-between items-center px-6 lg:px-12 py-6 border-b border-[#14241F]/10 text-[0.65rem] font-medium tracking-[0.25em] uppercase text-[#6e6e6e] flex-wrap gap-6 bg-[#FBF8F2]">
         <span className="whitespace-nowrap flex items-center gap-2"><Check size={14} className="text-[#2A6B4A]"/> 5.0 TripAdvisor</span>
