@@ -521,6 +521,33 @@ const BlogPost = () => {
                 </>
               )}
 
+              {/* AUTHOR BOX */}
+              <div className="mt-16 p-8 bg-muted/30 border border-border/50 rounded-2xl flex flex-col md:flex-row items-center md:items-start gap-8 group">
+                <div className="w-24 h-24 md:w-32 md:h-32 rounded-full overflow-hidden shrink-0 border-4 border-background shadow-md">
+                  <img 
+                    src="/__l5e/assets-v1/ff11c649-d82d-46b6-b474-e88118fed024/marius-guide.jpg" 
+                    alt="Marius Dobbin" 
+                    className="w-full h-full object-cover"
+                    loading="lazy"
+                  />
+                </div>
+                <div className="flex-1 text-center md:text-left">
+                  <h4 className="font-black text-[10px] uppercase tracking-[0.25em] text-accent mb-1">
+                    {language === 'pt' ? 'Autor e Especialista Local' : 'Author & Local Expert'}
+                  </h4>
+                  <p className="font-serif text-2xl font-bold mb-3 text-foreground">
+                    Marius Dobbin
+                  </p>
+                  <p className="text-base text-muted-foreground leading-relaxed mb-4">
+                    {language === 'pt' ? 'Carioca de alma e coração, transformei minha paixão profunda pelo Rio no propósito da minha vida. Desenho cada experiência com atenção aos detalhes para garantir que você viva a cidade de forma autêntica e segura.' : 'Born and raised in Rio, I turned a lifelong passion for my hometown into my life\'s work. I craft every journey with attention to detail to ensure you experience Rio authentically and safely.'}
+                  </p>
+                  <Link to="/your-private-guide-in-rio" className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-accent hover:gap-3 transition-all">
+                    {language === 'pt' ? 'Conheça minha história' : 'Discover my story'}
+                    <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+                  </Link>
+                </div>
+              </div>
+
               {/* BLOG CTA BLOCK */}
               <div className="mt-16 p-8 sm:p-12 rounded-2xl bg-gradient-to-br from-primary/10 via-primary/5 to-transparent border border-primary/20 text-center animate-fade-in shadow-inner relative overflow-hidden group">
                 <div className="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-full -mr-16 -mt-16 transition-transform group-hover:scale-150 duration-700" />
