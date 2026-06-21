@@ -259,7 +259,7 @@ export default function PrivateGuideRio() {
               </div>
               <div className="mt-6 flex items-center gap-4">
                 <div className="w-12 h-12 rounded-full bg-[#2A6B4A]/10 flex items-center justify-center">
-                  <img src="/cadastur-logo.png" alt="Cadastur Certified" className="w-8 h-8 object-contain" />
+                  <img src="https://logodownload.org/wp-content/uploads/2018/02/cadastur-logo-1.png" alt="Cadastur Certified" className="w-8 h-8 object-contain" loading="lazy" />
                 </div>
                 <div>
                   <div className="text-[0.65rem] font-medium tracking-[0.2em] uppercase text-[#6e6e6e]">Certified</div>
