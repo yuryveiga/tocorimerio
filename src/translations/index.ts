@@ -1,4 +1,7 @@
 export const translationsPt = {
+  ex_guide_eyebrow: 'Especialista Local',
+  ex_guide_desc: 'Carioca de alma e coração, transformei minha paixão profunda pelo Rio de Janeiro no propósito da minha vida. Desenho cada experiência com atenção obsessiva aos detalhes, combinando o conhecimento autêntico com um serviço impecável, garantindo que você viva o Rio de forma acolhedora e absolutamente segura.',
+  ex_guide_cta: 'Conheça minha história',
   inicio: 'Início',
   passeios: 'Passeios',
   sobre: 'Sobre Nós',
@@ -433,6 +436,9 @@ export const translationsPt = {
 };
 
 export const translationsEn = {
+  ex_guide_eyebrow: 'Your Local Expert',
+  ex_guide_desc: "Born and raised in Rio, I've turned a lifelong passion for my hometown into my life's work. I craft every journey with an obsessive attention to detail, pairing true insider knowledge with impeccable service to ensure you experience Rio authentically, comfortably, and safely.",
+  ex_guide_cta: 'Discover my story',
   inicio: 'Home',
   passeios: 'Tours',
   sobre: 'About Us',
@@ -867,6 +873,9 @@ export const translationsEn = {
 };
 
 export const translationsEs = {
+  ex_guide_eyebrow: 'Su Experto Local',
+  ex_guide_desc: 'Nacido y criado en Río, he convertido la pasión de toda mi vida por mi ciudad en mi vocación. Diseño cada viaje con una atención obsesiva al detalle, combinando un verdadero conocimiento interno con un servicio impecable para asegurar que experimentes Río de manera auténtica, cómoda y segura.',
+  ex_guide_cta: 'Descubre mi historia',
   inicio: 'Inicio',
   passeios: 'Paseos',
   sobre: 'Sobre Nosotros',
@@ -1300,6 +1309,9 @@ export const translationsEs = {
   last_spots_for: 'Últimos cupos para',
 };
 export const translationsZhCN = {
+  ex_guide_eyebrow: '您的当地专家',
+  ex_guide_desc: '我土生土长在里约，将对家乡的热爱化为了毕生的事业。我以极度的细致打磨每一次旅程，将真正的内部知识与无可挑剔的服务相结合，确保您能真实、舒适、安全地体验里约。',
+  ex_guide_cta: '探索我的故事',
   inicio: '首页',
   passeios: '旅游行程',
   sobre: '关于我们',
@@ -1733,6 +1745,9 @@ export const translationsZhCN = {
   last_spots_for: '最后名额：',
 };
 export const translationsZhTW = {
+  ex_guide_eyebrow: '您的在地專家',
+  ex_guide_desc: '我土生土長在里約，將對家鄉的熱愛化為了畢生的事業。我以極度的細緻打磨每一次旅程，將真正的內部知識與無可挑剔的服務相結合，確保您能真實、舒適、安全地體驗里約。',
+  ex_guide_cta: '探索我的故事',
   inicio: '首頁',
   passeios: '行程',
   sobre: '關於我們',
