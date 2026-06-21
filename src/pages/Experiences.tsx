@@ -314,6 +314,60 @@ export default function Experiences() {
         </div>
       </section>
 
+      {/* ─── MEET YOUR GUIDE ─────────────────────────────────────────────── */}
+      <section className="py-20 bg-muted/30 border-y border-border/40">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <ViewFadeIn>
+            <div className="grid grid-cols-1 md:grid-cols-12 gap-10 lg:gap-16 items-center">
+              {/* Photo */}
+              <div className="md:col-span-5 flex justify-center">
+                <div className="relative w-64 h-64 md:w-72 md:h-72 rounded-3xl overflow-hidden shadow-xl border-4 border-background bg-[#E8E4D9]">
+                  <img
+                    src="/__l5e/assets-v1/ff11c649-d82d-46b6-b474-e88118fed024/marius-guide.jpg"
+                    alt="Marius Dobbin — Private Guide in Rio de Janeiro"
+                    className="absolute inset-0 w-full h-full object-cover"
+                    loading="lazy"
+                  />
+                </div>
+              </div>
+
+              {/* Text */}
+              <div className="md:col-span-7 text-center md:text-left">
+                <p className="text-xs font-black uppercase tracking-[0.3em] text-accent mb-3">{t("ex_guide_eyebrow") || "Your Local Expert"}</p>
+                <h2 className="font-serif text-3xl md:text-4xl font-bold text-foreground mb-2 text-balance">
+                  Marius Dobbin
+                </h2>
+                <p className="text-muted-foreground font-medium mb-6">Founder & Lead Guide at Tocorime Rio</p>
+
+                <div className="flex flex-wrap justify-center md:justify-start gap-3 mb-6">
+                  <span className="inline-flex items-center gap-1.5 rounded-full bg-accent/10 text-accent px-3 py-1.5 text-xs font-bold uppercase tracking-wide">
+                    <MapPin className="w-3.5 h-3.5" /> Born & Raised in Rio
+                  </span>
+                  <span className="inline-flex items-center gap-1.5 rounded-full bg-accent/10 text-accent px-3 py-1.5 text-xs font-bold uppercase tracking-wide">
+                    <Clock className="w-3.5 h-3.5" /> 20+ Years Experience
+                  </span>
+                  <span className="inline-flex items-center gap-1.5 rounded-full bg-accent/10 text-accent px-3 py-1.5 text-xs font-bold uppercase tracking-wide">
+                    <ShieldCheck className="w-3.5 h-3.5" /> Cadastur Certified
+                  </span>
+                </div>
+
+                <p className="text-muted-foreground leading-relaxed mb-6 max-w-lg mx-auto md:mx-0">
+                  {t("ex_guide_desc") || "Born and raised in Rio, I turned my passion for this city into a career. Every experience is crafted with attention to detail, personalized service, and a commitment to making you feel welcomed and safe."}
+                </p>
+
+                <Link
+                  to="/your-private-guide-in-rio"
+                  className="inline-flex items-center gap-2 text-accent font-bold text-sm uppercase tracking-wide hover:gap-3 transition-all group"
+                >
+                  {t("ex_guide_cta") || "Read full bio"}
+                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                </Link>
+              </div>
+            </div>
+          </ViewFadeIn>
+        </div>
+      </section>
+
       {/* ─── STRATEGIC PHRASE: Low season ──────────────────────────────────── */}
       <section className="relative py-20 overflow-hidden">
         <div className="absolute inset-0">
