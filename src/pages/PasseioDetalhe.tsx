@@ -1217,7 +1217,7 @@ export function PasseioDetalhe() {
                  </div>
 
                  {/* TripAdvisor Badge Link */}
-                 <a href={tripAdvisorUrl} target="_blank" rel="noopener noreferrer" className="block p-6 bg-emerald-50 border border-emerald-100 rounded-2xl text-center group hover:bg-emerald-100 transition-colors">
+                 <a href={tripAdvisorUrl} target="_blank" rel="noopener noreferrer" className="block p-6 bg-emerald-50 border border-emerald-100 rounded-2xl text-center group hover:bg-emerald-100 transition-colors mb-6">
                     <div className="flex items-center justify-center gap-2 mb-2">
                        <Star className="w-4 h-4 fill-emerald-600 text-emerald-600" />
                        <Star className="w-4 h-4 fill-emerald-600 text-emerald-600" />
@@ -1227,6 +1227,34 @@ export function PasseioDetalhe() {
                     </div>
                     <span className="text-xs font-black text-emerald-800 uppercase tracking-widest group-hover:underline">{t("excelente_tripadvisor")}</span>
                  </a>
+
+                 {/* Guide Short Profile */}
+                 <div className="p-6 bg-muted/30 border border-border/50 rounded-2xl relative overflow-hidden group">
+                   <div className="flex items-center gap-4 mb-4">
+                     <div className="w-14 h-14 rounded-full overflow-hidden shrink-0 border-2 border-background shadow-md">
+                       <img 
+                         src="/__l5e/assets-v1/ff11c649-d82d-46b6-b474-e88118fed024/marius-guide.jpg" 
+                         alt="Marius Dobbin" 
+                         className="w-full h-full object-cover"
+                       />
+                     </div>
+                     <div>
+                       <h4 className="font-black text-[10px] uppercase tracking-widest text-accent mb-1">
+                         {t("ex_guide_eyebrow") || "Your Local Expert"}
+                       </h4>
+                       <p className="font-serif text-xl font-bold leading-none text-foreground">
+                         Marius Dobbin
+                       </p>
+                     </div>
+                   </div>
+                   <p className="text-sm text-muted-foreground leading-relaxed mb-4">
+                     {language === 'pt' ? 'Carioca de alma e coração. Desenho cada experiência com atenção aos detalhes para garantir que você viva o Rio de forma autêntica e segura.' : 'Born and raised in Rio. I craft every journey with attention to detail to ensure you experience Rio authentically and safely.'}
+                   </p>
+                   <Link to="/your-private-guide-in-rio" className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-accent hover:gap-3 transition-all">
+                     {t("ex_guide_cta") || "Discover my story"}
+                     <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+                   </Link>
+                 </div>
               </div>
             </div>
           </div>
