@@ -13,6 +13,7 @@ import { ViewFadeIn } from "@/components/ViewFadeIn";
 // Lazy load sections below the fold
 const WeatherSection = lazy(() => import("@/components/WeatherSection").then(m => ({ default: m.WeatherSection })));
 const ToursSection = lazy(() => import("@/components/ToursSection").then(m => ({ default: m.ToursSection })));
+const GuideProfileSection = lazy(() => import("@/components/GuideProfileSection").then(m => ({ default: m.GuideProfileSection })));
 const WhyChooseUs = lazy(() => import("@/components/WhyChooseUs").then(m => ({ default: m.WhyChooseUs })));
 const ReviewsSection = lazy(() => import("@/components/ReviewsSection").then(m => ({ default: m.ReviewsSection })));
 const AboutSection = lazy(() => import("@/components/AboutSection").then(m => ({ default: m.AboutSection })));
@@ -72,6 +73,7 @@ const Index = () => {
       {/* Each lazy section in its own Suspense so a slow chunk
           doesn't hold back the others from rendering. */}
       <Suspense fallback={<SectionLoader />}><ToursSection /></Suspense>
+      <LazyMount minHeight={300}><Suspense fallback={null}><GuideProfileSection /></Suspense></LazyMount>
       <LazyMount minHeight={400}><Suspense fallback={null}><WhyChooseUs /></Suspense></LazyMount>
       <LazyMount minHeight={500}><Suspense fallback={null}><ReviewsSection /></Suspense></LazyMount>
       <LazyMount minHeight={400}><Suspense fallback={null}><WeatherSection /></Suspense></LazyMount>
