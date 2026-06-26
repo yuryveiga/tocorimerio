@@ -114,6 +114,11 @@ async function fetchDynamicRoutes() {
     '/passeio',
     '/our-tours',
     '/sitemap',
+    '/experiences',
+    '/your-private-guide-in-rio',
+    '/city-tour',
+    '/hiking',
+    '/one-day',
     '/flamengo-x-vasco-maracana',
     '/fluminense-bolivar-libertadores',
     '/brasil-x-panama-maio-maracana'
