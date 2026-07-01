@@ -18,6 +18,7 @@ import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious
 import "react-quill-new/dist/quill.snow.css";
 import { OptimizedImage } from "@/components/OptimizedImage";
 import { getCanonicalUrl, generateOptimizedMetaDescription, getHreflangLinks, generateArticleSchema, generateBreadcrumbsSchema } from "@/utils/seo";
+import { BlogPostRating } from "@/components/BlogPostRating";
 
 const InlineCTA = () => {
   const { t, language } = useLocale();
@@ -434,6 +435,8 @@ const BlogPost = () => {
                   </div>
                 </div>
 
+                {post?.id && <BlogPostRating postId={post.id} />}
+
                 {/* BLOG CTA BLOCK */}
                 <div className="mt-16 p-8 sm:p-12 rounded-3xl bg-gradient-to-br from-primary/10 via-primary/5 to-transparent border border-primary/20 text-center animate-fade-in shadow-inner relative overflow-hidden group">
                   <div className="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-full -mr-16 -mt-16 transition-transform group-hover:scale-150 duration-700" />
@@ -574,6 +577,8 @@ const BlogPost = () => {
                   </Link>
                 </div>
               </div>
+
+              {post?.id && <BlogPostRating postId={post.id} />}
 
               {/* BLOG CTA BLOCK */}
               <div className="mt-16 p-8 sm:p-12 rounded-2xl bg-gradient-to-br from-primary/10 via-primary/5 to-transparent border border-primary/20 text-center animate-fade-in shadow-inner relative overflow-hidden group">
