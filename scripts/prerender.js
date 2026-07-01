@@ -339,7 +339,14 @@ async function prerender() {
         // Wait for network to settle
         await page.waitForLoadState('networkidle', { timeout: 20000 }).catch(() => { });
 
-        // Wait for route-specific selector (garante que dados do Supabase carregaram)
+        // Global Wait: Ensure useSiteData has finished so Header/Footer have contact info
+        try {
+          await page.waitForSelector('body[data-site-data-ready="true"]', { timeout: 20000 });
+        } catch {
+          console.warn(`  ⚠ ${route}: global data-site-data-ready not found in 20s. Header might be missing contact info.`);
+        }
+
+        // Wait for route-specific selector (garante que dados da página carregaram)
         const selector = getSelectorForRoute(route);
         let selectorOk = !selector;
         if (selector) {

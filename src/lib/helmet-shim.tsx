@@ -44,6 +44,20 @@ function applyTag(el: any, id: string): HTMLElement | null {
 
   if (type !== "meta" && type !== "link" && type !== "script") return null;
 
+  // Remove conflicting static tags (those without MARKER) so we don't have duplicates
+  if (type === "meta") {
+    const name = props.name || props.property || props.itemProp;
+    if (name) {
+      document.head.querySelectorAll(`meta[name="${name}"]:not([${MARKER}]), meta[property="${name}"]:not([${MARKER}]), meta[itemprop="${name}"]:not([${MARKER}])`).forEach(n => n.remove());
+    }
+  } else if (type === "link") {
+    const rel = props.rel;
+    const href = props.href;
+    if (rel && rel !== "stylesheet" && rel !== "preload") {
+      document.head.querySelectorAll(`link[rel="${rel}"]:not([${MARKER}])`).forEach(n => n.remove());
+    }
+  }
+
   const node = document.createElement(type);
   for (const [k, v] of Object.entries(props)) {
     if (k === "children") continue;

@@ -17,6 +17,7 @@ import { BUILD_ID } from "./version";
 import { ErrorBoundary } from "./components/ErrorBoundary";
 import { ScrollToHash } from "./components/ScrollToHash";
 import { RouteFader } from "./components/RouteFader";
+import { useSiteData } from "./hooks/useSiteData";
 
 // ─── Eagerly loaded (home page only) ─────────────────────────────────────────
 import Index from "./pages/Index";
@@ -144,12 +145,22 @@ const DeferUntilIdle = ({ children, delay = 1200 }: { children: ReactNode; delay
   return ready ? <>{children}</> : null;
 };
 
+const SiteDataReadyNotifier = () => {
+  const { isLoading } = useSiteData();
+  useEffect(() => {
+    if (!isLoading) {
+      document.body.setAttribute('data-site-data-ready', 'true');
+    }
+  }, [isLoading]);
+  return null;
+};
+
 const App = ({ queryClient: externalQueryClient }: { queryClient?: QueryClient }) => {
   const [queryClient] = useState(() => externalQueryClient || new QueryClient({
     defaultOptions: {
       queries: {
-        staleTime: 1000 * 60 * 5, // 5 minutes
-        gcTime: 1000 * 60 * 30, // 30 minutes
+        staleTime: 1000 * 60 * 60, // 60 minutes
+        gcTime: 1000 * 60 * 60 * 2, // 2 hours
         retry: 1,
         refetchOnWindowFocus: false,
       },
@@ -165,6 +176,7 @@ const App = ({ queryClient: externalQueryClient }: { queryClient?: QueryClient }
             <Sonner />
             <ThemeApplier />
             <ScrollToHash />
+            <SiteDataReadyNotifier />
             <CurrencyProvider>
               <LocaleProvider>
                 <CartProvider>
