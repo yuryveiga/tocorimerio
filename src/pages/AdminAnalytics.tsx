@@ -571,6 +571,12 @@ const AdminAnalytics = () => {
           </CardContent>
         </Card>
       </div>
+        </TabsContent>
+
+        <TabsContent value="ratings">
+          <BlogRatingsPanel />
+        </TabsContent>
+      </Tabs>
     </div>
   );
 };
