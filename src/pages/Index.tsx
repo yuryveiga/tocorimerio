@@ -17,6 +17,7 @@ const GuideProfileSection = lazy(() => import("@/components/GuideProfileSection"
 const WhyChooseUs = lazy(() => import("@/components/WhyChooseUs").then(m => ({ default: m.WhyChooseUs })));
 const ReviewsSection = lazy(() => import("@/components/ReviewsSection").then(m => ({ default: m.ReviewsSection })));
 const AboutSection = lazy(() => import("@/components/AboutSection").then(m => ({ default: m.AboutSection })));
+const ContactSection = lazy(() => import("@/components/ContactSection").then(m => ({ default: m.ContactSection })));
 const GallerySection = lazy(() => import("@/components/GallerySection").then(m => ({ default: m.GallerySection })));
 const BlogCarousel = lazy(() => import("@/components/BlogCarousel").then(m => ({ default: m.BlogCarousel })));
 const Footer = lazy(() => import("@/components/Footer").then(m => ({ default: m.Footer })));
@@ -77,6 +78,7 @@ const Index = () => {
       <LazyMount minHeight={500}><Suspense fallback={null}><ReviewsSection /></Suspense></LazyMount>
       <LazyMount minHeight={400}><Suspense fallback={null}><WeatherSection /></Suspense></LazyMount>
       <LazyMount minHeight={500}><Suspense fallback={null}><AboutSection /></Suspense></LazyMount>
+      <LazyMount minHeight={500}><Suspense fallback={null}><ContactSection /></Suspense></LazyMount>
       <LazyMount minHeight={600}><Suspense fallback={null}><GallerySection /></Suspense></LazyMount>
       <LazyMount minHeight={500}><Suspense fallback={null}><BlogCarousel /></Suspense></LazyMount>
       <LazyMount minHeight={300}><Suspense fallback={null}><Footer /></Suspense></LazyMount>
