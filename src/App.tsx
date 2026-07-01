@@ -48,6 +48,7 @@ const AdminSimulator         = lazy(() => import("./pages/AdminSimulator"));
 const AdminCalendar          = lazy(() => import("./pages/AdminCalendar"));
 const AdminAnalytics         = lazy(() => import("./pages/AdminAnalytics"));
 const Blog                   = lazy(() => import("./pages/Blog"));
+const Contact                = lazy(() => import("./pages/Contact"));
 const Cart                   = lazy(() => import("./pages/Cart"));
 const MaracanaCalendar       = lazy(() => import("./pages/MaracanaCalendar"));
 const GenericPage            = lazy(() => import("./pages/GenericPage"));
@@ -182,6 +183,7 @@ const App = ({ queryClient: externalQueryClient }: { queryClient?: QueryClient }
                     <Routes>
                       <Route path="/" element={<Index />} />
                       <Route path="/blog" element={<Blog />} />
+                      <Route path="/contact" element={<Contact />} />
                       <Route path="/blog/:slug" element={<BlogPost />} />
                       <Route path="/carrinho" element={<Cart />} />
                       <Route path="/confirmacao" element={<CheckoutSuccess />} />
