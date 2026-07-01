@@ -14,6 +14,44 @@ export type Database = {
   }
   public: {
     Tables: {
+      blog_post_ratings: {
+        Row: {
+          comment: string | null
+          created_at: string
+          id: string
+          post_id: string
+          stars: number
+          user_agent: string | null
+          visitor_key: string
+        }
+        Insert: {
+          comment?: string | null
+          created_at?: string
+          id?: string
+          post_id: string
+          stars: number
+          user_agent?: string | null
+          visitor_key: string
+        }
+        Update: {
+          comment?: string | null
+          created_at?: string
+          id?: string
+          post_id?: string
+          stars?: number
+          user_agent?: string | null
+          visitor_key?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "blog_post_ratings_post_id_fkey"
+            columns: ["post_id"]
+            isOneToOne: false
+            referencedRelation: "blog_posts"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       blog_posts: {
         Row: {
           content: string

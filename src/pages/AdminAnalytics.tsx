@@ -17,7 +17,8 @@ import {
   Legend,
 } from "recharts";
 import { Loader2, Users, Eye, Globe, MousePointer2, Link2, Repeat, Map, BookOpen } from "lucide-react";
-import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
+import { BlogRatingsPanel } from "@/components/admin/BlogRatingsPanel";
 
 type Visit = {
   id: string;
@@ -304,10 +305,22 @@ const AdminAnalytics = () => {
 
   return (
     <div className="space-y-8 pb-12">
-      <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
+      <div>
+        <h1 className="text-3xl font-bold font-serif text-foreground">Análise</h1>
+        <p className="text-muted-foreground mt-2">Visitas do site e avaliações dos posts do blog.</p>
+      </div>
+
+      <Tabs defaultValue="visits" className="space-y-6">
+        <TabsList>
+          <TabsTrigger value="visits">Visitas</TabsTrigger>
+          <TabsTrigger value="ratings">Avaliações do Blog</TabsTrigger>
+        </TabsList>
+
+        <TabsContent value="visits" className="space-y-8">
+          <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
         <div>
-          <h1 className="text-3xl font-bold font-serif text-foreground">Análise de Visitas</h1>
-          <p className="text-muted-foreground mt-2">
+          <h2 className="text-xl font-bold font-serif text-foreground">Visitas</h2>
+          <p className="text-muted-foreground text-sm mt-1">
             Visitas em páginas públicas (rotas <code>/admin</code> são ignoradas).
           </p>
         </div>
@@ -558,6 +571,12 @@ const AdminAnalytics = () => {
           </CardContent>
         </Card>
       </div>
+        </TabsContent>
+
+        <TabsContent value="ratings">
+          <BlogRatingsPanel />
+        </TabsContent>
+      </Tabs>
     </div>
   );
 };
