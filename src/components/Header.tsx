@@ -98,6 +98,11 @@ export function Header({ forceLanguage }: { forceLanguage?: 'pt' | 'en' | 'es' }
   };
 
   const allNavLinks = useMemo(() => {
+    const hrefRemap: Record<string, string> = {
+      "#about": "/about-us",
+      "#contact": "/contact",
+    };
+
     const navLinks = [
       { label: t("inicio"), href: "#top" },
       { label: t("passeios"), href: "#tours" },
@@ -108,7 +113,7 @@ export function Header({ forceLanguage }: { forceLanguage?: 'pt' | 'en' | 'es' }
 
     const staticHrefs = navLinks.map(l => l.href);
     const filteredDynamicLinks = pages
-      .map(p => ({ label: p.title, href: p.href }))
+      .map(p => ({ label: p.title, href: hrefRemap[p.href] ?? p.href }))
       .filter(link => !staticHrefs.includes(link.href));
 
     return [...navLinks, ...filteredDynamicLinks];

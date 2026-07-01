@@ -32,13 +32,19 @@ export function Footer() {
     return String(page[`title_${language}`] || page.title || "");
   };
 
+  // Remap old anchor hrefs to their new dedicated pages
+  const hrefRemap: Record<string, string> = {
+    "#about": "/about-us",
+    "#contact": "/contact",
+  };
+
   const navLinks = pages.length > 0
-    ? pages.map((p) => ({ label: getPageLabel(p), href: p.href }))
+    ? pages.map((p) => ({ label: getPageLabel(p), href: hrefRemap[p.href] ?? p.href }))
     : [
         { label: t("inicio"), href: "#top" },
         { label: t("passeios"), href: "#tours" },
-        { label: t("sobre"), href: "#about" },
-        { label: t("contato"), href: "#contact" },
+        { label: t("sobre"), href: "/about-us" },
+        { label: t("contato"), href: "/contact" },
       ];
 
   const activeSocials = socialMedia.length > 0
