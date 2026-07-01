@@ -101,7 +101,7 @@ export function Header({ forceLanguage }: { forceLanguage?: 'pt' | 'en' | 'es' }
     const navLinks = [
       { label: t("inicio"), href: "#top" },
       { label: t("passeios"), href: "#tours" },
-      { label: t("sobre"), href: "#about" },
+      { label: t("sobre"), href: "/about-us" },
       { label: t("contato"), href: "/contact" },
       { label: "Blog", href: "/blog" },
     ];
