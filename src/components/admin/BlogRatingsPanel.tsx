@@ -25,12 +25,12 @@ interface PostAgg {
   distribution: [number, number, number, number, number]; // 1..5 counts
 }
 
-const Stars = ({ value, size = 4 }: { value: number; size?: number }) => (
+const Stars = ({ value }: { value: number }) => (
   <div className="flex">
     {[1, 2, 3, 4, 5].map((n) => (
       <Star
         key={n}
-        className={`w-${size} h-${size} ${n <= Math.round(value) ? "fill-yellow-400 text-yellow-400" : "text-muted-foreground/30"}`}
+        className={`w-4 h-4 ${n <= Math.round(value) ? "fill-yellow-400 text-yellow-400" : "text-muted-foreground/30"}`}
       />
     ))}
   </div>
