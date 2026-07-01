@@ -304,9 +304,9 @@ export const generateOptimizedMetaDescription = (text: string, title: string = "
 
   // 2. Define o CTA e Símbolos por idioma
   const ctas: Record<string, string> = {
-    pt: "Reserve agora! ✓",
-    en: "Book now! ✓",
-    es: "¡Reserva ahora! ✓"
+    pt: "Reserve já seu passeio privativo no Rio! ✓",
+    en: "Book your private tour in Rio now! ✓",
+    es: "¡Reserva tu tour privado en Río ahora! ✓"
   };
 
   const cta = ctas[language] || ctas.pt;

@@ -421,14 +421,14 @@ export function PasseioDetalhe() {
   return (
     <main className="min-h-screen bg-background font-sans overflow-x-hidden" data-tour-detail>
       <Helmet>
-        <title>{translatedTitle} | {siteTitle}</title>
+        <title>{translatedTitle} | Private Tour Rio de Janeiro | {siteTitle}</title>
         <meta name="description" content={generateOptimizedMetaDescription(translatedShortDesc, translatedTitle, language)} />
 
         
         {/* Open Graph / Facebook */}
         <meta property="og:type" content="website" />
         <meta property="og:url" content={getCanonicalUrl(`/passeio/${tour?.slug || tour?.id}`)} />
-        <meta property="og:title" content={`${translatedTitle} | ${siteTitle}`} />
+        <meta property="og:title" content={`${translatedTitle} | Private Tour Rio de Janeiro | ${siteTitle}`} />
         <meta property="og:description" content={generateOptimizedMetaDescription(translatedShortDesc, translatedTitle, language)} />
         <meta property="og:image" content={tour.image_url} />
         <meta property="og:site_name" content="Tocorime Rio" />
