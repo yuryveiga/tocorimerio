@@ -68,9 +68,20 @@ export const GA4ComparisonPanel = () => {
 
         const [ga4Res, nativeRes] = await Promise.all([ga4Promise, nativePromise]);
 
+        const ga4Data = (ga4Res.data as { rows?: Array<{ date: string; sessions: number; users: number }>; error?: string; details?: string }) || {};
+        if (ga4Data?.error) {
+          const details = ga4Data.details || "";
+          let msg = ga4Data.error;
+          if (/SERVICE_DISABLED|has not been used/i.test(details)) {
+            msg = "A Google Analytics Data API está desativada no projeto Google Cloud da service account. Ative em: https://console.developers.google.com/apis/api/analyticsdata.googleapis.com/overview e aguarde 1-2 minutos.";
+          } else if (/PERMISSION_DENIED|403/i.test(details)) {
+            msg = "A service account não tem acesso à propriedade GA4 532232341. Adicione o e-mail como Leitor em GA4 Admin → Property access management.";
+          } else if (details) {
+            msg = `${msg} — ${details.slice(0, 400)}`;
+          }
+          throw new Error(msg);
+        }
         if (ga4Res.error) throw new Error(ga4Res.error.message || "GA4 fetch failed");
-        const ga4Data = (ga4Res.data as { rows?: Array<{ date: string; sessions: number; users: number }>; error?: string }) || {};
-        if (ga4Data.error) throw new Error(ga4Data.error);
 
         if (nativeRes.error) throw nativeRes.error;
 
@@ -213,7 +224,7 @@ export const GA4ComparisonPanel = () => {
             <p className="text-sm text-destructive font-medium">Erro ao carregar GA4</p>
             <p className="text-xs text-muted-foreground mt-1 break-words">{error}</p>
             <p className="text-xs text-muted-foreground mt-2">
-              Verifique se o e-mail da service account tem acesso de Leitor à propriedade GA4 <code>532232341</code>.
+              Verifique: (1) a Google Analytics Data API está ativada no projeto Cloud da service account; (2) o e-mail da service account tem acesso de Leitor à propriedade GA4 <code>532232341</code>.
             </p>
           </CardContent>
         </Card>

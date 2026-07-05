@@ -114,8 +114,9 @@ serve(async (req) => {
     if (!gaRes.ok) {
       const txt = await gaRes.text();
       console.error("GA4 API error:", gaRes.status, txt);
+      // Return 200 so supabase.functions.invoke() surfaces the body to the client
       return new Response(JSON.stringify({ error: `GA4 API ${gaRes.status}`, details: txt }), {
-        status: 502, headers: { ...corsHeaders, "Content-Type": "application/json" },
+        status: 200, headers: { ...corsHeaders, "Content-Type": "application/json" },
       });
     }
 
