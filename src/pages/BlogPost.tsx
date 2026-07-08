@@ -2,7 +2,8 @@ import { useState, useEffect } from "react";
 import { useParams, Navigate, Link } from "react-router-dom";
 import DOMPurify from "dompurify";
 
-import { fetchLovable, LovableBlogPost } from "@/integrations/lovable/client";
+import { LovableBlogPost } from "@/integrations/lovable/client";
+import { supabase } from "@/integrations/supabase/client";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { Calendar, ArrowLeft, MessageCircle, Facebook, Link2, ArrowRight, Compass } from "lucide-react";
@@ -67,10 +68,14 @@ const BlogPost = () => {
     window.scrollTo(0, 0);
     const loadPost = async () => {
       setIsLoading(true);
-      const posts = await fetchLovable<LovableBlogPost>("blog_posts");
-      const found = posts.find((p) => p.slug === slug && p.is_published);
-      
-      setPost(found || null);
+      // Busca apenas o post pelo slug — evita baixar TODOS os posts com conteúdo completo.
+      const { data } = await supabase
+        .from("blog_posts")
+        .select("*")
+        .eq("slug", slug!)
+        .eq("is_published", true)
+        .maybeSingle();
+      setPost((data as unknown as LovableBlogPost) || null);
       setIsLoading(false);
     };
     loadPost();
