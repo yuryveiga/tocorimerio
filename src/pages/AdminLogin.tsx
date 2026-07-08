@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate, Link, useSearchParams } from "react-router-dom";
 import { ArrowLeft } from "lucide-react";
 import { useAuth } from "@/hooks/useAuth";
 import { Button } from "@/components/ui/button";
@@ -18,6 +18,10 @@ const AdminLogin = () => {
   const { signIn, resetPassword } = useAuth();
   const navigate = useNavigate();
   const { toast } = useToast();
+  const [searchParams] = useSearchParams();
+  const rawNext = searchParams.get("next");
+  // Only allow same-origin relative paths.
+  const next = rawNext && rawNext.startsWith("/") && !rawNext.startsWith("//") ? rawNext : null;
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -26,7 +30,11 @@ const AdminLogin = () => {
     if (error) {
       toast({ title: "Erro", description: error, variant: "destructive" });
     } else {
-      navigate("/admin");
+      if (next) {
+        window.location.href = next;
+      } else {
+        navigate("/admin");
+      }
     }
     setIsLoading(false);
   };

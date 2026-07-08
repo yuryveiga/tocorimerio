@@ -32,6 +32,7 @@ const PasseioDetalhe         = lazy(() => import("./pages/PasseioDetalhe"));
 const BlogPost               = lazy(() => import("./pages/BlogPost"));
 const NotFound               = lazy(() => import("./pages/NotFound"));
 const AdminLogin             = lazy(() => import("./pages/AdminLogin"));
+const OAuthConsent           = lazy(() => import("./pages/OAuthConsent"));
 const AdminResetPassword     = lazy(() => import("./pages/AdminResetPassword"));
 const AdminLayout            = lazy(() => import("./pages/AdminLayout"));
 const AdminDashboard         = lazy(() => import("./pages/AdminDashboard"));
@@ -233,6 +234,7 @@ const App = ({ queryClient: externalQueryClient }: { queryClient?: QueryClient }
                       <Route path="/:slug" element={<GenericPage />} />
                       <Route path="/admin/login" element={<AdminLogin />} />
                       <Route path="/admin/reset-password" element={<AdminResetPassword />} />
+                      <Route path="/.lovable/oauth/consent" element={<OAuthConsent />} />
                       <Route path="/admin" element={<AdminLayout />}>
                         <Route index element={<AdminDashboard />} />
                         <Route path="blog" element={<AdminBlog />} />
