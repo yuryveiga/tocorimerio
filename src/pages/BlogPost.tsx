@@ -307,6 +307,9 @@ const BlogPost = () => {
           <>
             <title>{title} | {siteTitle}</title>
             <meta name="description" content={generateOptimizedMetaDescription(excerpt || content || title, title, language)} />
+            {(post as unknown as { meta_keywords?: string }).meta_keywords && (
+              <meta name="keywords" content={(post as unknown as { meta_keywords?: string }).meta_keywords} />
+            )}
 
             {/* Open Graph / Facebook */}
             <meta property="og:type" content="article" />

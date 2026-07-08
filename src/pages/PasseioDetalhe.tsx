@@ -423,6 +423,9 @@ export function PasseioDetalhe() {
       <Helmet>
         <title>{translatedTitle} | Private Tour Rio de Janeiro | {siteTitle}</title>
         <meta name="description" content={generateOptimizedMetaDescription(translatedShortDesc, translatedTitle, language)} />
+        {(tour as unknown as { meta_keywords?: string }).meta_keywords && (
+          <meta name="keywords" content={(tour as unknown as { meta_keywords?: string }).meta_keywords} />
+        )}
 
         
         {/* Open Graph / Facebook */}
