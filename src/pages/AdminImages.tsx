@@ -2,8 +2,9 @@ import { useState, useEffect, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
 import { fetchLovable, insertLovable, updateLovable, deleteLovable, uploadLovableFile, LovableSiteImage } from "@/integrations/lovable/client";
-import { Trash2, Upload, Image as ImageIcon, Loader2 } from "lucide-react";
+import { Trash2, Upload, Image as ImageIcon, Loader2, Sparkles } from "lucide-react";
 import { DeleteConfirmDialog } from "@/components/admin/DeleteConfirmDialog";
+import { supabase } from "@/integrations/supabase/client";
 
 
 const PRESET_KEYS = [
@@ -23,6 +24,12 @@ const AdminImages = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [uploadingKey, setUploadingKey] = useState<string | null>(null);
   const [itemToDelete, setItemToDelete] = useState<string | null>(null);
+  const [recompressing, setRecompressing] = useState(false);
+  const [recompressProgress, setRecompressProgress] = useState<{
+    processed: number;
+    total: number;
+    savedBytes: number;
+  } | null>(null);
 
   
   const { toast } = useToast();
@@ -74,6 +81,46 @@ const AdminImages = () => {
     await loadImages();
   };
 
+  const handleRecompress = async () => {
+    if (recompressing) return;
+    setRecompressing(true);
+    setRecompressProgress({ processed: 0, total: 0, savedBytes: 0 });
+    let offset = 0;
+    let savedBytes = 0;
+    let total = 0;
+    try {
+      // eslint-disable-next-line no-constant-condition
+      while (true) {
+        const { data, error } = await supabase.functions.invoke("recompress-bucket", {
+          body: { offset, limit: 6 },
+        });
+        if (error) throw error;
+        if (!data) throw new Error("Resposta vazia");
+        total = data.total ?? 0;
+        for (const r of data.results ?? []) {
+          if (r.status === "recompressed" && typeof r.savings === "number") {
+            savedBytes += r.savings;
+          }
+        }
+        offset = data.nextOffset ?? offset + (data.processed ?? 0);
+        setRecompressProgress({ processed: offset, total, savedBytes });
+        if (data.done) break;
+      }
+      toast({
+        title: "Recompressão concluída",
+        description: `${offset} imagens processadas. ${(savedBytes / 1024 / 1024).toFixed(2)} MB economizados.`,
+      });
+    } catch (e) {
+      toast({
+        title: "Erro na recompressão",
+        description: (e as Error).message,
+        variant: "destructive",
+      });
+    } finally {
+      setRecompressing(false);
+    }
+  };
+
 
   return (
     <div className="space-y-6">
@@ -82,6 +129,28 @@ const AdminImages = () => {
         <p className="text-muted-foreground font-sans text-sm mt-1">
           Edite as fotos principais usadas na estrutura do site (Logo, Banners, Fundo, etc).
         </p>
+      </div>
+
+      <div className="rounded-xl border bg-card p-4 flex flex-col sm:flex-row sm:items-center gap-4 justify-between">
+        <div>
+          <h2 className="font-semibold font-sans text-sm">Otimizar todas as imagens do bucket</h2>
+          <p className="text-xs text-muted-foreground mt-1">
+            Recomprime cada arquivo em WebP (q=72, máx 1920px) e mantém backup em <code>originals/</code>.
+            Executa em lotes de 6 arquivos.
+          </p>
+          {recompressProgress && (
+            <p className="text-xs text-muted-foreground mt-1">
+              Progresso: {recompressProgress.processed}/{recompressProgress.total} · Economia: {(recompressProgress.savedBytes / 1024 / 1024).toFixed(2)} MB
+            </p>
+          )}
+        </div>
+        <Button onClick={handleRecompress} disabled={recompressing} className="font-sans">
+          {recompressing ? (
+            <><Loader2 className="w-4 h-4 mr-2 animate-spin" /> Processando...</>
+          ) : (
+            <><Sparkles className="w-4 h-4 mr-2" /> Recomprimir bucket</>
+          )}
+        </Button>
       </div>
 
       {isLoading ? (
