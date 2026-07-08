@@ -110,48 +110,163 @@ const AdminImages = () => {
       currentBatch: [],
     });
     setRecompressLog([]);
-    let offset = 0;
+
+    const BUCKET = "site-images";
+    const BACKUP_PREFIX = "originals/";
+    const QUALITY = 0.72;
+    const MAX_DIMENSION = 1920;
+    const MIN_SAVINGS_BYTES = 5 * 1024;
+    const MIN_SAVINGS_PCT = 5;
+    const isImage = (n: string) => /\.(jpe?g|png|webp)$/i.test(n);
+
     let savedBytes = 0;
-    let total = 0;
     let recompressed = 0;
     let cacheOnly = 0;
     let failed = 0;
+    let processed = 0;
+
     try {
-      // eslint-disable-next-line no-constant-condition
-      while (true) {
-        const { data, error } = await supabase.functions.invoke("recompress-bucket", {
-          body: { offset, limit: 6 },
-        });
-        if (error) throw error;
-        if (!data) throw new Error("Resposta vazia");
-        total = data.total ?? 0;
-        const batch: FileResult[] = data.results ?? [];
-        for (const r of batch) {
-          if (r.status === "recompressed") {
-            recompressed++;
-            if (typeof r.savings === "number") savedBytes += r.savings;
-          } else if (r.status === "cache-only") {
-            cacheOnly++;
-          } else if (r.status?.startsWith("fail")) {
-            failed++;
+      // 1. List all files in bucket root.
+      const { data: files, error: listErr } = await supabase.storage
+        .from(BUCKET)
+        .list("", { limit: 1000, sortBy: { column: "name", order: "asc" } });
+      if (listErr) throw listErr;
+
+      const candidates = (files ?? []).filter(
+        (f) =>
+          f.name &&
+          !f.name.endsWith("/") &&
+          !f.name.startsWith(BACKUP_PREFIX) &&
+          isImage(f.name),
+      );
+
+      // Load backup index once.
+      const { data: backups } = await supabase.storage
+        .from(BUCKET)
+        .list(BACKUP_PREFIX, { limit: 1000 });
+      const backupSet = new Set((backups ?? []).map((b) => b.name));
+
+      const total = candidates.length;
+      setRecompressProgress({
+        processed: 0,
+        total,
+        savedBytes: 0,
+        recompressed: 0,
+        cacheOnly: 0,
+        failed: 0,
+        currentBatch: [],
+      });
+
+      for (const file of candidates) {
+        const name = file.name;
+        setRecompressProgress((p) => (p ? { ...p, currentBatch: [name] } : p));
+        let result: FileResult = { name, status: "fail", error: "unknown" };
+
+        try {
+          // Download via public URL (bucket is public).
+          const { data: pub } = supabase.storage.from(BUCKET).getPublicUrl(name);
+          const res = await fetch(pub.publicUrl, { cache: "no-store" });
+          if (!res.ok) throw new Error(`HTTP ${res.status}`);
+          const srcBlob = await res.blob();
+          const srcSize = srcBlob.size;
+          const srcType = srcBlob.type || "application/octet-stream";
+
+          // Backup if not present.
+          if (!backupSet.has(name)) {
+            const { error: bkErr } = await supabase.storage
+              .from(BUCKET)
+              .upload(BACKUP_PREFIX + name, srcBlob, {
+                cacheControl: "31536000",
+                upsert: false,
+                contentType: srcType,
+              });
+            if (bkErr && !/exists|Duplicate/i.test(bkErr.message)) {
+              throw new Error(`backup: ${bkErr.message}`);
+            }
+            backupSet.add(name);
           }
+
+          // Decode + resize via canvas.
+          const bitmap = await createImageBitmap(srcBlob);
+          const scale = Math.min(1, MAX_DIMENSION / Math.max(bitmap.width, bitmap.height));
+          const w = Math.max(1, Math.round(bitmap.width * scale));
+          const h = Math.max(1, Math.round(bitmap.height * scale));
+          const wasResized = scale < 1;
+
+          const canvas = document.createElement("canvas");
+          canvas.width = w;
+          canvas.height = h;
+          const ctx = canvas.getContext("2d");
+          if (!ctx) throw new Error("canvas 2d indisponível");
+          ctx.drawImage(bitmap, 0, 0, w, h);
+          bitmap.close?.();
+
+          const outBlob: Blob | null = await new Promise((resolve) =>
+            canvas.toBlob(resolve, "image/webp", QUALITY),
+          );
+          if (!outBlob) throw new Error("encode WebP falhou");
+
+          const outSize = outBlob.size;
+          const savings = srcSize - outSize;
+          const savingsPct = (savings / srcSize) * 100;
+
+          if (!wasResized && (savings < MIN_SAVINGS_BYTES || savingsPct < MIN_SAVINGS_PCT)) {
+            // Just refresh cache header.
+            const { error: upErr } = await supabase.storage
+              .from(BUCKET)
+              .update(name, srcBlob, {
+                cacheControl: "31536000",
+                upsert: true,
+                contentType: srcType,
+              });
+            if (upErr) throw new Error(`cache-refresh: ${upErr.message}`);
+            cacheOnly++;
+            result = { name, status: "cache-only", srcSize };
+          } else {
+            const { error: upErr } = await supabase.storage
+              .from(BUCKET)
+              .update(name, outBlob, {
+                cacheControl: "31536000",
+                upsert: true,
+                contentType: "image/webp",
+              });
+            if (upErr) throw new Error(`upload: ${upErr.message}`);
+            recompressed++;
+            savedBytes += savings;
+            result = {
+              name,
+              status: "recompressed",
+              srcSize,
+              outSize,
+              savings,
+              savingsPct: Math.round(savingsPct * 10) / 10,
+              resized: wasResized,
+            };
+          }
+        } catch (e) {
+          failed++;
+          result = { name, status: "fail", error: (e as Error).message };
         }
-        setRecompressLog((prev) => [...batch, ...prev].slice(0, 50));
-        offset = data.nextOffset ?? offset + (data.processed ?? 0);
+
+        processed++;
+        setRecompressLog((prev) => [result, ...prev].slice(0, 50));
         setRecompressProgress({
-          processed: offset,
+          processed,
           total,
           savedBytes,
           recompressed,
           cacheOnly,
           failed,
-          currentBatch: batch.map((b) => b.name),
+          currentBatch: [name],
         });
-        if (data.done) break;
+
+        // Yield to keep the UI responsive.
+        await new Promise((r) => setTimeout(r, 0));
       }
+
       toast({
         title: "Recompressão concluída",
-        description: `${offset} imagens processadas. ${(savedBytes / 1024 / 1024).toFixed(2)} MB economizados.`,
+        description: `${processed} imagens processadas. ${(savedBytes / 1024 / 1024).toFixed(2)} MB economizados.`,
       });
     } catch (e) {
       toast({
