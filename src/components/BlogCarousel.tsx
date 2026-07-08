@@ -32,7 +32,11 @@ export function BlogCarousel({ title }: { title?: string }) {
       (entries) => {
         if (entries[0].isIntersecting && !fetchedRef.current) {
           fetchedRef.current = true;
-          fetchLovable<LovableBlogPost>("blog_posts").then((data) => {
+          // Colunas mínimas para o carrossel (sem `content` completo)
+          fetchLovable<LovableBlogPost>(
+            "blog_posts",
+            "id,slug,image_url,is_published,title,title_en,title_es,excerpt,excerpt_en,excerpt_es",
+          ).then((data) => {
             setPosts(data.filter(p => p.is_published));
             setIsLoading(false);
           }).catch(() => setIsLoading(false));
@@ -83,8 +87,9 @@ export function BlogCarousel({ title }: { title?: string }) {
               <CarouselContent className="-ml-6">
                 {posts.map((post) => {
                   const title = getTranslated(post, 'title');
-                  const content = getTranslated(post, 'content');
-                  
+                  // Usa excerpt (curto) em vez de `content` (não é mais carregado)
+                  const excerpt = getTranslated(post, 'excerpt' as 'content');
+
                   return (
                     <CarouselItem key={post.id} className="pl-6 basis-full md:basis-1/2">
                       <div className="bg-card rounded-2xl overflow-hidden shadow-2xl h-[480px] flex flex-col group border-none">
@@ -104,7 +109,7 @@ export function BlogCarousel({ title }: { title?: string }) {
                               {title}
                             </h3>
                             <p className="text-white/80 font-sans text-sm line-clamp-4 leading-relaxed">
-                            {content ? content.replace(/<[^>]*>/g, ' ').substring(0, 150) + "..." : title}
+                            {excerpt ? excerpt.replace(/<[^>]*>/g, ' ').substring(0, 150) + "..." : title}
                             </p>
                           </div>
                           

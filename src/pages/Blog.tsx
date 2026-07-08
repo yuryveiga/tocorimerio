@@ -23,12 +23,16 @@ const Blog = () => {
 
   const loadPosts = async () => {
     setIsLoading(true);
-    const data = await fetchLovable<LovableBlogPost>("blog_posts");
-    
+    // Só carrega colunas usadas na listagem (evita trazer `content` gigante).
+    const data = await fetchLovable<LovableBlogPost>(
+      "blog_posts",
+      "id,slug,image_url,is_published,created_at,title,title_en,title_es,excerpt,excerpt_en,excerpt_es",
+    );
+
     const published = data
       .filter(p => p.is_published)
       .sort((a, b) => new Date(b.created_at || 0).getTime() - new Date(a.created_at || 0).getTime());
-      
+
     setPosts(published);
     setIsLoading(false);
   };
