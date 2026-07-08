@@ -5,6 +5,7 @@ import { fetchLovable, insertLovable, updateLovable, deleteLovable, uploadLovabl
 import { Trash2, Upload, Image as ImageIcon, Loader2, Sparkles } from "lucide-react";
 import { DeleteConfirmDialog } from "@/components/admin/DeleteConfirmDialog";
 import { supabase } from "@/integrations/supabase/client";
+import { Progress } from "@/components/ui/progress";
 
 
 const PRESET_KEYS = [
@@ -29,7 +30,22 @@ const AdminImages = () => {
     processed: number;
     total: number;
     savedBytes: number;
+    recompressed: number;
+    cacheOnly: number;
+    failed: number;
+    currentBatch: string[];
   } | null>(null);
+  type FileResult = {
+    name: string;
+    status: string;
+    srcSize?: number;
+    outSize?: number;
+    savings?: number;
+    savingsPct?: number;
+    resized?: boolean;
+    error?: string;
+  };
+  const [recompressLog, setRecompressLog] = useState<FileResult[]>([]);
 
   
   const { toast } = useToast();
@@ -84,10 +100,22 @@ const AdminImages = () => {
   const handleRecompress = async () => {
     if (recompressing) return;
     setRecompressing(true);
-    setRecompressProgress({ processed: 0, total: 0, savedBytes: 0 });
+    setRecompressProgress({
+      processed: 0,
+      total: 0,
+      savedBytes: 0,
+      recompressed: 0,
+      cacheOnly: 0,
+      failed: 0,
+      currentBatch: [],
+    });
+    setRecompressLog([]);
     let offset = 0;
     let savedBytes = 0;
     let total = 0;
+    let recompressed = 0;
+    let cacheOnly = 0;
+    let failed = 0;
     try {
       // eslint-disable-next-line no-constant-condition
       while (true) {
@@ -97,13 +125,28 @@ const AdminImages = () => {
         if (error) throw error;
         if (!data) throw new Error("Resposta vazia");
         total = data.total ?? 0;
-        for (const r of data.results ?? []) {
-          if (r.status === "recompressed" && typeof r.savings === "number") {
-            savedBytes += r.savings;
+        const batch: FileResult[] = data.results ?? [];
+        for (const r of batch) {
+          if (r.status === "recompressed") {
+            recompressed++;
+            if (typeof r.savings === "number") savedBytes += r.savings;
+          } else if (r.status === "cache-only") {
+            cacheOnly++;
+          } else if (r.status?.startsWith("fail")) {
+            failed++;
           }
         }
+        setRecompressLog((prev) => [...batch, ...prev].slice(0, 50));
         offset = data.nextOffset ?? offset + (data.processed ?? 0);
-        setRecompressProgress({ processed: offset, total, savedBytes });
+        setRecompressProgress({
+          processed: offset,
+          total,
+          savedBytes,
+          recompressed,
+          cacheOnly,
+          failed,
+          currentBatch: batch.map((b) => b.name),
+        });
         if (data.done) break;
       }
       toast({
@@ -131,26 +174,99 @@ const AdminImages = () => {
         </p>
       </div>
 
-      <div className="rounded-xl border bg-card p-4 flex flex-col sm:flex-row sm:items-center gap-4 justify-between">
-        <div>
-          <h2 className="font-semibold font-sans text-sm">Otimizar todas as imagens do bucket</h2>
-          <p className="text-xs text-muted-foreground mt-1">
-            Recomprime cada arquivo em WebP (q=72, máx 1920px) e mantém backup em <code>originals/</code>.
-            Executa em lotes de 6 arquivos.
-          </p>
-          {recompressProgress && (
+      <div className="rounded-xl border bg-card p-4 space-y-4">
+        <div className="flex flex-col sm:flex-row sm:items-center gap-4 justify-between">
+          <div>
+            <h2 className="font-semibold font-sans text-sm">Otimizar todas as imagens do bucket</h2>
             <p className="text-xs text-muted-foreground mt-1">
-              Progresso: {recompressProgress.processed}/{recompressProgress.total} · Economia: {(recompressProgress.savedBytes / 1024 / 1024).toFixed(2)} MB
+              Recomprime cada arquivo em WebP (q=72, máx 1920px) e mantém backup em <code>originals/</code>.
+              Executa em lotes de 6 arquivos.
             </p>
-          )}
+          </div>
+          <Button onClick={handleRecompress} disabled={recompressing} className="font-sans">
+            {recompressing ? (
+              <><Loader2 className="w-4 h-4 mr-2 animate-spin" /> Processando...</>
+            ) : (
+              <><Sparkles className="w-4 h-4 mr-2" /> Recomprimir bucket</>
+            )}
+          </Button>
         </div>
-        <Button onClick={handleRecompress} disabled={recompressing} className="font-sans">
-          {recompressing ? (
-            <><Loader2 className="w-4 h-4 mr-2 animate-spin" /> Processando...</>
-          ) : (
-            <><Sparkles className="w-4 h-4 mr-2" /> Recomprimir bucket</>
-          )}
-        </Button>
+
+        {recompressProgress && (
+          <div className="space-y-3">
+            <div>
+              <div className="flex justify-between text-xs font-sans mb-1">
+                <span className="font-medium">
+                  {recompressProgress.processed} / {recompressProgress.total || "?"} arquivos
+                </span>
+                <span className="text-muted-foreground">
+                  {recompressProgress.total
+                    ? Math.round((recompressProgress.processed / recompressProgress.total) * 100)
+                    : 0}
+                  %
+                </span>
+              </div>
+              <Progress
+                value={
+                  recompressProgress.total
+                    ? (recompressProgress.processed / recompressProgress.total) * 100
+                    : 0
+                }
+                className="h-2"
+              />
+            </div>
+
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 text-xs font-sans">
+              <div className="rounded-md bg-muted/40 p-2">
+                <div className="text-muted-foreground">Recomprimidas</div>
+                <div className="font-semibold text-base">{recompressProgress.recompressed}</div>
+              </div>
+              <div className="rounded-md bg-muted/40 p-2">
+                <div className="text-muted-foreground">Só cache</div>
+                <div className="font-semibold text-base">{recompressProgress.cacheOnly}</div>
+              </div>
+              <div className="rounded-md bg-muted/40 p-2">
+                <div className="text-muted-foreground">Falhas</div>
+                <div className="font-semibold text-base">{recompressProgress.failed}</div>
+              </div>
+              <div className="rounded-md bg-muted/40 p-2">
+                <div className="text-muted-foreground">Economia</div>
+                <div className="font-semibold text-base">
+                  {(recompressProgress.savedBytes / 1024 / 1024).toFixed(2)} MB
+                </div>
+              </div>
+            </div>
+
+            {recompressing && recompressProgress.currentBatch.length > 0 && (
+              <p className="text-xs text-muted-foreground font-sans truncate">
+                Processando: {recompressProgress.currentBatch.join(", ")}
+              </p>
+            )}
+
+            {recompressLog.length > 0 && (
+              <div className="border rounded-md max-h-56 overflow-auto">
+                <ul className="divide-y text-xs font-sans">
+                  {recompressLog.map((r, i) => (
+                    <li key={i} className="flex items-center justify-between gap-2 px-3 py-1.5">
+                      <span className="truncate flex-1" title={r.name}>
+                        {r.status === "recompressed" && "✅ "}
+                        {r.status === "cache-only" && "🪵 "}
+                        {r.status?.startsWith("fail") && "❌ "}
+                        {r.name}
+                      </span>
+                      <span className="text-muted-foreground whitespace-nowrap">
+                        {r.status === "recompressed" &&
+                          `${((r.srcSize ?? 0) / 1024).toFixed(0)}→${((r.outSize ?? 0) / 1024).toFixed(0)} KB (-${r.savingsPct}%)`}
+                        {r.status === "cache-only" && "cache atualizado"}
+                        {r.status?.startsWith("fail") && (r.error || r.status)}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+          </div>
+        )}
       </div>
 
       {isLoading ? (
