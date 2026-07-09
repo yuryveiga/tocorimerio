@@ -41,13 +41,6 @@ const Index = () => {
       <Helmet>
         <title>{siteTitle}</title>
         <meta name="description" content={siteDescription} />
-        <link
-          rel="preload"
-          as="image"
-          href="https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776157066514_2zl4bonrweg.avif"
-          type="image/avif"
-          fetchPriority="high"
-        />
         <meta property="og:title" content={siteTitle} />
         <meta property="og:description" content={siteDescription} />
         <meta property="og:type" content="website" />

@@ -15,6 +15,10 @@ export function HeroSection() {
   const { t, language } = useLocale();
   const [currentBg, setCurrentBg] = useState(0);
   const [scrollY, setScrollY] = useState(0);
+  // Slideshow das imagens 2/3: só renderizamos DEPOIS que a LCP terminou de
+  // pintar. Isso evita competir por banda no mobile (economia de ~500KB no
+  // primeiro paint em 4G lento).
+  const [showRestSlides, setShowRestSlides] = useState(false);
   const heroStyle = siteSettings['hero_style'] || "style1";
 
   const heroTitleKey = language === 'pt' ? 'hero_title' : `hero_title_${language}`;
@@ -42,11 +46,30 @@ export function HeroSection() {
 
   useEffect(() => {
     if (heroBgs.length <= 1) return;
+    if (!showRestSlides) return;
     const interval = setInterval(() => {
       setCurrentBg((prev) => (prev + 1) % heroBgs.length);
     }, 6000);
     return () => clearInterval(interval);
-  }, [heroBgs.length]);
+  }, [heroBgs.length, showRestSlides]);
+
+  // Adia carregamento das imagens 2/3 do slideshow até depois do LCP + idle.
+  useEffect(() => {
+    if (showRestSlides) return;
+    let cancelled = false;
+    const trigger = () => { if (!cancelled) setShowRestSlides(true); };
+    // Espera 3.5s OU idle callback — o que vier primeiro após o LCP.
+    const t = window.setTimeout(trigger, 3500);
+    const idle = (window as any).requestIdleCallback?.(
+      () => window.setTimeout(trigger, 1500),
+      { timeout: 4000 }
+    );
+    return () => {
+      cancelled = true;
+      window.clearTimeout(t);
+      if (idle && (window as any).cancelIdleCallback) (window as any).cancelIdleCallback(idle);
+    };
+  }, [showRestSlides]);
 
   // Subtle parallax — translate backgrounds + content while scrolling past hero.
   useEffect(() => {
@@ -174,7 +197,7 @@ export function HeroSection() {
 
   const renderSlideshowBackgrounds = () => (
     <>
-      {heroBgs.map((bg, index) => (
+      {heroBgs.map((bg, index) => index > 0 && !showRestSlides ? null : (
         <div
           key={index}
           className={`absolute inset-0 transition-opacity duration-1000 bg-cover bg-center bg-no-repeat ${index === currentBg ? 'opacity-100' : 'opacity-0'}`}

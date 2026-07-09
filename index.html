@@ -16,28 +16,23 @@
 
     <!-- Playfair 700 (serif H1/H2) só é usado em rotas marketing/conteúdo.
          Rotas utilitárias e /admin/* não renderizam títulos serif acima da
-         dobra, então preloadar lá é desperdício. Hero AVIF idem: só home.
-         O script abaixo:
-           1. injeta preloads condicionalmente no load inicial;
-           2. remove-os em qualquer navegação SPA (pushState/replaceState/popstate)
-              que sai da rota que justificava o preload. -->
+         dobra, então preloadar lá é desperdício.
+
+         Nota: o preload da imagem LCP do hero é feito diretamente pelo
+         componente HeroSection via <img fetchpriority="high"> com a URL
+         real vinda do banco (site_images.hero_bg). Preloadar um AVIF
+         hardcoded aqui causava DOUBLE-DOWNLOAD (AVIF preload + WEBP <img>),
+         ~460KB desperdiçados no mobile. -->
     <script>
       (function () {
         'use strict';
         try {
-          var HERO_PRELOAD_ID = 'hero-lcp-preload';
           var PLAYFAIR_PRELOAD_ID = 'playfair-700-preload';
-          var HERO_URL = 'https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776157066514_2zl4bonrweg.avif';
           var PLAYFAIR_URL = '/fonts/PlayfairDisplay-700.woff2';
 
           // Rotas que NÃO precisam de Playfair (sem títulos serif acima da dobra).
           // Tudo o que não bater aqui é considerado rota de marketing/conteúdo.
           var NO_PLAYFAIR_PREFIXES = ['/admin', '/carrinho', '/confirmacao', '/sitemap'];
-
-          function isHomePath() {
-            var p = window.location.pathname.replace(/\/+$/, '') || '/';
-            return p === '/' || p === '';
-          }
 
           function needsPlayfair() {
             var p = window.location.pathname.replace(/\/+$/, '') || '/';
@@ -46,23 +41,6 @@
               if (p === pref || p.indexOf(pref + '/') === 0) return false;
             }
             return true;
-          }
-
-          function injectHeroPreload() {
-            if (document.getElementById(HERO_PRELOAD_ID)) return;
-            var l = document.createElement('link');
-            l.id = HERO_PRELOAD_ID;
-            l.rel = 'preload';
-            l.as = 'image';
-            l.href = HERO_URL;
-            l.type = 'image/avif';
-            l.setAttribute('fetchpriority', 'high');
-            document.head.appendChild(l);
-          }
-
-          function removeHeroPreload() {
-            var el = document.getElementById(HERO_PRELOAD_ID);
-            if (el) el.remove();
           }
 
           function injectPlayfairPreload() {
@@ -83,7 +61,6 @@
           }
 
           function syncPreloads() {
-            if (isHomePath()) injectHeroPreload(); else removeHeroPreload();
             if (needsPlayfair()) injectPlayfairPreload(); else removePlayfairPreload();
           }
 
