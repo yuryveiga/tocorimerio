@@ -53,8 +53,9 @@ export function getOptimizedImage(
     if (height) params.set("height", String(height));
     params.set("quality", String(Math.round(quality)));
     params.set("resize", fit === "cover" ? "cover" : "contain");
-    // format=origin lets Supabase serve WebP/AVIF via content negotiation when supported.
-    if (format) params.set("format", format);
+    // Do NOT set format — Supabase auto-serves WebP via Accept header (~35% smaller than origin).
+    // Passing format=origin would defeat this. The <picture type="image/avif"> hint is harmless:
+    // the browser's Accept header still drives what Supabase returns.
     if (version) params.set("v", String(version));
     // Preserve any pre-existing query bits (rare) so we don't strip auth tokens etc.
     const preserved = new URLSearchParams(existingQuery);
