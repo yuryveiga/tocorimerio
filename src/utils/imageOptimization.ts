@@ -3,10 +3,9 @@
  */
 export function isOptimizable(url: string): boolean {
   if (!url) return false;
-  // Only Unsplash supports free image transformation via query params.
-  // Supabase /render/image/public/ requires the Image Transformation add-on
-  // which is NOT enabled on this project — attempting it causes 400 errors.
-  return url.includes("images.unsplash.com");
+  // Unsplash + Supabase Storage both support server-side image transformation.
+  // Supabase requires the Image Transformation add-on (confirmed enabled on this project).
+  return url.includes("images.unsplash.com") || /supabase\.(co|in)\/storage\/v1\/object\/public\//.test(url);
 }
 
 /**
@@ -44,9 +43,24 @@ export function getOptimizedImage(
     return `${baseUrl}?q=${quality}${widthParam}${heightParam}${fmt}${versionParam}&fit=crop`;
   }
  
-  // Supabase Storage — return as-is (Image Transformation API not enabled on this project)
-  if (url.includes("supabase.co")) {
-    return url;
+  // Supabase Storage — rewrite to /render/image/public/ with resize+quality+format.
+  const sbMatch = url.match(/^(https?:\/\/[^/]+)\/storage\/v1\/object\/public\/(.+)$/);
+  if (sbMatch) {
+    const [, origin, rest] = sbMatch;
+    const [pathPart, existingQuery = ""] = rest.split("?");
+    const params = new URLSearchParams();
+    params.set("width", String(width));
+    if (height) params.set("height", String(height));
+    params.set("quality", String(Math.round(quality)));
+    params.set("resize", fit === "cover" ? "cover" : "contain");
+    // Do NOT set format — Supabase auto-serves WebP via Accept header (~35% smaller than origin).
+    // Passing format=origin would defeat this. The <picture type="image/avif"> hint is harmless:
+    // the browser's Accept header still drives what Supabase returns.
+    if (version) params.set("v", String(version));
+    // Preserve any pre-existing query bits (rare) so we don't strip auth tokens etc.
+    const preserved = new URLSearchParams(existingQuery);
+    preserved.forEach((v, k) => { if (!params.has(k)) params.set(k, v); });
+    return `${origin}/storage/v1/render/image/public/${pathPart}?${params.toString()}`;
   }
 
   // Add version to other URLs if provided (ONLY for non-local assets to avoid preload mismatch)
