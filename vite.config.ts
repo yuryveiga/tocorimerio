@@ -26,6 +26,11 @@ export default defineConfig(({ mode }) => ({
           if (id.includes('lucide-react')) return 'icons';
           if (id.includes('@supabase/')) return 'supabase';
 
+          // Radix primitives — heavy and NOT used by the home page. Split into
+          // its own chunk so the home doesn't pay for Dialog/Select/Popover/etc.
+          // (~200 KiB of unused JS on first paint).
+          if (id.includes('@radix-ui/')) return 'radix';
+
           // React ecosystem, data layers, and Radix primitives — ship together to guarantee
           // initialization order (avoids "X is not a function" / createContext crashes
           // that happen when Radix/Tanstack/other libs load before React is ready).
@@ -36,7 +41,6 @@ export default defineConfig(({ mode }) => ({
             id.includes('/react-helmet-async/') ||
             id.includes('/scheduler/') ||
             id.includes('@tanstack/') ||
-            id.includes('@radix-ui/') ||
             id.includes('class-variance-authority') ||
             id.includes('clsx') ||
             id.includes('tailwind-merge')
