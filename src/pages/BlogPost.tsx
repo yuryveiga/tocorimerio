@@ -750,7 +750,33 @@ const BlogPost = () => {
               >
                 <CarouselContent className="-ml-4">
                   {(() => {
+                    // Stop words: generic location/travel words that exist in ALL Rio tours
+                    // and would create false positives
+                    const STOP_WORDS = new Set([
+                      'rio', 'janeiro', 'brazil', 'brasil', 'best', 'tour', 'tours',
+                      'guide', 'visit', 'travel', 'trip', 'experience', 'private',
+                      'with', 'from', 'that', 'this', 'your', 'have', 'will', 'about',
+                      'more', 'most', 'also', 'know', 'what', 'into', 'only', 'many',
+                      'city', 'time', 'area', 'view', 'make', 'here', 'like',
+                      'para', 'como', 'mais', 'para', 'pelo', 'pela', 'numa', 'pelo',
+                      'shops', 'shop', 'cafe', 'bars', 'bars',
+                    ]);
+
                     const postKeywords = (title + " " + excerpt + " " + content).toLowerCase();
+
+                    // Extract meaningful keywords from the post slug (e.g. "best-coffee-shops" → ["coffee"])
+                    const slugKeywords = (post.slug || "")
+                      .split('-')
+                      .filter(w => w.length > 4 && !STOP_WORDS.has(w));
+
+                    // Extract meaningful words from the post title
+                    const postTitleWords = title
+                      .toLowerCase()
+                      .split(/[\s\-]+/)
+                      .filter(w => w.length > 4 && !STOP_WORDS.has(w));
+
+                    // Combined meaningful keywords from slug + title (deduped)
+                    const meaningfulKeywords = [...new Set([...slugKeywords, ...postTitleWords])];
 
                     const scoredTours = tours
                       .filter(t => t.is_active !== false)
@@ -760,47 +786,49 @@ const BlogPost = () => {
                         const tourSlug = (tour.slug || "").toLowerCase();
                         const tourDesc = (tour.short_description || "").toLowerCase();
 
-                        // Exact slug match in post content (strongest signal)
+                        // Exact tour slug match anywhere in post content (strongest signal)
                         if (postKeywords.includes(tourSlug)) score += 100;
 
-                        // Full tour title match in post content
+                        // Full tour title found in post content
                         if (postKeywords.includes(tourTitle)) score += 50;
 
-                        // Individual word matches from tour title against post content
-                        const tourTitleWords = tourTitle.split(' ').filter(w => w.length > 3);
-                        tourTitleWords.forEach(word => {
-                          if (postKeywords.includes(word)) score += 10;
+                        // Meaningful post keywords vs tour title (high value, topic-specific match)
+                        meaningfulKeywords.forEach(word => {
+                          if (tourTitle.includes(word)) score += 20;
+                          if (tourDesc.includes(word)) score += 8;
+                          if (tourSlug.includes(word)) score += 15;
                         });
 
-                        // Individual word matches from tour description against post content
-                        const tourDescWords = tourDesc.split(' ').filter(w => w.length > 4);
-                        tourDescWords.forEach(word => {
-                          if (postKeywords.includes(word)) score += 3;
-                        });
+                        // Tour title words (non-stop) found in post content
+                        tourTitle.split(' ')
+                          .filter(w => w.length > 4 && !STOP_WORDS.has(w))
+                          .forEach(word => {
+                            if (postKeywords.includes(word)) score += 10;
+                          });
 
-                        // Post title words against tour title/desc (bidirectional)
-                        const postTitleWords = title.toLowerCase().split(' ').filter(w => w.length > 3);
-                        postTitleWords.forEach(word => {
-                          if (tourTitle.includes(word)) score += 15;
-                          if (tourDesc.includes(word)) score += 5;
-                        });
+                        // Tour description words (non-stop) found in post content
+                        tourDesc.split(' ')
+                          .filter(w => w.length > 5 && !STOP_WORDS.has(w))
+                          .forEach(word => {
+                            if (postKeywords.includes(word)) score += 3;
+                          });
 
                         return { tour, score };
                       })
                       .sort((a, b) => b.score - a.score || (b.tour.is_featured ? 1 : 0) - (a.tour.is_featured ? 1 : 0));
 
-                    // Tours with actual relevance to the post
-                    const relevantTours = scoredTours.filter(item => item.score > 5);
+                    // Only tours with a meaningful relevance score
+                    const relevantTours = scoredTours.filter(item => item.score >= 15);
 
-                    // Fallback: if fewer than 3 relevant tours, fill with featured tours
+                    // Fallback: if fewer than 3 relevant tours found, pad with featured tours
+                    const relevantIds = new Set(relevantTours.map(item => item.tour.id));
+                    const fallbackFeatured = scoredTours
+                      .filter(item => item.tour.is_featured && !relevantIds.has(item.tour.id))
+                      .map(item => item.tour);
+
                     const finalTours = relevantTours.length >= 3
                       ? relevantTours.map(item => item.tour)
-                      : [
-                          ...relevantTours.map(item => item.tour),
-                          ...scoredTours
-                            .filter(item => item.score <= 5 && item.tour.is_featured)
-                            .map(item => item.tour)
-                        ];
+                      : [...relevantTours.map(item => item.tour), ...fallbackFeatured];
 
                     return finalTours.map((tour) => (
                       <CarouselItem key={tour.id} className="pl-4 basis-full sm:basis-1/2 lg:basis-1/4">
