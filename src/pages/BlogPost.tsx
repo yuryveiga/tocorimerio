@@ -776,7 +776,60 @@ const BlogPost = () => {
                       .filter(w => w.length > 4 && !STOP_WORDS.has(w));
 
                     // Combined meaningful keywords from slug + title (deduped)
-                    const meaningfulKeywords = [...new Set([...slugKeywords, ...postTitleWords])];
+                    const baseKeywords = [...new Set([...slugKeywords, ...postTitleWords])];
+
+                    // Multilingual synonym map: post terms (any language) → equivalents
+                    // in PT/EN/ES so we can cross-match tours regardless of the language
+                    // the post or tour is written in. Extend as new content categories appear.
+                    const SYNONYMS: Record<string, string[]> = {
+                      coffee: ['coffee', 'café', 'cafe', 'degustação', 'degustacao'],
+                      café: ['coffee', 'café', 'cafe', 'degustação', 'degustacao'],
+                      cafe: ['coffee', 'café', 'cafe', 'degustação', 'degustacao'],
+                      beach: ['beach', 'praia', 'praias', 'playa'],
+                      praia: ['beach', 'praia', 'praias', 'playa'],
+                      praias: ['beach', 'praia', 'praias', 'playa'],
+                      hike: ['hike', 'hiking', 'trilha', 'trilhas', 'trekking', 'senderismo'],
+                      hiking: ['hike', 'hiking', 'trilha', 'trilhas', 'trekking', 'senderismo'],
+                      trilha: ['hike', 'hiking', 'trilha', 'trilhas', 'trekking'],
+                      trilhas: ['hike', 'hiking', 'trilha', 'trilhas', 'trekking'],
+                      waterfall: ['waterfall', 'cachoeira', 'cachoeiras', 'cascada'],
+                      cachoeira: ['waterfall', 'cachoeira', 'cachoeiras'],
+                      cachoeiras: ['waterfall', 'cachoeira', 'cachoeiras'],
+                      favela: ['favela', 'rocinha', 'community'],
+                      rocinha: ['favela', 'rocinha'],
+                      football: ['football', 'soccer', 'futebol', 'maracanã', 'maracana', 'matchday'],
+                      soccer: ['football', 'soccer', 'futebol', 'maracanã', 'maracana', 'matchday'],
+                      futebol: ['football', 'soccer', 'futebol', 'maracanã', 'maracana', 'matchday'],
+                      maracana: ['football', 'soccer', 'futebol', 'maracanã', 'maracana', 'matchday'],
+                      stadium: ['stadium', 'estádio', 'estadio', 'maracanã', 'maracana'],
+                      sailing: ['sailing', 'veleiro', 'barco', 'boat', 'sunset', 'guanabara', 'cagarras'],
+                      boat: ['sailing', 'veleiro', 'barco', 'boat', 'sunset', 'guanabara'],
+                      sunset: ['sunset', 'sailing', 'pôr do sol', 'atardecer'],
+                      diving: ['diving', 'scuba', 'mergulho', 'buceo', 'arraial'],
+                      scuba: ['diving', 'scuba', 'mergulho', 'arraial'],
+                      mergulho: ['diving', 'scuba', 'mergulho', 'arraial'],
+                      climbing: ['climbing', 'escalada', 'escalar', 'rocha'],
+                      escalada: ['climbing', 'escalada', 'rocha'],
+                      history: ['history', 'historic', 'história', 'historia', 'historico', 'histórico', 'colonial', 'imperial', 'centro'],
+                      historic: ['history', 'historic', 'história', 'historia', 'historico', 'histórico', 'colonial'],
+                      história: ['history', 'historic', 'história', 'historia', 'historico', 'histórico', 'colonial'],
+                      historia: ['history', 'historic', 'história', 'historia', 'historico', 'histórico', 'colonial'],
+                      culture: ['culture', 'cultural', 'cultura'],
+                      cultura: ['culture', 'cultural', 'cultura'],
+                      christ: ['christ', 'cristo', 'redentor', 'corcovado'],
+                      cristo: ['christ', 'cristo', 'redentor', 'corcovado'],
+                      corcovado: ['christ', 'cristo', 'redentor', 'corcovado'],
+                      sugarloaf: ['sugarloaf', 'pão de açúcar', 'pao de acucar', 'urca'],
+                      niteroi: ['niterói', 'niteroi'],
+                      niterói: ['niterói', 'niteroi'],
+                      transfer: ['transfer', 'transfers', 'aeroporto', 'airport'],
+                      airport: ['transfer', 'transfers', 'aeroporto', 'airport'],
+                    };
+
+                    // Expand keywords with all known synonyms
+                    const meaningfulKeywords = [...new Set(
+                      baseKeywords.flatMap(w => SYNONYMS[w] ? [w, ...SYNONYMS[w]] : [w])
+                    )];
 
                     const scoredTours = tours
                       .filter(t => t.is_active !== false)
