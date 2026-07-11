@@ -106,6 +106,7 @@
     "lovable-tagger": "^1.1.13",
     "playwright": "^1.59.1",
     "postcss": "^8.5.6",
+    "rollup-plugin-visualizer": "^7.0.1",
     "sharp": "^0.34.5",
     "tailwindcss": "^3.4.17",
     "ttf2woff2": "^8.0.1",
