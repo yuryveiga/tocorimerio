@@ -303,6 +303,77 @@ const BlogPost = () => {
               `}
             </script>
           </>
+        ) : post.slug === 'visit-rio-de-janeiro' ? (
+          <>
+            <title>Why Visit Rio de Janeiro? 10 Reasons to Fall in Love With the City</title>
+            <meta name="description" content="Discover why Rio de Janeiro belongs on your travel list — from iconic landmarks and beaches to samba culture, football, and unforgettable private tours." />
+            <meta name="keywords" content="Rio de Janeiro, Brazil Travel, Things to Do in Rio de Janeiro, Christ the Redeemer, Copacabana Beach, Ipanema, Sugarloaf Mountain, Carnival, Maracanã Stadium, Private Tours Rio de Janeiro" />
+            <meta name="robots" content="index, follow" />
+            <link rel="canonical" href="https://tocorimerio.com/blog/visit-rio-de-janeiro" />
+
+            {/* Open Graph (Facebook, WhatsApp, LinkedIn) */}
+            <meta property="og:type" content="article" />
+            <meta property="og:title" content="Why Visit Rio de Janeiro? 10 Reasons to Fall in Love With the City" />
+            <meta property="og:description" content="Discover why Rio de Janeiro belongs on your travel list — from iconic landmarks and beaches to samba culture, football, and unforgettable private tours." />
+            <meta property="og:url" content="https://tocorimerio.com/blog/visit-rio-de-janeiro" />
+            <meta property="og:image" content={post.image_url || `${getCanonicalUrl("")}/og-image.jpg`} />
+            <meta property="og:image:alt" content="Rio de Janeiro iconic landmarks and beaches" />
+            <meta property="og:locale" content="en_US" />
+            <meta property="og:site_name" content="Tocorime Rio" />
+            {post.created_at && <meta property="article:published_time" content={post.created_at} />}
+            {post.updated_at && <meta property="article:modified_time" content={post.updated_at} />}
+            <meta property="article:author" content="Tocorime Rio" />
+            <meta property="article:tag" content="Rio de Janeiro" />
+            <meta property="article:tag" content="Brazil Travel" />
+            <meta property="article:tag" content="Things to Do in Rio de Janeiro" />
+            <meta property="article:tag" content="Christ the Redeemer" />
+            <meta property="article:tag" content="Copacabana Beach" />
+            <meta property="article:tag" content="Ipanema" />
+            <meta property="article:tag" content="Sugarloaf Mountain" />
+            <meta property="article:tag" content="Carnival" />
+            <meta property="article:tag" content="Maracanã Stadium" />
+            <meta property="article:tag" content="Private Tours Rio de Janeiro" />
+
+            {/* Twitter Card */}
+            <meta name="twitter:card" content="summary_large_image" />
+            <meta name="twitter:title" content="Why Visit Rio de Janeiro? 10 Reasons to Fall in Love With the City" />
+            <meta name="twitter:description" content="Discover why Rio de Janeiro belongs on your travel list — from iconic landmarks and beaches to samba culture, football, and unforgettable private tours." />
+            <meta name="twitter:image" content={post.image_url || `${getCanonicalUrl("")}/og-image.jpg`} />
+
+            <script type="application/ld+json">
+              {JSON.stringify({
+                "@context": "https://schema.org",
+                "@type": "BlogPosting",
+                "headline": "Why Visit Rio de Janeiro? 10 Reasons to Fall in Love With the City",
+                "description": "Discover why Rio de Janeiro belongs on your travel list — from iconic landmarks and beaches to samba culture, football, and unforgettable private tours.",
+                "image": post.image_url || `${getCanonicalUrl("")}/og-image.jpg`,
+                "keywords": "Rio de Janeiro, Brazil Travel, Things to Do in Rio de Janeiro, Christ the Redeemer, Copacabana Beach, Ipanema, Sugarloaf Mountain, Carnival, Maracanã Stadium, Private Tours Rio de Janeiro",
+                "author": {
+                  "@type": "Organization",
+                  "name": "Tocorime Rio",
+                  "url": "https://tocorimerio.com"
+                },
+                "publisher": {
+                  "@type": "Organization",
+                  "name": "Tocorime Rio",
+                  "logo": {
+                    "@type": "ImageObject",
+                    "url": "https://tocorimerio.com/logo.png"
+                  }
+                },
+                "datePublished": post.created_at,
+                "dateModified": post.updated_at || post.created_at,
+                "mainEntityOfPage": {
+                  "@type": "WebPage",
+                  "@id": "https://tocorimerio.com/blog/visit-rio-de-janeiro"
+                }
+              })}
+            </script>
+
+            {getHreflangLinks(`/blog/visit-rio-de-janeiro`).map((l) => (
+              <link key={l.hreflang} rel="alternate" hrefLang={l.hreflang} href={l.href} />
+            ))}
+          </>
         ) : (
           <>
             <title>{title} | {siteTitle}</title>
@@ -680,7 +751,7 @@ const BlogPost = () => {
                 <CarouselContent className="-ml-4">
                   {(() => {
                     const postKeywords = (title + " " + excerpt + " " + content).toLowerCase();
-                    
+
                     const scoredTours = tours
                       .filter(t => t.is_active !== false)
                       .map(tour => {
@@ -689,27 +760,47 @@ const BlogPost = () => {
                         const tourSlug = (tour.slug || "").toLowerCase();
                         const tourDesc = (tour.short_description || "").toLowerCase();
 
-                        // Match slug in content
+                        // Exact slug match in post content (strongest signal)
                         if (postKeywords.includes(tourSlug)) score += 100;
-                        
-                        // Match title in content
+
+                        // Full tour title match in post content
                         if (postKeywords.includes(tourTitle)) score += 50;
-                        
-                        // Title word matches
+
+                        // Individual word matches from tour title against post content
                         const tourTitleWords = tourTitle.split(' ').filter(w => w.length > 3);
                         tourTitleWords.forEach(word => {
                           if (postKeywords.includes(word)) score += 10;
                         });
 
-                        // Featured bonus
-                        if (tour.is_featured) score += 5;
+                        // Individual word matches from tour description against post content
+                        const tourDescWords = tourDesc.split(' ').filter(w => w.length > 4);
+                        tourDescWords.forEach(word => {
+                          if (postKeywords.includes(word)) score += 3;
+                        });
+
+                        // Post title words against tour title/desc (bidirectional)
+                        const postTitleWords = title.toLowerCase().split(' ').filter(w => w.length > 3);
+                        postTitleWords.forEach(word => {
+                          if (tourTitle.includes(word)) score += 15;
+                          if (tourDesc.includes(word)) score += 5;
+                        });
 
                         return { tour, score };
                       })
                       .sort((a, b) => b.score - a.score || (b.tour.is_featured ? 1 : 0) - (a.tour.is_featured ? 1 : 0));
-                      
-                    // If no matches, fallback to featured tours
-                    const finalTours = scoredTours.map(item => item.tour);
+
+                    // Tours with actual relevance to the post
+                    const relevantTours = scoredTours.filter(item => item.score > 5);
+
+                    // Fallback: if fewer than 3 relevant tours, fill with featured tours
+                    const finalTours = relevantTours.length >= 3
+                      ? relevantTours.map(item => item.tour)
+                      : [
+                          ...relevantTours.map(item => item.tour),
+                          ...scoredTours
+                            .filter(item => item.score <= 5 && item.tour.is_featured)
+                            .map(item => item.tour)
+                        ];
 
                     return finalTours.map((tour) => (
                       <CarouselItem key={tour.id} className="pl-4 basis-full sm:basis-1/2 lg:basis-1/4">
