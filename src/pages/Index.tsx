@@ -66,15 +66,16 @@ const Index = () => {
       {/* Each lazy section in its own Suspense so a slow chunk
           doesn't hold back the others from rendering. */}
       <Suspense fallback={<SectionLoader />}><ToursSection /></Suspense>
-      <LazyMount minHeight={300}><Suspense fallback={null}><GuideProfileSection /></Suspense></LazyMount>
-      <LazyMount minHeight={400}><Suspense fallback={null}><WhyChooseUs /></Suspense></LazyMount>
-      <LazyMount minHeight={500}><Suspense fallback={null}><ReviewsSection /></Suspense></LazyMount>
-      <LazyMount minHeight={400}><Suspense fallback={null}><WeatherSection /></Suspense></LazyMount>
-      <LazyMount minHeight={500}><Suspense fallback={null}><AboutSection /></Suspense></LazyMount>
-      <LazyMount minHeight={500}><Suspense fallback={null}><ContactSection /></Suspense></LazyMount>
-      <LazyMount minHeight={600}><Suspense fallback={null}><GallerySection /></Suspense></LazyMount>
-      <LazyMount minHeight={500}><Suspense fallback={null}><BlogCarousel /></Suspense></LazyMount>
-      <LazyMount minHeight={300}><Suspense fallback={null}><Footer /></Suspense></LazyMount>
+      {/* minHeight values measured on mobile (390×844) to prevent CLS on mount. */}
+      <LazyMount minHeight={760}><Suspense fallback={null}><GuideProfileSection /></Suspense></LazyMount>
+      <LazyMount minHeight={880}><Suspense fallback={null}><WhyChooseUs /></Suspense></LazyMount>
+      <LazyMount minHeight={772}><Suspense fallback={null}><ReviewsSection /></Suspense></LazyMount>
+      <LazyMount minHeight={890}><Suspense fallback={null}><WeatherSection /></Suspense></LazyMount>
+      <LazyMount minHeight={1412}><Suspense fallback={null}><AboutSection /></Suspense></LazyMount>
+      <LazyMount minHeight={1362}><Suspense fallback={null}><ContactSection /></Suspense></LazyMount>
+      <LazyMount minHeight={749}><Suspense fallback={null}><GallerySection /></Suspense></LazyMount>
+      <LazyMount minHeight={1036}><Suspense fallback={null}><BlogCarousel /></Suspense></LazyMount>
+      <LazyMount minHeight={1350}><Suspense fallback={null}><Footer /></Suspense></LazyMount>
     </main>
   );
 };
