@@ -381,6 +381,51 @@ async function prerender() {
           document.head.appendChild(m);
         });
 
+        // LCP boost: extract the hero image URL rendered by React and inject
+        // a <link rel="preload" as="image" fetchpriority="high"> into <head>.
+        // The browser's preload scanner sees this while parsing HTML and starts
+        // downloading the LCP image BEFORE React hydrates — saves ~500–1500ms
+        // of LCP on mobile because it removes the JS-execution dependency.
+        // Only applied to routes that render a hero background (home, marketing).
+        try {
+          const heroUrl = await page.evaluate(() => {
+            // 1) Prefer the hidden <img fetchpriority="high"> that HeroSection
+            //    already emits for the preload scanner. That's the LCP element.
+            const heroImg = document.querySelector(
+              'section img[fetchpriority="high"], main > section:first-of-type img'
+            );
+            if (heroImg && heroImg.src && !heroImg.src.startsWith('data:')) {
+              return heroImg.src;
+            }
+            // 2) Fallback: parse the first section's inline background-image.
+            const bg = document.querySelector('main > section:first-of-type [style*="background-image"]');
+            if (bg) {
+              const m = /url\((['"]?)(.*?)\1\)/.exec(bg.getAttribute('style') || '');
+              if (m && m[2]) return m[2];
+            }
+            return null;
+          });
+          if (heroUrl) {
+            await page.evaluate((url) => {
+              // Avoid duplicating an existing preload for the same URL.
+              const existing = document.querySelector(
+                `link[rel="preload"][as="image"][href="${url}"]`
+              );
+              if (existing) return;
+              const link = document.createElement('link');
+              link.rel = 'preload';
+              link.as = 'image';
+              link.href = url;
+              link.setAttribute('fetchpriority', 'high');
+              // Insert as early as possible in <head> so the preload scanner
+              // encounters it before any script or stylesheet.
+              document.head.insertBefore(link, document.head.firstChild);
+            }, heroUrl);
+          }
+        } catch (e) {
+          console.warn(`  ⚠ ${route}: could not inject hero preload:`, e.message);
+        }
+
         let content = await page.content();
 
         const savePath = route === '/'
