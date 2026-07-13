@@ -16,20 +16,34 @@ export function ReviewsSection() {
     const el = sectionRef.current;
     if (!el) return;
 
-    // Load Elfsight only when the section enters the viewport
+    let loaded = false;
+    const loadElfsight = () => {
+      if (loaded) return;
+      loaded = true;
+      const idle = (cb: () => void) =>
+        "requestIdleCallback" in window
+          ? (window as any).requestIdleCallback(cb, { timeout: 2000 })
+          : setTimeout(cb, 200);
+      idle(() => {
+        const script = document.createElement("script");
+        script.src = "https://elfsightcdn.com/platform.js";
+        script.async = true;
+        document.body.appendChild(script);
+      });
+    };
+
+    // Only load when the section actually enters the viewport (no 400px margin).
+    // The heavy widget (~520 KiB, ~1.9s bootup) stays out of TBT unless the
+    // user really scrolls to reviews.
     const observer = new IntersectionObserver(
       (entries) => {
         if (entries[0].isIntersecting) {
-          const script = document.createElement("script");
-          script.src = "https://elfsightcdn.com/platform.js";
-          script.async = true;
-          document.body.appendChild(script);
+          loadElfsight();
           observer.disconnect();
         }
       },
-      { rootMargin: "400px" }
+      { rootMargin: "0px" }
     );
-
     observer.observe(el);
     return () => observer.disconnect();
   }, []);
