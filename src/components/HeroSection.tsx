@@ -135,14 +135,21 @@ export function HeroSection() {
   // ======== Reusable hero content blocks (shared across all 3 styles) ========
   const MiniBrand = ({ light = true }: { light?: boolean }) => (
     <div className={`flex items-center justify-center gap-2.5 mb-4 ${light ? 'text-white/90' : 'text-foreground/85'}`}>
-      {logoUrl && (
-        <img
-          src={logoUrl}
-          alt={siteName}
-          className="h-20 w-20 sm:h-24 sm:w-24 object-contain drop-shadow-lg"
-          loading="eager"
-        />
-      )}
+      {/* Reserve fixed space for the logo even before it loads, so the
+          hero content doesn't reflow when useSiteData hydrates (fixes CLS). */}
+      <div className="h-20 w-20 sm:h-24 sm:w-24 flex items-center justify-center shrink-0">
+        {logoUrl && (
+          <img
+            src={logoUrl}
+            alt={siteName}
+            width={96}
+            height={96}
+            className="h-full w-full object-contain drop-shadow-lg"
+            loading="eager"
+            decoding="sync"
+          />
+        )}
+      </div>
       <span className="font-serif text-2xl sm:text-3xl font-semibold tracking-tight">{siteName}</span>
     </div>
   );
