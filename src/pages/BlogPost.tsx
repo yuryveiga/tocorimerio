@@ -306,15 +306,15 @@ const BlogPost = () => {
         ) : post.slug === 'visit-rio-de-janeiro' ? (
           <>
             <title>Why Visit Rio de Janeiro? 10 Reasons to Fall in Love With the City</title>
-            <meta name="description" content="Discover why Rio de Janeiro belongs on your travel list — from iconic landmarks and beaches to samba culture, football, and unforgettable private tours." />
-            <meta name="keywords" content="Rio de Janeiro, Brazil Travel, Things to Do in Rio de Janeiro, Christ the Redeemer, Copacabana Beach, Ipanema, Sugarloaf Mountain, Carnival, Maracanã Stadium, Private Tours Rio de Janeiro" />
+            <meta name="description" content="Discover 10 compelling reasons to visit Rio de Janeiro, from iconic Christ the Redeemer and stunning beaches to vibrant culture and thrilling football. Plan your unforgettable trip to the Marvelous City with local insights." />
+            <meta name="keywords" content="Visit Rio de Janeiro, things to do Rio, Rio travel guide, Christ the Redeemer, Copacabana, Ipanema, Tijuca Forest, Rio culture, Rio football, safe travel Rio, Tocorime Rio" />
             <meta name="robots" content="index, follow" />
             <link rel="canonical" href="https://tocorimerio.com/blog/visit-rio-de-janeiro" />
 
             {/* Open Graph (Facebook, WhatsApp, LinkedIn) */}
             <meta property="og:type" content="article" />
             <meta property="og:title" content="Why Visit Rio de Janeiro? 10 Reasons to Fall in Love With the City" />
-            <meta property="og:description" content="Discover why Rio de Janeiro belongs on your travel list — from iconic landmarks and beaches to samba culture, football, and unforgettable private tours." />
+            <meta property="og:description" content="Discover 10 compelling reasons to visit Rio de Janeiro, from iconic Christ the Redeemer and stunning beaches to vibrant culture and thrilling football. Plan your unforgettable trip to the Marvelous City with local insights." />
             <meta property="og:url" content="https://tocorimerio.com/blog/visit-rio-de-janeiro" />
             <meta property="og:image" content={post.image_url || `${getCanonicalUrl("")}/og-image.jpg`} />
             <meta property="og:image:alt" content="Rio de Janeiro iconic landmarks and beaches" />
@@ -337,7 +337,7 @@ const BlogPost = () => {
             {/* Twitter Card */}
             <meta name="twitter:card" content="summary_large_image" />
             <meta name="twitter:title" content="Why Visit Rio de Janeiro? 10 Reasons to Fall in Love With the City" />
-            <meta name="twitter:description" content="Discover why Rio de Janeiro belongs on your travel list — from iconic landmarks and beaches to samba culture, football, and unforgettable private tours." />
+            <meta name="twitter:description" content="Discover 10 compelling reasons to visit Rio de Janeiro, from iconic Christ the Redeemer and stunning beaches to vibrant culture and thrilling football. Plan your unforgettable trip to the Marvelous City with local insights." />
             <meta name="twitter:image" content={post.image_url || `${getCanonicalUrl("")}/og-image.jpg`} />
 
             <script type="application/ld+json">
@@ -345,9 +345,9 @@ const BlogPost = () => {
                 "@context": "https://schema.org",
                 "@type": "BlogPosting",
                 "headline": "Why Visit Rio de Janeiro? 10 Reasons to Fall in Love With the City",
-                "description": "Discover why Rio de Janeiro belongs on your travel list — from iconic landmarks and beaches to samba culture, football, and unforgettable private tours.",
+                "description": "Discover 10 compelling reasons to visit Rio de Janeiro, from iconic Christ the Redeemer and stunning beaches to vibrant culture and thrilling football. Plan your unforgettable trip to the Marvelous City with local insights.",
                 "image": post.image_url || `${getCanonicalUrl("")}/og-image.jpg`,
-                "keywords": "Rio de Janeiro, Brazil Travel, Things to Do in Rio de Janeiro, Christ the Redeemer, Copacabana Beach, Ipanema, Sugarloaf Mountain, Carnival, Maracanã Stadium, Private Tours Rio de Janeiro",
+                "keywords": "Visit Rio de Janeiro, things to do Rio, Rio travel guide, Christ the Redeemer, Copacabana, Ipanema, Tijuca Forest, Rio culture, Rio football, safe travel Rio, Tocorime Rio",
                 "author": {
                   "@type": "Organization",
                   "name": "Tocorime Rio",
@@ -371,6 +371,78 @@ const BlogPost = () => {
             </script>
 
             {getHreflangLinks(`/blog/visit-rio-de-janeiro`).map((l) => (
+              <link key={l.hreflang} rel="alternate" hrefLang={l.hreflang} href={l.href} />
+            ))}
+          </>
+        ) : post.slug === 'visit-sugar-loaf-rio' ? (
+          <>
+            <title>Visit Sugarloaf Mountain Rio: Ultimate Guide & Private Tours</title>
+            <meta name="description" content="Discover the ultimate guide to visiting Sugarloaf Mountain in Rio de Janeiro. Learn about the cable car, best times for breathtaking views, and insider tips. Book a private tour with Tocorime Rio for an unforgettable experience." />
+            <meta name="keywords" content="Rio de Janeiro, Sugarloaf Mountain, Pão de Açúcar, cable car, tourist guide Rio, private tours Rio, things to do Rio, best views Rio, travel guide Rio, Tocorime Rio" />
+            <meta name="robots" content="index, follow" />
+            <link rel="canonical" href="https://tocorimerio.com/blog/visit-sugar-loaf-rio" />
+
+            <meta property="og:type" content="article" />
+            <meta property="og:title" content="Visit Sugarloaf Mountain Rio: Ultimate Guide & Private Tours" />
+            <meta property="og:description" content="Discover the ultimate guide to visiting Sugarloaf Mountain in Rio de Janeiro. Learn about the cable car, best times for breathtaking views, and insider tips. Book a private tour with Tocorime Rio for an unforgettable experience." />
+            <meta property="og:url" content="https://tocorimerio.com/blog/visit-sugar-loaf-rio" />
+            <meta property="og:image" content={post.image_url || fallbackImage} />
+            <meta property="og:locale" content="en_US" />
+            <meta property="og:site_name" content="Tocorime Rio" />
+
+            <meta name="twitter:card" content="summary_large_image" />
+            <meta name="twitter:title" content="Visit Sugarloaf Mountain Rio: Ultimate Guide & Private Tours" />
+            <meta name="twitter:description" content="Discover the ultimate guide to visiting Sugarloaf Mountain in Rio de Janeiro. Learn about the cable car, best times for breathtaking views, and insider tips. Book a private tour with Tocorime Rio for an unforgettable experience." />
+            <meta name="twitter:image" content={post.image_url || fallbackImage} />
+            {getHreflangLinks(`/blog/visit-sugar-loaf-rio`).map((l) => (
+              <link key={l.hreflang} rel="alternate" hrefLang={l.hreflang} href={l.href} />
+            ))}
+          </>
+        ) : post.slug === 'how-to-hire-a-safe-tour-guide-in-rio-de-janeiro-without-getting-scammed' ? (
+          <>
+            <title>How to Hire a Safe Tour Guide in Rio de Janeiro Without Getting Scammed</title>
+            <meta name="description" content="Learn how to hire a safe and professional tour guide in Rio de Janeiro and avoid scams. Get tips on verifying credentials, checking reviews, and choosing private tours for a secure and enjoyable trip with Tocorime Rio." />
+            <meta name="keywords" content="Rio de Janeiro tour guide, safe tour guide Rio, avoid scams Rio, private tours Rio, professional guide Rio, travel safety Rio, Tocorime Rio, how to hire a guide Rio" />
+            <meta name="robots" content="index, follow" />
+            <link rel="canonical" href="https://tocorimerio.com/blog/how-to-hire-a-safe-tour-guide-in-rio-de-janeiro-without-getting-scammed" />
+
+            <meta property="og:type" content="article" />
+            <meta property="og:title" content="How to Hire a Safe Tour Guide in Rio de Janeiro Without Getting Scammed" />
+            <meta property="og:description" content="Learn how to hire a safe and professional tour guide in Rio de Janeiro and avoid scams. Get tips on verifying credentials, checking reviews, and choosing private tours for a secure and enjoyable trip with Tocorime Rio." />
+            <meta property="og:url" content="https://tocorimerio.com/blog/how-to-hire-a-safe-tour-guide-in-rio-de-janeiro-without-getting-scammed" />
+            <meta property="og:image" content={post.image_url || fallbackImage} />
+            <meta property="og:locale" content="en_US" />
+            <meta property="og:site_name" content="Tocorime Rio" />
+
+            <meta name="twitter:card" content="summary_large_image" />
+            <meta name="twitter:title" content="How to Hire a Safe Tour Guide in Rio de Janeiro Without Getting Scammed" />
+            <meta name="twitter:description" content="Learn how to hire a safe and professional tour guide in Rio de Janeiro and avoid scams. Get tips on verifying credentials, checking reviews, and choosing private tours for a secure and enjoyable trip with Tocorime Rio." />
+            <meta name="twitter:image" content={post.image_url || fallbackImage} />
+            {getHreflangLinks(`/blog/how-to-hire-a-safe-tour-guide-in-rio-de-janeiro-without-getting-scammed`).map((l) => (
+              <link key={l.hreflang} rel="alternate" hrefLang={l.hreflang} href={l.href} />
+            ))}
+          </>
+        ) : post.slug === 'how-to-get-tickets-for-maracana-the-comp' ? (
+          <>
+            <title>How to Get Tickets for Maracanã Stadium: The Complete Guide</title>
+            <meta name="description" content="Experience the thrill of Maracanã Stadium! This guide helps you get tickets for live football matches in Rio, navigate safely, and enjoy the electric atmosphere. Find out how Tocorime Rio can assist with your Maracanã experience." />
+            <meta name="keywords" content="Maracanã Stadium, Maracanã tickets, football Rio, soccer Rio, Flamengo, Fluminense, Rio derby, live match Rio, Maracanã tour, Tocorime Rio" />
+            <meta name="robots" content="index, follow" />
+            <link rel="canonical" href="https://tocorimerio.com/blog/how-to-get-tickets-for-maracana-the-comp" />
+
+            <meta property="og:type" content="article" />
+            <meta property="og:title" content="How to Get Tickets for Maracanã Stadium: The Complete Guide" />
+            <meta property="og:description" content="Experience the thrill of Maracanã Stadium! This guide helps you get tickets for live football matches in Rio, navigate safely, and enjoy the electric atmosphere. Find out how Tocorime Rio can assist with your Maracanã experience." />
+            <meta property="og:url" content="https://tocorimerio.com/blog/how-to-get-tickets-for-maracana-the-comp" />
+            <meta property="og:image" content={post.image_url || fallbackImage} />
+            <meta property="og:locale" content="en_US" />
+            <meta property="og:site_name" content="Tocorime Rio" />
+
+            <meta name="twitter:card" content="summary_large_image" />
+            <meta name="twitter:title" content="How to Get Tickets for Maracanã Stadium: The Complete Guide" />
+            <meta name="twitter:description" content="Experience the thrill of Maracanã Stadium! This guide helps you get tickets for live football matches in Rio, navigate safely, and enjoy the electric atmosphere. Find out how Tocorime Rio can assist with your Maracanã experience." />
+            <meta name="twitter:image" content={post.image_url || fallbackImage} />
+            {getHreflangLinks(`/blog/how-to-get-tickets-for-maracana-the-comp`).map((l) => (
               <link key={l.hreflang} rel="alternate" hrefLang={l.hreflang} href={l.href} />
             ))}
           </>
