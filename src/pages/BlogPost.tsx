@@ -306,15 +306,15 @@ const BlogPost = () => {
         ) : post.slug === 'visit-rio-de-janeiro' ? (
           <>
             <title>Why Visit Rio de Janeiro? 10 Reasons to Fall in Love With the City</title>
-            <meta name="description" content="Discover why Rio de Janeiro belongs on your travel list — from iconic landmarks and beaches to samba culture, football, and unforgettable private tours." />
-            <meta name="keywords" content="Rio de Janeiro, Brazil Travel, Things to Do in Rio de Janeiro, Christ the Redeemer, Copacabana Beach, Ipanema, Sugarloaf Mountain, Carnival, Maracanã Stadium, Private Tours Rio de Janeiro" />
+            <meta name="description" content="Discover 10 compelling reasons to visit Rio de Janeiro, from iconic Christ the Redeemer and stunning beaches to vibrant culture and thrilling football. Plan your unforgettable trip to the Marvelous City with local insights." />
+            <meta name="keywords" content="Visit Rio de Janeiro, things to do Rio, Rio travel guide, Christ the Redeemer, Copacabana, Ipanema, Tijuca Forest, Rio culture, Rio football, safe travel Rio, Tocorime Rio" />
             <meta name="robots" content="index, follow" />
             <link rel="canonical" href="https://tocorimerio.com/blog/visit-rio-de-janeiro" />
 
             {/* Open Graph (Facebook, WhatsApp, LinkedIn) */}
             <meta property="og:type" content="article" />
             <meta property="og:title" content="Why Visit Rio de Janeiro? 10 Reasons to Fall in Love With the City" />
-            <meta property="og:description" content="Discover why Rio de Janeiro belongs on your travel list — from iconic landmarks and beaches to samba culture, football, and unforgettable private tours." />
+            <meta property="og:description" content="Discover 10 compelling reasons to visit Rio de Janeiro, from iconic Christ the Redeemer and stunning beaches to vibrant culture and thrilling football. Plan your unforgettable trip to the Marvelous City with local insights." />
             <meta property="og:url" content="https://tocorimerio.com/blog/visit-rio-de-janeiro" />
             <meta property="og:image" content={post.image_url || `${getCanonicalUrl("")}/og-image.jpg`} />
             <meta property="og:image:alt" content="Rio de Janeiro iconic landmarks and beaches" />
@@ -337,7 +337,7 @@ const BlogPost = () => {
             {/* Twitter Card */}
             <meta name="twitter:card" content="summary_large_image" />
             <meta name="twitter:title" content="Why Visit Rio de Janeiro? 10 Reasons to Fall in Love With the City" />
-            <meta name="twitter:description" content="Discover why Rio de Janeiro belongs on your travel list — from iconic landmarks and beaches to samba culture, football, and unforgettable private tours." />
+            <meta name="twitter:description" content="Discover 10 compelling reasons to visit Rio de Janeiro, from iconic Christ the Redeemer and stunning beaches to vibrant culture and thrilling football. Plan your unforgettable trip to the Marvelous City with local insights." />
             <meta name="twitter:image" content={post.image_url || `${getCanonicalUrl("")}/og-image.jpg`} />
 
             <script type="application/ld+json">
