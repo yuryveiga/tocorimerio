@@ -345,9 +345,9 @@ const BlogPost = () => {
                 "@context": "https://schema.org",
                 "@type": "BlogPosting",
                 "headline": "Why Visit Rio de Janeiro? 10 Reasons to Fall in Love With the City",
-                "description": "Discover why Rio de Janeiro belongs on your travel list — from iconic landmarks and beaches to samba culture, football, and unforgettable private tours.",
+                "description": "Discover 10 compelling reasons to visit Rio de Janeiro, from iconic Christ the Redeemer and stunning beaches to vibrant culture and thrilling football. Plan your unforgettable trip to the Marvelous City with local insights.",
                 "image": post.image_url || `${getCanonicalUrl("")}/og-image.jpg`,
-                "keywords": "Rio de Janeiro, Brazil Travel, Things to Do in Rio de Janeiro, Christ the Redeemer, Copacabana Beach, Ipanema, Sugarloaf Mountain, Carnival, Maracanã Stadium, Private Tours Rio de Janeiro",
+                "keywords": "Visit Rio de Janeiro, things to do Rio, Rio travel guide, Christ the Redeemer, Copacabana, Ipanema, Tijuca Forest, Rio culture, Rio football, safe travel Rio, Tocorime Rio",
                 "author": {
                   "@type": "Organization",
                   "name": "Tocorime Rio",
