@@ -28,7 +28,10 @@ const PasseiosIndex = () => {
       ? "Lista completa de passeios, city tours, trilhas e experiências exclusivas no Rio de Janeiro com guias bilíngues."
       : language === "es"
       ? "Lista completa de tours, city tours, senderismo y experiencias exclusivas en Río de Janeiro con guías bilingües."
-      : "Complete list of tours, city tours, hiking and exclusive experiences in Rio de Janeiro with bilingual guides.";
+      : "Explore a curated selection of private tours in Rio de Janeiro with Tocorime Rio. From thrilling hiking adventures like Pedra da Gávea to cultural immersions and coffee tastings, find your perfect Rio experience.";
+
+  const keywords =
+    "Rio de Janeiro tours, private tours Rio, adventure tours Rio, cultural tours Rio, Pedra da Gávea, Sugarloaf hiking, Little Africa Rio, coffee tasting Rio, Tijuca Forest, Tocorime Rio";
 
   const h1 =
     language === "pt"
@@ -62,6 +65,7 @@ const PasseiosIndex = () => {
       <Helmet>
         <title>{title}</title>
         <meta name="description" content={description} />
+        <meta name="keywords" content={keywords} />
         <link rel="canonical" href={getCanonicalUrl("/passeio")} />
         {getHreflangLinks("/passeio").map((l) => (
           <link key={l.hreflang} rel="alternate" hrefLang={l.hreflang} href={l.href} />
