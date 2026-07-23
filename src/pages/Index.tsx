@@ -33,7 +33,7 @@ const Index = () => {
         ? '+' + whatsappSocial.url.replace(/[^\d]/g, '')
         : whatsappSocial.url)
     : undefined;
-  const siteTitle = siteSettings?.site_title || (language === 'pt' ? "Passeios Privativos Exclusivos no Rio de Janeiro | Experiências Locais Autênticas" : language === 'es' ? "Tours Privados Exclusivos en Río de Janeiro | Experiencias Locales Auténticas" : "Exclusive Private Tours in Rio de Janeiro | Authentic Local Experiences");
+  const siteTitle = siteSettings?.site_title || (language === 'pt' ? "Passeios Privativos no Rio | Tocorime Rio" : language === 'es' ? "Tours Privados en Río | Tocorime Rio" : "Private Tours in Rio de Janeiro | Tocorime Rio");
   const siteDescription = siteSettings?.site_description || (language === 'pt' ? "Descubra o melhor do Rio de Janeiro com nossos guias especialistas. Tours privativos e personalizados para garantir segurança e exclusividade." : language === 'es' ? "Descubra lo mejor de Río de Janeiro con nuestros guías expertos. Tours privados y personalizados para garantizar seguridad y exclusividad." : "Discover the best of Rio de Janeiro with our expert guides. Private and personalized tours to ensure safety and exclusivity.");
 
   return (
