@@ -93,6 +93,7 @@ const Blog = () => {
                   key={post.id} 
                   to={post.slug}
                   data-blog-card
+                  aria-label={`${t("ler_mais")}: ${getTranslated(post, 'title')}`}
                   className="bg-card border rounded-2xl overflow-hidden hover:shadow-lg transition-all group flex flex-col"
                 >
                   <div className="aspect-video relative overflow-hidden bg-muted">
