@@ -626,6 +626,7 @@ const BlogPost = () => {
                           className="rounded-full w-10 h-10 border-green-500/20 hover:bg-green-500 hover:text-white transition-all shadow-sm"
                           onClick={shareOnWhatsApp}
                           title="WhatsApp"
+                          aria-label={language === 'pt' ? 'Compartilhar no WhatsApp' : language === 'es' ? 'Compartir en WhatsApp' : 'Share on WhatsApp'}
                         >
                           <MessageCircle className="w-4 h-4" />
                         </Button>
@@ -635,6 +636,7 @@ const BlogPost = () => {
                           className="rounded-full w-10 h-10 border-blue-600/20 hover:bg-blue-600 hover:text-white transition-all shadow-sm"
                           onClick={shareOnFacebook}
                           title="Facebook"
+                          aria-label={language === 'pt' ? 'Compartilhar no Facebook' : language === 'es' ? 'Compartir en Facebook' : 'Share on Facebook'}
                         >
                           <Facebook className="w-4 h-4" />
                         </Button>
@@ -644,6 +646,7 @@ const BlogPost = () => {
                           className="rounded-full w-10 h-10 border-primary/20 hover:bg-primary hover:text-white transition-all shadow-sm"
                           onClick={copyToClipboard}
                           title={language === 'pt' ? 'Copiar Link' : 'Copy Link'}
+                          aria-label={language === 'pt' ? 'Copiar link do post' : language === 'es' ? 'Copiar enlace' : 'Copy post link'}
                         >
                           <Link2 className="w-4 h-4" />
                         </Button>
@@ -768,6 +771,7 @@ const BlogPost = () => {
                         className="rounded-full w-10 h-10 border-green-500/20 hover:bg-green-500 hover:text-white transition-all shadow-sm"
                         onClick={shareOnWhatsApp}
                         title="WhatsApp"
+                        aria-label={language === 'pt' ? 'Compartilhar no WhatsApp' : language === 'es' ? 'Compartir en WhatsApp' : 'Share on WhatsApp'}
                       >
                         <MessageCircle className="w-4 h-4" />
                       </Button>
@@ -777,6 +781,7 @@ const BlogPost = () => {
                         className="rounded-full w-10 h-10 border-blue-600/20 hover:bg-blue-600 hover:text-white transition-all shadow-sm"
                         onClick={shareOnFacebook}
                         title="Facebook"
+                        aria-label={language === 'pt' ? 'Compartilhar no Facebook' : language === 'es' ? 'Compartir en Facebook' : 'Share on Facebook'}
                       >
                         <Facebook className="w-4 h-4" />
                       </Button>
@@ -786,6 +791,7 @@ const BlogPost = () => {
                         className="rounded-full w-10 h-10 border-primary/20 hover:bg-primary hover:text-white transition-all shadow-sm"
                         onClick={copyToClipboard}
                         title={language === 'pt' ? 'Copiar Link' : 'Copy Link'}
+                        aria-label={language === 'pt' ? 'Copiar link do post' : language === 'es' ? 'Copiar enlace' : 'Copy post link'}
                       >
                         <Link2 className="w-4 h-4" />
                       </Button>
