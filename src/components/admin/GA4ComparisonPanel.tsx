@@ -3,7 +3,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-import { Loader2, TrendingUp, TrendingDown, Minus } from "lucide-react";
+import { Loader2, TrendingUp, TrendingDown, Minus, Clock, MousePointerClick, LogOut } from "lucide-react";
 import {
   ResponsiveContainer,
   LineChart,
@@ -40,7 +40,14 @@ export const GA4ComparisonPanel = () => {
   const [range, setRange] = useState<RangeKey>("30");
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [ga4Rows, setGa4Rows] = useState<Array<{ date: string; sessions: number; users: number }>>([]);
+  const [ga4Rows, setGa4Rows] = useState<Array<{
+    date: string;
+    sessions: number;
+    users: number;
+    avgSessionDuration?: number;
+    engagementRate?: number;
+    bounceRate?: number;
+  }>>([]);
   const [nativeRows, setNativeRows] = useState<Array<{ date: string; sessions: number; users: number }>>([]);
 
   useEffect(() => {
@@ -68,7 +75,18 @@ export const GA4ComparisonPanel = () => {
 
         const [ga4Res, nativeRes] = await Promise.all([ga4Promise, nativePromise]);
 
-        const ga4Data = (ga4Res.data as { rows?: Array<{ date: string; sessions: number; users: number }>; error?: string; details?: string }) || {};
+        const ga4Data = (ga4Res.data as {
+          rows?: Array<{
+            date: string;
+            sessions: number;
+            users: number;
+            avgSessionDuration?: number;
+            engagementRate?: number;
+            bounceRate?: number;
+          }>;
+          error?: string;
+          details?: string;
+        }) || {};
         if (ga4Data?.error) {
           const details = ga4Data.details || "";
           let msg = ga4Data.error;
@@ -179,6 +197,38 @@ export const GA4ComparisonPanel = () => {
     return { ...t, diffSessions, diffUsers };
   }, [merged]);
 
+  // Engagement metrics (weighted by sessions across days)
+  const engagement = useMemo(() => {
+    let weightedDuration = 0;
+    let weightedEngagement = 0;
+    let weightedBounce = 0;
+    let totalSessions = 0;
+    for (const r of ga4Rows) {
+      const s = r.sessions || 0;
+      if (s <= 0) continue;
+      totalSessions += s;
+      weightedDuration += (r.avgSessionDuration || 0) * s;
+      weightedEngagement += (r.engagementRate || 0) * s;
+      weightedBounce += (r.bounceRate || 0) * s;
+    }
+    if (totalSessions === 0) {
+      return { avgDuration: 0, engagementRate: 0, bounceRate: 0 };
+    }
+    return {
+      avgDuration: weightedDuration / totalSessions,
+      engagementRate: weightedEngagement / totalSessions,
+      bounceRate: weightedBounce / totalSessions,
+    };
+  }, [ga4Rows]);
+
+  const formatDuration = (seconds: number) => {
+    if (!seconds || seconds < 0) return "0s";
+    const m = Math.floor(seconds / 60);
+    const s = Math.round(seconds % 60);
+    if (m === 0) return `${s}s`;
+    return `${m}m ${s.toString().padStart(2, "0")}s`;
+  };
+
   const formatPct = (v: number | null) => {
     if (v === null || Number.isNaN(v)) return "—";
     const sign = v > 0 ? "+" : "";
@@ -270,6 +320,55 @@ export const GA4ComparisonPanel = () => {
                 </div>
                 <p className="text-xs text-muted-foreground">
                   {totals.ga4Users.toLocaleString()} GA4 · {totals.nativeUsers.toLocaleString()} nativo
+                </p>
+              </CardContent>
+            </Card>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <Card>
+              <CardHeader className="pb-2">
+                <CardTitle className="text-sm font-medium flex items-center gap-2">
+                  <Clock className="w-4 h-4 text-primary" />
+                  Tempo médio no site
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="text-2xl font-bold">{formatDuration(engagement.avgDuration)}</div>
+                <p className="text-xs text-muted-foreground">
+                  duração média por sessão (GA4)
+                </p>
+              </CardContent>
+            </Card>
+            <Card>
+              <CardHeader className="pb-2">
+                <CardTitle className="text-sm font-medium flex items-center gap-2">
+                  <MousePointerClick className="w-4 h-4 text-emerald-600" />
+                  Taxa de engajamento
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="text-2xl font-bold">
+                  {(engagement.engagementRate * 100).toFixed(1)}%
+                </div>
+                <p className="text-xs text-muted-foreground">
+                  sessões com &gt;10s, evento-chave ou 2+ pageviews
+                </p>
+              </CardContent>
+            </Card>
+            <Card>
+              <CardHeader className="pb-2">
+                <CardTitle className="text-sm font-medium flex items-center gap-2">
+                  <LogOut className="w-4 h-4 text-orange-600" />
+                  Taxa de rejeição
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="text-2xl font-bold">
+                  {(engagement.bounceRate * 100).toFixed(1)}%
+                </div>
+                <p className="text-xs text-muted-foreground">
+                  entrou e saiu sem interagir
                 </p>
               </CardContent>
             </Card>
