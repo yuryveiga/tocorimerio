@@ -98,6 +98,9 @@ serve(async (req) => {
         { name: "sessions" },
         { name: "totalUsers" },
         { name: "screenPageViews" },
+        { name: "averageSessionDuration" },
+        { name: "engagementRate" },
+        { name: "bounceRate" },
       ],
       orderBys: [{ dimension: { dimensionName: "date" } }],
     };
@@ -129,6 +132,9 @@ serve(async (req) => {
         sessions: Number(r.metricValues?.[0]?.value ?? 0),
         users: Number(r.metricValues?.[1]?.value ?? 0),
         pageviews: Number(r.metricValues?.[2]?.value ?? 0),
+        avgSessionDuration: Number(r.metricValues?.[3]?.value ?? 0),
+        engagementRate: Number(r.metricValues?.[4]?.value ?? 0),
+        bounceRate: Number(r.metricValues?.[5]?.value ?? 0),
       };
     });
 
