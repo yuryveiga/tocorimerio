@@ -101,7 +101,7 @@ serve(async (req) => {
         currency: targetCurrency,
         product_data: {
           name: item.title,
-          description: `${item.quantity} pessoa(s) - ${item.date} ${item.period}`,
+          description: `${item.quantity} pessoa(s) - ${item.date}`,
         },
         unit_amount: Math.round(item.final_price * 100),
       },
