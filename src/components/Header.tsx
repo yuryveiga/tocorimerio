@@ -292,11 +292,11 @@ export function Header({ forceLanguage }: { forceLanguage?: 'pt' | 'en' | 'es' }
               </Link>
             )}
             {mounted && (
-              <div className="flex items-center border border-border rounded-full px-1 py-0.5 bg-muted/30">
+              <div className="flex items-center border border-border rounded-full px-1.5 py-1 bg-muted/30">
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild>
                     <button 
-                      className="flex items-center gap-1 text-[10px] font-bold px-1.5 py-1 outline-none"
+                      className="flex items-center gap-1 text-[12px] font-bold px-2 py-1.5 outline-none"
                       aria-label={language === 'pt' ? "Alterar idioma" : "Change language"}
                     >
                       <span>{language === 'pt' ? '🇧🇷' : language === 'en' ? '🇺🇸' : language === 'es' ? '🇪🇸' : language === 'zh-CN' ? '🇨🇳' : '🇹🇼'}</span>
@@ -304,46 +304,46 @@ export function Header({ forceLanguage }: { forceLanguage?: 'pt' | 'en' | 'es' }
                     </button>
                   </DropdownMenuTrigger>
                   <DropdownMenuContent align="start" className="w-[110px] rounded-xl p-1 shadow-xl border-primary/10">
-                    <DropdownMenuItem onClick={() => setLanguage('pt')} className="gap-2 font-bold text-[10px] rounded-lg cursor-pointer">
+                    <DropdownMenuItem onClick={() => setLanguage('pt')} className="gap-2 font-bold text-[12px] rounded-lg cursor-pointer">
                       <span>🇧🇷</span> PT
                     </DropdownMenuItem>
-                    <DropdownMenuItem onClick={() => setLanguage('en')} className="gap-2 font-bold text-[10px] rounded-lg cursor-pointer">
+                    <DropdownMenuItem onClick={() => setLanguage('en')} className="gap-2 font-bold text-[12px] rounded-lg cursor-pointer">
                       <span>🇺🇸</span> EN
                     </DropdownMenuItem>
-                    <DropdownMenuItem onClick={() => setLanguage('es')} className="gap-2 font-bold text-[10px] rounded-lg cursor-pointer">
+                    <DropdownMenuItem onClick={() => setLanguage('es')} className="gap-2 font-bold text-[12px] rounded-lg cursor-pointer">
                       <span>🇪🇸</span> ES
                     </DropdownMenuItem>
-                    <DropdownMenuItem onClick={() => setLanguage('zh-CN')} className="gap-2 font-bold text-[10px] rounded-lg cursor-pointer">
+                    <DropdownMenuItem onClick={() => setLanguage('zh-CN')} className="gap-2 font-bold text-[12px] rounded-lg cursor-pointer">
                       <span>🇨🇳</span> 简体
                     </DropdownMenuItem>
-                    <DropdownMenuItem onClick={() => setLanguage('zh-TW')} className="gap-2 font-bold text-[10px] rounded-lg cursor-pointer">
+                    <DropdownMenuItem onClick={() => setLanguage('zh-TW')} className="gap-2 font-bold text-[12px] rounded-lg cursor-pointer">
                       <span>🇹🇼</span> 繁體
                     </DropdownMenuItem>
                   </DropdownMenuContent>
                 </DropdownMenu>
 
-                <span className="text-[10px] text-muted-foreground/30 font-thin italic">|</span>
+                <span className="text-[12px] text-muted-foreground/30 font-thin italic">|</span>
 
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild>
                     <button 
-                      className="flex items-center gap-1 text-[10px] font-bold px-1.5 py-1 outline-none"
+                      className="flex items-center gap-1 text-[12px] font-bold px-2 py-1.5 outline-none"
                       aria-label={language === 'pt' ? "Alterar moeda" : "Change currency"}
                     >
                       <span>{currency === 'BRL' ? 'R$' : currency === 'USD' ? '$' : currency === 'EUR' ? '€' : '¥'}</span>
                     </button>
                   </DropdownMenuTrigger>
                   <DropdownMenuContent align="end" className="w-[110px] rounded-xl p-1 shadow-xl border-primary/10">
-                    <DropdownMenuItem onClick={() => setCurrency('BRL')} className="gap-2 font-bold text-[10px] rounded-lg cursor-pointer">
+                    <DropdownMenuItem onClick={() => setCurrency('BRL')} className="gap-2 font-bold text-[12px] rounded-lg cursor-pointer">
                       <span>R$</span> BRL
                     </DropdownMenuItem>
-                    <DropdownMenuItem onClick={() => setCurrency('USD')} className="gap-2 font-bold text-[10px] rounded-lg cursor-pointer">
+                    <DropdownMenuItem onClick={() => setCurrency('USD')} className="gap-2 font-bold text-[12px] rounded-lg cursor-pointer">
                       <span>$</span> USD
                     </DropdownMenuItem>
-                    <DropdownMenuItem onClick={() => setCurrency('EUR')} className="gap-2 font-bold text-[10px] rounded-lg cursor-pointer">
+                    <DropdownMenuItem onClick={() => setCurrency('EUR')} className="gap-2 font-bold text-[12px] rounded-lg cursor-pointer">
                       <span>€</span> EUR
                     </DropdownMenuItem>
-                    <DropdownMenuItem onClick={() => setCurrency('CNY')} className="gap-2 font-bold text-[10px] rounded-lg cursor-pointer">
+                    <DropdownMenuItem onClick={() => setCurrency('CNY')} className="gap-2 font-bold text-[12px] rounded-lg cursor-pointer">
                       <span>¥</span> CNY
                     </DropdownMenuItem>
                   </DropdownMenuContent>
