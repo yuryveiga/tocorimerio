@@ -1,0 +1,1 @@
+DELETE FROM public.sales WHERE customer_email IN ('verify@test.com','verify2@test.com','verify3@test.com','verify4@test.com','rlstest@test.com','x@x.com');
