@@ -96,17 +96,27 @@ serve(async (req) => {
 
     console.log(`Subtotal: ${subtotalCents} cents, Fee: ${feeCents} cents, Total: ${totalCents} cents`);
 
-    const lineItems = processedItems.map((item: any) => ({
-      price_data: {
-        currency: targetCurrency,
-        product_data: {
-          name: item.title,
-          description: `${item.quantity} pessoa(s) - ${item.date}`,
+    // Internal period keys that should not be shown to the customer on Stripe
+    const INTERNAL_PERIODS = new Set(['morning', 'afternoon', 'night', 'match_time']);
+
+    const lineItems = processedItems.map((item: any) => {
+      const showPeriod = item.period && !INTERNAL_PERIODS.has(item.period);
+      const description = showPeriod
+        ? `${item.quantity} pessoa(s) - ${item.date} · ${item.period}`
+        : `${item.quantity} pessoa(s) - ${item.date}`;
+
+      return {
+        price_data: {
+          currency: targetCurrency,
+          product_data: {
+            name: item.title,
+            description,
+          },
+          unit_amount: Math.round(item.final_price * 100),
         },
-        unit_amount: Math.round(item.final_price * 100),
-      },
-      quantity: parseInt(item.quantity),
-    }));
+        quantity: parseInt(item.quantity),
+      };
+    });
 
     // Add 5% Service Fee
     if (feeCents > 0) {
