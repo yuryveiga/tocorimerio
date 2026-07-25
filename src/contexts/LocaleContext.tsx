@@ -107,15 +107,27 @@ export const LocaleProvider = ({ children }: { children: ReactNode }) => {
   const [language, setLanguageState] = useState<Language>(initial.language);
   const [currency, setCurrencyState] = useState<Currency>(initial.currency);
   const { rates } = useCurrency();
+  const location = useLocation();
 
-  // If a ?lang= param is present, persist it so navigation within the site keeps the language.
+  // React to ?lang= changes on SPA navigation (e.g. user clicks a hreflang link)
   useEffect(() => {
-    const urlLang = new URLSearchParams(window.location.search).get('lang');
-    if (urlLang) {
-      persistLocale(language, currency);
+    const urlLang = new URLSearchParams(location.search).get('lang');
+    if (!urlLang) return;
+    const map: Record<string, { language: Language; currency: Currency }> = {
+      pt:      { language: 'pt',    currency: 'BRL' },
+      en:      { language: 'en',    currency: 'USD' },
+      es:      { language: 'es',    currency: 'USD' },
+      'zh-cn': { language: 'zh-CN', currency: 'CNY' },
+      'zh-tw': { language: 'zh-TW', currency: 'CNY' },
+    };
+    const match = map[urlLang.toLowerCase()];
+    if (match && match.language !== language) {
+      setLanguageState(match.language);
+      setCurrencyState(match.currency);
+      persistLocale(match.language, match.currency);
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [location.search]);
 
   const setLanguage = (lang: Language) => {
     setLanguageState(lang);
