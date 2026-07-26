@@ -359,6 +359,7 @@ export type Database = {
           customer_email: string
           customer_name: string
           customer_phone: string | null
+          emails_sent: boolean
           id: string
           is_archived: boolean | null
           is_cancelled: boolean | null
@@ -380,6 +381,7 @@ export type Database = {
           customer_email: string
           customer_name: string
           customer_phone?: string | null
+          emails_sent?: boolean
           id?: string
           is_archived?: boolean | null
           is_cancelled?: boolean | null
@@ -401,6 +403,7 @@ export type Database = {
           customer_email?: string
           customer_name?: string
           customer_phone?: string | null
+          emails_sent?: boolean
           id?: string
           is_archived?: boolean | null
           is_cancelled?: boolean | null

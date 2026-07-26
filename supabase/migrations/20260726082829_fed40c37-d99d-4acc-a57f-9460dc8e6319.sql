@@ -1,0 +1,1 @@
+ALTER TABLE public.sales ADD COLUMN IF NOT EXISTS emails_sent boolean NOT NULL DEFAULT false;
