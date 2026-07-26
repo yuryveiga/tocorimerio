@@ -272,6 +272,8 @@ serve(async (req) => {
           await sendEmailAlert(sale, supabaseUrl); // Admin alert
           await sendEmailAlert(sale, supabaseUrl, true); // Customer confirmation
           await sendExternalWebhook(sale); // External notification
+
+          await supabase.from("sales").update({ emails_sent: true }).eq("id", id);
         }
       }
     }
