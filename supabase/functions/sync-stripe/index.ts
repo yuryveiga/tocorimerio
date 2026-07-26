@@ -287,27 +287,32 @@ serve(async (req) => {
           continue;
         }
 
-        if (sale && !sale.is_paid) {
+        if (!sale) continue;
+
+        let currentSale = sale;
+        if (!sale.is_paid) {
           console.log(`Sale ${id} found unpaid. Syncing status...`);
-          
           const { data: updatedSale, error: updateError } = await supabase
             .from("sales")
             .update({ is_paid: true, provider: "stripe" })
             .eq("id", id)
             .select()
             .single();
-
           if (updateError) {
             console.error(`Error updating sale ${id}:`, updateError);
             continue;
           }
-
-          console.log(`Sale ${id} marked as paid. Triggering notifications...`);
+          currentSale = updatedSale;
           await createGoogleCalendarEvent(updatedSale);
-          await sendEmailAlert(updatedSale, supabaseUrl); // Admin alert
-          await sendEmailAlert(updatedSale, supabaseUrl, true); // Customer copy
-          await sendExternalWebhook(updatedSale); // Webhook integration
+        }
 
+        // Send emails if not yet sent (paid via webhook or sync)
+        if (!currentSale.emails_sent) {
+          console.log(`Sending emails for sale ${id}...`);
+          await sendEmailAlert(currentSale, supabaseUrl); // Admin alert
+          await sendEmailAlert(currentSale, supabaseUrl, true); // Customer copy
+          await sendExternalWebhook(currentSale);
+          await supabase.from("sales").update({ emails_sent: true }).eq("id", id);
           syncedCount++;
           syncedSaleIds.push(id);
         }
