@@ -229,18 +229,43 @@ serve(async (req) => {
     // Accept optional body parameters to sync a specific session or change limits
     let limit = 30;
     let targetSessionId: string | null = null;
+    let explicitSaleIds: string[] | null = null;
     
     if (req.method === "POST") {
       try {
         const body = await req.json();
         if (body.limit) limit = Number(body.limit);
         if (body.sessionId) targetSessionId = String(body.sessionId);
+        if (body.saleIds && Array.isArray(body.saleIds)) explicitSaleIds = body.saleIds.map(String);
       } catch (_) {
         // Ignore JSON parse errors for empty/invalid bodies and fall back to defaults
       }
     }
 
     let sessionsList: any[] = [];
+
+    let syncedCount = 0;
+    const syncedSaleIds: string[] = [];
+
+    // Force-resend path: process specific saleIds directly (no Stripe lookup)
+    if (explicitSaleIds && explicitSaleIds.length > 0) {
+      for (const id of explicitSaleIds) {
+        const { data: sale } = await supabase.from("sales").select("*").eq("id", id).maybeSingle();
+        if (!sale || !sale.is_paid) continue;
+        if (sale.emails_sent) continue;
+        console.log(`Force-sending emails for sale ${id}...`);
+        await sendEmailAlert(sale, supabaseUrl);
+        await sendEmailAlert(sale, supabaseUrl, true);
+        await sendExternalWebhook(sale);
+        await supabase.from("sales").update({ emails_sent: true }).eq("id", id);
+        syncedCount++;
+        syncedSaleIds.push(id);
+      }
+      return new Response(
+        JSON.stringify({ success: true, syncedCount, syncedSaleIds }),
+        { headers: { ...corsHeaders, "Content-Type": "application/json" }, status: 200 }
+      );
+    }
 
     if (targetSessionId) {
       console.log(`Fetching specific Stripe Checkout Session: ${targetSessionId}`);
@@ -254,9 +279,6 @@ serve(async (req) => {
       });
       sessionsList = response.data;
     }
-
-    let syncedCount = 0;
-    const syncedSaleIds: string[] = [];
 
     for (const session of sessionsList) {
       if (session.payment_status !== "paid") continue;
