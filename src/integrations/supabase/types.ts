@@ -65,11 +65,14 @@ export type Database = {
           excerpt_es: string | null
           excerpt_zh_cn: string | null
           excerpt_zh_tw: string | null
+          featured_image_alt: string | null
           id: string
           image_url: string | null
           is_published: boolean
+          meta_description: string | null
           meta_keywords: string | null
           slug: string
+          tags: string[] | null
           title: string
           title_en: string | null
           title_es: string | null
@@ -89,11 +92,14 @@ export type Database = {
           excerpt_es?: string | null
           excerpt_zh_cn?: string | null
           excerpt_zh_tw?: string | null
+          featured_image_alt?: string | null
           id?: string
           image_url?: string | null
           is_published?: boolean
+          meta_description?: string | null
           meta_keywords?: string | null
           slug: string
+          tags?: string[] | null
           title: string
           title_en?: string | null
           title_es?: string | null
@@ -113,11 +119,14 @@ export type Database = {
           excerpt_es?: string | null
           excerpt_zh_cn?: string | null
           excerpt_zh_tw?: string | null
+          featured_image_alt?: string | null
           id?: string
           image_url?: string | null
           is_published?: boolean
+          meta_description?: string | null
           meta_keywords?: string | null
           slug?: string
+          tags?: string[] | null
           title?: string
           title_en?: string | null
           title_es?: string | null
@@ -350,6 +359,7 @@ export type Database = {
           customer_email: string
           customer_name: string
           customer_phone: string | null
+          emails_sent: boolean
           id: string
           is_archived: boolean | null
           is_cancelled: boolean | null
@@ -371,6 +381,7 @@ export type Database = {
           customer_email: string
           customer_name: string
           customer_phone?: string | null
+          emails_sent?: boolean
           id?: string
           is_archived?: boolean | null
           is_cancelled?: boolean | null
@@ -392,6 +403,7 @@ export type Database = {
           customer_email?: string
           customer_name?: string
           customer_phone?: string | null
+          emails_sent?: boolean
           id?: string
           is_archived?: boolean | null
           is_cancelled?: boolean | null

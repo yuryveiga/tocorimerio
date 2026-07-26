@@ -127,7 +127,7 @@ const CheckoutSuccess = () => {
       if (!saleIdsStr) { setLoading(false); return; }
       try {
         const saleIds = JSON.parse(saleIdsStr);
-        supabase.functions.invoke("sync-stripe", { body: { limit: 20 } }).catch(() => {});
+        supabase.functions.invoke("sync-stripe", { body: { limit: 20, saleIds } }).catch(() => {});
         const { data, error } = await supabase.from("sales").select("*").in("id", saleIds);
         if (error) throw error;
         if (data) {
