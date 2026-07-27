@@ -260,6 +260,17 @@ const AdminBlog = () => {
 
   const [showGalleryPicker, setShowGalleryPicker] = useState(false);
   const quillRef = useRef<any>(null);
+  const [activeLang, setActiveLang] = useState<'pt' | 'en' | 'es' | 'zh_cn' | 'zh_tw'>('pt');
+
+  const contentFieldFor = (lang: typeof activeLang): keyof LovableBlogPost => {
+    switch (lang) {
+      case 'en': return 'content_en' as keyof LovableBlogPost;
+      case 'es': return 'content_es' as keyof LovableBlogPost;
+      case 'zh_cn': return 'content_zh_cn' as keyof LovableBlogPost;
+      case 'zh_tw': return 'content_zh_tw' as keyof LovableBlogPost;
+      default: return 'content' as keyof LovableBlogPost;
+    }
+  };
 
   const imageHandler = useCallback(() => {
     const choice = true; // Forcing gallery for consistency/UI
@@ -276,31 +287,19 @@ const AdminBlog = () => {
       return;
     }
 
-    // Close picker first so focus returns to the editor before we try to insert.
+    // Append the image directly to the active language's content field.
+    // This is more reliable than using Quill's ref (which only pointed to the PT editor
+    // and lost its selection when the picker dialog opened).
+    const field = contentFieldFor(activeLang);
+    setEditing(prev => {
+      if (!prev) return prev;
+      const current = ((prev as any)[field] as string) || '';
+      const imgHtml = `<p><img src="${url}" alt="" /></p>`;
+      return { ...prev, [field]: current + imgHtml } as Partial<LovableBlogPost>;
+    });
     setShowGalleryPicker(false);
-
-    // Defer insertion until after the dialog closes and the editor regains focus.
-    setTimeout(() => {
-      const ref: any = quillRef.current;
-      const quill = ref?.getEditor?.() ?? ref?.editor ?? ref;
-      if (!quill || typeof quill.insertEmbed !== 'function') {
-        // Fallback: append raw <img> tag into the content so the image is never lost.
-        setEditing(prev => prev ? { ...prev, content: (prev.content || '') + `\n<p><img src="${url}" alt="" /></p>\n` } : prev);
-        toast({ title: "Imagem inserida no final do post." });
-        return;
-      }
-      try {
-        quill.focus();
-      } catch { /* noop */ }
-      let range = quill.getSelection(true);
-      if (!range) {
-        const len = typeof quill.getLength === 'function' ? quill.getLength() : 0;
-        range = { index: Math.max(0, len - 1), length: 0 };
-      }
-      quill.insertEmbed(range.index, 'image', url, 'user');
-      quill.setSelection(range.index + 1, 0);
-      toast({ title: "Imagem inserida no post!" });
-    }, 150);
+    const langLabel = { pt: 'PT', en: 'EN', es: 'ES', zh_cn: '中文简', zh_tw: '中文繁' }[activeLang];
+    toast({ title: `Imagem inserida no post (${langLabel})!`, description: 'Adicionada ao final do texto.' });
   };
 
   const deleteGalleryImage = async (id: string) => {
@@ -535,7 +534,7 @@ const AdminBlog = () => {
 
                     {/* Editor Area */}
                     <div className="flex-1 flex flex-col gap-6 overflow-hidden min-h-0">
-                       <Tabs defaultValue="pt" className="flex-1 flex flex-col overflow-hidden">
+                       <Tabs value={activeLang} onValueChange={(v) => setActiveLang(v as typeof activeLang)} className="flex-1 flex flex-col overflow-hidden">
                          <div className="flex items-center justify-between mb-2">
                            <TabsList className="bg-muted/50 p-1 rounded-xl h-10">
                               <TabsTrigger value="pt" className="text-xs font-bold rounded-lg px-4">Português</TabsTrigger>
