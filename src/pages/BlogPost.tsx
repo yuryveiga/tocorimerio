@@ -126,13 +126,24 @@ const BlogPost = () => {
   // 1. Replace non-breaking spaces (nbsp) with normal spaces to allow correct wrapping
   // 2. Remove soft hyphens that cause incorrect syllable splitting
   // 3. Protect compound words (mata-mata) with non-breaking hyphens
-  const content = String(rawContent || "")
-    .replace(/\u00A0/g, ' ')
-    .replace(/&nbsp;/g, ' ')
-    .replace(/\u00AD/g, '')
-    .replace(/&shy;/g, '')
-    .replace(/&#173;/g, '')
-    .replace(/([a-zA-ZáàâãéèêíïóôõöúçÁÀÂÃÉÈÊÍÏÓÔÕÖÚÇ])(-)([a-zA-ZáàâãéèêíïóôõöúçÁÀÂÃÉÈÊÍÏÓÔÕÖÚÇ])/g, '$1&#8209;$3');
+  const content = (() => {
+    const raw = String(rawContent || "")
+      .replace(/\u00A0/g, ' ')
+      .replace(/&nbsp;/g, ' ')
+      .replace(/\u00AD/g, '')
+      .replace(/&shy;/g, '')
+      .replace(/&#173;/g, '');
+
+    // Protect compound words (mata-mata) with non-breaking hyphens,
+    // but ONLY in text nodes — never inside HTML tag attributes (e.g. src="...").
+    return raw
+      .split(/(<[^>]*>)/)  // split preserving tags
+      .map(part => {
+        if (part.startsWith('<')) return part; // leave HTML tags untouched
+        return part.replace(/([a-zA-ZáàâãéèêíïóôõöúçÁÀÂÃÉÈÊÍÏÓÔÕÖÚÇ])(-)([a-zA-ZáàâãéèêíïóôõöúçÁÀÂÃÉÈÊÍÏÓÔÕÖÚÇ])/g, '$1&#8209;$3');
+      })
+      .join('');
+  })();
 
   const contentWithSplit = (() => {
     if (!content) return { part1: "", part2: "" };

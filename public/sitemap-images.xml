@@ -1370,13 +1370,6 @@
     </image:image>
   </url>
   <url>
-    <loc>https://tocorimerio.com/blog/flamengo-cruzeiro-libertadores-maracana-guide</loc>
-    <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1785185327349_np1xnrg881d.webp</image:loc>
-      <image:caption>Flamengo x Cruzeiro no Maracanã: um guia do visitante para o confronto da Libertadores</image:caption>
-    </image:image>
-  </url>
-  <url>
     <loc>https://tocorimerio.com/blog/best-coffee-shops-in-rio-de-janeiro</loc>
     <image:image>
       <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776154873773_6061xrix9z7.webp</image:loc>
@@ -1395,6 +1388,13 @@
     <image:image>
       <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776136539659_dhflxgmz62g.webp</image:loc>
       <image:caption>Uma Jornada Pela História: Navegando pelas Águas da Baía de Guanabara</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://tocorimerio.com/blog/flamengo-cruzeiro-libertadores-maracana-guide</loc>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1785185327349_np1xnrg881d.webp</image:loc>
+      <image:caption>Flamengo x Cruzeiro no Maracanã: um guia do visitante para o confronto da Libertadores</image:caption>
     </image:image>
   </url>
   <url>
