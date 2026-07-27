@@ -517,7 +517,7 @@ const BlogPost = () => {
         {blogHeroStyle === "hero" ? (
           <>
             {/* HERO SECTION FOR BLOG POST - NEW STYLE */}
-            <section className="relative h-[75vh] sm:h-[85vh] flex items-start justify-center overflow-hidden bg-black">
+            <section className="relative h-[75vh] sm:h-[85vh] flex items-center justify-center overflow-hidden bg-black">
               <div 
                 className="absolute inset-0 bg-cover bg-center bg-no-repeat transition-transform duration-[length:20000ms] hover:scale-110"
                 style={{ backgroundImage: `url('${post.image_url || fallbackImage}')` }}
@@ -525,7 +525,7 @@ const BlogPost = () => {
               <div className="absolute inset-0 bg-black/50" />
               <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-background to-transparent z-[5]" />
               
-              <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center animate-fade-in-up pt-28 sm:pt-32">
+              <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center animate-fade-in-up">
                 <Link to="/blog" className="inline-flex items-center text-white/80 hover:text-white font-sans mb-3 transition-colors">
                   <ArrowLeft className="w-5 h-5 mr-2" /> {t("voltar_blog")}
                 </Link>
