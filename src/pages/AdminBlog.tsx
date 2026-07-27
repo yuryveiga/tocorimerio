@@ -276,13 +276,31 @@ const AdminBlog = () => {
       return;
     }
 
-    const quill = quillRef.current?.getEditor();
-    if (quill) {
-      const range = quill.getSelection(true);
-      quill.insertEmbed(range.index, 'image', url);
-    }
+    // Close picker first so focus returns to the editor before we try to insert.
     setShowGalleryPicker(false);
-    toast({ title: "Imagem inserida no post!" });
+
+    // Defer insertion until after the dialog closes and the editor regains focus.
+    setTimeout(() => {
+      const ref: any = quillRef.current;
+      const quill = ref?.getEditor?.() ?? ref?.editor ?? ref;
+      if (!quill || typeof quill.insertEmbed !== 'function') {
+        // Fallback: append raw <img> tag into the content so the image is never lost.
+        setEditing(prev => prev ? { ...prev, content: (prev.content || '') + `\n<p><img src="${url}" alt="" /></p>\n` } : prev);
+        toast({ title: "Imagem inserida no final do post." });
+        return;
+      }
+      try {
+        quill.focus();
+      } catch { /* noop */ }
+      let range = quill.getSelection(true);
+      if (!range) {
+        const len = typeof quill.getLength === 'function' ? quill.getLength() : 0;
+        range = { index: Math.max(0, len - 1), length: 0 };
+      }
+      quill.insertEmbed(range.index, 'image', url, 'user');
+      quill.setSelection(range.index + 1, 0);
+      toast({ title: "Imagem inserida no post!" });
+    }, 150);
   };
 
   const deleteGalleryImage = async (id: string) => {
