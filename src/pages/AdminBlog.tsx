@@ -534,7 +534,7 @@ const AdminBlog = () => {
 
                     {/* Editor Area */}
                     <div className="flex-1 flex flex-col gap-6 overflow-hidden min-h-0">
-                       <Tabs defaultValue="pt" className="flex-1 flex flex-col overflow-hidden">
+                       <Tabs value={activeLang} onValueChange={(v) => setActiveLang(v as typeof activeLang)} className="flex-1 flex flex-col overflow-hidden">
                          <div className="flex items-center justify-between mb-2">
                            <TabsList className="bg-muted/50 p-1 rounded-xl h-10">
                               <TabsTrigger value="pt" className="text-xs font-bold rounded-lg px-4">Português</TabsTrigger>
