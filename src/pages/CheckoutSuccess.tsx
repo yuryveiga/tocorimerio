@@ -124,7 +124,33 @@ const CheckoutSuccess = () => {
   useEffect(() => {
     const loadSales = async () => {
       const saleIdsStr = searchParams.get("sale_ids");
-      if (!saleIdsStr) { setLoading(false); return; }
+
+      // ── Preview mode: inject mock data when no sale_ids in URL ──
+      if (!saleIdsStr) {
+        const mockSale = {
+          id: "mock-preview-001",
+          tour_title: "City Tour Expresso",
+          selected_date: new Date().toISOString().slice(0, 10),
+          selected_period: "morning",
+          quantity: 3,
+          total_price: 2100,
+          is_paid: true,
+          is_archived: false,
+          customer_name: "João Silva",
+          customer_email: "joao@example.com",
+        } as unknown as LovableSale;
+        setSales([mockSale]);
+        setParticipants({
+          "mock-preview-001": [
+            { name: "", dob: "" },
+            { name: "", dob: "" },
+            { name: "", dob: "" },
+          ],
+        });
+        setLoading(false);
+        return;
+      }
+
       try {
         const saleIds = JSON.parse(saleIdsStr);
         supabase.functions.invoke("sync-stripe", { body: { limit: 20, saleIds } }).catch(() => {});

@@ -506,7 +506,7 @@ const BlogPost = () => {
         {blogHeroStyle === "hero" ? (
           <>
             {/* HERO SECTION FOR BLOG POST - NEW STYLE */}
-            <section className="relative h-[60vh] sm:h-[70vh] flex items-center justify-center overflow-hidden bg-black">
+            <section className="relative h-[75vh] sm:h-[85vh] flex items-center justify-center overflow-hidden bg-black">
               <div 
                 className="absolute inset-0 bg-cover bg-center bg-no-repeat transition-transform duration-[length:20000ms] hover:scale-110"
                 style={{ backgroundImage: `url('${post.image_url || fallbackImage}')` }}
@@ -544,7 +544,12 @@ const BlogPost = () => {
                   className="max-w-none ql-editor blog-content-area"
                   style={{ padding: 0 }}
                   lang={language}
-                  dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(contentWithSplit.part1 || "") }}
+                  dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(contentWithSplit.part1 || "", {
+                    ADD_ATTR: ['src', 'width', 'height', 'style', 'class', 'target', 'rel'],
+                    ADD_TAGS: ['img'],
+                    ALLOW_DATA_ATTR: false,
+                    ALLOWED_URI_REGEXP: /^(?:(?:(?:f|ht)tps?|mailto|tel|callto|cid|xmpp|data):|[^a-z]|[a-z+.\-]+(?:[^a-z+.\-:]|$))/i,
+                  }) }}
                 />
 
                 {contentWithSplit.part2 && (
@@ -554,7 +559,12 @@ const BlogPost = () => {
                       className="max-w-none ql-editor blog-content-area"
                       style={{ padding: 0 }}
                       lang={language}
-                      dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(contentWithSplit.part2 || "") }}
+                      dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(contentWithSplit.part2 || "", {
+                        ADD_ATTR: ['src', 'width', 'height', 'style', 'class', 'target', 'rel'],
+                        ADD_TAGS: ['img'],
+                        ALLOW_DATA_ATTR: false,
+                        ALLOWED_URI_REGEXP: /^(?:(?:(?:f|ht)tps?|mailto|tel|callto|cid|xmpp|data):|[^a-z]|[a-z+.\-]+(?:[^a-z+.\-:]|$))/i,
+                      }) }}
                     />
                   </>
                 )}

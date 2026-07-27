@@ -1,6 +1,61 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
+    <loc>https://tocorimerio.com/passeio/praias-selvagens-guaratiba</loc>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776137037153_8q6mve9es2m.webp</image:loc>
+      <image:caption>Travessia das Praias Selvagens</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776137052383_be0rcksleea.webp</image:loc>
+      <image:caption>Travessia das Praias Selvagens</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776137055104_ulxgbd8ko1.webp</image:loc>
+      <image:caption>Travessia das Praias Selvagens</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776137057632_drvrd2utzy4.webp</image:loc>
+      <image:caption>Travessia das Praias Selvagens</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776137060246_jra13cdv35.webp</image:loc>
+      <image:caption>Travessia das Praias Selvagens</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776137062841_cz46u04to05.webp</image:loc>
+      <image:caption>Travessia das Praias Selvagens</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776137065510_4kwuqu522gd.webp</image:loc>
+      <image:caption>Travessia das Praias Selvagens</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776137068021_7xuf4ycc665.webp</image:loc>
+      <image:caption>Travessia das Praias Selvagens</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776137039137_t3gjg9idbnd.webp</image:loc>
+      <image:caption>Travessia das Praias Selvagens</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776137041433_x8m8occtfe.webp</image:loc>
+      <image:caption>Travessia das Praias Selvagens</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776137044404_odkt0lsh4w.webp</image:loc>
+      <image:caption>Travessia das Praias Selvagens</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776137046987_47xydain81g.webp</image:loc>
+      <image:caption>Travessia das Praias Selvagens</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776137049704_hhrqj95lbae.webp</image:loc>
+      <image:caption>Travessia das Praias Selvagens</image:caption>
+    </image:image>
+  </url>
+  <url>
     <loc>https://tocorimerio.com/passeio/escalada-rocha-rio</loc>
     <image:image>
       <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776137001629_5d14am30d8s.webp</image:loc>
@@ -159,6 +214,92 @@
     <image:image>
       <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776178438657_g014cowadp.webp</image:loc>
       <image:caption>Sailing Rio - Baia de Guanabara</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://tocorimerio.com/passeio/transfer-aeroporto-cidade</loc>
+    <image:image>
+      <image:loc>https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?q=80&amp;w=1200</image:loc>
+      <image:caption>Transfers (Aeroporto e Cidade)</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?q=80&amp;w=800</image:loc>
+      <image:caption>Transfers (Aeroporto e Cidade)</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://images.unsplash.com/photo-1569154941061-e231b4725ef1?q=80&amp;w=800</image:loc>
+      <image:caption>Transfers (Aeroporto e Cidade)</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://images.unsplash.com/photo-1517487881594-2787fef5ebf7?q=80&amp;w=800</image:loc>
+      <image:caption>Transfers (Aeroporto e Cidade)</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://tocorimerio.com/passeio/pedra-da-gavea-trilha</loc>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776136847390_169n24rnud8.webp</image:loc>
+      <image:caption>Pedra da Gávea</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776136864281_g9fboxwo3c.webp</image:loc>
+      <image:caption>Pedra da Gávea</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776136867362_wflr98j93cl.webp</image:loc>
+      <image:caption>Pedra da Gávea</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776136870103_rf59fdi0369.webp</image:loc>
+      <image:caption>Pedra da Gávea</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776136872909_cqnv540ap5.webp</image:loc>
+      <image:caption>Pedra da Gávea</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776136875954_cfyugltviy.webp</image:loc>
+      <image:caption>Pedra da Gávea</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776136879093_ip8r4n763ur.webp</image:loc>
+      <image:caption>Pedra da Gávea</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776136882267_reu0edvldh.webp</image:loc>
+      <image:caption>Pedra da Gávea</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776136885441_82db1d3kviu.webp</image:loc>
+      <image:caption>Pedra da Gávea</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776136888707_0e9a1520kjup.webp</image:loc>
+      <image:caption>Pedra da Gávea</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776136892174_c4r1pb5urai.webp</image:loc>
+      <image:caption>Pedra da Gávea</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776136849866_6iey58t5se7.webp</image:loc>
+      <image:caption>Pedra da Gávea</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776136853305_m2tqb91hz2.webp</image:loc>
+      <image:caption>Pedra da Gávea</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776136856097_yvpaxd2ofpa.webp</image:loc>
+      <image:caption>Pedra da Gávea</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776136858694_p8me9z7pijb.webp</image:loc>
+      <image:caption>Pedra da Gávea</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776136861213_zbytbkjle7k.webp</image:loc>
+      <image:caption>Pedra da Gávea</image:caption>
     </image:image>
   </url>
   <url>
@@ -485,93 +626,6 @@
     </image:image>
   </url>
   <url>
-    <loc>https://tocorimerio.com/passeio/pico-da-tijuca-hiking-tour-o-ponto-mais-alto-do-parque-nacional-da-tijuca</loc>
-    <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1781983282387_s19y0fv1a8.webp</image:loc>
-      <image:caption>Pico da Tijuca Hiking Tour – O Ponto Mais Alto do Parque Nacional da Tijuca</image:caption>
-    </image:image>
-    <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1781984256297_0d38jlgt3cof.webp</image:loc>
-      <image:caption>Pico da Tijuca Hiking Tour – O Ponto Mais Alto do Parque Nacional da Tijuca</image:caption>
-    </image:image>
-    <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1781984258194_l55veuozokt.webp</image:loc>
-      <image:caption>Pico da Tijuca Hiking Tour – O Ponto Mais Alto do Parque Nacional da Tijuca</image:caption>
-    </image:image>
-    <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1781984259632_81bemuxnoci.webp</image:loc>
-      <image:caption>Pico da Tijuca Hiking Tour – O Ponto Mais Alto do Parque Nacional da Tijuca</image:caption>
-    </image:image>
-    <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1781984260949_ailx6x1m58.webp</image:loc>
-      <image:caption>Pico da Tijuca Hiking Tour – O Ponto Mais Alto do Parque Nacional da Tijuca</image:caption>
-    </image:image>
-    <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1781984262161_z8hkkh6dsn.webp</image:loc>
-      <image:caption>Pico da Tijuca Hiking Tour – O Ponto Mais Alto do Parque Nacional da Tijuca</image:caption>
-    </image:image>
-    <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1781984263217_sktr1d38uhs.webp</image:loc>
-      <image:caption>Pico da Tijuca Hiking Tour – O Ponto Mais Alto do Parque Nacional da Tijuca</image:caption>
-    </image:image>
-    <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1781984264360_roo5gqsupsd.webp</image:loc>
-      <image:caption>Pico da Tijuca Hiking Tour – O Ponto Mais Alto do Parque Nacional da Tijuca</image:caption>
-    </image:image>
-    <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1781984265867_g7s10qtb0d.webp</image:loc>
-      <image:caption>Pico da Tijuca Hiking Tour – O Ponto Mais Alto do Parque Nacional da Tijuca</image:caption>
-    </image:image>
-    <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1781984267627_el1m46c6tes.webp</image:loc>
-      <image:caption>Pico da Tijuca Hiking Tour – O Ponto Mais Alto do Parque Nacional da Tijuca</image:caption>
-    </image:image>
-    <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1781984268997_g85ze51hobr.webp</image:loc>
-      <image:caption>Pico da Tijuca Hiking Tour – O Ponto Mais Alto do Parque Nacional da Tijuca</image:caption>
-    </image:image>
-    <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1781984270250_m5swlmjtjo.webp</image:loc>
-      <image:caption>Pico da Tijuca Hiking Tour – O Ponto Mais Alto do Parque Nacional da Tijuca</image:caption>
-    </image:image>
-    <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1781984271377_w2qbnsuvy8.webp</image:loc>
-      <image:caption>Pico da Tijuca Hiking Tour – O Ponto Mais Alto do Parque Nacional da Tijuca</image:caption>
-    </image:image>
-    <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1781984272479_ya2rz3fheus.webp</image:loc>
-      <image:caption>Pico da Tijuca Hiking Tour – O Ponto Mais Alto do Parque Nacional da Tijuca</image:caption>
-    </image:image>
-    <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1781984273723_k4whplj08qm.webp</image:loc>
-      <image:caption>Pico da Tijuca Hiking Tour – O Ponto Mais Alto do Parque Nacional da Tijuca</image:caption>
-    </image:image>
-    <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1781984275350_x6ifkcltdj.webp</image:loc>
-      <image:caption>Pico da Tijuca Hiking Tour – O Ponto Mais Alto do Parque Nacional da Tijuca</image:caption>
-    </image:image>
-    <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1781984276803_45yvjlbot9u.webp</image:loc>
-      <image:caption>Pico da Tijuca Hiking Tour – O Ponto Mais Alto do Parque Nacional da Tijuca</image:caption>
-    </image:image>
-    <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1781983284163_7wo5f5xifd4.webp</image:loc>
-      <image:caption>Pico da Tijuca Hiking Tour – O Ponto Mais Alto do Parque Nacional da Tijuca</image:caption>
-    </image:image>
-    <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1781983285619_z40kycb496.webp</image:loc>
-      <image:caption>Pico da Tijuca Hiking Tour – O Ponto Mais Alto do Parque Nacional da Tijuca</image:caption>
-    </image:image>
-    <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1781983287028_jkggryox5j.webp</image:loc>
-      <image:caption>Pico da Tijuca Hiking Tour – O Ponto Mais Alto do Parque Nacional da Tijuca</image:caption>
-    </image:image>
-    <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1781983288298_kzg4gnh7bkn.webp</image:loc>
-      <image:caption>Pico da Tijuca Hiking Tour – O Ponto Mais Alto do Parque Nacional da Tijuca</image:caption>
-    </image:image>
-  </url>
-  <url>
     <loc>https://tocorimerio.com/passeio/cristo-redentor-pao-de-acucar</loc>
     <image:image>
       <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776178624017_85tdzxr4lnn.webp</image:loc>
@@ -699,17 +753,6 @@
     <image:image>
       <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776136794694_b4cp5fev4us.webp</image:loc>
       <image:caption>Rio Historic Centre Walking Tour: Colonial, Imperial &amp; Modern Rio a Pé</image:caption>
-    </image:image>
-  </url>
-  <url>
-    <loc>https://tocorimerio.com/passeio/maracana-matchday</loc>
-    <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776136644074_ueljwux2xe.webp</image:loc>
-      <image:caption>Maracanã MatchDay</image:caption>
-    </image:image>
-    <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776136646347_hrrelisrwqe.webp</image:loc>
-      <image:caption>Maracanã MatchDay</image:caption>
     </image:image>
   </url>
   <url>
@@ -863,6 +906,17 @@
     </image:image>
   </url>
   <url>
+    <loc>https://tocorimerio.com/passeio/maracana-matchday</loc>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776136644074_ueljwux2xe.webp</image:loc>
+      <image:caption>Maracanã MatchDay</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776136646347_hrrelisrwqe.webp</image:loc>
+      <image:caption>Maracanã MatchDay</image:caption>
+    </image:image>
+  </url>
+  <url>
     <loc>https://tocorimerio.com/passeio/city-tour-rio-completo</loc>
     <image:image>
       <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776269176989_0zgv08vhwp5.webp</image:loc>
@@ -926,144 +980,90 @@
     </image:image>
   </url>
   <url>
-    <loc>https://tocorimerio.com/passeio/praias-selvagens-guaratiba</loc>
+    <loc>https://tocorimerio.com/passeio/pico-da-tijuca-hiking-tour-o-ponto-mais-alto-do-parque-nacional-da-tijuca</loc>
     <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776137037153_8q6mve9es2m.webp</image:loc>
-      <image:caption>Travessia das Praias Selvagens</image:caption>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1781983282387_s19y0fv1a8.webp</image:loc>
+      <image:caption>Pico da Tijuca Hiking Tour – O Ponto Mais Alto do Parque Nacional da Tijuca</image:caption>
     </image:image>
     <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776137052383_be0rcksleea.webp</image:loc>
-      <image:caption>Travessia das Praias Selvagens</image:caption>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1781984256297_0d38jlgt3cof.webp</image:loc>
+      <image:caption>Pico da Tijuca Hiking Tour – O Ponto Mais Alto do Parque Nacional da Tijuca</image:caption>
     </image:image>
     <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776137055104_ulxgbd8ko1.webp</image:loc>
-      <image:caption>Travessia das Praias Selvagens</image:caption>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1781984258194_l55veuozokt.webp</image:loc>
+      <image:caption>Pico da Tijuca Hiking Tour – O Ponto Mais Alto do Parque Nacional da Tijuca</image:caption>
     </image:image>
     <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776137057632_drvrd2utzy4.webp</image:loc>
-      <image:caption>Travessia das Praias Selvagens</image:caption>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1781984259632_81bemuxnoci.webp</image:loc>
+      <image:caption>Pico da Tijuca Hiking Tour – O Ponto Mais Alto do Parque Nacional da Tijuca</image:caption>
     </image:image>
     <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776137060246_jra13cdv35.webp</image:loc>
-      <image:caption>Travessia das Praias Selvagens</image:caption>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1781984260949_ailx6x1m58.webp</image:loc>
+      <image:caption>Pico da Tijuca Hiking Tour – O Ponto Mais Alto do Parque Nacional da Tijuca</image:caption>
     </image:image>
     <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776137062841_cz46u04to05.webp</image:loc>
-      <image:caption>Travessia das Praias Selvagens</image:caption>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1781984262161_z8hkkh6dsn.webp</image:loc>
+      <image:caption>Pico da Tijuca Hiking Tour – O Ponto Mais Alto do Parque Nacional da Tijuca</image:caption>
     </image:image>
     <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776137065510_4kwuqu522gd.webp</image:loc>
-      <image:caption>Travessia das Praias Selvagens</image:caption>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1781984263217_sktr1d38uhs.webp</image:loc>
+      <image:caption>Pico da Tijuca Hiking Tour – O Ponto Mais Alto do Parque Nacional da Tijuca</image:caption>
     </image:image>
     <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776137068021_7xuf4ycc665.webp</image:loc>
-      <image:caption>Travessia das Praias Selvagens</image:caption>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1781984264360_roo5gqsupsd.webp</image:loc>
+      <image:caption>Pico da Tijuca Hiking Tour – O Ponto Mais Alto do Parque Nacional da Tijuca</image:caption>
     </image:image>
     <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776137039137_t3gjg9idbnd.webp</image:loc>
-      <image:caption>Travessia das Praias Selvagens</image:caption>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1781984265867_g7s10qtb0d.webp</image:loc>
+      <image:caption>Pico da Tijuca Hiking Tour – O Ponto Mais Alto do Parque Nacional da Tijuca</image:caption>
     </image:image>
     <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776137041433_x8m8occtfe.webp</image:loc>
-      <image:caption>Travessia das Praias Selvagens</image:caption>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1781984267627_el1m46c6tes.webp</image:loc>
+      <image:caption>Pico da Tijuca Hiking Tour – O Ponto Mais Alto do Parque Nacional da Tijuca</image:caption>
     </image:image>
     <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776137044404_odkt0lsh4w.webp</image:loc>
-      <image:caption>Travessia das Praias Selvagens</image:caption>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1781984268997_g85ze51hobr.webp</image:loc>
+      <image:caption>Pico da Tijuca Hiking Tour – O Ponto Mais Alto do Parque Nacional da Tijuca</image:caption>
     </image:image>
     <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776137046987_47xydain81g.webp</image:loc>
-      <image:caption>Travessia das Praias Selvagens</image:caption>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1781984270250_m5swlmjtjo.webp</image:loc>
+      <image:caption>Pico da Tijuca Hiking Tour – O Ponto Mais Alto do Parque Nacional da Tijuca</image:caption>
     </image:image>
     <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776137049704_hhrqj95lbae.webp</image:loc>
-      <image:caption>Travessia das Praias Selvagens</image:caption>
-    </image:image>
-  </url>
-  <url>
-    <loc>https://tocorimerio.com/passeio/transfer-aeroporto-cidade</loc>
-    <image:image>
-      <image:loc>https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?q=80&amp;w=1200</image:loc>
-      <image:caption>Transfers (Aeroporto e Cidade)</image:caption>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1781984271377_w2qbnsuvy8.webp</image:loc>
+      <image:caption>Pico da Tijuca Hiking Tour – O Ponto Mais Alto do Parque Nacional da Tijuca</image:caption>
     </image:image>
     <image:image>
-      <image:loc>https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?q=80&amp;w=800</image:loc>
-      <image:caption>Transfers (Aeroporto e Cidade)</image:caption>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1781984272479_ya2rz3fheus.webp</image:loc>
+      <image:caption>Pico da Tijuca Hiking Tour – O Ponto Mais Alto do Parque Nacional da Tijuca</image:caption>
     </image:image>
     <image:image>
-      <image:loc>https://images.unsplash.com/photo-1569154941061-e231b4725ef1?q=80&amp;w=800</image:loc>
-      <image:caption>Transfers (Aeroporto e Cidade)</image:caption>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1781984273723_k4whplj08qm.webp</image:loc>
+      <image:caption>Pico da Tijuca Hiking Tour – O Ponto Mais Alto do Parque Nacional da Tijuca</image:caption>
     </image:image>
     <image:image>
-      <image:loc>https://images.unsplash.com/photo-1517487881594-2787fef5ebf7?q=80&amp;w=800</image:loc>
-      <image:caption>Transfers (Aeroporto e Cidade)</image:caption>
-    </image:image>
-  </url>
-  <url>
-    <loc>https://tocorimerio.com/passeio/pedra-da-gavea-trilha</loc>
-    <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776136847390_169n24rnud8.webp</image:loc>
-      <image:caption>Pedra da Gávea</image:caption>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1781984275350_x6ifkcltdj.webp</image:loc>
+      <image:caption>Pico da Tijuca Hiking Tour – O Ponto Mais Alto do Parque Nacional da Tijuca</image:caption>
     </image:image>
     <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776136864281_g9fboxwo3c.webp</image:loc>
-      <image:caption>Pedra da Gávea</image:caption>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1781984276803_45yvjlbot9u.webp</image:loc>
+      <image:caption>Pico da Tijuca Hiking Tour – O Ponto Mais Alto do Parque Nacional da Tijuca</image:caption>
     </image:image>
     <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776136867362_wflr98j93cl.webp</image:loc>
-      <image:caption>Pedra da Gávea</image:caption>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1781983284163_7wo5f5xifd4.webp</image:loc>
+      <image:caption>Pico da Tijuca Hiking Tour – O Ponto Mais Alto do Parque Nacional da Tijuca</image:caption>
     </image:image>
     <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776136870103_rf59fdi0369.webp</image:loc>
-      <image:caption>Pedra da Gávea</image:caption>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1781983285619_z40kycb496.webp</image:loc>
+      <image:caption>Pico da Tijuca Hiking Tour – O Ponto Mais Alto do Parque Nacional da Tijuca</image:caption>
     </image:image>
     <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776136872909_cqnv540ap5.webp</image:loc>
-      <image:caption>Pedra da Gávea</image:caption>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1781983287028_jkggryox5j.webp</image:loc>
+      <image:caption>Pico da Tijuca Hiking Tour – O Ponto Mais Alto do Parque Nacional da Tijuca</image:caption>
     </image:image>
     <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776136875954_cfyugltviy.webp</image:loc>
-      <image:caption>Pedra da Gávea</image:caption>
-    </image:image>
-    <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776136879093_ip8r4n763ur.webp</image:loc>
-      <image:caption>Pedra da Gávea</image:caption>
-    </image:image>
-    <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776136882267_reu0edvldh.webp</image:loc>
-      <image:caption>Pedra da Gávea</image:caption>
-    </image:image>
-    <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776136885441_82db1d3kviu.webp</image:loc>
-      <image:caption>Pedra da Gávea</image:caption>
-    </image:image>
-    <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776136888707_0e9a1520kjup.webp</image:loc>
-      <image:caption>Pedra da Gávea</image:caption>
-    </image:image>
-    <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776136892174_c4r1pb5urai.webp</image:loc>
-      <image:caption>Pedra da Gávea</image:caption>
-    </image:image>
-    <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776136849866_6iey58t5se7.webp</image:loc>
-      <image:caption>Pedra da Gávea</image:caption>
-    </image:image>
-    <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776136853305_m2tqb91hz2.webp</image:loc>
-      <image:caption>Pedra da Gávea</image:caption>
-    </image:image>
-    <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776136856097_yvpaxd2ofpa.webp</image:loc>
-      <image:caption>Pedra da Gávea</image:caption>
-    </image:image>
-    <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776136858694_p8me9z7pijb.webp</image:loc>
-      <image:caption>Pedra da Gávea</image:caption>
-    </image:image>
-    <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776136861213_zbytbkjle7k.webp</image:loc>
-      <image:caption>Pedra da Gávea</image:caption>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1781983288298_kzg4gnh7bkn.webp</image:loc>
+      <image:caption>Pico da Tijuca Hiking Tour – O Ponto Mais Alto do Parque Nacional da Tijuca</image:caption>
     </image:image>
   </url>
   <url>
@@ -1125,6 +1125,34 @@
     </image:image>
   </url>
   <url>
+    <loc>https://tocorimerio.com/blog/costao-do-pao-de-acucar-an-unforgettable-adventure-in-rio-de-janeiro</loc>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1784883447393_xxkxist8wq.webp</image:loc>
+      <image:caption>Costão do Pão de Açúcar: uma aventura inesquecível em Rio de Janeiro</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://tocorimerio.com/blog/helicopter-tour-rio-de-janeiro-routes-prices-what-to-expect</loc>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776810841769_3okykdqwdcy.webp</image:loc>
+      <image:caption>Passeio de helicóptero Rio de Janeiro: rotas, preços e o que esperar</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://tocorimerio.com/blog/hiking-in-rio-a-premium-guide-to-tijuca-forest</loc>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776793316010_tsjj5cm27zg.webp</image:loc>
+      <image:caption>Trilhas no Rio: Um Guia Premium para a Floresta da Tijuca</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://tocorimerio.com/blog/how-much-does-a-city-tour-in-rio-de-jane</loc>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1778894147868_wgmcbdzag5.webp</image:loc>
+      <image:caption>Quanto custa um city tour em Rio de Janeiro? (Guia completo de 2026)</image:caption>
+    </image:image>
+  </url>
+  <url>
     <loc>https://tocorimerio.com/blog/buzios-cabo-frio-regiao-dos-lagos</loc>
     <image:image>
       <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1775696760353_ms1kvra8fha.png</image:loc>
@@ -1139,17 +1167,24 @@
     </image:image>
   </url>
   <url>
-    <loc>https://tocorimerio.com/blog/private-vs-group-tours-why-exclusivity-matters-in-rio</loc>
+    <loc>https://tocorimerio.com/blog/how-to-find-a-trustworthy-tour-guide-in-rio-de-janeiro-scam-free</loc>
     <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776795346132_r84icju1vzn.webp</image:loc>
-      <image:caption>Tours Privados vs. em Grupo: Por que a Exclusividade Importa no Rio</image:caption>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1781072773783_did327nkuvd.webp</image:loc>
+      <image:caption>Como encontrar um guia de turismo confiável em Rio de Janeiro (sem golpes)</image:caption>
     </image:image>
   </url>
   <url>
-    <loc>https://tocorimerio.com/blog/free-hikes-vs-guided-tours-rio</loc>
+    <loc>https://tocorimerio.com/blog/how-to-visit-maracana-safely-tourists</loc>
     <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776155715338_sjykr9pmjzh.webp</image:loc>
-      <image:caption>Caminhadas gratuitas x visitas guiadas no Rio de Janeiro: quando um guia realmente vale a pena?</image:caption>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776438887419_50kfhcm5ojt.webp</image:loc>
+      <image:caption>Como visitar o Maracanã com segurança: o guia completo para turistas estrangeiros</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://tocorimerio.com/blog/best-tours-in-rio-de-janeiro-for-3-days</loc>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1778894977064_ykg8x6762l.webp</image:loc>
+      <image:caption>Melhores Passeios em Rio de Janeiro por 3 Dias: O Itinerário Perfeito (2026)</image:caption>
     </image:image>
   </url>
   <url>
@@ -1160,6 +1195,34 @@
     </image:image>
   </url>
   <url>
+    <loc>https://tocorimerio.com/blog/best-sunset-spots-rio-de-janeiro</loc>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1781073447656_af1yv9hkyqd.webp</image:loc>
+      <image:caption>Os melhores lugares para assistir ao pôr do sol em Rio de Janeiro</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://tocorimerio.com/blog/how-to-choose-a-reliable-private-tour-in-rio-de-janeiro</loc>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1784942049444_q1cafg445g.webp</image:loc>
+      <image:caption>Como escolher um tour privado confiável em Rio de Janeiro</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://tocorimerio.com/blog/best-private-tours-in-rio-de-janeiro-for-families-with-children</loc>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1784942221561_ss1w8j4b8hi.webp</image:loc>
+      <image:caption>Melhores passeios privados em Rio de Janeiro para famílias com crianças</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://tocorimerio.com/blog/boutique-hotels-rio-rooftops-vista-privada</loc>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1785031883321_2chm7rqrbj9.webp</image:loc>
+      <image:caption>Rooftops em hotéis boutique do Rio: onde tomar drinks com vista privada</image:caption>
+    </image:image>
+  </url>
+  <url>
     <loc>https://tocorimerio.com/blog/dicas-seguranca-transporte-rio</loc>
     <image:image>
       <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776136527563_dzcmntxz28d.webp</image:loc>
@@ -1167,17 +1230,10 @@
     </image:image>
   </url>
   <url>
-    <loc>https://tocorimerio.com/blog/gastronomia-carioca-pratos-tipicos</loc>
+    <loc>https://tocorimerio.com/blog/free-hikes-vs-guided-tours-rio</loc>
     <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776154873773_6061xrix9z7.webp</image:loc>
-      <image:caption>Gastronomia Carioca: 5 Pratos que Você Precisa Provar</image:caption>
-    </image:image>
-  </url>
-  <url>
-    <loc>https://tocorimerio.com/blog/hiking-in-rio-a-premium-guide-to-tijuca-forest</loc>
-    <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776793316010_tsjj5cm27zg.webp</image:loc>
-      <image:caption>Trilhas no Rio: Um Guia Premium para a Floresta da Tijuca</image:caption>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776155715338_sjykr9pmjzh.webp</image:loc>
+      <image:caption>Caminhadas gratuitas x visitas guiadas no Rio de Janeiro: quando um guia realmente vale a pena?</image:caption>
     </image:image>
   </url>
   <url>
@@ -1188,20 +1244,6 @@
     </image:image>
   </url>
   <url>
-    <loc>https://tocorimerio.com/blog/how-much-does-a-city-tour-in-rio-de-jane</loc>
-    <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1778894147868_wgmcbdzag5.webp</image:loc>
-      <image:caption>Quanto custa um city tour em Rio de Janeiro? (Guia completo de 2026)</image:caption>
-    </image:image>
-  </url>
-  <url>
-    <loc>https://tocorimerio.com/blog/the-best-way-to-see-rio-why-a-classic-schooner-beats-the-crowds</loc>
-    <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776797339345_loiuzsq3u8.webp</image:loc>
-      <image:caption>A Melhor Maneira de Ver o Rio: Por que um Veleiro Clássico Vence as Multidões</image:caption>
-    </image:image>
-  </url>
-  <url>
     <loc>https://tocorimerio.com/blog/how-to-hire-a-safe-tour-guide-in-rio-de-janeiro-without-getting-scammed</loc>
     <image:image>
       <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1781072233646_z90cm3z3l4.webp</image:loc>
@@ -1209,31 +1251,31 @@
     </image:image>
   </url>
   <url>
-    <loc>https://tocorimerio.com/blog/luxury-travel-rio-de-janeiro</loc>
+    <loc>https://tocorimerio.com/blog/best-favela-tour-in-rocinha-for-cultural-immersion</loc>
     <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776178598223_s0w825hcry.webp</image:loc>
-      <image:caption>Viagens de luxo em Rio de Janeiro: onde o drama natural encontra o refinamento de classe mundial</image:caption>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1784943557777_1gu1kmvsxio.webp</image:loc>
+      <image:caption>Melhor passeio em favelas em Rocinha para imersão cultural</image:caption>
     </image:image>
   </url>
   <url>
-    <loc>https://tocorimerio.com/blog/how-to-get-to-rio-de-janeiro-new-flights-routes</loc>
+    <loc>https://tocorimerio.com/blog/gastronomia-carioca-pratos-tipicos</loc>
     <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776178620123_asifj7wd7z7.webp</image:loc>
-      <image:caption>Chegar ao Rio de Janeiro ficou mais fácil: novas rotas e o que você precisa saber</image:caption>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776154873773_6061xrix9z7.webp</image:loc>
+      <image:caption>Gastronomia Carioca: 5 Pratos que Você Precisa Provar</image:caption>
     </image:image>
   </url>
   <url>
-    <loc>https://tocorimerio.com/blog/melhores-mirantes-gratuitos-rj</loc>
+    <loc>https://tocorimerio.com/blog/best-boat-tours-in-arraial-do-cabo-for-crystal-clear-beaches</loc>
     <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776444389833_5q228qpzgfu.webp</image:loc>
-      <image:caption>Os 3 Melhores Mirantes Gratuitos no Rio de Janeiro</image:caption>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1784943642355_cj5u9fkdvmm.webp</image:loc>
+      <image:caption>Melhores passeios de barco em Arraial do Cabo para praias cristalinas</image:caption>
     </image:image>
   </url>
   <url>
-    <loc>https://tocorimerio.com/blog/o-renascimento-verde-a-incrivel-historia-do-reflorestamento-da-floresta-da-tijuca</loc>
+    <loc>https://tocorimerio.com/blog/private-tours-vs-group-tours-in-rio-de-janeiro-which-is-worth-it</loc>
     <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776444378668_vzexl1lplmt.webp</image:loc>
-      <image:caption>O Renascimento Verde: A Incrível História do Reflorestamento da Floresta da Tijuca</image:caption>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1784941877813_zdwlhrxhsge.webp</image:loc>
+      <image:caption>Passeios privados vs. privados passeios em grupo em Rio de Janeiro: quanto vale a pena?</image:caption>
     </image:image>
   </url>
   <url>
@@ -1244,10 +1286,24 @@
     </image:image>
   </url>
   <url>
-    <loc>https://tocorimerio.com/blog/pedra-da-gavea-hike-guide</loc>
+    <loc>https://tocorimerio.com/blog/how-to-get-to-rio-de-janeiro-new-flights-routes</loc>
     <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776155090896_e0ha15pe0yu.webp</image:loc>
-      <image:caption>Caminhada na Pedra da Gávea: é realmente perigosa? Tudo o que você precisa saber antes de partir</image:caption>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776178620123_asifj7wd7z7.webp</image:loc>
+      <image:caption>Chegar ao Rio de Janeiro ficou mais fácil: novas rotas e o que você precisa saber</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://tocorimerio.com/blog/little-africa-pequena-africa-rios-most-s</loc>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1779160947654_pbpugm65kpd.webp</image:loc>
+      <image:caption>Pequena África: o bairro mais emocionante de Rio do qual você nunca ouviu falar</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://tocorimerio.com/blog/rooftops-ipanema-vista-mar-rio</loc>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1785032001623_ai7ovctinsr.webp</image:loc>
+      <image:caption>Rooftops em Ipanema com vista para o mar: bares e lounges exclusivos no Rio</image:caption>
     </image:image>
   </url>
   <url>
@@ -1265,171 +1321,17 @@
     </image:image>
   </url>
   <url>
-    <loc>https://tocorimerio.com/blog/onde-comer-no-rio-gastronomia</loc>
+    <loc>https://tocorimerio.com/blog/o-renascimento-verde-a-incrivel-historia-do-reflorestamento-da-floresta-da-tijuca</loc>
     <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1775701360748_19elgcf090q.png</image:loc>
-      <image:caption>Onde Comer no Rio: Gastronomia e Sabores Cariocas</image:caption>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776444378668_vzexl1lplmt.webp</image:loc>
+      <image:caption>O Renascimento Verde: A Incrível História do Reflorestamento da Floresta da Tijuca</image:caption>
     </image:image>
   </url>
   <url>
-    <loc>https://tocorimerio.com/blog/best-feijoada-rio-de-janeiro-tourists</loc>
+    <loc>https://tocorimerio.com/blog/luxury-travel-rio-de-janeiro</loc>
     <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1777144245848_af37x43rp8q.webp</image:loc>
-      <image:caption>Onde comer a melhor feijoada do Rio de Janeiro (e como evitar as armadilhas para turistas)</image:caption>
-    </image:image>
-  </url>
-  <url>
-    <loc>https://tocorimerio.com/blog/guia-arraial-do-cabo-caribe-brasileiro</loc>
-    <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776136539659_dhflxgmz62g.webp</image:loc>
-      <image:caption>Arraial do Cabo: Um Guia Completo para o &quot;Caribe Brasileiro&quot;</image:caption>
-    </image:image>
-  </url>
-  <url>
-    <loc>https://tocorimerio.com/blog/a-journey-through-history-sailing-the-waters-of-guanabara-bay</loc>
-    <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776136539659_dhflxgmz62g.webp</image:loc>
-      <image:caption>Uma Jornada Pela História: Navegando pelas Águas da Baía de Guanabara</image:caption>
-    </image:image>
-  </url>
-  <url>
-    <loc>https://tocorimerio.com/blog/rio-de-janeiro-with-kids-3-day-itinerary</loc>
-    <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776155669769_oliiwanq76n.webp</image:loc>
-      <image:caption>Rio de Janeiro com crianças: um roteiro familiar de 3 dias que não cansa ninguém</image:caption>
-    </image:image>
-  </url>
-  <url>
-    <loc>https://tocorimerio.com/blog/sunset-sailing-in-rio-the-ultimate-romantic-experience</loc>
-    <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776178596659_lwvnl9j555.webp</image:loc>
-      <image:caption>Velejar ao Pôr do Sol no Rio: A Experiência Romântica Definitiva</image:caption>
-    </image:image>
-  </url>
-  <url>
-    <loc>https://tocorimerio.com/blog/best-coffee-shops-in-rio-de-janeiro</loc>
-    <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776154873773_6061xrix9z7.webp</image:loc>
-      <image:caption>As melhores cafeterias de Rio de Janeiro: um guia bairro por bairro</image:caption>
-    </image:image>
-  </url>
-  <url>
-    <loc>https://tocorimerio.com/blog/rio-safety-guide-for-us-european-travelers</loc>
-    <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776793004416_ov0fzyy2ctk.webp</image:loc>
-      <image:caption>Guia de Segurança no Rio para Viajantes dos EUA e Europa</image:caption>
-    </image:image>
-  </url>
-  <url>
-    <loc>https://tocorimerio.com/blog/sustainability-and-craftsmanship-the-soul-of-the-tocorime</loc>
-    <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776798363880_akz7xx35db4.webp</image:loc>
-      <image:caption>Sustentabilidade e Artesanato: A Alma do Tocorime</image:caption>
-    </image:image>
-  </url>
-  <url>
-    <loc>https://tocorimerio.com/blog/the-best-months-to-visit-rio-for-hiking-and-outdoor-activities</loc>
-    <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776795733435_l6lqgufjqg.webp</image:loc>
-      <image:caption>Os Melhores Meses para Visitar o Rio: Trilhas e Atividades ao Ar Livre</image:caption>
-    </image:image>
-  </url>
-  <url>
-    <loc>https://tocorimerio.com/blog/o-que-fazer-no-rio-de-janeiro-10-experiencias-que-voce-nao-pode-perder</loc>
-    <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1775696781922_xxs40z6z3q.png</image:loc>
-      <image:caption>O Que Fazer no Rio de Janeiro: 10 Experiências Que Você Não Pode Perder</image:caption>
-    </image:image>
-  </url>
-  <url>
-    <loc>https://tocorimerio.com/blog/how-to-visit-christ-the-redeemer-in-2026</loc>
-    <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1778894432271_job7bzodl6s.webp</image:loc>
-      <image:caption>Como visitar o Cristo Redentor em 2026: ingressos, horários e dicas</image:caption>
-    </image:image>
-  </url>
-  <url>
-    <loc>https://tocorimerio.com/blog/rio-alem-do-obvio-lugares-secretos</loc>
-    <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776136532621_bydozzr39nb.webp</image:loc>
-      <image:caption>Rio Além do Óbvio: 5 Lugares Secretos para Fugir da Multidão</image:caption>
-    </image:image>
-  </url>
-  <url>
-    <loc>https://tocorimerio.com/blog/the-best-specialty-coffee-shops-in-the-center-of-rio-de-janeiro</loc>
-    <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1779158659742_gn9o1u3egy.webp</image:loc>
-      <image:caption>As melhores cafeterias especializadas no centro de Rio de Janeiro: um guia para viajantes</image:caption>
-    </image:image>
-  </url>
-  <url>
-    <loc>https://tocorimerio.com/blog/watch-a-match-at-maracana-why-you-shouldnt-go-alone</loc>
-    <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776792731605_1j9usvzlsrp.webp</image:loc>
-      <image:caption>Assistir a um Jogo no Maracanã: Por Que Você Não Deve Ir Sozinho</image:caption>
-    </image:image>
-  </url>
-  <url>
-    <loc>https://tocorimerio.com/blog/what-to-do-in-rio-when-it-rains</loc>
-    <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776154873773_6061xrix9z7.webp</image:loc>
-      <image:caption>O que fazer no Rio quando chove: 7 experiências culturais e gastronômicas que não exigem sol</image:caption>
-    </image:image>
-  </url>
-  <url>
-    <loc>https://tocorimerio.com/blog/what-to-wear-hiking-and-beach-rio-de-janeiro</loc>
-    <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776155088676_9t8wqvy9q2a.webp</image:loc>
-      <image:caption>O que vestir para um dia de caminhada e praia no Rio de Janeiro: o guia de malas para quem vem pela primeira vez</image:caption>
-    </image:image>
-  </url>
-  <url>
-    <loc>https://tocorimerio.com/blog/where-to-watch-the-2026-world-cup-in-rio</loc>
-    <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1779149093302_9dvl0y6ueo7.webp</image:loc>
-      <image:caption>Copa do Mundo 2026 em Rio de Janeiro: Fan Fests, melhores bares, onde ficar e guia completo</image:caption>
-    </image:image>
-  </url>
-  <url>
-    <loc>https://tocorimerio.com/blog/trilhas-no-rio-de-janeiro</loc>
-    <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776155661937_gt95mex1i.webp</image:loc>
-      <image:caption>Trilhas no Rio de Janeiro: Os Melhores Caminhos Para Quem Ama a Natureza</image:caption>
-    </image:image>
-  </url>
-  <url>
-    <loc>https://tocorimerio.com/blog/best-sunset-spots-rio-de-janeiro</loc>
-    <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1781073447656_af1yv9hkyqd.webp</image:loc>
-      <image:caption>Os melhores lugares para assistir ao pôr do sol em Rio de Janeiro</image:caption>
-    </image:image>
-  </url>
-  <url>
-    <loc>https://tocorimerio.com/blog/little-africa-pequena-africa-rios-most-s</loc>
-    <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1779160947654_pbpugm65kpd.webp</image:loc>
-      <image:caption>Pequena África: o bairro mais emocionante de Rio do qual você nunca ouviu falar</image:caption>
-    </image:image>
-  </url>
-  <url>
-    <loc>https://tocorimerio.com/blog/packing-list-for-rio-from-beach-to-rainforest</loc>
-    <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776795501321_2kuhhczlms.webp</image:loc>
-      <image:caption>O Que Levar na Mala para o Rio: Da Praia à Floresta Tropical</image:caption>
-    </image:image>
-  </url>
-  <url>
-    <loc>https://tocorimerio.com/blog/rio-imperial-cultura-historia</loc>
-    <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776154933416_1jovl3o2i6si.webp</image:loc>
-      <image:caption>Cultura e História: Um Mergulho no Passado Imperial do Rio</image:caption>
-    </image:image>
-  </url>
-  <url>
-    <loc>https://tocorimerio.com/blog/rock-climbing-beginners-rio-de-janeiro</loc>
-    <image:image>
-      <image:loc>https://images.unsplash.com/photo-1522163182402-834f871fd851?w=1200&amp;q=80</image:loc>
-      <image:caption>Escalada para iniciantes no Rio de Janeiro: por onde começar a escalar a serra carioca</image:caption>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776178598223_s0w825hcry.webp</image:loc>
+      <image:caption>Viagens de luxo em Rio de Janeiro: onde o drama natural encontra o refinamento de classe mundial</image:caption>
     </image:image>
   </url>
   <url>
@@ -1440,6 +1342,48 @@
     </image:image>
   </url>
   <url>
+    <loc>https://tocorimerio.com/blog/best-feijoada-rio-de-janeiro-tourists</loc>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1777144245848_af37x43rp8q.webp</image:loc>
+      <image:caption>Onde comer a melhor feijoada do Rio de Janeiro (e como evitar as armadilhas para turistas)</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://tocorimerio.com/blog/melhor-epoca-visitar-rio-de-janeiro</loc>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776449767100_shj8j2w059.webp</image:loc>
+      <image:caption>Planejando sua Viagem: Qual a melhor época para visitar o Rio?</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://tocorimerio.com/blog/guia-arraial-do-cabo-caribe-brasileiro</loc>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776136539659_dhflxgmz62g.webp</image:loc>
+      <image:caption>Arraial do Cabo: Um Guia Completo para o &quot;Caribe Brasileiro&quot;</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://tocorimerio.com/blog/melhores-mirantes-gratuitos-rj</loc>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776444389833_5q228qpzgfu.webp</image:loc>
+      <image:caption>Os 3 Melhores Mirantes Gratuitos no Rio de Janeiro</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://tocorimerio.com/blog/flamengo-cruzeiro-libertadores-maracana-guide</loc>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1785185327349_np1xnrg881d.webp</image:loc>
+      <image:caption>Flamengo x Cruzeiro no Maracanã: um guia do visitante para o confronto da Libertadores</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://tocorimerio.com/blog/best-coffee-shops-in-rio-de-janeiro</loc>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776154873773_6061xrix9z7.webp</image:loc>
+      <image:caption>As melhores cafeterias de Rio de Janeiro: um guia bairro por bairro</image:caption>
+    </image:image>
+  </url>
+  <url>
     <loc>https://tocorimerio.com/blog/melhores-pontos-por-do-sol-rio</loc>
     <image:image>
       <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776155714004_99sa4cr5p.webp</image:loc>
@@ -1447,52 +1391,31 @@
     </image:image>
   </url>
   <url>
-    <loc>https://tocorimerio.com/blog/the-best-private-rooftops-and-views-in-rio-avoid-the-crowds</loc>
+    <loc>https://tocorimerio.com/blog/a-journey-through-history-sailing-the-waters-of-guanabara-bay</loc>
     <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776793148489_g3rc5yilrj.webp</image:loc>
-      <image:caption>Os Melhores Rooftops e Vistas Privadas no Rio: Fuja das Multidões</image:caption>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776136539659_dhflxgmz62g.webp</image:loc>
+      <image:caption>Uma Jornada Pela História: Navegando pelas Águas da Baía de Guanabara</image:caption>
     </image:image>
   </url>
   <url>
-    <loc>https://tocorimerio.com/blog/um-dia-no-maraca</loc>
+    <loc>https://tocorimerio.com/blog/sustainability-and-craftsmanship-the-soul-of-the-tocorime</loc>
     <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1780956988237_cgg6jjqcbbh.webp</image:loc>
-      <image:caption>Último ato antes da Copa: Flamengo e Seleção levam multidões ao Maracanã</image:caption>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776798363880_akz7xx35db4.webp</image:loc>
+      <image:caption>Sustentabilidade e Artesanato: A Alma do Tocorime</image:caption>
     </image:image>
   </url>
   <url>
-    <loc>https://tocorimerio.com/blog/christ-the-redeemer-without-the-crowds</loc>
+    <loc>https://tocorimerio.com/blog/how-to-visit-christ-the-redeemer-in-2026</loc>
     <image:image>
-      <image:loc>https://images.unsplash.com/photo-1593995863951-57c27e518295?w=1200&amp;q=80</image:loc>
-      <image:caption>Cristo Redentor Sem Filas: O Guia Definitivo de Horários e Acesso</image:caption>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1778894432271_job7bzodl6s.webp</image:loc>
+      <image:caption>Como visitar o Cristo Redentor em 2026: ingressos, horários e dicas</image:caption>
     </image:image>
   </url>
   <url>
-    <loc>https://tocorimerio.com/blog/how-to-find-a-trustworthy-tour-guide-in-rio-de-janeiro-scam-free</loc>
+    <loc>https://tocorimerio.com/blog/what-to-wear-hiking-and-beach-rio-de-janeiro</loc>
     <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1781072773783_did327nkuvd.webp</image:loc>
-      <image:caption>Como encontrar um guia de turismo confiável em Rio de Janeiro (sem golpes)</image:caption>
-    </image:image>
-  </url>
-  <url>
-    <loc>https://tocorimerio.com/blog/the-complete-guide-to-custom-sightseeing</loc>
-    <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776810844363_vu866taa8ln.webp</image:loc>
-      <image:caption>Tour Privado Rio de Janeiro: O Guia Completo para Passeios Personalizados</image:caption>
-    </image:image>
-  </url>
-  <url>
-    <loc>https://tocorimerio.com/blog/how-to-visit-maracana-safely-tourists</loc>
-    <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776438887419_50kfhcm5ojt.webp</image:loc>
-      <image:caption>Como visitar o Maracanã com segurança: o guia completo para turistas estrangeiros</image:caption>
-    </image:image>
-  </url>
-  <url>
-    <loc>https://tocorimerio.com/blog/helicopter-tour-rio-de-janeiro-routes-prices-what-to-expect</loc>
-    <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776810841769_3okykdqwdcy.webp</image:loc>
-      <image:caption>Passeio de helicóptero Rio de Janeiro: rotas, preços e o que esperar</image:caption>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776155088676_9t8wqvy9q2a.webp</image:loc>
+      <image:caption>O que vestir para um dia de caminhada e praia no Rio de Janeiro: o guia de malas para quem vem pela primeira vez</image:caption>
     </image:image>
   </url>
   <url>
@@ -1503,24 +1426,66 @@
     </image:image>
   </url>
   <url>
-    <loc>https://tocorimerio.com/blog/uma-noite-de-idolos-no-maraca-a-experiencia-de-estar-no-maracana-quando-o-mengao-mandou-ver-no-medellin</loc>
+    <loc>https://tocorimerio.com/blog/o-que-fazer-no-rio-de-janeiro-10-experiencias-que-voce-nao-pode-perder</loc>
     <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776438009912_4j3x8ipzfup.webp</image:loc>
-      <image:caption>Uma Noite de Ídolos no Maraca - A experiência de estar no Maracanã quando o Mengão mandou ver no Medellín</image:caption>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1775696781922_xxs40z6z3q.png</image:loc>
+      <image:caption>O Que Fazer no Rio de Janeiro: 10 Experiências Que Você Não Pode Perder</image:caption>
     </image:image>
   </url>
   <url>
-    <loc>https://tocorimerio.com/blog/arraial-do-cabo-boat-trip</loc>
+    <loc>https://tocorimerio.com/blog/rio-alem-do-obvio-lugares-secretos</loc>
     <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776136539659_dhflxgmz62g.webp</image:loc>
-      <image:caption>Passeio de Barco Arraial do Cabo: o guia completo do passeio de barco</image:caption>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776136532621_bydozzr39nb.webp</image:loc>
+      <image:caption>Rio Além do Óbvio: 5 Lugares Secretos para Fugir da Multidão</image:caption>
     </image:image>
   </url>
   <url>
-    <loc>https://tocorimerio.com/blog/melhor-epoca-visitar-rio-de-janeiro</loc>
+    <loc>https://tocorimerio.com/blog/rocinha-favela-tour-the-most-eye-opening-experience-in-rio-de-janeiro</loc>
     <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776449767100_shj8j2w059.webp</image:loc>
-      <image:caption>Planejando sua Viagem: Qual a melhor época para visitar o Rio?</image:caption>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1781016955573_xgdspfu8ll.webp</image:loc>
+      <image:caption> Rocinha Favela Tour: a experiência mais reveladora em Rio de Janeiro</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://tocorimerio.com/blog/rock-climbing-beginners-rio-de-janeiro</loc>
+    <image:image>
+      <image:loc>https://images.unsplash.com/photo-1522163182402-834f871fd851?w=1200&amp;q=80</image:loc>
+      <image:caption>Escalada para iniciantes no Rio de Janeiro: por onde começar a escalar a serra carioca</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://tocorimerio.com/blog/rooftops-santa-teresa-rio-vistas-privadas</loc>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1785031830030_iv2ph1wcs6b.webp</image:loc>
+      <image:caption>Rooftops em Santa Teresa: 5 vistas privadas do Rio com pôr do sol inesquecível</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://tocorimerio.com/blog/traveling-to-rio-with-kids-how-to-make-it-stress-free</loc>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776793485811_dff51sqnmgh.webp</image:loc>
+      <image:caption>Viajando para o Rio com Crianças: Como Ter uma Viagem Sem Estresse</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://tocorimerio.com/blog/onde-comer-no-rio-gastronomia</loc>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1775701360748_19elgcf090q.png</image:loc>
+      <image:caption>Onde Comer no Rio: Gastronomia e Sabores Cariocas</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://tocorimerio.com/blog/packing-list-for-rio-from-beach-to-rainforest</loc>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776795501321_2kuhhczlms.webp</image:loc>
+      <image:caption>O Que Levar na Mala para o Rio: Da Praia à Floresta Tropical</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://tocorimerio.com/blog/where-exchange-money</loc>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1783515195339_q8z74piboqt.webp</image:loc>
+      <image:caption>Trocando dinheiro em Rio de Janeiro: um guia local para viajantes de Tocorime</image:caption>
     </image:image>
   </url>
   <url>
@@ -1538,24 +1503,17 @@
     </image:image>
   </url>
   <url>
-    <loc>https://tocorimerio.com/blog/where-exchange-money</loc>
+    <loc>https://tocorimerio.com/blog/pedra-da-gavea-hike-guide</loc>
     <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1783515195339_q8z74piboqt.webp</image:loc>
-      <image:caption>Trocando dinheiro em Rio de Janeiro: um guia local para viajantes de Tocorime</image:caption>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776155090896_e0ha15pe0yu.webp</image:loc>
+      <image:caption>Caminhada na Pedra da Gávea: é realmente perigosa? Tudo o que você precisa saber antes de partir</image:caption>
     </image:image>
   </url>
   <url>
-    <loc>https://tocorimerio.com/blog/best-tours-in-rio-de-janeiro-for-3-days</loc>
+    <loc>https://tocorimerio.com/blog/private-vs-group-tours-why-exclusivity-matters-in-rio</loc>
     <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1778894977064_ykg8x6762l.webp</image:loc>
-      <image:caption>Melhores Passeios em Rio de Janeiro por 3 Dias: O Itinerário Perfeito (2026)</image:caption>
-    </image:image>
-  </url>
-  <url>
-    <loc>https://tocorimerio.com/blog/rio-de-janeiro-com-criancas-roteiro</loc>
-    <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1775696762432_5pvc517qd7s.png</image:loc>
-      <image:caption>Rio com Crianças: Roteiro Completo para uma Viagem em Família</image:caption>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776795346132_r84icju1vzn.webp</image:loc>
+      <image:caption>Tours Privados vs. em Grupo: Por que a Exclusividade Importa no Rio</image:caption>
     </image:image>
   </url>
   <url>
@@ -1566,10 +1524,87 @@
     </image:image>
   </url>
   <url>
-    <loc>https://tocorimerio.com/blog/traveling-to-rio-with-kids-how-to-make-it-stress-free</loc>
+    <loc>https://tocorimerio.com/blog/where-to-watch-the-2026-world-cup-in-rio</loc>
     <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776793485811_dff51sqnmgh.webp</image:loc>
-      <image:caption>Viajando para o Rio com Crianças: Como Ter uma Viagem Sem Estresse</image:caption>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1779149093302_9dvl0y6ueo7.webp</image:loc>
+      <image:caption>Copa do Mundo 2026 em Rio de Janeiro: Fan Fests, melhores bares, onde ficar e guia completo</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://tocorimerio.com/blog/rio-safety-guide-for-us-european-travelers</loc>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776793004416_ov0fzyy2ctk.webp</image:loc>
+      <image:caption>Guia de Segurança no Rio para Viajantes dos EUA e Europa</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://tocorimerio.com/blog/roteiro-3-dias-rio-de-janeiro</loc>
+    <image:image>
+      <image:loc>https://images.unsplash.com/photo-1516306580123-e6e52b1b7b5f?q=80&amp;w=1200</image:loc>
+      <image:caption>Roteiro de 3 Dias para Aproveitar a Cidade Maravilhosa</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://tocorimerio.com/blog/sports-tourism-rio-de-janeiro</loc>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776155715338_sjykr9pmjzh.webp</image:loc>
+      <image:caption>Turismo Esportivo em Rio de Janeiro: uma cidade que corre, surfa e pontua</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://tocorimerio.com/blog/the-best-months-to-visit-rio-for-hiking-and-outdoor-activities</loc>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776795733435_l6lqgufjqg.webp</image:loc>
+      <image:caption>Os Melhores Meses para Visitar o Rio: Trilhas e Atividades ao Ar Livre</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://tocorimerio.com/blog/the-best-private-rooftops-and-views-in-rio-avoid-the-crowds</loc>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776793148489_g3rc5yilrj.webp</image:loc>
+      <image:caption>Os Melhores Rooftops e Vistas Privadas no Rio: Fuja das Multidões</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://tocorimerio.com/blog/the-best-specialty-coffee-shops-in-the-center-of-rio-de-janeiro</loc>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1779158659742_gn9o1u3egy.webp</image:loc>
+      <image:caption>As melhores cafeterias especializadas no centro de Rio de Janeiro: um guia para viajantes</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://tocorimerio.com/blog/arraial-do-cabo-boat-trip</loc>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776136539659_dhflxgmz62g.webp</image:loc>
+      <image:caption>Passeio de Barco Arraial do Cabo: o guia completo do passeio de barco</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://tocorimerio.com/blog/the-complete-guide-to-custom-sightseeing</loc>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776810844363_vu866taa8ln.webp</image:loc>
+      <image:caption>Tour Privado Rio de Janeiro: O Guia Completo para Passeios Personalizados</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://tocorimerio.com/blog/the-maracana-stadium-a-comprehensive-history-of-brazils-greatest-sporting-temple-and-its-connection-to-the-fifa-world-cup</loc>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776136526338_h2rbfgwm9q.webp</image:loc>
+      <image:caption>O Estádio do Maracanã: uma história abrangente do maior templo do esporte no Brasil e sua conexão com a Copa do Mundo FIFA</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://tocorimerio.com/blog/things-to-do-in-rio-de-janeiro-when-it-rains</loc>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1778893799536_6dpfsl0oe6k.webp</image:loc>
+      <image:caption>O que fazer em Rio de Janeiro quando chove (guia 2026)</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://tocorimerio.com/blog/trilhas-no-rio-de-janeiro</loc>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776155661937_gt95mex1i.webp</image:loc>
+      <image:caption>Trilhas no Rio de Janeiro: Os Melhores Caminhos Para Quem Ama a Natureza</image:caption>
     </image:image>
   </url>
   <url>
@@ -1587,24 +1622,24 @@
     </image:image>
   </url>
   <url>
-    <loc>https://tocorimerio.com/blog/um-dia-especial-no-rio-cristo-redentor-t</loc>
+    <loc>https://tocorimerio.com/blog/um-dia-no-maraca</loc>
     <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1781532236821_aglj6g2aw0t.webp</image:loc>
-      <image:caption>Um Dia Especial: Cristo Redentor, Trem do Corcovado e Açaí Amazônico</image:caption>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1780956988237_cgg6jjqcbbh.webp</image:loc>
+      <image:caption>Último ato antes da Copa: Flamengo e Seleção levam multidões ao Maracanã</image:caption>
     </image:image>
   </url>
   <url>
-    <loc>https://tocorimerio.com/blog/rocinha-favela-tour-the-most-eye-opening-experience-in-rio-de-janeiro</loc>
+    <loc>https://tocorimerio.com/blog/uma-noite-de-idolos-no-maraca-a-experiencia-de-estar-no-maracana-quando-o-mengao-mandou-ver-no-medellin</loc>
     <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1781016955573_xgdspfu8ll.webp</image:loc>
-      <image:caption> Rocinha Favela Tour: a experiência mais reveladora em Rio de Janeiro</image:caption>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776438009912_4j3x8ipzfup.webp</image:loc>
+      <image:caption>Uma Noite de Ídolos no Maraca - A experiência de estar no Maracanã quando o Mengão mandou ver no Medellín</image:caption>
     </image:image>
   </url>
   <url>
-    <loc>https://tocorimerio.com/blog/roteiro-3-dias-rio-de-janeiro</loc>
+    <loc>https://tocorimerio.com/blog/visit-rio-de-janeiro</loc>
     <image:image>
-      <image:loc>https://images.unsplash.com/photo-1516306580123-e6e52b1b7b5f?q=80&amp;w=1200</image:loc>
-      <image:caption>Roteiro de 3 Dias para Aproveitar a Cidade Maravilhosa</image:caption>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1783711325525_w28ka8nti5s.webp</image:loc>
+      <image:caption>Por que visitar Rio de Janeiro? 10 razões pelas quais a cidade maravilhosa merece um lugar na sua lista de desejos</image:caption>
     </image:image>
   </url>
   <url>
@@ -1615,24 +1650,73 @@
     </image:image>
   </url>
   <url>
-    <loc>https://tocorimerio.com/blog/sports-tourism-rio-de-janeiro</loc>
+    <loc>https://tocorimerio.com/blog/visit-sugar-loaf-rio</loc>
     <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776155715338_sjykr9pmjzh.webp</image:loc>
-      <image:caption>Turismo Esportivo em Rio de Janeiro: uma cidade que corre, surfa e pontua</image:caption>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1784061610504_4dno4she5bt.webp</image:loc>
+      <image:caption>Pão de Açúcar : o guia completo de 2026</image:caption>
     </image:image>
   </url>
   <url>
-    <loc>https://tocorimerio.com/blog/the-maracana-stadium-a-comprehensive-history-of-brazils-greatest-sporting-temple-and-its-connection-to-the-fifa-world-cup</loc>
+    <loc>https://tocorimerio.com/blog/watch-a-match-at-maracana-why-you-shouldnt-go-alone</loc>
     <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776136526338_h2rbfgwm9q.webp</image:loc>
-      <image:caption>O Estádio do Maracanã: uma história abrangente do maior templo do esporte no Brasil e sua conexão com a Copa do Mundo FIFA</image:caption>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776792731605_1j9usvzlsrp.webp</image:loc>
+      <image:caption>Assistir a um Jogo no Maracanã: Por Que Você Não Deve Ir Sozinho</image:caption>
     </image:image>
   </url>
   <url>
-    <loc>https://tocorimerio.com/blog/things-to-do-in-rio-de-janeiro-when-it-rains</loc>
+    <loc>https://tocorimerio.com/blog/christ-the-redeemer-without-the-crowds</loc>
     <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1778893799536_6dpfsl0oe6k.webp</image:loc>
-      <image:caption>O que fazer em Rio de Janeiro quando chove (guia 2026)</image:caption>
+      <image:loc>https://images.unsplash.com/photo-1593995863951-57c27e518295?w=1200&amp;q=80</image:loc>
+      <image:caption>Cristo Redentor Sem Filas: O Guia Definitivo de Horários e Acesso</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://tocorimerio.com/blog/what-to-do-in-rio-when-it-rains</loc>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776154873773_6061xrix9z7.webp</image:loc>
+      <image:caption>O que fazer no Rio quando chove: 7 experiências culturais e gastronômicas que não exigem sol</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://tocorimerio.com/blog/rio-de-janeiro-com-criancas-roteiro</loc>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1775696762432_5pvc517qd7s.png</image:loc>
+      <image:caption>Rio com Crianças: Roteiro Completo para uma Viagem em Família</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://tocorimerio.com/blog/rio-de-janeiro-with-kids-3-day-itinerary</loc>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776155669769_oliiwanq76n.webp</image:loc>
+      <image:caption>Rio de Janeiro com crianças: um roteiro familiar de 3 dias que não cansa ninguém</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://tocorimerio.com/blog/rio-imperial-cultura-historia</loc>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776154933416_1jovl3o2i6si.webp</image:loc>
+      <image:caption>Cultura e História: Um Mergulho no Passado Imperial do Rio</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://tocorimerio.com/blog/sunset-sailing-in-rio-the-ultimate-romantic-experience</loc>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776178596659_lwvnl9j555.webp</image:loc>
+      <image:caption>Velejar ao Pôr do Sol no Rio: A Experiência Romântica Definitiva</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://tocorimerio.com/blog/the-best-way-to-see-rio-why-a-classic-schooner-beats-the-crowds</loc>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776797339345_loiuzsq3u8.webp</image:loc>
+      <image:caption>A Melhor Maneira de Ver o Rio: Por que um Veleiro Clássico Vence as Multidões</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://tocorimerio.com/blog/um-dia-especial-no-rio-cristo-redentor-t</loc>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1781532236821_aglj6g2aw0t.webp</image:loc>
+      <image:caption>Um Dia Especial: Cristo Redentor, Trem do Corcovado e Açaí Amazônico</image:caption>
     </image:image>
   </url>
 </urlset>
