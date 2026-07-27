@@ -526,16 +526,16 @@ const BlogPost = () => {
               <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-background to-transparent z-[5]" />
               
               <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center animate-fade-in-up">
-                <Link to="/blog" className="inline-flex items-center text-white/80 hover:text-white font-sans mb-8 transition-colors">
+                <Link to="/blog" className="inline-flex items-center text-white/80 hover:text-white font-sans mb-3 transition-colors">
                   <ArrowLeft className="w-5 h-5 mr-2" /> {t("voltar_blog")}
                 </Link>
                 
-                <div className="flex items-center justify-center gap-2 text-sm text-white/80 mb-6 font-sans uppercase tracking-[0.2em]">
+                <div className="flex items-center justify-center gap-2 text-sm text-white/80 mb-3 font-sans uppercase tracking-[0.2em]">
                   <Calendar className="w-4 h-4 text-primary" />
                   {post.created_at ? format(new Date(post.created_at), language === 'en' ? "MMMM dd, yyyy" : "dd 'de' MMMM 'de' yyyy", { locale: dateLocale }) : t("publicado_recentemente")}
                 </div>
                 
-                <h1 className="font-serif text-3xl sm:text-5xl md:text-6xl font-extrabold text-white mb-6 leading-tight drop-shadow-2xl">
+                <h1 className="font-serif text-3xl sm:text-5xl md:text-6xl font-extrabold text-white mb-0 leading-tight drop-shadow-2xl">
                   {title}
                 </h1>
               </div>
