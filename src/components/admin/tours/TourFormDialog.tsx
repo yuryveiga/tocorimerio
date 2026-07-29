@@ -393,6 +393,72 @@ export function TourFormDialog({
                     </div>
                   </div>
 
+                  {/* Datas específicas disponíveis */}
+                  <div className="space-y-4 bg-sky-50/60 p-6 rounded-2xl border border-sky-200">
+                    <Label className="text-[10px] font-black uppercase tracking-widest text-sky-700 flex items-center gap-2">
+                      <CalendarDays className="w-4 h-4" /> Datas Específicas Disponíveis
+                    </Label>
+                    <p className="text-xs text-sky-800/80">
+                      Escolha datas exatas no calendário. Se houver datas marcadas aqui, o cliente só poderá reservar nestas datas (os dias da semana acima são ignorados).
+                    </p>
+                    {(() => {
+                      const dates = ((form.watch("available_dates") || []) as string[]);
+                      const selectedDates = dates
+                        .map(d => { try { return parseISO(d); } catch { return null; } })
+                        .filter(Boolean) as Date[];
+                      return (
+                        <>
+                          <Popover>
+                            <PopoverTrigger asChild>
+                              <Button type="button" variant="outline" className="h-11">
+                                <CalendarDays className="w-4 h-4 mr-2" />
+                                Abrir calendário ({dates.length} data{dates.length === 1 ? '' : 's'})
+                              </Button>
+                            </PopoverTrigger>
+                            <PopoverContent className="w-auto p-0 pointer-events-auto" align="start">
+                              <CalendarUI
+                                mode="multiple"
+                                selected={selectedDates}
+                                onSelect={(days) => {
+                                  const next = (days || []).map(d => format(d, "yyyy-MM-dd")).sort();
+                                  form.setValue("available_dates", next, { shouldDirty: true });
+                                }}
+                                locale={ptBR}
+                                className="p-3 pointer-events-auto"
+                                numberOfMonths={2}
+                              />
+                            </PopoverContent>
+                          </Popover>
+
+                          {dates.length > 0 && (
+                            <div className="flex flex-wrap gap-2 pt-2">
+                              {dates.map(d => (
+                                <button
+                                  key={d}
+                                  type="button"
+                                  onClick={() => form.setValue("available_dates", dates.filter(x => x !== d), { shouldDirty: true })}
+                                  className="text-xs bg-white border border-sky-300 hover:border-red-400 hover:text-red-600 rounded-full px-3 py-1 font-mono"
+                                  title="Remover"
+                                >
+                                  {format(parseISO(d), "dd/MM/yyyy")} ✕
+                                </button>
+                              ))}
+                              <Button
+                                type="button"
+                                variant="ghost"
+                                size="sm"
+                                className="text-xs text-red-600 h-7"
+                                onClick={() => form.setValue("available_dates", [], { shouldDirty: true })}
+                              >
+                                Limpar todas
+                              </Button>
+                            </div>
+                          )}
+                        </>
+                      );
+                    })()}
+                  </div>
+
                   {/* Slug */}
                   <div className="space-y-3 bg-amber-50/60 p-6 rounded-2xl border border-amber-200">
                     <Label className="text-[10px] font-black uppercase tracking-widest text-amber-700 flex items-center gap-2">
