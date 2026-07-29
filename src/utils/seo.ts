@@ -230,8 +230,9 @@ export const generateTourPackageSchema = (
     "description": description,
     "image": imageUrl,
     "url": url,
+    // Fix: Product.brand must be @type "Brand", not "Organization"
     "brand": {
-      "@type": "Organization",
+      "@type": "Brand",
       "name": "Tocorime Rio"
     },
     "offers": {
@@ -239,7 +240,41 @@ export const generateTourPackageSchema = (
       "price": price,
       "priceCurrency": currency,
       "availability": "https://schema.org/InStock",
-      "url": url
+      "url": url,
+      // Fix: shippingDetails required by Google Merchant — tours are digital/service (instant delivery, no shipping cost)
+      "shippingDetails": {
+        "@type": "OfferShippingDetails",
+        "shippingRate": {
+          "@type": "MonetaryAmount",
+          "value": "0",
+          "currency": currency
+        },
+        "shippingDestination": {
+          "@type": "DefinedRegion",
+          "addressCountry": "BR"
+        },
+        "deliveryTime": {
+          "@type": "ShippingDeliveryTime",
+          "handlingTime": {
+            "@type": "QuantitativeValue",
+            "minValue": 0,
+            "maxValue": 1,
+            "unitCode": "DAY"
+          },
+          "transitTime": {
+            "@type": "QuantitativeValue",
+            "minValue": 0,
+            "maxValue": 0,
+            "unitCode": "DAY"
+          }
+        }
+      },
+      // Fix: hasMerchantReturnPolicy required by Google Merchant — travel/tour services are non-refundable
+      "hasMerchantReturnPolicy": {
+        "@type": "MerchantReturnPolicy",
+        "applicableCountry": "BR",
+        "returnPolicyCategory": "https://schema.org/MerchantReturnNotPermitted"
+      }
     },
     "aggregateRating": {
       "@type": "AggregateRating",
