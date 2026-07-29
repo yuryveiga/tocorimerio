@@ -214,6 +214,8 @@ const App = ({ queryClient: externalQueryClient }: { queryClient?: QueryClient }
 
                       <Route path="/passeio" element={<PasseiosIndex />} />
                       <Route path="/our-tours" element={<PasseiosIndex />} />
+                      {/* Fix: /our-tours/index.html discovered by Google (old static URL) → canonical /passeio */}
+                      <Route path="/our-tours/index.html" element={<Navigate to="/passeio" replace />} />
                       <Route path="/passeios" element={<Navigate to="/passeio" replace />} />
                       <Route path="/passeios/:categoria" element={<PasseiosCategoria />} />
                       <Route path="/city-tour" element={<PasseiosCategoria categoriaOverride="city-tour" pathOverride="/city-tour" />} />
@@ -222,7 +224,13 @@ const App = ({ queryClient: externalQueryClient }: { queryClient?: QueryClient }
                       <Route path="/experiences" element={<Experiences />} />
                       <Route path="/your-private-guide-in-rio" element={<PrivateGuideRio />} />
                       <Route path="/passeio/:id" element={<PasseioDetalhe />} />
+                      {/* Fix: accented/corrupted tour slugs that Google indexed without canonical */}
+                      <Route path="/passeio/maracanã-matchday" element={<Navigate to="/passeio/maracana-matchday" replace />} />
+                      <Route path="/passeio/um-dia-em-niter-i" element={<Navigate to="/passeio/um-dia-em-niteroi" replace />} />
                       <Route path="/match/:id" element={<MatchDetail />} />
+
+                      {/* Fix: blog slug that was indexed by Google but doesn't exist in DB */}
+                      <Route path="/blog/is-rio-de-janeiro-safe-for-foreign-tourists" element={<Navigate to="/blog/rio-safety-guide-for-us-european-travelers" replace />} />
 
                       <Route path="/jogo/:id" element={<JogoLanding />} />
                       <Route path="/flamengo-x-vasco-maracana" element={<FlamengoVascoMaracana />} />

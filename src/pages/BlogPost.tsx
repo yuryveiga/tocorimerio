@@ -461,9 +461,16 @@ const BlogPost = () => {
           <>
             <title>{title} | {siteTitle}</title>
             <meta name="description" content={generateOptimizedMetaDescription(excerpt || content || title, title, language)} />
+            <meta name="robots" content="index, follow" />
             {(post as unknown as { meta_keywords?: string }).meta_keywords && (
               <meta name="keywords" content={(post as unknown as { meta_keywords?: string }).meta_keywords} />
             )}
+
+            {/* Canonical must appear before OG to make the signal unambiguous for crawlers */}
+            <link rel="canonical" href={getCanonicalUrl(`/blog/${post.slug}`)} />
+            {getHreflangLinks(`/blog/${post.slug}`).map((l) => (
+              <link key={l.hreflang} rel="alternate" hrefLang={l.hreflang} href={l.href} />
+            ))}
 
             {/* Open Graph / Facebook */}
             <meta property="og:type" content="article" />
@@ -475,11 +482,6 @@ const BlogPost = () => {
             <meta property="og:locale" content={language === 'pt' ? 'pt_BR' : language === 'es' ? 'es_ES' : 'en_US'} />
             {post.created_at && <meta property="article:published_time" content={post.created_at} />}
             {post.updated_at && <meta property="article:modified_time" content={post.updated_at} />}
-
-            <link rel="canonical" href={getCanonicalUrl(`/blog/${post.slug}`)} />
-            {getHreflangLinks(`/blog/${post.slug}`).map((l) => (
-              <link key={l.hreflang} rel="alternate" hrefLang={l.hreflang} href={l.href} />
-            ))}
 
             <script type="application/ld+json">
               {JSON.stringify(generateArticleSchema({
@@ -507,6 +509,7 @@ const BlogPost = () => {
             <meta name="twitter:image" content={post.image_url || fallbackImage} />
           </>
         )}
+
 
         <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet" />
       </Helmet>
