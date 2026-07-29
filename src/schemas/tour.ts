@@ -74,6 +74,7 @@ export const tourSchema = z.object({
   price_3_6_people: z.number().optional().default(0),
   price_7_19_people: z.number().optional().default(0),
   available_days: z.array(z.string()).optional().default([]),
+  available_dates: z.array(z.string()).optional().default([]),
   has_morning: z.boolean().optional().default(false),
   has_afternoon: z.boolean().optional().default(false),
   has_night: z.boolean().optional().default(false),

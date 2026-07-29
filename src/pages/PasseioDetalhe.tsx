@@ -1072,9 +1072,16 @@ export function PasseioDetalhe() {
                                disabled={(date) => {
                                  // Disable past dates
                                  if (isPast(date) && !isToday(date)) return true;
-                                 
-                                 // Disable days not in available_days (if configured)
-                                 if (tour?.available_days && tour.available_days.length > 0) {
+
+                                  // If admin defined specific available dates, only those are allowed
+                                  const specificDates = (tour as any)?.available_dates as string[] | undefined;
+                                  if (specificDates && specificDates.length > 0) {
+                                    const iso = format(date, "yyyy-MM-dd");
+                                    return !specificDates.includes(iso);
+                                  }
+
+                                  // Otherwise, fall back to weekday restrictions
+                                  if (tour?.available_days && tour.available_days.length > 0) {
                                    const dayOfWeek = date.getDay().toString();
                                    return !tour.available_days.includes(dayOfWeek);
                                  }

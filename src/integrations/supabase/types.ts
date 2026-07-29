@@ -569,6 +569,7 @@ export type Database = {
         Row: {
           allows_open: boolean
           allows_private: boolean
+          available_dates: Json
           available_days: Json | null
           bares_diurnos: string | null
           bares_noturnos: string | null
@@ -648,6 +649,7 @@ export type Database = {
         Insert: {
           allows_open?: boolean
           allows_private?: boolean
+          available_dates?: Json
           available_days?: Json | null
           bares_diurnos?: string | null
           bares_noturnos?: string | null
@@ -727,6 +729,7 @@ export type Database = {
         Update: {
           allows_open?: boolean
           allows_private?: boolean
+          available_dates?: Json
           available_days?: Json | null
           bares_diurnos?: string | null
           bares_noturnos?: string | null
