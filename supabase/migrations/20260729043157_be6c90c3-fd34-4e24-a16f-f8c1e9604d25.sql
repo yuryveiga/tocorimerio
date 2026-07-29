@@ -1,0 +1,1 @@
+ALTER TABLE public.tours ADD COLUMN IF NOT EXISTS available_dates jsonb NOT NULL DEFAULT '[]'::jsonb;
