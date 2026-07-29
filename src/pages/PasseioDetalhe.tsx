@@ -421,8 +421,14 @@ export function PasseioDetalhe() {
   return (
     <main className="min-h-screen bg-background font-sans overflow-x-hidden" data-tour-detail>
       <Helmet>
-        <title>{translatedTitle} | Private Tour Rio de Janeiro | {siteTitle}</title>
-        <meta name="description" content={generateOptimizedMetaDescription(translatedShortDesc, translatedTitle, language)} />
+        {/* meta_title_en allows a fully custom title tag per tour (overrides auto-template) */}
+        {(tour as unknown as { meta_title_en?: string }).meta_title_en ? (
+          <title>{(tour as unknown as { meta_title_en?: string }).meta_title_en}</title>
+        ) : (
+          <title>{translatedTitle} | Private Tour Rio de Janeiro | {siteTitle}</title>
+        )}
+        {/* meta_description_en allows an exact custom meta description (overrides auto-generation+CTA) */}
+        <meta name="description" content={(tour as unknown as { meta_description_en?: string }).meta_description_en || generateOptimizedMetaDescription(translatedShortDesc, translatedTitle, language)} />
         {(tour as unknown as { meta_keywords?: string }).meta_keywords && (
           <meta name="keywords" content={(tour as unknown as { meta_keywords?: string }).meta_keywords} />
         )}
@@ -431,16 +437,16 @@ export function PasseioDetalhe() {
         {/* Open Graph / Facebook */}
         <meta property="og:type" content="website" />
         <meta property="og:url" content={getCanonicalUrl(`/passeio/${tour?.slug || tour?.id}`)} />
-        <meta property="og:title" content={`${translatedTitle} | Private Tour Rio de Janeiro | ${siteTitle}`} />
-        <meta property="og:description" content={generateOptimizedMetaDescription(translatedShortDesc, translatedTitle, language)} />
+        <meta property="og:title" content={(tour as unknown as { meta_title_en?: string }).meta_title_en || `${translatedTitle} | Private Tour Rio de Janeiro | ${siteTitle}`} />
+        <meta property="og:description" content={(tour as unknown as { meta_description_en?: string }).meta_description_en || generateOptimizedMetaDescription(translatedShortDesc, translatedTitle, language)} />
         <meta property="og:image" content={tour.image_url} />
         <meta property="og:site_name" content="Tocorime Rio" />
         <meta property="og:locale" content={language === 'pt' ? 'pt_BR' : language === 'es' ? 'es_ES' : 'en_US'} />
 
         {/* Twitter */}
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content={`${translatedTitle} | ${siteTitle}`} />
-        <meta name="twitter:description" content={generateOptimizedMetaDescription(translatedShortDesc, translatedTitle, language)} />
+        <meta name="twitter:title" content={(tour as unknown as { meta_title_en?: string }).meta_title_en || `${translatedTitle} | ${siteTitle}`} />
+        <meta name="twitter:description" content={(tour as unknown as { meta_description_en?: string }).meta_description_en || generateOptimizedMetaDescription(translatedShortDesc, translatedTitle, language)} />
         <meta name="twitter:image" content={tour.image_url} />
 
         <link rel="canonical" href={canonicalUrl} />
