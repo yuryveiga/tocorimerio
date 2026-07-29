@@ -10,6 +10,10 @@ import { LovableTour, LovableSiteImage, fetchLovable } from "@/integrations/lova
 import { TourJsonList } from "./TourJsonList";
 import { TourGalleryTab } from "./TourGalleryTab";
 import { TieredPricingEditor } from "./TieredPricingEditor";
+import { Calendar as CalendarUI } from "@/components/ui/calendar";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+import { format, parseISO } from "date-fns";
+import { ptBR } from "date-fns/locale";
 
 
 interface TourFormDialogProps {
