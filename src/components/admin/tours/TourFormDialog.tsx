@@ -4,7 +4,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Sparkles, Loader2, ExternalLink, Youtube, MapPin, List, Info, Star, HelpCircle, Sunrise, Moon, Link2, AlertTriangle } from "lucide-react";
+import { Sparkles, Loader2, ExternalLink, Youtube, MapPin, List, Info, Star, HelpCircle, Sunrise, Moon, Link2, AlertTriangle, CalendarDays } from "lucide-react";
 import { useTourForm } from "@/hooks/admin/useTourForm";
 import { LovableTour, LovableSiteImage, fetchLovable } from "@/integrations/lovable/client";
 import { TourJsonList } from "./TourJsonList";
@@ -325,6 +325,67 @@ export function TourFormDialog({
                     <div className="flex items-center gap-2">
                       <input type="checkbox" {...form.register("is_featured")} id="is_featured" className="w-5 h-5" />
                       <Label htmlFor="is_featured" className="font-bold">Destaque na Home</Label>
+                    </div>
+                  </div>
+
+                  {/* Dias disponíveis */}
+                  <div className="space-y-4 bg-emerald-50/60 p-6 rounded-2xl border border-emerald-200">
+                    <Label className="text-[10px] font-black uppercase tracking-widest text-emerald-700 flex items-center gap-2">
+                      <CalendarDays className="w-4 h-4" /> Dias da Semana Disponíveis
+                    </Label>
+                    <p className="text-xs text-emerald-800/80">
+                      Marque os dias em que este passeio pode ser reservado. Se nenhum for marcado, todos os dias ficam disponíveis.
+                    </p>
+                    <div className="flex flex-wrap gap-2">
+                      {[
+                        { v: '0', label: 'Dom' },
+                        { v: '1', label: 'Seg' },
+                        { v: '2', label: 'Ter' },
+                        { v: '3', label: 'Qua' },
+                        { v: '4', label: 'Qui' },
+                        { v: '5', label: 'Sex' },
+                        { v: '6', label: 'Sáb' },
+                      ].map(day => {
+                        const current = (form.watch("available_days") || []) as string[];
+                        const checked = current.includes(day.v);
+                        return (
+                          <label
+                            key={day.v}
+                            className={`flex items-center gap-2 cursor-pointer px-4 py-2 rounded-xl border transition-colors ${checked ? 'bg-emerald-600 text-white border-emerald-600' : 'bg-white border-emerald-200 hover:border-emerald-400'}`}
+                          >
+                            <input
+                              type="checkbox"
+                              className="hidden"
+                              checked={checked}
+                              onChange={(e) => {
+                                const next = e.target.checked
+                                  ? [...current, day.v]
+                                  : current.filter(d => d !== day.v);
+                                form.setValue("available_days", next, { shouldDirty: true });
+                              }}
+                            />
+                            <span className="text-sm font-bold">{day.label}</span>
+                          </label>
+                        );
+                      })}
+                    </div>
+                    <div className="flex gap-2 pt-2">
+                      <Button
+                        type="button"
+                        variant="outline"
+                        size="sm"
+                        onClick={() => form.setValue("available_days", ['0','1','2','3','4','5','6'], { shouldDirty: true })}
+                      >
+                        Selecionar todos
+                      </Button>
+                      <Button
+                        type="button"
+                        variant="outline"
+                        size="sm"
+                        onClick={() => form.setValue("available_days", [], { shouldDirty: true })}
+                      >
+                        Limpar
+                      </Button>
                     </div>
                   </div>
 
