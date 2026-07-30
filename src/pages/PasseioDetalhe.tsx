@@ -1272,6 +1272,13 @@ export function PasseioDetalhe() {
                      <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
                    </Link>
                  </div>
+
+                 <RelatedBlogPosts
+                   tourTitle={(translatedTitle as string) || tour.title}
+                   tourSlug={tour.slug}
+                   tourDescription={(tour.short_description as string) || ""}
+                   tourKeywords={(tour as Record<string, unknown>).meta_keywords as string | null}
+                 />
               </div>
             </div>
           </div>
