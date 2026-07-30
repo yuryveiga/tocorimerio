@@ -622,9 +622,9 @@ export type Database = {
           meeting_point_address_es: string | null
           meeting_point_address_zh_cn: string | null
           meeting_point_address_zh_tw: string | null
+          meta_description_en: string | null
           meta_keywords: string | null
           meta_title_en: string | null
-          meta_description_en: string | null
           price: number
           price_1_person: number | null
           price_2_people: number | null
@@ -704,9 +704,9 @@ export type Database = {
           meeting_point_address_es?: string | null
           meeting_point_address_zh_cn?: string | null
           meeting_point_address_zh_tw?: string | null
+          meta_description_en?: string | null
           meta_keywords?: string | null
           meta_title_en?: string | null
-          meta_description_en?: string | null
           price?: number
           price_1_person?: number | null
           price_2_people?: number | null
@@ -786,9 +786,9 @@ export type Database = {
           meeting_point_address_es?: string | null
           meeting_point_address_zh_cn?: string | null
           meeting_point_address_zh_tw?: string | null
+          meta_description_en?: string | null
           meta_keywords?: string | null
           meta_title_en?: string | null
-          meta_description_en?: string | null
           price?: number
           price_1_person?: number | null
           price_2_people?: number | null
