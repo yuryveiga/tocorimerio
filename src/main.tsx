@@ -17,6 +17,23 @@ import "./index.css";
   } catch {}
 })();
 
+// SEO: redirect legacy blog slugs to their new shortened versions
+(() => {
+  try {
+    const LEGACY_SLUGS: Record<string, string> = {
+      "tours-in-lapa-rios-historic-heart-by-day-samba-capital-by-night": "tours-in-lapa",
+      "tours-in-santa-teresa-rios-bohemian-hilltop-village": "tours-in-santa-teresa",
+      "tours-in-ipanema-rios-effortlessly-chic-beach-neighborhood": "tours-in-ipanema",
+      "tours-in-copacabana-the-iconic-rio-beach-without-tourist-traps": "tours-in-copacabana",
+    };
+    const { pathname, search, hash } = window.location;
+    const match = decodeURIComponent(pathname).match(/^\/blog\/([^/]+)\/?$/);
+    if (match && LEGACY_SLUGS[match[1]]) {
+      window.location.replace(`/blog/${LEGACY_SLUGS[match[1]]}${search}${hash}`);
+    }
+  } catch {}
+})();
+
 const rootElement = document.getElementById("root")!;
 
 createRoot(rootElement).render(
