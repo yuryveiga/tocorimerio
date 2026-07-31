@@ -126,7 +126,6 @@ async function generateSitemap() {
     staticPages.forEach(page => {
       xml += `  <url>\n`;
       xml += `    <loc>${siteUrl}${page.url.toLowerCase()}</loc>\n`;
-      xml += `    <lastmod>${new Date().toISOString().split('T')[0]}</lastmod>\n`;
       xml += `    <changefreq>${page.changefreq}</changefreq>\n`;
       xml += `    <priority>${page.priority}</priority>\n`;
       xml += `  </url>\n`;
@@ -140,7 +139,7 @@ async function generateSitemap() {
       }
       xml += `  <url>\n`;
       xml += `    <loc>${siteUrl}/passeio/${slug}</loc>\n`;
-      xml += `    <lastmod>${(tour.updated_at || new Date().toISOString()).split('T')[0]}</lastmod>\n`;
+      if (tour.updated_at) xml += `    <lastmod>${tour.updated_at.split('T')[0]}</lastmod>\n`;
       xml += `    <changefreq>weekly</changefreq>\n`;
       xml += `    <priority>0.8</priority>\n`;
       const tourImages = collectImages(tour.image_url, tour.carousel_images_json, tour.images_json);
@@ -157,7 +156,6 @@ async function generateSitemap() {
     cats.forEach(c => {
       xml += `  <url>\n`;
       xml += `    <loc>${siteUrl}/passeios/${c}</loc>\n`;
-      xml += `    <lastmod>${new Date().toISOString().split('T')[0]}</lastmod>\n`;
       xml += `    <changefreq>weekly</changefreq>\n`;
       xml += `    <priority>0.7</priority>\n`;
       xml += `  </url>\n`;
@@ -176,7 +174,7 @@ async function generateSitemap() {
         if (!key) return;
         xml += `  <url>\n`;
         xml += `    <loc>${siteUrl}/match/${key}</loc>\n`;
-        xml += `    <lastmod>${(m.updated_at || new Date().toISOString()).split('T')[0]}</lastmod>\n`;
+        if (m.updated_at) xml += `    <lastmod>${m.updated_at.split('T')[0]}</lastmod>\n`;
         xml += `    <changefreq>weekly</changefreq>\n`;
         xml += `    <priority>0.9</priority>\n`;
         xml += `  </url>\n`;
@@ -191,7 +189,7 @@ async function generateSitemap() {
       const slug = slugify(post.slug);
       xml += `  <url>\n`;
       xml += `    <loc>${siteUrl}/blog/${slug}</loc>\n`;
-      xml += `    <lastmod>${(post.updated_at || new Date().toISOString()).split('T')[0]}</lastmod>\n`;
+      if (post.updated_at) xml += `    <lastmod>${post.updated_at.split('T')[0]}</lastmod>\n`;
       xml += `    <changefreq>monthly</changefreq>\n`;
       xml += `    <priority>0.8</priority>\n`;
       const postImages = collectImages(post.image_url);
@@ -246,8 +244,7 @@ async function generateSitemap() {
     }
 
     // Sitemap index pointing to both
-    const today = new Date().toISOString().split('T')[0];
-    const indexXml = `<?xml version="1.0" encoding="UTF-8"?>\n<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n  <sitemap><loc>${siteUrl}/sitemap.xml</loc><lastmod>${today}</lastmod></sitemap>\n  <sitemap><loc>${siteUrl}/sitemap-images.xml</loc><lastmod>${today}</lastmod></sitemap>\n</sitemapindex>\n`;
+    const indexXml = `<?xml version="1.0" encoding="UTF-8"?>\n<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n  <sitemap><loc>${siteUrl}/sitemap.xml</loc></sitemap>\n  <sitemap><loc>${siteUrl}/sitemap-images.xml</loc></sitemap>\n</sitemapindex>\n`;
     const indexPath = path.join(__dirname, '../public/sitemap-index.xml');
     fs.writeFileSync(indexPath, indexXml);
 

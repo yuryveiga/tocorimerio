@@ -1,4 +1,5 @@
-# Sitemap
+# Sitemaps
+Sitemap: https://tocorimerio.com/sitemap-index.xml
 Sitemap: https://tocorimerio.com/sitemap.xml
 Sitemap: https://tocorimerio.com/sitemap-images.xml
 
@@ -9,6 +10,7 @@ Allow: /
 # Disallow admin and private areas
 Disallow: /admin/
 Disallow: /api/
+Disallow: /.lovable/
 Disallow: /carrinho
 Disallow: /confirmacao
 Disallow: /checkout
