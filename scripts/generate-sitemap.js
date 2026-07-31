@@ -244,7 +244,6 @@ async function generateSitemap() {
     }
 
     // Sitemap index pointing to both
-    const today = new Date().toISOString().split('T')[0];
     const indexXml = `<?xml version="1.0" encoding="UTF-8"?>\n<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n  <sitemap><loc>${siteUrl}/sitemap.xml</loc></sitemap>\n  <sitemap><loc>${siteUrl}/sitemap-images.xml</loc></sitemap>\n</sitemapindex>\n`;
     const indexPath = path.join(__dirname, '../public/sitemap-index.xml');
     fs.writeFileSync(indexPath, indexXml);
