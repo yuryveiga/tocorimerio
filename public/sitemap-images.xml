@@ -1817,17 +1817,17 @@
     </image:image>
   </url>
   <url>
-    <loc>https://tocorimerio.com/blog/visit-sugar-loaf-rio</loc>
-    <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1784061610504_4dno4she5bt.webp</image:loc>
-      <image:caption>Pão de Açúcar : o guia completo de 2026</image:caption>
-    </image:image>
-  </url>
-  <url>
     <loc>https://tocorimerio.com/blog/what-to-wear-hiking-and-beach-rio-de-janeiro</loc>
     <image:image>
       <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776155088676_9t8wqvy9q2a.webp</image:loc>
       <image:caption>O que vestir para um dia de caminhada e praia no Rio de Janeiro: o guia de malas para quem vem pela primeira vez</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://tocorimerio.com/blog/visit-sugar-loaf-rio</loc>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1784061610504_4dno4she5bt.webp</image:loc>
+      <image:caption>Pão de Açúcar : o guia completo de 2026</image:caption>
     </image:image>
   </url>
 </urlset>
