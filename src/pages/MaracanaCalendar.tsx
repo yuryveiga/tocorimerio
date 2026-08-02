@@ -114,7 +114,7 @@ const MaracanaCalendar = () => {
               ? `${name}: ${m.competition}. Tour com ingresso oficial, transporte e guia bilíngue.`
               : `${name}: ${m.competition}. Tour with official ticket, transport and bilingual guide.`,
             startDate: start.toISOString(),
-            imageUrl: m.image_url || undefined,
+            imageUrl: (m as any).image_url || undefined,
             url,
             homeTeam: m.home_team,
             awayTeam: m.away_team,
