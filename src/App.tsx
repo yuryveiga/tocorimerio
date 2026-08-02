@@ -24,7 +24,6 @@ import Index from "./pages/Index";
 
 // ─── Lazy UI shell (loads after first paint to reduce TBT/TTI) ───────────────
 const FloatingButtons = lazy(() => import("./components/FloatingButtons").then(m => ({ default: m.FloatingButtons })));
-const MobileStickyCTA = lazy(() => import("./components/MobileStickyCTA").then(m => ({ default: m.MobileStickyCTA })));
 const MagneticCursor  = lazy(() => import("./components/MagneticCursor").then(m => ({ default: m.MagneticCursor })));
 
 // ─── Lazily loaded pages (split from main bundle) ─────────────────────────────
@@ -186,7 +185,6 @@ const App = ({ queryClient: externalQueryClient }: { queryClient?: QueryClient }
                   {/* UI shell: no fallback to avoid layout shift */}
                   <Suspense fallback={null}>
                     <DeferUntilIdle>
-                      <MobileStickyCTA />
                       <FloatingButtons />
                       <MagneticCursor />
                     </DeferUntilIdle>
