@@ -488,7 +488,34 @@ const MaracanaCalendar = () => {
           </motion.div>
         </div>
       </div>
-      
+
+      <section className="py-16 border-t border-border/50">
+        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 className="text-3xl sm:text-4xl font-bold mb-3 tracking-tight">
+            {language === 'pt' ? 'PERGUNTAS FREQUENTES' : language === 'es' ? 'PREGUNTAS FRECUENTES' : 'FREQUENTLY ASKED QUESTIONS'}
+          </h2>
+          <p className="text-muted-foreground mb-8">
+            {language === 'pt'
+              ? 'Tudo sobre os próximos jogos no Maracanã, ingressos e como funciona o tour.'
+              : language === 'es'
+                ? 'Todo sobre los próximos partidos en Maracanã, entradas y cómo funciona el tour.'
+                : 'Everything about upcoming games at Maracanã, tickets and how the tour works.'}
+          </p>
+          <Accordion type="single" collapsible className="w-full">
+            {seo.faqs.map((faq, i) => (
+              <AccordionItem key={i} value={`faq-${i}`}>
+                <AccordionTrigger className="text-left text-base font-semibold">
+                  {faq.q}
+                </AccordionTrigger>
+                <AccordionContent className="text-muted-foreground leading-relaxed">
+                  {faq.a}
+                </AccordionContent>
+              </AccordionItem>
+            ))}
+          </Accordion>
+        </div>
+      </section>
+
       <Footer />
     </div>
   );
