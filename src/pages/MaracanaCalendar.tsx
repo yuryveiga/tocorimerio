@@ -14,7 +14,8 @@ import { MapPin, ArrowRight, Bus, Ticket, UserCheck, Clock, Camera, Users, Chevr
 import { useState, useMemo, useEffect } from "react";
 import { Helmet } from "react-helmet-async";
 import { useSiteData } from "@/hooks/useSiteData";
-import { getCanonicalUrl, getHreflangLinks, generateBreadcrumbsSchema, cleanMatchSlug, generateSportsEventSchema } from "@/utils/seo";
+import { getCanonicalUrl, getHreflangLinks, generateBreadcrumbsSchema, cleanMatchSlug, generateSportsEventSchema, generateFAQSchema } from "@/utils/seo";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 
 const localeMap: Record<string, Locale> = { pt: ptBR, en: enUS, es };
 
@@ -250,6 +251,9 @@ const MaracanaCalendar = () => {
         </script>
         <script type="application/ld+json">
           {JSON.stringify(seo.itemList)}
+        </script>
+        <script type="application/ld+json">
+          {JSON.stringify(seo.faqSchema)}
         </script>
       </Helmet>
       
