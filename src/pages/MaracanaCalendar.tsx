@@ -14,7 +14,7 @@ import { MapPin, ArrowRight, Bus, Ticket, UserCheck, Clock, Camera, Users, Chevr
 import { useState, useMemo, useEffect } from "react";
 import { Helmet } from "react-helmet-async";
 import { useSiteData } from "@/hooks/useSiteData";
-import { getCanonicalUrl, getHreflangLinks, generateBreadcrumbsSchema, cleanMatchSlug } from "@/utils/seo";
+import { getCanonicalUrl, getHreflangLinks, generateBreadcrumbsSchema, cleanMatchSlug, generateSportsEventSchema } from "@/utils/seo";
 
 const localeMap: Record<string, Locale> = { pt: ptBR, en: enUS, es };
 
@@ -56,6 +56,96 @@ const MaracanaCalendar = () => {
 
   const weekDays = weekDaysByLang[language] || weekDaysByLang.en;
 
+  // ---- SEO: eventos + destaque por clube (Flamengo / Fluminense) ----
+  const seo = useMemo(() => {
+    const upcoming = availableMatches.slice(0, 30);
+
+    const hasTeam = (name: string) =>
+      upcoming.some(m =>
+        `${m.home_team} ${m.away_team}`.toLowerCase().includes(name)
+      );
+    const flaMatches = upcoming.filter(m => `${m.home_team} ${m.away_team}`.toLowerCase().includes('flamengo'));
+    const fluMatches = upcoming.filter(m => `${m.home_team} ${m.away_team}`.toLowerCase().includes('fluminense'));
+
+    const clubBits: string[] = [];
+    if (hasTeam('flamengo')) clubBits.push('Flamengo');
+    if (hasTeam('fluminense')) clubBits.push('Fluminense');
+
+    const baseTitle = language === 'pt'
+      ? 'Calendário de Jogos no Maracanã 2026 | Tocorime Rio'
+      : language === 'es'
+        ? 'Calendario de Partidos en Maracanã 2026 | Tocorime Rio'
+        : 'Maracanã Match Calendar 2026 | Tocorime Rio';
+
+    // Reforço de clube no título quando há jogos de Fla/Flu na lista
+    const title = clubBits.length
+      ? (language === 'pt'
+          ? `Calendário de Jogos no Maracanã 2026 — ${clubBits.join(' e ')} | Tocorime Rio`
+          : language === 'es'
+            ? `Calendario de Partidos en Maracanã 2026 — ${clubBits.join(' y ')} | Tocorime Rio`
+            : `Maracanã Match Calendar 2026 — ${clubBits.join(' & ')} | Tocorime Rio`)
+      : baseTitle;
+
+    const description = language === 'pt'
+      ? `Confira o calendário de jogos no Maracanã${clubBits.length ? ` (${clubBits.join(' e ')})` : ''} e reserve seu tour: ingresso oficial, transporte e guia bilíngue incluídos. Vagas limitadas — reserve já.`
+      : language === 'es'
+        ? `Consulta el calendario de partidos en Maracanã${clubBits.length ? ` (${clubBits.join(' y ')})` : ''} y reserva tu tour: entrada oficial, transporte y guía bilingüe incluidos. Plazas limitadas.`
+        : `Check the Maracanã match calendar${clubBits.length ? ` (${clubBits.join(' & ')})` : ''} and book your tour: official ticket, transport and bilingual guide included. Limited spots — book now.`;
+
+    const keywords = [
+      'Maracanã', 'Calendário de Jogos', 'Ingresso Maracanã', 'Tour Maracanã',
+      'Flamengo', 'Fluminense', 'Futebol no Rio de Janeiro', 'Passeio Turístico Rio de Janeiro',
+      ...(flaMatches.length ? ['jogo do Flamengo no Maracanã', 'ingresso Flamengo', 'Flamengo tickets Maracanã'] : []),
+      ...(fluMatches.length ? ['jogo do Fluminense no Maracanã', 'ingresso Fluminense', 'Fluminense tickets Maracanã'] : []),
+    ].join(', ');
+
+    const events = upcoming.map((m, i) => {
+      const start = getMatchDateInRio(m.match_date);
+      const url = getCanonicalUrl(`/match/${cleanMatchSlug(m.slug || '') || m.id}`);
+      const spots = getDisplaySpots(m.id, m.available_spots, m.sold_count);
+      const name = `${m.home_team} x ${m.away_team} — ${m.stadium || m.venue || 'Maracanã'}`;
+      return {
+        "@type": "ListItem",
+        position: i + 1,
+        item: {
+          ...generateSportsEventSchema({
+            name,
+            description: language === 'pt'
+              ? `${name}: ${m.competition}. Tour com ingresso oficial, transporte e guia bilíngue.`
+              : `${name}: ${m.competition}. Tour with official ticket, transport and bilingual guide.`,
+            startDate: start.toISOString(),
+            imageUrl: (m as any).image_url || undefined,
+            url,
+            homeTeam: m.home_team,
+            awayTeam: m.away_team,
+            venueName: m.stadium || m.venue || 'Maracanã',
+            offerUrl: url,
+            offerPrice: Number(m.price) || 0,
+            offerCurrency: 'BRL',
+          }),
+          offers: {
+            "@type": "Offer",
+            url,
+            price: Number(m.price) || 0,
+            priceCurrency: 'BRL',
+            availability: spots > 0 ? 'https://schema.org/InStock' : 'https://schema.org/SoldOut',
+            validFrom: new Date().toISOString(),
+            inventoryLevel: { "@type": "QuantitativeValue", value: spots },
+          },
+        },
+      };
+    });
+
+    const itemList = {
+      "@context": "https://schema.org",
+      "@type": "ItemList",
+      name: title,
+      itemListElement: events,
+    };
+
+    return { title, description, keywords, itemList };
+  }, [availableMatches, language]);
+
   const itinerary = [
     {
       icon: <Bus className="h-5 w-5" />,
@@ -87,16 +177,17 @@ const MaracanaCalendar = () => {
   return (
     <div className="min-h-screen bg-background">
       <Helmet>
-        <title>Calendário de Jogos no Rio de Janeiro | Tocorime Rio</title>
-        <meta name="description" content="Veja o calendário completo de partidas de futebol no Rio de Janeiro. Planeje sua visita ao Maracanã com datas, horários e disponibilidade." />
+        <title>{seo.title}</title>
+        <meta name="description" content={seo.description} />
+        <meta name="keywords" content={seo.keywords} />
         <link rel="canonical" href={getCanonicalUrl("/maracana-calendario")} />
         {getHreflangLinks("/maracana-calendario").map((l) => (
           <link key={l.hreflang} rel="alternate" hrefLang={l.hreflang} href={l.href} />
         ))}
         <meta property="og:type" content="website" />
         <meta property="og:url" content={getCanonicalUrl("/maracana-calendario")} />
-        <meta property="og:title" content="Calendário de Jogos no Maracanã | Tocorime Rio" />
-        <meta property="og:description" content="Calendário completo de partidas no Maracanã. Planeje sua visita com datas, horários e pacotes." />
+        <meta property="og:title" content={seo.title} />
+        <meta property="og:description" content={seo.description} />
         <meta property="og:site_name" content="Tocorime Rio" />
         <meta name="twitter:card" content="summary_large_image" />
         <script type="application/ld+json">
@@ -104,6 +195,9 @@ const MaracanaCalendar = () => {
             { name: language === 'pt' ? 'Início' : 'Home', url: getCanonicalUrl("/") },
             { name: language === 'pt' ? 'Calendário Maracanã' : 'Maracanã Calendar', url: getCanonicalUrl("/maracana-calendario") },
           ]))}
+        </script>
+        <script type="application/ld+json">
+          {JSON.stringify(seo.itemList)}
         </script>
       </Helmet>
       
