@@ -14,7 +14,8 @@ import { MapPin, ArrowRight, Bus, Ticket, UserCheck, Clock, Camera, Users, Chevr
 import { useState, useMemo, useEffect } from "react";
 import { Helmet } from "react-helmet-async";
 import { useSiteData } from "@/hooks/useSiteData";
-import { getCanonicalUrl, getHreflangLinks, generateBreadcrumbsSchema, cleanMatchSlug, generateSportsEventSchema } from "@/utils/seo";
+import { getCanonicalUrl, getHreflangLinks, generateBreadcrumbsSchema, cleanMatchSlug, generateSportsEventSchema, generateFAQSchema } from "@/utils/seo";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 
 const localeMap: Record<string, Locale> = { pt: ptBR, en: enUS, es };
 
@@ -143,7 +144,59 @@ const MaracanaCalendar = () => {
       itemListElement: events,
     };
 
-    return { title, description, keywords, itemList };
+    const next = upcoming[0];
+    const nextDate = next ? getMatchDateInRio(next.match_date) : null;
+    const nextLabel = nextDate ? format(nextDate, language === 'pt' ? "dd 'de' MMMM 'de' yyyy, HH:mm" : "MMMM d, yyyy, HH:mm", { locale }) : null;
+    const nextName = next ? `${next.home_team} x ${next.away_team}` : null;
+
+    const faqs: { q: string; a: string }[] = language === 'pt'
+      ? [
+          {
+            q: 'Quando é o próximo jogo no Maracanã?',
+            a: next
+              ? `O próximo jogo no Maracanã é ${nextName} (${next.competition || 'futebol'}) em ${nextLabel} (horário de Brasília). Confira o calendário completo nesta página, atualizado diariamente.`
+              : 'O calendário desta página é atualizado diariamente com os próximos jogos confirmados no Maracanã. Assim que a próxima partida for divulgada, ela aparece aqui com data, horário e ingressos.',
+          },
+          { q: 'Como comprar ingresso para o jogo no Maracanã?', a: 'Basta escolher a partida no calendário acima e reservar online. O tour inclui o ingresso oficial nas Cadeiras Cativas (Setor Oeste), transporte ida e volta do seu hotel e guia bilíngue.' },
+          { q: 'Quando joga o Flamengo no Maracanã?', a: 'Os jogos do Flamengo no Maracanã aparecem destacados no calendário acima assim que são confirmados pela CBF/Conmebol. Como são partidas de alta procura, recomendamos reservar com antecedência.' },
+          { q: 'Quando joga o Fluminense no Maracanã?', a: 'As partidas do Fluminense no Maracanã também são listadas no calendário desta página, com data, campeonato e disponibilidade de vagas em tempo real.' },
+          { q: 'O tour inclui transporte do hotel até o Maracanã?', a: 'Sim. Buscamos você no lobby do seu hotel na Zona Sul em van executiva, levamos ao estádio e fazemos o retorno seguro após o apito final.' },
+          { q: 'É seguro ir ao Maracanã como turista?', a: 'Sim, indo acompanhado. Nossos guias trilíngues acompanham o grupo do embarque ao retorno, orientando sobre setores, torcidas e comportamento no estádio.' },
+        ]
+      : language === 'es'
+        ? [
+            {
+              q: '¿Cuándo es el próximo partido en Maracanã?',
+              a: next
+                ? `El próximo partido en Maracanã es ${nextName} (${next.competition || 'fútbol'}) el ${nextLabel} (hora de Brasilia). Consulta el calendario completo en esta página.`
+                : 'El calendario de esta página se actualiza a diario con los próximos partidos confirmados en Maracanã.',
+            },
+            { q: '¿Cómo comprar entradas para el partido en Maracanã?', a: 'Elige el partido en el calendario y reserva online. El tour incluye entrada oficial (Sector Oeste), transporte desde tu hotel y guía bilingüe.' },
+            { q: '¿Cuándo juega Flamengo en Maracanã?', a: 'Los partidos de Flamengo aparecen destacados en el calendario apenas se confirman. Son de alta demanda: reserva con antelación.' },
+            { q: '¿Cuándo juega Fluminense en Maracanã?', a: 'Los partidos de Fluminense también se listan aquí, con fecha, campeonato y disponibilidad en tiempo real.' },
+            { q: '¿El tour incluye transporte desde el hotel?', a: 'Sí. Te recogemos en el lobby de tu hotel en la Zona Sur y regresamos tras el pitido final.' },
+            { q: '¿Es seguro ir a Maracanã como turista?', a: 'Sí, acompañado. Nuestros guías trilingües están con el grupo durante toda la experiencia.' },
+          ]
+        : [
+            {
+              q: 'When is the next game at Maracanã?',
+              a: next
+                ? `The next game at Maracanã is ${nextName} (${next.competition || 'football'}) on ${nextLabel} (Rio de Janeiro time). See the full, daily-updated fixture list on this page.`
+                : 'This page lists every confirmed upcoming match at Maracanã and is updated daily. As soon as the next fixture is announced it appears here with date, kick-off time and tickets.',
+            },
+            { q: 'How do I buy tickets for a match at Maracanã?', a: 'Pick a match in the calendar above and book online. The tour includes an official ticket in the Reserved Seats (West Sector), round-trip hotel transport and a bilingual guide.' },
+            { q: 'When does Flamengo play at Maracanã?', a: 'Flamengo fixtures are highlighted in the calendar above as soon as they are confirmed. These matches sell out fast, so book early.' },
+            { q: 'When does Fluminense play at Maracanã?', a: 'Fluminense home matches are also listed on this page with date, competition and live spot availability.' },
+            { q: 'Does the tour include transport from my hotel to Maracanã?', a: 'Yes. We pick you up at your South Zone hotel lobby in an executive van and bring you back safely after the final whistle.' },
+            { q: 'Is it safe to go to Maracanã as a tourist?', a: 'Yes, when accompanied. Our trilingual guides stay with the group from pickup to drop-off and explain sectors, fan culture and stadium etiquette.' },
+          ];
+
+    const faqSchema = {
+      "@context": "https://schema.org",
+      ...generateFAQSchema(faqs),
+    };
+
+    return { title, description, keywords, itemList, faqs, faqSchema };
   }, [availableMatches, language]);
 
   const itinerary = [
@@ -198,6 +251,9 @@ const MaracanaCalendar = () => {
         </script>
         <script type="application/ld+json">
           {JSON.stringify(seo.itemList)}
+        </script>
+        <script type="application/ld+json">
+          {JSON.stringify(seo.faqSchema)}
         </script>
       </Helmet>
       
@@ -432,7 +488,34 @@ const MaracanaCalendar = () => {
           </motion.div>
         </div>
       </div>
-      
+
+      <section className="py-16 border-t border-border/50">
+        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 className="text-3xl sm:text-4xl font-bold mb-3 tracking-tight">
+            {language === 'pt' ? 'PERGUNTAS FREQUENTES' : language === 'es' ? 'PREGUNTAS FRECUENTES' : 'FREQUENTLY ASKED QUESTIONS'}
+          </h2>
+          <p className="text-muted-foreground mb-8">
+            {language === 'pt'
+              ? 'Tudo sobre os próximos jogos no Maracanã, ingressos e como funciona o tour.'
+              : language === 'es'
+                ? 'Todo sobre los próximos partidos en Maracanã, entradas y cómo funciona el tour.'
+                : 'Everything about upcoming games at Maracanã, tickets and how the tour works.'}
+          </p>
+          <Accordion type="single" collapsible className="w-full">
+            {seo.faqs.map((faq, i) => (
+              <AccordionItem key={i} value={`faq-${i}`}>
+                <AccordionTrigger className="text-left text-base font-semibold">
+                  {faq.q}
+                </AccordionTrigger>
+                <AccordionContent className="text-muted-foreground leading-relaxed">
+                  {faq.a}
+                </AccordionContent>
+              </AccordionItem>
+            ))}
+          </Accordion>
+        </div>
+      </section>
+
       <Footer />
     </div>
   );
