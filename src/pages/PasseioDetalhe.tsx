@@ -265,6 +265,13 @@ export function PasseioDetalhe() {
   const [lightboxSource, setLightboxSource] = useState<'hero' | 'gallery'>('hero');
   const touchStartX = useRef<number | null>(null);
 
+  useEffect(() => {
+    if (!isLightboxOpen) return;
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    return () => { document.body.style.overflow = prev; };
+  }, [isLightboxOpen]);
+
   const images = useMemo(() => {
     let imgs = tour?.images_json as string[] || [];
     if (imgs.length === 0 && tour?.image_url) imgs = [tour.image_url];
