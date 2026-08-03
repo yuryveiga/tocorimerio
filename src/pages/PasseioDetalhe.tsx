@@ -263,6 +263,7 @@ export function PasseioDetalhe() {
   const [isLightboxOpen, setIsLightboxOpen] = useState(false);
   const [lightboxIndex, setLightboxIndex] = useState(0);
   const [lightboxSource, setLightboxSource] = useState<'hero' | 'gallery'>('hero');
+  const touchStartX = useRef<number | null>(null);
 
   const images = useMemo(() => {
     let imgs = tour?.images_json as string[] || [];
@@ -574,11 +575,14 @@ export function PasseioDetalhe() {
 
           <Button 
             variant="secondary" 
-            className="absolute bottom-10 right-10 gap-3 bg-white/90 backdrop-blur-2xl hover:bg-white text-black font-black text-[11px] uppercase tracking-widest px-8 h-14 rounded-2xl shadow-2xl transition-all hover:scale-105 ring-1 ring-black/5 active:scale-95"
+            className="absolute bottom-4 left-4 right-4 w-auto justify-center gap-2 md:bottom-10 md:right-10 md:left-auto md:gap-3 bg-white/95 backdrop-blur-2xl hover:bg-white text-black font-black text-[11px] uppercase tracking-widest px-5 md:px-8 h-12 md:h-14 rounded-2xl shadow-2xl transition-all md:hover:scale-105 ring-1 ring-black/5 active:scale-95"
             onClick={() => openLightbox(0)}
           >
             <Maximize2 className="w-5 h-5 text-primary" />
             {t("ver_galeria_completa")}
+            {images.length > 1 && (
+              <span className="ml-1 rounded-full bg-primary/10 px-2 py-0.5 text-[10px] text-primary">{images.length}</span>
+            )}
           </Button>
         </div>
       </section>
@@ -1405,6 +1409,16 @@ export function PasseioDetalhe() {
       {isLightboxOpen && (
         <div 
           className="fixed inset-0 bg-black/95 z-[100] flex items-center justify-center p-0 backdrop-blur-sm"
+          onTouchStart={(e) => { touchStartX.current = e.touches[0].clientX; }}
+          onTouchEnd={(e) => {
+            if (touchStartX.current === null) return;
+            const dx = e.changedTouches[0].clientX - touchStartX.current;
+            touchStartX.current = null;
+            if (Math.abs(dx) < 50) return;
+            const list = lightboxSource === 'gallery' ? (tour.carousel_images_json as string[] || []) : images;
+            if (dx < 0) setLightboxIndex((prev) => (prev < list.length - 1 ? prev + 1 : 0));
+            else setLightboxIndex((prev) => (prev > 0 ? prev - 1 : list.length - 1));
+          }}
           onKeyDown={(e) => {
             if (e.key === "Escape") setIsLightboxOpen(false);
               if (e.key === "ArrowLeft") {
@@ -1421,7 +1435,8 @@ export function PasseioDetalhe() {
           {/* Close Button */}
           <button
             onClick={() => setIsLightboxOpen(false)}
-            className="absolute top-6 right-6 w-12 h-12 bg-black/50 hover:bg-black/80 rounded-full flex items-center justify-center transition-all z-[120] border border-white/10 text-white"
+            className="absolute top-[max(1rem,env(safe-area-inset-top))] right-4 md:top-6 md:right-6 w-12 h-12 bg-black/60 hover:bg-black/80 rounded-full flex items-center justify-center transition-all z-[120] border border-white/10 text-white"
+            aria-label="Fechar"
           >
             <X className="w-6 h-6" />
           </button>

@@ -164,6 +164,11 @@ export function Header({ forceLanguage }: { forceLanguage?: 'pt' | 'en' | 'es' }
             <span className={`font-serif font-bold tracking-tight transition-all duration-500 ${isScrolled ? "text-lg text-foreground" : "text-xl text-foreground"} hidden sm:block ml-1 group-hover:text-primary`}>Tocorime Rio</span>
           </Link>
 
+          {/* TripAdvisor badge (mobile only, next to the logo) */}
+          <div className="lg:hidden flex items-center justify-center h-8 w-8 shrink-0 -ml-1 mr-auto scale-[0.6] origin-left">
+            <div className="elfsight-app-4a2f6277-e52c-46f0-95d8-12ba7e619e77" data-elfsight-app-lazy />
+          </div>
+
           <nav className="hidden lg:flex items-center gap-6">
             {allNavLinks.map((link) => (
               <Link 
