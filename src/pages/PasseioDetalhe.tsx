@@ -1408,7 +1408,7 @@ export function PasseioDetalhe() {
       {/* Lightbox Overlay */}
       {isLightboxOpen && (
         <div 
-          className="fixed inset-0 bg-black/95 z-[100] flex items-center justify-center p-0 backdrop-blur-sm"
+          className="fixed inset-0 h-[100dvh] max-h-[100dvh] overflow-hidden bg-black/95 z-[100] flex items-center justify-center p-0 backdrop-blur-sm"
           onTouchStart={(e) => { touchStartX.current = e.touches[0].clientX; }}
           onTouchEnd={(e) => {
             if (touchStartX.current === null) return;
@@ -1464,7 +1464,7 @@ export function PasseioDetalhe() {
           </div>
 
           {/* Image Container - Absolute Center */}
-          <div className="w-full h-full p-4 md:p-12 flex items-center justify-center">
+          <div className="w-full h-[100dvh] max-h-[100dvh] p-3 md:p-12 flex items-center justify-center">
             {(() => {
               const list = lightboxSource === 'gallery' ? (tour.carousel_images_json as string[] || []) : images;
               const img = list[lightboxIndex];
@@ -1474,7 +1474,7 @@ export function PasseioDetalhe() {
               const shouldLimitHeight = isGallerySource && isLandscape;
 
               return (
-                <div key={img} className="relative w-full h-full flex items-center justify-center animate-in fade-in zoom-in-95 duration-500">
+                <div key={img} className="relative w-full h-full max-h-full flex items-center justify-center animate-in fade-in zoom-in-95 duration-500">
                   <OptimizedImage 
                     src={img} 
                     alt={`${translatedTitle} view ${lightboxIndex + 1}`} 
@@ -1482,11 +1482,11 @@ export function PasseioDetalhe() {
                     height={shouldLimitHeight ? 600 : undefined}
                     quality={100}
                     containerClassName={cn(
-                      "w-full h-full flex items-center justify-center",
+                      "w-full h-full max-h-full flex items-center justify-center",
                       shouldLimitHeight && "max-h-[600px] h-[600px]"
                     )}
                     className={cn(
-                      "max-w-full cursor-auto",
+                      "max-w-full max-h-[100dvh] object-contain cursor-auto",
                       shouldLimitHeight ? "max-h-[600px] h-auto lg:h-[600px]" : "max-h-full h-auto w-auto"
                     )}
                     fit="contain"
