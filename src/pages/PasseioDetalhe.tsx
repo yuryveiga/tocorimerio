@@ -1000,6 +1000,11 @@ export function PasseioDetalhe() {
                 {/* Share Buttons */}
                   <div className="bg-card rounded-[2.5rem] border border-primary/20 p-8 shadow-2xl relative overflow-hidden group">
                     <div className="pointer-events-none absolute top-0 right-0 w-24 h-24 bg-primary/5 rounded-full -mr-12 -mt-12 transition-opacity duration-500 opacity-60 group-hover:opacity-100" />
+                    {/* Mobile-only section title */}
+                    <h2 className="lg:hidden text-2xl font-serif font-black text-foreground mb-6 flex items-center gap-3">
+                      <div className="w-2 h-8 bg-primary rounded-full shrink-0" />
+                      {language === 'pt' ? 'Faça sua Reserva' : language === 'es' ? 'Haz tu Reserva' : 'Book Your Tour'}
+                    </h2>
                      <div className="space-y-4">
                        {(!hidePrices && tour.pricing_model !== 'custom') ? (
                         <>
