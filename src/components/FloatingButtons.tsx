@@ -3,11 +3,13 @@ import { useLocation } from "react-router-dom";
 import { useSiteData } from "@/hooks/useSiteData";
 import { useLocale } from "@/contexts/LocaleContext";
 import { buildWhatsappLink } from "@/lib/whatsappMessage";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 export function FloatingButtons() {
   const { socialMedia } = useSiteData();
   const { language } = useLocale();
   const location = useLocation();
+  const isMobile = useIsMobile();
   const isAdmin = location.pathname.startsWith('/admin');
 
   useEffect(() => {
@@ -57,7 +59,7 @@ export function FloatingButtons() {
 
   return (
     <div className="fixed right-2 bottom-2 md:right-6 md:bottom-6 z-50 flex flex-col gap-1.5 md:gap-3 items-end pointer-events-auto">
-      {tripAdvisor && (
+      {tripAdvisor && !isMobile && (
         <div className="w-7 min-h-[28px] md:w-14 md:min-h-[56px] flex items-center justify-center scale-50 md:scale-100 origin-bottom-right">
           <div 
             className="elfsight-app-4a2f6277-e52c-46f0-95d8-12ba7e619e77" 
