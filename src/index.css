@@ -386,3 +386,12 @@ html.has-mc body { /* keep system cursor — custom cursor is additive, less ris
   .trust-marquee-track { animation: none !important; }
   .tw-caret { animation: none !important; opacity: 0; }
 }
+
+/* Hide Elfsight floating TripAdvisor widget on mobile (replaced by header link) */
+@media (max-width: 767px) {
+  [class*="elfsight-app-"],
+  .eapps-widget-toolbar,
+  div[class^="eapps-"] {
+    display: none !important;
+  }
+}
