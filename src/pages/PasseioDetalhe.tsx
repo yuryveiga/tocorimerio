@@ -1408,6 +1408,16 @@ export function PasseioDetalhe() {
       {isLightboxOpen && (
         <div 
           className="fixed inset-0 bg-black/95 z-[100] flex items-center justify-center p-0 backdrop-blur-sm"
+          onTouchStart={(e) => { touchStartX.current = e.touches[0].clientX; }}
+          onTouchEnd={(e) => {
+            if (touchStartX.current === null) return;
+            const dx = e.changedTouches[0].clientX - touchStartX.current;
+            touchStartX.current = null;
+            if (Math.abs(dx) < 50) return;
+            const list = lightboxSource === 'gallery' ? (tour.carousel_images_json as string[] || []) : images;
+            if (dx < 0) setLightboxIndex((prev) => (prev < list.length - 1 ? prev + 1 : 0));
+            else setLightboxIndex((prev) => (prev > 0 ? prev - 1 : list.length - 1));
+          }}
           onKeyDown={(e) => {
             if (e.key === "Escape") setIsLightboxOpen(false);
               if (e.key === "ArrowLeft") {
@@ -1424,7 +1434,8 @@ export function PasseioDetalhe() {
           {/* Close Button */}
           <button
             onClick={() => setIsLightboxOpen(false)}
-            className="absolute top-6 right-6 w-12 h-12 bg-black/50 hover:bg-black/80 rounded-full flex items-center justify-center transition-all z-[120] border border-white/10 text-white"
+            className="absolute top-[max(1rem,env(safe-area-inset-top))] right-4 md:top-6 md:right-6 w-12 h-12 bg-black/60 hover:bg-black/80 rounded-full flex items-center justify-center transition-all z-[120] border border-white/10 text-white"
+            aria-label="Fechar"
           >
             <X className="w-6 h-6" />
           </button>
