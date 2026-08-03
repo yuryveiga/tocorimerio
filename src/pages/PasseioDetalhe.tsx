@@ -574,11 +574,14 @@ export function PasseioDetalhe() {
 
           <Button 
             variant="secondary" 
-            className="absolute bottom-10 right-10 gap-3 bg-white/90 backdrop-blur-2xl hover:bg-white text-black font-black text-[11px] uppercase tracking-widest px-8 h-14 rounded-2xl shadow-2xl transition-all hover:scale-105 ring-1 ring-black/5 active:scale-95"
+            className="absolute bottom-4 left-4 right-4 w-auto justify-center gap-2 md:bottom-10 md:right-10 md:left-auto md:gap-3 bg-white/95 backdrop-blur-2xl hover:bg-white text-black font-black text-[11px] uppercase tracking-widest px-5 md:px-8 h-12 md:h-14 rounded-2xl shadow-2xl transition-all md:hover:scale-105 ring-1 ring-black/5 active:scale-95"
             onClick={() => openLightbox(0)}
           >
             <Maximize2 className="w-5 h-5 text-primary" />
             {t("ver_galeria_completa")}
+            {images.length > 1 && (
+              <span className="ml-1 rounded-full bg-primary/10 px-2 py-0.5 text-[10px] text-primary">{images.length}</span>
+            )}
           </Button>
         </div>
       </section>
