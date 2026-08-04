@@ -25,6 +25,8 @@ import "./index.css";
       "tours-in-santa-teresa-rios-bohemian-hilltop-village": "tours-in-santa-teresa",
       "tours-in-ipanema-rios-effortlessly-chic-beach-neighborhood": "tours-in-ipanema",
       "tours-in-copacabana-the-iconic-rio-beach-without-tourist-traps": "tours-in-copacabana",
+      "sunset-in-rio-de-janeiro-a-practical-guide-to-the-best-viewpoints-in-the-city": "sunset-in-rio-de-janeiro-guide",
+      "sunset-in-rio-de-janeiro-the-golden-hour-youll-never-forget": "sunset-rio-de-janeiro-golden-hour-experience",
     };
     const { pathname, search, hash } = window.location;
     const match = decodeURIComponent(pathname).match(/^\/blog\/([^/]+)\/?$/);
