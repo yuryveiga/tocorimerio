@@ -491,6 +491,10 @@ const BlogPost = () => {
                 url: getCanonicalUrl(`/blog/${post.slug}`),
                 datePublished: post.created_at,
                 dateModified: post.updated_at || post.created_at,
+                keywords: post.meta_keywords || (Array.isArray(post.tags) ? post.tags.join(", ") : undefined),
+                inLanguage: language === 'pt' ? 'pt-BR' : language === 'es' ? 'es-ES' : 'en-US',
+                wordCount: String(content || "").replace(/<[^>]*>/g, " ").trim().split(/\s+/).filter(Boolean).length || undefined,
+                articleSection: "Rio de Janeiro Travel Guide",
               }))}
             </script>
 

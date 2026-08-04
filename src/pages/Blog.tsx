@@ -64,6 +64,23 @@ const Blog = () => {
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Blog - Tocorime Rio" />
         <meta name="twitter:description" content="Dicas, roteiros e guias sobre passeios no Rio de Janeiro." />
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Blog",
+            name: "Blog Tocorime Rio",
+            url: getCanonicalUrl("/blog"),
+            publisher: { "@type": "Organization", name: "Tocorime Rio", url: getCanonicalUrl("/") },
+            blogPost: posts.slice(0, 20).map((p) => ({
+              "@type": "BlogPosting",
+              headline: getTranslated(p, "title"),
+              url: getCanonicalUrl(`/blog/${p.slug}`.replace("/blog//blog/", "/blog/")),
+              image: p.image_url || undefined,
+              datePublished: p.created_at,
+              author: { "@type": "Organization", name: "Tocorime Rio" },
+            })),
+          })}
+        </script>
       </Helmet>
       <Header />
       
