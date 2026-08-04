@@ -77,6 +77,10 @@ export const generateArticleSchema = (params: {
   datePublished?: string;
   dateModified?: string;
   authorName?: string;
+  keywords?: string;
+  inLanguage?: string;
+  wordCount?: number;
+  articleSection?: string;
 }) => ({
   "@context": "https://schema.org",
   "@type": "BlogPosting",
@@ -85,6 +89,11 @@ export const generateArticleSchema = (params: {
   "image": params.imageUrl,
   "datePublished": params.datePublished,
   "dateModified": params.dateModified || params.datePublished,
+  ...(params.keywords ? { keywords: params.keywords } : {}),
+  ...(params.inLanguage ? { inLanguage: params.inLanguage } : {}),
+  ...(params.wordCount ? { wordCount: params.wordCount } : {}),
+  ...(params.articleSection ? { articleSection: params.articleSection } : {}),
+  "isAccessibleForFree": true,
   "author": {
     "@type": "Organization",
     "name": params.authorName || "Tocorime Rio",
