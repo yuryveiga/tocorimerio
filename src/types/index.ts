@@ -129,6 +129,10 @@ export type LovableBlogPost = {
   content_es?: string;
   excerpt_en?: string;
   excerpt_es?: string;
+  meta_keywords?: string;
+  meta_description?: string;
+  tags?: string[];
+  featured_image_alt?: string;
 };
 
 export type LovableSiteSetting = {
