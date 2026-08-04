@@ -53,6 +53,26 @@ const InlineCTA = () => {
   );
 };
 
+// Social sharing overrides (Open Graph / Twitter Card) for specific posts
+const SOCIAL_SEO: Record<string, { title: string; description: string; imageAlt: string; keywords: string }> = {
+  "sunset-in-rio-de-janeiro-guide": {
+    title: "Sunset in Rio de Janeiro: A Practical Guide to the City's Best Viewpoints",
+    description:
+      "When and where to watch the sunset in Rio de Janeiro — the best viewpoints, seasonal sunset times, and practical tips for Arpoador, Sugarloaf Mountain, and more.",
+    imageAlt: "Sunset over Rio de Janeiro seen from Arpoador rock",
+    keywords:
+      "sunset in Rio de Janeiro, best sunset spots Rio, Arpoador sunset, Sugarloaf Mountain sunset, Mirante Dona Marta, pôr do sol no Rio de Janeiro",
+  },
+  "sunset-rio-de-janeiro-golden-hour-experience": {
+    title: "Sunset in Rio de Janeiro: The Golden Hour You'll Never Forget",
+    description:
+      "Discover why cariocas stop everything to watch the sky over Rio de Janeiro turn gold — and where to stand for the sunset of your trip.",
+    imageAlt: "Golden hour light over Rio de Janeiro's beaches and mountains",
+    keywords:
+      "sunset in Rio de Janeiro, Rio sunset experience, Arpoador sunset, golden hour Rio de Janeiro, pôr do sol no Rio de Janeiro, private Rio tours",
+  },
+};
+
 const BlogPost = () => {
   const { slug } = useParams();
   const [post, setPost] = useState<LovableBlogPost | null>(null);
@@ -456,6 +476,63 @@ const BlogPost = () => {
             {getHreflangLinks(`/blog/how-to-get-tickets-for-maracana-the-comp`).map((l) => (
               <link key={l.hreflang} rel="alternate" hrefLang={l.hreflang} href={l.href} />
             ))}
+          </>
+        ) : SOCIAL_SEO[post.slug] ? (
+          <>
+            <title>{SOCIAL_SEO[post.slug].title}</title>
+            <meta name="description" content={SOCIAL_SEO[post.slug].description} />
+            <meta name="keywords" content={SOCIAL_SEO[post.slug].keywords} />
+            <meta name="robots" content="index, follow" />
+            <link rel="canonical" href={getCanonicalUrl(`/blog/${post.slug}`)} />
+            {getHreflangLinks(`/blog/${post.slug}`).map((l) => (
+              <link key={l.hreflang} rel="alternate" hrefLang={l.hreflang} href={l.href} />
+            ))}
+
+            {/* Open Graph (Facebook, WhatsApp, LinkedIn) */}
+            <meta property="og:type" content="article" />
+            <meta property="og:site_name" content="Tocorime Rio" />
+            <meta property="og:url" content={getCanonicalUrl(`/blog/${post.slug}`)} />
+            <meta property="og:title" content={SOCIAL_SEO[post.slug].title} />
+            <meta property="og:description" content={SOCIAL_SEO[post.slug].description} />
+            <meta property="og:image" content={post.image_url || fallbackImage} />
+            <meta property="og:image:secure_url" content={post.image_url || fallbackImage} />
+            <meta property="og:image:width" content="1200" />
+            <meta property="og:image:height" content="630" />
+            <meta property="og:image:alt" content={post.featured_image_alt || SOCIAL_SEO[post.slug].imageAlt} />
+            <meta property="og:locale" content={language === 'pt' ? 'pt_BR' : language === 'es' ? 'es_ES' : 'en_US'} />
+            {post.created_at && <meta property="article:published_time" content={post.created_at} />}
+            {post.updated_at && <meta property="article:modified_time" content={post.updated_at} />}
+            <meta property="article:author" content="Tocorime Rio" />
+
+            {/* Twitter Card */}
+            <meta name="twitter:card" content="summary_large_image" />
+            <meta name="twitter:site" content="@tocorimerio" />
+            <meta name="twitter:title" content={SOCIAL_SEO[post.slug].title} />
+            <meta name="twitter:description" content={SOCIAL_SEO[post.slug].description} />
+            <meta name="twitter:image" content={post.image_url || fallbackImage} />
+            <meta name="twitter:image:alt" content={post.featured_image_alt || SOCIAL_SEO[post.slug].imageAlt} />
+
+            <script type="application/ld+json">
+              {JSON.stringify(generateArticleSchema({
+                title: SOCIAL_SEO[post.slug].title,
+                description: SOCIAL_SEO[post.slug].description,
+                imageUrl: post.image_url || fallbackImage,
+                url: getCanonicalUrl(`/blog/${post.slug}`),
+                datePublished: post.created_at,
+                dateModified: post.updated_at || post.created_at,
+                keywords: SOCIAL_SEO[post.slug].keywords,
+                inLanguage: language === 'pt' ? 'pt-BR' : language === 'es' ? 'es-ES' : 'en-US',
+                wordCount: String(content || "").replace(/<[^>]*>/g, " ").trim().split(/\s+/).filter(Boolean).length || undefined,
+                articleSection: "Rio de Janeiro Travel Guide",
+              }))}
+            </script>
+            <script type="application/ld+json">
+              {JSON.stringify(generateBreadcrumbsSchema([
+                { name: t("inicio"), url: getCanonicalUrl("/") },
+                { name: "Blog", url: getCanonicalUrl("/blog") },
+                { name: SOCIAL_SEO[post.slug].title, url: getCanonicalUrl(`/blog/${post.slug}`) }
+              ]))}
+            </script>
           </>
         ) : (
           <>
