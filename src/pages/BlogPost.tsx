@@ -53,6 +53,26 @@ const InlineCTA = () => {
   );
 };
 
+// Social sharing overrides (Open Graph / Twitter Card) for specific posts
+const SOCIAL_SEO: Record<string, { title: string; description: string; imageAlt: string; keywords: string }> = {
+  "sunset-in-rio-de-janeiro-guide": {
+    title: "Sunset in Rio de Janeiro: A Practical Guide to the City's Best Viewpoints",
+    description:
+      "When and where to watch the sunset in Rio de Janeiro — the best viewpoints, seasonal sunset times, and practical tips for Arpoador, Sugarloaf Mountain, and more.",
+    imageAlt: "Sunset over Rio de Janeiro seen from Arpoador rock",
+    keywords:
+      "sunset in Rio de Janeiro, best sunset spots Rio, Arpoador sunset, Sugarloaf Mountain sunset, Mirante Dona Marta, pôr do sol no Rio de Janeiro",
+  },
+  "sunset-rio-de-janeiro-golden-hour-experience": {
+    title: "Sunset in Rio de Janeiro: The Golden Hour You'll Never Forget",
+    description:
+      "Discover why cariocas stop everything to watch the sky over Rio de Janeiro turn gold — and where to stand for the sunset of your trip.",
+    imageAlt: "Golden hour light over Rio de Janeiro's beaches and mountains",
+    keywords:
+      "sunset in Rio de Janeiro, Rio sunset experience, Arpoador sunset, golden hour Rio de Janeiro, pôr do sol no Rio de Janeiro, private Rio tours",
+  },
+};
+
 const BlogPost = () => {
   const { slug } = useParams();
   const [post, setPost] = useState<LovableBlogPost | null>(null);
