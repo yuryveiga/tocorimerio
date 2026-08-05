@@ -295,7 +295,6 @@ const BlogPost = () => {
             <meta property="og:url" content="https://tocorimerio.com/blog/rocinha-favela-tour-rio-de-janeiro" />
             <meta property="og:image" content={ogImage} />
             <meta property="og:image:secure_url" content={ogImage} />
-            <meta property="og:image:type" content="image/jpeg" />
             <meta property="og:image:width" content="1200" />
             <meta property="og:image:height" content="630" />
             <meta property="og:image:alt" content="Guided favela tour in Rocinha, Rio de Janeiro with local expert" />
@@ -355,7 +354,6 @@ const BlogPost = () => {
             <meta property="og:url" content="https://tocorimerio.com/blog/visit-rio-de-janeiro" />
             <meta property="og:image" content={ogImage} />
             <meta property="og:image:secure_url" content={ogImage} />
-            <meta property="og:image:type" content="image/jpeg" />
             <meta property="og:image:width" content="1200" />
             <meta property="og:image:height" content="630" />
             <meta property="og:image:alt" content="Rio de Janeiro iconic landmarks and beaches" />
@@ -429,7 +427,6 @@ const BlogPost = () => {
             <meta property="og:url" content="https://tocorimerio.com/blog/visit-sugar-loaf-rio" />
             <meta property="og:image" content={ogImage} />
             <meta property="og:image:secure_url" content={ogImage} />
-            <meta property="og:image:type" content="image/jpeg" />
             <meta property="og:image:width" content="1200" />
             <meta property="og:image:height" content="630" />
             <meta property="og:image:alt" content={post.featured_image_alt || title} />
@@ -458,7 +455,6 @@ const BlogPost = () => {
             <meta property="og:url" content="https://tocorimerio.com/blog/how-to-hire-a-safe-tour-guide-in-rio-de-janeiro-without-getting-scammed" />
             <meta property="og:image" content={ogImage} />
             <meta property="og:image:secure_url" content={ogImage} />
-            <meta property="og:image:type" content="image/jpeg" />
             <meta property="og:image:width" content="1200" />
             <meta property="og:image:height" content="630" />
             <meta property="og:image:alt" content={post.featured_image_alt || title} />
@@ -487,7 +483,6 @@ const BlogPost = () => {
             <meta property="og:url" content="https://tocorimerio.com/blog/how-to-get-tickets-for-maracana-the-comp" />
             <meta property="og:image" content={ogImage} />
             <meta property="og:image:secure_url" content={ogImage} />
-            <meta property="og:image:type" content="image/jpeg" />
             <meta property="og:image:width" content="1200" />
             <meta property="og:image:height" content="630" />
             <meta property="og:image:alt" content={post.featured_image_alt || title} />
@@ -521,7 +516,6 @@ const BlogPost = () => {
             <meta property="og:description" content={SOCIAL_SEO[post.slug].description} />
             <meta property="og:image" content={ogImage} />
             <meta property="og:image:secure_url" content={ogImage} />
-            <meta property="og:image:type" content="image/jpeg" />
             <meta property="og:image:width" content="1200" />
             <meta property="og:image:height" content="630" />
             <meta property="og:image:alt" content={post.featured_image_alt || SOCIAL_SEO[post.slug].imageAlt} />
@@ -582,7 +576,6 @@ const BlogPost = () => {
             <meta property="og:description" content={generateOptimizedMetaDescription(excerpt || content || title, title, language)} />
             <meta property="og:image" content={ogImage} />
             <meta property="og:image:secure_url" content={ogImage} />
-            <meta property="og:image:type" content="image/jpeg" />
             <meta property="og:image:width" content="1200" />
             <meta property="og:image:height" content="630" />
             <meta property="og:image:alt" content={post.featured_image_alt || title} />
