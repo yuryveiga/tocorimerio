@@ -1020,13 +1020,10 @@ const FluminenseIndependienteRivadaviaLibertadores = () => {
           </div>
           <div className="riv-team-block">
             <img
-              src="https://upload.wikimedia.org/wikipedia/en/thumb/5/5f/Independiente_Rivadavia_escudo.svg/150px-Independiente_Rivadavia_escudo.svg.png"
+              src="https://ruacloirelfsbejduefa.supabase.co/storage/v1/object/public/crests/0599b17b-7b6a-4492-8c13-110552ef037c/visitante.png"
               alt="Independiente Rivadavia"
               className="riv-team-logo"
               loading="eager"
-              onError={e => {
-                (e.target as HTMLImageElement).src = 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/5f/Independiente_Rivadavia_escudo.svg/150px-Independiente_Rivadavia_escudo.svg.png';
-              }}
             />
             <div className="riv-team-name riv">Ind. Rivadavia</div>
             <div className="riv-team-sub">Mendoza · ARG</div>
