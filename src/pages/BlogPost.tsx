@@ -294,6 +294,10 @@ const BlogPost = () => {
             <meta property="og:description" content="Is a Rocinha favela tour safe? Discover Rio's most authentic cultural experience with local expert guides. Private tours, real community access, no tourist traps." />
             <meta property="og:url" content="https://tocorimerio.com/blog/rocinha-favela-tour-rio-de-janeiro" />
             <meta property="og:image" content={ogImage} />
+            <meta property="og:image:secure_url" content={ogImage} />
+            <meta property="og:image:type" content="image/jpeg" />
+            <meta property="og:image:width" content="1200" />
+            <meta property="og:image:height" content="630" />
             <meta property="og:image:alt" content="Guided favela tour in Rocinha, Rio de Janeiro with local expert" />
             <meta property="og:locale" content="en_US" />
             <meta property="og:site_name" content="Tocorime Rio" />
@@ -350,6 +354,10 @@ const BlogPost = () => {
             <meta property="og:description" content="Discover 10 compelling reasons to visit Rio de Janeiro, from iconic Christ the Redeemer and stunning beaches to vibrant culture and thrilling football. Plan your unforgettable trip to the Marvelous City with local insights." />
             <meta property="og:url" content="https://tocorimerio.com/blog/visit-rio-de-janeiro" />
             <meta property="og:image" content={ogImage} />
+            <meta property="og:image:secure_url" content={ogImage} />
+            <meta property="og:image:type" content="image/jpeg" />
+            <meta property="og:image:width" content="1200" />
+            <meta property="og:image:height" content="630" />
             <meta property="og:image:alt" content="Rio de Janeiro iconic landmarks and beaches" />
             <meta property="og:locale" content="en_US" />
             <meta property="og:site_name" content="Tocorime Rio" />
@@ -420,6 +428,11 @@ const BlogPost = () => {
             <meta property="og:description" content="Discover the ultimate guide to visiting Sugarloaf Mountain in Rio de Janeiro. Learn about the cable car, best times for breathtaking views, and insider tips. Book a private tour with Tocorime Rio for an unforgettable experience." />
             <meta property="og:url" content="https://tocorimerio.com/blog/visit-sugar-loaf-rio" />
             <meta property="og:image" content={ogImage} />
+            <meta property="og:image:secure_url" content={ogImage} />
+            <meta property="og:image:type" content="image/jpeg" />
+            <meta property="og:image:width" content="1200" />
+            <meta property="og:image:height" content="630" />
+            <meta property="og:image:alt" content={post.featured_image_alt || title} />
             <meta property="og:locale" content="en_US" />
             <meta property="og:site_name" content="Tocorime Rio" />
 
@@ -444,6 +457,11 @@ const BlogPost = () => {
             <meta property="og:description" content="Learn how to hire a safe and professional tour guide in Rio de Janeiro and avoid scams. Get tips on verifying credentials, checking reviews, and choosing private tours for a secure and enjoyable trip with Tocorime Rio." />
             <meta property="og:url" content="https://tocorimerio.com/blog/how-to-hire-a-safe-tour-guide-in-rio-de-janeiro-without-getting-scammed" />
             <meta property="og:image" content={ogImage} />
+            <meta property="og:image:secure_url" content={ogImage} />
+            <meta property="og:image:type" content="image/jpeg" />
+            <meta property="og:image:width" content="1200" />
+            <meta property="og:image:height" content="630" />
+            <meta property="og:image:alt" content={post.featured_image_alt || title} />
             <meta property="og:locale" content="en_US" />
             <meta property="og:site_name" content="Tocorime Rio" />
 
@@ -468,6 +486,11 @@ const BlogPost = () => {
             <meta property="og:description" content="Experience the thrill of Maracanã Stadium! This guide helps you get tickets for live football matches in Rio, navigate safely, and enjoy the electric atmosphere. Find out how Tocorime Rio can assist with your Maracanã experience." />
             <meta property="og:url" content="https://tocorimerio.com/blog/how-to-get-tickets-for-maracana-the-comp" />
             <meta property="og:image" content={ogImage} />
+            <meta property="og:image:secure_url" content={ogImage} />
+            <meta property="og:image:type" content="image/jpeg" />
+            <meta property="og:image:width" content="1200" />
+            <meta property="og:image:height" content="630" />
+            <meta property="og:image:alt" content={post.featured_image_alt || title} />
             <meta property="og:locale" content="en_US" />
             <meta property="og:site_name" content="Tocorime Rio" />
 
@@ -498,6 +521,7 @@ const BlogPost = () => {
             <meta property="og:description" content={SOCIAL_SEO[post.slug].description} />
             <meta property="og:image" content={ogImage} />
             <meta property="og:image:secure_url" content={ogImage} />
+            <meta property="og:image:type" content="image/jpeg" />
             <meta property="og:image:width" content="1200" />
             <meta property="og:image:height" content="630" />
             <meta property="og:image:alt" content={post.featured_image_alt || SOCIAL_SEO[post.slug].imageAlt} />
@@ -557,6 +581,11 @@ const BlogPost = () => {
             <meta property="og:title" content={`${title} | ${siteTitle}`} />
             <meta property="og:description" content={generateOptimizedMetaDescription(excerpt || content || title, title, language)} />
             <meta property="og:image" content={ogImage} />
+            <meta property="og:image:secure_url" content={ogImage} />
+            <meta property="og:image:type" content="image/jpeg" />
+            <meta property="og:image:width" content="1200" />
+            <meta property="og:image:height" content="630" />
+            <meta property="og:image:alt" content={post.featured_image_alt || title} />
             <meta property="og:site_name" content="Tocorime Rio" />
             <meta property="og:locale" content={language === 'pt' ? 'pt_BR' : language === 'es' ? 'es_ES' : 'en_US'} />
             {post.created_at && <meta property="article:published_time" content={post.created_at} />}
