@@ -262,7 +262,8 @@ const App = ({ queryClient: externalQueryClient }: { queryClient?: QueryClient }
                         <Route path="analytics" element={<AdminAnalytics />} />
 
                       </Route>
-                      <Route path="*" element={<Navigate to="/" replace />} />
+                      <Route path="/404" element={<NotFound />} />
+                      <Route path="*" element={<NotFound />} />
                     </Routes>
                     </RouteFader>
                   </Suspense>
