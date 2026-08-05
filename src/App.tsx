@@ -10,6 +10,7 @@ import { AuthProvider } from "@/hooks/useAuth";
 import { LocaleProvider } from "@/contexts/LocaleContext";
 import { CurrencyProvider } from "@/contexts/CurrencyContext";
 import { CartProvider } from "@/contexts/CartContext";
+import { SchemaGuard } from "./components/SchemaGuard";
 import { ThemeApplier } from "./components/ThemeApplier";
 import { useAnalytics } from "./hooks/useAnalytics";
 import { usePerfMetrics } from "./hooks/usePerfMetrics";
@@ -181,6 +182,7 @@ const App = ({ queryClient: externalQueryClient }: { queryClient?: QueryClient }
               <LocaleProvider>
                 <CartProvider>
                   <AnalyticsTracker />
+                  <SchemaGuard />
                   <PerfMetricsTracker />
                   {/* UI shell: no fallback to avoid layout shift */}
                   <Suspense fallback={null}>
