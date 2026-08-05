@@ -1425,17 +1425,17 @@
     </image:image>
   </url>
   <url>
-    <loc>https://tocorimerio.com/blog/boutique-hotels-rio-rooftops-vista-privada</loc>
-    <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1785031883321_2chm7rqrbj9.webp</image:loc>
-      <image:caption>Rooftops em hotéis boutique do Rio: onde tomar drinks com vista privada</image:caption>
-    </image:image>
-  </url>
-  <url>
     <loc>https://tocorimerio.com/blog/carnaval-rio-guia-definitivo</loc>
     <image:image>
       <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1775696779659_sdj1p6tvg3a.png</image:loc>
       <image:caption>Carnaval no Rio: O Guia Definitivo para Aproveitar como um Carioca</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://tocorimerio.com/blog/boutique-hotels-rio-rooftops-vista-privada</loc>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1785031883321_2chm7rqrbj9.webp</image:loc>
+      <image:caption>Rooftops em hotéis boutique do Rio: onde tomar drinks com vista privada</image:caption>
     </image:image>
   </url>
   <url>
@@ -1628,17 +1628,17 @@
     </image:image>
   </url>
   <url>
-    <loc>https://tocorimerio.com/blog/where-to-watch-the-2026-world-cup-in-rio</loc>
-    <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1779149093302_9dvl0y6ueo7.webp</image:loc>
-      <image:caption>Copa do Mundo 2026 em Rio de Janeiro: Fan Fests, melhores bares, onde ficar e guia completo</image:caption>
-    </image:image>
-  </url>
-  <url>
     <loc>https://tocorimerio.com/blog/tours-in-lapa</loc>
     <image:image>
       <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1785445575512_xwibug08d4o.webp</image:loc>
       <image:caption>Passeios em Lapa: coração histórico de Rio durante o dia, capital do samba à noite</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://tocorimerio.com/blog/where-to-watch-the-2026-world-cup-in-rio</loc>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1779149093302_9dvl0y6ueo7.webp</image:loc>
+      <image:caption>Copa do Mundo 2026 em Rio de Janeiro: Fan Fests, melhores bares, onde ficar e guia completo</image:caption>
     </image:image>
   </url>
   <url>
@@ -1663,6 +1663,13 @@
     </image:image>
   </url>
   <url>
+    <loc>https://tocorimerio.com/blog/sunset-in-rio-de-janeiro-guide</loc>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1785798054675_ruab49a7nyk.webp</image:loc>
+      <image:caption>Pôr do sol em Rio de Janeiro: um guia prático dos melhores mirantes da cidade</image:caption>
+    </image:image>
+  </url>
+  <url>
     <loc>https://tocorimerio.com/blog/arraial-do-cabo-boat-trip</loc>
     <image:image>
       <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776136539659_dhflxgmz62g.webp</image:loc>
@@ -1674,6 +1681,13 @@
     <image:image>
       <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776155669769_oliiwanq76n.webp</image:loc>
       <image:caption>Rio de Janeiro com crianças: um roteiro familiar de 3 dias que não cansa ninguém</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://tocorimerio.com/blog/sunset-rio-de-janeiro-golden-hour-experience</loc>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1785798318525_r8nwn96irn.webp</image:loc>
+      <image:caption>Pôr do sol em Rio de Janeiro: a hora dourada que você nunca esquecerá</image:caption>
     </image:image>
   </url>
   <url>
@@ -1695,6 +1709,13 @@
     <image:image>
       <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776810844363_vu866taa8ln.webp</image:loc>
       <image:caption>Tour Privado Rio de Janeiro: O Guia Completo para Passeios Personalizados</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://tocorimerio.com/blog/the-nfl-is-coming-to-rio-de-janeiro-everything-to-know-about-the-2026-rio-game</loc>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1785810368885_7xcsnhtr0f6.webp</image:loc>
+      <image:caption>A NFL está chegando ao Rio de Janeiro: tudo para saber sobre o jogo Rio de 2026</image:caption>
     </image:image>
   </url>
   <url>
