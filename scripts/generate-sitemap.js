@@ -85,6 +85,7 @@ async function generateSitemap() {
       { url: '/flamengo-x-vasco-maracana', priority: 0.8, changefreq: 'daily' },
       { url: '/fluminense-bolivar-libertadores', priority: 0.8, changefreq: 'daily' },
       { url: '/brasil-x-panama-maio-maracana', priority: 0.8, changefreq: 'daily' },
+      { url: '/fluminense-indenpediente-rivadavia-libertadores-maracana', priority: 0.8, changefreq: 'daily' },
     ];
 
     const escapeXml = (s) => String(s || '')

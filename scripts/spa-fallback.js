@@ -110,6 +110,7 @@ async function run() {
     '/flamengo-x-vasco-maracana',
     '/fluminense-bolivar-libertadores',
     '/brasil-x-panama-maio-maracana',
+    '/fluminense-indenpediente-rivadavia-libertadores-maracana',
     '/sobre',
     '/contato',
     '/carrinho',
