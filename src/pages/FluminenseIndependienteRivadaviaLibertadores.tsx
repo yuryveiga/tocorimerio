@@ -491,7 +491,7 @@ const FluminenseIndependienteRivadaviaLibertadores = () => {
       ? 'Olá! Tenho interesse no pacote Fluminense x Independiente Rivadavia Libertadores. Pode me ajudar?'
       : lang === 'es'
       ? '¡Hola! Me interesa el paquete Fluminense vs Independiente Rivadavia Libertadores. ¿Pueden ayudarme?'
-      : 'Hello! I'm interested in the Fluminense vs Independiente Rivadavia Libertadores package. Can you help me?'
+      : "Hello! I'm interested in the Fluminense vs Independiente Rivadavia Libertadores package. Can you help me?"
   )}`;
 
   return (
