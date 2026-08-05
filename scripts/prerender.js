@@ -121,7 +121,8 @@ async function fetchDynamicRoutes() {
     '/one-day',
     '/flamengo-x-vasco-maracana',
     '/fluminense-bolivar-libertadores',
-    '/brasil-x-panama-maio-maracana'
+    '/brasil-x-panama-maio-maracana',
+    '/fluminense-indenpediente-rivadavia-libertadores-maracana'
   ];
 
   console.log('Fetching dynamic routes from Supabase...');
