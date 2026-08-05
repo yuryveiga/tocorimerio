@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 
 const REDIRECT_SECONDS = 8;
@@ -33,7 +33,6 @@ const MESSAGES = [
 
 const NotFound = () => {
   const location = useLocation();
-  const navigate = useNavigate();
   const [count, setCount] = useState(REDIRECT_SECONDS);
 
   useEffect(() => {
@@ -41,10 +40,10 @@ const NotFound = () => {
   }, [location.pathname]);
 
   useEffect(() => {
-    if (count <= 0) { navigate("/"); return; }
+    if (count <= 0) { window.location.href = "/"; return; }
     const id = setTimeout(() => setCount(c => c - 1), 1000);
     return () => clearTimeout(id);
-  }, [count, navigate]);
+  }, [count]);
 
   const progress = ((REDIRECT_SECONDS - count) / REDIRECT_SECONDS) * 100;
 
