@@ -18,7 +18,7 @@ import { Button } from "@/components/ui/button";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 import "react-quill-new/dist/quill.snow.css";
 import { OptimizedImage } from "@/components/OptimizedImage";
-import { getCanonicalUrl, generateOptimizedMetaDescription, getHreflangLinks, generateArticleSchema, generateBreadcrumbsSchema } from "@/utils/seo";
+import { getCanonicalUrl, generateOptimizedMetaDescription, getHreflangLinks, generateArticleSchema, generateBreadcrumbsSchema, getOgImage } from "@/utils/seo";
 import { BlogPostRating } from "@/components/BlogPostRating";
 
 const InlineCTA = () => {
@@ -141,6 +141,8 @@ const BlogPost = () => {
   const title = getTranslated('title');
   const rawContent = getTranslated('content');
   const excerpt = getTranslated('excerpt');
+  // Imagem Open Graph 1200x630 gerada automaticamente (com fallback para a imagem padrão do site)
+  const ogImage = getOgImage(post.image_url || fallbackImage);
 
   // Fix line breaks for hyphenated words and non-breaking spaces
   // 1. Replace non-breaking spaces (nbsp) with normal spaces to allow correct wrapping
@@ -291,7 +293,7 @@ const BlogPost = () => {
             <meta property="og:title" content="Rocinha Favela Tour Rio: Safe, Fun & Eye-Opening Guide" />
             <meta property="og:description" content="Is a Rocinha favela tour safe? Discover Rio's most authentic cultural experience with local expert guides. Private tours, real community access, no tourist traps." />
             <meta property="og:url" content="https://tocorimerio.com/blog/rocinha-favela-tour-rio-de-janeiro" />
-            <meta property="og:image" content={`${getCanonicalUrl("")}/og-image.jpg`} />
+            <meta property="og:image" content={ogImage} />
             <meta property="og:image:alt" content="Guided favela tour in Rocinha, Rio de Janeiro with local expert" />
             <meta property="og:locale" content="en_US" />
             <meta property="og:site_name" content="Tocorime Rio" />
@@ -302,7 +304,7 @@ const BlogPost = () => {
             <meta name="twitter:card" content="summary_large_image" />
             <meta name="twitter:title" content="Rocinha Favela Tour Rio: Safe, Fun & Eye-Opening Guide" />
             <meta name="twitter:description" content="Is a Rocinha favela tour safe? Discover Rio's most authentic cultural experience with local expert guides. Private tours, real community access, no tourist traps." />
-            <meta name="twitter:image" content={`${getCanonicalUrl("")}/og-image.jpg`} />
+            <meta name="twitter:image" content={ogImage} />
 
             <script type="application/ld+json">
               {`
@@ -347,7 +349,7 @@ const BlogPost = () => {
             <meta property="og:title" content="Why Visit Rio de Janeiro? 10 Reasons to Fall in Love With the City" />
             <meta property="og:description" content="Discover 10 compelling reasons to visit Rio de Janeiro, from iconic Christ the Redeemer and stunning beaches to vibrant culture and thrilling football. Plan your unforgettable trip to the Marvelous City with local insights." />
             <meta property="og:url" content="https://tocorimerio.com/blog/visit-rio-de-janeiro" />
-            <meta property="og:image" content={post.image_url || `${getCanonicalUrl("")}/og-image.jpg`} />
+            <meta property="og:image" content={ogImage} />
             <meta property="og:image:alt" content="Rio de Janeiro iconic landmarks and beaches" />
             <meta property="og:locale" content="en_US" />
             <meta property="og:site_name" content="Tocorime Rio" />
@@ -369,7 +371,7 @@ const BlogPost = () => {
             <meta name="twitter:card" content="summary_large_image" />
             <meta name="twitter:title" content="Why Visit Rio de Janeiro? 10 Reasons to Fall in Love With the City" />
             <meta name="twitter:description" content="Discover 10 compelling reasons to visit Rio de Janeiro, from iconic Christ the Redeemer and stunning beaches to vibrant culture and thrilling football. Plan your unforgettable trip to the Marvelous City with local insights." />
-            <meta name="twitter:image" content={post.image_url || `${getCanonicalUrl("")}/og-image.jpg`} />
+            <meta name="twitter:image" content={ogImage} />
 
             <script type="application/ld+json">
               {JSON.stringify({
@@ -377,7 +379,7 @@ const BlogPost = () => {
                 "@type": "BlogPosting",
                 "headline": "Why Visit Rio de Janeiro? 10 Reasons to Fall in Love With the City",
                 "description": "Discover 10 compelling reasons to visit Rio de Janeiro, from iconic Christ the Redeemer and stunning beaches to vibrant culture and thrilling football. Plan your unforgettable trip to the Marvelous City with local insights.",
-                "image": post.image_url || `${getCanonicalUrl("")}/og-image.jpg`,
+                "image": ogImage,
                 "keywords": "Visit Rio de Janeiro, things to do Rio, Rio travel guide, Christ the Redeemer, Copacabana, Ipanema, Tijuca Forest, Rio culture, Rio football, safe travel Rio, Tocorime Rio",
                 "author": {
                   "@type": "Organization",
@@ -417,14 +419,14 @@ const BlogPost = () => {
             <meta property="og:title" content="Visit Sugarloaf Mountain Rio: Ultimate Guide & Private Tours" />
             <meta property="og:description" content="Discover the ultimate guide to visiting Sugarloaf Mountain in Rio de Janeiro. Learn about the cable car, best times for breathtaking views, and insider tips. Book a private tour with Tocorime Rio for an unforgettable experience." />
             <meta property="og:url" content="https://tocorimerio.com/blog/visit-sugar-loaf-rio" />
-            <meta property="og:image" content={post.image_url || fallbackImage} />
+            <meta property="og:image" content={ogImage} />
             <meta property="og:locale" content="en_US" />
             <meta property="og:site_name" content="Tocorime Rio" />
 
             <meta name="twitter:card" content="summary_large_image" />
             <meta name="twitter:title" content="Visit Sugarloaf Mountain Rio: Ultimate Guide & Private Tours" />
             <meta name="twitter:description" content="Discover the ultimate guide to visiting Sugarloaf Mountain in Rio de Janeiro. Learn about the cable car, best times for breathtaking views, and insider tips. Book a private tour with Tocorime Rio for an unforgettable experience." />
-            <meta name="twitter:image" content={post.image_url || fallbackImage} />
+            <meta name="twitter:image" content={ogImage} />
             {getHreflangLinks(`/blog/visit-sugar-loaf-rio`).map((l) => (
               <link key={l.hreflang} rel="alternate" hrefLang={l.hreflang} href={l.href} />
             ))}
@@ -441,14 +443,14 @@ const BlogPost = () => {
             <meta property="og:title" content="How to Hire a Safe Tour Guide in Rio de Janeiro Without Getting Scammed" />
             <meta property="og:description" content="Learn how to hire a safe and professional tour guide in Rio de Janeiro and avoid scams. Get tips on verifying credentials, checking reviews, and choosing private tours for a secure and enjoyable trip with Tocorime Rio." />
             <meta property="og:url" content="https://tocorimerio.com/blog/how-to-hire-a-safe-tour-guide-in-rio-de-janeiro-without-getting-scammed" />
-            <meta property="og:image" content={post.image_url || fallbackImage} />
+            <meta property="og:image" content={ogImage} />
             <meta property="og:locale" content="en_US" />
             <meta property="og:site_name" content="Tocorime Rio" />
 
             <meta name="twitter:card" content="summary_large_image" />
             <meta name="twitter:title" content="How to Hire a Safe Tour Guide in Rio de Janeiro Without Getting Scammed" />
             <meta name="twitter:description" content="Learn how to hire a safe and professional tour guide in Rio de Janeiro and avoid scams. Get tips on verifying credentials, checking reviews, and choosing private tours for a secure and enjoyable trip with Tocorime Rio." />
-            <meta name="twitter:image" content={post.image_url || fallbackImage} />
+            <meta name="twitter:image" content={ogImage} />
             {getHreflangLinks(`/blog/how-to-hire-a-safe-tour-guide-in-rio-de-janeiro-without-getting-scammed`).map((l) => (
               <link key={l.hreflang} rel="alternate" hrefLang={l.hreflang} href={l.href} />
             ))}
@@ -465,14 +467,14 @@ const BlogPost = () => {
             <meta property="og:title" content="How to Get Tickets for Maracanã Stadium: The Complete Guide" />
             <meta property="og:description" content="Experience the thrill of Maracanã Stadium! This guide helps you get tickets for live football matches in Rio, navigate safely, and enjoy the electric atmosphere. Find out how Tocorime Rio can assist with your Maracanã experience." />
             <meta property="og:url" content="https://tocorimerio.com/blog/how-to-get-tickets-for-maracana-the-comp" />
-            <meta property="og:image" content={post.image_url || fallbackImage} />
+            <meta property="og:image" content={ogImage} />
             <meta property="og:locale" content="en_US" />
             <meta property="og:site_name" content="Tocorime Rio" />
 
             <meta name="twitter:card" content="summary_large_image" />
             <meta name="twitter:title" content="How to Get Tickets for Maracanã Stadium: The Complete Guide" />
             <meta name="twitter:description" content="Experience the thrill of Maracanã Stadium! This guide helps you get tickets for live football matches in Rio, navigate safely, and enjoy the electric atmosphere. Find out how Tocorime Rio can assist with your Maracanã experience." />
-            <meta name="twitter:image" content={post.image_url || fallbackImage} />
+            <meta name="twitter:image" content={ogImage} />
             {getHreflangLinks(`/blog/how-to-get-tickets-for-maracana-the-comp`).map((l) => (
               <link key={l.hreflang} rel="alternate" hrefLang={l.hreflang} href={l.href} />
             ))}
@@ -494,8 +496,8 @@ const BlogPost = () => {
             <meta property="og:url" content={getCanonicalUrl(`/blog/${post.slug}`)} />
             <meta property="og:title" content={SOCIAL_SEO[post.slug].title} />
             <meta property="og:description" content={SOCIAL_SEO[post.slug].description} />
-            <meta property="og:image" content={post.image_url || fallbackImage} />
-            <meta property="og:image:secure_url" content={post.image_url || fallbackImage} />
+            <meta property="og:image" content={ogImage} />
+            <meta property="og:image:secure_url" content={ogImage} />
             <meta property="og:image:width" content="1200" />
             <meta property="og:image:height" content="630" />
             <meta property="og:image:alt" content={post.featured_image_alt || SOCIAL_SEO[post.slug].imageAlt} />
@@ -509,14 +511,14 @@ const BlogPost = () => {
             <meta name="twitter:site" content="@tocorimerio" />
             <meta name="twitter:title" content={SOCIAL_SEO[post.slug].title} />
             <meta name="twitter:description" content={SOCIAL_SEO[post.slug].description} />
-            <meta name="twitter:image" content={post.image_url || fallbackImage} />
+            <meta name="twitter:image" content={ogImage} />
             <meta name="twitter:image:alt" content={post.featured_image_alt || SOCIAL_SEO[post.slug].imageAlt} />
 
             <script type="application/ld+json">
               {JSON.stringify(generateArticleSchema({
                 title: SOCIAL_SEO[post.slug].title,
                 description: SOCIAL_SEO[post.slug].description,
-                imageUrl: post.image_url || fallbackImage,
+                imageUrl: ogImage,
                 url: getCanonicalUrl(`/blog/${post.slug}`),
                 datePublished: post.created_at,
                 dateModified: post.updated_at || post.created_at,
@@ -554,7 +556,7 @@ const BlogPost = () => {
             <meta property="og:url" content={getCanonicalUrl(`/blog/${post.slug}`)} />
             <meta property="og:title" content={`${title} | ${siteTitle}`} />
             <meta property="og:description" content={generateOptimizedMetaDescription(excerpt || content || title, title, language)} />
-            <meta property="og:image" content={post.image_url || fallbackImage} />
+            <meta property="og:image" content={ogImage} />
             <meta property="og:site_name" content="Tocorime Rio" />
             <meta property="og:locale" content={language === 'pt' ? 'pt_BR' : language === 'es' ? 'es_ES' : 'en_US'} />
             {post.created_at && <meta property="article:published_time" content={post.created_at} />}
@@ -564,7 +566,7 @@ const BlogPost = () => {
               {JSON.stringify(generateArticleSchema({
                 title,
                 description: excerpt || title,
-                imageUrl: post.image_url || fallbackImage,
+                imageUrl: ogImage,
                 url: getCanonicalUrl(`/blog/${post.slug}`),
                 datePublished: post.created_at,
                 dateModified: post.updated_at || post.created_at,
@@ -587,7 +589,7 @@ const BlogPost = () => {
             <meta name="twitter:card" content="summary_large_image" />
             <meta name="twitter:title" content={`${title} | ${siteTitle}`} />
             <meta name="twitter:description" content={excerpt || title} />
-            <meta name="twitter:image" content={post.image_url || fallbackImage} />
+            <meta name="twitter:image" content={ogImage} />
           </>
         )}
 
