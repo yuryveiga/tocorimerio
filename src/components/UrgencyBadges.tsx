@@ -90,7 +90,6 @@ export function UrgencyBadges({ tourId, tourSlug }: Props) {
   useEffect(() => {
     let cancelled = false;
     const fetchWeek = async () => {
-      const weekAgo = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString();
       const { data: count } = await supabase.rpc("count_recent_bookings", { _tour_id: tourId, _days: 7 });
       if (!cancelled) setWeekBookings((count as number) || 0);
     };
@@ -102,7 +101,6 @@ export function UrgencyBadges({ tourId, tourSlug }: Props) {
   useEffect(() => {
     let cancelled = false;
     const fetchRecent = async () => {
-      const since = new Date(Date.now() - 48 * 60 * 60 * 1000).toISOString();
       const { data } = await supabase.rpc("recent_sales_public", { _tour_id: tourId, _hours: 48 });
       if (!cancelled) setRecentSales((data as RecentSale[]) || []);
     };
