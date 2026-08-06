@@ -154,7 +154,7 @@ const CheckoutSuccess = () => {
       try {
         const saleIds = JSON.parse(saleIdsStr);
         supabase.functions.invoke("sync-stripe", { body: { limit: 20, saleIds } }).catch(() => {});
-        const { data, error } = await supabase.from("sales").select("*").in("id", saleIds);
+        const { data, error } = await supabase.rpc("get_sales_by_ids", { _ids: saleIds });
         if (error) throw error;
         if (data) {
           setSales(data as unknown as LovableSale[]);
@@ -192,10 +192,10 @@ const CheckoutSuccess = () => {
     setSubmitting(true);
     try {
       for (const saleId in participants) {
-        const { error } = await supabase
-          .from("sales")
-          .update({ passengers_json: participants[saleId] as any })
-          .eq("id", saleId);
+        const { error } = await supabase.rpc("set_sale_passengers", {
+          _id: saleId,
+          _passengers: participants[saleId] as any,
+        });
         if (error) throw error;
       }
       toast.success(tr.success);

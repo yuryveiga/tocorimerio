@@ -90,14 +90,8 @@ export function UrgencyBadges({ tourId, tourSlug }: Props) {
   useEffect(() => {
     let cancelled = false;
     const fetchWeek = async () => {
-      const weekAgo = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString();
-      const { count } = await supabase
-        .from("sales")
-        .select("id", { count: "exact", head: true })
-        .eq("tour_id", tourId)
-        .eq("is_cancelled", false)
-        .gte("created_at", weekAgo);
-      if (!cancelled) setWeekBookings(count || 0);
+      const { data: count } = await supabase.rpc("count_recent_bookings", { _tour_id: tourId, _days: 7 });
+      if (!cancelled) setWeekBookings((count as number) || 0);
     };
     fetchWeek();
     return () => { cancelled = true; };
@@ -107,15 +101,7 @@ export function UrgencyBadges({ tourId, tourSlug }: Props) {
   useEffect(() => {
     let cancelled = false;
     const fetchRecent = async () => {
-      const since = new Date(Date.now() - 48 * 60 * 60 * 1000).toISOString();
-      const { data } = await supabase
-        .from("sales")
-        .select("customer_name, created_at")
-        .eq("tour_id", tourId)
-        .eq("is_cancelled", false)
-        .gte("created_at", since)
-        .order("created_at", { ascending: false })
-        .limit(5);
+      const { data } = await supabase.rpc("recent_sales_public", { _tour_id: tourId, _hours: 48 });
       if (!cancelled) setRecentSales((data as RecentSale[]) || []);
     };
     fetchRecent();
