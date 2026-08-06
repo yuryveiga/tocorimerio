@@ -841,6 +841,41 @@ export type Database = {
     }
     Functions: {
       auto_archive_sales: { Args: never; Returns: undefined }
+      count_recent_bookings: {
+        Args: { _days?: number; _tour_id: string }
+        Returns: number
+      }
+      get_sales_by_ids: {
+        Args: { _ids: string[] }
+        Returns: {
+          created_at: string | null
+          currency: string | null
+          customer_email: string
+          customer_name: string
+          customer_phone: string | null
+          emails_sent: boolean
+          id: string
+          is_archived: boolean | null
+          is_cancelled: boolean | null
+          is_paid: boolean | null
+          is_private: boolean | null
+          passengers_json: Json | null
+          provider: string | null
+          quantity: number | null
+          selected_date: string | null
+          selected_period: string | null
+          total_price: number | null
+          tour_id: string
+          tour_slug: string | null
+          tour_title: string | null
+        }[]
+        SetofOptions: {
+          from: "*"
+          to: "sales"
+          isOneToOne: false
+          isSetofReturn: true
+        }
+      }
       has_role:
         | {
             Args: {
@@ -850,6 +885,17 @@ export type Database = {
             Returns: boolean
           }
         | { Args: { _role: string; _user_id: string }; Returns: boolean }
+      recent_sales_public: {
+        Args: { _hours?: number; _tour_id: string }
+        Returns: {
+          created_at: string
+          customer_name: string
+        }[]
+      }
+      set_sale_passengers: {
+        Args: { _id: string; _passengers: Json }
+        Returns: undefined
+      }
     }
     Enums: {
       app_role: "admin" | "user"
