@@ -144,6 +144,15 @@ const BlogPost = () => {
   // Imagem Open Graph 1200x630 gerada automaticamente (com fallback para a imagem padrão do site)
   const ogImage = getOgImage(post.image_url || fallbackImage);
 
+  // SEO overrides (title/description escritos manualmente para CTR no Google).
+  // Só usados em inglês, que é o idioma indexado das páginas do blog.
+  const metaTitleOverride = language === 'en'
+    ? ((post as unknown as { meta_title_en?: string }).meta_title_en || '').trim()
+    : '';
+  const metaDescOverride = language === 'en'
+    ? ((post as unknown as { meta_description?: string }).meta_description || '').trim()
+    : '';
+
   // Fix line breaks for hyphenated words and non-breaking spaces
   // 1. Replace non-breaking spaces (nbsp) with normal spaces to allow correct wrapping
   // 2. Remove soft hyphens that cause incorrect syllable splitting
