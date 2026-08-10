@@ -438,9 +438,12 @@ export function PasseioDetalhe() {
         )}
         {/* meta_description_en allows an exact custom meta description (overrides auto-generation+CTA) */}
         <meta name="description" content={(tour as unknown as { meta_description_en?: string }).meta_description_en || generateOptimizedMetaDescription(translatedShortDesc, translatedTitle, language)} />
-        {(tour as unknown as { meta_keywords?: string }).meta_keywords && (
-          <meta name="keywords" content={(tour as unknown as { meta_keywords?: string }).meta_keywords} />
-        )}
+        {(() => {
+          const kw = tour as unknown as { meta_keywords?: string; meta_keywords_pt?: string; meta_keywords_es?: string };
+          const localized = language === "pt" ? kw.meta_keywords_pt : language === "es" ? kw.meta_keywords_es : undefined;
+          const value = localized || kw.meta_keywords;
+          return value ? <meta name="keywords" content={value} /> : null;
+        })()}
 
         
         {/* Open Graph / Facebook */}

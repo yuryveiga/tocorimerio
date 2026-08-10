@@ -568,9 +568,12 @@ const BlogPost = () => {
             <title>{metaTitleOverride || `${title} | ${siteTitle}`}</title>
             <meta name="description" content={metaDescOverride || generateOptimizedMetaDescription(excerpt || content || title, title, language)} />
             <meta name="robots" content="index, follow" />
-            {(post as unknown as { meta_keywords?: string }).meta_keywords && (
-              <meta name="keywords" content={(post as unknown as { meta_keywords?: string }).meta_keywords} />
-            )}
+            {(() => {
+              const kw = post as unknown as { meta_keywords?: string; meta_keywords_pt?: string; meta_keywords_es?: string };
+              const localized = language === "pt" ? kw.meta_keywords_pt : language === "es" ? kw.meta_keywords_es : undefined;
+              const value = localized || kw.meta_keywords;
+              return value ? <meta name="keywords" content={value} /> : null;
+            })()}
 
             {/* Canonical must appear before OG to make the signal unambiguous for crawlers */}
             <link rel="canonical" href={getCanonicalUrl(`/blog/${post.slug}`)} />
