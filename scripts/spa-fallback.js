@@ -124,7 +124,7 @@ async function run() {
       const supabase = createClient(url, key);
       const [{ data: tours }, { data: posts }, { data: pages }] = await Promise.all([
         supabase.from('tours').select('id, slug, category, is_active'),
-        supabase.from('blog_posts').select('slug, title, title_en, excerpt, excerpt_en, image_url, featured_image_alt').eq('is_published', true),
+        supabase.from('blog_posts').select('slug, title, title_en, meta_title_en, meta_description, excerpt, excerpt_en, image_url, featured_image_alt').eq('is_published', true),
         supabase.from('pages').select('href').eq('is_visible', true),
       ]);
       (tours || []).filter(t => t.is_active !== false).forEach(t => {
@@ -140,8 +140,8 @@ async function run() {
         routes.add(route);
         const title = p.title_en || p.title || 'Tocorime Rio';
         postMeta.set(route, {
-          title: `${title} | Tocorime Rio`,
-          description: p.excerpt_en || p.excerpt || title,
+          title: (p.meta_title_en || '').trim() || `${title} | Tocorime Rio`,
+          description: (p.meta_description || '').trim() || p.excerpt_en || p.excerpt || title,
           url: `${SITE}${route}`,
           image: ogImage(p.image_url),
           imageAlt: p.featured_image_alt || title,
