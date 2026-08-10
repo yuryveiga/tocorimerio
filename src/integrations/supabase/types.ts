@@ -71,6 +71,8 @@ export type Database = {
           is_published: boolean
           meta_description: string | null
           meta_keywords: string | null
+          meta_keywords_es: string | null
+          meta_keywords_pt: string | null
           meta_title_en: string | null
           slug: string
           tags: string[] | null
@@ -99,6 +101,8 @@ export type Database = {
           is_published?: boolean
           meta_description?: string | null
           meta_keywords?: string | null
+          meta_keywords_es?: string | null
+          meta_keywords_pt?: string | null
           meta_title_en?: string | null
           slug: string
           tags?: string[] | null
@@ -127,6 +131,8 @@ export type Database = {
           is_published?: boolean
           meta_description?: string | null
           meta_keywords?: string | null
+          meta_keywords_es?: string | null
+          meta_keywords_pt?: string | null
           meta_title_en?: string | null
           slug?: string
           tags?: string[] | null
@@ -627,6 +633,8 @@ export type Database = {
           meeting_point_address_zh_tw: string | null
           meta_description_en: string | null
           meta_keywords: string | null
+          meta_keywords_es: string | null
+          meta_keywords_pt: string | null
           meta_title_en: string | null
           price: number
           price_1_person: number | null
@@ -709,6 +717,8 @@ export type Database = {
           meeting_point_address_zh_tw?: string | null
           meta_description_en?: string | null
           meta_keywords?: string | null
+          meta_keywords_es?: string | null
+          meta_keywords_pt?: string | null
           meta_title_en?: string | null
           price?: number
           price_1_person?: number | null
@@ -791,6 +801,8 @@ export type Database = {
           meeting_point_address_zh_tw?: string | null
           meta_description_en?: string | null
           meta_keywords?: string | null
+          meta_keywords_es?: string | null
+          meta_keywords_pt?: string | null
           meta_title_en?: string | null
           price?: number
           price_1_person?: number | null
