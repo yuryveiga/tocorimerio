@@ -19,6 +19,7 @@ import {
 import { Loader2, Users, Eye, Globe, MousePointer2, Link2, Repeat, Map, BookOpen } from "lucide-react";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { BlogRatingsPanel } from "@/components/admin/BlogRatingsPanel";
+import { EmailLeadsPanel } from "@/components/admin/EmailLeadsPanel";
 import { GA4ComparisonPanel } from "@/components/admin/GA4ComparisonPanel";
 
 type Visit = {
@@ -316,6 +317,7 @@ const AdminAnalytics = () => {
           <TabsTrigger value="visits">Visitas</TabsTrigger>
           <TabsTrigger value="ratings">Avaliações do Blog</TabsTrigger>
           <TabsTrigger value="ga4">GA4 vs Nativo</TabsTrigger>
+         <TabsTrigger value="leads">Leads</TabsTrigger>
         </TabsList>
 
         <TabsContent value="visits" className="space-y-8">
@@ -581,6 +583,10 @@ const AdminAnalytics = () => {
 
         <TabsContent value="ga4">
           <GA4ComparisonPanel />
+        </TabsContent>
+
+        <TabsContent value="leads">
+          <EmailLeadsPanel />
         </TabsContent>
       </Tabs>
     </div>
