@@ -628,6 +628,40 @@ const BlogPost = () => {
           </>
         )}
 
+        {post.slug === "best-feijoada-rio-de-janeiro-tourists" && (
+          <script type="application/ld+json">
+            {JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "FAQPage",
+              mainEntity: [
+                {
+                  q: "Qual é a melhor feijoada do Rio de Janeiro?",
+                  a: "As melhores feijoadas do Rio estão nos botequins tradicionais que cozinham o feijão no mesmo dia, geralmente às quartas-feiras e aos sábados, na Lapa, Santa Teresa, Glória e Centro.",
+                },
+                {
+                  q: "Qual dia da semana tem feijoada no Rio de Janeiro?",
+                  a: "Sábado é o dia clássico da feijoada no Rio, e muitos botequins também servem às quartas-feiras.",
+                },
+                {
+                  q: "Quanto custa uma feijoada no Rio de Janeiro?",
+                  a: "Uma porção individual costuma custar entre R$ 60 e R$ 120, e as porções para duas pessoas ficam entre R$ 110 e R$ 200.",
+                },
+                {
+                  q: "O que acompanha a feijoada?",
+                  a: "Arroz branco, couve refogada, farofa, laranja em rodelas e molho de pimenta, com chopp gelado ou caipirinha para beber.",
+                },
+                {
+                  q: "Existe feijoada vegetariana no Rio?",
+                  a: "Sim. Vários restaurantes de Botafogo e Santa Teresa servem feijoada vegetariana, geralmente aos sábados.",
+                },
+              ].map((f) => ({
+                "@type": "Question",
+                name: f.q,
+                acceptedAnswer: { "@type": "Answer", text: f.a },
+              })),
+            })}
+          </script>
+        )}
 
         <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet" />
       </Helmet>
