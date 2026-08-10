@@ -174,6 +174,15 @@ async function run() {
   }
 
   let count = 0;
+  // Meta estático para landing pages fixas (crawlers não executam JS)
+  postMeta.set('/things-to-do-in-rio-de-janeiro', {
+    title: 'Things to Do in Rio de Janeiro: 2026 Local Guide & Tours',
+    description: 'What to do in Rio de Janeiro, chosen by local guides: Christ the Redeemer, Sugarloaf, hikes, favela and coffee tours. Book a private English-speaking guide.',
+    url: `${SITE}/things-to-do-in-rio-de-janeiro`,
+    image: ogImage(null),
+    imageAlt: 'Rio de Janeiro seen from a viewpoint',
+    type: 'website',
+  });
   routes.forEach(r => {
     const meta = postMeta.get(r);
     writeRoute(r, meta ? withMeta(indexHtml, meta) : undefined);
