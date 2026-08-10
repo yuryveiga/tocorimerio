@@ -145,6 +145,36 @@ export type Database = {
         }
         Relationships: []
       }
+      email_leads: {
+        Row: {
+          created_at: string
+          email: string
+          id: string
+          language: string | null
+          name: string | null
+          source_slug: string | null
+          source_url: string | null
+        }
+        Insert: {
+          created_at?: string
+          email: string
+          id?: string
+          language?: string | null
+          name?: string | null
+          source_slug?: string | null
+          source_url?: string | null
+        }
+        Update: {
+          created_at?: string
+          email?: string
+          id?: string
+          language?: string | null
+          name?: string | null
+          source_slug?: string | null
+          source_url?: string | null
+        }
+        Relationships: []
+      }
       matches: {
         Row: {
           attention_json: Json | null
