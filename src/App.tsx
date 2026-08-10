@@ -69,6 +69,7 @@ const Sitemap                = lazy(() => import("./pages/Sitemap"));
 const PasseiosCategoria      = lazy(() => import("./pages/PasseiosCategoria"));
 const Experiences            = lazy(() => import("./pages/Experiences"));
 const PrivateGuideRio        = lazy(() => import("./pages/PrivateGuideRio"));
+const ThingsToDoInRio        = lazy(() => import("./pages/ThingsToDoInRio"));
 
 const PageLoader = () => <div className="min-h-screen flex items-center justify-center bg-background"><div className="w-12 h-12 border-4 border-primary border-t-transparent rounded-full animate-spin" /></div>;
 
@@ -224,6 +225,7 @@ const App = ({ queryClient: externalQueryClient }: { queryClient?: QueryClient }
                       <Route path="/one-day" element={<PasseiosCategoria categoriaOverride="um-dia" pathOverride="/one-day" />} />
                       <Route path="/experiences" element={<Experiences />} />
                       <Route path="/your-private-guide-in-rio" element={<PrivateGuideRio />} />
+                      <Route path="/things-to-do-in-rio-de-janeiro" element={<ThingsToDoInRio />} />
                       <Route path="/passeio/:id" element={<PasseioDetalhe />} />
                       {/* Fix: accented/corrupted tour slugs that Google indexed without canonical */}
                       <Route path="/passeio/maracanã-matchday" element={<Navigate to="/passeio/maracana-matchday" replace />} />

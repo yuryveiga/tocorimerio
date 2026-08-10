@@ -106,6 +106,7 @@ async function run() {
     '/blog',
     '/passeio',
     '/our-tours',
+    '/things-to-do-in-rio-de-janeiro',
     '/maracana-calendario',
     '/flamengo-x-vasco-maracana',
     '/fluminense-bolivar-libertadores',
