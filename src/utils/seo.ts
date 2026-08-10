@@ -174,7 +174,8 @@ export const generateSportsEventSchema = (params: {
   "endDate": params.endDate || params.startDate,
   "eventStatus": "https://schema.org/EventScheduled",
   "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
-  "image": params.imageUrl,
+  // Google exige o campo "image" em Event — sempre preenchido (com fallback do site)
+  "image": [getOgImage(params.imageUrl)],
   "url": params.url,
   "location": {
     "@type": "Place",
