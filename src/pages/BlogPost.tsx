@@ -20,6 +20,7 @@ import "react-quill-new/dist/quill.snow.css";
 import { OptimizedImage } from "@/components/OptimizedImage";
 import { getCanonicalUrl, generateOptimizedMetaDescription, getHreflangLinks, generateArticleSchema, generateBreadcrumbsSchema, getOgImage } from "@/utils/seo";
 import { BlogPostRating } from "@/components/BlogPostRating";
+import { EmailCaptureCTA } from "@/components/EmailCaptureCTA";
 
 const InlineCTA = () => {
   const { t, language } = useLocale();
@@ -727,6 +728,8 @@ const BlogPost = () => {
                   </div>
                 </div>
 
+                <EmailCaptureCTA sourceSlug={post?.slug} />
+
                 {post?.id && <BlogPostRating postId={post.id} />}
 
                 {/* BLOG CTA BLOCK */}
@@ -873,7 +876,9 @@ const BlogPost = () => {
                 </div>
               </div>
 
-              {post?.id && <BlogPostRating postId={post.id} />}
+              <EmailCaptureCTA sourceSlug={post?.slug} />
+
+                {post?.id && <BlogPostRating postId={post.id} />}
 
               {/* BLOG CTA BLOCK */}
               <div className="mt-16 p-8 sm:p-12 rounded-2xl bg-gradient-to-br from-primary/10 via-primary/5 to-transparent border border-primary/20 text-center animate-fade-in shadow-inner relative overflow-hidden group">
