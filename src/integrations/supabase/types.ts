@@ -71,6 +71,7 @@ export type Database = {
           is_published: boolean
           meta_description: string | null
           meta_keywords: string | null
+          meta_title_en: string | null
           slug: string
           tags: string[] | null
           title: string
@@ -98,6 +99,7 @@ export type Database = {
           is_published?: boolean
           meta_description?: string | null
           meta_keywords?: string | null
+          meta_title_en?: string | null
           slug: string
           tags?: string[] | null
           title: string
@@ -125,6 +127,7 @@ export type Database = {
           is_published?: boolean
           meta_description?: string | null
           meta_keywords?: string | null
+          meta_title_en?: string | null
           slug?: string
           tags?: string[] | null
           title?: string

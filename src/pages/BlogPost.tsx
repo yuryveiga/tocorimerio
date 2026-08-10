@@ -144,6 +144,15 @@ const BlogPost = () => {
   // Imagem Open Graph 1200x630 gerada automaticamente (com fallback para a imagem padrão do site)
   const ogImage = getOgImage(post.image_url || fallbackImage);
 
+  // SEO overrides (title/description escritos manualmente para CTR no Google).
+  // Só usados em inglês, que é o idioma indexado das páginas do blog.
+  const metaTitleOverride = language === 'en'
+    ? ((post as unknown as { meta_title_en?: string }).meta_title_en || '').trim()
+    : '';
+  const metaDescOverride = language === 'en'
+    ? ((post as unknown as { meta_description?: string }).meta_description || '').trim()
+    : '';
+
   // Fix line breaks for hyphenated words and non-breaking spaces
   // 1. Replace non-breaking spaces (nbsp) with normal spaces to allow correct wrapping
   // 2. Remove soft hyphens that cause incorrect syllable splitting
@@ -556,8 +565,8 @@ const BlogPost = () => {
           </>
         ) : (
           <>
-            <title>{title} | {siteTitle}</title>
-            <meta name="description" content={generateOptimizedMetaDescription(excerpt || content || title, title, language)} />
+            <title>{metaTitleOverride || `${title} | ${siteTitle}`}</title>
+            <meta name="description" content={metaDescOverride || generateOptimizedMetaDescription(excerpt || content || title, title, language)} />
             <meta name="robots" content="index, follow" />
             {(post as unknown as { meta_keywords?: string }).meta_keywords && (
               <meta name="keywords" content={(post as unknown as { meta_keywords?: string }).meta_keywords} />
@@ -572,8 +581,8 @@ const BlogPost = () => {
             {/* Open Graph / Facebook */}
             <meta property="og:type" content="article" />
             <meta property="og:url" content={getCanonicalUrl(`/blog/${post.slug}`)} />
-            <meta property="og:title" content={`${title} | ${siteTitle}`} />
-            <meta property="og:description" content={generateOptimizedMetaDescription(excerpt || content || title, title, language)} />
+            <meta property="og:title" content={metaTitleOverride || `${title} | ${siteTitle}`} />
+            <meta property="og:description" content={metaDescOverride || generateOptimizedMetaDescription(excerpt || content || title, title, language)} />
             <meta property="og:image" content={ogImage} />
             <meta property="og:image:secure_url" content={ogImage} />
             <meta property="og:image:width" content="1200" />
@@ -609,8 +618,8 @@ const BlogPost = () => {
 
             {/* Twitter */}
             <meta name="twitter:card" content="summary_large_image" />
-            <meta name="twitter:title" content={`${title} | ${siteTitle}`} />
-            <meta name="twitter:description" content={excerpt || title} />
+            <meta name="twitter:title" content={metaTitleOverride || `${title} | ${siteTitle}`} />
+            <meta name="twitter:description" content={metaDescOverride || excerpt || title} />
             <meta name="twitter:image" content={ogImage} />
           </>
         )}
