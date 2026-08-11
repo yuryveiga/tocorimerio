@@ -123,12 +123,22 @@ async function generateSitemap() {
     ).join('');
 
     let xml = `<?xml version="1.0" encoding="UTF-8"?>\n`;
-    xml += `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">\n`;
+    xml += `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1" xmlns:xhtml="http://www.w3.org/1999/xhtml">\n`;
+
+    // Alternates de idioma (hreflang) — mesma URL servida em EN (padrão),
+    // PT-BR (?lang=pt) e ES (?lang=es).
+    const altBlock = (loc) =>
+      `    <xhtml:link rel="alternate" hreflang="en" href="${escapeXml(loc)}"/>\n` +
+      `    <xhtml:link rel="alternate" hreflang="pt-BR" href="${escapeXml(loc + '?lang=pt')}"/>\n` +
+      `    <xhtml:link rel="alternate" hreflang="es" href="${escapeXml(loc + '?lang=es')}"/>\n` +
+      `    <xhtml:link rel="alternate" hreflang="x-default" href="${escapeXml(loc)}"/>\n`;
 
     // Static Pages
     staticPages.forEach(page => {
+      const loc = `${siteUrl}${page.url.toLowerCase()}`;
       xml += `  <url>\n`;
-      xml += `    <loc>${siteUrl}${page.url.toLowerCase()}</loc>\n`;
+      xml += `    <loc>${loc}</loc>\n`;
+      xml += altBlock(loc || siteUrl);
       xml += `    <changefreq>${page.changefreq}</changefreq>\n`;
       xml += `    <priority>${page.priority}</priority>\n`;
       xml += `  </url>\n`;
@@ -142,6 +152,7 @@ async function generateSitemap() {
       }
       xml += `  <url>\n`;
       xml += `    <loc>${siteUrl}/passeio/${slug}</loc>\n`;
+      xml += altBlock(`${siteUrl}/passeio/${slug}`);
       if (tour.updated_at) xml += `    <lastmod>${tour.updated_at.split('T')[0]}</lastmod>\n`;
       xml += `    <changefreq>weekly</changefreq>\n`;
       xml += `    <priority>0.8</priority>\n`;
@@ -159,6 +170,7 @@ async function generateSitemap() {
     cats.forEach(c => {
       xml += `  <url>\n`;
       xml += `    <loc>${siteUrl}/passeios/${c}</loc>\n`;
+      xml += altBlock(`${siteUrl}/passeios/${c}`);
       xml += `    <changefreq>weekly</changefreq>\n`;
       xml += `    <priority>0.7</priority>\n`;
       xml += `  </url>\n`;
@@ -177,6 +189,7 @@ async function generateSitemap() {
         if (!key) return;
         xml += `  <url>\n`;
         xml += `    <loc>${siteUrl}/match/${key}</loc>\n`;
+        xml += altBlock(`${siteUrl}/match/${key}`);
         if (m.updated_at) xml += `    <lastmod>${m.updated_at.split('T')[0]}</lastmod>\n`;
         xml += `    <changefreq>weekly</changefreq>\n`;
         xml += `    <priority>0.9</priority>\n`;
@@ -192,6 +205,7 @@ async function generateSitemap() {
       const slug = slugify(post.slug);
       xml += `  <url>\n`;
       xml += `    <loc>${siteUrl}/blog/${slug}</loc>\n`;
+      xml += altBlock(`${siteUrl}/blog/${slug}`);
       if (post.updated_at) xml += `    <lastmod>${post.updated_at.split('T')[0]}</lastmod>\n`;
       xml += `    <changefreq>monthly</changefreq>\n`;
       xml += `    <priority>0.8</priority>\n`;

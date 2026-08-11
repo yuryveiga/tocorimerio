@@ -428,6 +428,42 @@ async function prerender() {
           console.warn(`  ⚠ ${route}: could not inject hero preload:`, e.message);
         }
 
+        // Multilingual SEO: garante hreflang (en / pt-BR / es / x-default) em
+        // todas as páginas pré-renderizadas, para o Google entender que a
+        // mesma URL tem versões em 3 idiomas via ?lang=.
+        try {
+          await page.evaluate((r) => {
+            const SITE = 'https://tocorimerio.com';
+            const clean = r === '/' ? '/' : r.replace(/\/$/, '');
+            const base = `${SITE}${clean === '/' ? '/' : clean}`;
+            const alternates = [
+              ['en', base],
+              ['pt-BR', `${base}?lang=pt`],
+              ['es', `${base}?lang=es`],
+              ['x-default', base],
+            ];
+            document
+              .querySelectorAll('link[rel="alternate"][hreflang]')
+              .forEach((el) => el.remove());
+            for (const [lang, href] of alternates) {
+              const link = document.createElement('link');
+              link.rel = 'alternate';
+              link.setAttribute('hreflang', lang);
+              link.href = href;
+              document.head.appendChild(link);
+            }
+            // Canonical auto-referente (sem parâmetros) quando ausente
+            if (!document.querySelector('link[rel="canonical"]')) {
+              const c = document.createElement('link');
+              c.rel = 'canonical';
+              c.href = base;
+              document.head.appendChild(c);
+            }
+          }, route);
+        } catch (e) {
+          console.warn(`  ⚠ ${route}: could not inject hreflang:`, e.message);
+        }
+
         let content = await page.content();
 
         const savePath = route === '/'
