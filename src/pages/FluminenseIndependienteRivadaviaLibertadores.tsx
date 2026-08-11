@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Helmet } from "react-helmet-async";
-import { getCanonicalUrl, generateSportsEventSchema, generateBreadcrumbsSchema, getHreflangLinks } from "@/utils/seo";
+import { getCanonicalUrl, generateSportsEventSchema, generateBreadcrumbsSchema, generateFAQSchema } from "@/utils/seo";
 
 const TARGET_DATE = new Date('2026-08-11T19:00:00-03:00');
 const BOOKING_URL = "https://tocorimerio.com/match/fluminense-vs-independiente-rivadavia-2026-08-11";
@@ -484,7 +484,42 @@ const FluminenseIndependienteRivadaviaLibertadores = () => {
     return () => obs.disconnect();
   }, [lang]);
 
-  const hreflang = getHreflangLinks(PAGE_PATH);
+  const canonical = getCanonicalUrl(PAGE_PATH);
+  const OG_IMAGE = "https://lncimg.lance.com.br/cdn-cgi/image/width=1600,quality=80,fit=cover,format=webp/uploads/2016/10/19/5807e137e598d.jpeg";
+
+  const SEO: Record<Lang, { title: string; description: string; ogTitle: string; keywords: string; locale: string; htmlLang: string }> = {
+    pt: {
+      title: "Fluminense x Independiente Rivadavia no Maracanã (11/08/2026) — Ingressos + Transfer",
+      description: "Fluminense x Independiente Rivadavia pelas oitavas da Libertadores 2026, 11 de agosto no Maracanã. Pacote com ingresso oficial, transfer de Ipanema/Copacabana e guia trilíngue. Reserve online com confirmação imediata.",
+      ogTitle: "Fluminense x Independiente Rivadavia — Libertadores 2026 no Maracanã",
+      keywords: "ingressos Fluminense x Independiente Rivadavia, Fluminense Libertadores 2026, jogo no Maracanã 11 de agosto, comprar ingresso Maracanã, pacote jogo Maracanã com transfer, oitavas de final Libertadores 2026, Fluminense Maracanã ingressos, futebol no Rio de Janeiro",
+      locale: "pt_BR",
+      htmlLang: "pt-BR",
+    },
+    en: {
+      title: "Fluminense vs Independiente Rivadavia Tickets — Maracanã, Aug 11 2026 | Libertadores",
+      description: "Fluminense vs Independiente Rivadavia, Copa Libertadores 2026 Round of 16 at the Maracanã on Aug 11. Matchday package with official ticket, round-trip transfer from Ipanema/Copacabana and a trilingual guide. Foreign visitors welcome.",
+      ogTitle: "Fluminense vs Independiente Rivadavia — Copa Libertadores 2026 | Maracanã",
+      keywords: "Fluminense vs Independiente Rivadavia tickets, Copa Libertadores 2026 tickets, Maracana tickets for foreigners, buy Libertadores tickets Rio, Maracana matchday package, Rio de Janeiro football tickets, Fluminense match tickets, football experience Rio",
+      locale: "en_US",
+      htmlLang: "en",
+    },
+    es: {
+      title: "Entradas Fluminense vs Independiente Rivadavia — Maracaná, 11/08/2026 | Libertadores",
+      description: "Fluminense vs Independiente Rivadavia por los octavos de la Copa Libertadores 2026, el 11 de agosto en el Maracaná. Paquete con entrada oficial, traslado desde Ipanema/Copacabana y guía trilingüe. Reserva online con confirmación inmediata.",
+      ogTitle: "Fluminense vs Independiente Rivadavia — Libertadores 2026 en el Maracaná",
+      keywords: "entradas Fluminense vs Independiente Rivadavia, Copa Libertadores 2026 entradas, entradas Maracaná extranjeros, comprar entradas Libertadores Río, paquete partido Maracaná, octavos de final Libertadores 2026, fútbol en Río de Janeiro, Independiente Rivadavia Libertadores",
+      locale: "es_ES",
+      htmlLang: "es",
+    },
+  };
+  const seo = SEO[lang];
+  const hreflang = [
+    { hreflang: "pt-BR", href: `${canonical}?lang=pt` },
+    { hreflang: "en", href: `${canonical}?lang=en` },
+    { hreflang: "es", href: `${canonical}?lang=es` },
+    { hreflang: "x-default", href: canonical },
+  ];
 
   const waLink = `${WHATSAPP_URL}?text=${encodeURIComponent(
     lang === 'pt'
@@ -497,45 +532,57 @@ const FluminenseIndependienteRivadaviaLibertadores = () => {
   return (
     <div className="riv-page">
       <Helmet>
-        <title>Fluminense vs Independiente Rivadavia — Copa Libertadores 2026 | Maracanã Tickets & Matchday Package</title>
-        <meta name="description" content="Get tickets + transfer + guide for Fluminense vs Independiente Rivadavia at Maracanã — Copa Libertadores 2026 Round of 16, Aug 11. Book your matchday package. Foreign visitors welcome. Sectors: West Upper, West Lower, Maracanã Club, Premium." />
-        <link rel="canonical" href={getCanonicalUrl(PAGE_PATH)} />
+        <html lang={seo.htmlLang} />
+        <title>{seo.title}</title>
+        <meta name="description" content={seo.description} />
+        <link rel="canonical" href={canonical} />
         {hreflang.map(h => <link key={h.hreflang} rel="alternate" hrefLang={h.hreflang} href={h.href} />)}
         {/* Open Graph */}
         <meta property="og:type" content="website" />
-        <meta property="og:url" content={getCanonicalUrl(PAGE_PATH)} />
-        <meta property="og:title" content="Fluminense vs Independiente Rivadavia — Copa Libertadores 2026 | Maracanã" />
-        <meta property="og:description" content="Live Copa Libertadores at Maracanã on Aug 11, 2026. Book your matchday package: official ticket, transfer & bilingual guide. Foreign visitors welcome." />
-        <meta property="og:image" content="https://lncimg.lance.com.br/cdn-cgi/image/width=1600,quality=80,fit=cover,format=webp/uploads/2016/10/19/5807e137e598d.jpeg" />
+        <meta property="og:url" content={canonical} />
+        <meta property="og:title" content={seo.ogTitle} />
+        <meta property="og:description" content={seo.description} />
+        <meta property="og:image" content={OG_IMAGE} />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+        <meta property="og:locale" content={seo.locale} />
         <meta property="og:site_name" content="Tocorime Rio" />
         {/* Twitter */}
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Fluminense vs Independiente Rivadavia — Copa Libertadores 2026" />
-        <meta name="twitter:description" content="Matchday packages for Fluminense vs Independiente Rivadavia at Maracanã. Tickets, transfer & guide included." />
-        <meta name="twitter:image" content="https://lncimg.lance.com.br/cdn-cgi/image/width=1600,quality=80,fit=cover,format=webp/uploads/2016/10/19/5807e137e598d.jpeg" />
+        <meta name="twitter:title" content={seo.ogTitle} />
+        <meta name="twitter:description" content={seo.description} />
+        <meta name="twitter:image" content={OG_IMAGE} />
         {/* Keywords */}
-        <meta name="keywords" content="Fluminense Independiente Rivadavia tickets, Copa Libertadores 2026 tickets, Maracanã tickets foreigners, Fluminense Copa Libertadores 2026, buy Libertadores tickets Rio, Maracanã matchday package, Rio de Janeiro football tickets, Copa Libertadores octavos final, Maracanã stadium tour package" />
+        <meta name="keywords" content={seo.keywords} />
+        <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
         {/* Schema */}
         <script type="application/ld+json">
-          {JSON.stringify(generateSportsEventSchema({
+          {JSON.stringify({ ...generateSportsEventSchema({
             name: "Fluminense vs Independiente Rivadavia — Copa Libertadores 2026",
-            description: "Copa Libertadores 2026 Round of 16 first leg between Fluminense FC and Independiente Rivadavia at Maracanã Stadium, Rio de Janeiro.",
+            description: seo.description,
             startDate: TARGET_DATE.toISOString(),
-            imageUrl: "https://lncimg.lance.com.br/cdn-cgi/image/width=1600,quality=80,fit=cover,format=webp/uploads/2016/10/19/5807e137e598d.jpeg",
-            url: getCanonicalUrl(PAGE_PATH),
+            imageUrl: OG_IMAGE,
+            url: canonical,
             homeTeam: "Fluminense FC",
             awayTeam: "Independiente Rivadavia",
             venueName: "Estádio do Maracanã",
             offerUrl: BOOKING_URL,
             offerPrice: 89,
             offerCurrency: "USD",
-          }))}
+          }), inLanguage: seo.htmlLang })}
+        </script>
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            ...generateFAQSchema(T[lang].faqs),
+            inLanguage: seo.htmlLang,
+          })}
         </script>
         <script type="application/ld+json">
           {JSON.stringify(generateBreadcrumbsSchema([
-            { name: "Home", url: getCanonicalUrl("/") },
+            { name: lang === 'pt' ? "Início" : lang === 'es' ? "Inicio" : "Home", url: getCanonicalUrl("/") },
             { name: "Maracanã Matchday", url: getCanonicalUrl("/passeio/maracana-matchday") },
-            { name: "Fluminense vs Independiente Rivadavia", url: getCanonicalUrl(PAGE_PATH) },
+            { name: "Fluminense vs Independiente Rivadavia", url: canonical },
           ]))}
         </script>
         <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:ital,wght@0,400;0,600;0,700;1,400&family=Barlow:wght@400;500&display=swap" rel="stylesheet" />
