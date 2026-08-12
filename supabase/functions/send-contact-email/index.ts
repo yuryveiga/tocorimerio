@@ -23,6 +23,10 @@ serve(async (req) => {
     }
 
     const subject = `Novo Contato do Site: ${senderName}`;
+    const EXTRA_ADMIN = "veiga.yury@gmail.com";
+    const adminRecipients = Array.from(
+      new Set([String(to).trim().toLowerCase(), EXTRA_ADMIN]),
+    );
     const adminHtmlContent = `
       <!DOCTYPE html>
       <html>
@@ -107,7 +111,7 @@ serve(async (req) => {
       },
       body: JSON.stringify({
         from: "Tocorime Rio <contato@tocorimerio.com>",
-        to: [to],
+        to: adminRecipients,
         reply_to: senderEmail,
         subject: subject,
         html: adminHtmlContent,
