@@ -336,8 +336,9 @@ export default function MatchDetail() {
       "hasMerchantReturnPolicy": {
         "@type": "MerchantReturnPolicy",
         "applicableCountry": "BR",
+        "returnPolicyCountry": "BR",
         "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnPeriod",
-        "merchantReturnDays": 3,
+        "merchantReturnDays": 7,
         "returnMethod": "https://schema.org/ReturnByMail",
         "returnFees": "https://schema.org/FreeReturn"
       },
