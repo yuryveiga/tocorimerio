@@ -4,12 +4,15 @@ import Flame from "lucide-react/dist/esm/icons/flame";
 import ShieldCheck from "lucide-react/dist/esm/icons/shield-check";
 import Star from "lucide-react/dist/esm/icons/star";
 import { useLocale } from "@/contexts/LocaleContext";
+import { useSiteData } from "@/hooks/useSiteData";
 
 const STORAGE_KEY = "urgency_bar_dismissed_at";
 const HIDE_FOR_MS = 24 * 60 * 60 * 1000; // 24h
 
 export function UrgencyBar() {
   const { t } = useLocale();
+  const { siteSettings } = useSiteData();
+  const hideUrgency = siteSettings?.['hide_urgency'] === 'true';
   // Start visible to avoid CLS — hide synchronously if dismissed.
   const [visible, setVisible] = useState(true);
 
@@ -34,7 +37,7 @@ export function UrgencyBar() {
     setVisible(false);
   };
 
-  if (!visible) return null;
+  if (!visible || hideUrgency) return null;
 
   return (
     <div className="relative z-[60] bg-accent text-accent-foreground">
