@@ -165,23 +165,8 @@ export function Header({ forceLanguage }: { forceLanguage?: 'pt' | 'en' | 'es' }
             <span className={`font-serif font-bold tracking-tight transition-all duration-500 ${isScrolled ? "text-lg text-foreground" : "text-xl text-foreground"} hidden sm:block ml-1 group-hover:text-primary`}>Tocorime Rio</span>
           </Link>
 
-          {/* TripAdvisor link (mobile only, next to the logo) */}
-          {tripAdvisorSocial && (
-            <a
-              href={tripAdvisorSocial.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="lg:hidden flex items-center gap-1 shrink-0 ml-1 mr-auto h-7 px-2 rounded-full bg-[#00AA6C]/10 border border-[#00AA6C]/30 text-[#00754F]"
-              aria-label="TripAdvisor"
-            >
-              <svg viewBox="0 0 24 24" className="w-4 h-4" fill="currentColor" aria-hidden="true">
-                <circle cx="7.2" cy="12" r="2.1" />
-                <circle cx="16.8" cy="12" r="2.1" />
-                <path d="M12 5.4c-3.2 0-6 .9-8.1 2.2H0l1.9 2.1A5.9 5.9 0 0 0 7.2 19a5.8 5.8 0 0 0 4.8-2.5A5.8 5.8 0 0 0 16.8 19a5.9 5.9 0 0 0 5.3-9.3L24 7.6h-3.9C18 6.3 15.2 5.4 12 5.4Zm-4.8 11.7a5.1 5.1 0 1 1 0-10.2 5.1 5.1 0 0 1 0 10.2Zm9.6 0a5.1 5.1 0 1 1 0-10.2 5.1 5.1 0 0 1 0 10.2Z" />
-              </svg>
-              <span className="text-[10px] font-bold tracking-tight">Tripadvisor</span>
-            </a>
-          )}
+          {/* Mobile: keep the bar clean — logo, Book, menu. Everything else lives in the menu. */}
+          <div className="lg:hidden mr-auto" />
 
           <nav className="hidden lg:flex items-center gap-6">
             {allNavLinks.map((link) => (
