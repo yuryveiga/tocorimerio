@@ -26,6 +26,16 @@ export function HeroSection() {
 
   const heroTitle = siteSettings[heroTitleKey] || siteSettings['hero_title'] || `${t("conheca_melhor")} ${t("rio_janeiro")}`;
   const heroSubtitle = siteSettings[heroSubtitleKey] || siteSettings['hero_subtitle'] || t("hero_desc");
+  const hideUrgency = siteSettings['hide_urgency'] === 'true';
+
+  // Mobile-only headline: a specific promise instead of the generic title.
+  const mobileTitle =
+    siteSettings['hero_title_mobile'] ||
+    (language === 'pt'
+      ? 'Passeios privativos no Rio com guia local'
+      : language === 'es'
+      ? 'Tours privados en Río con guía local'
+      : 'Private Rio tours with a local guide');
 
   const siteName = siteSettings['site_name'] || 'Tocorime Rio';
   const logoUrl = siteSettings?.logo_url || images['logo'];
@@ -120,9 +130,9 @@ export function HeroSection() {
   };
 
   // Split heroTitle into per-word spans with staggered reveal animation.
-  const renderRevealTitle = () => (
+  const renderRevealTitle = (text: string = heroTitle) => (
     <span className="title-reveal">
-      {heroTitle.split(/(\s+)/).map((word, i) =>
+      {text.split(/(\s+)/).map((word, i) =>
         word.trim() === '' ? (
           <React.Fragment key={i}>{word}</React.Fragment>
         ) : (
@@ -130,6 +140,14 @@ export function HeroSection() {
         )
       )}
     </span>
+  );
+
+  // Responsive title: specific promise on mobile, full title from settings on desktop.
+  const renderHeroTitle = () => (
+    <>
+      <span className="sm:hidden">{renderRevealTitle(mobileTitle)}</span>
+      <span className="hidden sm:inline">{renderRevealTitle()}</span>
+    </>
   );
 
   // ======== Reusable hero content blocks (shared across all 3 styles) ========
@@ -159,13 +177,13 @@ export function HeroSection() {
   );
 
   const Audience = ({ light = true }: { light?: boolean }) => (
-    <p className={`text-sm sm:text-base font-sans font-medium mb-5 ${light ? 'text-white/80' : 'text-muted-foreground'}`}>
+    <p className={`hidden sm:block text-sm sm:text-base font-sans font-medium mb-5 ${light ? 'text-white/80' : 'text-muted-foreground'}`}>
       {t('hero_audience')}
     </p>
   );
 
-  const Guarantees = ({ light = true }: { light?: boolean }) => (
-    <div className={`flex flex-wrap items-center justify-center gap-x-5 gap-y-2 mb-7 text-xs sm:text-sm font-medium ${light ? 'text-white/85' : 'text-muted-foreground'}`}>
+  const Guarantees = ({ light = true, mobile = false }: { light?: boolean; mobile?: boolean }) => (
+    <div className={`${mobile ? 'flex sm:hidden mt-5' : 'hidden sm:flex'} flex-wrap items-center justify-center gap-x-5 gap-y-2 mb-7 text-xs sm:text-sm font-medium ${light ? 'text-white/85' : 'text-muted-foreground'}`}>
       <span className="inline-flex items-center gap-1.5"><Award className="w-4 h-4 text-accent" />{t('guarantee_guides')}</span>
       <span className="inline-flex items-center gap-1.5"><ShieldCheck className="w-4 h-4 text-accent" />{t('guarantee_entry')}</span>
       <span className="inline-flex items-center gap-1.5"><Lock className="w-4 h-4 text-accent" />{t('guarantee_payment')}</span>
@@ -186,15 +204,15 @@ export function HeroSection() {
         size="lg"
         variant="outline"
         onClick={() => scrollTo("tours")}
-        className={`h-14 sm:h-12 text-base sm:text-lg px-8 font-semibold font-sans border-2 ${light ? 'bg-white/10 backdrop-blur-sm border-white/40 text-white hover:bg-white hover:text-foreground' : ''}`}
+        className={`hidden sm:inline-flex h-14 sm:h-12 text-base sm:text-lg px-8 font-semibold font-sans border-2 ${light ? 'bg-white/10 backdrop-blur-sm border-white/40 text-white hover:bg-white hover:text-foreground' : ''}`}
       >
         {t('cta_see_tours')}
       </Button>
     </div>
   );
 
-  const ScarcityBadge = ({ light = true }: { light?: boolean }) => (
-    <div className="mt-6 flex justify-center">
+  const ScarcityBadge = ({ light = true }: { light?: boolean }) => hideUrgency ? null : (
+    <div className="mt-6 hidden sm:flex justify-center">
       <span className={`inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-xs sm:text-sm font-bold animate-pulse ${light ? 'bg-accent/95 text-accent-foreground shadow-lg' : 'bg-accent/15 text-accent border border-accent/40'}`}>
         <Flame className="w-4 h-4" />
         {t('last_spots_week')}
