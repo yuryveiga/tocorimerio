@@ -165,23 +165,8 @@ export function Header({ forceLanguage }: { forceLanguage?: 'pt' | 'en' | 'es' }
             <span className={`font-serif font-bold tracking-tight transition-all duration-500 ${isScrolled ? "text-lg text-foreground" : "text-xl text-foreground"} hidden sm:block ml-1 group-hover:text-primary`}>Tocorime Rio</span>
           </Link>
 
-          {/* TripAdvisor link (mobile only, next to the logo) */}
-          {tripAdvisorSocial && (
-            <a
-              href={tripAdvisorSocial.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="lg:hidden flex items-center gap-1 shrink-0 ml-1 mr-auto h-7 px-2 rounded-full bg-[#00AA6C]/10 border border-[#00AA6C]/30 text-[#00754F]"
-              aria-label="TripAdvisor"
-            >
-              <svg viewBox="0 0 24 24" className="w-4 h-4" fill="currentColor" aria-hidden="true">
-                <circle cx="7.2" cy="12" r="2.1" />
-                <circle cx="16.8" cy="12" r="2.1" />
-                <path d="M12 5.4c-3.2 0-6 .9-8.1 2.2H0l1.9 2.1A5.9 5.9 0 0 0 7.2 19a5.8 5.8 0 0 0 4.8-2.5A5.8 5.8 0 0 0 16.8 19a5.9 5.9 0 0 0 5.3-9.3L24 7.6h-3.9C18 6.3 15.2 5.4 12 5.4Zm-4.8 11.7a5.1 5.1 0 1 1 0-10.2 5.1 5.1 0 0 1 0 10.2Zm9.6 0a5.1 5.1 0 1 1 0-10.2 5.1 5.1 0 0 1 0 10.2Z" />
-              </svg>
-              <span className="text-[10px] font-bold tracking-tight">Tripadvisor</span>
-            </a>
-          )}
+          {/* Mobile: keep the bar clean — logo, Book, menu. Everything else lives in the menu. */}
+          <div className="lg:hidden mr-auto" />
 
           <nav className="hidden lg:flex items-center gap-6">
             {allNavLinks.map((link) => (
@@ -298,78 +283,19 @@ export function Header({ forceLanguage }: { forceLanguage?: 'pt' | 'en' | 'es' }
           </div>
 
           <div className="flex items-center gap-2 lg:hidden">
-            {showCart && (
-              <Link to="/carrinho" className="relative mr-2">
-                 <div className="p-2 text-foreground/80">
-                  <ShoppingCart className="w-6 h-6" />
-                  {mounted && items.length > 0 && (
-                    <span className="absolute top-0 right-0 bg-primary text-white text-[10px] font-black h-4 w-4 rounded-full flex items-center justify-center shadow-sm">
-                      {items.length}
-                    </span>
-                  )}
-                </div>
-              </Link>
-            )}
-            {mounted && (
-              <div className="flex items-center border border-border rounded-full px-1.5 py-1 bg-muted/30">
-                <DropdownMenu>
-                  <DropdownMenuTrigger asChild>
-                    <button 
-                      className="flex items-center gap-1 text-[12px] font-bold px-2 py-1.5 outline-none"
-                      aria-label={language === 'pt' ? "Alterar idioma" : "Change language"}
-                    >
-                      <span>{language === 'pt' ? '🇧🇷' : language === 'en' ? '🇺🇸' : language === 'es' ? '🇪🇸' : language === 'zh-CN' ? '🇨🇳' : '🇹🇼'}</span>
-                      <span className="uppercase">{language === 'zh-CN' ? 'ZH' : language === 'zh-TW' ? '繁' : language}</span>
-                    </button>
-                  </DropdownMenuTrigger>
-                  <DropdownMenuContent align="start" className="w-[110px] rounded-xl p-1 shadow-xl border-primary/10">
-                    <DropdownMenuItem onClick={() => setLanguage('pt')} className="gap-2 font-bold text-[12px] rounded-lg cursor-pointer">
-                      <span>🇧🇷</span> PT
-                    </DropdownMenuItem>
-                    <DropdownMenuItem onClick={() => setLanguage('en')} className="gap-2 font-bold text-[12px] rounded-lg cursor-pointer">
-                      <span>🇺🇸</span> EN
-                    </DropdownMenuItem>
-                    <DropdownMenuItem onClick={() => setLanguage('es')} className="gap-2 font-bold text-[12px] rounded-lg cursor-pointer">
-                      <span>🇪🇸</span> ES
-                    </DropdownMenuItem>
-                    <DropdownMenuItem onClick={() => setLanguage('zh-CN')} className="gap-2 font-bold text-[12px] rounded-lg cursor-pointer">
-                      <span>🇨🇳</span> 简体
-                    </DropdownMenuItem>
-                    <DropdownMenuItem onClick={() => setLanguage('zh-TW')} className="gap-2 font-bold text-[12px] rounded-lg cursor-pointer">
-                      <span>🇹🇼</span> 繁體
-                    </DropdownMenuItem>
-                  </DropdownMenuContent>
-                </DropdownMenu>
-
-                <span className="text-[12px] text-muted-foreground/30 font-thin italic">|</span>
-
-                <DropdownMenu>
-                  <DropdownMenuTrigger asChild>
-                    <button 
-                      className="flex items-center gap-1 text-[12px] font-bold px-2 py-1.5 outline-none"
-                      aria-label={language === 'pt' ? "Alterar moeda" : "Change currency"}
-                    >
-                      <span>{currency === 'BRL' ? 'R$' : currency === 'USD' ? '$' : currency === 'EUR' ? '€' : '¥'}</span>
-                    </button>
-                  </DropdownMenuTrigger>
-                  <DropdownMenuContent align="end" className="w-[110px] rounded-xl p-1 shadow-xl border-primary/10">
-                    <DropdownMenuItem onClick={() => setCurrency('BRL')} className="gap-2 font-bold text-[12px] rounded-lg cursor-pointer">
-                      <span>R$</span> BRL
-                    </DropdownMenuItem>
-                    <DropdownMenuItem onClick={() => setCurrency('USD')} className="gap-2 font-bold text-[12px] rounded-lg cursor-pointer">
-                      <span>$</span> USD
-                    </DropdownMenuItem>
-                    <DropdownMenuItem onClick={() => setCurrency('EUR')} className="gap-2 font-bold text-[12px] rounded-lg cursor-pointer">
-                      <span>€</span> EUR
-                    </DropdownMenuItem>
-                    <DropdownMenuItem onClick={() => setCurrency('CNY')} className="gap-2 font-bold text-[12px] rounded-lg cursor-pointer">
-                      <span>¥</span> CNY
-                    </DropdownMenuItem>
-                  </DropdownMenuContent>
-                </DropdownMenu>
-              </div>
-            )}
-            <button className="p-2 transition-transform active:scale-95" onClick={() => setIsMenuOpen(!isMenuOpen)} aria-label="Toggle menu">
+            <Button
+              onClick={() => handleNav("#tours")}
+              size="sm"
+              className="font-bold px-5 h-10 rounded-full shadow-lg shadow-primary/20"
+            >
+              {t("reservar")}
+            </Button>
+            <button
+              className="p-2 transition-transform active:scale-95 text-foreground"
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              aria-label="Toggle menu"
+              aria-expanded={isMenuOpen}
+            >
               {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
             </button>
           </div>
@@ -395,6 +321,92 @@ export function Header({ forceLanguage }: { forceLanguage?: 'pt' | 'en' | 'es' }
                   {link.label}
                 </Link>
               ))}
+
+              {showCart && (
+                <Link
+                  to="/carrinho"
+                  onClick={() => setIsMenuOpen(false)}
+                  className="flex items-center gap-3 text-lg font-bold py-2 text-foreground"
+                >
+                  <ShoppingCart className="w-5 h-5" />
+                  {t("meu_carrinho")}
+                  {mounted && items.length > 0 && (
+                    <span className="bg-primary text-primary-foreground text-[10px] font-black h-5 min-w-5 px-1.5 rounded-full flex items-center justify-center">
+                      {items.length}
+                    </span>
+                  )}
+                </Link>
+              )}
+
+              {whatsappSocial && (() => {
+                const waNumber = whatsappSocial.url.replace(/[^0-9]/g, '') || '5521970702523';
+                const waLink = whatsappSocial.url.startsWith('http') ? whatsappSocial.url : `https://wa.me/${waNumber}`;
+                return (
+                  <a
+                    href={waLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={() => setIsMenuOpen(false)}
+                    className="flex items-center gap-3 text-lg font-bold py-2 text-[#25D366]"
+                  >
+                    <svg viewBox="0 0 24 24" className="w-5 h-5" fill="currentColor" aria-hidden="true">
+                      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+                    </svg>
+                    WhatsApp
+                  </a>
+                );
+              })()}
+
+              {tripAdvisorSocial && (
+                <a
+                  href={tripAdvisorSocial.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={() => setIsMenuOpen(false)}
+                  className="flex items-center gap-3 text-lg font-bold py-2 text-[#00754F]"
+                >
+                  <svg viewBox="0 0 24 24" className="w-5 h-5" fill="currentColor" aria-hidden="true">
+                    <circle cx="7.2" cy="12" r="2.1" />
+                    <circle cx="16.8" cy="12" r="2.1" />
+                    <path d="M12 5.4c-3.2 0-6 .9-8.1 2.2H0l1.9 2.1A5.9 5.9 0 0 0 7.2 19a5.8 5.8 0 0 0 4.8-2.5A5.8 5.8 0 0 0 16.8 19a5.9 5.9 0 0 0 5.3-9.3L24 7.6h-3.9C18 6.3 15.2 5.4 12 5.4Zm-4.8 11.7a5.1 5.1 0 1 1 0-10.2 5.1 5.1 0 0 1 0 10.2Zm9.6 0a5.1 5.1 0 1 1 0-10.2 5.1 5.1 0 0 1 0 10.2Z" />
+                  </svg>
+                  Tripadvisor
+                </a>
+              )}
+
+              {mounted && (
+                <div className="pt-4 border-t border-border space-y-3">
+                  <div>
+                    <p className="text-[10px] font-black uppercase tracking-widest text-muted-foreground/60 mb-2">{t("idioma") || "Idioma"}</p>
+                    <div className="flex flex-wrap gap-2">
+                      {([['pt','🇧🇷 PT'],['en','🇺🇸 EN'],['es','🇪🇸 ES'],['zh-CN','🇨🇳 ZH'],['zh-TW','🇹🇼 繁']] as const).map(([code, label]) => (
+                        <button
+                          key={code}
+                          onClick={() => setLanguage(code)}
+                          className={`h-9 px-3 rounded-full border text-xs font-bold transition-colors ${language === code ? "bg-primary text-primary-foreground border-primary" : "border-border text-foreground/80"}`}
+                        >
+                          {label}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                  <div>
+                    <p className="text-[10px] font-black uppercase tracking-widest text-muted-foreground/60 mb-2">{t("moeda") || "Moeda"}</p>
+                    <div className="flex flex-wrap gap-2">
+                      {([['BRL','R$ BRL'],['USD','$ USD'],['EUR','€ EUR'],['CNY','¥ CNY']] as const).map(([code, label]) => (
+                        <button
+                          key={code}
+                          onClick={() => setCurrency(code)}
+                          className={`h-9 px-3 rounded-full border text-xs font-bold transition-colors ${currency === code ? "bg-primary text-primary-foreground border-primary" : "border-border text-foreground/80"}`}
+                        >
+                          {label}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              )}
+
               <div className="flex items-center gap-6 pt-6 border-t border-border">
                 {activeSocials.map((s) => (
                   <a key={s.platform} href={s.url} target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary" aria-label={s.platform}>
@@ -402,7 +414,6 @@ export function Header({ forceLanguage }: { forceLanguage?: 'pt' | 'en' | 'es' }
                   </a>
                 ))}
               </div>
-              <Button onClick={() => handleNav("#tours")} className="mt-4 font-bold h-12 text-lg uppercase tracking-tight">{t("reservar")}</Button>
             </div>
           </nav>
         )}
