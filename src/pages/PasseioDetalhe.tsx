@@ -100,6 +100,8 @@ export function PasseioDetalhe() {
   const [quantity, setQuantity] = useState(1);
   const [weather, setWeather] = useState<{ temp: number; condition: string; humidity: number; wind: number } | null>(null);
   const [showStickyBar, setShowStickyBar] = useState(false);
+  const bookingCardRef = useRef<HTMLDivElement | null>(null);
+  const dateFieldRef = useRef<HTMLDivElement | null>(null);
   const [selectedOptionIdx, setSelectedOptionIdx] = useState(0);
   const [imageDimensions, setImageDimensions] = useState<{ [key: string]: { width: number, height: number } }>({});
 
@@ -259,6 +261,34 @@ export function PasseioDetalhe() {
       }
     }
   }, [tour]);
+
+  // Discreet mobile bottom bar: appears after scrolling, hides while the booking form is on screen
+  useEffect(() => {
+    if (!tour) return;
+    let bookingVisible = false;
+    const update = () => {
+      setShowStickyBar(window.scrollY > 420 && !bookingVisible);
+    };
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        bookingVisible = entry.isIntersecting;
+        update();
+      },
+      { threshold: 0.15 }
+    );
+    if (bookingCardRef.current) observer.observe(bookingCardRef.current);
+    window.addEventListener("scroll", update, { passive: true });
+    update();
+    return () => {
+      observer.disconnect();
+      window.removeEventListener("scroll", update);
+    };
+  }, [tour]);
+
+  const scrollToDate = useCallback(() => {
+    const target = dateFieldRef.current || bookingCardRef.current;
+    target?.scrollIntoView({ behavior: "smooth", block: "center" });
+  }, []);
 
   const [isLightboxOpen, setIsLightboxOpen] = useState(false);
   const [lightboxIndex, setLightboxIndex] = useState(0);
