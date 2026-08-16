@@ -100,6 +100,8 @@ export function PasseioDetalhe() {
   const [quantity, setQuantity] = useState(1);
   const [weather, setWeather] = useState<{ temp: number; condition: string; humidity: number; wind: number } | null>(null);
   const [showStickyBar, setShowStickyBar] = useState(false);
+  const bookingCardRef = useRef<HTMLDivElement | null>(null);
+  const dateFieldRef = useRef<HTMLDivElement | null>(null);
   const [selectedOptionIdx, setSelectedOptionIdx] = useState(0);
   const [imageDimensions, setImageDimensions] = useState<{ [key: string]: { width: number, height: number } }>({});
 
@@ -259,6 +261,34 @@ export function PasseioDetalhe() {
       }
     }
   }, [tour]);
+
+  // Discreet mobile bottom bar: appears after scrolling, hides while the booking form is on screen
+  useEffect(() => {
+    if (!tour) return;
+    let bookingVisible = false;
+    const update = () => {
+      setShowStickyBar(window.scrollY > 420 && !bookingVisible);
+    };
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        bookingVisible = entry.isIntersecting;
+        update();
+      },
+      { threshold: 0.15 }
+    );
+    if (bookingCardRef.current) observer.observe(bookingCardRef.current);
+    window.addEventListener("scroll", update, { passive: true });
+    update();
+    return () => {
+      observer.disconnect();
+      window.removeEventListener("scroll", update);
+    };
+  }, [tour]);
+
+  const scrollToDate = useCallback(() => {
+    const target = dateFieldRef.current || bookingCardRef.current;
+    target?.scrollIntoView({ behavior: "smooth", block: "center" });
+  }, []);
 
   const [isLightboxOpen, setIsLightboxOpen] = useState(false);
   const [lightboxIndex, setLightboxIndex] = useState(0);
@@ -1029,7 +1059,7 @@ export function PasseioDetalhe() {
             <div className="contents lg:block lg:col-span-1">
               <div className="contents lg:block lg:sticky lg:top-28 lg:space-y-6">
                 {/* Share Buttons */}
-                  <div className="-order-2 lg:order-none bg-card rounded-[2.5rem] border border-primary/20 p-8 shadow-2xl relative overflow-hidden group">
+                  <div ref={bookingCardRef} className="-order-2 lg:order-none bg-card rounded-[2.5rem] border border-primary/20 p-8 shadow-2xl relative overflow-hidden group">
                     <div className="pointer-events-none absolute top-0 right-0 w-24 h-24 bg-primary/5 rounded-full -mr-12 -mt-12 transition-opacity duration-500 opacity-60 group-hover:opacity-100" />
                     {/* Mobile-only section title */}
                     <h2 className="lg:hidden text-2xl font-serif font-black text-foreground mb-6 flex items-center gap-3">
@@ -1100,7 +1130,7 @@ export function PasseioDetalhe() {
                         </div>
                       )}
 
-                      <div className="space-y-2">
+                      <div ref={dateFieldRef} className="space-y-2">
                         <Label htmlFor="date-trigger" className="text-[10px] font-black uppercase text-muted-foreground tracking-widest cursor-pointer">{t("data_viagem")}</Label>
                          <Popover>
                            <PopoverTrigger asChild>
@@ -1332,50 +1362,31 @@ export function PasseioDetalhe() {
         </div>
       </div>
 
-      {/* Sticky Mobile Bar */}
-      <div className={`fixed bottom-0 left-0 right-0 z-50 p-4 bg-background/80 backdrop-blur-xl border-t transform transition-transform duration-500 md:hidden ${showStickyBar ? "translate-y-0" : "translate-y-full"}`}>
-        <div className="flex items-center justify-between gap-4">
-          <div className="flex flex-col">
+      {/* Discreet persistent mobile bar — hidden while the booking form is on screen */}
+      <div
+        className={`fixed bottom-0 left-0 right-0 z-40 px-4 py-2.5 bg-background/90 backdrop-blur-xl border-t border-border/60 transform transition-transform duration-300 md:hidden ${showStickyBar && !isLightboxOpen ? "translate-y-0" : "translate-y-full"}`}
+      >
+        <div className="flex items-center justify-between gap-3">
+          <div className="flex flex-col leading-tight min-w-0">
             {(!hidePrices && tour.pricing_model !== 'custom') ? (
               <>
-                <span className="text-[10px] font-bold text-muted-foreground uppercase">{t("a_partir_de")}</span>
-                <div className="flex items-baseline gap-1">
-                   <div className="font-black text-xl text-primary">
-                     {formatPrice(getTourMinPrice(tour))}
-                   </div>
-                   <span className="text-[9px] font-black text-muted-foreground uppercase opacity-70">/ {t("pessoa")}</span>
-                </div>
+                <span className="text-[9px] font-bold text-muted-foreground uppercase tracking-wider">{t("a_partir_de")}</span>
+                <span className="font-black text-base text-primary truncate">
+                  {formatPrice(getTourMinPrice(tour))}
+                  <span className="text-[9px] font-bold text-muted-foreground uppercase ml-1 opacity-70">/ {t("pessoa")}</span>
+                </span>
               </>
             ) : (
-              <span className="text-sm font-black text-primary uppercase leading-none">{language === 'pt' ? 'Sob Consulta' : 'Upon Request'}</span>
+              <span className="text-sm font-black text-primary uppercase leading-none">{language === 'pt' ? 'Sob Consulta' : language === 'es' ? 'Bajo Consulta' : 'Upon Request'}</span>
             )}
           </div>
-          {(() => {
-            const wa = socialMedia.find((s) => s.platform?.toLowerCase().includes('whatsapp') && s.is_active !== false);
-            if (!wa) return null;
-            const cleanNumber = wa.url.replace(/[^\d+]/g, "").replace('+', '');
-            const titleI18n = String((tour as Record<string, any>)[`title_${language}`] || tour.title || "");
-            const isQuoteMode = hidePrices || tour.pricing_model === 'custom';
-            const msg = isQuoteMode 
-              ? (language === 'pt' ? `Olá! Gostaria de um orçamento para o passeio: ${titleI18n}` : `Hello! I would like a quote for the tour: ${titleI18n}`)
-              : t("wa_message").replace("{tour}", titleI18n);
-            const href = wa.url.startsWith('http')
-              ? `${wa.url}${wa.url.includes('?') ? '&' : '?'}text=${encodeURIComponent(msg)}`
-              : `https://wa.me/${cleanNumber}?text=${encodeURIComponent(msg)}`;
-            return (
-              <a
-                href={href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={`flex-1 h-14 rounded-2xl font-black text-xs uppercase tracking-widest flex items-center justify-center gap-2 text-white shadow-lg ${isQuoteMode ? 'bg-[#25D366]' : 'bg-primary'}`}
-              >
-                {isQuoteMode ? <MessageSquare className="w-5 h-5" /> : <ShoppingCart className="w-5 h-5" />}
-                {isQuoteMode 
-                  ? (language === 'pt' ? 'ORÇAMENTO' : 'QUOTE') 
-                  : t("reservar_agora")}
-              </a>
-            );
-          })()}
+          <Button
+            onClick={scrollToDate}
+            className="h-10 px-5 rounded-full font-bold text-xs gap-2 shadow-md shrink-0"
+          >
+            <CalendarIcon className="w-4 h-4" />
+            {language === 'pt' ? 'Escolher data' : language === 'es' ? 'Elegir fecha' : 'Choose date'}
+          </Button>
         </div>
       </div>
 
