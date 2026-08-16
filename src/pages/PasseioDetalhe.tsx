@@ -1026,10 +1026,10 @@ export function PasseioDetalhe() {
             </div>
 
             {/* Booking Sidebar */}
-            <div className="lg:col-span-1">
-              <div className="sticky top-28 space-y-6">
+            <div className="contents lg:block lg:col-span-1">
+              <div className="contents lg:block lg:sticky lg:top-28 lg:space-y-6">
                 {/* Share Buttons */}
-                  <div className="bg-card rounded-[2.5rem] border border-primary/20 p-8 shadow-2xl relative overflow-hidden group">
+                  <div className="-order-2 lg:order-none bg-card rounded-[2.5rem] border border-primary/20 p-8 shadow-2xl relative overflow-hidden group">
                     <div className="pointer-events-none absolute top-0 right-0 w-24 h-24 bg-primary/5 rounded-full -mr-12 -mt-12 transition-opacity duration-500 opacity-60 group-hover:opacity-100" />
                     {/* Mobile-only section title */}
                     <h2 className="lg:hidden text-2xl font-serif font-black text-foreground mb-6 flex items-center gap-3">
