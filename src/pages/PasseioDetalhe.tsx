@@ -563,8 +563,10 @@ export function PasseioDetalhe() {
         </div>
       </section>
 
+      {/* Progressive booking wrapper: on mobile the booking box comes before the gallery */}
+      <div className="flex flex-col gap-12 lg:block lg:gap-0">
       {/* Mosaic Gallery Section */}
-      <section className="px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto mb-12">
+      <section className="-order-1 lg:order-none px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto lg:mb-12">
         <div className="relative group overflow-hidden rounded-[2rem] shadow-xl bg-muted/20 border">
           <div className="grid grid-cols-1 md:grid-cols-4 md:grid-rows-2 gap-2 h-[350px] md:h-[400px] lg:h-[450px]">
             {/* Main Image */}
@@ -624,10 +626,10 @@ export function PasseioDetalhe() {
       </section>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-16 pb-24">
-          <div className="lg:col-span-2 space-y-16">
+        <div className="contents lg:grid lg:grid-cols-3 lg:gap-16 lg:pb-24">
+          <div className="contents lg:block lg:col-span-2 lg:space-y-16">
              {/* Ultra-Premium Stats Bar */}
-             <div className="bg-card rounded-[2.5rem] border border-primary/10 shadow-xl overflow-hidden ring-1 ring-primary/5">
+             <div className="hidden lg:block bg-card rounded-[2.5rem] border border-primary/10 shadow-xl overflow-hidden ring-1 ring-primary/5">
                 <div className="grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-primary/10">
                   {/* Duration */}
                   <div className="px-8 py-10 flex flex-col items-center text-center group hover:bg-primary/5 transition-colors">
