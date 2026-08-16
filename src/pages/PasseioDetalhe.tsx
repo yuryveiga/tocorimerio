@@ -493,6 +493,32 @@ export function PasseioDetalhe() {
                {translatedTitle}
             </h1>
             <UrgencyBadges tourId={tour.id} tourSlug={tour.slug} />
+
+            {/* Mobile essentials: duration, difficulty, what's included */}
+            <div className="lg:hidden flex flex-wrap gap-2 pt-1">
+              <span className="inline-flex items-center gap-2 rounded-full bg-card border border-primary/15 px-3 py-1.5 text-xs font-bold text-foreground">
+                <Clock className="w-3.5 h-3.5 text-primary" />
+                {translateDuration(tour.duration)}
+              </span>
+              {translatedDifficulty && (
+                <span className="inline-flex items-center gap-2 rounded-full bg-card border border-primary/15 px-3 py-1.5 text-xs font-bold text-foreground uppercase">
+                  <Gauge className="w-3.5 h-3.5 text-[#E76F51]" />
+                  {translatedDifficulty}
+                </span>
+              )}
+              {(() => {
+                const list = Array.isArray(translatedIncluded) ? translatedIncluded : translatedIncluded ? [translatedIncluded] : [];
+                if (!list.length) return null;
+                const first = typeof list[0] === 'string' ? list[0] : ((list[0] as any)?.text || (list[0] as any)?.title || "");
+                if (!first) return null;
+                return (
+                  <span className="inline-flex items-center gap-2 rounded-full bg-card border border-primary/15 px-3 py-1.5 text-xs font-bold text-foreground max-w-full">
+                    <Check className="w-3.5 h-3.5 text-primary shrink-0" />
+                    <span className="truncate">{first}{list.length > 1 ? ` +${list.length - 1}` : ""}</span>
+                  </span>
+                );
+              })()}
+            </div>
           </div>
           {!hidePrices ? (
             <div className="flex items-center gap-6 bg-card border border-primary/10 px-8 py-6 rounded-[2rem] shadow-xl h-fit ring-4 ring-primary/5">
@@ -537,8 +563,10 @@ export function PasseioDetalhe() {
         </div>
       </section>
 
+      {/* Progressive booking wrapper: on mobile the booking box comes before the gallery */}
+      <div className="flex flex-col gap-12 px-4 sm:px-6 lg:px-0 lg:block lg:gap-0">
       {/* Mosaic Gallery Section */}
-      <section className="px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto mb-12">
+      <section className="-order-1 lg:order-none w-full lg:px-8 max-w-7xl mx-auto lg:mb-12">
         <div className="relative group overflow-hidden rounded-[2rem] shadow-xl bg-muted/20 border">
           <div className="grid grid-cols-1 md:grid-cols-4 md:grid-rows-2 gap-2 h-[350px] md:h-[400px] lg:h-[450px]">
             {/* Main Image */}
@@ -597,11 +625,11 @@ export function PasseioDetalhe() {
         </div>
       </section>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-16 pb-24">
-          <div className="lg:col-span-2 space-y-16">
+      <div className="contents lg:block lg:max-w-7xl lg:mx-auto lg:px-8">
+        <div className="contents lg:grid lg:grid-cols-3 lg:gap-16 lg:pb-24">
+          <div className="contents lg:block lg:col-span-2 lg:space-y-16">
              {/* Ultra-Premium Stats Bar */}
-             <div className="bg-card rounded-[2.5rem] border border-primary/10 shadow-xl overflow-hidden ring-1 ring-primary/5">
+             <div className="hidden lg:block bg-card rounded-[2.5rem] border border-primary/10 shadow-xl overflow-hidden ring-1 ring-primary/5">
                 <div className="grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-primary/10">
                   {/* Duration */}
                   <div className="px-8 py-10 flex flex-col items-center text-center group hover:bg-primary/5 transition-colors">
@@ -998,10 +1026,10 @@ export function PasseioDetalhe() {
             </div>
 
             {/* Booking Sidebar */}
-            <div className="lg:col-span-1">
-              <div className="sticky top-28 space-y-6">
+            <div className="contents lg:block lg:col-span-1">
+              <div className="contents lg:block lg:sticky lg:top-28 lg:space-y-6">
                 {/* Share Buttons */}
-                  <div className="bg-card rounded-[2.5rem] border border-primary/20 p-8 shadow-2xl relative overflow-hidden group">
+                  <div className="-order-2 lg:order-none bg-card rounded-[2.5rem] border border-primary/20 p-8 shadow-2xl relative overflow-hidden group">
                     <div className="pointer-events-none absolute top-0 right-0 w-24 h-24 bg-primary/5 rounded-full -mr-12 -mt-12 transition-opacity duration-500 opacity-60 group-hover:opacity-100" />
                     {/* Mobile-only section title */}
                     <h2 className="lg:hidden text-2xl font-serif font-black text-foreground mb-6 flex items-center gap-3">
@@ -1302,6 +1330,7 @@ export function PasseioDetalhe() {
             </div>
           </div>
         </div>
+      </div>
 
       {/* Sticky Mobile Bar */}
       <div className={`fixed bottom-0 left-0 right-0 z-50 p-4 bg-background/80 backdrop-blur-xl border-t transform transition-transform duration-500 md:hidden ${showStickyBar ? "translate-y-0" : "translate-y-full"}`}>
