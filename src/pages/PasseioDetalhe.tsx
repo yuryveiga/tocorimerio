@@ -493,6 +493,32 @@ export function PasseioDetalhe() {
                {translatedTitle}
             </h1>
             <UrgencyBadges tourId={tour.id} tourSlug={tour.slug} />
+
+            {/* Mobile essentials: duration, difficulty, what's included */}
+            <div className="lg:hidden flex flex-wrap gap-2 pt-1">
+              <span className="inline-flex items-center gap-2 rounded-full bg-card border border-primary/15 px-3 py-1.5 text-xs font-bold text-foreground">
+                <Clock className="w-3.5 h-3.5 text-primary" />
+                {translateDuration(tour.duration)}
+              </span>
+              {translatedDifficulty && (
+                <span className="inline-flex items-center gap-2 rounded-full bg-card border border-primary/15 px-3 py-1.5 text-xs font-bold text-foreground uppercase">
+                  <Gauge className="w-3.5 h-3.5 text-[#E76F51]" />
+                  {translatedDifficulty}
+                </span>
+              )}
+              {(() => {
+                const list = Array.isArray(translatedIncluded) ? translatedIncluded : translatedIncluded ? [translatedIncluded] : [];
+                if (!list.length) return null;
+                const first = typeof list[0] === 'string' ? list[0] : ((list[0] as any)?.text || (list[0] as any)?.title || "");
+                if (!first) return null;
+                return (
+                  <span className="inline-flex items-center gap-2 rounded-full bg-card border border-primary/15 px-3 py-1.5 text-xs font-bold text-foreground max-w-full">
+                    <Check className="w-3.5 h-3.5 text-primary shrink-0" />
+                    <span className="truncate">{first}{list.length > 1 ? ` +${list.length - 1}` : ""}</span>
+                  </span>
+                );
+              })()}
+            </div>
           </div>
           {!hidePrices ? (
             <div className="flex items-center gap-6 bg-card border border-primary/10 px-8 py-6 rounded-[2rem] shadow-xl h-fit ring-4 ring-primary/5">
