@@ -566,7 +566,7 @@ export function PasseioDetalhe() {
       {/* Progressive booking wrapper: on mobile the booking box comes before the gallery */}
       <div className="flex flex-col gap-12 px-4 sm:px-6 lg:px-0 lg:block lg:gap-0">
       {/* Mosaic Gallery Section */}
-      <section className="-order-1 lg:order-none lg:px-8 max-w-7xl mx-auto lg:mb-12">
+      <section className="-order-1 lg:order-none w-full lg:px-8 max-w-7xl mx-auto lg:mb-12">
         <div className="relative group overflow-hidden rounded-[2rem] shadow-xl bg-muted/20 border">
           <div className="grid grid-cols-1 md:grid-cols-4 md:grid-rows-2 gap-2 h-[350px] md:h-[400px] lg:h-[450px]">
             {/* Main Image */}
