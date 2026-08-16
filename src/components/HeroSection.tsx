@@ -261,7 +261,7 @@ export function HeroSection() {
             <div className="flex justify-center"><SocialProofChip /></div>
 
             <h1 className="font-serif text-3xl sm:text-5xl md:text-6xl font-bold mb-4 text-white text-balance drop-shadow-lg leading-tight">
-              {renderRevealTitle()}
+              {renderHeroTitle()}
             </h1>
 
             <p className="text-base sm:text-lg text-white/90 max-w-2xl mx-auto mb-3 font-sans">
@@ -271,6 +271,7 @@ export function HeroSection() {
             <Audience />
             <Guarantees />
             <HeroCTAs />
+            <Guarantees mobile />
             <ScarcityBadge />
           </div>
         </div>
@@ -294,7 +295,7 @@ export function HeroSection() {
             <SocialProofChip light={false} />
 
             <h1 className="font-serif text-4xl sm:text-5xl lg:text-7xl font-extrabold mb-4 text-foreground text-balance leading-[1.05]">
-              {renderRevealTitle()}
+              {renderHeroTitle()}
             </h1>
 
             <p className="text-base sm:text-lg text-muted-foreground mb-3 font-sans leading-relaxed">
@@ -306,6 +307,7 @@ export function HeroSection() {
             <div className="lg:[&>div]:justify-start"><Guarantees light={false} /></div>
 
             <div className="lg:[&>div]:!mx-0 lg:[&>div]:justify-start"><HeroCTAs light={false} /></div>
+            <Guarantees light={false} mobile />
 
             <div className="lg:[&>div]:!justify-start"><ScarcityBadge light={false} /></div>
           </div>
@@ -325,7 +327,7 @@ export function HeroSection() {
           <div className="flex justify-center"><SocialProofChip /></div>
 
           <h1 className="font-serif text-4xl sm:text-6xl lg:text-7xl font-bold mb-4 text-white text-balance drop-shadow-2xl leading-[1.05] tracking-tight">
-            {renderRevealTitle()}
+            {renderHeroTitle()}
           </h1>
 
           <p className="text-base sm:text-xl text-white/90 max-w-3xl mx-auto mb-3 font-sans drop-shadow">
@@ -335,6 +337,7 @@ export function HeroSection() {
           <Audience />
           <Guarantees />
           <HeroCTAs />
+          <Guarantees mobile />
           <ScarcityBadge />
         </div>
       </div>
