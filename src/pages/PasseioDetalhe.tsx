@@ -1330,6 +1330,7 @@ export function PasseioDetalhe() {
             </div>
           </div>
         </div>
+      </div>
 
       {/* Sticky Mobile Bar */}
       <div className={`fixed bottom-0 left-0 right-0 z-50 p-4 bg-background/80 backdrop-blur-xl border-t transform transition-transform duration-500 md:hidden ${showStickyBar ? "translate-y-0" : "translate-y-full"}`}>
