@@ -1,4 +1,4 @@
-import { memo, useMemo } from "react";
+import { memo, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import Clock from "lucide-react/dist/esm/icons/clock";
 import Users from "lucide-react/dist/esm/icons/users";
@@ -49,6 +49,7 @@ export const TourItem = memo(({ tour }: { tour: TourCardProps }) => {
   const { siteSettings } = useSiteData();
   const hidePrices = siteSettings['hide_prices'] === 'true';
   const hideUrgency = siteSettings['hide_urgency'] === 'true';
+  const [showDetails, setShowDetails] = useState(false);
 
   const getTranslated = (field: keyof TourCardProps): string => {
     if (language === 'pt') return String(tour[field] || "");
