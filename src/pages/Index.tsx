@@ -67,17 +67,17 @@ const Index = () => {
           doesn't hold back the others from rendering. */}
       {/* Mobile order: tours → how to book → social proof → guide/story → editorial.
           Desktop keeps the original order via md:order-none. */}
-      <div className="order-1 md:order-none"><Suspense fallback={<SectionLoader />}><ToursSection /></Suspense></div>
+      <div className="order-1 md:order-1"><Suspense fallback={<SectionLoader />}><ToursSection /></Suspense></div>
       {/* minHeight values measured on mobile (390×844) to prevent CLS on mount. */}
-      <div className="order-2 md:order-none"><LazyMount minHeight={880}><Suspense fallback={null}><WhyChooseUs /></Suspense></LazyMount></div>
-      <div className="order-3 md:order-none"><LazyMount minHeight={772}><Suspense fallback={null}><ReviewsSection /></Suspense></LazyMount></div>
-      <div className="order-4 md:order-none"><LazyMount minHeight={1362}><Suspense fallback={null}><ContactSection /></Suspense></LazyMount></div>
-      <div className="order-5 md:order-none"><LazyMount minHeight={760}><Suspense fallback={null}><GuideProfileSection /></Suspense></LazyMount></div>
-      <div className="order-6 md:order-none"><LazyMount minHeight={1412}><Suspense fallback={null}><AboutSection /></Suspense></LazyMount></div>
-      <div className="order-7 md:order-none"><LazyMount minHeight={890}><Suspense fallback={null}><WeatherSection /></Suspense></LazyMount></div>
-      <div className="order-8 md:order-none"><LazyMount minHeight={749}><Suspense fallback={null}><GallerySection /></Suspense></LazyMount></div>
-      <div className="order-9 md:order-none"><LazyMount minHeight={1036}><Suspense fallback={null}><BlogCarousel /></Suspense></LazyMount></div>
-      <div className="order-10 md:order-none"><LazyMount minHeight={1350}><Suspense fallback={null}><Footer /></Suspense></LazyMount></div>
+      <div className="order-2 md:order-3"><LazyMount minHeight={880}><Suspense fallback={null}><WhyChooseUs /></Suspense></LazyMount></div>
+      <div className="order-3 md:order-4"><LazyMount minHeight={772}><Suspense fallback={null}><ReviewsSection /></Suspense></LazyMount></div>
+      <div className="order-4 md:order-7"><LazyMount minHeight={1362}><Suspense fallback={null}><ContactSection /></Suspense></LazyMount></div>
+      <div className="order-5 md:order-2"><LazyMount minHeight={760}><Suspense fallback={null}><GuideProfileSection /></Suspense></LazyMount></div>
+      <div className="order-6 md:order-6"><LazyMount minHeight={1412}><Suspense fallback={null}><AboutSection /></Suspense></LazyMount></div>
+      <div className="order-7 md:order-5"><LazyMount minHeight={890}><Suspense fallback={null}><WeatherSection /></Suspense></LazyMount></div>
+      <div className="order-8 md:order-8"><LazyMount minHeight={749}><Suspense fallback={null}><GallerySection /></Suspense></LazyMount></div>
+      <div className="order-9 md:order-9"><LazyMount minHeight={1036}><Suspense fallback={null}><BlogCarousel /></Suspense></LazyMount></div>
+      <div className="order-10 md:order-10"><LazyMount minHeight={1350}><Suspense fallback={null}><Footer /></Suspense></LazyMount></div>
     </main>
   );
 };
