@@ -290,6 +290,12 @@ export function PasseioDetalhe() {
     target?.scrollIntoView({ behavior: "smooth", block: "center" });
   }, []);
 
+  // Let global floating buttons (WhatsApp) lift above the sticky bottom bar.
+  useEffect(() => {
+    document.body.classList.toggle("has-sticky-bar", showStickyBar);
+    return () => document.body.classList.remove("has-sticky-bar");
+  }, [showStickyBar]);
+
   const [isLightboxOpen, setIsLightboxOpen] = useState(false);
   const [lightboxIndex, setLightboxIndex] = useState(0);
   const [lightboxSource, setLightboxSource] = useState<'hero' | 'gallery'>('hero');
