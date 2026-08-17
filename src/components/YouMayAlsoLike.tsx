@@ -33,14 +33,14 @@ export const YouMayAlsoLike = ({ excludeId }: { excludeId?: string }) => {
   return (
     <section className="py-16 bg-background">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-end justify-between mb-8 gap-4">
+        <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between mb-6 sm:mb-8 gap-3 sm:gap-4">
           <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl font-bold text-foreground">{title}</h2>
           <div className="flex gap-2 shrink-0">
-            <Button variant="outline" size="icon" className="rounded-full" onClick={() => emblaApi?.scrollPrev()} aria-label="Previous">
-              <ChevronLeft className="h-5 w-5" />
+            <Button variant="outline" size="icon" className="rounded-full h-8 w-8 sm:h-10 sm:w-10" onClick={() => emblaApi?.scrollPrev()} aria-label="Previous">
+              <ChevronLeft className="h-4 w-4 sm:h-5 sm:w-5" />
             </Button>
-            <Button variant="outline" size="icon" className="rounded-full" onClick={() => emblaApi?.scrollNext()} aria-label="Next">
-              <ChevronRight className="h-5 w-5" />
+            <Button variant="outline" size="icon" className="rounded-full h-8 w-8 sm:h-10 sm:w-10" onClick={() => emblaApi?.scrollNext()} aria-label="Next">
+              <ChevronRight className="h-4 w-4 sm:h-5 sm:w-5" />
             </Button>
           </div>
         </div>

@@ -58,7 +58,7 @@ export function FloatingButtons() {
   };
 
   return (
-    <div className="fixed right-2 bottom-2 md:right-6 md:bottom-6 z-50 flex flex-col gap-1.5 md:gap-3 items-end pointer-events-auto">
+    <div className="floating-buttons fixed right-2 bottom-2 md:right-6 md:bottom-6 z-50 flex flex-col gap-1.5 md:gap-3 items-end pointer-events-auto transition-[bottom] duration-300">
       {tripAdvisor && !isMobile && (
         <div className="w-7 min-h-[28px] md:w-14 md:min-h-[56px] flex items-center justify-center scale-50 md:scale-100 origin-bottom-right">
           <div 

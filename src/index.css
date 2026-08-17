@@ -395,3 +395,10 @@ html.has-mc body { /* keep system cursor — custom cursor is additive, less ris
     display: none !important;
   }
 }
+
+/* Lift floating WhatsApp button above the mobile sticky booking bar */
+@media (max-width: 767px) {
+  body.has-sticky-bar .floating-buttons {
+    bottom: 4rem;
+  }
+}
