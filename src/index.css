@@ -387,9 +387,11 @@ html.has-mc body { /* keep system cursor — custom cursor is additive, less ris
   .tw-caret { animation: none !important; opacity: 0; }
 }
 
-/* Hide Elfsight floating TripAdvisor widget on mobile (replaced by header link) */
+/* Hide every Elfsight widget/badge on mobile (replaced by the header TripAdvisor pill) */
 @media (max-width: 767px) {
   [class*="elfsight-app-"],
+  [class*="eapps-widget"],
+  [id*="eapps-"],
   .eapps-widget-toolbar,
   div[class^="eapps-"] {
     display: none !important;
