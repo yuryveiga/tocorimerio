@@ -159,7 +159,9 @@ export const TourItem = memo(({ tour }: { tour: TourCardProps }) => {
       </div>
       <div className="p-4 sm:p-6 flex flex-col flex-grow">
         <h3 className="font-serif text-lg sm:text-xl font-semibold text-foreground mb-2 line-clamp-2 sm:min-h-[3.5rem] group-hover:text-primary transition-colors">{title}</h3>
-        <p className="hidden sm:block text-muted-foreground text-sm mb-6 font-sans line-clamp-2 min-h-[2.5rem] leading-relaxed">{short_description}</p>
+        <div className="hidden sm:block mb-6">
+          <p className="text-muted-foreground text-sm font-sans line-clamp-2 min-h-[2.5rem] leading-relaxed">{short_description}</p>
+        </div>
 
         {/* Mobile: compact meta row (price · duration · category) */}
         <div className="sm:hidden flex flex-wrap items-center gap-x-2 gap-y-1 text-[11px] font-bold text-muted-foreground mb-3">
