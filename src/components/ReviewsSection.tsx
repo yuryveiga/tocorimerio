@@ -1,10 +1,12 @@
 import { useEffect, useRef } from "react";
 import { useLocale } from "@/contexts/LocaleContext";
 import { useSiteData } from "@/hooks/useSiteData";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 export function ReviewsSection() {
   const { t } = useLocale();
   const { socialMedia } = useSiteData();
+  const isMobile = useIsMobile();
   const sectionRef = useRef<HTMLElement>(null);
 
   const tripAdvisorSocial = socialMedia.find(s =>
@@ -13,6 +15,9 @@ export function ReviewsSection() {
   const tripAdvisorUrl = tripAdvisorSocial?.url || "https://www.tripadvisor.com.br/";
 
   useEffect(() => {
+    // On mobile the Elfsight widget is hidden (and its floating badge gets in the
+    // way of the booking UI), so we never load the ~520 KiB platform script.
+    if (isMobile) return;
     const el = sectionRef.current;
     if (!el) return;
 
@@ -46,7 +51,7 @@ export function ReviewsSection() {
     );
     observer.observe(el);
     return () => observer.disconnect();
-  }, []);
+  }, [isMobile]);
 
   return (
     <section ref={sectionRef} id="reviews" className="py-20 bg-muted/30">
@@ -60,12 +65,14 @@ export function ReviewsSection() {
           </p>
         </div>
 
-        <div className="min-h-[400px] flex items-center justify-center">
-          <div 
-            className="elfsight-app-a8e8bba0-e42c-47cd-a67d-a76cbb8bbd82" 
-            data-elfsight-app-lazy
-          />
-        </div>
+        {!isMobile && (
+          <div className="min-h-[400px] flex items-center justify-center">
+            <div
+              className="elfsight-app-a8e8bba0-e42c-47cd-a67d-a76cbb8bbd82"
+              data-elfsight-app-lazy
+            />
+          </div>
+        )}
 
         <div className="text-center mt-10">
           <a

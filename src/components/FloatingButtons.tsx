@@ -13,7 +13,7 @@ export function FloatingButtons() {
   const isAdmin = location.pathname.startsWith('/admin');
 
   useEffect(() => {
-    if (isAdmin) return;
+    if (isAdmin || isMobile) return;
     
     // Delay non-critical script to improve initial TBT
     const timer = setTimeout(() => {
@@ -24,7 +24,7 @@ export function FloatingButtons() {
     }, 2000);
 
     return () => clearTimeout(timer);
-  }, [isAdmin]);
+  }, [isAdmin, isMobile]);
 
   const socialLinks = useMemo(() => {
     const tripAdvisor = socialMedia.find(s => 
