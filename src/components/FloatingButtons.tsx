@@ -13,7 +13,20 @@ export function FloatingButtons() {
   const isAdmin = location.pathname.startsWith('/admin');
 
   useEffect(() => {
-    if (isAdmin || isMobile) return;
+    if (isAdmin) return;
+
+    if (isMobile) {
+      const removeElfsight = () => {
+        document
+          .querySelectorAll('script[src*="elfsight"], [class*="elfsight-app-"], [class*="eapps-"], [id*="eapps-"], iframe[src*="elfsight"]')
+          .forEach((element) => element.remove());
+      };
+
+      removeElfsight();
+      const observer = new MutationObserver(removeElfsight);
+      observer.observe(document.body, { childList: true, subtree: true });
+      return () => observer.disconnect();
+    }
     
     // Delay non-critical script to improve initial TBT
     const timer = setTimeout(() => {

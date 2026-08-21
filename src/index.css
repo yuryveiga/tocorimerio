@@ -392,6 +392,7 @@ html.has-mc body { /* keep system cursor — custom cursor is additive, less ris
   [class*="elfsight-app-"],
   [class*="eapps-widget"],
   [id*="eapps-"],
+  iframe[src*="elfsight"],
   .eapps-widget-toolbar,
   div[class^="eapps-"] {
     display: none !important;
