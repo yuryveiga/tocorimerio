@@ -190,7 +190,8 @@ const App = ({ queryClient: externalQueryClient }: { queryClient?: QueryClient }
                   <Suspense fallback={null}>
                     <DeferUntilIdle>
                       <FloatingButtons />
-                      <MagneticCursor />
+                      {/* Cursor custom só existe em ponteiro fino: não baixar o chunk no mobile. */}
+                      {typeof window !== "undefined" && window.matchMedia("(pointer: fine)").matches && <MagneticCursor />}
                     </DeferUntilIdle>
                   </Suspense>
                   {/* Page content: show spinner while lazy chunk loads */}

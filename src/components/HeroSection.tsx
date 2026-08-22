@@ -9,10 +9,13 @@ import { Button } from "@/components/ui/button";
 import { useSiteData } from "@/hooks/useSiteData";
 import { useLocale } from "@/contexts/LocaleContext";
 import { SocialProof } from "./SocialProof";
+import { useIsMobile } from "@/hooks/use-mobile";
+import { getOptimizedImage } from "@/utils/imageOptimization";
 
 export function HeroSection() {
   const { images, siteSettings, socialMedia } = useSiteData();
   const { t, language } = useLocale();
+  const isMobile = useIsMobile();
   const [currentBg, setCurrentBg] = useState(0);
   const [scrollY, setScrollY] = useState(0);
   // Slideshow das imagens 2/3: só renderizamos DEPOIS que a LCP terminou de
@@ -52,20 +55,30 @@ export function HeroSection() {
 
   // If admin hasn't set any images yet, show the default immediately.
   // Once the API resolves, availableBgs will have real URLs and override.
-  const heroBgs = availableBgs.length > 0 ? availableBgs : [DEFAULT_HERO];
+  const rawHeroBgs = availableBgs.length > 0 ? availableBgs : [DEFAULT_HERO];
+
+  // Mobile: sirva uma versão redimensionada (a tela tem ~390px de largura,
+  // baixar 1920px é desperdício e atrasa o LCP). Desktop mantém o original.
+  const heroBgs = isMobile
+    ? rawHeroBgs.map((u) => getOptimizedImage(u, 828, 55))
+    : rawHeroBgs;
+
+  // No mobile o slideshow (2ª/3ª imagem) só gasta banda e CPU — 1 imagem basta.
+  const slides = isMobile ? heroBgs.slice(0, 1) : heroBgs;
 
   useEffect(() => {
-    if (heroBgs.length <= 1) return;
+    if (slides.length <= 1) return;
     if (!showRestSlides) return;
     const interval = setInterval(() => {
-      setCurrentBg((prev) => (prev + 1) % heroBgs.length);
+      setCurrentBg((prev) => (prev + 1) % slides.length);
     }, 6000);
     return () => clearInterval(interval);
-  }, [heroBgs.length, showRestSlides]);
+  }, [slides.length, showRestSlides]);
 
   // Adia carregamento das imagens 2/3 do slideshow até depois do LCP + idle.
   useEffect(() => {
     if (showRestSlides) return;
+    if (isMobile) return; // mobile só usa 1 imagem — nada a adiar
     let cancelled = false;
     const trigger = () => { if (!cancelled) setShowRestSlides(true); };
     // Espera 3.5s OU idle callback — o que vier primeiro após o LCP.
@@ -79,10 +92,13 @@ export function HeroSection() {
       window.clearTimeout(t);
       if (idle && (window as any).cancelIdleCallback) (window as any).cancelIdleCallback(idle);
     };
-  }, [showRestSlides]);
+  }, [showRestSlides, isMobile]);
 
   // Subtle parallax — translate backgrounds + content while scrolling past hero.
+  // Desativado no mobile: re-renderizar o hero a cada frame de scroll é a maior
+  // fonte de bloqueio de main thread (TBT/INP) em celulares.
   useEffect(() => {
+    if (isMobile) return;
     const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (prefersReduced) return;
     let raf = 0;
@@ -98,7 +114,7 @@ export function HeroSection() {
       window.removeEventListener("scroll", onScroll);
       if (raf) cancelAnimationFrame(raf);
     };
-  }, []);
+  }, [isMobile]);
 
   const contentParallax = {
     transform: `translate3d(0, ${Math.min(scrollY * 0.18, 120)}px, 0)`,
@@ -222,21 +238,29 @@ export function HeroSection() {
 
   const renderSlideshowBackgrounds = () => (
     <>
-      {heroBgs.map((bg, index) => index > 0 && !showRestSlides ? null : (
+      {slides.map((bg, index) => index > 0 && !showRestSlides ? null : (
         <div
           key={index}
           className={`absolute inset-0 transition-opacity duration-1000 bg-cover bg-center bg-no-repeat ${index === currentBg ? 'opacity-100' : 'opacity-0'}`}
-          style={{ backgroundImage: `url(${bg})`, animation: `ken-burns 14s ease-in-out ${index * 2}s infinite alternate`, willChange: 'transform' }}
+          style={
+            isMobile
+              // Mobile: sem ken-burns (anima 1 camada em tela cheia = CPU/GPU cara)
+              // e sem background-image — a <img> visível abaixo evita decodificar
+              // a mesma imagem duas vezes.
+              ? undefined
+              : { backgroundImage: `url(${bg})`, animation: `ken-burns 14s ease-in-out ${index * 2}s infinite alternate`, willChange: 'transform' }
+          }
         >
           {/* Hidden <img> so the browser preload scanner can fetch the image.
-              fetchpriority="high" on index 0 tells the browser this is LCP-critical. */}
+              fetchpriority="high" on index 0 tells the browser this is LCP-critical.
+              No mobile ela é a própria imagem visível do hero. */}
           <img
             src={bg}
             alt=""
             aria-hidden="true"
             width={1920}
             height={1080}
-            className="absolute inset-0 w-full h-full object-cover opacity-0 pointer-events-none select-none"
+            className={`absolute inset-0 w-full h-full object-cover pointer-events-none select-none ${isMobile ? '' : 'opacity-0'}`}
             fetchPriority={index === 0 ? "high" : "low"}
             loading={index === 0 ? "eager" : "lazy"}
             decoding={index === 0 ? "sync" : "async"}
