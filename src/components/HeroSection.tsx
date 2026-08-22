@@ -238,21 +238,29 @@ export function HeroSection() {
 
   const renderSlideshowBackgrounds = () => (
     <>
-      {heroBgs.map((bg, index) => index > 0 && !showRestSlides ? null : (
+      {slides.map((bg, index) => index > 0 && !showRestSlides ? null : (
         <div
           key={index}
           className={`absolute inset-0 transition-opacity duration-1000 bg-cover bg-center bg-no-repeat ${index === currentBg ? 'opacity-100' : 'opacity-0'}`}
-          style={{ backgroundImage: `url(${bg})`, animation: `ken-burns 14s ease-in-out ${index * 2}s infinite alternate`, willChange: 'transform' }}
+          style={
+            isMobile
+              // Mobile: sem ken-burns (anima 1 camada em tela cheia = CPU/GPU cara)
+              // e sem background-image — a <img> visível abaixo evita decodificar
+              // a mesma imagem duas vezes.
+              ? undefined
+              : { backgroundImage: `url(${bg})`, animation: `ken-burns 14s ease-in-out ${index * 2}s infinite alternate`, willChange: 'transform' }
+          }
         >
           {/* Hidden <img> so the browser preload scanner can fetch the image.
-              fetchpriority="high" on index 0 tells the browser this is LCP-critical. */}
+              fetchpriority="high" on index 0 tells the browser this is LCP-critical.
+              No mobile ela é a própria imagem visível do hero. */}
           <img
             src={bg}
             alt=""
             aria-hidden="true"
             width={1920}
             height={1080}
-            className="absolute inset-0 w-full h-full object-cover opacity-0 pointer-events-none select-none"
+            className={`absolute inset-0 w-full h-full object-cover pointer-events-none select-none ${isMobile ? '' : 'opacity-0'}`}
             fetchPriority={index === 0 ? "high" : "low"}
             loading={index === 0 ? "eager" : "lazy"}
             decoding={index === 0 ? "sync" : "async"}
