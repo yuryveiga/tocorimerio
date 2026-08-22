@@ -9,6 +9,8 @@ import { Button } from "@/components/ui/button";
 import { useSiteData } from "@/hooks/useSiteData";
 import { useLocale } from "@/contexts/LocaleContext";
 import { SocialProof } from "./SocialProof";
+import { useIsMobile } from "@/hooks/use-mobile";
+import { getOptimizedImage } from "@/utils/imageOptimization";
 
 export function HeroSection() {
   const { images, siteSettings, socialMedia } = useSiteData();
