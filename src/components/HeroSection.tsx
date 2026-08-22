@@ -67,17 +67,18 @@ export function HeroSection() {
   const slides = isMobile ? heroBgs.slice(0, 1) : heroBgs;
 
   useEffect(() => {
-    if (heroBgs.length <= 1) return;
+    if (slides.length <= 1) return;
     if (!showRestSlides) return;
     const interval = setInterval(() => {
-      setCurrentBg((prev) => (prev + 1) % heroBgs.length);
+      setCurrentBg((prev) => (prev + 1) % slides.length);
     }, 6000);
     return () => clearInterval(interval);
-  }, [heroBgs.length, showRestSlides]);
+  }, [slides.length, showRestSlides]);
 
   // Adia carregamento das imagens 2/3 do slideshow até depois do LCP + idle.
   useEffect(() => {
     if (showRestSlides) return;
+    if (isMobile) return; // mobile só usa 1 imagem — nada a adiar
     let cancelled = false;
     const trigger = () => { if (!cancelled) setShowRestSlides(true); };
     // Espera 3.5s OU idle callback — o que vier primeiro após o LCP.
@@ -91,10 +92,13 @@ export function HeroSection() {
       window.clearTimeout(t);
       if (idle && (window as any).cancelIdleCallback) (window as any).cancelIdleCallback(idle);
     };
-  }, [showRestSlides]);
+  }, [showRestSlides, isMobile]);
 
   // Subtle parallax — translate backgrounds + content while scrolling past hero.
+  // Desativado no mobile: re-renderizar o hero a cada frame de scroll é a maior
+  // fonte de bloqueio de main thread (TBT/INP) em celulares.
   useEffect(() => {
+    if (isMobile) return;
     const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (prefersReduced) return;
     let raf = 0;
@@ -110,7 +114,7 @@ export function HeroSection() {
       window.removeEventListener("scroll", onScroll);
       if (raf) cancelAnimationFrame(raf);
     };
-  }, []);
+  }, [isMobile]);
 
   const contentParallax = {
     transform: `translate3d(0, ${Math.min(scrollY * 0.18, 120)}px, 0)`,
