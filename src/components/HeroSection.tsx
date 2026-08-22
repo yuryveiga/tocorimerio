@@ -15,6 +15,7 @@ import { getOptimizedImage } from "@/utils/imageOptimization";
 export function HeroSection() {
   const { images, siteSettings, socialMedia } = useSiteData();
   const { t, language } = useLocale();
+  const isMobile = useIsMobile();
   const [currentBg, setCurrentBg] = useState(0);
   const [scrollY, setScrollY] = useState(0);
   // Slideshow das imagens 2/3: só renderizamos DEPOIS que a LCP terminou de
