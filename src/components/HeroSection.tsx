@@ -54,7 +54,16 @@ export function HeroSection() {
 
   // If admin hasn't set any images yet, show the default immediately.
   // Once the API resolves, availableBgs will have real URLs and override.
-  const heroBgs = availableBgs.length > 0 ? availableBgs : [DEFAULT_HERO];
+  const rawHeroBgs = availableBgs.length > 0 ? availableBgs : [DEFAULT_HERO];
+
+  // Mobile: sirva uma versão redimensionada (a tela tem ~390px de largura,
+  // baixar 1920px é desperdício e atrasa o LCP). Desktop mantém o original.
+  const heroBgs = isMobile
+    ? rawHeroBgs.map((u) => getOptimizedImage(u, 828, 55))
+    : rawHeroBgs;
+
+  // No mobile o slideshow (2ª/3ª imagem) só gasta banda e CPU — 1 imagem basta.
+  const slides = isMobile ? heroBgs.slice(0, 1) : heroBgs;
 
   useEffect(() => {
     if (heroBgs.length <= 1) return;
