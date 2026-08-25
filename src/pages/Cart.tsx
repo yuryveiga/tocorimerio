@@ -64,7 +64,9 @@ const Cart = () => {
           quantity: item.quantity
         });
 
-        const { data, error } = await supabase.from("sales").insert({
+        const saleId = crypto.randomUUID();
+        const { error } = await supabase.from("sales").insert({
+          id: saleId,
           tour_id: item.id,
           tour_title: item.title,
           tour_slug: item.slug,
@@ -79,16 +81,14 @@ const Cart = () => {
           is_paid: false,
           currency: currency, // Savando a moeda original (BRL, USD, EUR)
           provider: "tour",
-        }).select("id").single();
+        });
 
         if (error) {
           console.error("Supabase insert error:", error);
           throw new Error(`Erro ao salvar no banco: ${error.message || JSON.stringify(error)}`);
         }
-        
-        if (data) {
-          saleIds.push(data.id);
-        }
+
+        saleIds.push(saleId);
       }
 
       console.log("Sales created successfully, IDs:", saleIds);

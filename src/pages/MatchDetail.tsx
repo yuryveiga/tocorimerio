@@ -206,7 +206,9 @@ export default function MatchDetail() {
 
     try {
       // 1. Create sale record in TOCORIME database first
-      const { data: saleData, error: saleError } = await localSupabase.from("sales").insert({
+      const saleId = crypto.randomUUID();
+      const { error: saleError } = await localSupabase.from("sales").insert({
+        id: saleId,
         tour_id: match.id,
         tour_title: `${match.home_team} x ${match.away_team} - ${sectorName} - Maracanã Experience`,
         tour_slug: match.slug,
@@ -220,7 +222,7 @@ export default function MatchDetail() {
         is_paid: false,
         currency: currency, // Savando a moeda (BRL, USD, EUR)
         provider: "matchday" // Track that this is a partner sale
-      }).select("id").single();
+      });
 
       if (saleError) throw saleError;
 
@@ -242,7 +244,7 @@ export default function MatchDetail() {
               date: format(new Date(match.match_date), "yyyy-MM-dd"),
               period: "match_time"
             }],
-            sale_ids: [saleData.id],
+            sale_ids: [saleId],
             customer: customerInfo,
             currency: currentCurrency,
             apply_fee: feeEnabled,
