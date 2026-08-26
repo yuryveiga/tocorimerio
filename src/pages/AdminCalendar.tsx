@@ -17,14 +17,17 @@ const GOOGLE_CALENDAR_EMBED_ID = "marius.e.dobbin@gmail.com";
 
 const AdminCalendar = () => {
   const [sales, setSales] = useState<LovableSale[]>([]);
+  const [tours, setTours] = useState<LovableTour[]>([]);
   const [currentDate, setCurrentDate] = useState(new Date());
   const [selectedDate, setSelectedDate] = useState<string | null>(null);
   const [viewingSale, setViewingSale] = useState<LovableSale | null>(null);
   const [lastSync, setLastSync] = useState<string | null>(null);
+  const [stripeOpen, setStripeOpen] = useState(false);
 
   useEffect(() => {
     fetchLovable<LovableSale>("sales").then(setSales);
-    
+    fetchLovable<LovableTour>("tours").then(setTours);
+
     // Buscar data da última atualização de um jogo
     import("@/integrations/supabase/client").then(({ supabase }) => {
       supabase
