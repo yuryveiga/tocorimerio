@@ -91,13 +91,19 @@ const AdminCalendar = () => {
 
   return (
     <div className="space-y-6">
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
         <h1 className="font-serif text-3xl font-bold text-foreground">Calendário</h1>
-        {lastSync && (
-          <span className="text-[10px] text-muted-foreground font-medium bg-muted/50 px-3 py-1 rounded-full border">
-            Dados sincronizados em: {new Date(lastSync).toLocaleString('pt-BR')}
-          </span>
-        )}
+        <div className="flex flex-wrap items-center gap-2">
+          <Button onClick={() => setStripeOpen(true)} className="rounded-xl">
+            <CreditCard className="w-4 h-4 mr-2" />
+            Criar Link Stripe
+          </Button>
+          {lastSync && (
+            <span className="text-[10px] text-muted-foreground font-medium bg-muted/50 px-3 py-1 rounded-full border">
+              Dados sincronizados em: {new Date(lastSync).toLocaleString('pt-BR')}
+            </span>
+          )}
+        </div>
       </div>
 
       {/* Reservas do Site */}
