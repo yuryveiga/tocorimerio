@@ -1,9 +1,10 @@
 import { useState, useEffect, useMemo } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { fetchLovable, LovableSale } from "@/integrations/lovable/client";
-import { ChevronLeft, ChevronRight, CalendarDays, Users } from "lucide-react";
+import { fetchLovable, LovableSale, LovableTour } from "@/integrations/lovable/client";
+import { ChevronLeft, ChevronRight, CalendarDays, Users, CreditCard } from "lucide-react";
 import SaleDetailDialog from "@/components/admin/SaleDetailDialog";
+import StripeCheckoutDialog from "@/components/admin/StripeCheckoutDialog";
 import { toast } from "sonner";
 
 const WEEKDAYS = ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sáb"];
