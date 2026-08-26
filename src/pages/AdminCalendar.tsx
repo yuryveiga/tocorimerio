@@ -271,6 +271,12 @@ const AdminCalendar = () => {
         open={!!viewingSale}
         onClose={() => setViewingSale(null)}
       />
+
+      <StripeCheckoutDialog
+        open={stripeOpen}
+        onClose={() => setStripeOpen(false)}
+        tours={tours}
+      />
     </div>
   );
 };
