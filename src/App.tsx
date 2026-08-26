@@ -68,6 +68,7 @@ const JogoLanding            = lazy(() => import("./pages/JogoLanding"));
 const Sitemap                = lazy(() => import("./pages/Sitemap"));
 const PasseiosCategoria      = lazy(() => import("./pages/PasseiosCategoria"));
 const Experiences            = lazy(() => import("./pages/Experiences"));
+const ShortLinkRedirect      = lazy(() => import("./pages/ShortLinkRedirect"));
 const PrivateGuideRio        = lazy(() => import("./pages/PrivateGuideRio"));
 const ThingsToDoInRio        = lazy(() => import("./pages/ThingsToDoInRio"));
 
@@ -199,6 +200,7 @@ const App = ({ queryClient: externalQueryClient }: { queryClient?: QueryClient }
                     <RouteFader>
                     <Routes>
                       <Route path="/" element={<Index />} />
+                      <Route path="/r/:code" element={<ShortLinkRedirect />} />
                       <Route path="/blog" element={<Blog />} />
                       <Route path="/contact" element={<Contact />} />
                       <Route path="/about-us" element={<AboutUs />} />

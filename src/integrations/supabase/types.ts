@@ -460,6 +460,36 @@ export type Database = {
         }
         Relationships: []
       }
+      short_links: {
+        Row: {
+          clicks: number
+          code: string
+          created_at: string
+          created_by: string | null
+          id: string
+          label: string | null
+          target_url: string
+        }
+        Insert: {
+          clicks?: number
+          code: string
+          created_at?: string
+          created_by?: string | null
+          id?: string
+          label?: string | null
+          target_url: string
+        }
+        Update: {
+          clicks?: number
+          code?: string
+          created_at?: string
+          created_by?: string | null
+          id?: string
+          label?: string | null
+          target_url?: string
+        }
+        Relationships: []
+      }
       site_images: {
         Row: {
           created_at: string

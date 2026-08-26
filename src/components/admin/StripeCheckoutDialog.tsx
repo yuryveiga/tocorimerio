@@ -8,6 +8,7 @@ import { LovableTour, insertLovable } from "@/integrations/lovable/client";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
 import { Loader2, Copy, ExternalLink } from "lucide-react";
+import { createShortLink } from "@/utils/shortLink";
 
 interface Props {
   open: boolean;
@@ -84,18 +85,11 @@ export default function StripeCheckoutDialog({ open, onClose, tours }: Props) {
 
       if (error) throw error;
       if (data?.url) {
-        // Shorten URL via TinyURL
-        try {
-          const shortRes = await fetch(`https://tinyurl.com/api-create.php?url=${encodeURIComponent(data.url)}`);
-          if (shortRes.ok) {
-            const shortUrl = await shortRes.text();
-            setGeneratedUrl(shortUrl);
-          } else {
-            setGeneratedUrl(data.url);
-          }
-        } catch {
-          setGeneratedUrl(data.url);
-        }
+        const shortUrl = await createShortLink(
+          data.url,
+          `${selectedTour?.title || "Passeio"} · ${customerName}`
+        );
+        setGeneratedUrl(shortUrl);
         toast({ title: "Link gerado e reserva salva!" });
       } else {
         throw new Error("Nenhum link retornado");

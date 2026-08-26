@@ -14,6 +14,7 @@ Disallow: /.lovable/
 Disallow: /carrinho
 Disallow: /confirmacao
 Disallow: /checkout
+Disallow: /r/
 
 # Crawl delay for aggressive bots
 Crawl-delay: 1
