@@ -68,6 +68,7 @@ const JogoLanding            = lazy(() => import("./pages/JogoLanding"));
 const Sitemap                = lazy(() => import("./pages/Sitemap"));
 const PasseiosCategoria      = lazy(() => import("./pages/PasseiosCategoria"));
 const Experiences            = lazy(() => import("./pages/Experiences"));
+const ShortLinkRedirect      = lazy(() => import("./pages/ShortLinkRedirect"));
 const PrivateGuideRio        = lazy(() => import("./pages/PrivateGuideRio"));
 const ThingsToDoInRio        = lazy(() => import("./pages/ThingsToDoInRio"));
 
