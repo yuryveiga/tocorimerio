@@ -10,6 +10,8 @@ import { useToast } from "@/hooks/use-toast";
 import { Loader2, Copy, ExternalLink } from "lucide-react";
 import { createShortLink } from "@/utils/shortLink";
 
+const CUSTOM_TOUR_ID = "custom";
+
 interface Props {
   open: boolean;
   onClose: () => void;
@@ -21,6 +23,7 @@ export default function StripeCheckoutDialog({ open, onClose, tours }: Props) {
   const [customerPhone, setCustomerPhone] = useState("");
   const [customerEmail, setCustomerEmail] = useState("");
   const [tourId, setTourId] = useState("");
+  const [customTitle, setCustomTitle] = useState("Tour Personalizado");
   const [quantity, setQuantity] = useState(1);
   const [selectedDate, setSelectedDate] = useState("");
   const [pricePerPerson, setPricePerPerson] = useState(0);
@@ -29,7 +32,9 @@ export default function StripeCheckoutDialog({ open, onClose, tours }: Props) {
   const [generatedUrl, setGeneratedUrl] = useState("");
   const { toast } = useToast();
 
+  const isCustom = tourId === CUSTOM_TOUR_ID;
   const selectedTour = useMemo(() => tours.find(t => t.id === tourId), [tours, tourId]);
+  const tourTitle = isCustom ? (customTitle || "Tour Personalizado") : (selectedTour?.title || "");
 
   const subtotal = pricePerPerson * quantity;
   const fee = addFee ? subtotal * 0.05 : 0;
@@ -37,12 +42,16 @@ export default function StripeCheckoutDialog({ open, onClose, tours }: Props) {
 
   const handleTourChange = (id: string) => {
     setTourId(id);
+    if (id === CUSTOM_TOUR_ID) {
+      setPricePerPerson(0);
+      return;
+    }
     const tour = tours.find(t => t.id === id);
     if (tour) setPricePerPerson(tour.price || 0);
   };
 
   const handleGenerate = async () => {
-    if (!customerName || !customerEmail || !tourId || !selectedDate) {
+    if (!customerName || !tourId || !selectedDate) {
       toast({ title: "Preencha todos os campos obrigatórios", variant: "destructive" });
       return;
     }
@@ -53,12 +62,12 @@ export default function StripeCheckoutDialog({ open, onClose, tours }: Props) {
     try {
       // Save sale as pending
       const savedSale = await insertLovable("sales", {
-        tour_id: tourId,
-        tour_title: selectedTour?.title || "",
-        tour_slug: selectedTour?.slug || "",
+        tour_id: isCustom ? crypto.randomUUID() : tourId,
+        tour_title: tourTitle,
+        tour_slug: isCustom ? "" : (selectedTour?.slug || ""),
         customer_name: customerName,
-        customer_email: customerEmail,
-        customer_phone: customerPhone,
+        customer_email: customerEmail || null,
+        customer_phone: customerPhone || null,
         quantity,
         total_price: total,
         selected_date: selectedDate,
@@ -72,7 +81,7 @@ export default function StripeCheckoutDialog({ open, onClose, tours }: Props) {
       const { data, error } = await supabase.functions.invoke("create-checkout", {
         body: {
           items: [{
-            title: selectedTour?.title || "Passeio",
+            title: tourTitle || "Passeio",
             quantity,
             price: pricePerPerson,
             date: selectedDate,
@@ -87,7 +96,8 @@ export default function StripeCheckoutDialog({ open, onClose, tours }: Props) {
       if (data?.url) {
         const shortUrl = await createShortLink(
           data.url,
-          `${selectedTour?.title || "Passeio"} · ${customerName}`
+          `${tourTitle || "Passeio"} · ${customerName}`,
+          `${customerName} ${tourTitle || "Passeio"}`
         );
         setGeneratedUrl(shortUrl);
         toast({ title: "Link gerado e reserva salva!" });
@@ -112,6 +122,7 @@ export default function StripeCheckoutDialog({ open, onClose, tours }: Props) {
     setCustomerPhone("");
     setCustomerEmail("");
     setTourId("");
+    setCustomTitle("Tour Personalizado");
     setQuantity(1);
     setSelectedDate("");
     setPricePerPerson(0);
@@ -142,11 +153,11 @@ export default function StripeCheckoutDialog({ open, onClose, tours }: Props) {
 
           <div className="grid grid-cols-2 gap-4">
             <div className="space-y-2">
-              <Label htmlFor="checkout-customer-phone">Telefone</Label>
+              <Label htmlFor="checkout-customer-phone">Telefone (opcional)</Label>
               <Input id="checkout-customer-phone" value={customerPhone} onChange={(e) => setCustomerPhone(e.target.value)} placeholder="(21) 99999-9999" />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="checkout-customer-email">Email *</Label>
+              <Label htmlFor="checkout-customer-email">Email (opcional)</Label>
               <Input id="checkout-customer-email" type="email" value={customerEmail} onChange={(e) => setCustomerEmail(e.target.value)} placeholder="email@exemplo.com" />
             </div>
           </div>
@@ -163,8 +174,21 @@ export default function StripeCheckoutDialog({ open, onClose, tours }: Props) {
               {tours.map(tour => (
                 <option key={tour.id} value={tour.id}>{tour.title}</option>
               ))}
+              <option value={CUSTOM_TOUR_ID}>Tour Personalizado</option>
             </select>
           </div>
+
+          {isCustom && (
+            <div className="space-y-2">
+              <Label htmlFor="checkout-custom-title">Nome do Tour Personalizado</Label>
+              <Input
+                id="checkout-custom-title"
+                value={customTitle}
+                onChange={(e) => setCustomTitle(e.target.value)}
+                placeholder="Ex: Tour Personalizado - Rio em 1 dia"
+              />
+            </div>
+          )}
 
           <div className="grid grid-cols-3 gap-4">
             <div className="space-y-2">
