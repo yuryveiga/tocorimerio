@@ -8,6 +8,7 @@ import { LovableTour, insertLovable } from "@/integrations/lovable/client";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
 import { Loader2, Copy, ExternalLink } from "lucide-react";
+import { createShortLink } from "@/utils/shortLink";
 
 interface Props {
   open: boolean;
