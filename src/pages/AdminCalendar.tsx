@@ -1,9 +1,10 @@
 import { useState, useEffect, useMemo } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { fetchLovable, LovableSale } from "@/integrations/lovable/client";
-import { ChevronLeft, ChevronRight, CalendarDays, Users } from "lucide-react";
+import { fetchLovable, LovableSale, LovableTour } from "@/integrations/lovable/client";
+import { ChevronLeft, ChevronRight, CalendarDays, Users, CreditCard } from "lucide-react";
 import SaleDetailDialog from "@/components/admin/SaleDetailDialog";
+import StripeCheckoutDialog from "@/components/admin/StripeCheckoutDialog";
 import { toast } from "sonner";
 
 const WEEKDAYS = ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sáb"];
@@ -16,14 +17,17 @@ const GOOGLE_CALENDAR_EMBED_ID = "marius.e.dobbin@gmail.com";
 
 const AdminCalendar = () => {
   const [sales, setSales] = useState<LovableSale[]>([]);
+  const [tours, setTours] = useState<LovableTour[]>([]);
   const [currentDate, setCurrentDate] = useState(new Date());
   const [selectedDate, setSelectedDate] = useState<string | null>(null);
   const [viewingSale, setViewingSale] = useState<LovableSale | null>(null);
   const [lastSync, setLastSync] = useState<string | null>(null);
+  const [stripeOpen, setStripeOpen] = useState(false);
 
   useEffect(() => {
     fetchLovable<LovableSale>("sales").then(setSales);
-    
+    fetchLovable<LovableTour>("tours").then(setTours);
+
     // Buscar data da última atualização de um jogo
     import("@/integrations/supabase/client").then(({ supabase }) => {
       supabase
@@ -87,13 +91,19 @@ const AdminCalendar = () => {
 
   return (
     <div className="space-y-6">
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
         <h1 className="font-serif text-3xl font-bold text-foreground">Calendário</h1>
-        {lastSync && (
-          <span className="text-[10px] text-muted-foreground font-medium bg-muted/50 px-3 py-1 rounded-full border">
-            Dados sincronizados em: {new Date(lastSync).toLocaleString('pt-BR')}
-          </span>
-        )}
+        <div className="flex flex-wrap items-center gap-2">
+          <Button onClick={() => setStripeOpen(true)} className="rounded-xl">
+            <CreditCard className="w-4 h-4 mr-2" />
+            Criar Link Stripe
+          </Button>
+          {lastSync && (
+            <span className="text-[10px] text-muted-foreground font-medium bg-muted/50 px-3 py-1 rounded-full border">
+              Dados sincronizados em: {new Date(lastSync).toLocaleString('pt-BR')}
+            </span>
+          )}
+        </div>
       </div>
 
       {/* Reservas do Site */}
@@ -260,6 +270,12 @@ const AdminCalendar = () => {
         sale={viewingSale}
         open={!!viewingSale}
         onClose={() => setViewingSale(null)}
+      />
+
+      <StripeCheckoutDialog
+        open={stripeOpen}
+        onClose={() => setStripeOpen(false)}
+        tours={tours}
       />
     </div>
   );
