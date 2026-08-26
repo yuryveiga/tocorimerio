@@ -63,7 +63,7 @@ export const buildMatchExperienceContent = (
       sections: [
         {
           heading: "O que está incluso no seu Maracanã matchday",
-          body: `O pacote para ${homeTeam} x ${awayTeam} inclui: ingresso oficial no setor escolhido (sem filas, sem revenda), transfer executivo ida e volta a partir de qualquer hotel da Zona Sul carioca (Copacabana, Ipanema, Leblon, Botafogo, Flamengo, Lagoa, Barra da Tijuca), guia bilíngue (português, inglês e espanhol) durante toda a experiência, encontro pré-jogo em bar tradicional para conhecer a torcida de perto, entrada acompanhada no estádio pelos portões corretos e suporte 24/7 por WhatsApp. Se preferir um tour mais exclusivo, oferecemos também a opção privativa, com horário personalizado e veículo dedicado apenas para o seu grupo.`,
+          body: `O pacote para ${homeTeam} x ${awayTeam} inclui: ingresso oficial no setor escolhido (sem filas, sem revenda), transfer ida e volta a partir de qualquer hotel da Zona Sul carioca (Copacabana, Ipanema, Leblon, Botafogo, Flamengo, Lagoa, Barra da Tijuca), guia bilíngue (português, inglês e espanhol) durante toda a experiência e entrada acompanhada no estádio pelos portões corretos. Se preferir um tour mais exclusivo, oferecemos também a opção privativa, com horário personalizado e veículo dedicado apenas para o seu grupo.`,
         },
         {
           heading: "Por que reservar com a Tocorime Rio",
