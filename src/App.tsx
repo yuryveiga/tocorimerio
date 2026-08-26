@@ -200,6 +200,7 @@ const App = ({ queryClient: externalQueryClient }: { queryClient?: QueryClient }
                     <RouteFader>
                     <Routes>
                       <Route path="/" element={<Index />} />
+                      <Route path="/r/:code" element={<ShortLinkRedirect />} />
                       <Route path="/blog" element={<Blog />} />
                       <Route path="/contact" element={<Contact />} />
                       <Route path="/about-us" element={<AboutUs />} />
