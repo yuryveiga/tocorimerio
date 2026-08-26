@@ -967,7 +967,6 @@ export type Database = {
           customer_name: string
         }[]
       }
-      register_short_link_click: { Args: { _code: string }; Returns: string }
       set_sale_passengers: {
         Args: { _id: string; _passengers: Json }
         Returns: undefined
