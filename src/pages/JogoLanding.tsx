@@ -168,14 +168,35 @@ export default function JogoLanding() {
           <section className="max-w-3xl mx-auto mb-12">
             <h2 className="font-serif text-2xl font-bold mb-6 text-center">Veja a experiência no Maracanã</h2>
             <div className="relative w-full aspect-video rounded-2xl overflow-hidden bg-black shadow-xl border border-border">
-              <iframe
-                src={`https://www.youtube.com/embed/${FEATURED_VIDEO_ID}?rel=0`}
-                title={FEATURED_VIDEO_TITLE}
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                allowFullScreen
-                loading="lazy"
-                className="absolute inset-0 w-full h-full"
-              />
+              {!videoOpen ? (
+                <button
+                  type="button"
+                  onClick={() => setVideoOpen(true)}
+                  className="group absolute inset-0 w-full h-full p-0 border-0 cursor-pointer"
+                  aria-label={`Reproduzir vídeo: ${FEATURED_VIDEO_TITLE}`}
+                >
+                  <img
+                    src={`https://img.youtube.com/vi/${FEATURED_VIDEO_ID}/maxresdefault.jpg`}
+                    alt={FEATURED_VIDEO_TITLE}
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    loading="lazy"
+                  />
+                  <div className="absolute inset-0 bg-black/30 group-hover:bg-black/20 transition-colors" />
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-primary/90 text-white flex items-center justify-center shadow-2xl transition-transform duration-300 group-hover:scale-110">
+                      <Play className="w-7 h-7 sm:w-8 sm:h-8 fill-current ml-1" />
+                    </div>
+                  </div>
+                </button>
+              ) : (
+                <iframe
+                  src={`https://www.youtube.com/embed/${FEATURED_VIDEO_ID}?rel=0&autoplay=1`}
+                  title={FEATURED_VIDEO_TITLE}
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  allowFullScreen
+                  className="absolute inset-0 w-full h-full"
+                />
+              )}
             </div>
             <p className="text-center text-sm text-muted-foreground mt-3">
               Assista como é viver um jogo de {match.home_team} x {match.away_team} de perto.
