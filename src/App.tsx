@@ -41,6 +41,7 @@ const AdminPages             = lazy(() => import("./pages/AdminPages"));
 const AdminImages            = lazy(() => import("./pages/AdminImages"));
 const AdminSocial            = lazy(() => import("./pages/AdminSocial"));
 const AdminGallery           = lazy(() => import("./pages/AdminGallery"));
+const AdminGuides            = lazy(() => import("./pages/AdminGuides"));
 const AdminBlog              = lazy(() => import("./pages/AdminBlog"));
 const AdminHero              = lazy(() => import("./pages/AdminHero"));
 const AdminTheme             = lazy(() => import("./pages/AdminTheme"));
@@ -260,6 +261,7 @@ const App = ({ queryClient: externalQueryClient }: { queryClient?: QueryClient }
                         <Route path="images" element={<AdminImages />} />
                         <Route path="social" element={<AdminSocial />} />
                         <Route path="gallery" element={<AdminGallery />} />
+                        <Route path="guides" element={<AdminGuides />} />
                         <Route path="sales" element={<AdminSales />} />
                         <Route path="simulator" element={<AdminSimulator />} />
                         <Route path="calendar" element={<AdminCalendar />} />

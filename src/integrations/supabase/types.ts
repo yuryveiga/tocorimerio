@@ -175,6 +175,57 @@ export type Database = {
         }
         Relationships: []
       }
+      guides: {
+        Row: {
+          bio: string | null
+          bio_en: string | null
+          bio_es: string | null
+          created_at: string
+          id: string
+          is_active: boolean
+          languages: string[]
+          name: string
+          photo_url: string | null
+          role: string | null
+          role_en: string | null
+          role_es: string | null
+          sort_order: number
+          updated_at: string
+        }
+        Insert: {
+          bio?: string | null
+          bio_en?: string | null
+          bio_es?: string | null
+          created_at?: string
+          id?: string
+          is_active?: boolean
+          languages?: string[]
+          name: string
+          photo_url?: string | null
+          role?: string | null
+          role_en?: string | null
+          role_es?: string | null
+          sort_order?: number
+          updated_at?: string
+        }
+        Update: {
+          bio?: string | null
+          bio_en?: string | null
+          bio_es?: string | null
+          created_at?: string
+          id?: string
+          is_active?: boolean
+          languages?: string[]
+          name?: string
+          photo_url?: string | null
+          role?: string | null
+          role_en?: string | null
+          role_es?: string | null
+          sort_order?: number
+          updated_at?: string
+        }
+        Relationships: []
+      }
       matches: {
         Row: {
           attention_json: Json | null

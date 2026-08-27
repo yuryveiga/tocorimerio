@@ -10,6 +10,7 @@ import {
   LayoutTemplate, 
   Palette, 
   Users, 
+  UserRound,
   MessageSquare, 
   DollarSign,
   Calculator,
@@ -72,6 +73,7 @@ const menuGroups = [
       { title: "Passeios", url: "/admin/tours", icon: Map },
       { title: "Blog", url: "/admin/blog", icon: PenTool },
       { title: "Galeria", url: "/admin/gallery", icon: Images },
+      { title: "Guias", url: "/admin/guides", icon: UserRound },
     ]
   },
   {
