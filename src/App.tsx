@@ -41,6 +41,7 @@ const AdminPages             = lazy(() => import("./pages/AdminPages"));
 const AdminImages            = lazy(() => import("./pages/AdminImages"));
 const AdminSocial            = lazy(() => import("./pages/AdminSocial"));
 const AdminGallery           = lazy(() => import("./pages/AdminGallery"));
+const AdminGuides            = lazy(() => import("./pages/AdminGuides"));
 const AdminBlog              = lazy(() => import("./pages/AdminBlog"));
 const AdminHero              = lazy(() => import("./pages/AdminHero"));
 const AdminTheme             = lazy(() => import("./pages/AdminTheme"));
