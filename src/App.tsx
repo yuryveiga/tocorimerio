@@ -261,6 +261,7 @@ const App = ({ queryClient: externalQueryClient }: { queryClient?: QueryClient }
                         <Route path="images" element={<AdminImages />} />
                         <Route path="social" element={<AdminSocial />} />
                         <Route path="gallery" element={<AdminGallery />} />
+                        <Route path="guides" element={<AdminGuides />} />
                         <Route path="sales" element={<AdminSales />} />
                         <Route path="simulator" element={<AdminSimulator />} />
                         <Route path="calendar" element={<AdminCalendar />} />
