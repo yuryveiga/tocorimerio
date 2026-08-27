@@ -65,6 +65,17 @@ export default function JogoLanding() {
 
   const included = (match.included_json || []).map((i: any) => i.text).filter(Boolean);
 
+  const videoSchema = {
+    "@context": "https://schema.org",
+    "@type": "VideoObject",
+    name: `Experiência ${match.home_team} x ${match.away_team} no Maracanã`,
+    description: `Veja como é a experiência de assistir ${match.home_team} x ${match.away_team} no Estádio do Maracanã com guia bilíngue e ingresso oficial.`,
+    thumbnailUrl: `https://img.youtube.com/vi/${FEATURED_VIDEO_ID}/maxresdefault.jpg`,
+    uploadDate: match.match_date,
+    embedUrl: `https://www.youtube.com/embed/${FEATURED_VIDEO_ID}`,
+    contentUrl: `https://www.youtube.com/watch?v=${FEATURED_VIDEO_ID}`,
+  };
+
   return (
     <div className="min-h-screen bg-background">
       <Helmet>
@@ -79,6 +90,7 @@ export default function JogoLanding() {
         <meta name="twitter:card" content="summary_large_image" />
         <script type="application/ld+json">{JSON.stringify(schema)}</script>
         <script type="application/ld+json">{JSON.stringify(breadcrumbSchema)}</script>
+        <script type="application/ld+json">{JSON.stringify(videoSchema)}</script>
       </Helmet>
 
       <Header />
