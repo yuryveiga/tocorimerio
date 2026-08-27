@@ -20,8 +20,7 @@ export function TourGuidesCard() {
 
   if (!guides.length) return null;
 
-  const pickRole = (g: Guide) =>
-    language === "en" ? g.role_en || g.role : language === "es" ? g.role_es || g.role : g.role;
+
 
   return (
     <div className="p-6 bg-muted/30 border border-border/50 rounded-2xl relative overflow-hidden group">
