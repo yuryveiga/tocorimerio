@@ -5,7 +5,7 @@ import {
   Clock, Users, MapPin, Calendar, Check, ChevronLeft, 
   ArrowRight, ShieldCheck, Bus, Ticket, Camera, Info,
   Smartphone, CreditCard, ChevronDown, ChevronUp, Plus, Minus,
-  X, Ban, AlertTriangle, Backpack, HeartHandshake, Activity
+  X, Ban, AlertTriangle, Backpack, HeartHandshake, Activity, Play
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
@@ -28,6 +28,9 @@ import { supabase as localSupabase } from "@/integrations/supabase/client";
 import { OptimizedImage } from "@/components/OptimizedImage";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 import { getCanonicalUrl, cleanMatchSlug, uncleanMatchSlug } from "@/utils/seo";
+
+const FEATURED_VIDEO_ID = "-Wmc5Aqj4iU";
+const FEATURED_VIDEO_TITLE = "Experiência Maracanã com a Tocorime Rio";
 import { LovableMatch } from "@/types";
 import { WhyChooseUs } from "@/components/WhyChooseUs";
 import { PaymentLogos } from "@/components/PaymentLogos";
@@ -48,6 +51,7 @@ export default function MatchDetail() {
   const [customerInfo, setCustomerInfo] = useState({ name: "", whatsapp: "", email: "" });
   const [quantity, setQuantity] = useState(1);
   const [selectedSectorIdx, setSelectedSectorIdx] = useState(0);
+  const [videoOpen, setVideoOpen] = useState(false);
 
   const { data: match, isLoading } = useQuery({
     queryKey: ["partner-match", id],
@@ -416,6 +420,16 @@ export default function MatchDetail() {
         <meta name="twitter:image" content={(match as any).banner_url || (match as any).image_url || `${getCanonicalUrl("")}/og-image.jpg`} />
         <link rel="canonical" href={getCanonicalUrl(`/match/${match.slug || match.id}`)} />
         {jsonLd && <script type="application/ld+json">{JSON.stringify(jsonLd)}</script>}
+        <script type="application/ld+json">{JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "VideoObject",
+          name: `Experiência ${match.home_team} x ${match.away_team} no Maracanã`,
+          description: `Veja como é a experiência de assistir ${match.home_team} x ${match.away_team} no Estádio do Maracanã com guia bilíngue e ingresso oficial.`,
+          thumbnailUrl: `https://img.youtube.com/vi/${FEATURED_VIDEO_ID}/maxresdefault.jpg`,
+          uploadDate: match.match_date,
+          embedUrl: `https://www.youtube.com/embed/${FEATURED_VIDEO_ID}`,
+          contentUrl: `https://www.youtube.com/watch?v=${FEATURED_VIDEO_ID}`,
+        })}</script>
       </Helmet>
       
       <Header />
@@ -521,7 +535,44 @@ export default function MatchDetail() {
                     </div>
                  </section>
 
-
+                 {/* Featured Video */}
+                 <section className="space-y-6">
+                    <h2 className="text-3xl font-serif font-black flex items-center gap-4">
+                       <div className="w-2 h-10 bg-primary rounded-full" />
+                       Veja a experiência no Maracanã
+                    </h2>
+                    <div className="relative w-full aspect-video rounded-3xl overflow-hidden bg-black shadow-xl border border-border/50">
+                       {!videoOpen ? (
+                          <button
+                             type="button"
+                             onClick={() => setVideoOpen(true)}
+                             className="group absolute inset-0 w-full h-full p-0 border-0 cursor-pointer"
+                             aria-label={FEATURED_VIDEO_TITLE}
+                          >
+                             <img
+                                src={`https://img.youtube.com/vi/${FEATURED_VIDEO_ID}/maxresdefault.jpg`}
+                                alt={FEATURED_VIDEO_TITLE}
+                                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                                loading="lazy"
+                             />
+                             <div className="absolute inset-0 bg-black/30 group-hover:bg-black/20 transition-colors" />
+                             <div className="absolute inset-0 flex items-center justify-center">
+                                <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-primary/90 text-white flex items-center justify-center shadow-2xl transition-transform duration-300 group-hover:scale-110">
+                                   <Play className="w-7 h-7 sm:w-8 sm:h-8 fill-current ml-1" />
+                                </div>
+                             </div>
+                          </button>
+                       ) : (
+                          <iframe
+                             src={`https://www.youtube.com/embed/${FEATURED_VIDEO_ID}?rel=0&autoplay=1`}
+                             title={FEATURED_VIDEO_TITLE}
+                             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                             allowFullScreen
+                             className="absolute inset-0 w-full h-full"
+                          />
+                       )}
+                    </div>
+                 </section>
 
                  <section className="space-y-10">
                     <h2 className="text-3xl font-serif font-black flex items-center gap-4">
