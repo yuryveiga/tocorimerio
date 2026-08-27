@@ -27,7 +27,7 @@ export function TourGuidesCard() {
       <h4 className="font-black text-[10px] uppercase tracking-widest text-accent mb-4">
         {t("ex_guide_eyebrow") || "Your Local Expert"}
       </h4>
-      <Link to="/about-us" className="block" aria-label={t("ex_guide_cta") || "Meet our guides"}>
+      <Link to="/about-us#guides" className="block" aria-label={t("ex_guide_cta") || "Meet our guides"}>
         <div className="flex flex-wrap gap-4 mb-4">
           {guides.map((guide) => (
             <div key={guide.id} className="flex flex-col items-center gap-1.5 w-16 group/guide">
