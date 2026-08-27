@@ -10,6 +10,7 @@ import {
   LayoutTemplate, 
   Palette, 
   Users, 
+  UserRound,
   MessageSquare, 
   DollarSign,
   Calculator,
