@@ -1,6 +1,6 @@
 import { useParams, Link, Navigate } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
-import { Calendar, MapPin, Ticket, ArrowRight, Check } from "lucide-react";
+import { Calendar, MapPin, Ticket, ArrowRight, Check, Play } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
@@ -10,10 +10,15 @@ import { slugify } from "@/utils/slugify";
 import { getMatchDateInRio, getMatchHour } from "@/lib/dateUtils";
 import { format } from "date-fns";
 import { ptBR } from "date-fns/locale";
+import { useState } from "react";
+
+const FEATURED_VIDEO_ID = "-Wmc5Aqj4iU";
+const FEATURED_VIDEO_TITLE = "A experiência de um jogo no Maracanã";
 
 export default function JogoLanding() {
   const { id } = useParams<{ id: string }>();
   const { data: matches, isLoading } = useMatches();
+  const [videoOpen, setVideoOpen] = useState(false);
 
   if (isLoading) {
     return (
@@ -61,6 +66,17 @@ export default function JogoLanding() {
 
   const included = (match.included_json || []).map((i: any) => i.text).filter(Boolean);
 
+  const videoSchema = {
+    "@context": "https://schema.org",
+    "@type": "VideoObject",
+    name: `Experiência ${match.home_team} x ${match.away_team} no Maracanã`,
+    description: `Veja como é a experiência de assistir ${match.home_team} x ${match.away_team} no Estádio do Maracanã com guia bilíngue e ingresso oficial.`,
+    thumbnailUrl: `https://img.youtube.com/vi/${FEATURED_VIDEO_ID}/maxresdefault.jpg`,
+    uploadDate: match.match_date,
+    embedUrl: `https://www.youtube.com/embed/${FEATURED_VIDEO_ID}`,
+    contentUrl: `https://www.youtube.com/watch?v=${FEATURED_VIDEO_ID}`,
+  };
+
   return (
     <div className="min-h-screen bg-background">
       <Helmet>
@@ -75,6 +91,7 @@ export default function JogoLanding() {
         <meta name="twitter:card" content="summary_large_image" />
         <script type="application/ld+json">{JSON.stringify(schema)}</script>
         <script type="application/ld+json">{JSON.stringify(breadcrumbSchema)}</script>
+        <script type="application/ld+json">{JSON.stringify(videoSchema)}</script>
       </Helmet>
 
       <Header />
@@ -147,6 +164,45 @@ export default function JogoLanding() {
               </ul>
             </section>
           )}
+
+          {/* Featured Video */}
+          <section className="max-w-3xl mx-auto mb-12">
+            <h2 className="font-serif text-2xl font-bold mb-6 text-center">Veja a experiência no Maracanã</h2>
+            <div className="relative w-full aspect-video rounded-2xl overflow-hidden bg-black shadow-xl border border-border">
+              {!videoOpen ? (
+                <button
+                  type="button"
+                  onClick={() => setVideoOpen(true)}
+                  className="group absolute inset-0 w-full h-full p-0 border-0 cursor-pointer"
+                  aria-label={`Reproduzir vídeo: ${FEATURED_VIDEO_TITLE}`}
+                >
+                  <img
+                    src={`https://img.youtube.com/vi/${FEATURED_VIDEO_ID}/maxresdefault.jpg`}
+                    alt={FEATURED_VIDEO_TITLE}
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    loading="lazy"
+                  />
+                  <div className="absolute inset-0 bg-black/30 group-hover:bg-black/20 transition-colors" />
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-primary/90 text-white flex items-center justify-center shadow-2xl transition-transform duration-300 group-hover:scale-110">
+                      <Play className="w-7 h-7 sm:w-8 sm:h-8 fill-current ml-1" />
+                    </div>
+                  </div>
+                </button>
+              ) : (
+                <iframe
+                  src={`https://www.youtube.com/embed/${FEATURED_VIDEO_ID}?rel=0&autoplay=1`}
+                  title={FEATURED_VIDEO_TITLE}
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  allowFullScreen
+                  className="absolute inset-0 w-full h-full"
+                />
+              )}
+            </div>
+            <p className="text-center text-sm text-muted-foreground mt-3">
+              Assista como é viver um jogo de {match.home_team} x {match.away_team} de perto.
+            </p>
+          </section>
 
           {/* Final CTA */}
           <section className="text-center bg-primary/5 border border-primary/20 rounded-3xl p-10 max-w-3xl mx-auto">
