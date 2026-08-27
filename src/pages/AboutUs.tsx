@@ -1,6 +1,7 @@
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { AboutSection } from "@/components/AboutSection";
+import { GuidesSection } from "@/components/GuidesSection";
 import { Helmet } from "react-helmet-async";
 import { getCanonicalUrl, getHreflangLinks } from "@/utils/seo";
 import { useLocale } from "@/contexts/LocaleContext";
