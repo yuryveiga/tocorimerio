@@ -45,6 +45,7 @@ const AboutUs = () => {
 
       <main className="flex-1">
         <AboutSection />
+        <GuidesSection />
       </main>
 
       <Footer />
