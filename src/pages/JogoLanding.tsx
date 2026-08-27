@@ -164,6 +164,24 @@ export default function JogoLanding() {
             </section>
           )}
 
+          {/* Featured Video */}
+          <section className="max-w-3xl mx-auto mb-12">
+            <h2 className="font-serif text-2xl font-bold mb-6 text-center">Veja a experiência no Maracanã</h2>
+            <div className="relative w-full aspect-video rounded-2xl overflow-hidden bg-black shadow-xl border border-border">
+              <iframe
+                src={`https://www.youtube.com/embed/${FEATURED_VIDEO_ID}?rel=0`}
+                title={FEATURED_VIDEO_TITLE}
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowFullScreen
+                loading="lazy"
+                className="absolute inset-0 w-full h-full"
+              />
+            </div>
+            <p className="text-center text-sm text-muted-foreground mt-3">
+              Assista como é viver um jogo de {match.home_team} x {match.away_team} de perto.
+            </p>
+          </section>
+
           {/* Final CTA */}
           <section className="text-center bg-primary/5 border border-primary/20 rounded-3xl p-10 max-w-3xl mx-auto">
             <Ticket className="w-12 h-12 text-primary mx-auto mb-4" />
