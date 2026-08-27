@@ -1,6 +1,6 @@
 import { useParams, Link, Navigate } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
-import { Calendar, MapPin, Ticket, ArrowRight, Check } from "lucide-react";
+import { Calendar, MapPin, Ticket, ArrowRight, Check, Play } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
@@ -10,6 +10,10 @@ import { slugify } from "@/utils/slugify";
 import { getMatchDateInRio, getMatchHour } from "@/lib/dateUtils";
 import { format } from "date-fns";
 import { ptBR } from "date-fns/locale";
+import { useState } from "react";
+
+const FEATURED_VIDEO_ID = "-Wmc5Aqj4iU";
+const FEATURED_VIDEO_TITLE = "A experiência de um jogo no Maracanã";
 
 export default function JogoLanding() {
   const { id } = useParams<{ id: string }>();
