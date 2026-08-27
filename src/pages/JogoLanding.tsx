@@ -18,6 +18,7 @@ const FEATURED_VIDEO_TITLE = "A experiência de um jogo no Maracanã";
 export default function JogoLanding() {
   const { id } = useParams<{ id: string }>();
   const { data: matches, isLoading } = useMatches();
+  const [videoOpen, setVideoOpen] = useState(false);
 
   if (isLoading) {
     return (
