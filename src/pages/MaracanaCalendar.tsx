@@ -227,7 +227,7 @@ const MaracanaCalendar = () => {
     };
 
     return { title, description, keywords, itemList, faqs, faqSchema };
-  }, [availableMatches, language]);
+  }, [availableMatches, language, formatPrice, locale]);
 
   const itinerary = [
     {
