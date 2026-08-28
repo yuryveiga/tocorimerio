@@ -743,10 +743,14 @@ export type Database = {
           meeting_point_address_zh_cn: string | null
           meeting_point_address_zh_tw: string | null
           meta_description_en: string | null
+          meta_description_es: string | null
+          meta_description_pt: string | null
           meta_keywords: string | null
           meta_keywords_es: string | null
           meta_keywords_pt: string | null
           meta_title_en: string | null
+          meta_title_es: string | null
+          meta_title_pt: string | null
           price: number
           price_1_person: number | null
           price_2_people: number | null
@@ -827,10 +831,14 @@ export type Database = {
           meeting_point_address_zh_cn?: string | null
           meeting_point_address_zh_tw?: string | null
           meta_description_en?: string | null
+          meta_description_es?: string | null
+          meta_description_pt?: string | null
           meta_keywords?: string | null
           meta_keywords_es?: string | null
           meta_keywords_pt?: string | null
           meta_title_en?: string | null
+          meta_title_es?: string | null
+          meta_title_pt?: string | null
           price?: number
           price_1_person?: number | null
           price_2_people?: number | null
@@ -911,10 +919,14 @@ export type Database = {
           meeting_point_address_zh_cn?: string | null
           meeting_point_address_zh_tw?: string | null
           meta_description_en?: string | null
+          meta_description_es?: string | null
+          meta_description_pt?: string | null
           meta_keywords?: string | null
           meta_keywords_es?: string | null
           meta_keywords_pt?: string | null
           meta_title_en?: string | null
+          meta_title_es?: string | null
+          meta_title_pt?: string | null
           price?: number
           price_1_person?: number | null
           price_2_people?: number | null
