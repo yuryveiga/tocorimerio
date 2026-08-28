@@ -124,15 +124,26 @@ async function run() {
     try {
       const supabase = createClient(url, key);
       const [{ data: tours }, { data: posts }, { data: pages }] = await Promise.all([
-        supabase.from('tours').select('id, slug, category, is_active'),
+        supabase.from('tours').select('id, slug, category, is_active, title, title_en, short_description_en, short_description, image_url, meta_title_en, meta_description_en'),
         supabase.from('blog_posts').select('slug, title, title_en, meta_title_en, meta_description, excerpt, excerpt_en, image_url, featured_image_alt').eq('is_published', true),
         supabase.from('pages').select('href').eq('is_visible', true),
       ]);
       (tours || []).filter(t => t.is_active !== false).forEach(t => {
         let s = slugify(t.slug || t.id);
         if (s.includes('niter-i') || s.includes('niteroi')) s = 'um-dia-em-niteroi';
-        routes.add(`/passeio/${s}`);
+        const route = `/passeio/${s}`;
+        routes.add(route);
+        const tourTitle = t.title_en || t.title || 'Tocorime Rio';
+        postMeta.set(route, {
+          title: (t.meta_title_en || '').trim() || `${tourTitle} | Private Tour Rio de Janeiro | Tocorime Rio`,
+          description: (t.meta_description_en || '').trim() || t.short_description_en || t.short_description || tourTitle,
+          url: `${SITE}${route}`,
+          image: ogImage(t.image_url),
+          imageAlt: tourTitle,
+          type: 'website',
+        });
       });
+
       const cats = new Set();
       (tours || []).forEach(t => { const s = slugify(t.category); if (s) cats.add(s); });
       cats.forEach(c => routes.add(`/passeios/${c}`));
