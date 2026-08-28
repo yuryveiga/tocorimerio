@@ -533,6 +533,80 @@ const MaracanaCalendar = () => {
         </div>
       </div>
 
+      {/* Guia de ingressos: conteúdo de suporte para "maracana tickets" */}
+      <section className="py-16 border-t border-border/50 bg-secondary/10">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
+          <div>
+            <h2 className="text-3xl sm:text-4xl font-bold mb-4 tracking-tight">
+              {language === 'pt' ? 'GUIA DE INGRESSOS DO MARACANÃ' : language === 'es' ? 'GUÍA DE ENTRADAS DE MARACANÃ' : 'MARACANÃ TICKETS GUIDE'}
+            </h2>
+            <p className="text-muted-foreground leading-relaxed">
+              {language === 'pt'
+                ? 'Comprar ingresso para o Maracanã como turista não é tão simples quanto parece: a maioria dos jogos exige cadastro biométrico, CPF brasileiro ou sócio-torcedor, e os clássicos esgotam com dias de antecedência. Por isso trabalhamos com pacotes matchday: você reserva uma vaga, nós emitimos o ingresso oficial no seu nome e cuidamos de toda a logística.'
+                : language === 'es'
+                  ? 'Comprar entradas para Maracanã como turista no es tan simple: la mayoría de los partidos exige registro biométrico, CPF brasileño o membresía del club, y los clásicos se agotan con días de antelación. Por eso trabajamos con paquetes matchday: reservas una plaza, nosotros emitimos la entrada oficial a tu nombre y gestionamos toda la logística.'
+                  : 'Buying Maracanã tickets as a visitor is rarely straightforward: most matches require biometric registration, a Brazilian CPF number or club membership, and big derbies sell out days in advance. That is why we sell matchday packages instead — you reserve a spot, we issue the official ticket in your name and handle every logistical step.'}
+            </p>
+          </div>
+
+          <div>
+            <h3 className="text-xl font-bold mb-4">
+              {language === 'pt' ? 'Setores do Maracanã e o que esperar de cada um' : language === 'es' ? 'Sectores de Maracanã y qué esperar' : 'Maracanã sectors and what to expect'}
+            </h3>
+            <div className="grid gap-4 sm:grid-cols-2">
+              {[
+                {
+                  t: language === 'pt' ? 'Cadeiras Cativas Oeste (nosso setor)' : language === 'es' ? 'Sillas Reservadas Oeste (nuestro sector)' : 'Reserved Seats West (our sector)',
+                  d: language === 'pt' ? 'Visão central do campo, cobertura parcial, acesso tranquilo e distância segura das torcidas organizadas. Melhor custo-benefício para turistas.' : language === 'es' ? 'Vista central del campo, cobertura parcial, acceso tranquilo y distancia segura de las hinchadas. La mejor relación calidad-precio para turistas.' : 'Central view of the pitch, partial roof cover, calm access gates and a safe distance from the organised supporter ends. Best value for visitors.',
+                },
+                {
+                  t: language === 'pt' ? 'Setor Leste inferior' : language === 'es' ? 'Sector Este inferior' : 'Lower East Sector',
+                  d: language === 'pt' ? 'Boa visão e mais barato, porém sem cobertura e sol forte em jogos diurnos.' : language === 'es' ? 'Buena vista y más barato, pero sin cobertura y con mucho sol en partidos diurnos.' : 'Good view and cheaper, but uncovered and exposed to strong sun in afternoon kick-offs.',
+                },
+                {
+                  t: language === 'pt' ? 'Setor Norte e Sul (torcidas)' : language === 'es' ? 'Sector Norte y Sur (hinchadas)' : 'North & South Sectors (fan ends)',
+                  d: language === 'pt' ? 'Atrás dos gols, onde ficam as torcidas organizadas. Atmosfera intensa, mas não recomendado para quem vai pela primeira vez.' : language === 'es' ? 'Detrás de los arcos, donde están las hinchadas organizadas. Ambiente intenso, no recomendado para la primera visita.' : 'Behind the goals, home of the organised supporter groups. Electric atmosphere, but not recommended for a first visit.',
+                },
+                {
+                  t: language === 'pt' ? 'Camarotes e Maracanã Mais' : language === 'es' ? 'Palcos y Maracanã Mais' : 'Boxes & Maracanã Mais',
+                  d: language === 'pt' ? 'Ingressos premium com serviço, bem mais caros e geralmente vendidos por temporada.' : language === 'es' ? 'Entradas premium con servicio, mucho más caras y normalmente vendidas por temporada.' : 'Premium hospitality tickets, far more expensive and usually sold on a season basis.',
+                },
+              ].map((s, i) => (
+                <div key={i} className="p-5 rounded-xl border border-border/50 bg-card/50">
+                  <h4 className="font-bold mb-2">{s.t}</h4>
+                  <p className="text-sm text-muted-foreground leading-relaxed">{s.d}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div>
+            <h3 className="text-xl font-bold mb-4">
+              {language === 'pt' ? 'Como funciona a reserva, passo a passo' : language === 'es' ? 'Cómo funciona la reserva, paso a paso' : 'How booking works, step by step'}
+            </h3>
+            <ol className="list-decimal pl-5 space-y-2 text-muted-foreground leading-relaxed">
+              <li>{language === 'pt' ? 'Escolha o jogo no calendário acima (data, campeonato e preço por pessoa).' : language === 'es' ? 'Elige el partido en el calendario (fecha, campeonato y precio por persona).' : 'Pick your fixture in the calendar above (date, competition and price per person).'}</li>
+              <li>{language === 'pt' ? 'Reserve online e informe seu hotel — o pagamento é seguro via Stripe.' : language === 'es' ? 'Reserva online e indica tu hotel — el pago es seguro vía Stripe.' : 'Book online and tell us your hotel — payment is secured through Stripe.'}</li>
+              <li>{language === 'pt' ? 'Emitimos o ingresso oficial no seu nome e confirmamos o horário da busca.' : language === 'es' ? 'Emitimos la entrada oficial a tu nombre y confirmamos la hora de recogida.' : 'We issue the official ticket in your name and confirm your pickup time.'}</li>
+              <li>{language === 'pt' ? 'No dia do jogo: van executiva, entrada com o guia e retorno seguro ao hotel.' : language === 'es' ? 'El día del partido: van ejecutiva, entrada con el guía y regreso seguro al hotel.' : 'On matchday: executive van, guided entry to the stadium and a safe ride back to your hotel.'}</li>
+            </ol>
+          </div>
+
+          <div>
+            <h3 className="text-xl font-bold mb-4">
+              {language === 'pt' ? 'Continue explorando o Rio' : language === 'es' ? 'Sigue explorando Río' : 'Keep exploring Rio'}
+            </h3>
+            <ul className="grid gap-3 sm:grid-cols-2 text-primary">
+              <li><Link className="hover:underline font-medium" to="/passeios">{language === 'pt' ? 'Todos os passeios privativos no Rio' : language === 'es' ? 'Todos los tours privados en Río' : 'All private tours in Rio de Janeiro'}</Link></li>
+              <li><Link className="hover:underline font-medium" to="/things-to-do-in-rio-de-janeiro">{language === 'pt' ? 'O que fazer no Rio de Janeiro' : language === 'es' ? 'Qué hacer en Río de Janeiro' : 'Things to do in Rio de Janeiro'}</Link></li>
+              <li><Link className="hover:underline font-medium" to="/blog">{language === 'pt' ? 'Blog: guias locais do Rio' : language === 'es' ? 'Blog: guías locales de Río' : 'Blog: local Rio travel guides'}</Link></li>
+              <li><Link className="hover:underline font-medium" to="/contact">{language === 'pt' ? 'Falar com um guia local' : language === 'es' ? 'Hablar con un guía local' : 'Talk to a local guide'}</Link></li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+
       <section className="py-16 border-t border-border/50">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl sm:text-4xl font-bold mb-3 tracking-tight">
