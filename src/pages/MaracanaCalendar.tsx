@@ -168,11 +168,17 @@ const MaracanaCalendar = () => {
               : 'O calendário desta página é atualizado diariamente com os próximos jogos confirmados no Maracanã. Assim que a próxima partida for divulgada, ela aparece aqui com data, horário e ingressos.',
           },
           { q: 'Como comprar ingresso para o jogo no Maracanã?', a: 'Basta escolher a partida no calendário acima e reservar online. O tour inclui o ingresso oficial nas Cadeiras Cativas (Setor Oeste), transporte ida e volta do seu hotel e guia bilíngue.' },
+          { q: 'Quanto custa o ingresso para o Maracanã?', a: priceLabel
+              ? `Nossos pacotes para jogos no Maracanã começam em ${priceLabel} por pessoa, já com ingresso oficial, transporte ida e volta do hotel e guia bilíngue. O preço varia conforme o campeonato e a procura da partida — clássicos e jogos de Libertadores custam mais.`
+              : 'O preço varia conforme o campeonato e a procura da partida. Cada jogo no calendário acima mostra o valor por pessoa, já incluindo ingresso oficial, transporte e guia bilíngue.' },
+          { q: 'Qual é o melhor setor do Maracanã para turistas?', a: 'As Cadeiras Cativas do Setor Oeste (inferior) são as mais indicadas: visão central do campo, cobertura parcial, acesso mais tranquilo e distância segura das torcidas organizadas. É o setor que usamos nos nossos tours.' },
+          { q: 'Dá para comprar ingresso do Maracanã na bilheteria no dia do jogo?', a: 'Nem sempre. Muitos jogos exigem cadastro biométrico, CPF ou sócio-torcedor e esgotam antes do dia da partida. Comprando com o tour, resolvemos toda a parte burocrática e garantimos a entrada.' },
+          { q: 'Turista estrangeiro precisa de CPF para entrar no Maracanã?', a: 'Em vários jogos sim — o sistema de venda exige documento brasileiro ou cadastro prévio. Nós fazemos essa emissão para você e entregamos o ingresso já em seu nome no dia.' },
           { q: 'Quando joga o Flamengo no Maracanã?', a: 'Os jogos do Flamengo no Maracanã aparecem destacados no calendário acima assim que são confirmados pela CBF/Conmebol. Como são partidas de alta procura, recomendamos reservar com antecedência.' },
           { q: 'Quando joga o Fluminense no Maracanã?', a: 'As partidas do Fluminense no Maracanã também são listadas no calendário desta página, com data, campeonato e disponibilidade de vagas em tempo real.' },
           { q: 'O tour inclui transporte do hotel até o Maracanã?', a: 'Sim. Buscamos você no lobby do seu hotel na Zona Sul em van executiva, levamos ao estádio e fazemos o retorno seguro após o apito final.' },
           { q: 'É seguro ir ao Maracanã como turista?', a: 'Sim, indo acompanhado. Nossos guias trilíngues acompanham o grupo do embarque ao retorno, orientando sobre setores, torcidas e comportamento no estádio.' },
-        ]
+
       : language === 'es'
         ? [
             {
