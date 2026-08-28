@@ -189,6 +189,12 @@ const MaracanaCalendar = () => {
                 : 'El calendario de esta página se actualiza a diario con los próximos partidos confirmados en Maracanã.',
             },
             { q: '¿Cómo comprar entradas para el partido en Maracanã?', a: 'Elige el partido en el calendario y reserva online. El tour incluye entrada oficial (Sector Oeste), transporte desde tu hotel y guía bilingüe.' },
+            { q: '¿Cuánto cuestan las entradas para Maracanã?', a: priceLabel
+                ? `Nuestros paquetes para partidos en Maracanã empiezan en ${priceLabel} por persona, con entrada oficial, transporte desde el hotel y guía bilingüe. El precio varía según el campeonato: clásicos y Libertadores cuestan más.`
+                : 'El precio varía según el campeonato y la demanda. Cada partido del calendario muestra el valor por persona, con entrada oficial, transporte y guía bilingüe.' },
+            { q: '¿Cuál es el mejor sector de Maracanã para turistas?', a: 'Las Sillas Reservadas del Sector Oeste (inferior): vista central del campo, cobertura parcial, acceso tranquilo y distancia segura de las hinchadas organizadas. Es el sector que usamos en nuestros tours.' },
+            { q: '¿Puedo comprar la entrada en la taquilla el día del partido?', a: 'No siempre. Muchos partidos exigen registro biométrico o CPF brasileño y se agotan antes. Con el tour resolvemos todo el trámite y garantizamos tu entrada.' },
+            { q: '¿Un turista extranjero necesita CPF para entrar a Maracanã?', a: 'En varios partidos sí: el sistema de venta exige documento brasileño o registro previo. Nosotros gestionamos la emisión y te entregamos la entrada a tu nombre.' },
             { q: '¿Cuándo juega Flamengo en Maracanã?', a: 'Los partidos de Flamengo aparecen destacados en el calendario apenas se confirman. Son de alta demanda: reserva con antelación.' },
             { q: '¿Cuándo juega Fluminense en Maracanã?', a: 'Los partidos de Fluminense también se listan aquí, con fecha, campeonato y disponibilidad en tiempo real.' },
             { q: '¿El tour incluye transporte desde el hotel?', a: 'Sí. Te recogemos en el lobby de tu hotel en la Zona Sur y regresamos tras el pitido final.' },
@@ -201,11 +207,18 @@ const MaracanaCalendar = () => {
                 ? `The next game at Maracanã is ${nextName} (${next.competition || 'football'}) on ${nextLabel} (Rio de Janeiro time). See the full, daily-updated fixture list on this page.`
                 : 'This page lists every confirmed upcoming match at Maracanã and is updated daily. As soon as the next fixture is announced it appears here with date, kick-off time and tickets.',
             },
-            { q: 'How do I buy tickets for a match at Maracanã?', a: 'Pick a match in the calendar above and book online. The tour includes an official ticket in the Reserved Seats (West Sector), round-trip hotel transport and a bilingual guide.' },
+            { q: 'How do I buy tickets for a match at Maracanã?', a: 'Pick a match in the calendar above and book online. Your Maracanã ticket comes as part of a guided matchday package: an official seat in the Reserved Seats (West Sector), round-trip hotel transport and a bilingual guide — no Brazilian ID, no queues, no resale risk.' },
+            { q: 'How much are Maracanã tickets?', a: priceLabel
+                ? `Our Maracanã matchday packages start at ${priceLabel} per person, including the official ticket, round-trip hotel transport and a bilingual guide. Prices vary by competition and demand — derbies (Fla-Flu, Flamengo x Vasco) and Copa Libertadores nights cost more than league games.`
+                : 'Prices vary by competition and demand. Each fixture in the calendar above shows the price per person, already including the official ticket, hotel transport and a bilingual guide.' },
+            { q: 'What is the best sector at Maracanã for tourists?', a: 'The Reserved Seats in the lower West Sector (Cadeiras Cativas Oeste) are the best choice: a central view of the pitch, partial roof cover, calmer access gates and a safe distance from the organised supporter ends. That is the sector we use on every tour.' },
+            { q: 'Can I buy Maracanã tickets at the box office on matchday?', a: 'Often not. Many matches require biometric registration, a Brazilian CPF number or club membership, and popular fixtures sell out days in advance. Booking the tour removes all of that paperwork and guarantees entry.' },
+            { q: 'Do foreign tourists need a CPF to enter Maracanã?', a: 'For several matches, yes — the official ticketing system requires a Brazilian document or prior registration. We handle the issuing process and hand you the ticket in your name on the day.' },
             { q: 'When does Flamengo play at Maracanã?', a: 'Flamengo fixtures are highlighted in the calendar above as soon as they are confirmed. These matches sell out fast, so book early.' },
             { q: 'When does Fluminense play at Maracanã?', a: 'Fluminense home matches are also listed on this page with date, competition and live spot availability.' },
             { q: 'Does the tour include transport from my hotel to Maracanã?', a: 'Yes. We pick you up at your South Zone hotel lobby in an executive van and bring you back safely after the final whistle.' },
             { q: 'Is it safe to go to Maracanã as a tourist?', a: 'Yes, when accompanied. Our trilingual guides stay with the group from pickup to drop-off and explain sectors, fan culture and stadium etiquette.' },
+
           ];
 
     const faqSchema = {
