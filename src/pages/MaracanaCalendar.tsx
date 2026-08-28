@@ -153,7 +153,13 @@ const MaracanaCalendar = () => {
     const nextLabel = nextDate ? format(nextDate, language === 'pt' ? "dd 'de' MMMM 'de' yyyy, HH:mm" : "MMMM d, yyyy, HH:mm", { locale }) : null;
     const nextName = next ? `${next.home_team} x ${next.away_team}` : null;
 
+    const cheapest = availableMatches.length
+      ? Math.min(...availableMatches.map(m => Number(m.price) || Infinity))
+      : null;
+    const priceLabel = cheapest && Number.isFinite(cheapest) ? formatPrice(cheapest) : null;
+
     const faqs: { q: string; a: string }[] = language === 'pt'
+
       ? [
           {
             q: 'Quando é o próximo jogo no Maracanã?',
