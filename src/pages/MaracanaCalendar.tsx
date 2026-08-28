@@ -73,31 +73,35 @@ const MaracanaCalendar = () => {
     if (hasTeam('fluminense')) clubBits.push('Fluminense');
 
     const baseTitle = language === 'pt'
-      ? 'Calendário de Jogos no Maracanã 2026 | Tocorime Rio'
+      ? 'Ingressos Maracanã 2026: Calendário de Jogos, Preços e Tour'
       : language === 'es'
-        ? 'Calendario de Partidos en Maracanã 2026 | Tocorime Rio'
-        : 'Maracanã Match Calendar 2026 | Tocorime Rio';
+        ? 'Entradas Maracanã 2026: Calendario de Partidos, Precios y Tour'
+        : 'Maracanã Tickets 2026: Match Calendar, Prices & Guided Tour';
 
     // Reforço de clube no título quando há jogos de Fla/Flu na lista
     const title = clubBits.length
       ? (language === 'pt'
-          ? `Calendário de Jogos no Maracanã 2026 — ${clubBits.join(' e ')} | Tocorime Rio`
+          ? `Ingressos Maracanã 2026: Jogos do ${clubBits.join(' e ')}, Preços e Tour`
           : language === 'es'
-            ? `Calendario de Partidos en Maracanã 2026 — ${clubBits.join(' y ')} | Tocorime Rio`
-            : `Maracanã Match Calendar 2026 — ${clubBits.join(' & ')} | Tocorime Rio`)
+            ? `Entradas Maracanã 2026: Partidos de ${clubBits.join(' y ')}, Precios y Tour`
+            : `Maracanã Tickets 2026: ${clubBits.join(' & ')} Fixtures, Prices & Tour`)
       : baseTitle;
 
     const description = language === 'pt'
-      ? `Confira o calendário de jogos no Maracanã${clubBits.length ? ` (${clubBits.join(' e ')})` : ''} e reserve seu tour: ingresso oficial, transporte e guia bilíngue incluídos. Vagas limitadas — reserve já.`
+      ? `Ingressos para o Maracanã${clubBits.length ? ` (${clubBits.join(' e ')})` : ''} com calendário atualizado de jogos, preços e setores. Ingresso oficial, transporte do hotel e guia bilíngue incluídos.`
       : language === 'es'
-        ? `Consulta el calendario de partidos en Maracanã${clubBits.length ? ` (${clubBits.join(' y ')})` : ''} y reserva tu tour: entrada oficial, transporte y guía bilingüe incluidos. Plazas limitadas.`
-        : `Check the Maracanã match calendar${clubBits.length ? ` (${clubBits.join(' & ')})` : ''} and book your tour: official ticket, transport and bilingual guide included. Limited spots — book now.`;
+        ? `Entradas para Maracanã${clubBits.length ? ` (${clubBits.join(' y ')})` : ''} con calendario actualizado, precios y sectores. Entrada oficial, transporte del hotel y guía bilingüe incluidos.`
+        : `Maracanã tickets${clubBits.length ? ` for ${clubBits.join(' & ')}` : ''} with the updated fixture calendar, prices and seating sectors. Official ticket, hotel transport and bilingual guide included.`;
 
     const keywords = [
-      'Maracanã', 'Calendário de Jogos', 'Ingresso Maracanã', 'Tour Maracanã',
+      'maracana tickets', 'maracanã tickets', 'maracana stadium tickets', 'buy maracana tickets',
+      'how much are maracana tickets', 'maracana ticket prices', 'maracana match calendar',
+      'ingresso Maracanã', 'ingressos Maracanã preço', 'entradas Maracanã',
+      'Maracanã', 'Calendário de Jogos', 'Tour Maracanã',
       'Flamengo', 'Fluminense', 'Futebol no Rio de Janeiro', 'Passeio Turístico Rio de Janeiro',
       ...(flaMatches.length ? ['jogo do Flamengo no Maracanã', 'ingresso Flamengo', 'Flamengo tickets Maracanã'] : []),
       ...(fluMatches.length ? ['jogo do Fluminense no Maracanã', 'ingresso Fluminense', 'Fluminense tickets Maracanã'] : []),
+
     ].join(', ');
 
     const events = upcoming.map((m, i) => {
