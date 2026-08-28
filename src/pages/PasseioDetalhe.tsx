@@ -464,17 +464,26 @@ export function PasseioDetalhe() {
     setIsLightboxOpen(true);
   };
 
+  // SEO por idioma: título/descrição customizados por passeio (fallback = template automático)
+  const seoMeta = tour as unknown as {
+    meta_title_en?: string; meta_description_en?: string;
+    meta_title_pt?: string; meta_description_pt?: string;
+    meta_title_es?: string; meta_description_es?: string;
+  };
+  const customTitle =
+    (language === "pt" ? seoMeta.meta_title_pt : language === "es" ? seoMeta.meta_title_es : seoMeta.meta_title_en) ||
+    seoMeta.meta_title_en;
+  const customDescription =
+    (language === "pt" ? seoMeta.meta_description_pt : language === "es" ? seoMeta.meta_description_es : seoMeta.meta_description_en) ||
+    seoMeta.meta_description_en;
+  const seoTitle = customTitle || `${translatedTitle} | Private Tour Rio de Janeiro | ${siteTitle}`;
+  const seoDescription = customDescription || generateOptimizedMetaDescription(translatedShortDesc, translatedTitle, language);
+
   return (
     <main className="min-h-screen bg-background font-sans overflow-x-hidden" data-tour-detail>
       <Helmet>
-        {/* meta_title_en allows a fully custom title tag per tour (overrides auto-template) */}
-        {(tour as unknown as { meta_title_en?: string }).meta_title_en ? (
-          <title>{(tour as unknown as { meta_title_en?: string }).meta_title_en}</title>
-        ) : (
-          <title>{translatedTitle} | Private Tour Rio de Janeiro | {siteTitle}</title>
-        )}
-        {/* meta_description_en allows an exact custom meta description (overrides auto-generation+CTA) */}
-        <meta name="description" content={(tour as unknown as { meta_description_en?: string }).meta_description_en || generateOptimizedMetaDescription(translatedShortDesc, translatedTitle, language)} />
+        <title>{seoTitle}</title>
+        <meta name="description" content={seoDescription} />
         {(() => {
           const kw = tour as unknown as { meta_keywords?: string; meta_keywords_pt?: string; meta_keywords_es?: string };
           const localized = language === "pt" ? kw.meta_keywords_pt : language === "es" ? kw.meta_keywords_es : undefined;
@@ -486,17 +495,18 @@ export function PasseioDetalhe() {
         {/* Open Graph / Facebook */}
         <meta property="og:type" content="website" />
         <meta property="og:url" content={getCanonicalUrl(`/passeio/${tour?.slug || tour?.id}`)} />
-        <meta property="og:title" content={(tour as unknown as { meta_title_en?: string }).meta_title_en || `${translatedTitle} | Private Tour Rio de Janeiro | ${siteTitle}`} />
-        <meta property="og:description" content={(tour as unknown as { meta_description_en?: string }).meta_description_en || generateOptimizedMetaDescription(translatedShortDesc, translatedTitle, language)} />
+        <meta property="og:title" content={seoTitle} />
+        <meta property="og:description" content={seoDescription} />
         <meta property="og:image" content={tour.image_url} />
         <meta property="og:site_name" content="Tocorime Rio" />
         <meta property="og:locale" content={language === 'pt' ? 'pt_BR' : language === 'es' ? 'es_ES' : 'en_US'} />
 
         {/* Twitter */}
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content={(tour as unknown as { meta_title_en?: string }).meta_title_en || `${translatedTitle} | ${siteTitle}`} />
-        <meta name="twitter:description" content={(tour as unknown as { meta_description_en?: string }).meta_description_en || generateOptimizedMetaDescription(translatedShortDesc, translatedTitle, language)} />
+        <meta name="twitter:title" content={seoTitle} />
+        <meta name="twitter:description" content={seoDescription} />
         <meta name="twitter:image" content={tour.image_url} />
+
 
         <link rel="canonical" href={canonicalUrl} />
         {getHreflangLinks(`/passeio/${tour?.slug || tour?.id}`).map((l) => (
