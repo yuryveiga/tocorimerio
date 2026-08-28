@@ -291,12 +291,26 @@ const MaracanaCalendar = () => {
       
       <div className="pt-24 pb-8 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
-          <h1 className="text-4xl sm:text-5xl font-bold mb-2 font-sans tracking-tight">
-            {language === 'pt' ? 'CALENDÁRIO DE JOGOS NO MARACANÃ' : language === 'es' ? 'CALENDARIO DE PARTIDOS EN MARACANÃ' : 'MATCH CALENDAR AT MARACANÃ'}
+          <h1 className="text-4xl sm:text-5xl font-bold mb-3 font-sans tracking-tight">
+            {language === 'pt' ? 'INGRESSOS PARA O MARACANÃ E CALENDÁRIO DE JOGOS' : language === 'es' ? 'ENTRADAS PARA MARACANÃ Y CALENDARIO DE PARTIDOS' : 'MARACANÃ TICKETS & MATCH CALENDAR'}
           </h1>
-          <p className="text-muted-foreground mb-8">
-            {language === 'pt' ? 'Confira os próximos jogos e nosso itinerário' : language === 'es' ? 'Consulta los próximos partidos y nuestro itinerario' : 'Check upcoming matches and our itinerary'}
+          <p className="text-muted-foreground mb-4 max-w-3xl leading-relaxed">
+            {language === 'pt'
+              ? 'Todos os próximos jogos confirmados no Maracanã, com data, campeonato, preço por pessoa e vagas em tempo real. Cada reserva inclui o ingresso oficial nas Cadeiras Cativas do Setor Oeste, transporte ida e volta do seu hotel na Zona Sul e guia trilíngue — sem fila, sem CPF e sem risco de revenda.'
+              : language === 'es'
+                ? 'Todos los próximos partidos confirmados en Maracanã, con fecha, campeonato, precio por persona y plazas en tiempo real. Cada reserva incluye la entrada oficial en las Sillas Reservadas del Sector Oeste, transporte ida y vuelta desde tu hotel en la Zona Sur y guía trilingüe — sin colas, sin CPF y sin riesgo de reventa.'
+                : 'Every confirmed upcoming fixture at Maracanã, with date, competition, price per person and live availability. Each booking includes an official Maracanã ticket in the Reserved Seats (lower West Sector), round-trip transport from your South Zone hotel and a trilingual guide — no queues, no Brazilian CPF and no resale risk.'}
           </p>
+          {(() => {
+            const cheapest = availableMatches.length ? Math.min(...availableMatches.map(m => Number(m.price) || Infinity)) : null;
+            if (!cheapest || !Number.isFinite(cheapest)) return null;
+            return (
+              <p className="text-sm font-semibold text-primary mb-8">
+                {language === 'pt' ? `Ingressos com tour a partir de ${formatPrice(cheapest)} por pessoa` : language === 'es' ? `Entradas con tour desde ${formatPrice(cheapest)} por persona` : `Maracanã tickets with guided tour from ${formatPrice(cheapest)} per person`}
+              </p>
+            );
+          })()}
+
         </motion.div>
 
         {/* Full-width Calendar */}
