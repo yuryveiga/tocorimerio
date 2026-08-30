@@ -132,6 +132,26 @@ const SaleDetailDialog = ({ sale, open, onClose }: SaleDetailDialogProps) => {
             </div>
           </div>
 
+          {/* Link de Pagamento (Stripe manual) */}
+          {sale.payment_link && (
+            <div>
+              <h4 className="text-xs font-bold uppercase text-muted-foreground tracking-wider mb-3 flex items-center gap-1.5">
+                <Link2 className="w-3.5 h-3.5" /> Link de Pagamento
+              </h4>
+              <div className="rounded-lg border bg-primary/5 border-primary/20 p-3 space-y-2">
+                <p className="text-xs text-muted-foreground break-all">{sale.payment_link}</p>
+                <div className="flex gap-2">
+                  <Button size="sm" variant="outline" className="flex-1" onClick={copyPaymentLink}>
+                    <Copy className="w-3.5 h-3.5 mr-1.5" /> Copiar
+                  </Button>
+                  <Button size="sm" className="flex-1" onClick={() => window.open(sale.payment_link!, "_blank")}>
+                    <ExternalLink className="w-3.5 h-3.5 mr-1.5" /> Abrir
+                  </Button>
+                </div>
+              </div>
+            </div>
+          )}
+
           {/* Passageiros */}
           {sale.passengers_json && sale.passengers_json.length > 0 && (
             <div>
