@@ -100,6 +100,9 @@ export default function StripeCheckoutDialog({ open, onClose, tours }: Props) {
           `${customerName} ${tourTitle || "Passeio"}`
         );
         setGeneratedUrl(shortUrl);
+        if (saleId) {
+          await supabase.from("sales").update({ payment_link: shortUrl }).eq("id", saleId);
+        }
         toast({ title: "Link gerado e reserva salva!" });
       } else {
         throw new Error("Nenhum link retornado");

@@ -110,6 +110,7 @@ export type LovableSale = {
   passengers_json?: { name: string; dob: string }[];
   currency?: string;
   provider?: string;
+  payment_link?: string;
   created_at: string;
 };
 

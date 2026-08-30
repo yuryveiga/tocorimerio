@@ -1,7 +1,8 @@
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { LovableSale } from "@/integrations/lovable/client";
-import { Phone, Mail, Calendar, Users, MapPin, Clock, DollarSign, X } from "lucide-react";
+import { Phone, Mail, Calendar, Users, MapPin, Clock, DollarSign, X, Link2, Copy, ExternalLink } from "lucide-react";
+import { useToast } from "@/hooks/use-toast";
 
 interface SaleDetailDialogProps {
   sale: LovableSale | null;
@@ -10,7 +11,14 @@ interface SaleDetailDialogProps {
 }
 
 const SaleDetailDialog = ({ sale, open, onClose }: SaleDetailDialogProps) => {
+  const { toast } = useToast();
   if (!sale) return null;
+
+  const copyPaymentLink = () => {
+    if (!sale.payment_link) return;
+    navigator.clipboard.writeText(sale.payment_link);
+    toast({ title: "Link copiado!" });
+  };
 
   const formatPrice = (price: number) =>
     new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL" }).format(price);
@@ -123,6 +131,26 @@ const SaleDetailDialog = ({ sale, open, onClose }: SaleDetailDialogProps) => {
               <span className="font-semibold">{sale.is_private ? "Privativo" : "Aberto"}</span>
             </div>
           </div>
+
+          {/* Link de Pagamento (Stripe manual) */}
+          {sale.payment_link && (
+            <div>
+              <h4 className="text-xs font-bold uppercase text-muted-foreground tracking-wider mb-3 flex items-center gap-1.5">
+                <Link2 className="w-3.5 h-3.5" /> Link de Pagamento
+              </h4>
+              <div className="rounded-lg border bg-primary/5 border-primary/20 p-3 space-y-2">
+                <p className="text-xs text-muted-foreground break-all">{sale.payment_link}</p>
+                <div className="flex gap-2">
+                  <Button size="sm" variant="outline" className="flex-1" onClick={copyPaymentLink}>
+                    <Copy className="w-3.5 h-3.5 mr-1.5" /> Copiar
+                  </Button>
+                  <Button size="sm" className="flex-1" onClick={() => window.open(sale.payment_link!, "_blank")}>
+                    <ExternalLink className="w-3.5 h-3.5 mr-1.5" /> Abrir
+                  </Button>
+                </div>
+              </div>
+            </div>
+          )}
 
           {/* Passageiros */}
           {sale.passengers_json && sale.passengers_json.length > 0 && (
