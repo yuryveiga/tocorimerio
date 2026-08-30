@@ -1,7 +1,8 @@
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { LovableSale } from "@/integrations/lovable/client";
-import { Phone, Mail, Calendar, Users, MapPin, Clock, DollarSign, X } from "lucide-react";
+import { Phone, Mail, Calendar, Users, MapPin, Clock, DollarSign, X, Link2, Copy, ExternalLink } from "lucide-react";
+import { useToast } from "@/hooks/use-toast";
 
 interface SaleDetailDialogProps {
   sale: LovableSale | null;
