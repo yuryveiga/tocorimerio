@@ -11,7 +11,14 @@ interface SaleDetailDialogProps {
 }
 
 const SaleDetailDialog = ({ sale, open, onClose }: SaleDetailDialogProps) => {
+  const { toast } = useToast();
   if (!sale) return null;
+
+  const copyPaymentLink = () => {
+    if (!sale.payment_link) return;
+    navigator.clipboard.writeText(sale.payment_link);
+    toast({ title: "Link copiado!" });
+  };
 
   const formatPrice = (price: number) =>
     new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL" }).format(price);
