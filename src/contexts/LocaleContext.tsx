@@ -24,11 +24,11 @@ const TTL_MS = 24 * 60 * 60 * 1000; // 1 day
 // Priority order:
 // 1. ?lang= URL param  (highest)
 // 2. localStorage      (if not expired — TTL 1 day)
-// 3. Browser language + system timezone detection (lowest)
+// 3. Browser language detection (lowest)
 //
-// Portuguese is only inferred for explicit pt-BR speakers or
-// users whose system timezone is a known Brazilian timezone.
-// Generic "pt" (no region) falls back to English.
+// Default language is ENGLISH for everyone. Portuguese is only used
+// when the browser language is explicitly Portuguese (pt / pt-BR).
+// Timezone is NOT used — foreigners in Brazil get English.
 const detectLocale = (): { language: Language; currency: Currency } => {
   if (typeof window === 'undefined') return { language: 'en', currency: 'USD' };
 
