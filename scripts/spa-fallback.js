@@ -112,6 +112,7 @@ async function run() {
     '/fluminense-bolivar-libertadores',
     '/brasil-x-panama-maio-maracana',
     '/fluminense-indenpediente-rivadavia-libertadores-maracana',
+    '/flamengo-x-mirassol-maracana-tickets-02-09',
     '/sobre',
     '/contato',
     '/carrinho',

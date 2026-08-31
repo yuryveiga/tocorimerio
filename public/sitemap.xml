@@ -136,12 +136,21 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://tocorimerio.com/flamengo-x-mirassol-maracana-tickets-02-09</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://tocorimerio.com/flamengo-x-mirassol-maracana-tickets-02-09"/>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://tocorimerio.com/flamengo-x-mirassol-maracana-tickets-02-09?lang=pt"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://tocorimerio.com/flamengo-x-mirassol-maracana-tickets-02-09?lang=es"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://tocorimerio.com/flamengo-x-mirassol-maracana-tickets-02-09"/>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://tocorimerio.com/passeio/trilha-da-pedra-bonita</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://tocorimerio.com/passeio/trilha-da-pedra-bonita"/>
     <xhtml:link rel="alternate" hreflang="pt-BR" href="https://tocorimerio.com/passeio/trilha-da-pedra-bonita?lang=pt"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://tocorimerio.com/passeio/trilha-da-pedra-bonita?lang=es"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://tocorimerio.com/passeio/trilha-da-pedra-bonita"/>
-    <lastmod>2026-08-10</lastmod>
+    <lastmod>2026-08-28</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -238,544 +247,12 @@
     </image:image>
   </url>
   <url>
-    <loc>https://tocorimerio.com/passeio/pedra-da-gavea-trilha</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://tocorimerio.com/passeio/pedra-da-gavea-trilha"/>
-    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://tocorimerio.com/passeio/pedra-da-gavea-trilha?lang=pt"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://tocorimerio.com/passeio/pedra-da-gavea-trilha?lang=es"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://tocorimerio.com/passeio/pedra-da-gavea-trilha"/>
-    <lastmod>2026-08-10</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-    <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776136847390_169n24rnud8.webp</image:loc>
-      <image:caption>Pedra da Gávea</image:caption>
-    </image:image>
-    <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776136864281_g9fboxwo3c.webp</image:loc>
-      <image:caption>Pedra da Gávea</image:caption>
-    </image:image>
-    <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776136867362_wflr98j93cl.webp</image:loc>
-      <image:caption>Pedra da Gávea</image:caption>
-    </image:image>
-    <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776136870103_rf59fdi0369.webp</image:loc>
-      <image:caption>Pedra da Gávea</image:caption>
-    </image:image>
-    <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776136872909_cqnv540ap5.webp</image:loc>
-      <image:caption>Pedra da Gávea</image:caption>
-    </image:image>
-    <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776136875954_cfyugltviy.webp</image:loc>
-      <image:caption>Pedra da Gávea</image:caption>
-    </image:image>
-    <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776136879093_ip8r4n763ur.webp</image:loc>
-      <image:caption>Pedra da Gávea</image:caption>
-    </image:image>
-    <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776136882267_reu0edvldh.webp</image:loc>
-      <image:caption>Pedra da Gávea</image:caption>
-    </image:image>
-    <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776136885441_82db1d3kviu.webp</image:loc>
-      <image:caption>Pedra da Gávea</image:caption>
-    </image:image>
-    <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776136888707_0e9a1520kjup.webp</image:loc>
-      <image:caption>Pedra da Gávea</image:caption>
-    </image:image>
-    <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776136892174_c4r1pb5urai.webp</image:loc>
-      <image:caption>Pedra da Gávea</image:caption>
-    </image:image>
-    <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776136849866_6iey58t5se7.webp</image:loc>
-      <image:caption>Pedra da Gávea</image:caption>
-    </image:image>
-    <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776136853305_m2tqb91hz2.webp</image:loc>
-      <image:caption>Pedra da Gávea</image:caption>
-    </image:image>
-    <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776136856097_yvpaxd2ofpa.webp</image:loc>
-      <image:caption>Pedra da Gávea</image:caption>
-    </image:image>
-    <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776136858694_p8me9z7pijb.webp</image:loc>
-      <image:caption>Pedra da Gávea</image:caption>
-    </image:image>
-    <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776136861213_zbytbkjle7k.webp</image:loc>
-      <image:caption>Pedra da Gávea</image:caption>
-    </image:image>
-  </url>
-  <url>
-    <loc>https://tocorimerio.com/passeio/amanhecer-no-parque-bondinho</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://tocorimerio.com/passeio/amanhecer-no-parque-bondinho"/>
-    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://tocorimerio.com/passeio/amanhecer-no-parque-bondinho?lang=pt"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://tocorimerio.com/passeio/amanhecer-no-parque-bondinho?lang=es"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://tocorimerio.com/passeio/amanhecer-no-parque-bondinho"/>
-    <lastmod>2026-08-10</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-    <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1785298807298_8i5mp0k9rxo.webp</image:loc>
-      <image:caption>Nascer-do-Sol no Pão de Açúcar (Sugar Loaf)</image:caption>
-    </image:image>
-    <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1785298803183_njmqk42x39.webp</image:loc>
-      <image:caption>Nascer-do-Sol no Pão de Açúcar (Sugar Loaf)</image:caption>
-    </image:image>
-    <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1785298804320_j02r1wxk6gp.webp</image:loc>
-      <image:caption>Nascer-do-Sol no Pão de Açúcar (Sugar Loaf)</image:caption>
-    </image:image>
-    <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1785298805217_4qtdc9pz6vg.webp</image:loc>
-      <image:caption>Nascer-do-Sol no Pão de Açúcar (Sugar Loaf)</image:caption>
-    </image:image>
-    <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1785298805846_9hopvtx9xb.webp</image:loc>
-      <image:caption>Nascer-do-Sol no Pão de Açúcar (Sugar Loaf)</image:caption>
-    </image:image>
-    <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1785298806873_cdrch3kdknv.webp</image:loc>
-      <image:caption>Nascer-do-Sol no Pão de Açúcar (Sugar Loaf)</image:caption>
-    </image:image>
-    <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1785298807949_fhd3w0kmfuu.webp</image:loc>
-      <image:caption>Nascer-do-Sol no Pão de Açúcar (Sugar Loaf)</image:caption>
-    </image:image>
-    <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1785298808392_js104il5e.webp</image:loc>
-      <image:caption>Nascer-do-Sol no Pão de Açúcar (Sugar Loaf)</image:caption>
-    </image:image>
-    <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1785298808991_8j1foi6o98n.webp</image:loc>
-      <image:caption>Nascer-do-Sol no Pão de Açúcar (Sugar Loaf)</image:caption>
-    </image:image>
-    <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1785298809403_hdyvu9duxzk.webp</image:loc>
-      <image:caption>Nascer-do-Sol no Pão de Açúcar (Sugar Loaf)</image:caption>
-    </image:image>
-    <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1785298810041_us6p24ss409.webp</image:loc>
-      <image:caption>Nascer-do-Sol no Pão de Açúcar (Sugar Loaf)</image:caption>
-    </image:image>
-    <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1785298810674_nghrhhcq0y.webp</image:loc>
-      <image:caption>Nascer-do-Sol no Pão de Açúcar (Sugar Loaf)</image:caption>
-    </image:image>
-    <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1785298811127_r88qzlgubve.webp</image:loc>
-      <image:caption>Nascer-do-Sol no Pão de Açúcar (Sugar Loaf)</image:caption>
-    </image:image>
-    <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1785298811587_qsypip0kbz.webp</image:loc>
-      <image:caption>Nascer-do-Sol no Pão de Açúcar (Sugar Loaf)</image:caption>
-    </image:image>
-    <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1785298812275_sn9uqmqizji.webp</image:loc>
-      <image:caption>Nascer-do-Sol no Pão de Açúcar (Sugar Loaf)</image:caption>
-    </image:image>
-    <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1785298936341_ryzaqxkygr.webp</image:loc>
-      <image:caption>Nascer-do-Sol no Pão de Açúcar (Sugar Loaf)</image:caption>
-    </image:image>
-    <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1785298936996_9ztqzzxvvw.webp</image:loc>
-      <image:caption>Nascer-do-Sol no Pão de Açúcar (Sugar Loaf)</image:caption>
-    </image:image>
-    <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1785298966729_z1uph1nr0jn.webp</image:loc>
-      <image:caption>Nascer-do-Sol no Pão de Açúcar (Sugar Loaf)</image:caption>
-    </image:image>
-    <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1785298967819_upda6xtz82.webp</image:loc>
-      <image:caption>Nascer-do-Sol no Pão de Açúcar (Sugar Loaf)</image:caption>
-    </image:image>
-    <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1785298995616_3616fsvv405.webp</image:loc>
-      <image:caption>Nascer-do-Sol no Pão de Açúcar (Sugar Loaf)</image:caption>
-    </image:image>
-  </url>
-  <url>
-    <loc>https://tocorimerio.com/passeio/costao-pao-de-acucar</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://tocorimerio.com/passeio/costao-pao-de-acucar"/>
-    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://tocorimerio.com/passeio/costao-pao-de-acucar?lang=pt"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://tocorimerio.com/passeio/costao-pao-de-acucar?lang=es"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://tocorimerio.com/passeio/costao-pao-de-acucar"/>
-    <lastmod>2026-08-10</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-    <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776136895488_l56izoo8xns.webp</image:loc>
-      <image:caption>Costão do Pão de Açúcar</image:caption>
-    </image:image>
-    <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776136910165_8fn6h7g61y7.webp</image:loc>
-      <image:caption>Costão do Pão de Açúcar</image:caption>
-    </image:image>
-    <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776136913079_z75tvjkh5j.webp</image:loc>
-      <image:caption>Costão do Pão de Açúcar</image:caption>
-    </image:image>
-    <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776136922754_j0hh5ow9psm.webp</image:loc>
-      <image:caption>Costão do Pão de Açúcar</image:caption>
-    </image:image>
-    <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776136926024_9dwo6g0czrw.webp</image:loc>
-      <image:caption>Costão do Pão de Açúcar</image:caption>
-    </image:image>
-    <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776136929209_1k2naukpluf.webp</image:loc>
-      <image:caption>Costão do Pão de Açúcar</image:caption>
-    </image:image>
-    <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776810653753_s6vwojcolqd.webp</image:loc>
-      <image:caption>Costão do Pão de Açúcar</image:caption>
-    </image:image>
-    <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776810654595_ae4n4c98v4l.webp</image:loc>
-      <image:caption>Costão do Pão de Açúcar</image:caption>
-    </image:image>
-    <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776810673101_1nagyza6k1f.webp</image:loc>
-      <image:caption>Costão do Pão de Açúcar</image:caption>
-    </image:image>
-    <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776810673878_2jjhkkexozx.webp</image:loc>
-      <image:caption>Costão do Pão de Açúcar</image:caption>
-    </image:image>
-    <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776810701731_l3uq7n9v59c.webp</image:loc>
-      <image:caption>Costão do Pão de Açúcar</image:caption>
-    </image:image>
-    <image:image>
-      <image:loc>https://images.unsplash.com/photo-1619546952812-520e98064a52?q=80&amp;w=800</image:loc>
-      <image:caption>Costão do Pão de Açúcar</image:caption>
-    </image:image>
-    <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776136897825_hwg7gie7hhp.webp</image:loc>
-      <image:caption>Costão do Pão de Açúcar</image:caption>
-    </image:image>
-    <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776136900733_ad61e83y2zm.webp</image:loc>
-      <image:caption>Costão do Pão de Açúcar</image:caption>
-    </image:image>
-    <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776136903696_zrj0v3h0r3r.webp</image:loc>
-      <image:caption>Costão do Pão de Açúcar</image:caption>
-    </image:image>
-    <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776136907236_krryobfqceq.webp</image:loc>
-      <image:caption>Costão do Pão de Açúcar</image:caption>
-    </image:image>
-  </url>
-  <url>
-    <loc>https://tocorimerio.com/passeio/praias-selvagens-guaratiba</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://tocorimerio.com/passeio/praias-selvagens-guaratiba"/>
-    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://tocorimerio.com/passeio/praias-selvagens-guaratiba?lang=pt"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://tocorimerio.com/passeio/praias-selvagens-guaratiba?lang=es"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://tocorimerio.com/passeio/praias-selvagens-guaratiba"/>
-    <lastmod>2026-08-10</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-    <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776137037153_8q6mve9es2m.webp</image:loc>
-      <image:caption>Travessia das Praias Selvagens</image:caption>
-    </image:image>
-    <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776137052383_be0rcksleea.webp</image:loc>
-      <image:caption>Travessia das Praias Selvagens</image:caption>
-    </image:image>
-    <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776137055104_ulxgbd8ko1.webp</image:loc>
-      <image:caption>Travessia das Praias Selvagens</image:caption>
-    </image:image>
-    <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776137057632_drvrd2utzy4.webp</image:loc>
-      <image:caption>Travessia das Praias Selvagens</image:caption>
-    </image:image>
-    <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776137060246_jra13cdv35.webp</image:loc>
-      <image:caption>Travessia das Praias Selvagens</image:caption>
-    </image:image>
-    <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776137062841_cz46u04to05.webp</image:loc>
-      <image:caption>Travessia das Praias Selvagens</image:caption>
-    </image:image>
-    <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776137065510_4kwuqu522gd.webp</image:loc>
-      <image:caption>Travessia das Praias Selvagens</image:caption>
-    </image:image>
-    <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776137068021_7xuf4ycc665.webp</image:loc>
-      <image:caption>Travessia das Praias Selvagens</image:caption>
-    </image:image>
-    <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776137039137_t3gjg9idbnd.webp</image:loc>
-      <image:caption>Travessia das Praias Selvagens</image:caption>
-    </image:image>
-    <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776137041433_x8m8occtfe.webp</image:loc>
-      <image:caption>Travessia das Praias Selvagens</image:caption>
-    </image:image>
-    <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776137044404_odkt0lsh4w.webp</image:loc>
-      <image:caption>Travessia das Praias Selvagens</image:caption>
-    </image:image>
-    <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776137046987_47xydain81g.webp</image:loc>
-      <image:caption>Travessia das Praias Selvagens</image:caption>
-    </image:image>
-    <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776137049704_hhrqj95lbae.webp</image:loc>
-      <image:caption>Travessia das Praias Selvagens</image:caption>
-    </image:image>
-  </url>
-  <url>
-    <loc>https://tocorimerio.com/passeio/tour-pe-centro-historico</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://tocorimerio.com/passeio/tour-pe-centro-historico"/>
-    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://tocorimerio.com/passeio/tour-pe-centro-historico?lang=pt"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://tocorimerio.com/passeio/tour-pe-centro-historico?lang=es"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://tocorimerio.com/passeio/tour-pe-centro-historico"/>
-    <lastmod>2026-08-10</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-    <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776136780115_5cor918wqko.webp</image:loc>
-      <image:caption>Rio Historic Centre Walking Tour: Colonial, Imperial &amp; Modern Rio a Pé</image:caption>
-    </image:image>
-    <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776136798818_koq569t43j.webp</image:loc>
-      <image:caption>Rio Historic Centre Walking Tour: Colonial, Imperial &amp; Modern Rio a Pé</image:caption>
-    </image:image>
-    <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776136802265_xlwx76yzxak.webp</image:loc>
-      <image:caption>Rio Historic Centre Walking Tour: Colonial, Imperial &amp; Modern Rio a Pé</image:caption>
-    </image:image>
-    <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776136805365_dr45x4ch6y5.webp</image:loc>
-      <image:caption>Rio Historic Centre Walking Tour: Colonial, Imperial &amp; Modern Rio a Pé</image:caption>
-    </image:image>
-    <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776136808486_b3jwbdidiet.webp</image:loc>
-      <image:caption>Rio Historic Centre Walking Tour: Colonial, Imperial &amp; Modern Rio a Pé</image:caption>
-    </image:image>
-    <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776136811961_cogebo1j6vm.webp</image:loc>
-      <image:caption>Rio Historic Centre Walking Tour: Colonial, Imperial &amp; Modern Rio a Pé</image:caption>
-    </image:image>
-    <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776136815404_qjnp9324on.webp</image:loc>
-      <image:caption>Rio Historic Centre Walking Tour: Colonial, Imperial &amp; Modern Rio a Pé</image:caption>
-    </image:image>
-    <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776136818781_nhjiemkqdp.webp</image:loc>
-      <image:caption>Rio Historic Centre Walking Tour: Colonial, Imperial &amp; Modern Rio a Pé</image:caption>
-    </image:image>
-    <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776136822414_d6w8nykf0sl.webp</image:loc>
-      <image:caption>Rio Historic Centre Walking Tour: Colonial, Imperial &amp; Modern Rio a Pé</image:caption>
-    </image:image>
-    <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776136781937_kzdywjqb2n.webp</image:loc>
-      <image:caption>Rio Historic Centre Walking Tour: Colonial, Imperial &amp; Modern Rio a Pé</image:caption>
-    </image:image>
-    <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776136785179_w7qyj2zihn.webp</image:loc>
-      <image:caption>Rio Historic Centre Walking Tour: Colonial, Imperial &amp; Modern Rio a Pé</image:caption>
-    </image:image>
-    <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776136788334_0i95j272zms.webp</image:loc>
-      <image:caption>Rio Historic Centre Walking Tour: Colonial, Imperial &amp; Modern Rio a Pé</image:caption>
-    </image:image>
-    <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776136791522_o0kdvjfvv08.webp</image:loc>
-      <image:caption>Rio Historic Centre Walking Tour: Colonial, Imperial &amp; Modern Rio a Pé</image:caption>
-    </image:image>
-    <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776136794694_b4cp5fev4us.webp</image:loc>
-      <image:caption>Rio Historic Centre Walking Tour: Colonial, Imperial &amp; Modern Rio a Pé</image:caption>
-    </image:image>
-  </url>
-  <url>
-    <loc>https://tocorimerio.com/passeio/cachoeiras-horto</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://tocorimerio.com/passeio/cachoeiras-horto"/>
-    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://tocorimerio.com/passeio/cachoeiras-horto?lang=pt"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://tocorimerio.com/passeio/cachoeiras-horto?lang=es"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://tocorimerio.com/passeio/cachoeiras-horto"/>
-    <lastmod>2026-08-10</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-    <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776136935433_iyan1f2zuk.webp</image:loc>
-      <image:caption>Rota das Cachoeiras do Horto</image:caption>
-    </image:image>
-    <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776136961919_9omf9g796iq.webp</image:loc>
-      <image:caption>Rota das Cachoeiras do Horto</image:caption>
-    </image:image>
-    <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776136966469_5iemqhqhbko.webp</image:loc>
-      <image:caption>Rota das Cachoeiras do Horto</image:caption>
-    </image:image>
-    <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776136969885_bs8xlji2gdo.webp</image:loc>
-      <image:caption>Rota das Cachoeiras do Horto</image:caption>
-    </image:image>
-    <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776136973315_ei0zahkro7.webp</image:loc>
-      <image:caption>Rota das Cachoeiras do Horto</image:caption>
-    </image:image>
-    <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776136977236_3zub1fo2pfj.webp</image:loc>
-      <image:caption>Rota das Cachoeiras do Horto</image:caption>
-    </image:image>
-    <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776136980375_2jy7a73qc38.webp</image:loc>
-      <image:caption>Rota das Cachoeiras do Horto</image:caption>
-    </image:image>
-    <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776136983603_am69xdgfuj.webp</image:loc>
-      <image:caption>Rota das Cachoeiras do Horto</image:caption>
-    </image:image>
-    <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776136986691_d2f968tacgw.webp</image:loc>
-      <image:caption>Rota das Cachoeiras do Horto</image:caption>
-    </image:image>
-    <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1777775609659_xituim1bh8f.webp</image:loc>
-      <image:caption>Rota das Cachoeiras do Horto</image:caption>
-    </image:image>
-    <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1777775611294_bit4uud4zpd.webp</image:loc>
-      <image:caption>Rota das Cachoeiras do Horto</image:caption>
-    </image:image>
-    <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776136937989_pp9xfss2rv.webp</image:loc>
-      <image:caption>Rota das Cachoeiras do Horto</image:caption>
-    </image:image>
-    <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776136940878_9u8stet2fh4.webp</image:loc>
-      <image:caption>Rota das Cachoeiras do Horto</image:caption>
-    </image:image>
-    <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776136944518_2kfezva6jww.webp</image:loc>
-      <image:caption>Rota das Cachoeiras do Horto</image:caption>
-    </image:image>
-    <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776136947997_d0polhvafol.webp</image:loc>
-      <image:caption>Rota das Cachoeiras do Horto</image:caption>
-    </image:image>
-    <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776136951491_otzs5mh98g.webp</image:loc>
-      <image:caption>Rota das Cachoeiras do Horto</image:caption>
-    </image:image>
-  </url>
-  <url>
-    <loc>https://tocorimerio.com/passeio/um-dia-em-niteroi</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://tocorimerio.com/passeio/um-dia-em-niteroi"/>
-    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://tocorimerio.com/passeio/um-dia-em-niteroi?lang=pt"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://tocorimerio.com/passeio/um-dia-em-niteroi?lang=es"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://tocorimerio.com/passeio/um-dia-em-niteroi"/>
-    <lastmod>2026-08-10</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-    <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776136562967_sx7ro9vibbj.webp</image:loc>
-      <image:caption>Um dia em Niterói</image:caption>
-    </image:image>
-    <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776136578254_1ae633sspx8h.webp</image:loc>
-      <image:caption>Um dia em Niterói</image:caption>
-    </image:image>
-    <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776136581021_p56x7udsr2p.webp</image:loc>
-      <image:caption>Um dia em Niterói</image:caption>
-    </image:image>
-    <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776136583843_0mf1sgy7vfqr.webp</image:loc>
-      <image:caption>Um dia em Niterói</image:caption>
-    </image:image>
-    <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776136586497_aj4fyxzb2xl.webp</image:loc>
-      <image:caption>Um dia em Niterói</image:caption>
-    </image:image>
-    <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776136588961_77rfhmzq62m.webp</image:loc>
-      <image:caption>Um dia em Niterói</image:caption>
-    </image:image>
-    <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776136591893_u3ub2kmkll.webp</image:loc>
-      <image:caption>Um dia em Niterói</image:caption>
-    </image:image>
-    <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776136594494_mpo4eunxoz.webp</image:loc>
-      <image:caption>Um dia em Niterói</image:caption>
-    </image:image>
-    <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776136596991_ygzt9804uv.webp</image:loc>
-      <image:caption>Um dia em Niterói</image:caption>
-    </image:image>
-    <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776136599324_kgia4f1ht6.webp</image:loc>
-      <image:caption>Um dia em Niterói</image:caption>
-    </image:image>
-    <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776136601590_g0i3ggfo2t5.webp</image:loc>
-      <image:caption>Um dia em Niterói</image:caption>
-    </image:image>
-    <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776136564693_sobbcs7196p.webp</image:loc>
-      <image:caption>Um dia em Niterói</image:caption>
-    </image:image>
-    <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776136567386_92ysyrykpk4.webp</image:loc>
-      <image:caption>Um dia em Niterói</image:caption>
-    </image:image>
-    <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776136570716_xk7vlbshgpk.webp</image:loc>
-      <image:caption>Um dia em Niterói</image:caption>
-    </image:image>
-    <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776136573026_9xn7aajsonk.webp</image:loc>
-      <image:caption>Um dia em Niterói</image:caption>
-    </image:image>
-    <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776136575635_y7hue34iaa.webp</image:loc>
-      <image:caption>Um dia em Niterói</image:caption>
-    </image:image>
-  </url>
-  <url>
-    <loc>https://tocorimerio.com/passeio/maracana-matchday</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://tocorimerio.com/passeio/maracana-matchday"/>
-    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://tocorimerio.com/passeio/maracana-matchday?lang=pt"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://tocorimerio.com/passeio/maracana-matchday?lang=es"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://tocorimerio.com/passeio/maracana-matchday"/>
-    <lastmod>2026-08-10</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-    <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776136644074_ueljwux2xe.webp</image:loc>
-      <image:caption>Maracanã MatchDay</image:caption>
-    </image:image>
-    <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776136646347_hrrelisrwqe.webp</image:loc>
-      <image:caption>Maracanã MatchDay</image:caption>
-    </image:image>
-  </url>
-  <url>
     <loc>https://tocorimerio.com/passeio/pequena-frica-experience-hist-ria-cultura-e-resist-ncia-no-cora-o-do-rio</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://tocorimerio.com/passeio/pequena-frica-experience-hist-ria-cultura-e-resist-ncia-no-cora-o-do-rio"/>
     <xhtml:link rel="alternate" hreflang="pt-BR" href="https://tocorimerio.com/passeio/pequena-frica-experience-hist-ria-cultura-e-resist-ncia-no-cora-o-do-rio?lang=pt"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://tocorimerio.com/passeio/pequena-frica-experience-hist-ria-cultura-e-resist-ncia-no-cora-o-do-rio?lang=es"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://tocorimerio.com/passeio/pequena-frica-experience-hist-ria-cultura-e-resist-ncia-no-cora-o-do-rio"/>
-    <lastmod>2026-08-10</lastmod>
+    <lastmod>2026-08-28</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -860,12 +337,676 @@
     </image:image>
   </url>
   <url>
+    <loc>https://tocorimerio.com/passeio/pedra-da-gavea-trilha</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://tocorimerio.com/passeio/pedra-da-gavea-trilha"/>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://tocorimerio.com/passeio/pedra-da-gavea-trilha?lang=pt"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://tocorimerio.com/passeio/pedra-da-gavea-trilha?lang=es"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://tocorimerio.com/passeio/pedra-da-gavea-trilha"/>
+    <lastmod>2026-08-28</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776136847390_169n24rnud8.webp</image:loc>
+      <image:caption>Pedra da Gávea</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776136864281_g9fboxwo3c.webp</image:loc>
+      <image:caption>Pedra da Gávea</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776136867362_wflr98j93cl.webp</image:loc>
+      <image:caption>Pedra da Gávea</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776136870103_rf59fdi0369.webp</image:loc>
+      <image:caption>Pedra da Gávea</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776136872909_cqnv540ap5.webp</image:loc>
+      <image:caption>Pedra da Gávea</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776136875954_cfyugltviy.webp</image:loc>
+      <image:caption>Pedra da Gávea</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776136879093_ip8r4n763ur.webp</image:loc>
+      <image:caption>Pedra da Gávea</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776136882267_reu0edvldh.webp</image:loc>
+      <image:caption>Pedra da Gávea</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776136885441_82db1d3kviu.webp</image:loc>
+      <image:caption>Pedra da Gávea</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776136888707_0e9a1520kjup.webp</image:loc>
+      <image:caption>Pedra da Gávea</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776136892174_c4r1pb5urai.webp</image:loc>
+      <image:caption>Pedra da Gávea</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776136849866_6iey58t5se7.webp</image:loc>
+      <image:caption>Pedra da Gávea</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776136853305_m2tqb91hz2.webp</image:loc>
+      <image:caption>Pedra da Gávea</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776136856097_yvpaxd2ofpa.webp</image:loc>
+      <image:caption>Pedra da Gávea</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776136858694_p8me9z7pijb.webp</image:loc>
+      <image:caption>Pedra da Gávea</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776136861213_zbytbkjle7k.webp</image:loc>
+      <image:caption>Pedra da Gávea</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://tocorimerio.com/passeio/costao-pao-de-acucar</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://tocorimerio.com/passeio/costao-pao-de-acucar"/>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://tocorimerio.com/passeio/costao-pao-de-acucar?lang=pt"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://tocorimerio.com/passeio/costao-pao-de-acucar?lang=es"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://tocorimerio.com/passeio/costao-pao-de-acucar"/>
+    <lastmod>2026-08-28</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776136895488_l56izoo8xns.webp</image:loc>
+      <image:caption>Costão do Pão de Açúcar</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776136910165_8fn6h7g61y7.webp</image:loc>
+      <image:caption>Costão do Pão de Açúcar</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776136913079_z75tvjkh5j.webp</image:loc>
+      <image:caption>Costão do Pão de Açúcar</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776136922754_j0hh5ow9psm.webp</image:loc>
+      <image:caption>Costão do Pão de Açúcar</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776136926024_9dwo6g0czrw.webp</image:loc>
+      <image:caption>Costão do Pão de Açúcar</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776136929209_1k2naukpluf.webp</image:loc>
+      <image:caption>Costão do Pão de Açúcar</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776810653753_s6vwojcolqd.webp</image:loc>
+      <image:caption>Costão do Pão de Açúcar</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776810654595_ae4n4c98v4l.webp</image:loc>
+      <image:caption>Costão do Pão de Açúcar</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776810673101_1nagyza6k1f.webp</image:loc>
+      <image:caption>Costão do Pão de Açúcar</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776810673878_2jjhkkexozx.webp</image:loc>
+      <image:caption>Costão do Pão de Açúcar</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776810701731_l3uq7n9v59c.webp</image:loc>
+      <image:caption>Costão do Pão de Açúcar</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://images.unsplash.com/photo-1619546952812-520e98064a52?q=80&amp;w=800</image:loc>
+      <image:caption>Costão do Pão de Açúcar</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776136897825_hwg7gie7hhp.webp</image:loc>
+      <image:caption>Costão do Pão de Açúcar</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776136900733_ad61e83y2zm.webp</image:loc>
+      <image:caption>Costão do Pão de Açúcar</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776136903696_zrj0v3h0r3r.webp</image:loc>
+      <image:caption>Costão do Pão de Açúcar</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776136907236_krryobfqceq.webp</image:loc>
+      <image:caption>Costão do Pão de Açúcar</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://tocorimerio.com/passeio/degustacao-de-cafe-brasileiro</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://tocorimerio.com/passeio/degustacao-de-cafe-brasileiro"/>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://tocorimerio.com/passeio/degustacao-de-cafe-brasileiro?lang=pt"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://tocorimerio.com/passeio/degustacao-de-cafe-brasileiro?lang=es"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://tocorimerio.com/passeio/degustacao-de-cafe-brasileiro"/>
+    <lastmod>2026-08-28</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1781744352241_xb9jevsms8i.webp</image:loc>
+      <image:caption>Degustação de Café Brasileiro</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1781743046469_02p2ysbmt0mn.webp</image:loc>
+      <image:caption>Degustação de Café Brasileiro</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1781743048713_lo1hceir5r.webp</image:loc>
+      <image:caption>Degustação de Café Brasileiro</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1781743049802_emlbx59ji5h.webp</image:loc>
+      <image:caption>Degustação de Café Brasileiro</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1781743050715_5r6djwukph3.webp</image:loc>
+      <image:caption>Degustação de Café Brasileiro</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1781743051645_7po86af2679.webp</image:loc>
+      <image:caption>Degustação de Café Brasileiro</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1781743052644_ft4rjft52t9.webp</image:loc>
+      <image:caption>Degustação de Café Brasileiro</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1781743053788_q3ec1m8f5u.webp</image:loc>
+      <image:caption>Degustação de Café Brasileiro</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1781743054533_4h1ooal21ed.webp</image:loc>
+      <image:caption>Degustação de Café Brasileiro</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1781743055670_j8zwspfgvr.webp</image:loc>
+      <image:caption>Degustação de Café Brasileiro</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1781743057455_bk9kqzr9cgk.webp</image:loc>
+      <image:caption>Degustação de Café Brasileiro</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1781743058708_c957y0km0du.webp</image:loc>
+      <image:caption>Degustação de Café Brasileiro</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1781743060092_k2unban0rcn.webp</image:loc>
+      <image:caption>Degustação de Café Brasileiro</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1781743061118_lt83cu3qe5s.webp</image:loc>
+      <image:caption>Degustação de Café Brasileiro</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1781743062983_bifhjd5c1ac.webp</image:loc>
+      <image:caption>Degustação de Café Brasileiro</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1781743063800_l1x87drlih8.webp</image:loc>
+      <image:caption>Degustação de Café Brasileiro</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1781744349183_6vvj4tph65d.webp</image:loc>
+      <image:caption>Degustação de Café Brasileiro</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1781744350388_x3di1c85yo.webp</image:loc>
+      <image:caption>Degustação de Café Brasileiro</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1781744353349_0gtoli8gsdu.webp</image:loc>
+      <image:caption>Degustação de Café Brasileiro</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1781744354283_g1fxlm7bu18.webp</image:loc>
+      <image:caption>Degustação de Café Brasileiro</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://tocorimerio.com/passeio/sunset-sailing-rio</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://tocorimerio.com/passeio/sunset-sailing-rio"/>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://tocorimerio.com/passeio/sunset-sailing-rio?lang=pt"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://tocorimerio.com/passeio/sunset-sailing-rio?lang=es"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://tocorimerio.com/passeio/sunset-sailing-rio"/>
+    <lastmod>2026-08-28</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776178439310_p7ohei4s7y.webp</image:loc>
+      <image:caption>Sailing Rio - Baia de Guanabara</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776178454055_e29cuehfko.webp</image:loc>
+      <image:caption>Sailing Rio - Baia de Guanabara</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776178455147_i0m6je1fw2.webp</image:loc>
+      <image:caption>Sailing Rio - Baia de Guanabara</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776178456169_s5y3zc4k1dg.webp</image:loc>
+      <image:caption>Sailing Rio - Baia de Guanabara</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776178456826_otj514vif2.webp</image:loc>
+      <image:caption>Sailing Rio - Baia de Guanabara</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776178437254_3tp7eykr1l9.webp</image:loc>
+      <image:caption>Sailing Rio - Baia de Guanabara</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776178437966_sj78ip4t5mp.webp</image:loc>
+      <image:caption>Sailing Rio - Baia de Guanabara</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776178438657_g014cowadp.webp</image:loc>
+      <image:caption>Sailing Rio - Baia de Guanabara</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://tocorimerio.com/passeio/amanhecer-no-parque-bondinho</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://tocorimerio.com/passeio/amanhecer-no-parque-bondinho"/>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://tocorimerio.com/passeio/amanhecer-no-parque-bondinho?lang=pt"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://tocorimerio.com/passeio/amanhecer-no-parque-bondinho?lang=es"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://tocorimerio.com/passeio/amanhecer-no-parque-bondinho"/>
+    <lastmod>2026-08-28</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1785298807298_8i5mp0k9rxo.webp</image:loc>
+      <image:caption>Nascer-do-Sol no Pão de Açúcar (Sugar Loaf)</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1785298803183_njmqk42x39.webp</image:loc>
+      <image:caption>Nascer-do-Sol no Pão de Açúcar (Sugar Loaf)</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1785298804320_j02r1wxk6gp.webp</image:loc>
+      <image:caption>Nascer-do-Sol no Pão de Açúcar (Sugar Loaf)</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1785298805217_4qtdc9pz6vg.webp</image:loc>
+      <image:caption>Nascer-do-Sol no Pão de Açúcar (Sugar Loaf)</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1785298805846_9hopvtx9xb.webp</image:loc>
+      <image:caption>Nascer-do-Sol no Pão de Açúcar (Sugar Loaf)</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1785298806873_cdrch3kdknv.webp</image:loc>
+      <image:caption>Nascer-do-Sol no Pão de Açúcar (Sugar Loaf)</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1785298807949_fhd3w0kmfuu.webp</image:loc>
+      <image:caption>Nascer-do-Sol no Pão de Açúcar (Sugar Loaf)</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1785298808392_js104il5e.webp</image:loc>
+      <image:caption>Nascer-do-Sol no Pão de Açúcar (Sugar Loaf)</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1785298808991_8j1foi6o98n.webp</image:loc>
+      <image:caption>Nascer-do-Sol no Pão de Açúcar (Sugar Loaf)</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1785298809403_hdyvu9duxzk.webp</image:loc>
+      <image:caption>Nascer-do-Sol no Pão de Açúcar (Sugar Loaf)</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1785298810041_us6p24ss409.webp</image:loc>
+      <image:caption>Nascer-do-Sol no Pão de Açúcar (Sugar Loaf)</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1785298810674_nghrhhcq0y.webp</image:loc>
+      <image:caption>Nascer-do-Sol no Pão de Açúcar (Sugar Loaf)</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1785298811127_r88qzlgubve.webp</image:loc>
+      <image:caption>Nascer-do-Sol no Pão de Açúcar (Sugar Loaf)</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1785298811587_qsypip0kbz.webp</image:loc>
+      <image:caption>Nascer-do-Sol no Pão de Açúcar (Sugar Loaf)</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1785298812275_sn9uqmqizji.webp</image:loc>
+      <image:caption>Nascer-do-Sol no Pão de Açúcar (Sugar Loaf)</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1785298936341_ryzaqxkygr.webp</image:loc>
+      <image:caption>Nascer-do-Sol no Pão de Açúcar (Sugar Loaf)</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1785298936996_9ztqzzxvvw.webp</image:loc>
+      <image:caption>Nascer-do-Sol no Pão de Açúcar (Sugar Loaf)</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1785298966729_z1uph1nr0jn.webp</image:loc>
+      <image:caption>Nascer-do-Sol no Pão de Açúcar (Sugar Loaf)</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1785298967819_upda6xtz82.webp</image:loc>
+      <image:caption>Nascer-do-Sol no Pão de Açúcar (Sugar Loaf)</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1785298995616_3616fsvv405.webp</image:loc>
+      <image:caption>Nascer-do-Sol no Pão de Açúcar (Sugar Loaf)</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://tocorimerio.com/passeio/praias-selvagens-guaratiba</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://tocorimerio.com/passeio/praias-selvagens-guaratiba"/>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://tocorimerio.com/passeio/praias-selvagens-guaratiba?lang=pt"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://tocorimerio.com/passeio/praias-selvagens-guaratiba?lang=es"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://tocorimerio.com/passeio/praias-selvagens-guaratiba"/>
+    <lastmod>2026-08-28</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776137037153_8q6mve9es2m.webp</image:loc>
+      <image:caption>Travessia das Praias Selvagens</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776137052383_be0rcksleea.webp</image:loc>
+      <image:caption>Travessia das Praias Selvagens</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776137055104_ulxgbd8ko1.webp</image:loc>
+      <image:caption>Travessia das Praias Selvagens</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776137057632_drvrd2utzy4.webp</image:loc>
+      <image:caption>Travessia das Praias Selvagens</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776137060246_jra13cdv35.webp</image:loc>
+      <image:caption>Travessia das Praias Selvagens</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776137062841_cz46u04to05.webp</image:loc>
+      <image:caption>Travessia das Praias Selvagens</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776137065510_4kwuqu522gd.webp</image:loc>
+      <image:caption>Travessia das Praias Selvagens</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776137068021_7xuf4ycc665.webp</image:loc>
+      <image:caption>Travessia das Praias Selvagens</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776137039137_t3gjg9idbnd.webp</image:loc>
+      <image:caption>Travessia das Praias Selvagens</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776137041433_x8m8occtfe.webp</image:loc>
+      <image:caption>Travessia das Praias Selvagens</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776137044404_odkt0lsh4w.webp</image:loc>
+      <image:caption>Travessia das Praias Selvagens</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776137046987_47xydain81g.webp</image:loc>
+      <image:caption>Travessia das Praias Selvagens</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776137049704_hhrqj95lbae.webp</image:loc>
+      <image:caption>Travessia das Praias Selvagens</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://tocorimerio.com/passeio/tour-pe-centro-historico</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://tocorimerio.com/passeio/tour-pe-centro-historico"/>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://tocorimerio.com/passeio/tour-pe-centro-historico?lang=pt"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://tocorimerio.com/passeio/tour-pe-centro-historico?lang=es"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://tocorimerio.com/passeio/tour-pe-centro-historico"/>
+    <lastmod>2026-08-28</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776136780115_5cor918wqko.webp</image:loc>
+      <image:caption>Rio Historic Centre Walking Tour: Colonial, Imperial &amp; Modern Rio a Pé</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776136798818_koq569t43j.webp</image:loc>
+      <image:caption>Rio Historic Centre Walking Tour: Colonial, Imperial &amp; Modern Rio a Pé</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776136802265_xlwx76yzxak.webp</image:loc>
+      <image:caption>Rio Historic Centre Walking Tour: Colonial, Imperial &amp; Modern Rio a Pé</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776136805365_dr45x4ch6y5.webp</image:loc>
+      <image:caption>Rio Historic Centre Walking Tour: Colonial, Imperial &amp; Modern Rio a Pé</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776136808486_b3jwbdidiet.webp</image:loc>
+      <image:caption>Rio Historic Centre Walking Tour: Colonial, Imperial &amp; Modern Rio a Pé</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776136811961_cogebo1j6vm.webp</image:loc>
+      <image:caption>Rio Historic Centre Walking Tour: Colonial, Imperial &amp; Modern Rio a Pé</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776136815404_qjnp9324on.webp</image:loc>
+      <image:caption>Rio Historic Centre Walking Tour: Colonial, Imperial &amp; Modern Rio a Pé</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776136818781_nhjiemkqdp.webp</image:loc>
+      <image:caption>Rio Historic Centre Walking Tour: Colonial, Imperial &amp; Modern Rio a Pé</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776136822414_d6w8nykf0sl.webp</image:loc>
+      <image:caption>Rio Historic Centre Walking Tour: Colonial, Imperial &amp; Modern Rio a Pé</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776136781937_kzdywjqb2n.webp</image:loc>
+      <image:caption>Rio Historic Centre Walking Tour: Colonial, Imperial &amp; Modern Rio a Pé</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776136785179_w7qyj2zihn.webp</image:loc>
+      <image:caption>Rio Historic Centre Walking Tour: Colonial, Imperial &amp; Modern Rio a Pé</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776136788334_0i95j272zms.webp</image:loc>
+      <image:caption>Rio Historic Centre Walking Tour: Colonial, Imperial &amp; Modern Rio a Pé</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776136791522_o0kdvjfvv08.webp</image:loc>
+      <image:caption>Rio Historic Centre Walking Tour: Colonial, Imperial &amp; Modern Rio a Pé</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776136794694_b4cp5fev4us.webp</image:loc>
+      <image:caption>Rio Historic Centre Walking Tour: Colonial, Imperial &amp; Modern Rio a Pé</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://tocorimerio.com/passeio/cachoeiras-horto</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://tocorimerio.com/passeio/cachoeiras-horto"/>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://tocorimerio.com/passeio/cachoeiras-horto?lang=pt"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://tocorimerio.com/passeio/cachoeiras-horto?lang=es"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://tocorimerio.com/passeio/cachoeiras-horto"/>
+    <lastmod>2026-08-28</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776136935433_iyan1f2zuk.webp</image:loc>
+      <image:caption>Rota das Cachoeiras do Horto</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776136961919_9omf9g796iq.webp</image:loc>
+      <image:caption>Rota das Cachoeiras do Horto</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776136966469_5iemqhqhbko.webp</image:loc>
+      <image:caption>Rota das Cachoeiras do Horto</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776136969885_bs8xlji2gdo.webp</image:loc>
+      <image:caption>Rota das Cachoeiras do Horto</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776136973315_ei0zahkro7.webp</image:loc>
+      <image:caption>Rota das Cachoeiras do Horto</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776136977236_3zub1fo2pfj.webp</image:loc>
+      <image:caption>Rota das Cachoeiras do Horto</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776136980375_2jy7a73qc38.webp</image:loc>
+      <image:caption>Rota das Cachoeiras do Horto</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776136983603_am69xdgfuj.webp</image:loc>
+      <image:caption>Rota das Cachoeiras do Horto</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776136986691_d2f968tacgw.webp</image:loc>
+      <image:caption>Rota das Cachoeiras do Horto</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1777775609659_xituim1bh8f.webp</image:loc>
+      <image:caption>Rota das Cachoeiras do Horto</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1777775611294_bit4uud4zpd.webp</image:loc>
+      <image:caption>Rota das Cachoeiras do Horto</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776136937989_pp9xfss2rv.webp</image:loc>
+      <image:caption>Rota das Cachoeiras do Horto</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776136940878_9u8stet2fh4.webp</image:loc>
+      <image:caption>Rota das Cachoeiras do Horto</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776136944518_2kfezva6jww.webp</image:loc>
+      <image:caption>Rota das Cachoeiras do Horto</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776136947997_d0polhvafol.webp</image:loc>
+      <image:caption>Rota das Cachoeiras do Horto</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776136951491_otzs5mh98g.webp</image:loc>
+      <image:caption>Rota das Cachoeiras do Horto</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://tocorimerio.com/passeio/um-dia-em-niteroi</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://tocorimerio.com/passeio/um-dia-em-niteroi"/>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://tocorimerio.com/passeio/um-dia-em-niteroi?lang=pt"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://tocorimerio.com/passeio/um-dia-em-niteroi?lang=es"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://tocorimerio.com/passeio/um-dia-em-niteroi"/>
+    <lastmod>2026-08-28</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776136562967_sx7ro9vibbj.webp</image:loc>
+      <image:caption>Um dia em Niterói</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776136578254_1ae633sspx8h.webp</image:loc>
+      <image:caption>Um dia em Niterói</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776136581021_p56x7udsr2p.webp</image:loc>
+      <image:caption>Um dia em Niterói</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776136583843_0mf1sgy7vfqr.webp</image:loc>
+      <image:caption>Um dia em Niterói</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776136586497_aj4fyxzb2xl.webp</image:loc>
+      <image:caption>Um dia em Niterói</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776136588961_77rfhmzq62m.webp</image:loc>
+      <image:caption>Um dia em Niterói</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776136591893_u3ub2kmkll.webp</image:loc>
+      <image:caption>Um dia em Niterói</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776136594494_mpo4eunxoz.webp</image:loc>
+      <image:caption>Um dia em Niterói</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776136596991_ygzt9804uv.webp</image:loc>
+      <image:caption>Um dia em Niterói</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776136599324_kgia4f1ht6.webp</image:loc>
+      <image:caption>Um dia em Niterói</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776136601590_g0i3ggfo2t5.webp</image:loc>
+      <image:caption>Um dia em Niterói</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776136564693_sobbcs7196p.webp</image:loc>
+      <image:caption>Um dia em Niterói</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776136567386_92ysyrykpk4.webp</image:loc>
+      <image:caption>Um dia em Niterói</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776136570716_xk7vlbshgpk.webp</image:loc>
+      <image:caption>Um dia em Niterói</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776136573026_9xn7aajsonk.webp</image:loc>
+      <image:caption>Um dia em Niterói</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776136575635_y7hue34iaa.webp</image:loc>
+      <image:caption>Um dia em Niterói</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://tocorimerio.com/passeio/maracana-matchday</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://tocorimerio.com/passeio/maracana-matchday"/>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://tocorimerio.com/passeio/maracana-matchday?lang=pt"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://tocorimerio.com/passeio/maracana-matchday?lang=es"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://tocorimerio.com/passeio/maracana-matchday"/>
+    <lastmod>2026-08-28</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776136644074_ueljwux2xe.webp</image:loc>
+      <image:caption>Maracanã MatchDay</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776136646347_hrrelisrwqe.webp</image:loc>
+      <image:caption>Maracanã MatchDay</image:caption>
+    </image:image>
+  </url>
+  <url>
     <loc>https://tocorimerio.com/passeio/pico-da-tijuca-hiking-tour-o-ponto-mais-alto-do-parque-nacional-da-tijuca</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://tocorimerio.com/passeio/pico-da-tijuca-hiking-tour-o-ponto-mais-alto-do-parque-nacional-da-tijuca"/>
     <xhtml:link rel="alternate" hreflang="pt-BR" href="https://tocorimerio.com/passeio/pico-da-tijuca-hiking-tour-o-ponto-mais-alto-do-parque-nacional-da-tijuca?lang=pt"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://tocorimerio.com/passeio/pico-da-tijuca-hiking-tour-o-ponto-mais-alto-do-parque-nacional-da-tijuca?lang=es"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://tocorimerio.com/passeio/pico-da-tijuca-hiking-tour-o-ponto-mais-alto-do-parque-nacional-da-tijuca"/>
-    <lastmod>2026-08-10</lastmod>
+    <lastmod>2026-08-28</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -959,7 +1100,7 @@
     <xhtml:link rel="alternate" hreflang="pt-BR" href="https://tocorimerio.com/passeio/favela-rio-tour-rocinha?lang=pt"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://tocorimerio.com/passeio/favela-rio-tour-rocinha?lang=es"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://tocorimerio.com/passeio/favela-rio-tour-rocinha"/>
-    <lastmod>2026-08-10</lastmod>
+    <lastmod>2026-08-28</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -1009,7 +1150,7 @@
     <xhtml:link rel="alternate" hreflang="pt-BR" href="https://tocorimerio.com/passeio/scuba-diving-in-arraial-do-cabo?lang=pt"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://tocorimerio.com/passeio/scuba-diving-in-arraial-do-cabo?lang=es"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://tocorimerio.com/passeio/scuba-diving-in-arraial-do-cabo"/>
-    <lastmod>2026-08-10</lastmod>
+    <lastmod>2026-08-28</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -1046,102 +1187,12 @@
     </image:image>
   </url>
   <url>
-    <loc>https://tocorimerio.com/passeio/degustacao-de-cafe-brasileiro</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://tocorimerio.com/passeio/degustacao-de-cafe-brasileiro"/>
-    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://tocorimerio.com/passeio/degustacao-de-cafe-brasileiro?lang=pt"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://tocorimerio.com/passeio/degustacao-de-cafe-brasileiro?lang=es"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://tocorimerio.com/passeio/degustacao-de-cafe-brasileiro"/>
-    <lastmod>2026-08-11</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-    <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1781744352241_xb9jevsms8i.webp</image:loc>
-      <image:caption>Degustação de Café Brasileiro</image:caption>
-    </image:image>
-    <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1781743046469_02p2ysbmt0mn.webp</image:loc>
-      <image:caption>Degustação de Café Brasileiro</image:caption>
-    </image:image>
-    <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1781743048713_lo1hceir5r.webp</image:loc>
-      <image:caption>Degustação de Café Brasileiro</image:caption>
-    </image:image>
-    <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1781743049802_emlbx59ji5h.webp</image:loc>
-      <image:caption>Degustação de Café Brasileiro</image:caption>
-    </image:image>
-    <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1781743050715_5r6djwukph3.webp</image:loc>
-      <image:caption>Degustação de Café Brasileiro</image:caption>
-    </image:image>
-    <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1781743051645_7po86af2679.webp</image:loc>
-      <image:caption>Degustação de Café Brasileiro</image:caption>
-    </image:image>
-    <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1781743052644_ft4rjft52t9.webp</image:loc>
-      <image:caption>Degustação de Café Brasileiro</image:caption>
-    </image:image>
-    <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1781743053788_q3ec1m8f5u.webp</image:loc>
-      <image:caption>Degustação de Café Brasileiro</image:caption>
-    </image:image>
-    <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1781743054533_4h1ooal21ed.webp</image:loc>
-      <image:caption>Degustação de Café Brasileiro</image:caption>
-    </image:image>
-    <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1781743055670_j8zwspfgvr.webp</image:loc>
-      <image:caption>Degustação de Café Brasileiro</image:caption>
-    </image:image>
-    <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1781743057455_bk9kqzr9cgk.webp</image:loc>
-      <image:caption>Degustação de Café Brasileiro</image:caption>
-    </image:image>
-    <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1781743058708_c957y0km0du.webp</image:loc>
-      <image:caption>Degustação de Café Brasileiro</image:caption>
-    </image:image>
-    <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1781743060092_k2unban0rcn.webp</image:loc>
-      <image:caption>Degustação de Café Brasileiro</image:caption>
-    </image:image>
-    <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1781743061118_lt83cu3qe5s.webp</image:loc>
-      <image:caption>Degustação de Café Brasileiro</image:caption>
-    </image:image>
-    <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1781743062983_bifhjd5c1ac.webp</image:loc>
-      <image:caption>Degustação de Café Brasileiro</image:caption>
-    </image:image>
-    <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1781743063800_l1x87drlih8.webp</image:loc>
-      <image:caption>Degustação de Café Brasileiro</image:caption>
-    </image:image>
-    <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1781744349183_6vvj4tph65d.webp</image:loc>
-      <image:caption>Degustação de Café Brasileiro</image:caption>
-    </image:image>
-    <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1781744350388_x3di1c85yo.webp</image:loc>
-      <image:caption>Degustação de Café Brasileiro</image:caption>
-    </image:image>
-    <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1781744353349_0gtoli8gsdu.webp</image:loc>
-      <image:caption>Degustação de Café Brasileiro</image:caption>
-    </image:image>
-    <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1781744354283_g1fxlm7bu18.webp</image:loc>
-      <image:caption>Degustação de Café Brasileiro</image:caption>
-    </image:image>
-  </url>
-  <url>
     <loc>https://tocorimerio.com/passeio/city-tour-rio-completo</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://tocorimerio.com/passeio/city-tour-rio-completo"/>
     <xhtml:link rel="alternate" hreflang="pt-BR" href="https://tocorimerio.com/passeio/city-tour-rio-completo?lang=pt"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://tocorimerio.com/passeio/city-tour-rio-completo?lang=es"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://tocorimerio.com/passeio/city-tour-rio-completo"/>
-    <lastmod>2026-08-10</lastmod>
+    <lastmod>2026-08-28</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -1211,7 +1262,7 @@
     <xhtml:link rel="alternate" hreflang="pt-BR" href="https://tocorimerio.com/passeio/escalada-rocha-rio?lang=pt"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://tocorimerio.com/passeio/escalada-rocha-rio?lang=es"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://tocorimerio.com/passeio/escalada-rocha-rio"/>
-    <lastmod>2026-08-10</lastmod>
+    <lastmod>2026-08-28</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -1272,54 +1323,12 @@
     </image:image>
   </url>
   <url>
-    <loc>https://tocorimerio.com/passeio/sunset-sailing-rio</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://tocorimerio.com/passeio/sunset-sailing-rio"/>
-    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://tocorimerio.com/passeio/sunset-sailing-rio?lang=pt"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://tocorimerio.com/passeio/sunset-sailing-rio?lang=es"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://tocorimerio.com/passeio/sunset-sailing-rio"/>
-    <lastmod>2026-08-10</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-    <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776178439310_p7ohei4s7y.webp</image:loc>
-      <image:caption>Sailing Rio - Baia de Guanabara</image:caption>
-    </image:image>
-    <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776178454055_e29cuehfko.webp</image:loc>
-      <image:caption>Sailing Rio - Baia de Guanabara</image:caption>
-    </image:image>
-    <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776178455147_i0m6je1fw2.webp</image:loc>
-      <image:caption>Sailing Rio - Baia de Guanabara</image:caption>
-    </image:image>
-    <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776178456169_s5y3zc4k1dg.webp</image:loc>
-      <image:caption>Sailing Rio - Baia de Guanabara</image:caption>
-    </image:image>
-    <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776178456826_otj514vif2.webp</image:loc>
-      <image:caption>Sailing Rio - Baia de Guanabara</image:caption>
-    </image:image>
-    <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776178437254_3tp7eykr1l9.webp</image:loc>
-      <image:caption>Sailing Rio - Baia de Guanabara</image:caption>
-    </image:image>
-    <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776178437966_sj78ip4t5mp.webp</image:loc>
-      <image:caption>Sailing Rio - Baia de Guanabara</image:caption>
-    </image:image>
-    <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776178438657_g014cowadp.webp</image:loc>
-      <image:caption>Sailing Rio - Baia de Guanabara</image:caption>
-    </image:image>
-  </url>
-  <url>
     <loc>https://tocorimerio.com/passeio/sailing-rio-ilhas-cagarras</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://tocorimerio.com/passeio/sailing-rio-ilhas-cagarras"/>
     <xhtml:link rel="alternate" hreflang="pt-BR" href="https://tocorimerio.com/passeio/sailing-rio-ilhas-cagarras?lang=pt"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://tocorimerio.com/passeio/sailing-rio-ilhas-cagarras?lang=es"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://tocorimerio.com/passeio/sailing-rio-ilhas-cagarras"/>
-    <lastmod>2026-08-10</lastmod>
+    <lastmod>2026-08-28</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -1377,7 +1386,7 @@
     <xhtml:link rel="alternate" hreflang="pt-BR" href="https://tocorimerio.com/passeio/transfer-aeroporto-cidade?lang=pt"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://tocorimerio.com/passeio/transfer-aeroporto-cidade?lang=es"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://tocorimerio.com/passeio/transfer-aeroporto-cidade"/>
-    <lastmod>2026-08-10</lastmod>
+    <lastmod>2026-08-28</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -1403,7 +1412,7 @@
     <xhtml:link rel="alternate" hreflang="pt-BR" href="https://tocorimerio.com/passeio/cristo-redentor-pao-de-acucar?lang=pt"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://tocorimerio.com/passeio/cristo-redentor-pao-de-acucar?lang=es"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://tocorimerio.com/passeio/cristo-redentor-pao-de-acucar"/>
-    <lastmod>2026-08-10</lastmod>
+    <lastmod>2026-08-28</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -1503,22 +1512,12 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://tocorimerio.com/match/flamengo-vs-cruzeiro-2026-08-19</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://tocorimerio.com/match/flamengo-vs-cruzeiro-2026-08-19"/>
-    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://tocorimerio.com/match/flamengo-vs-cruzeiro-2026-08-19?lang=pt"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://tocorimerio.com/match/flamengo-vs-cruzeiro-2026-08-19?lang=es"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://tocorimerio.com/match/flamengo-vs-cruzeiro-2026-08-19"/>
-    <lastmod>2026-08-09</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://tocorimerio.com/match/fluminense-vs-coritiba-2026-10-07</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://tocorimerio.com/match/fluminense-vs-coritiba-2026-10-07"/>
-    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://tocorimerio.com/match/fluminense-vs-coritiba-2026-10-07?lang=pt"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://tocorimerio.com/match/fluminense-vs-coritiba-2026-10-07?lang=es"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://tocorimerio.com/match/fluminense-vs-coritiba-2026-10-07"/>
-    <lastmod>2026-08-07</lastmod>
+    <loc>https://tocorimerio.com/match/flamengo-vs-mirassol-sp-2026-09-02</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://tocorimerio.com/match/flamengo-vs-mirassol-sp-2026-09-02"/>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://tocorimerio.com/match/flamengo-vs-mirassol-sp-2026-09-02?lang=pt"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://tocorimerio.com/match/flamengo-vs-mirassol-sp-2026-09-02?lang=es"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://tocorimerio.com/match/flamengo-vs-mirassol-sp-2026-09-02"/>
+    <lastmod>2026-08-28</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
@@ -1528,57 +1527,7 @@
     <xhtml:link rel="alternate" hreflang="pt-BR" href="https://tocorimerio.com/match/flamengo-vs-atltico-mineiro-2026-10-25?lang=pt"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://tocorimerio.com/match/flamengo-vs-atltico-mineiro-2026-10-25?lang=es"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://tocorimerio.com/match/flamengo-vs-atltico-mineiro-2026-10-25"/>
-    <lastmod>2026-06-17</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://tocorimerio.com/match/flamengo-vs-fluminense-2026-10-11</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://tocorimerio.com/match/flamengo-vs-fluminense-2026-10-11"/>
-    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://tocorimerio.com/match/flamengo-vs-fluminense-2026-10-11?lang=pt"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://tocorimerio.com/match/flamengo-vs-fluminense-2026-10-11?lang=es"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://tocorimerio.com/match/flamengo-vs-fluminense-2026-10-11"/>
-    <lastmod>2026-08-05</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://tocorimerio.com/match/flamengo-vs-red-bull-bragantino-2026-09-20</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://tocorimerio.com/match/flamengo-vs-red-bull-bragantino-2026-09-20"/>
-    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://tocorimerio.com/match/flamengo-vs-red-bull-bragantino-2026-09-20?lang=pt"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://tocorimerio.com/match/flamengo-vs-red-bull-bragantino-2026-09-20?lang=es"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://tocorimerio.com/match/flamengo-vs-red-bull-bragantino-2026-09-20"/>
-    <lastmod>2026-08-05</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://tocorimerio.com/match/fluminense-vs-vasco-da-gama-2026-09-06</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://tocorimerio.com/match/fluminense-vs-vasco-da-gama-2026-09-06"/>
-    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://tocorimerio.com/match/fluminense-vs-vasco-da-gama-2026-09-06?lang=pt"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://tocorimerio.com/match/fluminense-vs-vasco-da-gama-2026-09-06?lang=es"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://tocorimerio.com/match/fluminense-vs-vasco-da-gama-2026-09-06"/>
-    <lastmod>2026-08-10</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://tocorimerio.com/match/fluminense-vs-independiente-rivadavia-2026-08-11</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://tocorimerio.com/match/fluminense-vs-independiente-rivadavia-2026-08-11"/>
-    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://tocorimerio.com/match/fluminense-vs-independiente-rivadavia-2026-08-11?lang=pt"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://tocorimerio.com/match/fluminense-vs-independiente-rivadavia-2026-08-11?lang=es"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://tocorimerio.com/match/fluminense-vs-independiente-rivadavia-2026-08-11"/>
-    <lastmod>2026-08-10</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://tocorimerio.com/match/flamengo-vs-botafogo-2026-08-30</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://tocorimerio.com/match/flamengo-vs-botafogo-2026-08-30"/>
-    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://tocorimerio.com/match/flamengo-vs-botafogo-2026-08-30?lang=pt"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://tocorimerio.com/match/flamengo-vs-botafogo-2026-08-30?lang=es"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://tocorimerio.com/match/flamengo-vs-botafogo-2026-08-30"/>
-    <lastmod>2026-08-05</lastmod>
+    <lastmod>2026-08-28</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
@@ -1588,7 +1537,57 @@
     <xhtml:link rel="alternate" hreflang="pt-BR" href="https://tocorimerio.com/match/fluminense-vs-santos-2026-10-18?lang=pt"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://tocorimerio.com/match/fluminense-vs-santos-2026-10-18?lang=es"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://tocorimerio.com/match/fluminense-vs-santos-2026-10-18"/>
-    <lastmod>2026-07-26</lastmod>
+    <lastmod>2026-08-28</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://tocorimerio.com/match/flamengo-vs-botafogo-2026-08-30</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://tocorimerio.com/match/flamengo-vs-botafogo-2026-08-30"/>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://tocorimerio.com/match/flamengo-vs-botafogo-2026-08-30?lang=pt"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://tocorimerio.com/match/flamengo-vs-botafogo-2026-08-30?lang=es"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://tocorimerio.com/match/flamengo-vs-botafogo-2026-08-30"/>
+    <lastmod>2026-08-30</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://tocorimerio.com/match/flamengo-vs-fluminense-2026-10-11</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://tocorimerio.com/match/flamengo-vs-fluminense-2026-10-11"/>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://tocorimerio.com/match/flamengo-vs-fluminense-2026-10-11?lang=pt"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://tocorimerio.com/match/flamengo-vs-fluminense-2026-10-11?lang=es"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://tocorimerio.com/match/flamengo-vs-fluminense-2026-10-11"/>
+    <lastmod>2026-08-28</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://tocorimerio.com/match/fluminense-vs-vasco-da-gama-2026-09-06</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://tocorimerio.com/match/fluminense-vs-vasco-da-gama-2026-09-06"/>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://tocorimerio.com/match/fluminense-vs-vasco-da-gama-2026-09-06?lang=pt"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://tocorimerio.com/match/fluminense-vs-vasco-da-gama-2026-09-06?lang=es"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://tocorimerio.com/match/fluminense-vs-vasco-da-gama-2026-09-06"/>
+    <lastmod>2026-08-28</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://tocorimerio.com/match/flamengo-vs-red-bull-bragantino-2026-09-20</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://tocorimerio.com/match/flamengo-vs-red-bull-bragantino-2026-09-20"/>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://tocorimerio.com/match/flamengo-vs-red-bull-bragantino-2026-09-20?lang=pt"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://tocorimerio.com/match/flamengo-vs-red-bull-bragantino-2026-09-20?lang=es"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://tocorimerio.com/match/flamengo-vs-red-bull-bragantino-2026-09-20"/>
+    <lastmod>2026-08-28</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://tocorimerio.com/match/fluminense-vs-coritiba-2026-10-07</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://tocorimerio.com/match/fluminense-vs-coritiba-2026-10-07"/>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://tocorimerio.com/match/fluminense-vs-coritiba-2026-10-07?lang=pt"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://tocorimerio.com/match/fluminense-vs-coritiba-2026-10-07?lang=es"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://tocorimerio.com/match/fluminense-vs-coritiba-2026-10-07"/>
+    <lastmod>2026-08-28</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
@@ -1598,7 +1597,17 @@
     <xhtml:link rel="alternate" hreflang="pt-BR" href="https://tocorimerio.com/match/flamengo-vs-gremio-2026-11-04?lang=pt"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://tocorimerio.com/match/flamengo-vs-gremio-2026-11-04?lang=es"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://tocorimerio.com/match/flamengo-vs-gremio-2026-11-04"/>
-    <lastmod>2026-07-07</lastmod>
+    <lastmod>2026-08-28</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://tocorimerio.com/match/fluminense-vs-club-altetico-platense-2026-09-08</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://tocorimerio.com/match/fluminense-vs-club-altetico-platense-2026-09-08"/>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://tocorimerio.com/match/fluminense-vs-club-altetico-platense-2026-09-08?lang=pt"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://tocorimerio.com/match/fluminense-vs-club-altetico-platense-2026-09-08?lang=es"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://tocorimerio.com/match/fluminense-vs-club-altetico-platense-2026-09-08"/>
+    <lastmod>2026-08-28</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
@@ -1608,7 +1617,7 @@
     <xhtml:link rel="alternate" hreflang="pt-BR" href="https://tocorimerio.com/match/flamengo-vs-corinthians-2026-09-13?lang=pt"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://tocorimerio.com/match/flamengo-vs-corinthians-2026-09-13?lang=es"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://tocorimerio.com/match/flamengo-vs-corinthians-2026-09-13"/>
-    <lastmod>2026-08-10</lastmod>
+    <lastmod>2026-08-31</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
@@ -1618,37 +1627,17 @@
     <xhtml:link rel="alternate" hreflang="pt-BR" href="https://tocorimerio.com/match/fluminense-vs-internacional-2026-10-28?lang=pt"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://tocorimerio.com/match/fluminense-vs-internacional-2026-10-28?lang=es"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://tocorimerio.com/match/fluminense-vs-internacional-2026-10-28"/>
-    <lastmod>2026-06-17</lastmod>
+    <lastmod>2026-08-28</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://tocorimerio.com/match/fluminense-vs-remo-2026-08-23</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://tocorimerio.com/match/fluminense-vs-remo-2026-08-23"/>
-    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://tocorimerio.com/match/fluminense-vs-remo-2026-08-23?lang=pt"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://tocorimerio.com/match/fluminense-vs-remo-2026-08-23?lang=es"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://tocorimerio.com/match/fluminense-vs-remo-2026-08-23"/>
-    <lastmod>2026-08-06</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://tocorimerio.com/match/fluminense-vs-palmeiras-2026-08-16</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://tocorimerio.com/match/fluminense-vs-palmeiras-2026-08-16"/>
-    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://tocorimerio.com/match/fluminense-vs-palmeiras-2026-08-16?lang=pt"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://tocorimerio.com/match/fluminense-vs-palmeiras-2026-08-16?lang=es"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://tocorimerio.com/match/fluminense-vs-palmeiras-2026-08-16"/>
-    <lastmod>2026-08-10</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://tocorimerio.com/match/fluminense-vs-cruzeiro-2026-11-29</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://tocorimerio.com/match/fluminense-vs-cruzeiro-2026-11-29"/>
-    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://tocorimerio.com/match/fluminense-vs-cruzeiro-2026-11-29?lang=pt"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://tocorimerio.com/match/fluminense-vs-cruzeiro-2026-11-29?lang=es"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://tocorimerio.com/match/fluminense-vs-cruzeiro-2026-11-29"/>
-    <lastmod>2026-06-17</lastmod>
+    <loc>https://tocorimerio.com/match/flamengo-vs-independiente-del-valle-2026-09-17</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://tocorimerio.com/match/flamengo-vs-independiente-del-valle-2026-09-17"/>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://tocorimerio.com/match/flamengo-vs-independiente-del-valle-2026-09-17?lang=pt"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://tocorimerio.com/match/flamengo-vs-independiente-del-valle-2026-09-17?lang=es"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://tocorimerio.com/match/flamengo-vs-independiente-del-valle-2026-09-17"/>
+    <lastmod>2026-08-28</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
@@ -1658,7 +1647,17 @@
     <xhtml:link rel="alternate" hreflang="pt-BR" href="https://tocorimerio.com/match/flamengo-vs-athletico-paranaense-2026-11-18?lang=pt"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://tocorimerio.com/match/flamengo-vs-athletico-paranaense-2026-11-18?lang=es"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://tocorimerio.com/match/flamengo-vs-athletico-paranaense-2026-11-18"/>
-    <lastmod>2026-06-17</lastmod>
+    <lastmod>2026-08-28</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://tocorimerio.com/match/fluminense-vs-cruzeiro-2026-11-29</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://tocorimerio.com/match/fluminense-vs-cruzeiro-2026-11-29"/>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://tocorimerio.com/match/fluminense-vs-cruzeiro-2026-11-29?lang=pt"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://tocorimerio.com/match/fluminense-vs-cruzeiro-2026-11-29?lang=es"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://tocorimerio.com/match/fluminense-vs-cruzeiro-2026-11-29"/>
+    <lastmod>2026-08-28</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
@@ -1668,7 +1667,7 @@
     <xhtml:link rel="alternate" hreflang="pt-BR" href="https://tocorimerio.com/match/fluminense-vs-mirassol-sp-2026-11-22?lang=pt"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://tocorimerio.com/match/fluminense-vs-mirassol-sp-2026-11-22?lang=es"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://tocorimerio.com/match/fluminense-vs-mirassol-sp-2026-11-22"/>
-    <lastmod>2026-06-17</lastmod>
+    <lastmod>2026-08-28</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
@@ -1678,9 +1677,23 @@
     <xhtml:link rel="alternate" hreflang="pt-BR" href="https://tocorimerio.com/match/flamengo-vs-chapecoense-2026-12-02?lang=pt"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://tocorimerio.com/match/flamengo-vs-chapecoense-2026-12-02?lang=es"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://tocorimerio.com/match/flamengo-vs-chapecoense-2026-12-02"/>
-    <lastmod>2026-06-17</lastmod>
+    <lastmod>2026-08-28</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://tocorimerio.com/blog/buzios-cabo-frio-regiao-dos-lagos</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://tocorimerio.com/blog/buzios-cabo-frio-regiao-dos-lagos"/>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://tocorimerio.com/blog/buzios-cabo-frio-regiao-dos-lagos?lang=pt"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://tocorimerio.com/blog/buzios-cabo-frio-regiao-dos-lagos?lang=es"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://tocorimerio.com/blog/buzios-cabo-frio-regiao-dos-lagos"/>
+    <lastmod>2026-07-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1775696760353_ms1kvra8fha.png</image:loc>
+      <image:caption>Búzios e Cabo Frio: O Charme e a Agitação da Região dos Lagos</image:caption>
+    </image:image>
   </url>
   <url>
     <loc>https://tocorimerio.com/blog/best-sunset-spots-rio-de-janeiro</loc>
@@ -1694,6 +1707,468 @@
     <image:image>
       <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1781073447656_af1yv9hkyqd.webp</image:loc>
       <image:caption>Os melhores lugares para assistir ao pôr do sol em Rio de Janeiro</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://tocorimerio.com/blog/where-exchange-money</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://tocorimerio.com/blog/where-exchange-money"/>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://tocorimerio.com/blog/where-exchange-money?lang=pt"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://tocorimerio.com/blog/where-exchange-money?lang=es"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://tocorimerio.com/blog/where-exchange-money"/>
+    <lastmod>2026-07-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1783515195339_q8z74piboqt.webp</image:loc>
+      <image:caption>Trocando dinheiro em Rio de Janeiro: um guia local para viajantes de Tocorime</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://tocorimerio.com/blog/rio-alem-do-obvio-lugares-secretos</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://tocorimerio.com/blog/rio-alem-do-obvio-lugares-secretos"/>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://tocorimerio.com/blog/rio-alem-do-obvio-lugares-secretos?lang=pt"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://tocorimerio.com/blog/rio-alem-do-obvio-lugares-secretos?lang=es"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://tocorimerio.com/blog/rio-alem-do-obvio-lugares-secretos"/>
+    <lastmod>2026-07-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776136532621_bydozzr39nb.webp</image:loc>
+      <image:caption>Rio Além do Óbvio: 5 Lugares Secretos para Fugir da Multidão</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://tocorimerio.com/blog/rio-imperial-cultura-historia</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://tocorimerio.com/blog/rio-imperial-cultura-historia"/>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://tocorimerio.com/blog/rio-imperial-cultura-historia?lang=pt"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://tocorimerio.com/blog/rio-imperial-cultura-historia?lang=es"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://tocorimerio.com/blog/rio-imperial-cultura-historia"/>
+    <lastmod>2026-07-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776154933416_1jovl3o2i6si.webp</image:loc>
+      <image:caption>Cultura e História: Um Mergulho no Passado Imperial do Rio</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://tocorimerio.com/blog/visit-sugar-loaf-rio</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://tocorimerio.com/blog/visit-sugar-loaf-rio"/>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://tocorimerio.com/blog/visit-sugar-loaf-rio?lang=pt"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://tocorimerio.com/blog/visit-sugar-loaf-rio?lang=es"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://tocorimerio.com/blog/visit-sugar-loaf-rio"/>
+    <lastmod>2026-07-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1784061610504_4dno4she5bt.webp</image:loc>
+      <image:caption>Pão de Açúcar : o guia completo de 2026</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://tocorimerio.com/blog/dicas-seguranca-transporte-rio</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://tocorimerio.com/blog/dicas-seguranca-transporte-rio"/>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://tocorimerio.com/blog/dicas-seguranca-transporte-rio?lang=pt"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://tocorimerio.com/blog/dicas-seguranca-transporte-rio?lang=es"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://tocorimerio.com/blog/dicas-seguranca-transporte-rio"/>
+    <lastmod>2026-07-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776136527563_dzcmntxz28d.webp</image:loc>
+      <image:caption>Dicas de Segurança e Transporte para Turistas no Rio</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://tocorimerio.com/blog/rooftops-santa-teresa-rio-vistas-privadas</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://tocorimerio.com/blog/rooftops-santa-teresa-rio-vistas-privadas"/>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://tocorimerio.com/blog/rooftops-santa-teresa-rio-vistas-privadas?lang=pt"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://tocorimerio.com/blog/rooftops-santa-teresa-rio-vistas-privadas?lang=es"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://tocorimerio.com/blog/rooftops-santa-teresa-rio-vistas-privadas"/>
+    <lastmod>2026-07-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1785031830030_iv2ph1wcs6b.webp</image:loc>
+      <image:caption>Rooftops em Santa Teresa: 5 vistas privadas do Rio com pôr do sol inesquecível</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://tocorimerio.com/blog/carnaval-rio-guia-definitivo</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://tocorimerio.com/blog/carnaval-rio-guia-definitivo"/>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://tocorimerio.com/blog/carnaval-rio-guia-definitivo?lang=pt"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://tocorimerio.com/blog/carnaval-rio-guia-definitivo?lang=es"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://tocorimerio.com/blog/carnaval-rio-guia-definitivo"/>
+    <lastmod>2026-07-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1775696779659_sdj1p6tvg3a.png</image:loc>
+      <image:caption>Carnaval no Rio: O Guia Definitivo para Aproveitar como um Carioca</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://tocorimerio.com/blog/a-journey-through-history-sailing-the-waters-of-guanabara-bay</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://tocorimerio.com/blog/a-journey-through-history-sailing-the-waters-of-guanabara-bay"/>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://tocorimerio.com/blog/a-journey-through-history-sailing-the-waters-of-guanabara-bay?lang=pt"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://tocorimerio.com/blog/a-journey-through-history-sailing-the-waters-of-guanabara-bay?lang=es"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://tocorimerio.com/blog/a-journey-through-history-sailing-the-waters-of-guanabara-bay"/>
+    <lastmod>2026-07-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776136539659_dhflxgmz62g.webp</image:loc>
+      <image:caption>Uma Jornada Pela História: Navegando pelas Águas da Baía de Guanabara</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://tocorimerio.com/blog/packing-list-for-rio-from-beach-to-rainforest</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://tocorimerio.com/blog/packing-list-for-rio-from-beach-to-rainforest"/>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://tocorimerio.com/blog/packing-list-for-rio-from-beach-to-rainforest?lang=pt"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://tocorimerio.com/blog/packing-list-for-rio-from-beach-to-rainforest?lang=es"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://tocorimerio.com/blog/packing-list-for-rio-from-beach-to-rainforest"/>
+    <lastmod>2026-07-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776795501321_2kuhhczlms.webp</image:loc>
+      <image:caption>O Que Levar na Mala para o Rio: Da Praia à Floresta Tropical</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://tocorimerio.com/blog/onde-comer-no-rio-gastronomia</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://tocorimerio.com/blog/onde-comer-no-rio-gastronomia"/>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://tocorimerio.com/blog/onde-comer-no-rio-gastronomia?lang=pt"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://tocorimerio.com/blog/onde-comer-no-rio-gastronomia?lang=es"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://tocorimerio.com/blog/onde-comer-no-rio-gastronomia"/>
+    <lastmod>2026-04-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1775701360748_19elgcf090q.png</image:loc>
+      <image:caption>Onde Comer no Rio: Gastronomia e Sabores Cariocas</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://tocorimerio.com/blog/beyond-the-beach-discovering-rios-hidden-gems-by-sea</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://tocorimerio.com/blog/beyond-the-beach-discovering-rios-hidden-gems-by-sea"/>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://tocorimerio.com/blog/beyond-the-beach-discovering-rios-hidden-gems-by-sea?lang=pt"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://tocorimerio.com/blog/beyond-the-beach-discovering-rios-hidden-gems-by-sea?lang=es"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://tocorimerio.com/blog/beyond-the-beach-discovering-rios-hidden-gems-by-sea"/>
+    <lastmod>2026-07-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776178598223_s0w825hcry.webp</image:loc>
+      <image:caption>Além da Praia: Descobrindo os Tesouros Escondidos do Rio pelo Mar</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://tocorimerio.com/blog/how-to-choose-a-reliable-private-tour-in-rio-de-janeiro</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://tocorimerio.com/blog/how-to-choose-a-reliable-private-tour-in-rio-de-janeiro"/>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://tocorimerio.com/blog/how-to-choose-a-reliable-private-tour-in-rio-de-janeiro?lang=pt"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://tocorimerio.com/blog/how-to-choose-a-reliable-private-tour-in-rio-de-janeiro?lang=es"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://tocorimerio.com/blog/how-to-choose-a-reliable-private-tour-in-rio-de-janeiro"/>
+    <lastmod>2026-07-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1784942049444_q1cafg445g.webp</image:loc>
+      <image:caption>Como escolher um tour privado confiável em Rio de Janeiro</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://tocorimerio.com/blog/private-tours-vs-group-tours-in-rio-de-janeiro-which-is-worth-it</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://tocorimerio.com/blog/private-tours-vs-group-tours-in-rio-de-janeiro-which-is-worth-it"/>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://tocorimerio.com/blog/private-tours-vs-group-tours-in-rio-de-janeiro-which-is-worth-it?lang=pt"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://tocorimerio.com/blog/private-tours-vs-group-tours-in-rio-de-janeiro-which-is-worth-it?lang=es"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://tocorimerio.com/blog/private-tours-vs-group-tours-in-rio-de-janeiro-which-is-worth-it"/>
+    <lastmod>2026-07-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1784941877813_zdwlhrxhsge.webp</image:loc>
+      <image:caption>Passeios privados vs. privados passeios em grupo em Rio de Janeiro: quanto vale a pena?</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://tocorimerio.com/blog/costao-do-pao-de-acucar-an-unforgettable-adventure-in-rio-de-janeiro</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://tocorimerio.com/blog/costao-do-pao-de-acucar-an-unforgettable-adventure-in-rio-de-janeiro"/>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://tocorimerio.com/blog/costao-do-pao-de-acucar-an-unforgettable-adventure-in-rio-de-janeiro?lang=pt"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://tocorimerio.com/blog/costao-do-pao-de-acucar-an-unforgettable-adventure-in-rio-de-janeiro?lang=es"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://tocorimerio.com/blog/costao-do-pao-de-acucar-an-unforgettable-adventure-in-rio-de-janeiro"/>
+    <lastmod>2026-07-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1784883447393_xxkxist8wq.webp</image:loc>
+      <image:caption>Costão do Pão de Açúcar: uma aventura inesquecível em Rio de Janeiro</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://tocorimerio.com/blog/sunset-in-rio-de-janeiro-guide</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://tocorimerio.com/blog/sunset-in-rio-de-janeiro-guide"/>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://tocorimerio.com/blog/sunset-in-rio-de-janeiro-guide?lang=pt"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://tocorimerio.com/blog/sunset-in-rio-de-janeiro-guide?lang=es"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://tocorimerio.com/blog/sunset-in-rio-de-janeiro-guide"/>
+    <lastmod>2026-08-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1785798054675_ruab49a7nyk.webp</image:loc>
+      <image:caption>Pôr do sol em Rio de Janeiro: um guia prático dos melhores mirantes da cidade</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://tocorimerio.com/blog/how-to-get-to-rio-de-janeiro-new-flights-routes</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://tocorimerio.com/blog/how-to-get-to-rio-de-janeiro-new-flights-routes"/>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://tocorimerio.com/blog/how-to-get-to-rio-de-janeiro-new-flights-routes?lang=pt"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://tocorimerio.com/blog/how-to-get-to-rio-de-janeiro-new-flights-routes?lang=es"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://tocorimerio.com/blog/how-to-get-to-rio-de-janeiro-new-flights-routes"/>
+    <lastmod>2026-07-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776178620123_asifj7wd7z7.webp</image:loc>
+      <image:caption>Chegar ao Rio de Janeiro ficou mais fácil: novas rotas e o que você precisa saber</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://tocorimerio.com/blog/melhores-trilhas-rio-de-janeiro</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://tocorimerio.com/blog/melhores-trilhas-rio-de-janeiro"/>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://tocorimerio.com/blog/melhores-trilhas-rio-de-janeiro?lang=pt"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://tocorimerio.com/blog/melhores-trilhas-rio-de-janeiro?lang=es"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://tocorimerio.com/blog/melhores-trilhas-rio-de-janeiro"/>
+    <lastmod>2026-07-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776155088676_9t8wqvy9q2a.webp</image:loc>
+      <image:caption>As 3 Melhores Trilhas para Ver o Rio de Cima</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://tocorimerio.com/blog/ecotourism-tijuca-forest-rio-de-janeiro</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://tocorimerio.com/blog/ecotourism-tijuca-forest-rio-de-janeiro"/>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://tocorimerio.com/blog/ecotourism-tijuca-forest-rio-de-janeiro?lang=pt"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://tocorimerio.com/blog/ecotourism-tijuca-forest-rio-de-janeiro?lang=es"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://tocorimerio.com/blog/ecotourism-tijuca-forest-rio-de-janeiro"/>
+    <lastmod>2026-07-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776810852021_fdqrwwj2mzl.webp</image:loc>
+      <image:caption>No Coração Verde de Rio: Ecoturismo na Floresta Nacional da Tijuca</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://tocorimerio.com/blog/o-renascimento-verde-a-incrivel-historia-do-reflorestamento-da-floresta-da-tijuca</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://tocorimerio.com/blog/o-renascimento-verde-a-incrivel-historia-do-reflorestamento-da-floresta-da-tijuca"/>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://tocorimerio.com/blog/o-renascimento-verde-a-incrivel-historia-do-reflorestamento-da-floresta-da-tijuca?lang=pt"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://tocorimerio.com/blog/o-renascimento-verde-a-incrivel-historia-do-reflorestamento-da-floresta-da-tijuca?lang=es"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://tocorimerio.com/blog/o-renascimento-verde-a-incrivel-historia-do-reflorestamento-da-floresta-da-tijuca"/>
+    <lastmod>2026-07-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776444378668_vzexl1lplmt.webp</image:loc>
+      <image:caption>O Renascimento Verde: A Incrível História do Reflorestamento da Floresta da Tijuca</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://tocorimerio.com/blog/how-to-buy-maracana-tickets-as-a-foreigner</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://tocorimerio.com/blog/how-to-buy-maracana-tickets-as-a-foreigner"/>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://tocorimerio.com/blog/how-to-buy-maracana-tickets-as-a-foreigner?lang=pt"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://tocorimerio.com/blog/how-to-buy-maracana-tickets-as-a-foreigner?lang=es"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://tocorimerio.com/blog/how-to-buy-maracana-tickets-as-a-foreigner"/>
+    <lastmod>2026-04-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776794057243_b2z6k1uypav.webp</image:loc>
+      <image:caption>Como Comprar Ingressos para o Maracanã sendo Estrangeiro</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://tocorimerio.com/blog/roteiro-de-3-dias-no-rio-de-janeiro</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://tocorimerio.com/blog/roteiro-de-3-dias-no-rio-de-janeiro"/>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://tocorimerio.com/blog/roteiro-de-3-dias-no-rio-de-janeiro?lang=pt"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://tocorimerio.com/blog/roteiro-de-3-dias-no-rio-de-janeiro?lang=es"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://tocorimerio.com/blog/roteiro-de-3-dias-no-rio-de-janeiro"/>
+    <lastmod>2026-07-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1775696766664_76lcnnpl2ca.png</image:loc>
+      <image:caption>Roteiro de 3 Dias no Rio de Janeiro: Aproveite Cada Minuto da Cidade Maravilhosa</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://tocorimerio.com/blog/melhor-epoca-visitar-rio-de-janeiro</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://tocorimerio.com/blog/melhor-epoca-visitar-rio-de-janeiro"/>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://tocorimerio.com/blog/melhor-epoca-visitar-rio-de-janeiro?lang=pt"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://tocorimerio.com/blog/melhor-epoca-visitar-rio-de-janeiro?lang=es"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://tocorimerio.com/blog/melhor-epoca-visitar-rio-de-janeiro"/>
+    <lastmod>2026-04-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776449767100_shj8j2w059.webp</image:loc>
+      <image:caption>Planejando sua Viagem: Qual a melhor época para visitar o Rio?</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://tocorimerio.com/blog/best-boat-tours-in-arraial-do-cabo-for-crystal-clear-beaches</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://tocorimerio.com/blog/best-boat-tours-in-arraial-do-cabo-for-crystal-clear-beaches"/>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://tocorimerio.com/blog/best-boat-tours-in-arraial-do-cabo-for-crystal-clear-beaches?lang=pt"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://tocorimerio.com/blog/best-boat-tours-in-arraial-do-cabo-for-crystal-clear-beaches?lang=es"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://tocorimerio.com/blog/best-boat-tours-in-arraial-do-cabo-for-crystal-clear-beaches"/>
+    <lastmod>2026-07-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1784943642355_cj5u9fkdvmm.webp</image:loc>
+      <image:caption>Melhores passeios de barco em Arraial do Cabo para praias cristalinas</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://tocorimerio.com/blog/the-best-months-to-visit-rio-for-hiking-and-outdoor-activities</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://tocorimerio.com/blog/the-best-months-to-visit-rio-for-hiking-and-outdoor-activities"/>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://tocorimerio.com/blog/the-best-months-to-visit-rio-for-hiking-and-outdoor-activities?lang=pt"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://tocorimerio.com/blog/the-best-months-to-visit-rio-for-hiking-and-outdoor-activities?lang=es"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://tocorimerio.com/blog/the-best-months-to-visit-rio-for-hiking-and-outdoor-activities"/>
+    <lastmod>2026-07-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776795733435_l6lqgufjqg.webp</image:loc>
+      <image:caption>Os Melhores Meses para Visitar o Rio: Trilhas e Atividades ao Ar Livre</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://tocorimerio.com/blog/free-hikes-vs-guided-tours-rio</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://tocorimerio.com/blog/free-hikes-vs-guided-tours-rio"/>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://tocorimerio.com/blog/free-hikes-vs-guided-tours-rio?lang=pt"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://tocorimerio.com/blog/free-hikes-vs-guided-tours-rio?lang=es"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://tocorimerio.com/blog/free-hikes-vs-guided-tours-rio"/>
+    <lastmod>2026-07-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776155715338_sjykr9pmjzh.webp</image:loc>
+      <image:caption>Caminhadas gratuitas x visitas guiadas no Rio de Janeiro: quando um guia realmente vale a pena?</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://tocorimerio.com/blog/feijoadas-in-rio-de-janeiro-a-culinary-guide</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://tocorimerio.com/blog/feijoadas-in-rio-de-janeiro-a-culinary-guide"/>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://tocorimerio.com/blog/feijoadas-in-rio-de-janeiro-a-culinary-guide?lang=pt"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://tocorimerio.com/blog/feijoadas-in-rio-de-janeiro-a-culinary-guide?lang=es"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://tocorimerio.com/blog/feijoadas-in-rio-de-janeiro-a-culinary-guide"/>
+    <lastmod>2026-08-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1787295162165_5qd6ji4ghsw.webp</image:loc>
+      <image:caption>Melhores Feijoadas do Rio de Janeiro: Guia 2026 dos Lugares Imperdíveis</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://tocorimerio.com/blog/how-to-hire-a-safe-tour-guide-in-rio-de-janeiro-without-getting-scammed</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://tocorimerio.com/blog/how-to-hire-a-safe-tour-guide-in-rio-de-janeiro-without-getting-scammed"/>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://tocorimerio.com/blog/how-to-hire-a-safe-tour-guide-in-rio-de-janeiro-without-getting-scammed?lang=pt"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://tocorimerio.com/blog/how-to-hire-a-safe-tour-guide-in-rio-de-janeiro-without-getting-scammed?lang=es"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://tocorimerio.com/blog/how-to-hire-a-safe-tour-guide-in-rio-de-janeiro-without-getting-scammed"/>
+    <lastmod>2026-07-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1781072233646_z90cm3z3l4.webp</image:loc>
+      <image:caption>Como contratar um guia de turismo seguro em Rio de Janeiro (sem ser enganado)</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://tocorimerio.com/blog/discover-the-best-time-to-visit-rio-your-ultimate-guide</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://tocorimerio.com/blog/discover-the-best-time-to-visit-rio-your-ultimate-guide"/>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://tocorimerio.com/blog/discover-the-best-time-to-visit-rio-your-ultimate-guide?lang=pt"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://tocorimerio.com/blog/discover-the-best-time-to-visit-rio-your-ultimate-guide?lang=es"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://tocorimerio.com/blog/discover-the-best-time-to-visit-rio-your-ultimate-guide"/>
+    <lastmod>2026-08-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1787295581036_vwxzuqymhzn.webp</image:loc>
+      <image:caption>Melhor Época para Visitar o Rio de Janeiro: Guia Mês a Mês 2026</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://tocorimerio.com/blog/pedra-da-gavea-hike-guide</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://tocorimerio.com/blog/pedra-da-gavea-hike-guide"/>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://tocorimerio.com/blog/pedra-da-gavea-hike-guide?lang=pt"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://tocorimerio.com/blog/pedra-da-gavea-hike-guide?lang=es"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://tocorimerio.com/blog/pedra-da-gavea-hike-guide"/>
+    <lastmod>2026-07-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776155090896_e0ha15pe0yu.webp</image:loc>
+      <image:caption>Caminhada na Pedra da Gávea: é realmente perigosa? Tudo o que você precisa saber antes de partir</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://tocorimerio.com/blog/where-to-watch-the-2026-world-cup-in-rio</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://tocorimerio.com/blog/where-to-watch-the-2026-world-cup-in-rio"/>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://tocorimerio.com/blog/where-to-watch-the-2026-world-cup-in-rio?lang=pt"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://tocorimerio.com/blog/where-to-watch-the-2026-world-cup-in-rio?lang=es"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://tocorimerio.com/blog/where-to-watch-the-2026-world-cup-in-rio"/>
+    <lastmod>2026-05-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1779149093302_9dvl0y6ueo7.webp</image:loc>
+      <image:caption>Copa do Mundo 2026 em Rio de Janeiro: Fan Fests, melhores bares, onde ficar e guia completo</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://tocorimerio.com/blog/what-to-wear-hiking-and-beach-rio-de-janeiro</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://tocorimerio.com/blog/what-to-wear-hiking-and-beach-rio-de-janeiro"/>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://tocorimerio.com/blog/what-to-wear-hiking-and-beach-rio-de-janeiro?lang=pt"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://tocorimerio.com/blog/what-to-wear-hiking-and-beach-rio-de-janeiro?lang=es"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://tocorimerio.com/blog/what-to-wear-hiking-and-beach-rio-de-janeiro"/>
+    <lastmod>2026-07-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776155088676_9t8wqvy9q2a.webp</image:loc>
+      <image:caption>O que vestir para um dia de caminhada e praia no Rio de Janeiro: o guia de malas para quem vem pela primeira vez</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://tocorimerio.com/blog/best-feijoada-rio-de-janeiro-tourists</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://tocorimerio.com/blog/best-feijoada-rio-de-janeiro-tourists"/>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://tocorimerio.com/blog/best-feijoada-rio-de-janeiro-tourists?lang=pt"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://tocorimerio.com/blog/best-feijoada-rio-de-janeiro-tourists?lang=es"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://tocorimerio.com/blog/best-feijoada-rio-de-janeiro-tourists"/>
+    <lastmod>2026-08-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1777144245848_af37x43rp8q.webp</image:loc>
+      <image:caption>Melhor Feijoada do Rio de Janeiro: 8 lugares que os cariocas amam (2026)</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://tocorimerio.com/blog/the-best-specialty-coffees-in-the-center-of-rio-de-janeiro</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://tocorimerio.com/blog/the-best-specialty-coffees-in-the-center-of-rio-de-janeiro"/>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://tocorimerio.com/blog/the-best-specialty-coffees-in-the-center-of-rio-de-janeiro?lang=pt"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://tocorimerio.com/blog/the-best-specialty-coffees-in-the-center-of-rio-de-janeiro?lang=es"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://tocorimerio.com/blog/the-best-specialty-coffees-in-the-center-of-rio-de-janeiro"/>
+    <lastmod>2026-08-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776154873773_6061xrix9z7.webp</image:loc>
+      <image:caption>Cafés Centro RJ: os Melhores Cafés Especiais do Centro do Rio de Janeiro</image:caption>
     </image:image>
   </url>
   <url>
@@ -1739,20 +2214,6 @@
     </image:image>
   </url>
   <url>
-    <loc>https://tocorimerio.com/blog/what-to-wear-hiking-and-beach-rio-de-janeiro</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://tocorimerio.com/blog/what-to-wear-hiking-and-beach-rio-de-janeiro"/>
-    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://tocorimerio.com/blog/what-to-wear-hiking-and-beach-rio-de-janeiro?lang=pt"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://tocorimerio.com/blog/what-to-wear-hiking-and-beach-rio-de-janeiro?lang=es"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://tocorimerio.com/blog/what-to-wear-hiking-and-beach-rio-de-janeiro"/>
-    <lastmod>2026-07-30</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-    <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776155088676_9t8wqvy9q2a.webp</image:loc>
-      <image:caption>O que vestir para um dia de caminhada e praia no Rio de Janeiro: o guia de malas para quem vem pela primeira vez</image:caption>
-    </image:image>
-  </url>
-  <url>
     <loc>https://tocorimerio.com/blog/the-maracana-stadium-a-comprehensive-history-of-brazils-greatest-sporting-temple-and-its-connection-to-the-fifa-world-cup</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://tocorimerio.com/blog/the-maracana-stadium-a-comprehensive-history-of-brazils-greatest-sporting-temple-and-its-connection-to-the-fifa-world-cup"/>
     <xhtml:link rel="alternate" hreflang="pt-BR" href="https://tocorimerio.com/blog/the-maracana-stadium-a-comprehensive-history-of-brazils-greatest-sporting-temple-and-its-connection-to-the-fifa-world-cup?lang=pt"/>
@@ -1781,34 +2242,6 @@
     </image:image>
   </url>
   <url>
-    <loc>https://tocorimerio.com/blog/dicas-seguranca-transporte-rio</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://tocorimerio.com/blog/dicas-seguranca-transporte-rio"/>
-    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://tocorimerio.com/blog/dicas-seguranca-transporte-rio?lang=pt"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://tocorimerio.com/blog/dicas-seguranca-transporte-rio?lang=es"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://tocorimerio.com/blog/dicas-seguranca-transporte-rio"/>
-    <lastmod>2026-07-30</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-    <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776136527563_dzcmntxz28d.webp</image:loc>
-      <image:caption>Dicas de Segurança e Transporte para Turistas no Rio</image:caption>
-    </image:image>
-  </url>
-  <url>
-    <loc>https://tocorimerio.com/blog/rooftops-santa-teresa-rio-vistas-privadas</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://tocorimerio.com/blog/rooftops-santa-teresa-rio-vistas-privadas"/>
-    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://tocorimerio.com/blog/rooftops-santa-teresa-rio-vistas-privadas?lang=pt"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://tocorimerio.com/blog/rooftops-santa-teresa-rio-vistas-privadas?lang=es"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://tocorimerio.com/blog/rooftops-santa-teresa-rio-vistas-privadas"/>
-    <lastmod>2026-07-30</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-    <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1785031830030_iv2ph1wcs6b.webp</image:loc>
-      <image:caption>Rooftops em Santa Teresa: 5 vistas privadas do Rio com pôr do sol inesquecível</image:caption>
-    </image:image>
-  </url>
-  <url>
     <loc>https://tocorimerio.com/blog/rock-climbing-beginners-rio-de-janeiro</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://tocorimerio.com/blog/rock-climbing-beginners-rio-de-janeiro"/>
     <xhtml:link rel="alternate" hreflang="pt-BR" href="https://tocorimerio.com/blog/rock-climbing-beginners-rio-de-janeiro?lang=pt"/>
@@ -1820,90 +2253,6 @@
     <image:image>
       <image:loc>https://images.unsplash.com/photo-1522163182402-834f871fd851?w=1200&amp;q=80</image:loc>
       <image:caption>Escalada para iniciantes no Rio de Janeiro: por onde começar a escalar a serra carioca</image:caption>
-    </image:image>
-  </url>
-  <url>
-    <loc>https://tocorimerio.com/blog/carnaval-rio-guia-definitivo</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://tocorimerio.com/blog/carnaval-rio-guia-definitivo"/>
-    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://tocorimerio.com/blog/carnaval-rio-guia-definitivo?lang=pt"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://tocorimerio.com/blog/carnaval-rio-guia-definitivo?lang=es"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://tocorimerio.com/blog/carnaval-rio-guia-definitivo"/>
-    <lastmod>2026-07-30</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-    <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1775696779659_sdj1p6tvg3a.png</image:loc>
-      <image:caption>Carnaval no Rio: O Guia Definitivo para Aproveitar como um Carioca</image:caption>
-    </image:image>
-  </url>
-  <url>
-    <loc>https://tocorimerio.com/blog/a-journey-through-history-sailing-the-waters-of-guanabara-bay</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://tocorimerio.com/blog/a-journey-through-history-sailing-the-waters-of-guanabara-bay"/>
-    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://tocorimerio.com/blog/a-journey-through-history-sailing-the-waters-of-guanabara-bay?lang=pt"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://tocorimerio.com/blog/a-journey-through-history-sailing-the-waters-of-guanabara-bay?lang=es"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://tocorimerio.com/blog/a-journey-through-history-sailing-the-waters-of-guanabara-bay"/>
-    <lastmod>2026-07-30</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-    <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776136539659_dhflxgmz62g.webp</image:loc>
-      <image:caption>Uma Jornada Pela História: Navegando pelas Águas da Baía de Guanabara</image:caption>
-    </image:image>
-  </url>
-  <url>
-    <loc>https://tocorimerio.com/blog/onde-comer-no-rio-gastronomia</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://tocorimerio.com/blog/onde-comer-no-rio-gastronomia"/>
-    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://tocorimerio.com/blog/onde-comer-no-rio-gastronomia?lang=pt"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://tocorimerio.com/blog/onde-comer-no-rio-gastronomia?lang=es"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://tocorimerio.com/blog/onde-comer-no-rio-gastronomia"/>
-    <lastmod>2026-04-05</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-    <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1775701360748_19elgcf090q.png</image:loc>
-      <image:caption>Onde Comer no Rio: Gastronomia e Sabores Cariocas</image:caption>
-    </image:image>
-  </url>
-  <url>
-    <loc>https://tocorimerio.com/blog/beyond-the-beach-discovering-rios-hidden-gems-by-sea</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://tocorimerio.com/blog/beyond-the-beach-discovering-rios-hidden-gems-by-sea"/>
-    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://tocorimerio.com/blog/beyond-the-beach-discovering-rios-hidden-gems-by-sea?lang=pt"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://tocorimerio.com/blog/beyond-the-beach-discovering-rios-hidden-gems-by-sea?lang=es"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://tocorimerio.com/blog/beyond-the-beach-discovering-rios-hidden-gems-by-sea"/>
-    <lastmod>2026-07-30</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-    <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776178598223_s0w825hcry.webp</image:loc>
-      <image:caption>Além da Praia: Descobrindo os Tesouros Escondidos do Rio pelo Mar</image:caption>
-    </image:image>
-  </url>
-  <url>
-    <loc>https://tocorimerio.com/blog/costao-do-pao-de-acucar-an-unforgettable-adventure-in-rio-de-janeiro</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://tocorimerio.com/blog/costao-do-pao-de-acucar-an-unforgettable-adventure-in-rio-de-janeiro"/>
-    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://tocorimerio.com/blog/costao-do-pao-de-acucar-an-unforgettable-adventure-in-rio-de-janeiro?lang=pt"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://tocorimerio.com/blog/costao-do-pao-de-acucar-an-unforgettable-adventure-in-rio-de-janeiro?lang=es"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://tocorimerio.com/blog/costao-do-pao-de-acucar-an-unforgettable-adventure-in-rio-de-janeiro"/>
-    <lastmod>2026-07-30</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-    <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1784883447393_xxkxist8wq.webp</image:loc>
-      <image:caption>Costão do Pão de Açúcar: uma aventura inesquecível em Rio de Janeiro</image:caption>
-    </image:image>
-  </url>
-  <url>
-    <loc>https://tocorimerio.com/blog/melhores-trilhas-rio-de-janeiro</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://tocorimerio.com/blog/melhores-trilhas-rio-de-janeiro"/>
-    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://tocorimerio.com/blog/melhores-trilhas-rio-de-janeiro?lang=pt"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://tocorimerio.com/blog/melhores-trilhas-rio-de-janeiro?lang=es"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://tocorimerio.com/blog/melhores-trilhas-rio-de-janeiro"/>
-    <lastmod>2026-07-30</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-    <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776155088676_9t8wqvy9q2a.webp</image:loc>
-      <image:caption>As 3 Melhores Trilhas para Ver o Rio de Cima</image:caption>
     </image:image>
   </url>
   <url>
@@ -1935,101 +2284,73 @@
     </image:image>
   </url>
   <url>
-    <loc>https://tocorimerio.com/blog/how-to-buy-maracana-tickets-as-a-foreigner</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://tocorimerio.com/blog/how-to-buy-maracana-tickets-as-a-foreigner"/>
-    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://tocorimerio.com/blog/how-to-buy-maracana-tickets-as-a-foreigner?lang=pt"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://tocorimerio.com/blog/how-to-buy-maracana-tickets-as-a-foreigner?lang=es"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://tocorimerio.com/blog/how-to-buy-maracana-tickets-as-a-foreigner"/>
-    <lastmod>2026-04-21</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-    <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776794057243_b2z6k1uypav.webp</image:loc>
-      <image:caption>Como Comprar Ingressos para o Maracanã sendo Estrangeiro</image:caption>
-    </image:image>
-  </url>
-  <url>
-    <loc>https://tocorimerio.com/blog/roteiro-de-3-dias-no-rio-de-janeiro</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://tocorimerio.com/blog/roteiro-de-3-dias-no-rio-de-janeiro"/>
-    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://tocorimerio.com/blog/roteiro-de-3-dias-no-rio-de-janeiro?lang=pt"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://tocorimerio.com/blog/roteiro-de-3-dias-no-rio-de-janeiro?lang=es"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://tocorimerio.com/blog/roteiro-de-3-dias-no-rio-de-janeiro"/>
+    <loc>https://tocorimerio.com/blog/authentic-rio-experiences-live-like-a-carioca</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://tocorimerio.com/blog/authentic-rio-experiences-live-like-a-carioca"/>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://tocorimerio.com/blog/authentic-rio-experiences-live-like-a-carioca?lang=pt"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://tocorimerio.com/blog/authentic-rio-experiences-live-like-a-carioca?lang=es"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://tocorimerio.com/blog/authentic-rio-experiences-live-like-a-carioca"/>
     <lastmod>2026-07-30</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1775696766664_76lcnnpl2ca.png</image:loc>
-      <image:caption>Roteiro de 3 Dias no Rio de Janeiro: Aproveite Cada Minuto da Cidade Maravilhosa</image:caption>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776154938233_l17i77lm62l.webp</image:loc>
+      <image:caption>Viva como um carioca: experiências imersivas em Rio de Janeiro</image:caption>
     </image:image>
   </url>
   <url>
-    <loc>https://tocorimerio.com/blog/the-best-months-to-visit-rio-for-hiking-and-outdoor-activities</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://tocorimerio.com/blog/the-best-months-to-visit-rio-for-hiking-and-outdoor-activities"/>
-    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://tocorimerio.com/blog/the-best-months-to-visit-rio-for-hiking-and-outdoor-activities?lang=pt"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://tocorimerio.com/blog/the-best-months-to-visit-rio-for-hiking-and-outdoor-activities?lang=es"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://tocorimerio.com/blog/the-best-months-to-visit-rio-for-hiking-and-outdoor-activities"/>
-    <lastmod>2026-07-30</lastmod>
+    <loc>https://tocorimerio.com/blog/pontos-turisticos-em-santa-teresa</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://tocorimerio.com/blog/pontos-turisticos-em-santa-teresa"/>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://tocorimerio.com/blog/pontos-turisticos-em-santa-teresa?lang=pt"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://tocorimerio.com/blog/pontos-turisticos-em-santa-teresa?lang=es"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://tocorimerio.com/blog/pontos-turisticos-em-santa-teresa"/>
+    <lastmod>2026-08-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776795733435_l6lqgufjqg.webp</image:loc>
-      <image:caption>Os Melhores Meses para Visitar o Rio: Trilhas e Atividades ao Ar Livre</image:caption>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776136527563_dzcmntxz28d.webp</image:loc>
+      <image:caption>Pontos Turísticos em Santa Teresa: o Que Ver no Bairro Mais Charmoso do Rio</image:caption>
     </image:image>
   </url>
   <url>
-    <loc>https://tocorimerio.com/blog/free-hikes-vs-guided-tours-rio</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://tocorimerio.com/blog/free-hikes-vs-guided-tours-rio"/>
-    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://tocorimerio.com/blog/free-hikes-vs-guided-tours-rio?lang=pt"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://tocorimerio.com/blog/free-hikes-vs-guided-tours-rio?lang=es"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://tocorimerio.com/blog/free-hikes-vs-guided-tours-rio"/>
-    <lastmod>2026-07-30</lastmod>
+    <loc>https://tocorimerio.com/blog/o-que-fazer-no-rj-com-chuva</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://tocorimerio.com/blog/o-que-fazer-no-rj-com-chuva"/>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://tocorimerio.com/blog/o-que-fazer-no-rj-com-chuva?lang=pt"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://tocorimerio.com/blog/o-que-fazer-no-rj-com-chuva?lang=es"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://tocorimerio.com/blog/o-que-fazer-no-rj-com-chuva"/>
+    <lastmod>2026-08-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776155715338_sjykr9pmjzh.webp</image:loc>
-      <image:caption>Caminhadas gratuitas x visitas guiadas no Rio de Janeiro: quando um guia realmente vale a pena?</image:caption>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776154936644_eebfspimip8.webp</image:loc>
+      <image:caption>O Que Fazer no RJ Com Chuva: os Melhores Programas Cobertos do Rio de Janeiro</image:caption>
     </image:image>
   </url>
   <url>
-    <loc>https://tocorimerio.com/blog/how-to-hire-a-safe-tour-guide-in-rio-de-janeiro-without-getting-scammed</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://tocorimerio.com/blog/how-to-hire-a-safe-tour-guide-in-rio-de-janeiro-without-getting-scammed"/>
-    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://tocorimerio.com/blog/how-to-hire-a-safe-tour-guide-in-rio-de-janeiro-without-getting-scammed?lang=pt"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://tocorimerio.com/blog/how-to-hire-a-safe-tour-guide-in-rio-de-janeiro-without-getting-scammed?lang=es"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://tocorimerio.com/blog/how-to-hire-a-safe-tour-guide-in-rio-de-janeiro-without-getting-scammed"/>
-    <lastmod>2026-07-30</lastmod>
+    <loc>https://tocorimerio.com/blog/melhor-feijoada-rio-de-janeiro</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://tocorimerio.com/blog/melhor-feijoada-rio-de-janeiro"/>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://tocorimerio.com/blog/melhor-feijoada-rio-de-janeiro?lang=pt"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://tocorimerio.com/blog/melhor-feijoada-rio-de-janeiro?lang=es"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://tocorimerio.com/blog/melhor-feijoada-rio-de-janeiro"/>
+    <lastmod>2026-08-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1781072233646_z90cm3z3l4.webp</image:loc>
-      <image:caption>Como contratar um guia de turismo seguro em Rio de Janeiro (sem ser enganado)</image:caption>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1787714695834_1uumov16vem.webp</image:loc>
+      <image:caption>Melhor Feijoada Rio de Janeiro: Nosso Pick Nº 1 (e Mais 2 Opções Imperdíveis)</image:caption>
     </image:image>
   </url>
   <url>
-    <loc>https://tocorimerio.com/blog/pedra-da-gavea-hike-guide</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://tocorimerio.com/blog/pedra-da-gavea-hike-guide"/>
-    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://tocorimerio.com/blog/pedra-da-gavea-hike-guide?lang=pt"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://tocorimerio.com/blog/pedra-da-gavea-hike-guide?lang=es"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://tocorimerio.com/blog/pedra-da-gavea-hike-guide"/>
-    <lastmod>2026-07-30</lastmod>
+    <loc>https://tocorimerio.com/blog/melhor-agencia-de-turismo-do-rio-de-janeiro</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://tocorimerio.com/blog/melhor-agencia-de-turismo-do-rio-de-janeiro"/>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://tocorimerio.com/blog/melhor-agencia-de-turismo-do-rio-de-janeiro?lang=pt"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://tocorimerio.com/blog/melhor-agencia-de-turismo-do-rio-de-janeiro?lang=es"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://tocorimerio.com/blog/melhor-agencia-de-turismo-do-rio-de-janeiro"/>
+    <lastmod>2026-08-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776155090896_e0ha15pe0yu.webp</image:loc>
-      <image:caption>Caminhada na Pedra da Gávea: é realmente perigosa? Tudo o que você precisa saber antes de partir</image:caption>
-    </image:image>
-  </url>
-  <url>
-    <loc>https://tocorimerio.com/blog/best-feijoada-rio-de-janeiro-tourists</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://tocorimerio.com/blog/best-feijoada-rio-de-janeiro-tourists"/>
-    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://tocorimerio.com/blog/best-feijoada-rio-de-janeiro-tourists?lang=pt"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://tocorimerio.com/blog/best-feijoada-rio-de-janeiro-tourists?lang=es"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://tocorimerio.com/blog/best-feijoada-rio-de-janeiro-tourists"/>
-    <lastmod>2026-08-10</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-    <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1777144245848_af37x43rp8q.webp</image:loc>
-      <image:caption>Melhor Feijoada do Rio de Janeiro: 8 lugares que os cariocas amam (2026)</image:caption>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1787715366094_9oxiix2xex5.webp</image:loc>
+      <image:caption>Por Que Somos a Melhor Agência de Turismo do Rio de Janeiro</image:caption>
     </image:image>
   </url>
   <url>
@@ -2089,20 +2410,6 @@
     </image:image>
   </url>
   <url>
-    <loc>https://tocorimerio.com/blog/authentic-rio-experiences-live-like-a-carioca</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://tocorimerio.com/blog/authentic-rio-experiences-live-like-a-carioca"/>
-    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://tocorimerio.com/blog/authentic-rio-experiences-live-like-a-carioca?lang=pt"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://tocorimerio.com/blog/authentic-rio-experiences-live-like-a-carioca?lang=es"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://tocorimerio.com/blog/authentic-rio-experiences-live-like-a-carioca"/>
-    <lastmod>2026-07-30</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-    <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776154938233_l17i77lm62l.webp</image:loc>
-      <image:caption>Viva como um carioca: experiências imersivas em Rio de Janeiro</image:caption>
-    </image:image>
-  </url>
-  <url>
     <loc>https://tocorimerio.com/blog/visit-rio-de-janeiro</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://tocorimerio.com/blog/visit-rio-de-janeiro"/>
     <xhtml:link rel="alternate" hreflang="pt-BR" href="https://tocorimerio.com/blog/visit-rio-de-janeiro?lang=pt"/>
@@ -2117,20 +2424,6 @@
     </image:image>
   </url>
   <url>
-    <loc>https://tocorimerio.com/blog/buzios-cabo-frio-regiao-dos-lagos</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://tocorimerio.com/blog/buzios-cabo-frio-regiao-dos-lagos"/>
-    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://tocorimerio.com/blog/buzios-cabo-frio-regiao-dos-lagos?lang=pt"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://tocorimerio.com/blog/buzios-cabo-frio-regiao-dos-lagos?lang=es"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://tocorimerio.com/blog/buzios-cabo-frio-regiao-dos-lagos"/>
-    <lastmod>2026-07-30</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-    <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1775696760353_ms1kvra8fha.png</image:loc>
-      <image:caption>Búzios e Cabo Frio: O Charme e a Agitação da Região dos Lagos</image:caption>
-    </image:image>
-  </url>
-  <url>
     <loc>https://tocorimerio.com/blog/sports-tourism-rio-de-janeiro</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://tocorimerio.com/blog/sports-tourism-rio-de-janeiro"/>
     <xhtml:link rel="alternate" hreflang="pt-BR" href="https://tocorimerio.com/blog/sports-tourism-rio-de-janeiro?lang=pt"/>
@@ -2142,20 +2435,6 @@
     <image:image>
       <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776155715338_sjykr9pmjzh.webp</image:loc>
       <image:caption>Turismo Esportivo em Rio de Janeiro: uma cidade que corre, surfa e pontua</image:caption>
-    </image:image>
-  </url>
-  <url>
-    <loc>https://tocorimerio.com/blog/ecotourism-tijuca-forest-rio-de-janeiro</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://tocorimerio.com/blog/ecotourism-tijuca-forest-rio-de-janeiro"/>
-    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://tocorimerio.com/blog/ecotourism-tijuca-forest-rio-de-janeiro?lang=pt"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://tocorimerio.com/blog/ecotourism-tijuca-forest-rio-de-janeiro?lang=es"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://tocorimerio.com/blog/ecotourism-tijuca-forest-rio-de-janeiro"/>
-    <lastmod>2026-07-30</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-    <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776810852021_fdqrwwj2mzl.webp</image:loc>
-      <image:caption>No Coração Verde de Rio: Ecoturismo na Floresta Nacional da Tijuca</image:caption>
     </image:image>
   </url>
   <url>
@@ -2383,20 +2662,6 @@
     </image:image>
   </url>
   <url>
-    <loc>https://tocorimerio.com/blog/where-exchange-money</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://tocorimerio.com/blog/where-exchange-money"/>
-    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://tocorimerio.com/blog/where-exchange-money?lang=pt"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://tocorimerio.com/blog/where-exchange-money?lang=es"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://tocorimerio.com/blog/where-exchange-money"/>
-    <lastmod>2026-07-08</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-    <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1783515195339_q8z74piboqt.webp</image:loc>
-      <image:caption>Trocando dinheiro em Rio de Janeiro: um guia local para viajantes de Tocorime</image:caption>
-    </image:image>
-  </url>
-  <url>
     <loc>https://tocorimerio.com/blog/tours-in-lapa</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://tocorimerio.com/blog/tours-in-lapa"/>
     <xhtml:link rel="alternate" hreflang="pt-BR" href="https://tocorimerio.com/blog/tours-in-lapa?lang=pt"/>
@@ -2411,34 +2676,6 @@
     </image:image>
   </url>
   <url>
-    <loc>https://tocorimerio.com/blog/where-to-watch-the-2026-world-cup-in-rio</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://tocorimerio.com/blog/where-to-watch-the-2026-world-cup-in-rio"/>
-    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://tocorimerio.com/blog/where-to-watch-the-2026-world-cup-in-rio?lang=pt"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://tocorimerio.com/blog/where-to-watch-the-2026-world-cup-in-rio?lang=es"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://tocorimerio.com/blog/where-to-watch-the-2026-world-cup-in-rio"/>
-    <lastmod>2026-05-19</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-    <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1779149093302_9dvl0y6ueo7.webp</image:loc>
-      <image:caption>Copa do Mundo 2026 em Rio de Janeiro: Fan Fests, melhores bares, onde ficar e guia completo</image:caption>
-    </image:image>
-  </url>
-  <url>
-    <loc>https://tocorimerio.com/blog/rio-alem-do-obvio-lugares-secretos</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://tocorimerio.com/blog/rio-alem-do-obvio-lugares-secretos"/>
-    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://tocorimerio.com/blog/rio-alem-do-obvio-lugares-secretos?lang=pt"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://tocorimerio.com/blog/rio-alem-do-obvio-lugares-secretos?lang=es"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://tocorimerio.com/blog/rio-alem-do-obvio-lugares-secretos"/>
-    <lastmod>2026-07-30</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-    <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776136532621_bydozzr39nb.webp</image:loc>
-      <image:caption>Rio Além do Óbvio: 5 Lugares Secretos para Fugir da Multidão</image:caption>
-    </image:image>
-  </url>
-  <url>
     <loc>https://tocorimerio.com/blog/rio-de-janeiro-with-kids-3-day-itinerary</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://tocorimerio.com/blog/rio-de-janeiro-with-kids-3-day-itinerary"/>
     <xhtml:link rel="alternate" hreflang="pt-BR" href="https://tocorimerio.com/blog/rio-de-janeiro-with-kids-3-day-itinerary?lang=pt"/>
@@ -2450,34 +2687,6 @@
     <image:image>
       <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776155669769_oliiwanq76n.webp</image:loc>
       <image:caption>Rio de Janeiro com crianças: um roteiro familiar de 3 dias que não cansa ninguém</image:caption>
-    </image:image>
-  </url>
-  <url>
-    <loc>https://tocorimerio.com/blog/rio-imperial-cultura-historia</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://tocorimerio.com/blog/rio-imperial-cultura-historia"/>
-    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://tocorimerio.com/blog/rio-imperial-cultura-historia?lang=pt"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://tocorimerio.com/blog/rio-imperial-cultura-historia?lang=es"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://tocorimerio.com/blog/rio-imperial-cultura-historia"/>
-    <lastmod>2026-07-30</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-    <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776154933416_1jovl3o2i6si.webp</image:loc>
-      <image:caption>Cultura e História: Um Mergulho no Passado Imperial do Rio</image:caption>
-    </image:image>
-  </url>
-  <url>
-    <loc>https://tocorimerio.com/blog/visit-sugar-loaf-rio</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://tocorimerio.com/blog/visit-sugar-loaf-rio"/>
-    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://tocorimerio.com/blog/visit-sugar-loaf-rio?lang=pt"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://tocorimerio.com/blog/visit-sugar-loaf-rio?lang=es"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://tocorimerio.com/blog/visit-sugar-loaf-rio"/>
-    <lastmod>2026-07-30</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-    <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1784061610504_4dno4she5bt.webp</image:loc>
-      <image:caption>Pão de Açúcar : o guia completo de 2026</image:caption>
     </image:image>
   </url>
   <url>
@@ -2618,34 +2827,6 @@
     <image:image>
       <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776136539659_dhflxgmz62g.webp</image:loc>
       <image:caption>Passeio de Barco Arraial do Cabo: o guia completo do passeio de barco</image:caption>
-    </image:image>
-  </url>
-  <url>
-    <loc>https://tocorimerio.com/blog/best-boat-tours-in-arraial-do-cabo-for-crystal-clear-beaches</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://tocorimerio.com/blog/best-boat-tours-in-arraial-do-cabo-for-crystal-clear-beaches"/>
-    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://tocorimerio.com/blog/best-boat-tours-in-arraial-do-cabo-for-crystal-clear-beaches?lang=pt"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://tocorimerio.com/blog/best-boat-tours-in-arraial-do-cabo-for-crystal-clear-beaches?lang=es"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://tocorimerio.com/blog/best-boat-tours-in-arraial-do-cabo-for-crystal-clear-beaches"/>
-    <lastmod>2026-07-30</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-    <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1784943642355_cj5u9fkdvmm.webp</image:loc>
-      <image:caption>Melhores passeios de barco em Arraial do Cabo para praias cristalinas</image:caption>
-    </image:image>
-  </url>
-  <url>
-    <loc>https://tocorimerio.com/blog/o-renascimento-verde-a-incrivel-historia-do-reflorestamento-da-floresta-da-tijuca</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://tocorimerio.com/blog/o-renascimento-verde-a-incrivel-historia-do-reflorestamento-da-floresta-da-tijuca"/>
-    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://tocorimerio.com/blog/o-renascimento-verde-a-incrivel-historia-do-reflorestamento-da-floresta-da-tijuca?lang=pt"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://tocorimerio.com/blog/o-renascimento-verde-a-incrivel-historia-do-reflorestamento-da-floresta-da-tijuca?lang=es"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://tocorimerio.com/blog/o-renascimento-verde-a-incrivel-historia-do-reflorestamento-da-floresta-da-tijuca"/>
-    <lastmod>2026-07-30</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-    <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776444378668_vzexl1lplmt.webp</image:loc>
-      <image:caption>O Renascimento Verde: A Incrível História do Reflorestamento da Floresta da Tijuca</image:caption>
     </image:image>
   </url>
   <url>
@@ -2817,34 +2998,6 @@
     </image:image>
   </url>
   <url>
-    <loc>https://tocorimerio.com/blog/melhor-epoca-visitar-rio-de-janeiro</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://tocorimerio.com/blog/melhor-epoca-visitar-rio-de-janeiro"/>
-    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://tocorimerio.com/blog/melhor-epoca-visitar-rio-de-janeiro?lang=pt"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://tocorimerio.com/blog/melhor-epoca-visitar-rio-de-janeiro?lang=es"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://tocorimerio.com/blog/melhor-epoca-visitar-rio-de-janeiro"/>
-    <lastmod>2026-04-10</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-    <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776449767100_shj8j2w059.webp</image:loc>
-      <image:caption>Planejando sua Viagem: Qual a melhor época para visitar o Rio?</image:caption>
-    </image:image>
-  </url>
-  <url>
-    <loc>https://tocorimerio.com/blog/packing-list-for-rio-from-beach-to-rainforest</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://tocorimerio.com/blog/packing-list-for-rio-from-beach-to-rainforest"/>
-    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://tocorimerio.com/blog/packing-list-for-rio-from-beach-to-rainforest?lang=pt"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://tocorimerio.com/blog/packing-list-for-rio-from-beach-to-rainforest?lang=es"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://tocorimerio.com/blog/packing-list-for-rio-from-beach-to-rainforest"/>
-    <lastmod>2026-07-30</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-    <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776795501321_2kuhhczlms.webp</image:loc>
-      <image:caption>O Que Levar na Mala para o Rio: Da Praia à Floresta Tropical</image:caption>
-    </image:image>
-  </url>
-  <url>
     <loc>https://tocorimerio.com/blog/best-private-tours-in-rio-de-janeiro-for-families-with-children</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://tocorimerio.com/blog/best-private-tours-in-rio-de-janeiro-for-families-with-children"/>
     <xhtml:link rel="alternate" hreflang="pt-BR" href="https://tocorimerio.com/blog/best-private-tours-in-rio-de-janeiro-for-families-with-children?lang=pt"/>
@@ -2856,34 +3009,6 @@
     <image:image>
       <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1784942221561_ss1w8j4b8hi.webp</image:loc>
       <image:caption>Melhores passeios privados em Rio de Janeiro para famílias com crianças</image:caption>
-    </image:image>
-  </url>
-  <url>
-    <loc>https://tocorimerio.com/blog/how-to-choose-a-reliable-private-tour-in-rio-de-janeiro</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://tocorimerio.com/blog/how-to-choose-a-reliable-private-tour-in-rio-de-janeiro"/>
-    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://tocorimerio.com/blog/how-to-choose-a-reliable-private-tour-in-rio-de-janeiro?lang=pt"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://tocorimerio.com/blog/how-to-choose-a-reliable-private-tour-in-rio-de-janeiro?lang=es"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://tocorimerio.com/blog/how-to-choose-a-reliable-private-tour-in-rio-de-janeiro"/>
-    <lastmod>2026-07-30</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-    <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1784942049444_q1cafg445g.webp</image:loc>
-      <image:caption>Como escolher um tour privado confiável em Rio de Janeiro</image:caption>
-    </image:image>
-  </url>
-  <url>
-    <loc>https://tocorimerio.com/blog/private-tours-vs-group-tours-in-rio-de-janeiro-which-is-worth-it</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://tocorimerio.com/blog/private-tours-vs-group-tours-in-rio-de-janeiro-which-is-worth-it"/>
-    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://tocorimerio.com/blog/private-tours-vs-group-tours-in-rio-de-janeiro-which-is-worth-it?lang=pt"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://tocorimerio.com/blog/private-tours-vs-group-tours-in-rio-de-janeiro-which-is-worth-it?lang=es"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://tocorimerio.com/blog/private-tours-vs-group-tours-in-rio-de-janeiro-which-is-worth-it"/>
-    <lastmod>2026-07-30</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-    <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1784941877813_zdwlhrxhsge.webp</image:loc>
-      <image:caption>Passeios privados vs. privados passeios em grupo em Rio de Janeiro: quanto vale a pena?</image:caption>
     </image:image>
   </url>
   <url>
@@ -2954,34 +3079,6 @@
     <image:image>
       <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776793004416_ov0fzyy2ctk.webp</image:loc>
       <image:caption>Guia de Segurança no Rio para Viajantes dos EUA e Europa</image:caption>
-    </image:image>
-  </url>
-  <url>
-    <loc>https://tocorimerio.com/blog/sunset-in-rio-de-janeiro-guide</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://tocorimerio.com/blog/sunset-in-rio-de-janeiro-guide"/>
-    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://tocorimerio.com/blog/sunset-in-rio-de-janeiro-guide?lang=pt"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://tocorimerio.com/blog/sunset-in-rio-de-janeiro-guide?lang=es"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://tocorimerio.com/blog/sunset-in-rio-de-janeiro-guide"/>
-    <lastmod>2026-08-04</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-    <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1785798054675_ruab49a7nyk.webp</image:loc>
-      <image:caption>Pôr do sol em Rio de Janeiro: um guia prático dos melhores mirantes da cidade</image:caption>
-    </image:image>
-  </url>
-  <url>
-    <loc>https://tocorimerio.com/blog/how-to-get-to-rio-de-janeiro-new-flights-routes</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://tocorimerio.com/blog/how-to-get-to-rio-de-janeiro-new-flights-routes"/>
-    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://tocorimerio.com/blog/how-to-get-to-rio-de-janeiro-new-flights-routes?lang=pt"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://tocorimerio.com/blog/how-to-get-to-rio-de-janeiro-new-flights-routes?lang=es"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://tocorimerio.com/blog/how-to-get-to-rio-de-janeiro-new-flights-routes"/>
-    <lastmod>2026-07-30</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-    <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776178620123_asifj7wd7z7.webp</image:loc>
-      <image:caption>Chegar ao Rio de Janeiro ficou mais fácil: novas rotas e o que você precisa saber</image:caption>
     </image:image>
   </url>
 </urlset>

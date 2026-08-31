@@ -123,7 +123,8 @@ async function fetchDynamicRoutes() {
     '/flamengo-x-vasco-maracana',
     '/fluminense-bolivar-libertadores',
     '/brasil-x-panama-maio-maracana',
-    '/fluminense-indenpediente-rivadavia-libertadores-maracana'
+    '/fluminense-indenpediente-rivadavia-libertadores-maracana',
+    '/flamengo-x-mirassol-maracana-tickets-02-09'
   ];
 
   console.log('Fetching dynamic routes from Supabase...');
