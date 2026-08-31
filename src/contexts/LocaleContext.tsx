@@ -24,11 +24,11 @@ const TTL_MS = 24 * 60 * 60 * 1000; // 1 day
 // Priority order:
 // 1. ?lang= URL param  (highest)
 // 2. localStorage      (if not expired — TTL 1 day)
-// 3. Browser language + system timezone detection (lowest)
+// 3. Browser language detection (lowest)
 //
-// Portuguese is only inferred for explicit pt-BR speakers or
-// users whose system timezone is a known Brazilian timezone.
-// Generic "pt" (no region) falls back to English.
+// Default language is ENGLISH for everyone. Portuguese is only used
+// when the browser language is explicitly Portuguese (pt / pt-BR).
+// Timezone is NOT used — foreigners in Brazil get English.
 const detectLocale = (): { language: Language; currency: Currency } => {
   if (typeof window === 'undefined') return { language: 'en', currency: 'USD' };
 
@@ -60,25 +60,19 @@ const detectLocale = (): { language: Language; currency: Currency } => {
     }
   } catch {}
 
-  // --- 3. Browser language + timezone detection ---
-  const tz = Intl.DateTimeFormat().resolvedOptions().timeZone || '';
+  // --- 3. Browser language detection ---
+  // Default is ENGLISH for everyone. Portuguese is used only when the
+  // visitor's browser language is explicitly Portuguese — timezone/location
+  // is ignored, so foreigners traveling in Brazil still get English.
   const langs = (navigator.languages || [navigator.language || '']).map((l) => l.toLowerCase());
   const primary = langs[0] || '';
 
-  // Brazilian timezones (system clock, not IP-based)
-  const isBrazil =
-    tz.startsWith('America/') &&
-    (tz.includes('Sao_Paulo') || tz.includes('Bahia') || tz.includes('Fortaleza') ||
-     tz.includes('Recife')   || tz.includes('Manaus') || tz.includes('Belem')     ||
-     tz.includes('Cuiaba')   || tz.includes('Porto_Velho') || tz.includes('Rio_Branco') ||
-     tz.includes('Maceio')   || tz.includes('Araguaina') || tz.includes('Boa_Vista') ||
-     tz.includes('Campo_Grande') || tz.includes('Noronha') || tz.includes('Santarem') ||
-     tz.includes('Eirunepe'));
-
-  // Portuguese ONLY for explicit pt-BR speakers or Brazilian system timezone.
-  // Generic "pt" (no region) → English (avoids misdetecting African/European users).
-  if (isBrazil || primary === 'pt-br') {
+  // Portuguese ONLY for pt browsers (pt-BR → BRL, other pt → USD).
+  if (primary === 'pt-br') {
     return { language: 'pt', currency: 'BRL' };
+  }
+  if (primary.startsWith('pt')) {
+    return { language: 'pt', currency: 'USD' };
   }
 
   if (primary.startsWith('es')) return { language: 'es', currency: 'USD' };
