@@ -195,6 +195,15 @@ async function run() {
     imageAlt: 'Rio de Janeiro seen from a viewpoint',
     type: 'website',
   });
+  postMeta.set('/flamengo-x-mirassol-maracana-tickets-02-09', {
+    title: 'Flamengo x Mirassol Tickets Maracanã (Sep 2, 2026) | Tocorime Rio',
+    description: 'Buy Flamengo vs Mirassol tickets at Maracanã, Sep 2 2026: official ticket + hotel transfer + English-speaking guide. No CPF or biometrics needed. Instant confirmation.',
+    url: `${SITE}/flamengo-x-mirassol-maracana-tickets-02-09`,
+    image: 'https://lncimg.lance.com.br/cdn-cgi/image/width=1600,quality=80,fit=cover,format=webp/uploads/2016/10/19/5807e137e598d.jpeg',
+    imageAlt: 'Maracanã Stadium packed for a Flamengo match',
+    type: 'website',
+  });
+
   routes.forEach(r => {
     const meta = postMeta.get(r);
     writeRoute(r, meta ? withMeta(indexHtml, meta) : undefined);
