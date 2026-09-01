@@ -440,6 +440,68 @@ const FlamengoMirassolMaracana = () => {
   const seo = SEO[lang];
   const OG_IMAGE = "https://lncimg.lance.com.br/cdn-cgi/image/width=1600,quality=80,fit=cover,format=webp/uploads/2016/10/19/5807e137e598d.jpeg";
 
+  const waLink = `${WHATSAPP_URL}?text=${encodeURIComponent(
+    lang === 'pt'
+      ? 'Olá! Tenho interesse nos ingressos Flamengo x Mirassol no Maracanã. Pode me ajudar?'
+      : lang === 'es'
+      ? '¡Hola! Me interesan las entradas Flamengo vs Mirassol en Maracaná. ¿Pueden ayudarme?'
+      : "Hello! I'm interested in the Flamengo vs Mirassol tickets at Maracanã. Can you help me?"
+  )}`;
+
+  return (
+    <div className="mir-page">
+      <Helmet>
+        <html lang={seo.htmlLang} />
+        <title>{seo.title}</title>
+        <meta name="description" content={seo.description} />
+        <meta name="keywords" content={seo.keywords} />
+        <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
+        <link rel="canonical" href={getCanonicalUrl(PAGE_PATH)} />
+        {hreflang.map(h => <link key={h.hreflang} rel="alternate" hrefLang={h.hreflang} href={h.href} />)}
+        {/* Open Graph */}
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content={getCanonicalUrl(PAGE_PATH)} />
+        <meta property="og:locale" content={seo.locale} />
+        <meta property="og:title" content={seo.ogTitle} />
+        <meta property="og:description" content={seo.description} />
+        <meta property="og:image" content={OG_IMAGE} />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+        <meta property="og:image:alt" content="Maracanã Stadium packed for a Flamengo match" />
+        <meta property="og:site_name" content="Tocorime Rio" />
+        {/* Twitter */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={seo.twTitle} />
+        <meta name="twitter:description" content={seo.description} />
+        <meta name="twitter:image" content={OG_IMAGE} />
+        {/* Schema */}
+        <script type="application/ld+json">
+          {JSON.stringify({
+            ...generateSportsEventSchema({
+              name: "Flamengo x Mirassol — Brasileirão Série A 2026",
+              description: seo.description,
+              startDate: TARGET_DATE.toISOString(),
+              imageUrl: OG_IMAGE,
+              url: getCanonicalUrl(PAGE_PATH),
+              homeTeam: "CR Flamengo",
+              awayTeam: "Mirassol FC",
+              venueName: "Estádio do Maracanã",
+              offerUrl: BOOKING_URL,
+              offerPrice: 125,
+              offerCurrency: "USD",
+            }),
+            inLanguage: seo.htmlLang,
+          })}
+        </script>
+        <script type="application/ld+json">
+          {JSON.stringify(generateBreadcrumbsSchema([
+            { name: "Home", url: getCanonicalUrl("/") },
+            { name: "Maracanã Tickets", url: getCanonicalUrl("/maracana-calendario") },
+            { name: "Flamengo x Mirassol", url: getCanonicalUrl(PAGE_PATH) },
+          ]))}
+        </script>
+        <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:ital,wght@0,400;0,600;0,700;1,400&family=Barlow:wght@400;500&display=swap" rel="stylesheet" />
+      </Helmet>
 
       <style dangerouslySetInnerHTML={{ __html: `
         .mir-page {
