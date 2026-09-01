@@ -408,56 +408,96 @@ const FlamengoMirassolMaracana = () => {
 
   const hreflang = getHreflangLinks(PAGE_PATH);
 
+  const SEO: Record<Lang, { title: string; description: string; ogTitle: string; twTitle: string; keywords: string; locale: string; htmlLang: string }> = {
+    en: {
+      title: "Flamengo x Mirassol Tickets Maracanã (Sep 2, 2026) | Tocorime Rio",
+      description: "Buy Flamengo vs Mirassol tickets at Maracanã, Sep 2 2026: official ticket + hotel transfer + English-speaking guide. No CPF or biometrics needed. Instant confirmation.",
+      ogTitle: "Flamengo x Mirassol at Maracanã — Tickets + Transfer + Guide",
+      twTitle: "Flamengo x Mirassol Tickets — Maracanã, Sep 2 2026",
+      keywords: "flamengo mirassol tickets, maracana tickets, how to buy maracana tickets, flamengo tickets maracana, brasileirao tickets 2026, football match rio de janeiro, maracana stadium experience, maracana matchday package, private guide rio de janeiro, things to do in rio de janeiro, rio de janeiro tours",
+      locale: "en_US",
+      htmlLang: "en",
+    },
+    pt: {
+      title: "Ingressos Flamengo x Mirassol no Maracanã (02/09/2026) | Tocorime Rio",
+      description: "Ingressos Flamengo x Mirassol no Maracanã em 02/09/2026 com transfer do hotel e guia trilíngue. Setor Oeste Superior e Maracanã Club. Confirmação imediata.",
+      ogTitle: "Flamengo x Mirassol no Maracanã — Ingresso + Transfer + Guia",
+      twTitle: "Ingressos Flamengo x Mirassol — Maracanã, 02/09/2026",
+      keywords: "ingressos flamengo x mirassol, ingressos maracanã, como comprar ingresso no maracanã, flamengo maracanã ingressos, brasileirão 2026 ingressos, jogo no maracanã para turistas, pacote maracanã com transfer, guia privativo rio de janeiro, o que fazer no rio de janeiro, passeios no rio de janeiro",
+      locale: "pt_BR",
+      htmlLang: "pt-BR",
+    },
+    es: {
+      title: "Entradas Flamengo vs Mirassol en Maracaná (2/9/2026) | Tocorime Rio",
+      description: "Entradas Flamengo vs Mirassol en Maracaná el 2 de septiembre de 2026: ticket oficial + traslado desde el hotel + guía en español. Sin CPF ni biometría.",
+      ogTitle: "Flamengo vs Mirassol en Maracaná — Entrada + Traslado + Guía",
+      twTitle: "Entradas Flamengo vs Mirassol — Maracaná, 2/9/2026",
+      keywords: "entradas flamengo vs mirassol, entradas maracaná, cómo comprar entradas maracaná, flamengo entradas maracaná, brasileirao 2026 entradas, partido de fútbol en río de janeiro, paquete maracaná con traslado, guía privado río de janeiro, qué hacer en río de janeiro, tours en río de janeiro",
+      locale: "es_ES",
+      htmlLang: "es",
+    },
+  };
+  const seo = SEO[lang];
+  const OG_IMAGE = "https://lncimg.lance.com.br/cdn-cgi/image/width=1600,quality=80,fit=cover,format=webp/uploads/2016/10/19/5807e137e598d.jpeg";
+
   const waLink = `${WHATSAPP_URL}?text=${encodeURIComponent(
     lang === 'pt'
-      ? 'Olá! Tenho interesse no pacote Flamengo x Mirassol Libertadores. Pode me ajudar?'
+      ? 'Olá! Tenho interesse nos ingressos Flamengo x Mirassol no Maracanã. Pode me ajudar?'
       : lang === 'es'
-      ? '¡Hola! Me interesa el paquete Flamengo vs Mirassol Libertadores. ¿Pueden ayudarme?'
-      : "Hello! I'm interested in the Flamengo vs Mirassol Libertadores package. Can you help me?"
+      ? '¡Hola! Me interesan las entradas Flamengo vs Mirassol en Maracaná. ¿Pueden ayudarme?'
+      : "Hello! I'm interested in the Flamengo vs Mirassol tickets at Maracanã. Can you help me?"
   )}`;
 
   return (
     <div className="mir-page">
       <Helmet>
-        <title>Flamengo vs Mirassol — Brasileirão 2026 | Maracanã Tickets & Matchday Package</title>
-        <meta name="description" content="Get tickets + transfer + guide for Flamengo vs Mirassol at Maracanã — Brasileirão 2026 Round of 16, Sep 2. Book your matchday package. Foreign visitors welcome. Sectors: West Upper, West Lower, Maracanã Club, Premium." />
+        <html lang={seo.htmlLang} />
+        <title>{seo.title}</title>
+        <meta name="description" content={seo.description} />
+        <meta name="keywords" content={seo.keywords} />
+        <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
         <link rel="canonical" href={getCanonicalUrl(PAGE_PATH)} />
         {hreflang.map(h => <link key={h.hreflang} rel="alternate" hrefLang={h.hreflang} href={h.href} />)}
         {/* Open Graph */}
         <meta property="og:type" content="website" />
         <meta property="og:url" content={getCanonicalUrl(PAGE_PATH)} />
-        <meta property="og:title" content="Flamengo vs Mirassol — Brasileirão 2026 | Maracanã" />
-        <meta property="og:description" content="Live Brasileirão at Maracanã on Sep 2, 2026. Book your matchday package: official ticket, transfer & bilingual guide. Foreign visitors welcome." />
-        <meta property="og:image" content="https://lncimg.lance.com.br/cdn-cgi/image/width=1600,quality=80,fit=cover,format=webp/uploads/2016/10/19/5807e137e598d.jpeg" />
+        <meta property="og:locale" content={seo.locale} />
+        <meta property="og:title" content={seo.ogTitle} />
+        <meta property="og:description" content={seo.description} />
+        <meta property="og:image" content={OG_IMAGE} />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+        <meta property="og:image:alt" content="Maracanã Stadium packed for a Flamengo match" />
         <meta property="og:site_name" content="Tocorime Rio" />
         {/* Twitter */}
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Flamengo vs Mirassol — Brasileirão 2026" />
-        <meta name="twitter:description" content="Matchday packages for Flamengo vs Mirassol at Maracanã. Tickets, transfer & guide included." />
-        <meta name="twitter:image" content="https://lncimg.lance.com.br/cdn-cgi/image/width=1600,quality=80,fit=cover,format=webp/uploads/2016/10/19/5807e137e598d.jpeg" />
-        {/* Keywords */}
-        <meta name="keywords" content="Flamengo Mirassol tickets, Brasileirão 2026 tickets, Maracanã tickets foreigners, Flamengo Brasileirão 2026, buy Libertadores tickets Rio, Maracanã matchday package, Rio de Janeiro football tickets, Brasileirão octavos final, Maracanã stadium tour package" />
+        <meta name="twitter:title" content={seo.twTitle} />
+        <meta name="twitter:description" content={seo.description} />
+        <meta name="twitter:image" content={OG_IMAGE} />
         {/* Schema */}
         <script type="application/ld+json">
-          {JSON.stringify(generateSportsEventSchema({
-            name: "Flamengo vs Mirassol — Brasileirão 2026",
-            description: "Brasileirão 2026 Round of 16 first leg between CR Flamengo and Mirassol at Maracanã Stadium, Rio de Janeiro.",
-            startDate: TARGET_DATE.toISOString(),
-            imageUrl: "https://lncimg.lance.com.br/cdn-cgi/image/width=1600,quality=80,fit=cover,format=webp/uploads/2016/10/19/5807e137e598d.jpeg",
-            url: getCanonicalUrl(PAGE_PATH),
-            homeTeam: "CR Flamengo",
-            awayTeam: "Mirassol",
-            venueName: "Estádio do Maracanã",
-            offerUrl: BOOKING_URL,
-            offerPrice: 89,
-            offerCurrency: "USD",
-          }))}
+          {JSON.stringify({
+            ...generateSportsEventSchema({
+              name: "Flamengo x Mirassol — Brasileirão Série A 2026",
+              description: seo.description,
+              startDate: TARGET_DATE.toISOString(),
+              imageUrl: OG_IMAGE,
+              url: getCanonicalUrl(PAGE_PATH),
+              homeTeam: "CR Flamengo",
+              awayTeam: "Mirassol FC",
+              venueName: "Estádio do Maracanã",
+              offerUrl: BOOKING_URL,
+              offerPrice: 125,
+              offerCurrency: "USD",
+            }),
+            inLanguage: seo.htmlLang,
+          })}
         </script>
         <script type="application/ld+json">
           {JSON.stringify(generateBreadcrumbsSchema([
             { name: "Home", url: getCanonicalUrl("/") },
-            { name: "Maracanã Matchday", url: getCanonicalUrl("/passeio/maracana-matchday") },
-            { name: "Flamengo vs Mirassol", url: getCanonicalUrl(PAGE_PATH) },
+            { name: "Maracanã Tickets", url: getCanonicalUrl("/maracana-calendario") },
+            { name: "Flamengo x Mirassol", url: getCanonicalUrl(PAGE_PATH) },
           ]))}
         </script>
         <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:ital,wght@0,400;0,600;0,700;1,400&family=Barlow:wght@400;500&display=swap" rel="stylesheet" />
