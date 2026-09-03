@@ -384,6 +384,8 @@ export const translationsPt = {
   flamengo_coritiba_desc: "Garanta seu ingresso para Flamengo x Coritiba no Maracanã. Pacotes com transfer, guia bilíngue e setores premium incluindo Maracanã Club. Reserve já!",
   fluminense_guaira_title: "Fluminense x Deportivo La Guaíra no Maracanã | Ingressos + Transfer | Tocorime Rio",
   fluminense_guaira_desc: "Garanta seu ingresso para Fluminense x Deportivo La Guaíra no Maracanã. Pacotes com transfer, guia bilíngue e setores premium. Reserve já!",
+  fluminense_platense_title: "Fluminense x Platense no Maracanã (08/09) | Ingressos + Transfer | Tocorime Rio",
+  fluminense_platense_desc: "Ingressos para Fluminense x Club Atlético Platense no Maracanã em 8 de setembro de 2026. Pacotes com transfer do hotel, guia bilíngue e setores premium. Sem CPF, confirmação imediata.",
   // Experiences Page
   ex_meta_title: 'Experiências no Rio de Janeiro | Passeios Privativos e Trilhas | Tocorime Rio',
   ex_meta_desc: 'Experiências privativas inesquecíveis no Rio de Janeiro: City Tour, Trilhas e Bate e Volta. Avaliado com 5.0 no TripAdvisor. Guias locais bilíngues. Reserve sua aventura.',
@@ -821,6 +823,8 @@ export const translationsEn = {
   flamengo_coritiba_desc: "Get your ticket for Flamengo vs Coritiba at Maracanã. Packages with transfer, bilingual guide, and premium sectors including Maracanã Club. Book now!",
   fluminense_guaira_title: "Fluminense vs Deportivo La Guaíra at Maracanã | Tickets + Transfer | Tocorime Rio",
   fluminense_guaira_desc: "Get your ticket for Fluminense vs Deportivo La Guaíra at Maracanã. Packages with transfer, bilingual guide, and premium sectors. Book now!",
+  fluminense_platense_title: "Fluminense vs Platense Tickets Maracanã (Sep 8) | Tocorime Rio",
+  fluminense_platense_desc: "Buy Fluminense vs Club Atlético Platense tickets at Maracanã, Sep 8 2026: official ticket + hotel transfer + English-speaking guide. No CPF needed, instant confirmation.",
   // Experiences Page
   ex_meta_title: 'Rio de Janeiro Experiences | Private Tours, Hiking & Day Trips | Tocorime Rio',
   ex_meta_desc: 'Unforgettable private experiences in Rio de Janeiro: City Tour, Hiking & One-Day Trips. Rated 5.0 on TripAdvisor. Bilingual local guides. Book your Rio adventure now.',
@@ -1258,6 +1262,8 @@ export const translationsEs = {
   flamengo_coritiba_desc: "Asegura tu entrada para Flamengo vs Coritiba en el Maracaná. Paquetes con traslado, guía bilingüe y sectores premium, incluyendo Maracanã Club. ¡Reserva ya!",
   fluminense_guaira_title: "Fluminense vs Deportivo La Guaíra en el Maracaná | Entradas + Traslado | Tocorime Rio",
   fluminense_guaira_desc: "Asegura tu entrada para Fluminense vs Deportivo La Guaíra en el Maracaná. Paquetes con traslado, guía bilingüe y sectores premium. ¡Reserva ya!",
+  fluminense_platense_title: "Fluminense vs Platense en el Maracaná (8 sep) | Entradas | Tocorime Rio",
+  fluminense_platense_desc: "Entradas para Fluminense vs Club Atlético Platense en el Maracaná, 8 de septiembre de 2026: entrada oficial + traslado + guía bilingüe. Sin CPF, confirmación inmediata.",
   // Experiences Page
   ex_meta_title: 'Experiencias en Río de Janeiro | Tours Privados, Senderismo | Tocorime Rio',
   ex_meta_desc: 'Experiencias privadas inolvidables en Río de Janeiro: City Tour, Senderismo y Excursiones. 5.0 en TripAdvisor. Guías bilingües. Reserva tu aventura en Río.',
@@ -1694,6 +1700,8 @@ export const translationsZhCN = {
   flamengo_coritiba_desc: "获取在 Maracanã 举行的 Flamengo vs Coritiba 门票。套餐包含接送、双语导游及包括 Maracanã Club 在内的高级区域。立即预订！",
   fluminense_guaira_title: "Fluminense 对阵 Deportivo La Guaíra | 门票 + 接送 | Tocorime Rio",
   fluminense_guaira_desc: "获取在 Maracanã 举行的 Fluminense vs Deportivo La Guaíra 门票。套餐包含接送、双语导游和高级区域。立即预订！",
+  fluminense_platense_title: "Fluminense 对阵 Platense | 马拉卡纳门票 | Tocorime Rio",
+  fluminense_platense_desc: "2026年9月8日马拉卡纳球场 Fluminense vs Platense 门票：官方门票 + 酒店接送 + 双语导游，即时确认。",
   // Experiences Page
   ex_meta_title: 'Rio de Janeiro 体验 | 私家团、徒步与一日游 | Tocorime Rio',
   ex_meta_desc: '难忘的 Rio de Janeiro 私人体验：城市游览、徒步与一日游。TripAdvisor 5.0 评分。双语当地导游。立即预订。',
@@ -2130,6 +2138,8 @@ export const translationsZhTW = {
   flamengo_coritiba_desc: "獲取 Flamengo vs Coritiba 電子門票。套裝包含接送、雙語導遊及包含 Maracanã Club 在內的尊貴區域。立即預訂！",
   fluminense_guaira_title: "Fluminense vs Deportivo La Guaíra 於 Maracanã | 門票 + 接送 | Tocorime Rio",
   fluminense_guaira_desc: "獲取 Fluminense vs Deportivo La Guaíra 電子門票。套裝包含接送、雙語導遊及尊貴區域。立即預訂！",
+  fluminense_platense_title: "Fluminense vs Platense | 馬拉卡納門票 | Tocorime Rio",
+  fluminense_platense_desc: "2026年9月8日馬拉卡納球場 Fluminense vs Platense 門票：官方門票 + 酒店接送 + 雙語導遊，即時確認。",
   
   // Experiences Page
   ex_meta_title: 'Rio de Janeiro 旅遊體驗 | 私人包團、健行與一日遊 | Tocorime Rio',
