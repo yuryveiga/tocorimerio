@@ -113,6 +113,7 @@ async function run() {
     '/brasil-x-panama-maio-maracana',
     '/fluminense-indenpediente-rivadavia-libertadores-maracana',
     '/flamengo-x-mirassol-maracana-tickets-02-09',
+    '/Fluminense-x-patense-libertadores-maracana-tickets',
     '/sobre',
     '/contato',
     '/carrinho',
@@ -201,6 +202,15 @@ async function run() {
     url: `${SITE}/flamengo-x-mirassol-maracana-tickets-02-09`,
     image: 'https://lncimg.lance.com.br/cdn-cgi/image/width=1600,quality=80,fit=cover,format=webp/uploads/2016/10/19/5807e137e598d.jpeg',
     imageAlt: 'Maracanã Stadium packed for a Flamengo match',
+    type: 'website',
+  });
+
+  postMeta.set('/Fluminense-x-patense-libertadores-maracana-tickets', {
+    title: 'Fluminense vs Platense Tickets Maracanã (Sep 8, 2026) | Tocorime Rio',
+    description: 'Buy Fluminense vs Club Atlético Platense tickets at Maracanã, Sep 8 2026: official ticket + hotel transfer + English-speaking guide. No CPF needed, instant confirmation.',
+    url: `${SITE}/Fluminense-x-patense-libertadores-maracana-tickets`,
+    image: 'https://lncimg.lance.com.br/cdn-cgi/image/width=1600,quality=80,fit=cover,format=webp/uploads/2016/10/19/5807e137e598d.jpeg',
+    imageAlt: 'Maracanã Stadium packed for a Fluminense match',
     type: 'website',
   });
 
