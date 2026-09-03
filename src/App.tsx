@@ -64,6 +64,7 @@ const FluminenseDeportivoGuairaLibertadores = lazy(() => import("./pages/Flumine
 const FlamengoCoritibaMaracana = lazy(() => import("./pages/FlamengoCoritibaMaracana"));
 const FluminenseIndependienteRivadaviaLibertadores = lazy(() => import("./pages/FluminenseIndependienteRivadaviaLibertadores"));
 const FlamengoMirassolMaracana = lazy(() => import("./pages/FlamengoMirassolMaracana"));
+const FluminensePlatenseLibertadores = lazy(() => import("./pages/FluminensePlatenseLibertadores"));
 const PasseiosIndex          = lazy(() => import("./pages/PasseiosIndex"));
 // BrasilPanamaMaracana removida — redirecionada para /#tours
 const JogoLanding            = lazy(() => import("./pages/JogoLanding"));
