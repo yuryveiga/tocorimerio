@@ -248,7 +248,10 @@ const App = ({ queryClient: externalQueryClient }: { queryClient?: QueryClient }
                       <Route path="/flamengo-x-coritiba-maracana" element={<FlamengoCoritibaMaracana />} />
                       <Route path="/fluminense-indenpediente-rivadavia-libertadores-maracana" element={<FluminenseIndependienteRivadaviaLibertadores />} />
                       <Route path="/flamengo-x-mirassol-maracana-tickets-02-09" element={<FlamengoMirassolMaracana />} />
+                      <Route path="/Fluminense-x-patense-libertadores-maracana-tickets" element={<FluminensePlatenseLibertadores />} />
+                      <Route path="/fluminense-x-patense-libertadores-maracana-tickets" element={<FluminensePlatenseLibertadores />} />
                       <Route path="/brasil-x-panama-maio-maracana" element={<RedirectToHash hash="#tours" />} />
+
                       <Route path="/sitemap" element={<Sitemap />} />
                       <Route path="/:slug" element={<GenericPage />} />
                       <Route path="/admin/login" element={<AdminLogin />} />
