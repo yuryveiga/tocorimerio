@@ -102,16 +102,16 @@ export function BlogPostRating({ postId }: Props) {
     return () => { cancelled = true; };
   }, [postId, visitorKey]);
 
-  const submit = async () => {
-    if (!selected) {
+  const submit = async (stars: number, withComment = false) => {
+    if (!stars) {
       toast.error(t.pickStar);
       return;
     }
     setSubmitting(true);
     const { error } = await supabase.from("blog_post_ratings").insert({
       post_id: postId,
-      stars: selected,
-      comment: comment.trim().slice(0, 1000) || null,
+      stars,
+      comment: withComment ? (comment.trim().slice(0, 1000) || null) : null,
       visitor_key: visitorKey,
       user_agent: navigator.userAgent.slice(0, 500),
     });
@@ -129,11 +129,12 @@ export function BlogPostRating({ postId }: Props) {
     setCount((c) => c + 1);
     setAvg((prev) => {
       const newCount = count + 1;
-      const sum = (prev ?? 0) * count + selected;
+      const sum = (prev ?? 0) * count + stars;
       return sum / newCount;
     });
     toast.success(t.thanks);
   };
+
 
   const displayValue = hover || selected;
 
