@@ -1374,33 +1374,75 @@ export function PasseioDetalhe() {
         </div>
       </div>
 
-      {/* Discreet persistent mobile bar — hidden while the booking form is on screen */}
+      {/* Progressive mobile booking bar: date → people → pay, always showing the running total */}
       <div
-        className={`fixed bottom-0 left-0 right-0 z-40 px-4 py-2.5 bg-background/90 backdrop-blur-xl border-t border-border/60 transform transition-transform duration-300 md:hidden ${showStickyBar && !isLightboxOpen ? "translate-y-0" : "translate-y-full"}`}
+        className={`fixed bottom-0 left-0 right-0 z-40 px-4 py-2.5 bg-background/95 backdrop-blur-xl border-t border-border/60 transform transition-transform duration-300 md:hidden ${showStickyBar && !isLightboxOpen ? "translate-y-0" : "translate-y-full"}`}
       >
-        <div className="flex items-center justify-between gap-3">
-          <div className="flex flex-col leading-tight min-w-0">
-            {(!hidePrices && tour.pricing_model !== 'custom') ? (
-              <>
-                <span className="text-[9px] font-bold text-muted-foreground uppercase tracking-wider">{t("a_partir_de")}</span>
-                <span className="font-black text-base text-primary truncate">
-                  {formatPrice(getTourMinPrice(tour))}
-                  <span className="text-[9px] font-bold text-muted-foreground uppercase ml-1 opacity-70">/ {t("pessoa")}</span>
-                </span>
-              </>
-            ) : (
-              <span className="text-sm font-black text-primary uppercase leading-none">{language === 'pt' ? 'Sob Consulta' : language === 'es' ? 'Bajo Consulta' : 'Upon Request'}</span>
-            )}
-          </div>
-          <Button
-            onClick={scrollToDate}
-            className="h-10 px-5 rounded-full font-bold text-xs gap-2 shadow-md shrink-0"
-          >
-            <CalendarIcon className="w-4 h-4" />
-            {language === 'pt' ? 'Escolher data' : language === 'es' ? 'Elegir fecha' : 'Choose date'}
-          </Button>
-        </div>
+        {(() => {
+          const showPrice = !hidePrices && tour.pricing_model !== 'custom';
+          const hasDate = !!selectedDate;
+          const peopleLabel = language === 'pt' ? (quantity > 1 ? 'pessoas' : 'pessoa') : language === 'es' ? (quantity > 1 ? 'personas' : 'persona') : quantity > 1 ? 'people' : 'person';
+          const steps = [
+            language === 'pt' ? 'Data' : language === 'es' ? 'Fecha' : 'Date',
+            language === 'pt' ? 'Pessoas' : language === 'es' ? 'Personas' : 'People',
+            language === 'pt' ? 'Pagar' : language === 'es' ? 'Pagar' : 'Pay',
+          ];
+          const currentStep = hasDate ? 2 : 0;
+          return (
+            <>
+              {showPrice && (
+                <div className="flex items-center gap-1.5 mb-1.5" aria-hidden="true">
+                  {steps.map((s, i) => (
+                    <div key={s} className="flex items-center gap-1.5 flex-1">
+                      <span className={`text-[8px] font-black uppercase tracking-widest ${i <= currentStep ? 'text-primary' : 'text-muted-foreground/50'}`}>{s}</span>
+                      <div className={`h-0.5 flex-1 rounded-full ${i <= currentStep ? 'bg-primary' : 'bg-muted'}`} />
+                    </div>
+                  ))}
+                </div>
+              )}
+              <div className="flex items-center justify-between gap-3">
+                <div className="flex flex-col leading-tight min-w-0">
+                  {showPrice ? (
+                    <>
+                      <span className="text-[9px] font-bold text-muted-foreground uppercase tracking-wider truncate">
+                        {hasDate
+                          ? `${format(parseISO(selectedDate), "dd/MM")} · ${quantity} ${peopleLabel}`
+                          : t("a_partir_de")}
+                      </span>
+                      <span className="font-black text-base text-primary truncate">
+                        {hasDate ? formatPrice(currentUnitPrice * quantity) : formatPrice(getTourMinPrice(tour))}
+                        {!hasDate && (
+                          <span className="text-[9px] font-bold text-muted-foreground uppercase ml-1 opacity-70">/ {t("pessoa")}</span>
+                        )}
+                      </span>
+                    </>
+                  ) : (
+                    <span className="text-sm font-black text-primary uppercase leading-none">{language === 'pt' ? 'Sob Consulta' : language === 'es' ? 'Bajo Consulta' : 'Upon Request'}</span>
+                  )}
+                </div>
+                {showPrice && hasDate ? (
+                  <Button
+                    onClick={handleBooking}
+                    className="h-11 px-5 rounded-full font-black text-xs uppercase tracking-widest gap-2 shadow-md shrink-0"
+                  >
+                    <ShoppingCart className="w-4 h-4" />
+                    {t("reservar_agora")}
+                  </Button>
+                ) : (
+                  <Button
+                    onClick={scrollToDate}
+                    className="h-11 px-5 rounded-full font-bold text-xs gap-2 shadow-md shrink-0"
+                  >
+                    <CalendarIcon className="w-4 h-4" />
+                    {language === 'pt' ? 'Escolher data' : language === 'es' ? 'Elegir fecha' : 'Choose date'}
+                  </Button>
+                )}
+              </div>
+            </>
+          );
+        })()}
       </div>
+
 
       <Suspense fallback={<div className="h-20" />}>
         <WeatherSection />
