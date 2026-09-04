@@ -1,8 +1,6 @@
 import { useEffect, useState } from "react";
 import { Star } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
-import { Button } from "@/components/ui/button";
-import { Textarea } from "@/components/ui/textarea";
 import { toast } from "sonner";
 import { useLocale } from "@/contexts/LocaleContext";
 
@@ -73,7 +71,6 @@ export function BlogPostRating({ postId }: Props) {
   const [count, setCount] = useState(0);
   const [selected, setSelected] = useState(0);
   const [hover, setHover] = useState(0);
-  const [comment, setComment] = useState("");
   const [submitted, setSubmitted] = useState(false);
   const [submitting, setSubmitting] = useState(false);
 
@@ -102,16 +99,16 @@ export function BlogPostRating({ postId }: Props) {
     return () => { cancelled = true; };
   }, [postId, visitorKey]);
 
-  const submit = async () => {
-    if (!selected) {
+  const submit = async (stars: number) => {
+    if (!stars) {
       toast.error(t.pickStar);
       return;
     }
     setSubmitting(true);
     const { error } = await supabase.from("blog_post_ratings").insert({
       post_id: postId,
-      stars: selected,
-      comment: comment.trim().slice(0, 1000) || null,
+      stars,
+      comment: null,
       visitor_key: visitorKey,
       user_agent: navigator.userAgent.slice(0, 500),
     });
@@ -129,11 +126,12 @@ export function BlogPostRating({ postId }: Props) {
     setCount((c) => c + 1);
     setAvg((prev) => {
       const newCount = count + 1;
-      const sum = (prev ?? 0) * count + selected;
+      const sum = (prev ?? 0) * count + stars;
       return sum / newCount;
     });
     toast.success(t.thanks);
   };
+
 
   const displayValue = hover || selected;
 
@@ -162,44 +160,33 @@ export function BlogPostRating({ postId }: Props) {
           <span className="text-sm font-medium">{t.thanks}</span>
         </div>
       ) : (
-        <div className="space-y-4">
-          <div
-            className="flex gap-1"
-            onMouseLeave={() => setHover(0)}
-            role="radiogroup"
-            aria-label={t.title}
-          >
-            {[1, 2, 3, 4, 5].map((n) => (
-              <button
-                key={n}
-                type="button"
-                onMouseEnter={() => setHover(n)}
-                onFocus={() => setHover(n)}
-                onClick={() => setSelected(n)}
-                aria-label={`${n} star${n === 1 ? "" : "s"}`}
-                aria-checked={selected === n}
-                role="radio"
-                className="p-1 transition-transform hover:scale-110"
-              >
-                <Star
-                  className={`w-8 h-8 transition-colors ${n <= displayValue ? "fill-yellow-400 text-yellow-400" : "text-muted-foreground/40"}`}
-                />
-              </button>
-            ))}
-          </div>
-          <Textarea
-            value={comment}
-            onChange={(e) => setComment(e.target.value.slice(0, 1000))}
-            placeholder={t.placeholder}
-            maxLength={1000}
-            rows={3}
-            className="resize-none"
-          />
-          <Button onClick={submit} disabled={submitting || !selected} className="rounded-full px-8">
-            {t.submit}
-          </Button>
+        <div
+          className="flex gap-1 -ml-2"
+          onMouseLeave={() => setHover(0)}
+          role="radiogroup"
+          aria-label={t.title}
+        >
+          {[1, 2, 3, 4, 5].map((n) => (
+            <button
+              key={n}
+              type="button"
+              disabled={submitting}
+              onMouseEnter={() => setHover(n)}
+              onFocus={() => setHover(n)}
+              onClick={() => { setSelected(n); submit(n); }}
+              aria-label={`${n} star${n === 1 ? "" : "s"}`}
+              aria-checked={selected === n}
+              role="radio"
+              className="p-2.5 min-w-[44px] min-h-[44px] transition-transform active:scale-95 hover:scale-110 disabled:opacity-60"
+            >
+              <Star
+                className={`w-8 h-8 transition-colors ${n <= displayValue ? "fill-yellow-400 text-yellow-400" : "text-muted-foreground/40"}`}
+              />
+            </button>
+          ))}
         </div>
       )}
+
     </div>
   );
 }
