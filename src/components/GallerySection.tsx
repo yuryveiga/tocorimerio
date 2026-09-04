@@ -164,7 +164,7 @@ export function GallerySection() {
               )}
               fit="contain"
               fill={false}
-              fetchPriority="high"
+              fetchPriority="auto"
               onDimensions={(w, h) => {
                 setImageDimensions(prev => ({
                   ...prev,
