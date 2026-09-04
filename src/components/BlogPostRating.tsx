@@ -163,44 +163,33 @@ export function BlogPostRating({ postId }: Props) {
           <span className="text-sm font-medium">{t.thanks}</span>
         </div>
       ) : (
-        <div className="space-y-4">
-          <div
-            className="flex gap-1"
-            onMouseLeave={() => setHover(0)}
-            role="radiogroup"
-            aria-label={t.title}
-          >
-            {[1, 2, 3, 4, 5].map((n) => (
-              <button
-                key={n}
-                type="button"
-                onMouseEnter={() => setHover(n)}
-                onFocus={() => setHover(n)}
-                onClick={() => setSelected(n)}
-                aria-label={`${n} star${n === 1 ? "" : "s"}`}
-                aria-checked={selected === n}
-                role="radio"
-                className="p-1 transition-transform hover:scale-110"
-              >
-                <Star
-                  className={`w-8 h-8 transition-colors ${n <= displayValue ? "fill-yellow-400 text-yellow-400" : "text-muted-foreground/40"}`}
-                />
-              </button>
-            ))}
-          </div>
-          <Textarea
-            value={comment}
-            onChange={(e) => setComment(e.target.value.slice(0, 1000))}
-            placeholder={t.placeholder}
-            maxLength={1000}
-            rows={3}
-            className="resize-none"
-          />
-          <Button onClick={submit} disabled={submitting || !selected} className="rounded-full px-8">
-            {t.submit}
-          </Button>
+        <div
+          className="flex gap-1 -ml-2"
+          onMouseLeave={() => setHover(0)}
+          role="radiogroup"
+          aria-label={t.title}
+        >
+          {[1, 2, 3, 4, 5].map((n) => (
+            <button
+              key={n}
+              type="button"
+              disabled={submitting}
+              onMouseEnter={() => setHover(n)}
+              onFocus={() => setHover(n)}
+              onClick={() => { setSelected(n); submit(n); }}
+              aria-label={`${n} star${n === 1 ? "" : "s"}`}
+              aria-checked={selected === n}
+              role="radio"
+              className="p-2.5 min-w-[44px] min-h-[44px] transition-transform active:scale-95 hover:scale-110 disabled:opacity-60"
+            >
+              <Star
+                className={`w-8 h-8 transition-colors ${n <= displayValue ? "fill-yellow-400 text-yellow-400" : "text-muted-foreground/40"}`}
+              />
+            </button>
+          ))}
         </div>
       )}
+
     </div>
   );
 }
