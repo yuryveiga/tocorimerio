@@ -749,7 +749,26 @@ export function PasseioDetalhe() {
                     </Button>
                   </div>
                 </div>
-                <p className="text-xl text-muted-foreground leading-relaxed font-sans first-letter:text-5xl first-letter:font-black first-letter:text-primary first-letter:float-left first-letter:mr-3 first-letter:mt-1 whitespace-pre-wrap">{translatedShortDesc}</p>
+                <div>
+                  <p
+                    id="tour-about-text"
+                    className={`text-lg sm:text-xl text-muted-foreground leading-relaxed font-sans first-letter:text-5xl first-letter:font-black first-letter:text-primary first-letter:float-left first-letter:mr-3 first-letter:mt-1 whitespace-pre-wrap ${
+                      descExpanded ? "" : "line-clamp-4 sm:line-clamp-none"
+                    }`}
+                  >
+                    {translatedShortDesc}
+                  </p>
+                  {!descExpanded && (translatedShortDesc || "").length > 220 && (
+                    <button
+                      type="button"
+                      onClick={() => setDescExpanded(true)}
+                      className="sm:hidden mt-2 text-xs font-black uppercase tracking-widest text-primary"
+                    >
+                      {language === 'pt' ? 'Ler mais' : language === 'es' ? 'Leer más' : 'Read more'}
+                    </button>
+                  )}
+                </div>
+
               </div>
 
                {/* What's Included */}
