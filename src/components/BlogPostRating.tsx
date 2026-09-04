@@ -99,7 +99,7 @@ export function BlogPostRating({ postId }: Props) {
     return () => { cancelled = true; };
   }, [postId, visitorKey]);
 
-  const submit = async (stars: number, withComment = false) => {
+  const submit = async (stars: number) => {
     if (!stars) {
       toast.error(t.pickStar);
       return;
@@ -108,7 +108,7 @@ export function BlogPostRating({ postId }: Props) {
     const { error } = await supabase.from("blog_post_ratings").insert({
       post_id: postId,
       stars,
-      comment: withComment ? (comment.trim().slice(0, 1000) || null) : null,
+      comment: null,
       visitor_key: visitorKey,
       user_agent: navigator.userAgent.slice(0, 500),
     });
