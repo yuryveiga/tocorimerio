@@ -735,6 +735,8 @@ const BlogPost = () => {
                   </>
                 )}
 
+                {post?.id && <BlogPostRating postId={post.id} />}
+
                 {/* AUTHOR BOX */}
                 <div className="mt-16 p-8 bg-muted/30 border border-border/50 rounded-2xl flex flex-col md:flex-row items-center md:items-start gap-8 group">
                   <div className="w-24 h-24 md:w-32 md:h-32 rounded-full overflow-hidden shrink-0 border-4 border-background shadow-md">
@@ -763,8 +765,6 @@ const BlogPost = () => {
                 </div>
 
                 <EmailCaptureCTA sourceSlug={post?.slug} />
-
-                {post?.id && <BlogPostRating postId={post.id} />}
 
                 {/* BLOG CTA BLOCK */}
                 <div className="mt-16 p-8 sm:p-12 rounded-3xl bg-gradient-to-br from-primary/10 via-primary/5 to-transparent border border-primary/20 text-center animate-fade-in shadow-inner relative overflow-hidden group">
@@ -883,6 +883,8 @@ const BlogPost = () => {
                 </>
               )}
 
+              {post?.id && <BlogPostRating postId={post.id} />}
+
               {/* AUTHOR BOX */}
               <div className="mt-16 p-8 bg-muted/30 border border-border/50 rounded-2xl flex flex-col md:flex-row items-center md:items-start gap-8 group">
                 <div className="w-24 h-24 md:w-32 md:h-32 rounded-full overflow-hidden shrink-0 border-4 border-background shadow-md">
@@ -911,8 +913,6 @@ const BlogPost = () => {
               </div>
 
               <EmailCaptureCTA sourceSlug={post?.slug} />
-
-                {post?.id && <BlogPostRating postId={post.id} />}
 
               {/* BLOG CTA BLOCK */}
               <div className="mt-16 p-8 sm:p-12 rounded-2xl bg-gradient-to-br from-primary/10 via-primary/5 to-transparent border border-primary/20 text-center animate-fade-in shadow-inner relative overflow-hidden group">

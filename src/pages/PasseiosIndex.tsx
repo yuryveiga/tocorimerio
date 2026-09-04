@@ -1,3 +1,4 @@
+import { useMemo, useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
@@ -10,11 +11,27 @@ import { BASE_URL } from "@/utils/seo";
 const PasseiosIndex = () => {
   const { tours, isLoading } = useSiteData();
   const { language } = useLocale();
+  const [activeCategory, setActiveCategory] = useState<string>("ALL");
 
   const sortedTours = [...(tours || [])].sort((a, b) => {
     if (a.is_featured !== b.is_featured) return a.is_featured ? -1 : 1;
     return (a.sort_order ?? 0) - (b.sort_order ?? 0);
   });
+
+  const categories = useMemo(() => {
+    const set = new Set<string>();
+    sortedTours.forEach((t) => {
+      const c = (t.category || "").trim().toUpperCase();
+      if (c) set.add(c);
+    });
+    return Array.from(set).sort();
+  }, [tours]);
+
+  const visibleTours =
+    activeCategory === "ALL"
+      ? sortedTours
+      : sortedTours.filter((t) => (t.category || "").trim().toUpperCase() === activeCategory);
+
 
   const title =
     language === "pt"
@@ -101,15 +118,39 @@ const PasseiosIndex = () => {
             <p className="text-muted-foreground text-lg max-w-2xl mx-auto">{subtitle}</p>
           </header>
 
+          {!isLoading && categories.length > 1 && (
+            <nav
+              aria-label={language === "pt" ? "Filtrar por categoria" : language === "es" ? "Filtrar por categoría" : "Filter by category"}
+              className="-mx-4 px-4 mb-8 flex gap-2 overflow-x-auto snap-x scrollbar-none [scrollbar-width:none] [-ms-overflow-style:none] sm:flex-wrap sm:justify-center sm:mx-0 sm:px-0"
+            >
+              {[{ value: "ALL", label: language === "pt" ? "Todos" : language === "es" ? "Todos" : "All" },
+                ...categories.map((c) => ({ value: c, label: c }))].map((c) => (
+                <button
+                  key={c.value}
+                  type="button"
+                  onClick={() => setActiveCategory(c.value)}
+                  aria-pressed={activeCategory === c.value}
+                  className={`shrink-0 snap-start min-h-[44px] px-4 rounded-full border text-xs font-black uppercase tracking-widest transition-colors ${
+                    activeCategory === c.value
+                      ? "bg-primary text-primary-foreground border-primary shadow-sm"
+                      : "bg-card text-muted-foreground border-border hover:border-primary/40"
+                  }`}
+                >
+                  {c.label}
+                </button>
+              ))}
+            </nav>
+          )}
+
           {isLoading ? (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {[1, 2, 3, 4, 5, 6].map((i) => (
                 <div key={i} className="h-96 bg-muted rounded-2xl animate-pulse" />
               ))}
             </div>
-          ) : sortedTours.length > 0 ? (
+          ) : visibleTours.length > 0 ? (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {sortedTours.map((tour) => (
+              {visibleTours.map((tour) => (
                 <div key={tour.id} data-tour-card>
                   <TourItem tour={tour as unknown as TourCardProps} />
                 </div>
@@ -120,6 +161,7 @@ const PasseiosIndex = () => {
               {language === "pt" ? "Nenhum passeio disponível" : "No tours available"}
             </p>
           )}
+
         </div>
       </main>
 

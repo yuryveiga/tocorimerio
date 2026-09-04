@@ -399,9 +399,13 @@ html.has-mc body { /* keep system cursor — custom cursor is additive, less ris
   }
 }
 
-/* Lift floating WhatsApp button above the mobile sticky booking bar */
+/* Single primary CTA per screen on mobile: when the sticky booking bar is up,
+   the floating WhatsApp button steps aside instead of competing with it. */
 @media (max-width: 767px) {
   body.has-sticky-bar .floating-buttons {
-    bottom: 4rem;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(120%);
+    transition: opacity 200ms ease, transform 250ms ease;
   }
 }
