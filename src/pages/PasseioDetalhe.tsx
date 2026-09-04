@@ -101,6 +101,7 @@ export function PasseioDetalhe() {
   const [quantity, setQuantity] = useState(1);
   const [weather, setWeather] = useState<{ temp: number; condition: string; humidity: number; wind: number } | null>(null);
   const [showStickyBar, setShowStickyBar] = useState(false);
+  const [descExpanded, setDescExpanded] = useState(false);
   const bookingCardRef = useRef<HTMLDivElement | null>(null);
   const dateFieldRef = useRef<HTMLDivElement | null>(null);
   const [selectedOptionIdx, setSelectedOptionIdx] = useState(0);
