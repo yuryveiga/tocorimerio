@@ -1,3 +1,4 @@
+import { useMemo, useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
@@ -10,11 +11,27 @@ import { BASE_URL } from "@/utils/seo";
 const PasseiosIndex = () => {
   const { tours, isLoading } = useSiteData();
   const { language } = useLocale();
+  const [activeCategory, setActiveCategory] = useState<string>("ALL");
 
   const sortedTours = [...(tours || [])].sort((a, b) => {
     if (a.is_featured !== b.is_featured) return a.is_featured ? -1 : 1;
     return (a.sort_order ?? 0) - (b.sort_order ?? 0);
   });
+
+  const categories = useMemo(() => {
+    const set = new Set<string>();
+    sortedTours.forEach((t) => {
+      const c = (t.category || "").trim().toUpperCase();
+      if (c) set.add(c);
+    });
+    return Array.from(set).sort();
+  }, [tours]);
+
+  const visibleTours =
+    activeCategory === "ALL"
+      ? sortedTours
+      : sortedTours.filter((t) => (t.category || "").trim().toUpperCase() === activeCategory);
+
 
   const title =
     language === "pt"
