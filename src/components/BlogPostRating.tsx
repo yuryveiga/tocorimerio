@@ -1,8 +1,6 @@
 import { useEffect, useState } from "react";
 import { Star } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
-import { Button } from "@/components/ui/button";
-import { Textarea } from "@/components/ui/textarea";
 import { toast } from "sonner";
 import { useLocale } from "@/contexts/LocaleContext";
 
@@ -73,7 +71,6 @@ export function BlogPostRating({ postId }: Props) {
   const [count, setCount] = useState(0);
   const [selected, setSelected] = useState(0);
   const [hover, setHover] = useState(0);
-  const [comment, setComment] = useState("");
   const [submitted, setSubmitted] = useState(false);
   const [submitting, setSubmitting] = useState(false);
 
