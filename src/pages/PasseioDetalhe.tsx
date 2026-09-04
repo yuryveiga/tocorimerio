@@ -36,7 +36,7 @@ import { Calendar as CalendarUI } from "@/components/ui/calendar";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { format, parseISO, isPast, isToday } from "date-fns";
 import { ptBR, enUS, es as esLocale } from "date-fns/locale";
-import { getCanonicalUrl, BASE_URL, generateTouristAttractionSchema, generateTourPackageSchema, generateFAQSchema, generateOptimizedMetaDescription, getHreflangLinks, generateBreadcrumbsSchema } from "@/utils/seo";
+import { getCanonicalUrl, BASE_URL, generateTouristAttractionSchema, generateTouristTripSchema, generateTourPackageSchema, getOgImage, generateFAQSchema, generateOptimizedMetaDescription, getHreflangLinks, generateBreadcrumbsSchema } from "@/utils/seo";
 import { slugify } from "@/utils/slugify";
 
 
@@ -198,10 +198,29 @@ export function PasseioDetalhe() {
     }
   }, [tour, id, cleanSlug, navigate]);
 
+  const TOURIST_TYPE_BY_SLUG: Record<string, string> = {
+    "boteco-tour": "Foodies",
+    "degustacao-de-cafe-brasileiro": "Foodies",
+    "favela-rio-tour-rocinha": "Culture lovers",
+  };
+  const AREA_SERVED_BY_SLUG: Record<string, string> = {
+    "favela-rio-tour-rocinha": "Rocinha, Rio de Janeiro",
+  };
+
   const jsonLd = tour ? {
     "@context": "https://schema.org",
     "@graph": [
       generateTouristAttractionSchema(translatedTitle, translatedShortDesc, tour.image_url),
+      generateTouristTripSchema({
+        name: translatedTitle,
+        description: translatedShortDesc,
+        imageUrl: tour.image_url,
+        url: canonicalUrl,
+        price: getTourMinPrice(tour),
+        currency: "BRL",
+        touristType: TOURIST_TYPE_BY_SLUG[cleanSlug || ""],
+        areaServed: AREA_SERVED_BY_SLUG[cleanSlug || ""],
+      }),
       generateTourPackageSchema(
         translatedTitle,
         translatedShortDesc,
@@ -495,10 +514,12 @@ export function PasseioDetalhe() {
         
         {/* Open Graph / Facebook */}
         <meta property="og:type" content="website" />
-        <meta property="og:url" content={getCanonicalUrl(`/passeio/${tour?.slug || tour?.id}`)} />
+        <meta property="og:url" content={canonicalUrl} />
         <meta property="og:title" content={seoTitle} />
         <meta property="og:description" content={seoDescription} />
-        <meta property="og:image" content={tour.image_url} />
+        <meta property="og:image" content={getOgImage(tour.image_url)} />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
         <meta property="og:site_name" content="Tocorime Rio" />
         <meta property="og:locale" content={language === 'pt' ? 'pt_BR' : language === 'es' ? 'es_ES' : 'en_US'} />
 
@@ -506,11 +527,11 @@ export function PasseioDetalhe() {
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content={seoTitle} />
         <meta name="twitter:description" content={seoDescription} />
-        <meta name="twitter:image" content={tour.image_url} />
+        <meta name="twitter:image" content={getOgImage(tour.image_url)} />
 
 
         <link rel="canonical" href={canonicalUrl} />
-        {getHreflangLinks(`/passeio/${tour?.slug || tour?.id}`).map((l) => (
+        {getHreflangLinks(`/passeio/${cleanSlug || tour?.id}`).map((l) => (
           <link key={l.hreflang} rel="alternate" hrefLang={l.hreflang} href={l.href} />
         ))}
         {jsonLd && <script type="application/ld+json">{JSON.stringify(jsonLd)}</script>}

@@ -246,7 +246,43 @@ export const generateLocalBusinessSchema = (siteTitle: string, description: stri
   };
 };
 
+/**
+ * Gera schema "TouristTrip" para páginas de passeio.
+ */
+export const generateTouristTripSchema = (params: {
+  name: string;
+  description: string;
+  imageUrl?: string;
+  url: string;
+  price?: number;
+  currency?: string;
+  touristType?: string;
+  areaServed?: string;
+}) => ({
+  "@type": "TouristTrip",
+  "name": params.name,
+  "description": params.description,
+  ...(params.imageUrl ? { image: [getOgImage(params.imageUrl)] } : {}),
+  "url": params.url,
+  ...(params.touristType ? { touristType: params.touristType } : {}),
+  "provider": {
+    "@type": "LocalBusiness",
+    "name": "Tocorime Rio",
+    "url": BASE_URL,
+  },
+  "offers": {
+    "@type": "Offer",
+    ...(params.price ? { price: params.price } : {}),
+    "priceCurrency": params.currency || "BRL",
+    "availability": "https://schema.org/InStock",
+    "url": params.url,
+  },
+  "areaServed": params.areaServed || "Rio de Janeiro",
+  "inLanguage": ["pt-BR", "en", "es"],
+});
+
 export const generateTouristAttractionSchema = (name: string, description: string, imageUrl: string) => {
+
   return {
     "@type": "TouristAttraction",
     "name": name,
