@@ -118,15 +118,39 @@ const PasseiosIndex = () => {
             <p className="text-muted-foreground text-lg max-w-2xl mx-auto">{subtitle}</p>
           </header>
 
+          {!isLoading && categories.length > 1 && (
+            <nav
+              aria-label={language === "pt" ? "Filtrar por categoria" : language === "es" ? "Filtrar por categoría" : "Filter by category"}
+              className="-mx-4 px-4 mb-8 flex gap-2 overflow-x-auto snap-x scrollbar-none [scrollbar-width:none] [-ms-overflow-style:none] sm:flex-wrap sm:justify-center sm:mx-0 sm:px-0"
+            >
+              {[{ value: "ALL", label: language === "pt" ? "Todos" : language === "es" ? "Todos" : "All" },
+                ...categories.map((c) => ({ value: c, label: c }))].map((c) => (
+                <button
+                  key={c.value}
+                  type="button"
+                  onClick={() => setActiveCategory(c.value)}
+                  aria-pressed={activeCategory === c.value}
+                  className={`shrink-0 snap-start min-h-[44px] px-4 rounded-full border text-xs font-black uppercase tracking-widest transition-colors ${
+                    activeCategory === c.value
+                      ? "bg-primary text-primary-foreground border-primary shadow-sm"
+                      : "bg-card text-muted-foreground border-border hover:border-primary/40"
+                  }`}
+                >
+                  {c.label}
+                </button>
+              ))}
+            </nav>
+          )}
+
           {isLoading ? (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {[1, 2, 3, 4, 5, 6].map((i) => (
                 <div key={i} className="h-96 bg-muted rounded-2xl animate-pulse" />
               ))}
             </div>
-          ) : sortedTours.length > 0 ? (
+          ) : visibleTours.length > 0 ? (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {sortedTours.map((tour) => (
+              {visibleTours.map((tour) => (
                 <div key={tour.id} data-tour-card>
                   <TourItem tour={tour as unknown as TourCardProps} />
                 </div>
@@ -137,6 +161,7 @@ const PasseiosIndex = () => {
               {language === "pt" ? "Nenhum passeio disponível" : "No tours available"}
             </p>
           )}
+
         </div>
       </main>
 
