@@ -93,6 +93,39 @@ function withMeta(html, { title, description, url, image, imageAlt, type = 'arti
   return out;
 }
 
+
+// ── LCP: preload da imagem principal (hero) ──────────────────────────────────
+// O HTML estático não tem conteúdo; sem isto o browser só descobre a imagem
+// do passeio/post depois de baixar o JS e consultar o banco (~2s).
+// Espelha exatamente o que <OptimizedImage> pede (mesmas larguras/qualidade/
+// versão), para o preload casar com o srcset e não baixar duas vezes.
+const SRCSET_WIDTHS = [320, 480, 800, 1200, 1600];
+const IMG_SIZES = '(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw';
+
+function optimizedUrl(url, width, quality, version) {
+  const sb = String(url || '').match(/^(https?:\/\/[^/]+)\/storage\/v1\/object\/public\/(.+)$/);
+  if (!sb) return null; // só Supabase Storage (Unsplash troca de URL por formato)
+  const [, origin, rest] = sb;
+  const [pathPart] = rest.split('?');
+  const params = new URLSearchParams();
+  params.set('width', String(width));
+  params.set('quality', String(quality));
+  params.set('resize', 'cover');
+  if (version) params.set('v', String(version));
+  return `${origin}/storage/v1/render/image/public/${pathPart}?${params.toString()}`;
+}
+
+function heroPreload(html, imageUrl, version) {
+  if (!optimizedUrl(imageUrl, 800, 60, version)) return html;
+  const srcset = SRCSET_WIDTHS
+    .map((w) => `${optimizedUrl(imageUrl, w, 60, version)} ${w}w`)
+    .join(', ');
+  const tag =
+    `<link rel="preload" as="image" fetchpriority="high" ` +
+    `imagesrcset="${escAttr(srcset)}" imagesizes="${IMG_SIZES}">`;
+  return html.replace(/<head>/i, `<head>\n  ${tag}`);
+}
+
 function writeRoute(route, html) {
   if (!route || route === '/') return;
   const dir = path.join(distPath, route);
@@ -141,6 +174,7 @@ async function run() {
           description: (t.meta_description_en || '').trim() || t.short_description_en || t.short_description || tourTitle,
           url: `${SITE}${route}`,
           image: ogImage(t.image_url),
+          heroImage: t.image_url,
           imageAlt: tourTitle,
           type: 'website',
         });
@@ -158,6 +192,7 @@ async function run() {
           description: (p.meta_description || '').trim() || p.excerpt_en || p.excerpt || title,
           url: `${SITE}${route}`,
           image: ogImage(p.image_url),
+          heroImage: p.image_url,
           imageAlt: p.featured_image_alt || title,
           type: 'article',
         });
@@ -216,7 +251,9 @@ async function run() {
 
   routes.forEach(r => {
     const meta = postMeta.get(r);
-    writeRoute(r, meta ? withMeta(indexHtml, meta) : undefined);
+    let html = meta ? withMeta(indexHtml, meta) : undefined;
+    if (html && meta.heroImage) html = heroPreload(html, meta.heroImage, imagesVersion);
+    writeRoute(r, html);
     count++;
   });
   console.log(`[spa-fallback] ${count} rotas com index.html escritas em dist/`);
