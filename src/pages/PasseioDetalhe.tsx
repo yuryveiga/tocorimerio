@@ -482,7 +482,7 @@ export function PasseioDetalhe() {
     toast.success(language === 'pt' ? 'Link copiado!' : language === 'es' ? '¡Enlace copiado!' : 'Link copied!');
   };
 
-  if (isLoading) return <div className="min-h-screen flex items-center justify-center animate-pulse bg-muted" />;
+  if (isLoading) return <TourDetailSkeleton />;
 
   if (!tour) return <div className="min-h-screen flex flex-col items-center justify-center"><h1 className="text-2xl font-bold">{t("nao_encontrado")}</h1><Link to="/"><Button className="mt-4">{t("voltar_home")}</Button></Link></div>;
 
