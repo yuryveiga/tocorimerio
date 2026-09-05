@@ -40,6 +40,7 @@ export interface Match {
   packages_count?: number;
   total_stock?: number;
   total_sold?: number;
+  max_per_purchase?: number;
 }
 
 export function useMatches() {
