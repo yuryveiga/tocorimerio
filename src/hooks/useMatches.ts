@@ -1,5 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { createClient } from '@supabase/supabase-js';
+import { supabase as localSupabase } from '@/integrations/supabase/client';
 
 // Esse é o cliente do projeto original "Maracanã Matchday"
 // Isso permite que a Tocorime puxe os jogos diretamente de lá
