@@ -64,8 +64,14 @@ const getYouTubeEmbedUrl = (url: string) => {
 export function PasseioDetalhe() {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
-  const { tours, isLoading: isGlobalLoading, siteSettings, socialMedia } = useSiteData();
-  const { data: tour, isLoading: isTourLoading } = useQuery({
+  const { tours, siteSettings, socialMedia } = useSiteData();
+  // Dados já carregados na listagem: usados como placeholder para pintar
+  // título/preço/imagem imediatamente, sem esperar a consulta detalhada.
+  const listPlaceholder = useMemo(
+    () => (id ? tours.find((t) => t.slug === id || t.id === id) : undefined),
+    [tours, id]
+  );
+  const { data: tourData, isLoading: isTourLoading } = useQuery({
     queryKey: ["tour", id],
     queryFn: async () => {
       if (!id) return null;
@@ -89,7 +95,10 @@ export function PasseioDetalhe() {
     staleTime: 1000 * 60 * 5, // 5 minutes
   });
 
-  const isLoading = isGlobalLoading || isTourLoading;
+  const tour = tourData ?? listPlaceholder ?? null;
+  // Só bloqueia a tela quando não há absolutamente nada para mostrar.
+  const isLoading = !tour && isTourLoading;
+
   const [selectedImageIdx, setSelectedImageIdx] = useState(0);
   const [openFaq, setOpenFaq] = useState<number | null>(null);
   const [isPrivate, setIsPrivate] = useState(false);
