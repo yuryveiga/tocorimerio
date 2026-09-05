@@ -1476,9 +1476,13 @@ export function PasseioDetalhe() {
       </div>
 
 
-      <Suspense fallback={<div className="h-20" />}>
-        <WeatherSection />
-      </Suspense>
+      {/* Clima: só monta perto do viewport e reserva a altura real (evita CLS). */}
+      <LazyMount minHeight={560} rootMargin="400px">
+        <Suspense fallback={<div className="h-[560px]" />}>
+          <WeatherSection />
+        </Suspense>
+      </LazyMount>
+
       <WhyChooseUs />
 
       {/* TripAdvisor Reviews Carousel */}
