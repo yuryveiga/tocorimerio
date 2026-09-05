@@ -19,6 +19,8 @@ import { WhyChooseUs } from "@/components/WhyChooseUs";
 import { getOptimizedImage } from "@/utils/imageOptimization";
 import { OptimizedImage } from "@/components/OptimizedImage";
 import { getTourMinPrice, getTieredPrice } from "@/utils/pricing";
+import { TourDetailSkeleton } from "@/components/TourDetailSkeleton";
+
 import { UrgencyBadges } from "@/components/UrgencyBadges";
 import { PaymentLogos } from "@/components/PaymentLogos";
 import { SocialProof } from "@/components/SocialProof";
@@ -41,6 +43,7 @@ import { slugify } from "@/utils/slugify";
 
 
 import { WeatherSection } from "@/components/WeatherSection";
+import { LazyMount } from "@/components/LazyMount";
 import { YouMayAlsoLike } from "@/components/YouMayAlsoLike";
 import { RelatedBlogPosts } from "@/components/RelatedBlogPosts";
 import { TourGuidesCard } from "@/components/TourGuidesCard";
@@ -64,8 +67,14 @@ const getYouTubeEmbedUrl = (url: string) => {
 export function PasseioDetalhe() {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
-  const { tours, isLoading: isGlobalLoading, siteSettings, socialMedia } = useSiteData();
-  const { data: tour, isLoading: isTourLoading } = useQuery({
+  const { tours, siteSettings, socialMedia } = useSiteData();
+  // Dados já carregados na listagem: usados como placeholder para pintar
+  // título/preço/imagem imediatamente, sem esperar a consulta detalhada.
+  const listPlaceholder = useMemo(
+    () => (id ? tours.find((t) => t.slug === id || t.id === id) : undefined),
+    [tours, id]
+  );
+  const { data: tourData, isLoading: isTourLoading } = useQuery({
     queryKey: ["tour", id],
     queryFn: async () => {
       if (!id) return null;
@@ -89,7 +98,10 @@ export function PasseioDetalhe() {
     staleTime: 1000 * 60 * 5, // 5 minutes
   });
 
-  const isLoading = isGlobalLoading || isTourLoading;
+  const tour = tourData ?? listPlaceholder ?? null;
+  // Só bloqueia a tela quando não há absolutamente nada para mostrar.
+  const isLoading = !tour && isTourLoading;
+
   const [selectedImageIdx, setSelectedImageIdx] = useState(0);
   const [openFaq, setOpenFaq] = useState<number | null>(null);
   const [isPrivate, setIsPrivate] = useState(false);
@@ -473,7 +485,7 @@ export function PasseioDetalhe() {
     toast.success(language === 'pt' ? 'Link copiado!' : language === 'es' ? '¡Enlace copiado!' : 'Link copied!');
   };
 
-  if (isLoading) return <div className="min-h-screen flex items-center justify-center animate-pulse bg-muted" />;
+  if (isLoading) return <TourDetailSkeleton />;
 
   if (!tour) return <div className="min-h-screen flex flex-col items-center justify-center"><h1 className="text-2xl font-bold">{t("nao_encontrado")}</h1><Link to="/"><Button className="mt-4">{t("voltar_home")}</Button></Link></div>;
 
@@ -1465,9 +1477,13 @@ export function PasseioDetalhe() {
       </div>
 
 
-      <Suspense fallback={<div className="h-20" />}>
-        <WeatherSection />
-      </Suspense>
+      {/* Clima: só monta perto do viewport e reserva a altura real (evita CLS). */}
+      <LazyMount minHeight={560} rootMargin="400px">
+        <Suspense fallback={<div className="h-[560px]" />}>
+          <WeatherSection />
+        </Suspense>
+      </LazyMount>
+
       <WhyChooseUs />
 
       {/* TripAdvisor Reviews Carousel */}
