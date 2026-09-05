@@ -130,9 +130,9 @@ export function useSiteData() {
     siteSettings: settingsQuery.data || cachedSettings,
     isLoading,
     isError: toursQuery.isError || pagesQuery.isError || imagesQuery.isError,
-    // version is bumped only when images refetch; settings refetches don't
-    // need to invalidate every cached <img> in the tree.
-    version: imagesQuery.dataUpdatedAt || 0,
+    // version reflects the last image edit in the database, so image URLs stay
+    // stable between visits (cacheable) and only change when the admin updates one.
+    version: imagesQuery.data?.version || 0,
   }), [
     toursQuery.data, 
     pagesQuery.data, 
