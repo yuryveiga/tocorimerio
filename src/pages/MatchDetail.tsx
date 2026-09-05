@@ -107,6 +107,23 @@ export default function MatchDetail() {
          }
          throw error;
       };
+
+      // Apply local stock override (we control our own inventory)
+      const { data: override } = await localSupabase
+        .from("match_overrides")
+        .select("available_spots, max_per_purchase, sold_count_local")
+        .eq("match_id", data.id)
+        .maybeSingle();
+
+      if (override && override.available_spots !== null && override.available_spots !== undefined) {
+        const localSold = override.sold_count_local || 0;
+        data.available_spots = Math.max(0, override.available_spots - localSold);
+        data.sold_count = 0;
+      }
+      if (override && override.max_per_purchase) {
+        (data as LovableMatch).max_per_purchase = override.max_per_purchase;
+      }
+
       return data as LovableMatch;
     },
     enabled: !!id,
