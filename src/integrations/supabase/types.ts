@@ -234,6 +234,7 @@ export type Database = {
           match_id: string
           max_per_purchase: number | null
           slug: string | null
+          sold_count_local: number | null
           updated_at: string
         }
         Insert: {
@@ -243,6 +244,7 @@ export type Database = {
           match_id: string
           max_per_purchase?: number | null
           slug?: string | null
+          sold_count_local?: number | null
           updated_at?: string
         }
         Update: {
@@ -252,6 +254,7 @@ export type Database = {
           match_id?: string
           max_per_purchase?: number | null
           slug?: string | null
+          sold_count_local?: number | null
           updated_at?: string
         }
         Relationships: []
@@ -1008,13 +1011,7 @@ export type Database = {
       }
     }
     Views: {
-      match_local_sold_counts: {
-        Row: {
-          match_id: string | null
-          sold_count: number | null
-        }
-        Relationships: []
-      }
+      [_ in never]: never
     }
     Functions: {
       auto_archive_sales: { Args: never; Returns: undefined }
