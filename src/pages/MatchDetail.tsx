@@ -211,6 +211,11 @@ export default function MatchDetail() {
       return;
     }
 
+    if (quantity > effectiveRemaining) {
+      toast.error(language === 'pt' ? "Quantidade indisponível no estoque" : language === 'es' ? "Cantidad no disponible en stock" : "Quantity unavailable in stock");
+      return;
+    }
+
     setIsProcessing(true);
     const currentCurrency = currency.toLowerCase();
     const rate = rates[currency] || 1;
