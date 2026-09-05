@@ -226,6 +226,36 @@ export type Database = {
         }
         Relationships: []
       }
+      match_overrides: {
+        Row: {
+          available_spots: number | null
+          created_at: string
+          id: string
+          match_id: string
+          max_per_purchase: number | null
+          slug: string | null
+          updated_at: string
+        }
+        Insert: {
+          available_spots?: number | null
+          created_at?: string
+          id?: string
+          match_id: string
+          max_per_purchase?: number | null
+          slug?: string | null
+          updated_at?: string
+        }
+        Update: {
+          available_spots?: number | null
+          created_at?: string
+          id?: string
+          match_id?: string
+          max_per_purchase?: number | null
+          slug?: string | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
       matches: {
         Row: {
           attention_json: Json | null
@@ -985,6 +1015,17 @@ export type Database = {
       count_recent_bookings: {
         Args: { _days?: number; _tour_id: string }
         Returns: number
+      }
+      get_match_local_sold_count: {
+        Args: { _match_id: string }
+        Returns: number
+      }
+      get_match_local_sold_counts: {
+        Args: { _match_ids: string[] }
+        Returns: {
+          match_id: string
+          sold_count: number
+        }[]
       }
       get_sales_by_ids: {
         Args: { _ids: string[] }
