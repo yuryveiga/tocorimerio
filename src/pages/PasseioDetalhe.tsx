@@ -19,6 +19,8 @@ import { WhyChooseUs } from "@/components/WhyChooseUs";
 import { getOptimizedImage } from "@/utils/imageOptimization";
 import { OptimizedImage } from "@/components/OptimizedImage";
 import { getTourMinPrice, getTieredPrice } from "@/utils/pricing";
+import { TourDetailSkeleton } from "@/components/TourDetailSkeleton";
+
 import { UrgencyBadges } from "@/components/UrgencyBadges";
 import { PaymentLogos } from "@/components/PaymentLogos";
 import { SocialProof } from "@/components/SocialProof";
