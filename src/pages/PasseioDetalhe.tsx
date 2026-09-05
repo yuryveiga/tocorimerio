@@ -43,6 +43,7 @@ import { slugify } from "@/utils/slugify";
 
 
 import { WeatherSection } from "@/components/WeatherSection";
+import { LazyMount } from "@/components/LazyMount";
 import { YouMayAlsoLike } from "@/components/YouMayAlsoLike";
 import { RelatedBlogPosts } from "@/components/RelatedBlogPosts";
 import { TourGuidesCard } from "@/components/TourGuidesCard";
