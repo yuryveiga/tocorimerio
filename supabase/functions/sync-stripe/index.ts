@@ -84,7 +84,10 @@ async function getAccessToken(email: string, key: string): Promise<string> {
 
 async function sendEmailAlert(sale: Record<string, any>, supabaseUrl: string, isCustomer = false) {
   try {
-    const adminEmail = Deno.env.get("ADMIN_EMAIL") || "tocorimeriotours@gmail.com, veiga.yury@gmail.com";
+    const DEFAULT_ADMIN_EMAIL = "tocorimeriotours@gmail.com, veiga.yury@gmail.com";
+    const rawAdminEmail = Deno.env.get("ADMIN_EMAIL") || "";
+    // Guard against a misconfigured ADMIN_EMAIL secret (e.g. an API key pasted by mistake)
+    const adminEmail = rawAdminEmail.includes("@") ? rawAdminEmail : DEFAULT_ADMIN_EMAIL;
     const to = isCustomer ? sale.customer_email : adminEmail;
     const replyTo = isCustomer ? "tocorimeriotours@gmail.com" : undefined;
     
