@@ -1008,24 +1008,19 @@ export type Database = {
       }
     }
     Views: {
-      [_ in never]: never
+      match_local_sold_counts: {
+        Row: {
+          match_id: string | null
+          sold_count: number | null
+        }
+        Relationships: []
+      }
     }
     Functions: {
       auto_archive_sales: { Args: never; Returns: undefined }
       count_recent_bookings: {
         Args: { _days?: number; _tour_id: string }
         Returns: number
-      }
-      get_match_local_sold_count: {
-        Args: { _match_id: string }
-        Returns: number
-      }
-      get_match_local_sold_counts: {
-        Args: { _match_ids: string[] }
-        Returns: {
-          match_id: string
-          sold_count: number
-        }[]
       }
       get_sales_by_ids: {
         Args: { _ids: string[] }
