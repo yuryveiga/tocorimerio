@@ -637,15 +637,22 @@ export default function MatchDetail() {
                              )}
                           </div>
 
-                          <div className="space-y-6">
-                             <div className="space-y-3">
-                                <label className="text-[10px] font-black uppercase text-muted-foreground tracking-widest">{t('quantas_pessoas')}</label>
-                                 <div className="flex items-center justify-between p-3 bg-muted/50 rounded-2xl border">
-                                    <Button variant="ghost" size="icon" onClick={() => setQuantity(q => Math.max(1, q-1))}><Minus className="h-4 w-4" /></Button>
-                                    <span className="font-black text-xl">{quantity}</span>
-                                    <Button variant="ghost" size="icon" onClick={() => setQuantity(q => Math.min(q+1, Math.max(1, (match.available_spots || 20) - (match.sold_count || 0))))}><Plus className="h-4 w-4" /></Button>
+                           <div className="space-y-6">
+                              <div className="space-y-3">
+                                 <div className="flex items-center justify-between">
+                                   <label className="text-[10px] font-black uppercase text-muted-foreground tracking-widest">{t('quantas_pessoas')}</label>
+                                   {effectiveRemaining <= 10 && (
+                                     <span className="text-[10px] font-black uppercase text-orange-600 tracking-widest">
+                                       {language === 'pt' ? `Restam ${effectiveRemaining}` : language === 'es' ? `Quedan ${effectiveRemaining}` : `${effectiveRemaining} left`}
+                                     </span>
+                                   )}
                                  </div>
-                              </div>
+                                  <div className="flex items-center justify-between p-3 bg-muted/50 rounded-2xl border">
+                                     <Button variant="ghost" size="icon" onClick={() => setQuantity(q => Math.max(1, q-1))}><Minus className="h-4 w-4" /></Button>
+                                     <span className="font-black text-xl">{quantity}</span>
+                                     <Button variant="ghost" size="icon" onClick={() => setQuantity(q => Math.min(q+1, Math.max(1, maxPerPurchase)))}><Plus className="h-4 w-4" /></Button>
+                                  </div>
+                               </div>
 
                               {finalSectors.length > 0 && (
                                 <div className="space-y-3">
