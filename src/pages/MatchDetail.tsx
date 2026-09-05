@@ -200,6 +200,11 @@ export default function MatchDetail() {
     return processedSectors;
   }, [partnerPackages, processedSectors, language]);
 
+  const effectiveRemaining = match ? Math.max(0, match.available_spots - match.sold_count) : 0;
+  const maxPerPurchase = match?.max_per_purchase
+    ? Math.min(match.max_per_purchase, effectiveRemaining)
+    : effectiveRemaining;
+
   const handleCheckout = async () => {
     if (!customerInfo.name || !customerInfo.whatsapp || !customerInfo.email) {
       toast.error(language === 'pt' ? "Preencha todos os campos" : "Please fill all fields");
