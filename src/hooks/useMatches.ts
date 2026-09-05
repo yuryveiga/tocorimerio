@@ -84,12 +84,34 @@ export function useMatches() {
         });
       });
 
-      // 3) Mesclar — sobrescrever preço do match com o menor pacote ativo
+      // 3) Buscar overrides locais de estoque (Tocorime controla seu próprio inventário)
+      const { data: overridesData } = await localSupabase
+        .from('match_overrides')
+        .select('match_id, available_spots, max_per_purchase, sold_count_local')
+        .in('match_id', matchIds);
+
+      const overridesByMatch: Record<string, any> = {};
+      (overridesData || []).forEach((o: any) => {
+        overridesByMatch[o.match_id] = o;
+      });
+
+      // 4) Mesclar — sobrescrever preço do match com o menor pacote ativo e aplicar estoque local
       return matches.map(m => {
         const pkgs = pkgsByMatch[m.id] || [];
+        const override = overridesByMatch[m.id];
         const min_price = pkgs.length > 0 ? Math.min(...pkgs.map(p => p.price_brl)) : m.price;
         const total_stock = pkgs.reduce((s, p) => s + p.total_stock, 0);
         const total_sold = pkgs.reduce((s, p) => s + p.sold_count, 0);
+
+        let available_spots = total_stock > 0 ? total_stock : m.available_spots;
+        let sold_count = total_sold > 0 ? total_sold : m.sold_count;
+
+        if (override && override.available_spots !== null && override.available_spots !== undefined) {
+          const localSold = override.sold_count_local || 0;
+          available_spots = Math.max(0, override.available_spots - localSold);
+          sold_count = 0;
+        }
+
         return {
           ...m,
           min_price,
@@ -98,8 +120,9 @@ export function useMatches() {
           total_sold,
           // Preço exibido no calendário = menor pacote ativo
           price: min_price || m.price,
-          available_spots: total_stock > 0 ? total_stock : m.available_spots,
-          sold_count: total_sold > 0 ? total_sold : m.sold_count,
+          available_spots,
+          sold_count,
+          max_per_purchase: override?.max_per_purchase,
         };
       });
     },
