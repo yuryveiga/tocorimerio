@@ -55,11 +55,20 @@ export function useSiteImages() {
         .filter(img => img.key?.startsWith('gallery__maracana'))
         .map(img => ({ id: img.id, url: img.image_url, key: img.key }));
 
-      return { imagesMap, galleryImages, maracanaGallery };
+      // Cache-busting version derived from the DATA (last image edit), not from
+      // the fetch time. Using dataUpdatedAt made every visit request a brand new
+      // URL (&v=<timestamp>), so no browser/CDN cache ever hit.
+      const version = data.reduce((max, img) => {
+        const t = Date.parse((img as unknown as { updated_at?: string }).updated_at || "");
+        return Number.isFinite(t) && t > max ? t : max;
+      }, 0);
+
+      return { imagesMap, galleryImages, maracanaGallery, version };
     },
     staleTime: 1000 * 60 * 5, // 5 minutes
   });
 }
+
 
 export function useSocialMedia() {
   return useQuery({
@@ -121,9 +130,9 @@ export function useSiteData() {
     siteSettings: settingsQuery.data || cachedSettings,
     isLoading,
     isError: toursQuery.isError || pagesQuery.isError || imagesQuery.isError,
-    // version is bumped only when images refetch; settings refetches don't
-    // need to invalidate every cached <img> in the tree.
-    version: imagesQuery.dataUpdatedAt || 0,
+    // version reflects the last image edit in the database, so image URLs stay
+    // stable between visits (cacheable) and only change when the admin updates one.
+    version: imagesQuery.data?.version || 0,
   }), [
     toursQuery.data, 
     pagesQuery.data, 
