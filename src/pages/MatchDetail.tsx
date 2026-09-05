@@ -107,6 +107,23 @@ export default function MatchDetail() {
          }
          throw error;
       };
+
+      // Apply local stock override (we control our own inventory)
+      const { data: override } = await localSupabase
+        .from("match_overrides")
+        .select("available_spots, max_per_purchase, sold_count_local")
+        .eq("match_id", data.id)
+        .maybeSingle();
+
+      if (override && override.available_spots !== null && override.available_spots !== undefined) {
+        const localSold = override.sold_count_local || 0;
+        data.available_spots = Math.max(0, override.available_spots - localSold);
+        data.sold_count = 0;
+      }
+      if (override && override.max_per_purchase) {
+        (data as LovableMatch).max_per_purchase = override.max_per_purchase;
+      }
+
       return data as LovableMatch;
     },
     enabled: !!id,
@@ -183,9 +200,19 @@ export default function MatchDetail() {
     return processedSectors;
   }, [partnerPackages, processedSectors, language]);
 
+  const effectiveRemaining = match ? Math.max(0, match.available_spots - match.sold_count) : 0;
+  const maxPerPurchase = match?.max_per_purchase
+    ? Math.min(match.max_per_purchase, effectiveRemaining)
+    : effectiveRemaining;
+
   const handleCheckout = async () => {
     if (!customerInfo.name || !customerInfo.whatsapp || !customerInfo.email) {
       toast.error(language === 'pt' ? "Preencha todos os campos" : "Please fill all fields");
+      return;
+    }
+
+    if (quantity > effectiveRemaining) {
+      toast.error(language === 'pt' ? "Quantidade indisponível no estoque" : language === 'es' ? "Cantidad no disponible en stock" : "Quantity unavailable in stock");
       return;
     }
 
@@ -615,15 +642,22 @@ export default function MatchDetail() {
                              )}
                           </div>
 
-                          <div className="space-y-6">
-                             <div className="space-y-3">
-                                <label className="text-[10px] font-black uppercase text-muted-foreground tracking-widest">{t('quantas_pessoas')}</label>
-                                 <div className="flex items-center justify-between p-3 bg-muted/50 rounded-2xl border">
-                                    <Button variant="ghost" size="icon" onClick={() => setQuantity(q => Math.max(1, q-1))}><Minus className="h-4 w-4" /></Button>
-                                    <span className="font-black text-xl">{quantity}</span>
-                                    <Button variant="ghost" size="icon" onClick={() => setQuantity(q => Math.min(q+1, Math.max(1, (match.available_spots || 20) - (match.sold_count || 0))))}><Plus className="h-4 w-4" /></Button>
+                           <div className="space-y-6">
+                              <div className="space-y-3">
+                                 <div className="flex items-center justify-between">
+                                   <label className="text-[10px] font-black uppercase text-muted-foreground tracking-widest">{t('quantas_pessoas')}</label>
+                                   {effectiveRemaining <= 10 && (
+                                     <span className="text-[10px] font-black uppercase text-orange-600 tracking-widest">
+                                       {language === 'pt' ? `Restam ${effectiveRemaining}` : language === 'es' ? `Quedan ${effectiveRemaining}` : `${effectiveRemaining} left`}
+                                     </span>
+                                   )}
                                  </div>
-                              </div>
+                                  <div className="flex items-center justify-between p-3 bg-muted/50 rounded-2xl border">
+                                     <Button variant="ghost" size="icon" onClick={() => setQuantity(q => Math.max(1, q-1))}><Minus className="h-4 w-4" /></Button>
+                                     <span className="font-black text-xl">{quantity}</span>
+                                     <Button variant="ghost" size="icon" onClick={() => setQuantity(q => Math.min(q+1, Math.max(1, maxPerPurchase)))}><Plus className="h-4 w-4" /></Button>
+                                  </div>
+                               </div>
 
                               {finalSectors.length > 0 && (
                                 <div className="space-y-3">

@@ -226,6 +226,39 @@ export type Database = {
         }
         Relationships: []
       }
+      match_overrides: {
+        Row: {
+          available_spots: number | null
+          created_at: string
+          id: string
+          match_id: string
+          max_per_purchase: number | null
+          slug: string | null
+          sold_count_local: number | null
+          updated_at: string
+        }
+        Insert: {
+          available_spots?: number | null
+          created_at?: string
+          id?: string
+          match_id: string
+          max_per_purchase?: number | null
+          slug?: string | null
+          sold_count_local?: number | null
+          updated_at?: string
+        }
+        Update: {
+          available_spots?: number | null
+          created_at?: string
+          id?: string
+          match_id?: string
+          max_per_purchase?: number | null
+          slug?: string | null
+          sold_count_local?: number | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
       matches: {
         Row: {
           attention_json: Json | null

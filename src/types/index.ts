@@ -184,6 +184,7 @@ export type LovableMatch = {
   dont_bring_json?: { text: string }[];
   attention_json?: { text: string }[];
   not_suitable_json?: { text: string }[];
+  max_per_purchase?: number;
 };
 
 export interface SiteSettingsData {
