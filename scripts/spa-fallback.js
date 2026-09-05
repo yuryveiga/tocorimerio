@@ -135,6 +135,7 @@ function writeRoute(route, html) {
 
 async function run() {
   const postMeta = new Map();
+  let imagesVersion = 0;
   const routes = new Set([
     '/blog',
     '/passeio',
@@ -158,6 +159,12 @@ async function run() {
   if (url && key) {
     try {
       const supabase = createClient(url, key);
+      const { data: siteImages } = await supabase.from('site_images').select('updated_at');
+      imagesVersion = (siteImages || []).reduce((max, i) => {
+        const t = Date.parse(i.updated_at || '');
+        return Number.isFinite(t) && t > max ? t : max;
+      }, 0);
+
       const [{ data: tours }, { data: posts }, { data: pages }] = await Promise.all([
         supabase.from('tours').select('id, slug, category, is_active, title, title_en, short_description_en, short_description, image_url, meta_title_en, meta_description_en'),
         supabase.from('blog_posts').select('slug, title, title_en, meta_title_en, meta_description, excerpt, excerpt_en, image_url, featured_image_alt').eq('is_published', true),
