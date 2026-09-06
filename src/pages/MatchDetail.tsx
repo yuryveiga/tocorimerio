@@ -468,6 +468,11 @@ export default function MatchDetail() {
               <OptimizedImage 
                 src={images['maracana_hero'] || "https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images//WhatsApp Image 2026-04-14 at 15.41.21.jpeg"} 
                 alt="Maracanã Stadium" 
+                width={1280}
+                quality={70}
+                sizes="(max-width: 1024px) 100vw, 1280px"
+                loading="eager"
+                fetchPriority="high"
                 containerClassName="w-full h-full"
                 fit="cover"
                 className="w-full h-full object-cover"
@@ -577,10 +582,15 @@ export default function MatchDetail() {
                              aria-label={FEATURED_VIDEO_TITLE}
                           >
                              <img
-                                src={`https://img.youtube.com/vi/${FEATURED_VIDEO_ID}/maxresdefault.jpg`}
+                                src={`https://img.youtube.com/vi/${FEATURED_VIDEO_ID}/hqdefault.jpg`}
+                                srcSet={`https://img.youtube.com/vi/${FEATURED_VIDEO_ID}/hqdefault.jpg 480w, https://img.youtube.com/vi/${FEATURED_VIDEO_ID}/sddefault.jpg 640w, https://img.youtube.com/vi/${FEATURED_VIDEO_ID}/maxresdefault.jpg 1280w`}
+                                sizes="(max-width: 768px) 100vw, 720px"
+                                width={1280}
+                                height={720}
                                 alt={FEATURED_VIDEO_TITLE}
                                 className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                                 loading="lazy"
+                                decoding="async"
                              />
                              <div className="absolute inset-0 bg-black/30 group-hover:bg-black/20 transition-colors" />
                              <div className="absolute inset-0 flex items-center justify-center">
@@ -939,6 +949,7 @@ export default function MatchDetail() {
                                  src={img.url} 
                                  alt={`Maracanã ${i + 1}`} 
                                  width={600}
+                                 sizes="(max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
                                  containerClassName="w-full h-full"
                                  fit="cover"
                                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" 
