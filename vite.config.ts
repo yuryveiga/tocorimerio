@@ -24,6 +24,10 @@ export default defineConfig(({ mode }) => ({
           // Split heavy libs out of the React core vendor bundle so they can load
           // in parallel and be evicted from the critical path when not needed.
           if (id.includes('lucide-react')) return 'icons';
+          // Rich-text editor (admin only) — keep in its own named chunk so it can
+          // never be merged into a chunk reachable from the first paint.
+          if (id.includes('react-quill') || id.includes('/quill') || id.includes('parchment') || id.includes('quill-delta')) return 'editor';
+          if (id.includes('recharts') || id.includes('d3-') || id.includes('victory-')) return 'charts';
           if (id.includes('@supabase/')) return 'supabase';
 
           // Radix primitives — split per package so the first paint only pays for
