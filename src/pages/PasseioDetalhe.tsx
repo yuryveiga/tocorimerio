@@ -9,7 +9,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { LovableTour } from "@/integrations/lovable/client";
 import { useSiteData } from "@/hooks/useSiteData";
 import { Header } from "@/components/Header";
-import { Footer } from "@/components/Footer";
+const Footer = lazy(() => import("@/components/Footer").then(m => ({ default: m.Footer })));
 import { TourItem, TourCardProps } from "@/components/TourItem";
 
 import { useLocale } from "@/contexts/LocaleContext";
