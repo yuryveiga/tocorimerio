@@ -3,9 +3,11 @@ import { getOptimizedImage, getBlurPlaceholder, isOptimizable } from "@/utils/im
 import { cn } from "@/lib/utils";
 import { useSiteData } from "@/hooks/useSiteData";
 
-const SRCSET_WIDTHS = [320, 480, 800, 1200, 1600];
+const SRCSET_WIDTHS = [320, 480, 640, 800, 1024, 1280, 1600, 1920];
+const DEFAULT_SIZES = "(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw";
 
 function buildSrcSet(
+  maxWidth: number,
   src: string,
   quality: number,
   fit: "cover" | "contain",
@@ -13,7 +15,9 @@ function buildSrcSet(
   version: string | number | undefined,
   fmt?: "webp" | "avif"
 ) {
+  const cap = SRCSET_WIDTHS.find((w) => w >= maxWidth) ?? SRCSET_WIDTHS[SRCSET_WIDTHS.length - 1];
   return SRCSET_WIDTHS
+    .filter((w) => w <= cap)
     .map((w) => `${getOptimizedImage(src, w, quality, fmt, fit, height, version)} ${w}w`)
     .join(", ");
 }
@@ -34,6 +38,8 @@ interface OptimizedImageProps {
   onDimensions?: (width: number, height: number) => void;
   version?: string | number;
   showBlur?: boolean;
+  /** CSS sizes hint so the browser downloads the smallest sufficient variant. */
+  sizes?: string;
 }
 
 export const OptimizedImage = memo(function OptimizedImage({
@@ -52,6 +58,7 @@ export const OptimizedImage = memo(function OptimizedImage({
   onDimensions,
   version: propVersion,
   showBlur = true,
+  sizes = DEFAULT_SIZES,
 }: OptimizedImageProps) {
   const { version: siteVersion } = useSiteData();
   
@@ -88,12 +95,12 @@ export const OptimizedImage = memo(function OptimizedImage({
   }, [finalSrc]);
 
   const srcSetAvif = useMemo(
-    () => (optimizable ? buildSrcSet(src, quality, fit, height, version, "avif") : undefined),
-    [src, quality, fit, height, version, optimizable]
+    () => (optimizable ? buildSrcSet(width, src, quality, fit, height, version, "avif") : undefined),
+    [width, src, quality, fit, height, version, optimizable]
   );
   const srcSetWebp = useMemo(
-    () => (optimizable ? buildSrcSet(src, quality, fit, height, version, "webp") : undefined),
-    [src, quality, fit, height, version, optimizable]
+    () => (optimizable ? buildSrcSet(width, src, quality, fit, height, version, "webp") : undefined),
+    [width, src, quality, fit, height, version, optimizable]
   );
  
   return (
@@ -123,12 +130,12 @@ export const OptimizedImage = memo(function OptimizedImage({
             <source 
               srcSet={srcSetAvif} 
               type="image/avif" 
-              sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+              sizes={sizes}
             />
             <source 
               srcSet={srcSetWebp} 
               type="image/webp" 
-              sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+              sizes={sizes}
             />
           </>
         )}
