@@ -1488,7 +1488,11 @@ export function PasseioDetalhe() {
         </Suspense>
       </LazyMount>
 
-      <WhyChooseUs />
+      <LazyMount minHeight={520} rootMargin="400px">
+        <Suspense fallback={<div className="h-[520px]" />}>
+          <WhyChooseUs />
+        </Suspense>
+      </LazyMount>
 
       {/* TripAdvisor Reviews Carousel */}
       <section className="py-24 bg-muted/30 border-t border-border/50">
