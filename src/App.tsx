@@ -27,6 +27,31 @@ import Index from "./pages/Index";
 const FloatingButtons = lazy(() => import("./components/FloatingButtons").then(m => ({ default: m.FloatingButtons })));
 const MagneticCursor  = lazy(() => import("./components/MagneticCursor").then(m => ({ default: m.MagneticCursor })));
 
+/**
+ * Toast layers are never visible on first paint — mount them once the browser is
+ * idle so their JS (radix-toast + sonner) stays off the critical path.
+ */
+const DeferredToasters = () => {
+  const [ready, setReady] = useState(false);
+  useEffect(() => {
+    const w = window as unknown as { requestIdleCallback?: (cb: () => void) => number };
+    if (w.requestIdleCallback) {
+      const id = w.requestIdleCallback(() => setReady(true));
+      return () => (window as unknown as { cancelIdleCallback?: (i: number) => void }).cancelIdleCallback?.(id);
+    }
+    const t = setTimeout(() => setReady(true), 1200);
+    return () => clearTimeout(t);
+  }, []);
+  if (!ready) return null;
+  return (
+    <Suspense fallback={null}>
+      <Toaster />
+      <Sonner />
+    </Suspense>
+  );
+};
+
+
 // ─── Lazily loaded pages (split from main bundle) ─────────────────────────────
 const PasseioDetalhe         = lazy(() => import("./pages/PasseioDetalhe"));
 const BlogPost               = lazy(() => import("./pages/BlogPost"));
