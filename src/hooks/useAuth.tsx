@@ -1,5 +1,7 @@
 import { useState, useEffect, createContext, useContext } from "react";
-import { supabase } from "@/integrations/supabase/client";
+// Loaded on demand: keeps the ~50 KB Supabase SDK off the first-paint path for
+// visitors who never sign in.
+const getSupabase = async () => (await import("@/integrations/supabase/client")).supabase;
 import type { User, Session } from "@supabase/supabase-js";
 
 interface AuthContextType {
@@ -24,6 +26,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   const checkAdminRole = async (userId: string, email: string) => {
     try {
+      const supabase = await getSupabase();
       const { data } = await supabase
         .from("profiles")
         .select("role")
@@ -40,7 +43,11 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
     // Set up listener first — but do NOT await inside the callback
     // to avoid deadlocking getSession()
-    const { data: { subscription } } = supabase.auth.onAuthStateChange(
+    let subscription: { unsubscribe: () => void } | null = null;
+
+    void getSupabase().then((supabase) => {
+      if (!mounted) return;
+      subscription = supabase.auth.onAuthStateChange(
       (event, session) => {
         if (!mounted) return;
 
@@ -80,7 +87,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
           }
         }
       }
-    );
+      ).data.subscription;
+    });
 
     // Fallback: if no auth event fires within 3s, stop loading
     const timeout = setTimeout(() => {
@@ -90,13 +98,14 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     return () => {
       mounted = false;
       clearTimeout(timeout);
-      subscription.unsubscribe();
+      subscription?.unsubscribe();
     };
   }, []);
 
 
 
   const signIn = async (email: string, password: string) => {
+    const supabase = await getSupabase();
     const { error } = await supabase.auth.signInWithPassword({ email, password });
     if (error) {
       if (error.message.includes("Invalid login")) {
@@ -110,12 +119,14 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   };
 
   const signUp = async (email: string, password: string) => {
+    const supabase = await getSupabase();
     const { error } = await supabase.auth.signUp({ email, password });
     if (error) return { error: error.message };
     return { error: null };
   };
 
   const signOut = async () => {
+    const supabase = await getSupabase();
     await supabase.auth.signOut();
     setUser(null);
     setSession(null);
@@ -124,6 +135,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   };
 
   const resetPassword = async (email: string) => {
+    const supabase = await getSupabase();
     const { error } = await supabase.auth.resetPasswordForEmail(email, {
       redirectTo: `${window.location.origin}/admin/reset-password`,
     });
@@ -132,6 +144,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   };
 
   const updatePassword = async (newPassword: string) => {
+    const supabase = await getSupabase();
     const { error } = await supabase.auth.updateUser({ password: newPassword });
     if (error) return { error: error.message };
     return { error: null };
