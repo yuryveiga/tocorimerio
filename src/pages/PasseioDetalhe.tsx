@@ -659,6 +659,8 @@ export function PasseioDetalhe() {
                 src={images[0] || "/placeholder.svg"} 
                 alt={translatedTitle} 
                 width={1200}
+                quality={70}
+                sizes="(max-width: 1024px) 100vw, 66vw"
                 containerClassName="w-full h-full"
                 fit="cover"
                 className="w-full h-full object-cover transition-transform duration-[length:1500ms] ease-out group-hover/item:scale-110" 
@@ -677,7 +679,8 @@ export function PasseioDetalhe() {
                 <OptimizedImage 
                   src={img} 
                   alt={`${translatedTitle} ${idx + 1}`} 
-                  width={800}
+                  width={640}
+                  sizes="(max-width: 1024px) 50vw, 33vw"
                   containerClassName="w-full h-full"
                   fit="cover"
                   className="w-full h-full object-cover transition-transform duration-[length:1500ms] ease-out group-hover/item:scale-125" 
@@ -1089,6 +1092,7 @@ export function PasseioDetalhe() {
                                  src={img} 
                                  alt={`${translatedTitle} ${i + 1}`} 
                                  width={600}
+                                 sizes="(max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
                                  containerClassName="w-full h-full"
                                  fit="cover"
                                  className="w-full h-full object-cover group-hover/gal:scale-110 transition-transform duration-700" 
@@ -1634,9 +1638,10 @@ export function PasseioDetalhe() {
                   <OptimizedImage 
                     src={img} 
                     alt={`${translatedTitle} view ${lightboxIndex + 1}`} 
-                    width={4000}
+                    width={1920}
                     height={shouldLimitHeight ? 600 : undefined}
-                    quality={100}
+                    quality={88}
+                    sizes="100vw"
                     containerClassName={cn(
                       "w-full h-full max-h-full flex items-center justify-center",
                       shouldLimitHeight && "max-h-[600px] h-[600px]"

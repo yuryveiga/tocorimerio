@@ -101,6 +101,7 @@ export const TourItem = memo(({ tour }: { tour: TourCardProps }) => {
           src={tour.image_url} 
           alt={title} 
           width={600} 
+          sizes="(max-width: 640px) 92vw, (max-width: 1024px) 50vw, 33vw" 
           containerClassName="w-full h-full"
           fit="cover"
           className="w-full h-full object-cover transition-transform duration-[900ms] ease-[cubic-bezier(0.2,0.8,0.2,1)] group-hover:scale-110" 
