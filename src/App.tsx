@@ -3,8 +3,8 @@ import { lazy, Suspense, useState, useEffect, type ReactNode } from "react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
 import { StaticRouter } from "react-router-dom/server";
-import { Toaster as Sonner } from "@/components/ui/sonner";
-import { Toaster } from "@/components/ui/toaster";
+const Sonner = lazy(() => import("@/components/ui/sonner").then(m => ({ default: m.Toaster })));
+const Toaster = lazy(() => import("@/components/ui/toaster").then(m => ({ default: m.Toaster })));
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { AuthProvider } from "@/hooks/useAuth";
 import { LocaleProvider } from "@/contexts/LocaleContext";
@@ -26,6 +26,31 @@ import Index from "./pages/Index";
 // ─── Lazy UI shell (loads after first paint to reduce TBT/TTI) ───────────────
 const FloatingButtons = lazy(() => import("./components/FloatingButtons").then(m => ({ default: m.FloatingButtons })));
 const MagneticCursor  = lazy(() => import("./components/MagneticCursor").then(m => ({ default: m.MagneticCursor })));
+
+/**
+ * Toast layers are never visible on first paint — mount them once the browser is
+ * idle so their JS (radix-toast + sonner) stays off the critical path.
+ */
+const DeferredToasters = () => {
+  const [ready, setReady] = useState(false);
+  useEffect(() => {
+    const w = window as unknown as { requestIdleCallback?: (cb: () => void) => number };
+    if (w.requestIdleCallback) {
+      const id = w.requestIdleCallback(() => setReady(true));
+      return () => (window as unknown as { cancelIdleCallback?: (i: number) => void }).cancelIdleCallback?.(id);
+    }
+    const t = setTimeout(() => setReady(true), 1200);
+    return () => clearTimeout(t);
+  }, []);
+  if (!ready) return null;
+  return (
+    <Suspense fallback={null}>
+      <Toaster />
+      <Sonner />
+    </Suspense>
+  );
+};
+
 
 // ─── Lazily loaded pages (split from main bundle) ─────────────────────────────
 const PasseioDetalhe         = lazy(() => import("./pages/PasseioDetalhe"));
@@ -179,8 +204,7 @@ const App = ({ queryClient: externalQueryClient }: { queryClient?: QueryClient }
       <ErrorBoundary>
         <AuthProvider>
           <TooltipProvider>
-            <Toaster />
-            <Sonner />
+            <DeferredToasters />
             <ThemeApplier />
             <ScrollToHash />
             <SiteDataReadyNotifier />

@@ -26,10 +26,20 @@ export default defineConfig(({ mode }) => ({
           if (id.includes('lucide-react')) return 'icons';
           if (id.includes('@supabase/')) return 'supabase';
 
-          // Radix primitives — heavy and NOT used by the home page. Split into
-          // its own chunk so the home doesn't pay for Dialog/Select/Popover/etc.
-          // (~200 KiB of unused JS on first paint).
-          if (id.includes('@radix-ui/')) return 'radix';
+          // Radix primitives — split per package so the first paint only pays for
+          // the primitives that page actually uses (tooltip/toast) instead of the
+          // whole Dialog/Select/Popover/Dropdown bundle. Shared internal helpers
+          // stay together to keep initialization order safe.
+          if (id.includes('@radix-ui/')) {
+            const m = id.match(/@radix-ui\/([^/]+)/);
+            const pkg = m ? m[1] : 'shared';
+            // Internal primitives shared by nearly every component.
+            if (/^(react-primitive|react-compose-refs|react-context|react-slot|react-use-|react-presence|react-portal|primitive|react-id|react-dismissable-layer|react-focus-|react-collection|number|rect)/.test(pkg)) {
+              return 'radix-core';
+            }
+            return `radix-${pkg.replace(/^react-/, '')}`;
+          }
+
 
           // React ecosystem, data layers, and Radix primitives — ship together to guarantee
           // initialization order (avoids "X is not a function" / createContext crashes
