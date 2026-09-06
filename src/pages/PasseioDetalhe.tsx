@@ -1557,7 +1557,9 @@ export function PasseioDetalhe() {
         </div>
       </section>
 
-      <Footer />
+      <Suspense fallback={<div className="h-[400px]" />}>
+        <Footer />
+      </Suspense>
 
       {/* Lightbox Overlay */}
       {isLightboxOpen && (
