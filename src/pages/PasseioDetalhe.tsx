@@ -1395,12 +1395,16 @@ export function PasseioDetalhe() {
                  {/* Registered guides — click to open /about-us */}
                  <TourGuidesCard />
 
-                 <RelatedBlogPosts
-                   tourTitle={(translatedTitle as string) || tour.title}
-                   tourSlug={tour.slug}
-                   tourDescription={(tour.short_description as string) || ""}
-                   tourKeywords={(tour as Record<string, unknown>).meta_keywords as string | null}
-                 />
+                 <LazyMount minHeight={320} rootMargin="400px">
+                   <Suspense fallback={<div className="h-[320px]" />}>
+                     <RelatedBlogPosts
+                       tourTitle={(translatedTitle as string) || tour.title}
+                       tourSlug={tour.slug}
+                       tourDescription={(tour.short_description as string) || ""}
+                       tourKeywords={(tour as Record<string, unknown>).meta_keywords as string | null}
+                     />
+                   </Suspense>
+                 </LazyMount>
               </div>
             </div>
           </div>
