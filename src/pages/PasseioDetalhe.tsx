@@ -15,7 +15,7 @@ import { TourItem, TourCardProps } from "@/components/TourItem";
 import { useLocale } from "@/contexts/LocaleContext";
 import { useCart } from "@/contexts/CartContext";
 import { toast } from "sonner";
-import { WhyChooseUs } from "@/components/WhyChooseUs";
+const WhyChooseUs = lazy(() => import("@/components/WhyChooseUs").then(m => ({ default: m.WhyChooseUs })));
 import { getOptimizedImage } from "@/utils/imageOptimization";
 import { OptimizedImage } from "@/components/OptimizedImage";
 import { getTourMinPrice, getTieredPrice } from "@/utils/pricing";
