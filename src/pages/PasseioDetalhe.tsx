@@ -9,13 +9,13 @@ import { supabase } from "@/integrations/supabase/client";
 import { LovableTour } from "@/integrations/lovable/client";
 import { useSiteData } from "@/hooks/useSiteData";
 import { Header } from "@/components/Header";
-import { Footer } from "@/components/Footer";
+const Footer = lazy(() => import("@/components/Footer").then(m => ({ default: m.Footer })));
 import { TourItem, TourCardProps } from "@/components/TourItem";
 
 import { useLocale } from "@/contexts/LocaleContext";
 import { useCart } from "@/contexts/CartContext";
 import { toast } from "sonner";
-import { WhyChooseUs } from "@/components/WhyChooseUs";
+const WhyChooseUs = lazy(() => import("@/components/WhyChooseUs").then(m => ({ default: m.WhyChooseUs })));
 import { getOptimizedImage } from "@/utils/imageOptimization";
 import { OptimizedImage } from "@/components/OptimizedImage";
 import { getTourMinPrice, getTieredPrice } from "@/utils/pricing";
@@ -42,10 +42,10 @@ import { getCanonicalUrl, BASE_URL, generateTouristAttractionSchema, generateTou
 import { slugify } from "@/utils/slugify";
 
 
-import { WeatherSection } from "@/components/WeatherSection";
+const WeatherSection = lazy(() => import("@/components/WeatherSection").then(m => ({ default: m.WeatherSection })));
 import { LazyMount } from "@/components/LazyMount";
-import { YouMayAlsoLike } from "@/components/YouMayAlsoLike";
-import { RelatedBlogPosts } from "@/components/RelatedBlogPosts";
+const YouMayAlsoLike = lazy(() => import("@/components/YouMayAlsoLike").then(m => ({ default: m.YouMayAlsoLike })));
+const RelatedBlogPosts = lazy(() => import("@/components/RelatedBlogPosts").then(m => ({ default: m.RelatedBlogPosts })));
 import { TourGuidesCard } from "@/components/TourGuidesCard";
 
 const getYouTubeEmbedUrl = (url: string) => {
@@ -1395,12 +1395,16 @@ export function PasseioDetalhe() {
                  {/* Registered guides — click to open /about-us */}
                  <TourGuidesCard />
 
-                 <RelatedBlogPosts
-                   tourTitle={(translatedTitle as string) || tour.title}
-                   tourSlug={tour.slug}
-                   tourDescription={(tour.short_description as string) || ""}
-                   tourKeywords={(tour as Record<string, unknown>).meta_keywords as string | null}
-                 />
+                 <LazyMount minHeight={320} rootMargin="400px">
+                   <Suspense fallback={<div className="h-[320px]" />}>
+                     <RelatedBlogPosts
+                       tourTitle={(translatedTitle as string) || tour.title}
+                       tourSlug={tour.slug}
+                       tourDescription={(tour.short_description as string) || ""}
+                       tourKeywords={(tour as Record<string, unknown>).meta_keywords as string | null}
+                     />
+                   </Suspense>
+                 </LazyMount>
               </div>
             </div>
           </div>
@@ -1484,7 +1488,11 @@ export function PasseioDetalhe() {
         </Suspense>
       </LazyMount>
 
-      <WhyChooseUs />
+      <LazyMount minHeight={520} rootMargin="400px">
+        <Suspense fallback={<div className="h-[520px]" />}>
+          <WhyChooseUs />
+        </Suspense>
+      </LazyMount>
 
       {/* TripAdvisor Reviews Carousel */}
       <section className="py-24 bg-muted/30 border-t border-border/50">
@@ -1549,7 +1557,9 @@ export function PasseioDetalhe() {
         </div>
       </section>
 
-      <Footer />
+      <Suspense fallback={<div className="h-[400px]" />}>
+        <Footer />
+      </Suspense>
 
       {/* Lightbox Overlay */}
       {isLightboxOpen && (
