@@ -1,5 +1,7 @@
 import { useState, useEffect, createContext, useContext } from "react";
-import { supabase } from "@/integrations/supabase/client";
+// Loaded on demand: keeps the ~50 KB Supabase SDK off the first-paint path for
+// visitors who never sign in.
+const getSupabase = async () => (await import("@/integrations/supabase/client")).supabase;
 import type { User, Session } from "@supabase/supabase-js";
 
 interface AuthContextType {
@@ -24,6 +26,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   const checkAdminRole = async (userId: string, email: string) => {
     try {
+      const supabase = await getSupabase();
       const { data } = await supabase
         .from("profiles")
         .select("role")

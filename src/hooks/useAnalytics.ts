@@ -1,7 +1,6 @@
 
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
-import { supabase } from "@/integrations/supabase/client";
 
 const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL as string;
 const SUPABASE_ANON = import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY as string;
@@ -24,8 +23,14 @@ export const useAnalytics = () => {
 
     const trackVisit = async () => {
       try {
-        const { data: { session } } = await supabase.auth.getSession();
-        if (session?.user) return;
+        // Skip logged-in users without pulling in the Supabase SDK: the session
+        // is stored under an "sb-<ref>-auth-token" key in localStorage.
+        try {
+          for (let i = 0; i < localStorage.length; i++) {
+            const k = localStorage.key(i);
+            if (k && /^sb-.*-auth-token$/.test(k) && localStorage.getItem(k)) return;
+          }
+        } catch { /* storage blocked — keep tracking */ }
 
         let sessionId = sessionStorage.getItem("site_session_id");
         if (!sessionId) {
