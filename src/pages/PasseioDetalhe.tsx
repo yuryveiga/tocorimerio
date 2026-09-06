@@ -42,10 +42,10 @@ import { getCanonicalUrl, BASE_URL, generateTouristAttractionSchema, generateTou
 import { slugify } from "@/utils/slugify";
 
 
-import { WeatherSection } from "@/components/WeatherSection";
+const WeatherSection = lazy(() => import("@/components/WeatherSection").then(m => ({ default: m.WeatherSection })));
 import { LazyMount } from "@/components/LazyMount";
-import { YouMayAlsoLike } from "@/components/YouMayAlsoLike";
-import { RelatedBlogPosts } from "@/components/RelatedBlogPosts";
+const YouMayAlsoLike = lazy(() => import("@/components/YouMayAlsoLike").then(m => ({ default: m.YouMayAlsoLike })));
+const RelatedBlogPosts = lazy(() => import("@/components/RelatedBlogPosts").then(m => ({ default: m.RelatedBlogPosts })));
 import { TourGuidesCard } from "@/components/TourGuidesCard";
 
 const getYouTubeEmbedUrl = (url: string) => {
