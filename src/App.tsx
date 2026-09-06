@@ -179,8 +179,7 @@ const App = ({ queryClient: externalQueryClient }: { queryClient?: QueryClient }
       <ErrorBoundary>
         <AuthProvider>
           <TooltipProvider>
-            <Toaster />
-            <Sonner />
+            <DeferredToasters />
             <ThemeApplier />
             <ScrollToHash />
             <SiteDataReadyNotifier />
