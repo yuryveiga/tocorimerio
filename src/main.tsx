@@ -22,12 +22,17 @@ import "./index.css";
   try {
     const LEGACY_SLUGS: Record<string, string> = {
       "tours-in-lapa-rios-historic-heart-by-day-samba-capital-by-night": "tours-in-lapa",
-      "tours-in-santa-teresa-rios-bohemian-hilltop-village": "tours-in-santa-teresa",
+      "tours-in-santa-teresa-rios-bohemian-hilltop-village": "pontos-turisticos-em-santa-teresa",
       "tours-in-ipanema-rios-effortlessly-chic-beach-neighborhood": "tours-in-ipanema",
       "tours-in-copacabana-the-iconic-rio-beach-without-tourist-traps": "tours-in-copacabana",
       "sunset-in-rio-de-janeiro-a-practical-guide-to-the-best-viewpoints-in-the-city": "sunset-in-rio-de-janeiro-guide",
       "sunset-in-rio-de-janeiro-the-golden-hour-youll-never-forget": "sunset-rio-de-janeiro-golden-hour-experience",
+      // Duplicados unificados (o artigo antigo passa a apontar para a versão mantida)
+      "tours-in-santa-teresa": "pontos-turisticos-em-santa-teresa",
+      "o-que-fazer-no-rj-com-chuva": "things-to-do-in-rio-de-janeiro-when-it-rains",
+      "melhor-feijoada-rio-de-janeiro": "best-feijoada-rio-de-janeiro-tourists",
     };
+
     const { pathname, search, hash } = window.location;
     const match = decodeURIComponent(pathname).match(/^\/blog\/([^/]+)\/?$/);
     if (match && LEGACY_SLUGS[match[1]]) {
