@@ -1700,6 +1700,20 @@
     </image:image>
   </url>
   <url>
+    <loc>https://tocorimerio.com/blog/roteiro-de-3-dias-no-rio-de-janeiro</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://tocorimerio.com/blog/roteiro-de-3-dias-no-rio-de-janeiro"/>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://tocorimerio.com/blog/roteiro-de-3-dias-no-rio-de-janeiro?lang=pt"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://tocorimerio.com/blog/roteiro-de-3-dias-no-rio-de-janeiro?lang=es"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://tocorimerio.com/blog/roteiro-de-3-dias-no-rio-de-janeiro"/>
+    <lastmod>2026-09-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1775696766664_76lcnnpl2ca.png</image:loc>
+      <image:caption>Roteiro de 3 Dias no Rio de Janeiro: Guia Completo</image:caption>
+    </image:image>
+  </url>
+  <url>
     <loc>https://tocorimerio.com/blog/rio-alem-do-obvio-lugares-secretos</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://tocorimerio.com/blog/rio-alem-do-obvio-lugares-secretos"/>
     <xhtml:link rel="alternate" hreflang="pt-BR" href="https://tocorimerio.com/blog/rio-alem-do-obvio-lugares-secretos?lang=pt"/>
@@ -1711,20 +1725,6 @@
     <image:image>
       <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776136532621_bydozzr39nb.webp</image:loc>
       <image:caption>Rio Além do Óbvio: 5 Lugares Secretos para Fugir da Multidão</image:caption>
-    </image:image>
-  </url>
-  <url>
-    <loc>https://tocorimerio.com/blog/rio-imperial-cultura-historia</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://tocorimerio.com/blog/rio-imperial-cultura-historia"/>
-    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://tocorimerio.com/blog/rio-imperial-cultura-historia?lang=pt"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://tocorimerio.com/blog/rio-imperial-cultura-historia?lang=es"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://tocorimerio.com/blog/rio-imperial-cultura-historia"/>
-    <lastmod>2026-07-30</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-    <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776154933416_1jovl3o2i6si.webp</image:loc>
-      <image:caption>Cultura e História: Um Mergulho no Passado Imperial do Rio</image:caption>
     </image:image>
   </url>
   <url>
@@ -1770,17 +1770,45 @@
     </image:image>
   </url>
   <url>
+    <loc>https://tocorimerio.com/blog/christ-the-redeemer-without-the-crowds</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://tocorimerio.com/blog/christ-the-redeemer-without-the-crowds"/>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://tocorimerio.com/blog/christ-the-redeemer-without-the-crowds?lang=pt"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://tocorimerio.com/blog/christ-the-redeemer-without-the-crowds?lang=es"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://tocorimerio.com/blog/christ-the-redeemer-without-the-crowds"/>
+    <lastmod>2026-09-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://images.unsplash.com/photo-1593995863951-57c27e518295?w=1200&amp;q=80</image:loc>
+      <image:caption>Cristo Redentor Sem Filas: Horários e Acesso</image:caption>
+    </image:image>
+  </url>
+  <url>
     <loc>https://tocorimerio.com/blog/carnaval-rio-guia-definitivo</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://tocorimerio.com/blog/carnaval-rio-guia-definitivo"/>
     <xhtml:link rel="alternate" hreflang="pt-BR" href="https://tocorimerio.com/blog/carnaval-rio-guia-definitivo?lang=pt"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://tocorimerio.com/blog/carnaval-rio-guia-definitivo?lang=es"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://tocorimerio.com/blog/carnaval-rio-guia-definitivo"/>
-    <lastmod>2026-09-08</lastmod>
+    <lastmod>2026-09-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <image:image>
       <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1775696779659_sdj1p6tvg3a.png</image:loc>
       <image:caption>Carnaval no Rio: o Guia Definitivo para Aproveitar</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://tocorimerio.com/blog/rio-imperial-cultura-historia</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://tocorimerio.com/blog/rio-imperial-cultura-historia"/>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://tocorimerio.com/blog/rio-imperial-cultura-historia?lang=pt"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://tocorimerio.com/blog/rio-imperial-cultura-historia?lang=es"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://tocorimerio.com/blog/rio-imperial-cultura-historia"/>
+    <lastmod>2026-09-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776154933416_1jovl3o2i6si.webp</image:loc>
+      <image:caption>Cultura e História: Um Mergulho no Passado Imperial do Rio</image:caption>
     </image:image>
   </url>
   <url>
@@ -1809,6 +1837,20 @@
     <image:image>
       <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1775701360748_19elgcf090q.png</image:loc>
       <image:caption>Onde Comer no Rio: Gastronomia e Sabores Cariocas</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://tocorimerio.com/blog/is-rocinha-safe</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://tocorimerio.com/blog/is-rocinha-safe"/>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://tocorimerio.com/blog/is-rocinha-safe?lang=pt"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://tocorimerio.com/blog/is-rocinha-safe?lang=es"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://tocorimerio.com/blog/is-rocinha-safe"/>
+    <lastmod>2026-09-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1777147243914_pekaowzuns.webp</image:loc>
+      <image:caption>Rocinha é seguro? O que os turistas devem saber antes de visitar a favela mais famosa de Rio </image:caption>
     </image:image>
   </url>
   <url>
@@ -1845,7 +1887,7 @@
     <xhtml:link rel="alternate" hreflang="pt-BR" href="https://tocorimerio.com/blog/melhores-trilhas-rio-de-janeiro?lang=pt"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://tocorimerio.com/blog/melhores-trilhas-rio-de-janeiro?lang=es"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://tocorimerio.com/blog/melhores-trilhas-rio-de-janeiro"/>
-    <lastmod>2026-07-30</lastmod>
+    <lastmod>2026-09-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -2069,7 +2111,7 @@
     <xhtml:link rel="alternate" hreflang="pt-BR" href="https://tocorimerio.com/blog/buzios-cabo-frio-regiao-dos-lagos?lang=pt"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://tocorimerio.com/blog/buzios-cabo-frio-regiao-dos-lagos?lang=es"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://tocorimerio.com/blog/buzios-cabo-frio-regiao-dos-lagos"/>
-    <lastmod>2026-09-08</lastmod>
+    <lastmod>2026-09-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -2131,20 +2173,6 @@
     <image:image>
       <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1784883447393_xxkxist8wq.webp</image:loc>
       <image:caption>Costão do Pão de Açúcar: Aventura Inesquecível no Rio</image:caption>
-    </image:image>
-  </url>
-  <url>
-    <loc>https://tocorimerio.com/blog/christ-the-redeemer-without-the-crowds</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://tocorimerio.com/blog/christ-the-redeemer-without-the-crowds"/>
-    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://tocorimerio.com/blog/christ-the-redeemer-without-the-crowds?lang=pt"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://tocorimerio.com/blog/christ-the-redeemer-without-the-crowds?lang=es"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://tocorimerio.com/blog/christ-the-redeemer-without-the-crowds"/>
-    <lastmod>2026-09-08</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-    <image:image>
-      <image:loc>https://images.unsplash.com/photo-1593995863951-57c27e518295?w=1200&amp;q=80</image:loc>
-      <image:caption>Cristo Redentor Sem Filas: Horários e Acesso</image:caption>
     </image:image>
   </url>
   <url>
@@ -2344,20 +2372,6 @@
     </image:image>
   </url>
   <url>
-    <loc>https://tocorimerio.com/blog/roteiro-de-3-dias-no-rio-de-janeiro</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://tocorimerio.com/blog/roteiro-de-3-dias-no-rio-de-janeiro"/>
-    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://tocorimerio.com/blog/roteiro-de-3-dias-no-rio-de-janeiro?lang=pt"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://tocorimerio.com/blog/roteiro-de-3-dias-no-rio-de-janeiro?lang=es"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://tocorimerio.com/blog/roteiro-de-3-dias-no-rio-de-janeiro"/>
-    <lastmod>2026-09-08</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-    <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1775696766664_76lcnnpl2ca.png</image:loc>
-      <image:caption>Roteiro de 3 Dias no Rio de Janeiro: Guia Completo</image:caption>
-    </image:image>
-  </url>
-  <url>
     <loc>https://tocorimerio.com/blog/private-vs-group-tours-why-exclusivity-matters-in-rio</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://tocorimerio.com/blog/private-vs-group-tours-why-exclusivity-matters-in-rio"/>
     <xhtml:link rel="alternate" hreflang="pt-BR" href="https://tocorimerio.com/blog/private-vs-group-tours-why-exclusivity-matters-in-rio?lang=pt"/>
@@ -2447,7 +2461,7 @@
     <xhtml:link rel="alternate" hreflang="pt-BR" href="https://tocorimerio.com/blog/passeios-imperdiveis-rio-de-janeiro?lang=pt"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://tocorimerio.com/blog/passeios-imperdiveis-rio-de-janeiro?lang=es"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://tocorimerio.com/blog/passeios-imperdiveis-rio-de-janeiro"/>
-    <lastmod>2026-09-08</lastmod>
+    <lastmod>2026-09-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -2517,7 +2531,7 @@
     <xhtml:link rel="alternate" hreflang="pt-BR" href="https://tocorimerio.com/blog/gastronomia-carioca-pratos-tipicos?lang=pt"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://tocorimerio.com/blog/gastronomia-carioca-pratos-tipicos?lang=es"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://tocorimerio.com/blog/gastronomia-carioca-pratos-tipicos"/>
-    <lastmod>2026-04-10</lastmod>
+    <lastmod>2026-09-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -2601,7 +2615,7 @@
     <xhtml:link rel="alternate" hreflang="pt-BR" href="https://tocorimerio.com/blog/melhores-mirantes-gratuitos-rj?lang=pt"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://tocorimerio.com/blog/melhores-mirantes-gratuitos-rj?lang=es"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://tocorimerio.com/blog/melhores-mirantes-gratuitos-rj"/>
-    <lastmod>2026-07-30</lastmod>
+    <lastmod>2026-09-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -2643,12 +2657,26 @@
     <xhtml:link rel="alternate" hreflang="pt-BR" href="https://tocorimerio.com/blog/melhores-pontos-por-do-sol-rio?lang=pt"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://tocorimerio.com/blog/melhores-pontos-por-do-sol-rio?lang=es"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://tocorimerio.com/blog/melhores-pontos-por-do-sol-rio"/>
-    <lastmod>2026-07-30</lastmod>
+    <lastmod>2026-09-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <image:image>
       <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776155714004_99sa4cr5p.webp</image:loc>
       <image:caption>Os 5 Melhores Pontos para Ver o Pôr do Sol no Rio de Janeiro</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://tocorimerio.com/blog/tours-in-santa-teresa</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://tocorimerio.com/blog/tours-in-santa-teresa"/>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://tocorimerio.com/blog/tours-in-santa-teresa?lang=pt"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://tocorimerio.com/blog/tours-in-santa-teresa?lang=es"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://tocorimerio.com/blog/tours-in-santa-teresa"/>
+    <lastmod>2026-09-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1785445441313_f706aj8pbh.webp</image:loc>
+      <image:caption>Pontos Turísticos de Santa Teresa: O Que Ver no Bairro</image:caption>
     </image:image>
   </url>
   <url>
@@ -2937,7 +2965,7 @@
     <xhtml:link rel="alternate" hreflang="pt-BR" href="https://tocorimerio.com/blog/rio-de-janeiro-com-criancas-roteiro?lang=pt"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://tocorimerio.com/blog/rio-de-janeiro-com-criancas-roteiro?lang=es"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://tocorimerio.com/blog/rio-de-janeiro-com-criancas-roteiro"/>
-    <lastmod>2026-09-08</lastmod>
+    <lastmod>2026-09-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <image:image>
