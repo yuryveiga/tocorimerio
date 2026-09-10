@@ -1215,17 +1215,17 @@
     </image:image>
   </url>
   <url>
+    <loc>https://tocorimerio.com/blog/roteiro-de-3-dias-no-rio-de-janeiro</loc>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1775696766664_76lcnnpl2ca.png</image:loc>
+      <image:caption>Roteiro de 3 Dias no Rio de Janeiro: Guia Completo</image:caption>
+    </image:image>
+  </url>
+  <url>
     <loc>https://tocorimerio.com/blog/rio-alem-do-obvio-lugares-secretos</loc>
     <image:image>
       <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776136532621_bydozzr39nb.webp</image:loc>
       <image:caption>Rio Além do Óbvio: 5 Lugares Secretos para Fugir da Multidão</image:caption>
-    </image:image>
-  </url>
-  <url>
-    <loc>https://tocorimerio.com/blog/rio-imperial-cultura-historia</loc>
-    <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776154933416_1jovl3o2i6si.webp</image:loc>
-      <image:caption>Cultura e História: Um Mergulho no Passado Imperial do Rio</image:caption>
     </image:image>
   </url>
   <url>
@@ -1250,10 +1250,24 @@
     </image:image>
   </url>
   <url>
+    <loc>https://tocorimerio.com/blog/christ-the-redeemer-without-the-crowds</loc>
+    <image:image>
+      <image:loc>https://images.unsplash.com/photo-1593995863951-57c27e518295?w=1200&amp;q=80</image:loc>
+      <image:caption>Cristo Redentor Sem Filas: Horários e Acesso</image:caption>
+    </image:image>
+  </url>
+  <url>
     <loc>https://tocorimerio.com/blog/carnaval-rio-guia-definitivo</loc>
     <image:image>
       <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1775696779659_sdj1p6tvg3a.png</image:loc>
       <image:caption>Carnaval no Rio: o Guia Definitivo para Aproveitar</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://tocorimerio.com/blog/rio-imperial-cultura-historia</loc>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776154933416_1jovl3o2i6si.webp</image:loc>
+      <image:caption>Cultura e História: Um Mergulho no Passado Imperial do Rio</image:caption>
     </image:image>
   </url>
   <url>
@@ -1268,6 +1282,13 @@
     <image:image>
       <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1775701360748_19elgcf090q.png</image:loc>
       <image:caption>Onde Comer no Rio: Gastronomia e Sabores Cariocas</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://tocorimerio.com/blog/is-rocinha-safe</loc>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1777147243914_pekaowzuns.webp</image:loc>
+      <image:caption>Rocinha é seguro? O que os turistas devem saber antes de visitar a favela mais famosa de Rio </image:caption>
     </image:image>
   </url>
   <url>
@@ -1432,13 +1453,6 @@
     </image:image>
   </url>
   <url>
-    <loc>https://tocorimerio.com/blog/christ-the-redeemer-without-the-crowds</loc>
-    <image:image>
-      <image:loc>https://images.unsplash.com/photo-1593995863951-57c27e518295?w=1200&amp;q=80</image:loc>
-      <image:caption>Cristo Redentor Sem Filas: Horários e Acesso</image:caption>
-    </image:image>
-  </url>
-  <url>
     <loc>https://tocorimerio.com/blog/rock-climbing-beginners-rio-de-janeiro</loc>
     <image:image>
       <image:loc>https://images.unsplash.com/photo-1522163182402-834f871fd851?w=1200&amp;q=80</image:loc>
@@ -1534,13 +1548,6 @@
     <image:image>
       <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1785798054675_ruab49a7nyk.webp</image:loc>
       <image:caption>Pôr do Sol no Rio: Guia dos Melhores Mirantes</image:caption>
-    </image:image>
-  </url>
-  <url>
-    <loc>https://tocorimerio.com/blog/roteiro-de-3-dias-no-rio-de-janeiro</loc>
-    <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1775696766664_76lcnnpl2ca.png</image:loc>
-      <image:caption>Roteiro de 3 Dias no Rio de Janeiro: Guia Completo</image:caption>
     </image:image>
   </url>
   <url>
@@ -1688,6 +1695,13 @@
     <image:image>
       <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776155714004_99sa4cr5p.webp</image:loc>
       <image:caption>Os 5 Melhores Pontos para Ver o Pôr do Sol no Rio de Janeiro</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://tocorimerio.com/blog/tours-in-santa-teresa</loc>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1785445441313_f706aj8pbh.webp</image:loc>
+      <image:caption>Pontos Turísticos de Santa Teresa: O Que Ver no Bairro</image:caption>
     </image:image>
   </url>
   <url>

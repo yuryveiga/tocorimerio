@@ -18,7 +18,7 @@ import { Button } from "@/components/ui/button";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 import "react-quill-new/dist/quill.snow.css";
 import { OptimizedImage } from "@/components/OptimizedImage";
-import { getCanonicalUrl, generateOptimizedMetaDescription, getHreflangLinks, generateArticleSchema, generateBreadcrumbsSchema, getOgImage } from "@/utils/seo";
+import { getCanonicalUrl, generateOptimizedMetaDescription, getHreflangLinks, generateArticleSchema, generateBreadcrumbsSchema, getOgImage, generateFAQSchema } from "@/utils/seo";
 import { BlogPostRating } from "@/components/BlogPostRating";
 import { EmailCaptureCTA } from "@/components/EmailCaptureCTA";
 
@@ -51,6 +51,48 @@ const InlineCTA = () => {
         </Button>
       </Link>
     </div>
+  );
+};
+
+const RocinhaFAQ = ({ language }: { language: string }) => {
+  const items: Record<string, { q: string; a: string }[]> = {
+    pt: [
+      { q: "É seguro visitar a Rocinha como turista?", a: "Sim, desde que seja feito com um guia local experiente que conheça a comunidade. Um passeio organizado permite explorar a Rocinha com contexto, respeito e segurança, evitando áreas de risco e valorizando o comércio local." },
+      { q: "Por que devo fazer um tour guiado na Rocinha?", a: "A Rocinha é grande e complexa. Um guia mostra pontos que os visitantes não encontrariam sozinhos, explica a história da comunidade e ajuda a preservar o respeito pelos moradores durante o percurso." },
+      { q: "O que devo evitar ao visitar uma favela no Rio?", a: "Evite entrar sem guia, afastar-se do grupo, ostentar joias ou objetos de valor, e fotografar moradores sem permissão. Calçados confortáveis e água são essenciais." },
+      { q: "O que ver no passeio pela Rocinha?", a: "Você pode conhecer mirantes, arte de rua, comércios locais, vielas históricas e pontos de vista do Rio que só quem mora na comunidade conhece bem." },
+      { q: "Como reservar um tour na Rocinha com a Tocorime Rio?", a: "Basta acessar a página do Favela Rio Tour – Rocinha e escolher a data. O passeio inclui guia local, traslado a partir de áreas centrais do Rio e suporte em inglês." },
+    ],
+    en: [
+      { q: "Is Rocinha safe for tourists?", a: "Rocinha can be visited safely when explored with an experienced local guide who knows the community. A structured tour helps visitors understand the area respectfully, avoid risky zones, and support local businesses." },
+      { q: "Why should I book a guided tour to Rocinha?", a: "Rocinha is large and complex. A guide shows spots visitors would not find alone, explains the community's history, and helps preserve respect for residents along the way." },
+      { q: "What should I avoid when visiting a favela in Rio?", a: "Avoid entering without a guide, wandering away from the group, wearing flashy jewelry or valuables, and taking photos of residents without permission. Comfortable shoes and water are essential." },
+      { q: "What will I see on a Rocinha tour?", a: "You can visit viewpoints, street art, local shops, historic alleys, and Rio views that only those who live in the community know well." },
+      { q: "How do I book a Rocinha tour with Tocorime Rio?", a: "Simply visit the Favela Rio Tour – Rocinha page and pick a date. The tour includes a local guide, pickup from central Rio areas, and English-speaking support." },
+    ],
+    es: [
+      { q: "¿Es segura Rocinha para los turistas?", a: "Rocinha se puede visitar con seguridad si se explora con un guía local experimentado que conozca la comunidad. Un recorrido organizado permite entender el área con respeto, evitar zonas de riesgo y apoyar los negocios locales." },
+      { q: "¿Por qué debería reservar un tour guiado por Rocinha?", a: "Rocinha es grande y compleja. Un guía muestra lugares que los visitantes no encontrarían solos, explica la historia de la comunidad y ayuda a preservar el respeto por los residentes durante el recorrido." },
+      { q: "¿Qué debo evitar al visitar una favela en Río?", a: "Evita entrar sin guía, alejarte del grupo, lucir joyas u objetos de valor, y fotografiar residentes sin permiso. Lleva zapatos cómodos y agua." },
+      { q: "¿Qué veré en un tour por Rocinha?", a: "Puedes conocer miradores, arte urbano, comercios locales, callejones históricos y vistas de Río que solo quienes viven en la comunidad conocen bien." },
+      { q: "¿Cómo reservo un tour por Rocinha con Tocorime Rio?", a: "Solo visita la página del Favela Rio Tour – Rocinha y elige una fecha. El tour incluye guía local, traslado desde zonas centrales de Río y soporte en inglés." },
+    ],
+  };
+  const list = items[language] || items.en;
+  return (
+    <section className="mt-16 border-t border-border/50 pt-10">
+      <h2 className="font-serif text-2xl sm:text-3xl font-bold mb-6">
+        {language === 'pt' ? 'Perguntas Frequentes' : language === 'es' ? 'Preguntas Frecuentes' : 'Frequently Asked Questions'}
+      </h2>
+      <div className="space-y-6">
+        {list.map((item, index) => (
+          <div key={index}>
+            <h3 className="font-bold text-lg mb-2 text-foreground">{item.q}</h3>
+            <p className="text-muted-foreground leading-relaxed">{item.a}</p>
+          </div>
+        ))}
+      </div>
+    </section>
   );
 };
 
@@ -298,66 +340,7 @@ const BlogPost = () => {
         }
       `}</style>
       <Helmet>
-        {post.slug.includes('rocinha') ? (
-          <>
-            <title>Rocinha Favela Tour Rio: Safe, Fun & Eye-Opening Guide</title>
-            <meta name="description" content="Is a Rocinha favela tour safe? Discover Rio's most authentic cultural experience with local expert guides. Private tours, real community access, no tourist traps." />
-            <meta name="keywords" content="Rocinha favela tour, Rio de Janeiro favela tour, safe favela tour Rio, guided tour Rocinha, favela tour for tourists, community tour Rio de Janeiro, responsible favela tourism, things to do in Rio de Janeiro, Rio de Janeiro private tours, Tocorime Rio" />
-            <meta name="robots" content="index, follow" />
-            <link rel="canonical" href="https://tocorimerio.com/blog/rocinha-favela-tour-rio-de-janeiro" />
-
-            {/* Open Graph (Facebook, WhatsApp, LinkedIn) */}
-            <meta property="og:type" content="article" />
-            <meta property="og:title" content="Rocinha Favela Tour Rio: Safe, Fun & Eye-Opening Guide" />
-            <meta property="og:description" content="Is a Rocinha favela tour safe? Discover Rio's most authentic cultural experience with local expert guides. Private tours, real community access, no tourist traps." />
-            <meta property="og:url" content="https://tocorimerio.com/blog/rocinha-favela-tour-rio-de-janeiro" />
-            <meta property="og:image" content={ogImage} />
-            <meta property="og:image:secure_url" content={ogImage} />
-            <meta property="og:image:width" content="1200" />
-            <meta property="og:image:height" content="630" />
-            <meta property="og:image:alt" content="Guided favela tour in Rocinha, Rio de Janeiro with local expert" />
-            <meta property="og:locale" content="en_US" />
-            <meta property="og:site_name" content="Tocorime Rio" />
-            <meta property="article:published_time" content="2026-06-09" />
-            <meta property="article:author" content="Tocorime Rio" />
-
-            {/* Twitter Card */}
-            <meta name="twitter:card" content="summary_large_image" />
-            <meta name="twitter:title" content="Rocinha Favela Tour Rio: Safe, Fun & Eye-Opening Guide" />
-            <meta name="twitter:description" content="Is a Rocinha favela tour safe? Discover Rio's most authentic cultural experience with local expert guides. Private tours, real community access, no tourist traps." />
-            <meta name="twitter:image" content={ogImage} />
-
-            <script type="application/ld+json">
-              {`
-              {
-                "@context": "https://schema.org",
-                "@type": "BlogPosting",
-                "headline": "Rocinha Favela Tour Rio: Safe, Fun & Eye-Opening Guide",
-                "description": "Is a Rocinha favela tour safe? Discover Rio's most authentic cultural experience with local expert guides. Private tours, real community access, no tourist traps.",
-                "image": "https://tocorimerio.com/images/blog/rocinha-favela-tour-cover.jpg",
-                "author": {
-                  "@type": "Organization",
-                  "name": "Tocorime Rio",
-                  "url": "https://tocorimerio.com"
-                },
-                "publisher": {
-                  "@type": "Organization",
-                  "name": "Tocorime Rio",
-                  "logo": {
-                    "@type": "ImageObject",
-                    "url": "https://tocorimerio.com/logo.png"
-                  }
-                },
-                "datePublished": "2026-06-09",
-                "mainEntityOfPage": {
-                  "@type": "WebPage",
-                  "@id": "https://tocorimerio.com/blog/rocinha-favela-tour-rio-de-janeiro"
-                }
-              }
-              `}
-            </script>
-          </>
-        ) : post.slug === 'visit-rio-de-janeiro' ? (
+{post.slug === 'visit-rio-de-janeiro' ? (
           <>
             <title>Why Visit Rio de Janeiro? 10 Reasons to Fall in Love With the City</title>
             <meta name="description" content="Discover 10 compelling reasons to visit Rio de Janeiro, from iconic Christ the Redeemer and stunning beaches to vibrant culture and thrilling football. Plan your unforgettable trip to the Marvelous City with local insights." />
@@ -671,6 +654,21 @@ const BlogPost = () => {
           </script>
         )}
 
+        {post.slug === "is-rocinha-safe" && (
+          <script type="application/ld+json">
+            {JSON.stringify({
+              "@context": "https://schema.org",
+              ...generateFAQSchema([
+                { q: "Is Rocinha safe for tourists?", a: "Rocinha can be visited safely when explored with an experienced local guide who knows the community. A structured tour helps visitors understand the area respectfully, avoid risky zones, and support local businesses." },
+                { q: "Why should I book a guided tour to Rocinha?", a: "Rocinha is large and complex. A guide shows spots visitors would not find alone, explains the community's history, and helps preserve respect for residents along the way." },
+                { q: "What should I avoid when visiting a favela in Rio?", a: "Avoid entering without a guide, wandering away from the group, wearing flashy jewelry or valuables, and taking photos of residents without permission. Comfortable shoes and water are essential." },
+                { q: "What will I see on a Rocinha tour?", a: "You can visit viewpoints, street art, local shops, historic alleys, and Rio views that only those who live in the community know well." },
+                { q: "How do I book a Rocinha tour with Tocorime Rio?", a: "Simply visit the Favela Rio Tour – Rocinha page and pick a date. The tour includes a local guide, pickup from central Rio areas, and English-speaking support." },
+              ]),
+            })}
+          </script>
+        )}
+
         <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet" />
       </Helmet>
       
@@ -743,6 +741,7 @@ const BlogPost = () => {
                   </>
                 )}
 
+                {post.slug === 'is-rocinha-safe' && <RocinhaFAQ language={language} />}
                 {post?.id && <BlogPostRating postId={post.id} />}
 
                 {/* AUTHOR BOX */}
@@ -891,6 +890,7 @@ const BlogPost = () => {
                 </>
               )}
 
+              {post.slug === 'is-rocinha-safe' && <RocinhaFAQ language={language} />}
               {post?.id && <BlogPostRating postId={post.id} />}
 
               {/* AUTHOR BOX */}
