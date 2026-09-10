@@ -54,6 +54,48 @@ const InlineCTA = () => {
   );
 };
 
+const RocinhaFAQ = ({ language }: { language: string }) => {
+  const items: Record<string, { q: string; a: string }[]> = {
+    pt: [
+      { q: "É seguro visitar a Rocinha como turista?", a: "Sim, desde que seja feito com um guia local experiente que conheça a comunidade. Um passeio organizado permite explorar a Rocinha com contexto, respeito e segurança, evitando áreas de risco e valorizando o comércio local." },
+      { q: "Por que devo fazer um tour guiado na Rocinha?", a: "A Rocinha é grande e complexa. Um guia mostra pontos que os visitantes não encontrariam sozinhos, explica a história da comunidade e ajuda a preservar o respeito pelos moradores durante o percurso." },
+      { q: "O que devo evitar ao visitar uma favela no Rio?", a: "Evite entrar sem guia, afastar-se do grupo, ostentar joias ou objetos de valor, e fotografar moradores sem permissão. Calçados confortáveis e água são essenciais." },
+      { q: "O que ver no passeio pela Rocinha?", a: "Você pode conhecer mirantes, arte de rua, comércios locais, vielas históricas e pontos de vista do Rio que só quem mora na comunidade conhece bem." },
+      { q: "Como reservar um tour na Rocinha com a Tocorime Rio?", a: "Basta acessar a página do Favela Rio Tour – Rocinha e escolher a data. O passeio inclui guia local, traslado a partir de áreas centrais do Rio e suporte em inglês." },
+    ],
+    en: [
+      { q: "Is Rocinha safe for tourists?", a: "Rocinha can be visited safely when explored with an experienced local guide who knows the community. A structured tour helps visitors understand the area respectfully, avoid risky zones, and support local businesses." },
+      { q: "Why should I book a guided tour to Rocinha?", a: "Rocinha is large and complex. A guide shows spots visitors would not find alone, explains the community's history, and helps preserve respect for residents along the way." },
+      { q: "What should I avoid when visiting a favela in Rio?", a: "Avoid entering without a guide, wandering away from the group, wearing flashy jewelry or valuables, and taking photos of residents without permission. Comfortable shoes and water are essential." },
+      { q: "What will I see on a Rocinha tour?", a: "You can visit viewpoints, street art, local shops, historic alleys, and Rio views that only those who live in the community know well." },
+      { q: "How do I book a Rocinha tour with Tocorime Rio?", a: "Simply visit the Favela Rio Tour – Rocinha page and pick a date. The tour includes a local guide, pickup from central Rio areas, and English-speaking support." },
+    ],
+    es: [
+      { q: "¿Es segura Rocinha para los turistas?", a: "Rocinha se puede visitar con seguridad si se explora con un guía local experimentado que conozca la comunidad. Un recorrido organizado permite entender el área con respeto, evitar zonas de riesgo y apoyar los negocios locales." },
+      { q: "¿Por qué debería reservar un tour guiado por Rocinha?", a: "Rocinha es grande y compleja. Un guía muestra lugares que los visitantes no encontrarían solos, explica la historia de la comunidad y ayuda a preservar el respeto por los residentes durante el recorrido." },
+      { q: "¿Qué debo evitar al visitar una favela en Río?", a: "Evita entrar sin guía, alejarte del grupo, lucir joyas u objetos de valor, y fotografiar residentes sin permiso. Lleva zapatos cómodos y agua." },
+      { q: "¿Qué veré en un tour por Rocinha?", a: "Puedes conocer miradores, arte urbano, comercios locales, callejones históricos y vistas de Río que solo quienes viven en la comunidad conocen bien." },
+      { q: "¿Cómo reservo un tour por Rocinha con Tocorime Rio?", a: "Solo visita la página del Favela Rio Tour – Rocinha y elige una fecha. El tour incluye guía local, traslado desde zonas centrales de Río y soporte en inglés." },
+    ],
+  };
+  const list = items[language] || items.en;
+  return (
+    <section className="mt-16 border-t border-border/50 pt-10">
+      <h2 className="font-serif text-2xl sm:text-3xl font-bold mb-6">
+        {language === 'pt' ? 'Perguntas Frequentes' : language === 'es' ? 'Preguntas Frecuentes' : 'Frequently Asked Questions'}
+      </h2>
+      <div className="space-y-6">
+        {list.map((item, index) => (
+          <div key={index}>
+            <h3 className="font-bold text-lg mb-2 text-foreground">{item.q}</h3>
+            <p className="text-muted-foreground leading-relaxed">{item.a}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+  );
+};
+
 // Social sharing overrides (Open Graph / Twitter Card) for specific posts
 const SOCIAL_SEO: Record<string, { title: string; description: string; imageAlt: string; keywords: string }> = {
   "sunset-in-rio-de-janeiro-guide": {
