@@ -298,66 +298,7 @@ const BlogPost = () => {
         }
       `}</style>
       <Helmet>
-        {post.slug.includes('rocinha') ? (
-          <>
-            <title>Rocinha Favela Tour Rio: Safe, Fun & Eye-Opening Guide</title>
-            <meta name="description" content="Is a Rocinha favela tour safe? Discover Rio's most authentic cultural experience with local expert guides. Private tours, real community access, no tourist traps." />
-            <meta name="keywords" content="Rocinha favela tour, Rio de Janeiro favela tour, safe favela tour Rio, guided tour Rocinha, favela tour for tourists, community tour Rio de Janeiro, responsible favela tourism, things to do in Rio de Janeiro, Rio de Janeiro private tours, Tocorime Rio" />
-            <meta name="robots" content="index, follow" />
-            <link rel="canonical" href="https://tocorimerio.com/blog/rocinha-favela-tour-rio-de-janeiro" />
-
-            {/* Open Graph (Facebook, WhatsApp, LinkedIn) */}
-            <meta property="og:type" content="article" />
-            <meta property="og:title" content="Rocinha Favela Tour Rio: Safe, Fun & Eye-Opening Guide" />
-            <meta property="og:description" content="Is a Rocinha favela tour safe? Discover Rio's most authentic cultural experience with local expert guides. Private tours, real community access, no tourist traps." />
-            <meta property="og:url" content="https://tocorimerio.com/blog/rocinha-favela-tour-rio-de-janeiro" />
-            <meta property="og:image" content={ogImage} />
-            <meta property="og:image:secure_url" content={ogImage} />
-            <meta property="og:image:width" content="1200" />
-            <meta property="og:image:height" content="630" />
-            <meta property="og:image:alt" content="Guided favela tour in Rocinha, Rio de Janeiro with local expert" />
-            <meta property="og:locale" content="en_US" />
-            <meta property="og:site_name" content="Tocorime Rio" />
-            <meta property="article:published_time" content="2026-06-09" />
-            <meta property="article:author" content="Tocorime Rio" />
-
-            {/* Twitter Card */}
-            <meta name="twitter:card" content="summary_large_image" />
-            <meta name="twitter:title" content="Rocinha Favela Tour Rio: Safe, Fun & Eye-Opening Guide" />
-            <meta name="twitter:description" content="Is a Rocinha favela tour safe? Discover Rio's most authentic cultural experience with local expert guides. Private tours, real community access, no tourist traps." />
-            <meta name="twitter:image" content={ogImage} />
-
-            <script type="application/ld+json">
-              {`
-              {
-                "@context": "https://schema.org",
-                "@type": "BlogPosting",
-                "headline": "Rocinha Favela Tour Rio: Safe, Fun & Eye-Opening Guide",
-                "description": "Is a Rocinha favela tour safe? Discover Rio's most authentic cultural experience with local expert guides. Private tours, real community access, no tourist traps.",
-                "image": "https://tocorimerio.com/images/blog/rocinha-favela-tour-cover.jpg",
-                "author": {
-                  "@type": "Organization",
-                  "name": "Tocorime Rio",
-                  "url": "https://tocorimerio.com"
-                },
-                "publisher": {
-                  "@type": "Organization",
-                  "name": "Tocorime Rio",
-                  "logo": {
-                    "@type": "ImageObject",
-                    "url": "https://tocorimerio.com/logo.png"
-                  }
-                },
-                "datePublished": "2026-06-09",
-                "mainEntityOfPage": {
-                  "@type": "WebPage",
-                  "@id": "https://tocorimerio.com/blog/rocinha-favela-tour-rio-de-janeiro"
-                }
-              }
-              `}
-            </script>
-          </>
-        ) : post.slug === 'visit-rio-de-janeiro' ? (
+{post.slug === 'visit-rio-de-janeiro' ? (
           <>
             <title>Why Visit Rio de Janeiro? 10 Reasons to Fall in Love With the City</title>
             <meta name="description" content="Discover 10 compelling reasons to visit Rio de Janeiro, from iconic Christ the Redeemer and stunning beaches to vibrant culture and thrilling football. Plan your unforgettable trip to the Marvelous City with local insights." />
