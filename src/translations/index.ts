@@ -2148,6 +2148,8 @@ export const translationsZhTW = {
   mlp_garanta_experiencia: "預訂您的 Maracanã 體驗",
   mlp_vagas_limitadas: "{home} vs {away} 名額有限。立即預訂，感受巴西最大體育場的熱血。",
   mlp_ver_disponibilidade: "查看供應情況並預訂",
+  mlp_alta_demanda: "極高需求比賽",
+  mlp_alta_demanda_sub: "提前購買 — 庫存有限。",
 
   // Specific matches
   flamengo_coritiba_title: "Flamengo vs Coritiba 於 Maracanã | 門票 + 接送 | Tocorime Rio",
@@ -2156,8 +2158,9 @@ export const translationsZhTW = {
   fluminense_guaira_desc: "獲取 Fluminense vs Deportivo La Guaíra 電子門票。套裝包含接送、雙語導遊及尊貴區域。立即預訂！",
   fluminense_platense_title: "Fluminense vs Platense | 馬拉卡納門票 | Tocorime Rio",
   fluminense_platense_desc: "2026年9月8日馬拉卡納球場 Fluminense vs Platense 門票：官方門票 + 酒店接送 + 雙語導遊，即時確認。",
-  flamengo_idv_title: "Flamengo vs Independiente del Valle | 馬拉卡納門票",
-  flamengo_idv_desc: "2026年9月17日馬拉卡納球場 Flamengo vs Independiente del Valle 門票：官方門票 + 酒店接送 + 雙語導遊，即時確認。",
+  flamengo_idv_title: "Flamengo vs Independiente del Valle | 2026 南美自由盃門票 — 馬拉卡納（高需求）",
+  flamengo_idv_desc: "2026年9月17日南美自由盃 Flamengo vs Independiente del Valle 高需求門票：官方門票 + 酒店接送 + 雙語導遊，即時確認。",
+
   
   // Experiences Page
   ex_meta_title: 'Rio de Janeiro 旅遊體驗 | 私人包團、健行與一日遊 | Tocorime Rio',
