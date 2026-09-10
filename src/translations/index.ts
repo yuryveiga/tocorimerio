@@ -378,6 +378,8 @@ export const translationsPt = {
   mlp_garanta_experiencia: "Garanta sua experiência no Maracanã",
   mlp_vagas_limitadas: "Vagas limitadas para {home} x {away}. Reserve agora e viva a emoção do maior estádio do Brasil.",
   mlp_ver_disponibilidade: "Ver disponibilidade e reservar",
+  mlp_alta_demanda: "Jogo de altíssima demanda",
+  mlp_alta_demanda_sub: "Compre com antecedência — estoque limitado.",
 
   // Specific matches
   flamengo_coritiba_title: "Flamengo x Coritiba no Maracanã | Ingressos + Transfer | Tocorime Rio",
@@ -386,8 +388,8 @@ export const translationsPt = {
   fluminense_guaira_desc: "Garanta seu ingresso para Fluminense x Deportivo La Guaíra no Maracanã. Pacotes com transfer, guia bilíngue e setores premium. Reserve já!",
   fluminense_platense_title: "Fluminense x Platense no Maracanã (08/09) | Ingressos + Transfer | Tocorime Rio",
   fluminense_platense_desc: "Ingressos para Fluminense x Club Atlético Platense no Maracanã em 8 de setembro de 2026. Pacotes com transfer do hotel, guia bilíngue e setores premium. Sem CPF, confirmação imediata.",
-  flamengo_idv_title: "Flamengo x Independiente del Valle (17/09) | Ingressos Maracanã",
-  flamengo_idv_desc: "Ingressos para Flamengo x Independiente del Valle no Maracanã, 17 de setembro de 2026. Pacotes com transfer do hotel, guia bilíngue e setores premium. Sem CPF, confirmação imediata.",
+  flamengo_idv_title: "Flamengo x Independiente del Valle | Libertadores 2026 | Ingressos Maracanã — Alta Demanda",
+  flamengo_idv_desc: "Ingressos de altíssima demanda para Flamengo x Independiente del Valle na Libertadores, 17/09/2026 no Maracanã. Pacotes com transfer do hotel, guia bilíngue e setores premium. Sem CPF, confirmação imediata.",
   // Experiences Page
   ex_meta_title: 'Experiências no Rio de Janeiro | Passeios Privativos e Trilhas | Tocorime Rio',
   ex_meta_desc: 'Experiências privativas inesquecíveis no Rio de Janeiro: City Tour, Trilhas e Bate e Volta. Avaliado com 5.0 no TripAdvisor. Guias locais bilíngues. Reserve sua aventura.',
@@ -819,6 +821,8 @@ export const translationsEn = {
   mlp_garanta_experiencia: "Secure your experience at Maracanã",
   mlp_vagas_limitadas: "Limited spots for {home} vs {away}. Book now and feel the thrill of Brazil's largest stadium.",
   mlp_ver_disponibilidade: "Check availability and book",
+  mlp_alta_demanda: "Very high demand match",
+  mlp_alta_demanda_sub: "Buy in advance — limited stock.",
 
   // Specific matches
   flamengo_coritiba_title: "Flamengo vs Coritiba at Maracanã | Tickets + Transfer | Tocorime Rio",
@@ -827,8 +831,8 @@ export const translationsEn = {
   fluminense_guaira_desc: "Get your ticket for Fluminense vs Deportivo La Guaíra at Maracanã. Packages with transfer, bilingual guide, and premium sectors. Book now!",
   fluminense_platense_title: "Fluminense vs Platense Tickets Maracanã (Sep 8) | Tocorime Rio",
   fluminense_platense_desc: "Buy Fluminense vs Club Atlético Platense tickets at Maracanã, Sep 8 2026: official ticket + hotel transfer + English-speaking guide. No CPF needed, instant confirmation.",
-  flamengo_idv_title: "Flamengo vs Independiente del Valle Tickets Maracanã (Sep 17)",
-  flamengo_idv_desc: "Buy Flamengo vs Independiente del Valle tickets at Maracanã, Sep 17 2026: official ticket + hotel transfer + English-speaking guide. No CPF needed, instant confirmation.",
+  flamengo_idv_title: "Flamengo vs Independiente del Valle | Copa Libertadores 2026 Tickets — Maracanã (High Demand)",
+  flamengo_idv_desc: "High-demand tickets for Flamengo vs Independiente del Valle in the Copa Libertadores at Maracanã, Sep 17 2026: official ticket + hotel transfer + English-speaking guide. No CPF, instant confirmation.",
   // Experiences Page
   ex_meta_title: 'Rio de Janeiro Experiences | Private Tours, Hiking & Day Trips | Tocorime Rio',
   ex_meta_desc: 'Unforgettable private experiences in Rio de Janeiro: City Tour, Hiking & One-Day Trips. Rated 5.0 on TripAdvisor. Bilingual local guides. Book your Rio adventure now.',
@@ -1260,6 +1264,8 @@ export const translationsEs = {
   mlp_garanta_experiencia: "Asegura tu experiencia en el Maracaná",
   mlp_vagas_limitadas: "Plazas limitadas para {home} vs {away}. Reserva ahora y vive la emoción del estadio más grande de Brasil.",
   mlp_ver_disponibilidade: "Ver disponibilidad y reservar",
+  mlp_alta_demanda: "Partido de muy alta demanda",
+  mlp_alta_demanda_sub: "Compra con anticipación — stock limitado.",
 
   // Specific matches
   flamengo_coritiba_title: "Flamengo vs Coritiba en el Maracaná | Entradas + Traslado | Tocorime Rio",
@@ -1268,8 +1274,8 @@ export const translationsEs = {
   fluminense_guaira_desc: "Asegura tu entrada para Fluminense vs Deportivo La Guaíra en el Maracaná. Paquetes con traslado, guía bilingüe y sectores premium. ¡Reserva ya!",
   fluminense_platense_title: "Fluminense vs Platense en el Maracaná (8 sep) | Entradas | Tocorime Rio",
   fluminense_platense_desc: "Entradas para Fluminense vs Club Atlético Platense en el Maracaná, 8 de septiembre de 2026: entrada oficial + traslado + guía bilingüe. Sin CPF, confirmación inmediata.",
-  flamengo_idv_title: "Flamengo vs Independiente del Valle en el Maracaná (17 sep)",
-  flamengo_idv_desc: "Entradas para Flamengo vs Independiente del Valle en el Maracaná, 17 de septiembre de 2026: entrada oficial + traslado + guía bilingüe. Sin CPF, confirmación inmediata.",
+  flamengo_idv_title: "Flamengo vs Independiente del Valle | Entradas Libertadores 2026 — Maracaná (Alta Demanda)",
+  flamengo_idv_desc: "Entradas de muy alta demanda para Flamengo vs Independiente del Valle en la Libertadores, 17 sep 2026 en el Maracaná: entrada oficial + traslado + guía bilingüe. Sin CPF, confirmación inmediata.",
   // Experiences Page
   ex_meta_title: 'Experiencias en Río de Janeiro | Tours Privados, Senderismo | Tocorime Rio',
   ex_meta_desc: 'Experiencias privadas inolvidables en Río de Janeiro: City Tour, Senderismo y Excursiones. 5.0 en TripAdvisor. Guías bilingües. Reserva tu aventura en Río.',
@@ -1700,6 +1706,8 @@ export const translationsZhCN = {
   mlp_garanta_experiencia: "锁定您的 Maracanã 体验",
   mlp_vagas_limitadas: "{home} vs {away} 名额有限。立即预订，感受巴西最大球场的激情。",
   mlp_ver_disponibilidade: "检查余位并预订",
+  mlp_alta_demanda: "极高需求比赛",
+  mlp_alta_demanda_sub: "提前购买 — 库存有限。",
 
   // Specific matches
   flamengo_coritiba_title: "Flamengo 对阵 Coritiba | 门票 + 接送 | Tocorime Rio",
@@ -1708,8 +1716,8 @@ export const translationsZhCN = {
   fluminense_guaira_desc: "获取在 Maracanã 举行的 Fluminense vs Deportivo La Guaíra 门票。套餐包含接送、双语导游和高级区域。立即预订！",
   fluminense_platense_title: "Fluminense 对阵 Platense | 马拉卡纳门票 | Tocorime Rio",
   fluminense_platense_desc: "2026年9月8日马拉卡纳球场 Fluminense vs Platense 门票：官方门票 + 酒店接送 + 双语导游，即时确认。",
-  flamengo_idv_title: "Flamengo 对阵 Independiente del Valle | 马拉卡纳门票",
-  flamengo_idv_desc: "2026年9月17日马拉卡纳球场 Flamengo vs Independiente del Valle 门票：官方门票 + 酒店接送 + 双语导游，即时确认。",
+  flamengo_idv_title: "Flamengo 对阵 Independiente del Valle | 2026 南美解放者杯门票 — 马拉卡纳（高需求）",
+  flamengo_idv_desc: "2026年9月17日南美解放者杯 Flamengo vs Independiente del Valle 高需求门票：官方门票 + 酒店接送 + 双语导游，即时确认。",
   // Experiences Page
   ex_meta_title: 'Rio de Janeiro 体验 | 私家团、徒步与一日游 | Tocorime Rio',
   ex_meta_desc: '难忘的 Rio de Janeiro 私人体验：城市游览、徒步与一日游。TripAdvisor 5.0 评分。双语当地导游。立即预订。',
@@ -2140,6 +2148,8 @@ export const translationsZhTW = {
   mlp_garanta_experiencia: "預訂您的 Maracanã 體驗",
   mlp_vagas_limitadas: "{home} vs {away} 名額有限。立即預訂，感受巴西最大體育場的熱血。",
   mlp_ver_disponibilidade: "查看供應情況並預訂",
+  mlp_alta_demanda: "極高需求比賽",
+  mlp_alta_demanda_sub: "提前購買 — 庫存有限。",
 
   // Specific matches
   flamengo_coritiba_title: "Flamengo vs Coritiba 於 Maracanã | 門票 + 接送 | Tocorime Rio",
@@ -2148,8 +2158,9 @@ export const translationsZhTW = {
   fluminense_guaira_desc: "獲取 Fluminense vs Deportivo La Guaíra 電子門票。套裝包含接送、雙語導遊及尊貴區域。立即預訂！",
   fluminense_platense_title: "Fluminense vs Platense | 馬拉卡納門票 | Tocorime Rio",
   fluminense_platense_desc: "2026年9月8日馬拉卡納球場 Fluminense vs Platense 門票：官方門票 + 酒店接送 + 雙語導遊，即時確認。",
-  flamengo_idv_title: "Flamengo vs Independiente del Valle | 馬拉卡納門票",
-  flamengo_idv_desc: "2026年9月17日馬拉卡納球場 Flamengo vs Independiente del Valle 門票：官方門票 + 酒店接送 + 雙語導遊，即時確認。",
+  flamengo_idv_title: "Flamengo vs Independiente del Valle | 2026 南美自由盃門票 — 馬拉卡納（高需求）",
+  flamengo_idv_desc: "2026年9月17日南美自由盃 Flamengo vs Independiente del Valle 高需求門票：官方門票 + 酒店接送 + 雙語導遊，即時確認。",
+
   
   // Experiences Page
   ex_meta_title: 'Rio de Janeiro 旅遊體驗 | 私人包團、健行與一日遊 | Tocorime Rio',

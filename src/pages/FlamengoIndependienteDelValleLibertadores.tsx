@@ -21,6 +21,8 @@ export default function FlamengoIndependienteDelValleLibertadores() {
       accentClass="from-red-800 via-red-900 to-black"
       heroBackground="https://lncimg.lance.com.br/cdn-cgi/image/width=1600,quality=80,fit=cover,format=webp/uploads/2016/10/19/5807e137e598d.jpeg"
       youtubeVideos={youtubeVideos}
+      overrideCompetition="Libertadores"
+      highDemand
     />
   );
 }
