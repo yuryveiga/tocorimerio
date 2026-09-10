@@ -654,6 +654,21 @@ const BlogPost = () => {
           </script>
         )}
 
+        {post.slug === "is-rocinha-safe" && (
+          <script type="application/ld+json">
+            {JSON.stringify({
+              "@context": "https://schema.org",
+              ...generateFAQSchema([
+                { q: "Is Rocinha safe for tourists?", a: "Rocinha can be visited safely when explored with an experienced local guide who knows the community. A structured tour helps visitors understand the area respectfully, avoid risky zones, and support local businesses." },
+                { q: "Why should I book a guided tour to Rocinha?", a: "Rocinha is large and complex. A guide shows spots visitors would not find alone, explains the community's history, and helps preserve respect for residents along the way." },
+                { q: "What should I avoid when visiting a favela in Rio?", a: "Avoid entering without a guide, wandering away from the group, wearing flashy jewelry or valuables, and taking photos of residents without permission. Comfortable shoes and water are essential." },
+                { q: "What will I see on a Rocinha tour?", a: "You can visit viewpoints, street art, local shops, historic alleys, and Rio views that only those who live in the community know well." },
+                { q: "How do I book a Rocinha tour with Tocorime Rio?", a: "Simply visit the Favela Rio Tour – Rocinha page and pick a date. The tour includes a local guide, pickup from central Rio areas, and English-speaking support." },
+              ]),
+            })}
+          </script>
+        )}
+
         <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet" />
       </Helmet>
       
@@ -726,6 +741,7 @@ const BlogPost = () => {
                   </>
                 )}
 
+                {post.slug === 'is-rocinha-safe' && <RocinhaFAQ language={language} />}
                 {post?.id && <BlogPostRating postId={post.id} />}
 
                 {/* AUTHOR BOX */}
@@ -874,7 +890,8 @@ const BlogPost = () => {
                 </>
               )}
 
-              {post?.id && <BlogPostRating postId={post.id} />}
+              {post.slug === 'is-rocinha-safe' && <RocinhaFAQ language={language} />}
+              {post?.id && <BlogPostRating postId={post.id} />
 
               {/* AUTHOR BOX */}
               <div className="mt-16 p-8 bg-muted/30 border border-border/50 rounded-2xl flex flex-col md:flex-row items-center md:items-start gap-8 group">
