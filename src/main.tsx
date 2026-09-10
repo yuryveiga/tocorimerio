@@ -31,6 +31,8 @@ import "./index.css";
       "tours-in-santa-teresa": "pontos-turisticos-em-santa-teresa",
       "o-que-fazer-no-rj-com-chuva": "things-to-do-in-rio-de-janeiro-when-it-rains",
       "melhor-feijoada-rio-de-janeiro": "best-feijoada-rio-de-janeiro-tourists",
+      // Slug antigo corrigido para versão otimizada
+      "blogcopa-do-mundo-feminina-2027-maracana": "copa-do-mundo-feminina-2027-maracana",
     };
 
     const { pathname, search, hash } = window.location;
