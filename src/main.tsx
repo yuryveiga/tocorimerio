@@ -41,6 +41,17 @@ import "./index.css";
   } catch {}
 })();
 
+// Redirect the spaced landing URL to the clean hyphenated version
+(() => {
+  try {
+    const { pathname, search, hash } = window.location;
+    const decoded = decodeURIComponent(pathname).replace(/\/+$/, "");
+    if (decoded === "/Flamengo x Independiente del Valle-libertadores-maracana-tickets") {
+      window.location.replace(`/Flamengo-x-Independiente-del-Valle-libertadores-maracana-tickets${search}${hash}`);
+    }
+  } catch {}
+})();
+
 const rootElement = document.getElementById("root")!;
 
 createRoot(rootElement).render(
