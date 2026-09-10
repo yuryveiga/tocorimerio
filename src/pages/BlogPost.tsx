@@ -72,6 +72,14 @@ const SOCIAL_SEO: Record<string, { title: string; description: string; imageAlt:
     keywords:
       "sunset in Rio de Janeiro, Rio sunset experience, Arpoador sunset, golden hour Rio de Janeiro, pôr do sol no Rio de Janeiro, private Rio tours",
   },
+  "copa-do-mundo-feminina-2027-maracana": {
+    title: "2027 Women's World Cup Rio: Maracanã Hosts the Final",
+    description:
+      "The Maracanã will host the opening match and the Final of the 2027 FIFA Women's World Cup. Here's what's confirmed for Rio — and how to plan your trip.",
+    imageAlt: "Maracanã Stadium will host the 2027 Women's World Cup Final in Rio de Janeiro",
+    keywords:
+      "2027 Women's World Cup, FIFA Women's World Cup Brazil 2027, Maracanã, Copa do Mundo Feminina 2027, Rio de Janeiro World Cup, World Cup Final Maracanã, football tourism Rio de Janeiro",
+  },
 };
 
 const BlogPost = () => {
