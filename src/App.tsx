@@ -90,6 +90,7 @@ const FlamengoCoritibaMaracana = lazy(() => import("./pages/FlamengoCoritibaMara
 const FluminenseIndependienteRivadaviaLibertadores = lazy(() => import("./pages/FluminenseIndependienteRivadaviaLibertadores"));
 const FlamengoMirassolMaracana = lazy(() => import("./pages/FlamengoMirassolMaracana"));
 const FluminensePlatenseLibertadores = lazy(() => import("./pages/FluminensePlatenseLibertadores"));
+const FlamengoIndependienteDelValleLibertadores = lazy(() => import("./pages/FlamengoIndependienteDelValleLibertadores"));
 const PasseiosIndex          = lazy(() => import("./pages/PasseiosIndex"));
 // BrasilPanamaMaracana removida — redirecionada para /#tours
 const JogoLanding            = lazy(() => import("./pages/JogoLanding"));
@@ -274,6 +275,8 @@ const App = ({ queryClient: externalQueryClient }: { queryClient?: QueryClient }
                       <Route path="/flamengo-x-mirassol-maracana-tickets-02-09" element={<FlamengoMirassolMaracana />} />
                       <Route path="/Fluminense-x-patense-libertadores-maracana-tickets" element={<FluminensePlatenseLibertadores />} />
                       <Route path="/fluminense-x-patense-libertadores-maracana-tickets" element={<FluminensePlatenseLibertadores />} />
+                      <Route path="/Flamengo-x-Independiente-del-Valle-libertadores-maracana-tickets" element={<FlamengoIndependienteDelValleLibertadores />} />
+                      <Route path="/flamengo-x-independiente-del-valle-libertadores-maracana-tickets" element={<FlamengoIndependienteDelValleLibertadores />} />
                       <Route path="/brasil-x-panama-maio-maracana" element={<RedirectToHash hash="#tours" />} />
 
                       <Route path="/sitemap" element={<Sitemap />} />

@@ -148,6 +148,8 @@ async function run() {
     '/fluminense-indenpediente-rivadavia-libertadores-maracana',
     '/flamengo-x-mirassol-maracana-tickets-02-09',
     '/Fluminense-x-patense-libertadores-maracana-tickets',
+    '/Flamengo-x-Independiente-del-Valle-libertadores-maracana-tickets',
+    '/flamengo-x-independiente-del-valle-libertadores-maracana-tickets',
     '/sobre',
     '/contato',
     '/carrinho',
@@ -246,6 +248,17 @@ async function run() {
     imageAlt: 'Maracanã Stadium packed for a Flamengo match',
     type: 'website',
   });
+
+  const idvMeta = {
+    title: 'Flamengo vs Independiente del Valle Tickets Maracanã (Sep 17, 2026)',
+    description: 'Buy Flamengo vs Independiente del Valle tickets at Maracanã, Sep 17 2026: official ticket + hotel transfer + English-speaking guide. No CPF needed, instant confirmation.',
+    url: `${SITE}/Flamengo-x-Independiente-del-Valle-libertadores-maracana-tickets`,
+    image: 'https://lncimg.lance.com.br/cdn-cgi/image/width=1600,quality=80,fit=cover,format=webp/uploads/2016/10/19/5807e137e598d.jpeg',
+    imageAlt: 'Maracanã Stadium packed for a Flamengo match',
+    type: 'website',
+  };
+  postMeta.set('/Flamengo-x-Independiente-del-Valle-libertadores-maracana-tickets', idvMeta);
+  postMeta.set('/flamengo-x-independiente-del-valle-libertadores-maracana-tickets', idvMeta);
 
   postMeta.set('/Fluminense-x-patense-libertadores-maracana-tickets', {
     title: 'Fluminense vs Platense Tickets Maracanã (Sep 8, 2026) | Tocorime Rio',
