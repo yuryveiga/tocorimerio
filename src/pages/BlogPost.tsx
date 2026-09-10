@@ -18,7 +18,7 @@ import { Button } from "@/components/ui/button";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 import "react-quill-new/dist/quill.snow.css";
 import { OptimizedImage } from "@/components/OptimizedImage";
-import { getCanonicalUrl, generateOptimizedMetaDescription, getHreflangLinks, generateArticleSchema, generateBreadcrumbsSchema, getOgImage } from "@/utils/seo";
+import { getCanonicalUrl, generateOptimizedMetaDescription, getHreflangLinks, generateArticleSchema, generateBreadcrumbsSchema, getOgImage, generateFAQSchema } from "@/utils/seo";
 import { BlogPostRating } from "@/components/BlogPostRating";
 import { EmailCaptureCTA } from "@/components/EmailCaptureCTA";
 
