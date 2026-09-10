@@ -250,11 +250,11 @@ async function run() {
   });
 
   const idvMeta = {
-    title: 'Flamengo vs Independiente del Valle Tickets Maracanã (Sep 17, 2026)',
-    description: 'Buy Flamengo vs Independiente del Valle tickets at Maracanã, Sep 17 2026: official ticket + hotel transfer + English-speaking guide. No CPF needed, instant confirmation.',
+    title: 'Flamengo vs Independiente del Valle — Copa Libertadores 2026 Tickets Maracanã (High Demand) | Tocorime Rio',
+    description: 'High-demand tickets for Flamengo vs Independiente del Valle in the Copa Libertadores at Maracanã, Sep 17 2026: official ticket + hotel transfer + English-speaking guide. No CPF, instant confirmation.',
     url: `${SITE}/Flamengo-x-Independiente-del-Valle-libertadores-maracana-tickets`,
     image: 'https://lncimg.lance.com.br/cdn-cgi/image/width=1600,quality=80,fit=cover,format=webp/uploads/2016/10/19/5807e137e598d.jpeg',
-    imageAlt: 'Maracanã Stadium packed for a Flamengo match',
+    imageAlt: 'Maracanã Stadium packed for a Flamengo Libertadores match',
     type: 'website',
   };
   postMeta.set('/Flamengo-x-Independiente-del-Valle-libertadores-maracana-tickets', idvMeta);
