@@ -3,7 +3,7 @@ import { Link, Navigate } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import { createClient } from "@supabase/supabase-js";
 import { useQuery } from "@tanstack/react-query";
-import { Calendar, MapPin, Ticket, ArrowRight, Check, Clock, Users, Star, ShieldCheck } from "lucide-react";
+import { Calendar, MapPin, Ticket, ArrowRight, Check, Clock, Users, Star, ShieldCheck, Flame } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
@@ -93,6 +93,8 @@ interface Props {
   heroBackground?: string;
   accentClass?: string; // e.g. "from-green-600 to-green-800"
   youtubeVideos?: { id: string; title: string }[];
+  overrideCompetition?: string;
+  highDemand?: boolean;
 }
 
 export default function MatchLandingPage({
@@ -103,6 +105,8 @@ export default function MatchLandingPage({
   heroBackground,
   accentClass = "from-primary to-primary/70",
   youtubeVideos,
+  overrideCompetition,
+  highDemand,
 }: Props) {
   const { t, language, formatPrice } = useLocale();
   const { data: matches, isLoading } = useMatches();
@@ -173,7 +177,7 @@ export default function MatchLandingPage({
   const minPrice = validPkgs.length > 0 ? Math.min(...validPkgs.map((p) => p.price_brl)) : match.price || 0;
 
   const schema = generateSportsEventSchema({
-    name: `${match.home_team} x ${match.away_team}`,
+    name: `${match.home_team} x ${match.away_team}${overrideCompetition ? ` — ${overrideCompetition}` : ""}`,
     description: pageDescription,
     startDate: match.match_date,
     imageUrl: match.home_team_logo || match.away_team_logo,
@@ -232,9 +236,15 @@ export default function MatchLandingPage({
         </div>
 
         <div className="max-w-5xl mx-auto text-center relative z-10">
-          <p className="inline-block text-xs sm:text-sm font-bold tracking-[0.2em] uppercase bg-black/40 border border-white/10 backdrop-blur-md px-6 py-2 rounded-full mb-8 shadow-lg">
-            {match.competition || t("mlp_jogo_maracana")}
+          <p className="inline-block text-xs sm:text-sm font-bold tracking-[0.2em] uppercase bg-black/40 border border-white/10 backdrop-blur-md px-6 py-2 rounded-full mb-4 shadow-lg">
+            {overrideCompetition || match.competition || t("mlp_jogo_maracana")}
           </p>
+
+          {highDemand && (
+            <div className="inline-flex items-center gap-2 mb-6 px-4 py-2 rounded-full bg-red-600/90 text-white text-xs sm:text-sm font-black uppercase tracking-wider shadow-lg animate-pulse">
+              <Flame className="w-4 h-4" /> {t("mlp_alta_demanda")}
+            </div>
+          )}
 
           <div className="flex items-center justify-center gap-4 sm:gap-10 mb-6">
             {match.home_team_logo && (
