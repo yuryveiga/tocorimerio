@@ -891,7 +891,7 @@ const BlogPost = () => {
               )}
 
               {post.slug === 'is-rocinha-safe' && <RocinhaFAQ language={language} />}
-              {post?.id && <BlogPostRating postId={post.id} />
+              {post?.id && <BlogPostRating postId={post.id} />}
 
               {/* AUTHOR BOX */}
               <div className="mt-16 p-8 bg-muted/30 border border-border/50 rounded-2xl flex flex-col md:flex-row items-center md:items-start gap-8 group">
