@@ -867,10 +867,11 @@ export function PasseioDetalhe() {
               <li className="inline-flex items-center gap-2"><Shield className="w-4 h-4 text-primary" />{t("gtk_cancellation_value")}</li>
             </ul>
 
-            <div className="flex flex-col sm:flex-row gap-3 pt-2">
-              <Button onClick={handleCheckAvailability} size="lg" className="h-12 rounded-xl font-black text-xs uppercase tracking-widest gap-2">
-                <CalendarIcon className="w-4 h-4" /> {t("check_availability")}
+            <div className="flex flex-row items-stretch justify-center gap-2 pt-2">
+              <Button onClick={handleCheckAvailability} size="lg" className="h-12 flex-1 rounded-xl font-black text-[10px] sm:text-xs uppercase tracking-widest gap-1.5 px-3">
+                <CalendarIcon className="w-4 h-4 shrink-0" /> {t("check_availability")}
               </Button>
+              <span className="self-center text-muted-foreground/60 font-black text-sm">/</span>
               {(() => {
                 const wa = socialMedia.find((s) => s.platform?.toLowerCase().includes('whatsapp') && s.is_active !== false);
                 if (!wa) return null;
@@ -885,9 +886,9 @@ export function PasseioDetalhe() {
                     href={href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center justify-center gap-2 h-12 px-6 rounded-xl font-bold text-xs uppercase tracking-widest border border-[#25D366]/40 text-[#128C7E] hover:bg-[#25D366]/10 transition-colors"
+                    className="inline-flex flex-1 items-center justify-center gap-1.5 h-12 px-3 rounded-xl font-bold text-[10px] sm:text-xs uppercase tracking-widest border border-[#25D366]/40 text-[#128C7E] hover:bg-[#25D366]/10 transition-colors"
                   >
-                    <MessageSquare className="w-4 h-4" /> {t("ask_whatsapp")}
+                    <MessageSquare className="w-4 h-4 shrink-0" /> {t("ask_whatsapp")}
                   </a>
                 );
               })()}
