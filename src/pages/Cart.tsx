@@ -123,7 +123,7 @@ const Cart = () => {
     <div className="min-h-screen flex flex-col pt-20 bg-muted/20">
       <Helmet>
         <title>{t("meu_carrinho")} | Tocorime Rio</title>
-        <meta name="robots" content="noindex, nofollow" />
+        <meta name="robots" content="noindex, follow" />
         <link rel="canonical" href={getCanonicalUrl("/carrinho")} />
       </Helmet>
       <Header />

@@ -65,6 +65,8 @@ const Sitemap = () => {
       <Helmet>
         <title>{t("sitemap") || "Mapa do Site"} | Maracanã Match Day</title>
         <meta name="description" content="Navegue por todas as páginas, experiências e artigos do Maracanã Match Day." />
+        <meta name="robots" content="noindex, follow" />
+        <link rel="canonical" href="https://tocorimerio.com/sitemap" />
       </Helmet>
 
       <div className="bg-primary/5 py-16 mb-12">

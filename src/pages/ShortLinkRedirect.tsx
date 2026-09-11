@@ -40,7 +40,7 @@ export default function ShortLinkRedirect() {
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center gap-4 px-6 text-center">
-      <meta name="robots" content="noindex, nofollow" />
+      <meta name="robots" content="noindex, follow" />
       {notFound ? (
         <>
           <h1 className="text-2xl font-semibold">Link inválido ou expirado</h1>

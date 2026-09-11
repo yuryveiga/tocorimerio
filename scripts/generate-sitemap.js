@@ -72,23 +72,25 @@ async function generateSitemap() {
       return; // Stop gracefully
     }
 
+    // Somente URLs públicas, indexáveis, canônicas e HTTP 200.
+    // Sem /admin, /api, /carrinho, /checkout, /confirmacao, /r/ ou parâmetros.
     const staticPages = [
-      { url: '', priority: 1.0, changefreq: 'daily' },
-      { url: '/blog', priority: 0.9, changefreq: 'weekly' },
-      { url: '/sobre', priority: 0.7, changefreq: 'monthly' },
-      { url: '/contato', priority: 0.7, changefreq: 'monthly' },
-      { url: '/about-us', priority: 0.7, changefreq: 'monthly' },
-      { url: '/contact', priority: 0.7, changefreq: 'monthly' },
-      { url: '/passeio', priority: 0.8, changefreq: 'weekly' },
-      { url: '/our-tours', priority: 0.9, changefreq: 'weekly' },
-      { url: '/things-to-do-in-rio-de-janeiro', priority: 0.9, changefreq: 'weekly' },
-      { url: '/your-private-guide-in-rio', priority: 0.8, changefreq: 'monthly' },
-      { url: '/maracana-calendario', priority: 0.9, changefreq: 'daily' },
-      { url: '/flamengo-x-vasco-maracana', priority: 0.8, changefreq: 'daily' },
-      { url: '/fluminense-bolivar-libertadores', priority: 0.8, changefreq: 'daily' },
-      { url: '/brasil-x-panama-maio-maracana', priority: 0.8, changefreq: 'daily' },
-      { url: '/fluminense-indenpediente-rivadavia-libertadores-maracana', priority: 0.8, changefreq: 'daily' },
-      { url: '/flamengo-x-mirassol-maracana-tickets-02-09', priority: 0.8, changefreq: 'daily' },
+      { url: '' },
+      { url: '/blog' },
+      { url: '/sobre' },
+      { url: '/contato' },
+      { url: '/about-us' },
+      { url: '/contact' },
+      { url: '/passeio' },
+      { url: '/our-tours' },
+      { url: '/things-to-do-in-rio-de-janeiro' },
+      { url: '/your-private-guide-in-rio' },
+      { url: '/maracana-calendario' },
+      { url: '/flamengo-x-vasco-maracana' },
+      { url: '/fluminense-bolivar-libertadores' },
+      { url: '/brasil-x-panama-maio-maracana' },
+      { url: '/fluminense-indenpediente-rivadavia-libertadores-maracana' },
+      { url: '/flamengo-x-mirassol-maracana-tickets-02-09' },
     ];
 
     const escapeXml = (s) => String(s || '')
@@ -126,22 +128,16 @@ async function generateSitemap() {
     let xml = `<?xml version="1.0" encoding="UTF-8"?>\n`;
     xml += `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1" xmlns:xhtml="http://www.w3.org/1999/xhtml">\n`;
 
-    // Alternates de idioma (hreflang) — mesma URL servida em EN (padrão),
-    // PT-BR (?lang=pt) e ES (?lang=es).
-    const altBlock = (loc) =>
-      `    <xhtml:link rel="alternate" hreflang="en" href="${escapeXml(loc)}"/>\n` +
-      `    <xhtml:link rel="alternate" hreflang="pt-BR" href="${escapeXml(loc + '?lang=pt')}"/>\n` +
-      `    <xhtml:link rel="alternate" hreflang="es" href="${escapeXml(loc + '?lang=es')}"/>\n` +
-      `    <xhtml:link rel="alternate" hreflang="x-default" href="${escapeXml(loc)}"/>\n`;
+    // Cada URL é servida nos 3 idiomas no MESMO endereço (o site troca o
+    // idioma na própria página), então não há URLs alternativas com parâmetro.
+    // changefreq/priority foram removidos: eram valores artificiais e o Google
+    // os ignora. <lastmod> só aparece quando existe data real de modificação.
 
     // Static Pages
     staticPages.forEach(page => {
       const loc = `${siteUrl}${page.url.toLowerCase()}`;
       xml += `  <url>\n`;
       xml += `    <loc>${loc}</loc>\n`;
-      xml += altBlock(loc || siteUrl);
-      xml += `    <changefreq>${page.changefreq}</changefreq>\n`;
-      xml += `    <priority>${page.priority}</priority>\n`;
       xml += `  </url>\n`;
     });
 
@@ -153,10 +149,7 @@ async function generateSitemap() {
       }
       xml += `  <url>\n`;
       xml += `    <loc>${siteUrl}/passeio/${slug}</loc>\n`;
-      xml += altBlock(`${siteUrl}/passeio/${slug}`);
       if (tour.updated_at) xml += `    <lastmod>${tour.updated_at.split('T')[0]}</lastmod>\n`;
-      xml += `    <changefreq>weekly</changefreq>\n`;
-      xml += `    <priority>0.8</priority>\n`;
       const tourImages = collectImages(tour.image_url, tour.carousel_images_json, tour.images_json);
       xml += imageBlock(tourImages, tour.title);
       xml += `  </url>\n`;
@@ -171,9 +164,6 @@ async function generateSitemap() {
     cats.forEach(c => {
       xml += `  <url>\n`;
       xml += `    <loc>${siteUrl}/passeios/${c}</loc>\n`;
-      xml += altBlock(`${siteUrl}/passeios/${c}`);
-      xml += `    <changefreq>weekly</changefreq>\n`;
-      xml += `    <priority>0.7</priority>\n`;
       xml += `  </url>\n`;
     });
 
@@ -190,10 +180,7 @@ async function generateSitemap() {
         if (!key) return;
         xml += `  <url>\n`;
         xml += `    <loc>${siteUrl}/match/${key}</loc>\n`;
-        xml += altBlock(`${siteUrl}/match/${key}`);
         if (m.updated_at) xml += `    <lastmod>${m.updated_at.split('T')[0]}</lastmod>\n`;
-        xml += `    <changefreq>weekly</changefreq>\n`;
-        xml += `    <priority>0.9</priority>\n`;
         xml += `  </url>\n`;
       });
       matchesCount = visible.length;
@@ -206,10 +193,7 @@ async function generateSitemap() {
       const slug = slugify(post.slug);
       xml += `  <url>\n`;
       xml += `    <loc>${siteUrl}/blog/${slug}</loc>\n`;
-      xml += altBlock(`${siteUrl}/blog/${slug}`);
       if (post.updated_at) xml += `    <lastmod>${post.updated_at.split('T')[0]}</lastmod>\n`;
-      xml += `    <changefreq>monthly</changefreq>\n`;
-      xml += `    <priority>0.8</priority>\n`;
       const postImages = collectImages(post.image_url);
       xml += imageBlock(postImages, post.title || post.excerpt);
       xml += `  </url>\n`;

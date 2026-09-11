@@ -1,57 +1,29 @@
-import { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
-
-const REDIRECT_SECONDS = 8;
 
 const MESSAGES = [
   {
     lang: "EN",
-    oops: "Page not found",
-    body: "The page you're looking for doesn't exist or has been moved.",
-    redirect: "Redirecting you to the home page in",
-    seconds: "seconds",
-    btn: "Go to Home",
+    oops: "Looks like this page took the wrong turn in Rio.",
+    body: "The page you're looking for doesn't exist or has been moved. Try one of the routes below.",
   },
   {
     lang: "PT",
-    oops: "Página não encontrada",
-    body: "A página que você procura não existe ou foi movida.",
-    redirect: "Você será redirecionado para a página inicial em",
-    seconds: "segundos",
-    btn: "Ir para a Home",
+    oops: "Parece que esta página errou o caminho no Rio.",
+    body: "A página que você procura não existe ou foi movida. Escolha um dos caminhos abaixo.",
   },
   {
     lang: "ES",
-    oops: "Página no encontrada",
-    body: "La página que buscas no existe o ha sido movida.",
-    redirect: "Serás redirigido a la página principal en",
-    seconds: "segundos",
-    btn: "Ir al Inicio",
+    oops: "Parece que esta página tomó el camino equivocado en Río.",
+    body: "La página que buscas no existe o ha sido movida. Elige una de las opciones de abajo.",
   },
 ];
 
 const NotFound = () => {
-  const location = useLocation();
-  const [count, setCount] = useState(REDIRECT_SECONDS);
-
-  useEffect(() => {
-    console.error("404:", location.pathname);
-  }, [location.pathname]);
-
-  useEffect(() => {
-    if (count <= 0) { window.location.href = "/"; return; }
-    const id = setTimeout(() => setCount(c => c - 1), 1000);
-    return () => clearTimeout(id);
-  }, [count]);
-
-  const progress = ((REDIRECT_SECONDS - count) / REDIRECT_SECONDS) * 100;
-
   return (
     <div className="nf-page">
       <Helmet>
         <title>404 — Page Not Found | Tocorime Rio</title>
-        <meta name="robots" content="noindex, nofollow" />
+        <meta name="robots" content="noindex, follow" />
         <link
           href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@400;600;700&family=Barlow:wght@400;500&display=swap"
           rel="stylesheet"
@@ -210,48 +182,13 @@ const NotFound = () => {
           line-height: 1.55;
         }
 
-        /* Redirect countdown */
-        .nf-redirect {
-          width: 100%;
-          margin-bottom: 2rem;
-        }
-
-        .nf-redirect-text {
-          font-family: 'Barlow Condensed', sans-serif;
-          font-size: 0.8rem;
-          letter-spacing: 0.12em;
-          text-transform: uppercase;
-          color: #7a7360;
-          margin-bottom: 0.8rem;
+        /* CTA group */
+        .nf-actions {
           display: flex;
-          align-items: center;
-          justify-content: center;
-          gap: 0.4rem;
           flex-wrap: wrap;
-        }
-
-        .nf-count {
-          font-family: 'Bebas Neue', sans-serif;
-          font-size: 1.5rem;
-          color: #f0c84a;
-          line-height: 1;
-          display: inline-block;
-          min-width: 1.6rem;
-          text-align: center;
-        }
-
-        /* Progress bar */
-        .nf-progress-track {
-          height: 2px;
-          background: rgba(255,255,255,0.06);
-          border-radius: 1px;
-          overflow: hidden;
-        }
-        .nf-progress-fill {
-          height: 100%;
-          background: linear-gradient(90deg, #1a7a2e, #c9a227);
-          border-radius: 1px;
-          transition: width 0.9s linear;
+          gap: 0.9rem;
+          justify-content: center;
+          width: 100%;
         }
 
         /* CTA */
@@ -262,7 +199,8 @@ const NotFound = () => {
           font-weight: 700;
           letter-spacing: 0.14em;
           text-transform: uppercase;
-          padding: 0.95rem 2.8rem;
+          padding: 0.95rem 1.9rem;
+          min-height: 48px;
           background: #1a7a2e;
           color: #fff;
           text-decoration: none;
@@ -315,20 +253,12 @@ const NotFound = () => {
           ))}
         </div>
 
-        {/* Countdown */}
-        <div className="nf-redirect">
-          <div className="nf-redirect-text">
-            <span>Redirecting&nbsp;/&nbsp;Redirecionando&nbsp;/&nbsp;Redirigiendo</span>
-            <span className="nf-count">{count}</span>
-            <span>s</span>
-          </div>
-          <div className="nf-progress-track">
-            <div className="nf-progress-fill" style={{ width: `${progress}%` }} />
-          </div>
+        {/* CTAs — sem redirect automático, o visitante escolhe o caminho */}
+        <div className="nf-actions">
+          <a href="/passeio" className="nf-btn">View Tours</a>
+          <a href="/things-to-do-in-rio-de-janeiro" className="nf-btn">Explore Rio</a>
+          <a href="/contato" className="nf-btn">Contact Us</a>
         </div>
-
-        {/* Manual CTA */}
-        <a href="/" className="nf-btn">Home ↗</a>
 
         <p className="nf-footer">tocorimerio.com</p>
       </div>

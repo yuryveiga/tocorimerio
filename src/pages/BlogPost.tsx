@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
-import { useParams, Navigate, Link } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
+import NotFound from "./NotFound";
 import DOMPurify from "dompurify";
 
 import { LovableBlogPost } from "@/integrations/lovable/client";
@@ -186,7 +187,8 @@ const BlogPost = () => {
   }
 
   if (!post) {
-    return <Navigate to="/404" replace />;
+    // Mantém a URL original em vez de redirecionar para /404.
+    return <NotFound />;
   }
 
   const title = getTranslated('title');
