@@ -31,7 +31,7 @@ import {
   CarouselNext, 
   CarouselPrevious 
 } from "@/components/ui/carousel";
-import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Label } from "@/components/ui/label";
 import { Maximize2, Calendar as CalendarIcon } from "lucide-react";
 import { Calendar as CalendarUI } from "@/components/ui/calendar";
@@ -44,7 +44,7 @@ import { slugify } from "@/utils/slugify";
 
 const WeatherSection = lazy(() => import("@/components/WeatherSection").then(m => ({ default: m.WeatherSection })));
 import { LazyMount } from "@/components/LazyMount";
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+
 const YouMayAlsoLike = lazy(() => import("@/components/YouMayAlsoLike").then(m => ({ default: m.YouMayAlsoLike })));
 const RelatedBlogPosts = lazy(() => import("@/components/RelatedBlogPosts").then(m => ({ default: m.RelatedBlogPosts })));
 import { TourGuidesCard } from "@/components/TourGuidesCard";
