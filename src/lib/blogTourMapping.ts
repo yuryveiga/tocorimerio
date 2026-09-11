@@ -48,11 +48,23 @@ const RULES: Rule[] = [
     keywords: ["rocinha", "favela", "comunidade"],
     targets: [{ type: "tour", slug: "favela-rio-tour-rocinha" }],
   },
-  // Maracanã / football articles → Maracanã MatchDay
+  // Maracanã / football articles → Maracanã MatchDay + fixture calendar
   {
-    keywords: ["maracana", "maracanã", "football", "futebol", "soccer", "flamengo", "fluminense", "copa do mundo", "world cup", "matchday", "estadio", "stadium"],
-    targets: [{ type: "tour", slug: "maracana-matchday" }],
+    keywords: ["maracana", "maracanã", "football", "futebol", "soccer", "flamengo", "fluminense", "vasco", "botafogo", "ingressos", "tickets", "copa do mundo", "world cup", "matchday", "estadio", "stadium"],
+    targets: [
+      { type: "tour", slug: "maracana-matchday" },
+      {
+        type: "page",
+        path: "/maracana-calendario",
+        label: {
+          pt: "Calendário de jogos e ingressos do Maracanã",
+          en: "Maracanã match calendar & tickets",
+          es: "Calendario de partidos y entradas de Maracanã",
+        },
+      },
+    ],
   },
+
   // Tijuca articles → Pico da Tijuca hiking tour
   {
     keywords: ["tijuca", "floresta da tijuca", "tijuca forest", "ecoturismo"],
