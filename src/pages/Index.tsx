@@ -6,7 +6,7 @@ import { HeroSection } from "@/components/HeroSection";
 import { TrustMarquee } from "@/components/TrustMarquee";
 import { useSiteData } from "@/hooks/useSiteData";
 import { useLocale } from "@/contexts/LocaleContext";
-import { getCanonicalUrl, generateTravelAgencySchema, getHreflangLinks } from "@/utils/seo";
+import { getCanonicalUrl, getHreflangLinks } from "@/utils/seo";
 
 // Lazy load sections below the fold
 const WeatherSection = lazy(() => import("@/components/WeatherSection").then(m => ({ default: m.WeatherSection })));
@@ -32,12 +32,8 @@ const Index = () => {
         ? '+' + whatsappSocial.url.replace(/[^\d]/g, '')
         : whatsappSocial.url)
     : undefined;
-  const contactEmail = socialMedia.find((s) => s.platform?.toLowerCase() === 'email')?.url;
-  // sameAs: apenas perfis oficiais realmente cadastrados (sem inventar redes).
-  const officialProfiles = socialMedia
-    .filter((s) => ['instagram', 'tripadvisor', 'youtube', 'facebook'].includes((s.platform || '').toLowerCase()))
-    .map((s) => s.url)
-    .filter((u): u is string => !!u && u.startsWith('http'));
+  // O schema TravelAgency/Organization é estático em index.html (lido por
+  // qualquer crawler, sem depender de JavaScript).
   const siteTitle = language === 'pt'
     ? (siteSettings?.site_title || "Passeios Privados no Rio de Janeiro | Tocorime Rio")
     : language === 'es'
@@ -68,15 +64,6 @@ const Index = () => {
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content={siteTitle} />
         <meta name="twitter:description" content={siteDescription} />
-        <script type="application/ld+json">
-          {JSON.stringify(generateTravelAgencySchema({
-            description: siteDescription,
-            imageUrl: images?.hero_bg,
-            telephone: businessPhone,
-            email: contactEmail,
-            sameAs: officialProfiles,
-          }))}
-        </script>
       </Helmet>
       <Header />
       <HeroSection />
