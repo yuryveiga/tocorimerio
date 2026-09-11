@@ -26,12 +26,6 @@ const SectionLoader = () => <div className="h-40 w-full flex items-center justif
 const Index = () => {
   const { siteSettings, images, socialMedia } = useSiteData();
   const { language } = useLocale();
-  const whatsappSocial = socialMedia.find((s) => s.platform?.toLowerCase().includes('whatsapp'));
-  const businessPhone = whatsappSocial?.url
-    ? (whatsappSocial.url.startsWith('http')
-        ? '+' + whatsappSocial.url.replace(/[^\d]/g, '')
-        : whatsappSocial.url)
-    : undefined;
   // O schema TravelAgency/Organization é estático em index.html (lido por
   // qualquer crawler, sem depender de JavaScript).
   const siteTitle = language === 'pt'
