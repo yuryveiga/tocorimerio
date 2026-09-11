@@ -6,9 +6,10 @@ interface SocialProofProps {
   className?: string;
   light?: boolean;
   hideReviewsOnMobile?: boolean;
+  compact?: boolean;
 }
 
-export const SocialProof = ({ className = "", light = true, hideReviewsOnMobile = false }: SocialProofProps) => {
+export const SocialProof = ({ className = "", light = true, hideReviewsOnMobile = false, compact = false }: SocialProofProps) => {
   const { socialMedia } = useSiteData();
   const { language } = useLocale();
   
