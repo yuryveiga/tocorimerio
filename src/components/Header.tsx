@@ -134,7 +134,6 @@ export function Header({ forceLanguage }: { forceLanguage?: 'pt' | 'en' | 'es' }
   }, [socialMedia]);
 
 
-  console.log("socialMedia:", socialMedia);
 
   const logoUrl = images["logo"] || "https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/images__1_-removebg-preview.png";
 
