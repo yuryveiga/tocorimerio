@@ -875,7 +875,7 @@ export function PasseioDetalhe() {
             </ul>
 
             <div className="flex flex-row items-stretch justify-center gap-2 pt-0.5 -mb-1">
-              <Button onClick={handleCheckAvailability} size="lg" className="h-12 flex-1 rounded-xl font-black text-[10px] sm:text-xs uppercase tracking-widest gap-1.5 px-3">
+              <Button onClick={handleCheckAvailability} size="lg" className="h-10 flex-1 rounded-xl font-black text-[10px] sm:text-xs uppercase tracking-widest gap-1.5 px-3">
                 <CalendarIcon className="w-4 h-4 shrink-0" /> {t("check_availability")}
               </Button>
               <span className="self-center text-muted-foreground/60 font-black text-sm">/</span>
@@ -893,7 +893,7 @@ export function PasseioDetalhe() {
                     href={href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex flex-1 items-center justify-center gap-1.5 h-12 px-3 rounded-xl font-bold text-[10px] sm:text-xs uppercase tracking-widest border border-[#25D366]/40 text-[#128C7E] hover:bg-[#25D366]/10 transition-colors"
+                    className="inline-flex flex-1 items-center justify-center gap-1.5 h-10 px-3 rounded-xl font-bold text-[10px] sm:text-xs uppercase tracking-widest border border-[#25D366]/40 text-[#128C7E] hover:bg-[#25D366]/10 transition-colors"
                   >
                     <MessageSquare className="w-4 h-4 shrink-0" /> {t("ask_whatsapp")}
                   </a>
