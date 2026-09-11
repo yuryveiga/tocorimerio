@@ -251,23 +251,23 @@ export function HeroSection() {
           className={`absolute inset-0 transition-opacity duration-1000 bg-cover bg-center bg-no-repeat ${index === currentBg ? 'opacity-100' : 'opacity-0'}`}
           style={
             isMobile
-              // Mobile: sem ken-burns (anima 1 camada em tela cheia = CPU/GPU cara)
-              // e sem background-image — a <img> visível abaixo evita decodificar
-              // a mesma imagem duas vezes.
+              // Mobile: sem ken-burns (anima 1 camada em tela cheia = CPU/GPU cara).
               ? undefined
-              : { backgroundImage: `url(${bg})`, animation: `ken-burns 14s ease-in-out ${index * 2}s infinite alternate`, willChange: 'transform' }
+              : { animation: `ken-burns 14s ease-in-out ${index * 2}s infinite alternate`, willChange: 'transform' }
           }
         >
-          {/* Hidden <img> so the browser preload scanner can fetch the image.
-              fetchpriority="high" on index 0 tells the browser this is LCP-critical.
-              No mobile ela é a própria imagem visível do hero. */}
+          {/* A <img> é a própria imagem visível do hero (não há mais
+              background-image, que impedia srcset e baixava o original inteiro).
+              fetchpriority="high" no índice 0 marca o candidato a LCP. */}
           <img
             src={bg}
+            srcSet={rawHeroBgs[index] ? heroSrcSet(rawHeroBgs[index]) : undefined}
+            sizes="100vw"
             alt=""
             aria-hidden="true"
             width={1920}
             height={1080}
-            className={`absolute inset-0 w-full h-full object-cover pointer-events-none select-none ${isMobile ? '' : 'opacity-0'}`}
+            className="absolute inset-0 w-full h-full object-cover pointer-events-none select-none"
             fetchPriority={index === 0 ? "high" : "low"}
             loading={index === 0 ? "eager" : "lazy"}
             decoding={index === 0 ? "sync" : "async"}
