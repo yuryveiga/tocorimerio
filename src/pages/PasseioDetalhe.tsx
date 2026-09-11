@@ -921,18 +921,25 @@ export function PasseioDetalhe() {
             </div>
           </div>
           {!hidePrices ? (
-            <div className="flex items-center gap-6 bg-card border border-primary/10 px-8 py-6 rounded-[2rem] shadow-xl h-fit ring-4 ring-primary/5">
-              <div className="text-right">
+            <div className="flex flex-col sm:flex-row items-center justify-between gap-4 sm:gap-6 bg-card border border-primary/10 px-6 sm:px-8 py-5 sm:py-6 rounded-[2rem] shadow-xl h-fit ring-4 ring-primary/5">
+              <div className="text-center sm:text-right">
                 <span className="text-muted-foreground text-[10px] font-black uppercase tracking-widest block mb-1 opacity-70">
                   {tour.pricing_model === 'group' ? t("valor_grupo") || "Valor por Grupo" : t("a_partir_de")}
                 </span>
                 <span className="text-4xl font-black text-primary">
                   {formatPrice(getTourMinPrice(tour))}
                 </span>
-                <span className="text-[10px] font-black uppercase text-muted-foreground block text-right mt-1 opacity-60 tracking-tighter shrink-0">
+                <span className="text-[10px] font-black uppercase text-muted-foreground block mt-1 opacity-60 tracking-tighter shrink-0">
                   {tour.pricing_model === 'group' ? t("ate") || "até" : t("por_pessoa")} {tour.pricing_model === 'group' ? `${tour.max_group_size} ${t("pessoas")}` : ""}
                 </span>
               </div>
+              <Button
+                onClick={handleCheckAvailability}
+                size="lg"
+                className="h-12 sm:h-14 w-full sm:w-auto rounded-xl sm:rounded-2xl font-black text-sm uppercase tracking-widest px-6 sm:px-8"
+              >
+                {t("book_exclamation") || "BOOK!"}
+              </Button>
             </div>
           ) : (() => {
             const wa = socialMedia.find((s) => s.platform?.toLowerCase().includes('whatsapp') && s.is_active !== false);
