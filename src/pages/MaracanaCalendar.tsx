@@ -7,7 +7,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { Locale } from "date-fns";
 import { format, startOfMonth, endOfMonth, eachDayOfInterval, getDay, isSameDay, addMonths, subMonths } from "date-fns";
 import { ptBR, enUS, es } from "date-fns/locale";
-import { getMatchDateInRio, isMatchOnDay, getDisplaySpots } from "@/lib/dateUtils";
+import { getMatchDateInRio, isMatchOnDay } from "@/lib/dateUtils";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { MapPin, ArrowRight, Bus, Ticket, UserCheck, Clock, Camera, Users, ChevronLeft, ChevronRight, CalendarDays } from "lucide-react";
@@ -184,7 +184,7 @@ const MaracanaCalendar = () => {
           { q: 'Dá para comprar ingresso do Maracanã na bilheteria no dia do jogo?', a: 'Nem sempre. Muitos jogos exigem cadastro biométrico, CPF ou sócio-torcedor e esgotam antes do dia da partida. Comprando com o tour, resolvemos toda a parte burocrática e garantimos a entrada.' },
           { q: 'Turista estrangeiro precisa de CPF para entrar no Maracanã?', a: 'Em vários jogos sim — o sistema de venda exige documento brasileiro ou cadastro prévio. Nós fazemos essa emissão para você e entregamos o ingresso já em seu nome no dia.' },
           { q: 'Quando joga o Flamengo no Maracanã?', a: 'Os jogos do Flamengo no Maracanã aparecem destacados no calendário acima assim que são confirmados pela CBF/Conmebol. Como são partidas de alta procura, recomendamos reservar com antecedência.' },
-          { q: 'Quando joga o Fluminense no Maracanã?', a: 'As partidas do Fluminense no Maracanã também são listadas no calendário desta página, com data, campeonato e disponibilidade de vagas em tempo real.' },
+          { q: 'Quando joga o Fluminense no Maracanã?', a: 'As partidas do Fluminense no Maracanã também são listadas no calendário desta página, com data, campeonato e horário de início.' },
           { q: 'O tour inclui transporte do hotel até o Maracanã?', a: 'Sim. Buscamos você no lobby do seu hotel na Zona Sul em van executiva, levamos ao estádio e fazemos o retorno seguro após o apito final.' },
           { q: 'É seguro ir ao Maracanã como turista?', a: 'Sim, indo acompanhado. Nossos guias trilíngues acompanham o grupo do embarque ao retorno, orientando sobre setores, torcidas e comportamento no estádio.' },
         ]
@@ -205,7 +205,7 @@ const MaracanaCalendar = () => {
             { q: '¿Puedo comprar la entrada en la taquilla el día del partido?', a: 'No siempre. Muchos partidos exigen registro biométrico o CPF brasileño y se agotan antes. Con el tour resolvemos todo el trámite y garantizamos tu entrada.' },
             { q: '¿Un turista extranjero necesita CPF para entrar a Maracanã?', a: 'En varios partidos sí: el sistema de venta exige documento brasileño o registro previo. Nosotros gestionamos la emisión y te entregamos la entrada a tu nombre.' },
             { q: '¿Cuándo juega Flamengo en Maracanã?', a: 'Los partidos de Flamengo aparecen destacados en el calendario apenas se confirman. Son de alta demanda: reserva con antelación.' },
-            { q: '¿Cuándo juega Fluminense en Maracanã?', a: 'Los partidos de Fluminense también se listan aquí, con fecha, campeonato y disponibilidad en tiempo real.' },
+            { q: '¿Cuándo juega Fluminense en Maracanã?', a: 'Los partidos de Fluminense también se listan aquí, con fecha, campeonato y hora de inicio.' },
             { q: '¿El tour incluye transporte desde el hotel?', a: 'Sí. Te recogemos en el lobby de tu hotel en la Zona Sur y regresamos tras el pitido final.' },
             { q: '¿Es seguro ir a Maracanã como turista?', a: 'Sí, acompañado. Nuestros guías trilingües están con el grupo durante toda la experiencia.' },
           ]
@@ -224,7 +224,7 @@ const MaracanaCalendar = () => {
             { q: 'Can I buy Maracanã tickets at the box office on matchday?', a: 'Often not. Many matches require biometric registration, a Brazilian CPF number or club membership, and popular fixtures sell out days in advance. Booking the tour removes all of that paperwork and guarantees entry.' },
             { q: 'Do foreign tourists need a CPF to enter Maracanã?', a: 'For several matches, yes — the official ticketing system requires a Brazilian document or prior registration. We handle the issuing process and hand you the ticket in your name on the day.' },
             { q: 'When does Flamengo play at Maracanã?', a: 'Flamengo fixtures are highlighted in the calendar above as soon as they are confirmed. These matches sell out fast, so book early.' },
-            { q: 'When does Fluminense play at Maracanã?', a: 'Fluminense home matches are also listed on this page with date, competition and live spot availability.' },
+            { q: 'When does Fluminense play at Maracanã?', a: 'Fluminense home matches are also listed on this page with date, competition and kick-off time.' },
             { q: 'Does the tour include transport from my hotel to Maracanã?', a: 'Yes. We pick you up at your South Zone hotel lobby in an executive van and bring you back safely after the final whistle.' },
             { q: 'Is it safe to go to Maracanã as a tourist?', a: 'Yes, when accompanied. Our trilingual guides stay with the group from pickup to drop-off and explain sectors, fan culture and stadium etiquette.' },
 
@@ -305,10 +305,10 @@ const MaracanaCalendar = () => {
           </h1>
           <p className="text-muted-foreground mb-4 max-w-3xl leading-relaxed">
             {language === 'pt'
-              ? 'Todos os próximos jogos confirmados no Maracanã, com data, campeonato, preço por pessoa e vagas em tempo real. Cada reserva inclui o ingresso oficial nas Cadeiras Cativas do Setor Oeste, transporte ida e volta do seu hotel na Zona Sul e guia trilíngue — sem fila, sem CPF e sem risco de revenda.'
+              ? 'Todos os próximos jogos confirmados no Maracanã, com data, campeonato, preço por pessoa e horário de início. Cada reserva inclui o ingresso oficial nas Cadeiras Cativas do Setor Oeste, transporte ida e volta do seu hotel na Zona Sul e guia trilíngue — sem fila, sem CPF e sem risco de revenda.'
               : language === 'es'
-                ? 'Todos los próximos partidos confirmados en Maracanã, con fecha, campeonato, precio por persona y plazas en tiempo real. Cada reserva incluye la entrada oficial en las Sillas Reservadas del Sector Oeste, transporte ida y vuelta desde tu hotel en la Zona Sur y guía trilingüe — sin colas, sin CPF y sin riesgo de reventa.'
-                : 'Every confirmed upcoming fixture at Maracanã, with date, competition, price per person and live availability. Each booking includes an official Maracanã ticket in the Reserved Seats (lower West Sector), round-trip transport from your South Zone hotel and a trilingual guide — no queues, no Brazilian CPF and no resale risk.'}
+                ? 'Todos los próximos partidos confirmados en Maracanã, con fecha, campeonato, precio por persona y hora de inicio. Cada reserva incluye la entrada oficial en las Sillas Reservadas del Sector Oeste, transporte ida y vuelta desde tu hotel en la Zona Sur y guía trilingüe — sin colas, sin CPF y sin riesgo de reventa.'
+                : 'Every confirmed upcoming fixture at Maracanã, with date, competition, price per person and kick-off time. Each booking includes an official Maracanã ticket in the Reserved Seats (lower West Sector), round-trip transport from your South Zone hotel and a trilingual guide — no queues, no Brazilian CPF and no resale risk.'}
           </p>
           {(() => {
             const cheapest = availableMatches.length ? Math.min(...availableMatches.map(m => Number(m.price) || Infinity)) : null;
