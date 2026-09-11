@@ -197,7 +197,7 @@ export function Header({ forceLanguage }: { forceLanguage?: 'pt' | 'en' | 'es' }
                     setIsMenuOpen(false);
                   }
                 }}
-                className={`text-sm font-semibold font-sans transition-all hover:text-primary relative group ${location.pathname === link.href ? "text-primary" : "text-foreground/80"}`}
+                className={`inline-flex items-center py-2 text-sm font-semibold font-sans transition-all hover:text-primary relative group ${location.pathname === link.href ? "text-primary" : "text-foreground/80"}`}
               >
                 {link.label}
                 <span className={`absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all group-hover:w-full ${location.pathname === link.href ? "w-full" : ""}`}></span>
