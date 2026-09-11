@@ -192,7 +192,11 @@ export const TourItem = memo(({ tour }: { tour: TourCardProps }) => {
           <button
             type="button"
             onClick={(e) => { e.preventDefault(); e.stopPropagation(); setShowDetails(v => !v); }}
-            className="text-[11px] font-bold uppercase tracking-wider text-primary underline underline-offset-4"
+            aria-expanded={showDetails}
+            aria-label={`${showDetails
+              ? (language === 'pt' ? 'Ocultar detalhes de' : language === 'es' ? 'Ocultar detalles de' : 'Hide details of')
+              : (language === 'pt' ? 'Ver detalhes de' : language === 'es' ? 'Ver detalles de' : 'View details of')} ${title}`}
+            className="inline-flex items-center min-h-[44px] py-2 pr-3 text-[11px] font-bold uppercase tracking-wider text-primary underline underline-offset-4"
           >
             {showDetails
               ? (language === 'pt' ? 'Ocultar detalhes' : language === 'es' ? 'Ocultar detalles' : 'Hide details')
