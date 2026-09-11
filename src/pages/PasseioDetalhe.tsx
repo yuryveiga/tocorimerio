@@ -1640,12 +1640,14 @@ export function PasseioDetalhe() {
       </div>
 
 
-      {/* Clima: só monta perto do viewport e reserva a altura real (evita CLS). */}
-      <LazyMount minHeight={560} rootMargin="400px">
-        <Suspense fallback={<div className="h-[560px]" />}>
-          <WeatherSection />
-        </Suspense>
-      </LazyMount>
+      {/* Clima: só monta perto do viewport e reserva a altura real (evita CLS). Oculto no mobile. */}
+      <div className="hidden lg:block">
+        <LazyMount minHeight={560} rootMargin="400px">
+          <Suspense fallback={<div className="h-[560px]" />}>
+            <WeatherSection />
+          </Suspense>
+        </LazyMount>
+      </div>
 
       <LazyMount minHeight={520} rootMargin="400px">
         <Suspense fallback={<div className="h-[520px]" />}>
@@ -1713,6 +1715,21 @@ export function PasseioDetalhe() {
               <CarouselNext className="static translate-y-0 h-12 w-12 border-2 hover:bg-primary hover:text-white transition-all shadow-xl" />
             </div>
           </Carousel>
+        </div>
+      </section>
+
+      {/* Mobile-only: formulário de reserva abaixo de "You May Also Like" */}
+      <section className="lg:hidden py-16 border-t border-border/50 bg-muted/20">
+        <div className="max-w-md mx-auto px-4">
+          <div className="bg-card rounded-[2.5rem] border border-primary/20 p-6 shadow-2xl">
+            <h2 className="text-2xl font-serif font-black text-foreground mb-6 flex items-center gap-3">
+              <div className="w-2 h-8 bg-primary rounded-full shrink-0" />
+              {language === 'pt' ? 'Faça sua Reserva' : language === 'es' ? 'Haz tu Reserva' : 'Book Your Tour'}
+            </h2>
+            <div className="space-y-4">
+              {renderBookingForm(false)}
+            </div>
+          </div>
         </div>
       </section>
 
