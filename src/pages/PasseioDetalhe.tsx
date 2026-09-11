@@ -934,12 +934,12 @@ export function PasseioDetalhe() {
                    {tour.pricing_model === 'group' ? t("ate") || "até" : t("por_pessoa")} {tour.pricing_model === 'group' ? `${tour.max_group_size} ${t("pessoas")}` : ""}
                  </span>
                </div>
-               <Button
-                 onClick={handleCheckAvailability}
-                 className="h-8 sm:h-14 w-auto shrink-0 rounded-lg sm:rounded-2xl font-black text-xs sm:text-sm uppercase tracking-widest px-4 sm:px-8"
-               >
-                 {t("book_exclamation") || "BOOK!"}
-               </Button>
+                <Button
+                  onClick={handleCheckAvailability}
+                  className="h-6 sm:h-12 min-w-[120px] sm:min-w-[140px] w-auto shrink-0 rounded-lg sm:rounded-2xl font-black text-xs sm:text-sm uppercase tracking-widest px-6 sm:px-8"
+                >
+                  {t("book_exclamation") || "BOOK!"}
+                </Button>
              </div>
           ) : (() => {
             const wa = socialMedia.find((s) => s.platform?.toLowerCase().includes('whatsapp') && s.is_active !== false);
