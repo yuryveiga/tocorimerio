@@ -72,23 +72,25 @@ async function generateSitemap() {
       return; // Stop gracefully
     }
 
+    // Somente URLs públicas, indexáveis, canônicas e HTTP 200.
+    // Sem /admin, /api, /carrinho, /checkout, /confirmacao, /r/ ou parâmetros.
     const staticPages = [
-      { url: '', priority: 1.0, changefreq: 'daily' },
-      { url: '/blog', priority: 0.9, changefreq: 'weekly' },
-      { url: '/sobre', priority: 0.7, changefreq: 'monthly' },
-      { url: '/contato', priority: 0.7, changefreq: 'monthly' },
-      { url: '/about-us', priority: 0.7, changefreq: 'monthly' },
-      { url: '/contact', priority: 0.7, changefreq: 'monthly' },
-      { url: '/passeio', priority: 0.8, changefreq: 'weekly' },
-      { url: '/our-tours', priority: 0.9, changefreq: 'weekly' },
-      { url: '/things-to-do-in-rio-de-janeiro', priority: 0.9, changefreq: 'weekly' },
-      { url: '/your-private-guide-in-rio', priority: 0.8, changefreq: 'monthly' },
-      { url: '/maracana-calendario', priority: 0.9, changefreq: 'daily' },
-      { url: '/flamengo-x-vasco-maracana', priority: 0.8, changefreq: 'daily' },
-      { url: '/fluminense-bolivar-libertadores', priority: 0.8, changefreq: 'daily' },
-      { url: '/brasil-x-panama-maio-maracana', priority: 0.8, changefreq: 'daily' },
-      { url: '/fluminense-indenpediente-rivadavia-libertadores-maracana', priority: 0.8, changefreq: 'daily' },
-      { url: '/flamengo-x-mirassol-maracana-tickets-02-09', priority: 0.8, changefreq: 'daily' },
+      { url: '' },
+      { url: '/blog' },
+      { url: '/sobre' },
+      { url: '/contato' },
+      { url: '/about-us' },
+      { url: '/contact' },
+      { url: '/passeio' },
+      { url: '/our-tours' },
+      { url: '/things-to-do-in-rio-de-janeiro' },
+      { url: '/your-private-guide-in-rio' },
+      { url: '/maracana-calendario' },
+      { url: '/flamengo-x-vasco-maracana' },
+      { url: '/fluminense-bolivar-libertadores' },
+      { url: '/brasil-x-panama-maio-maracana' },
+      { url: '/fluminense-indenpediente-rivadavia-libertadores-maracana' },
+      { url: '/flamengo-x-mirassol-maracana-tickets-02-09' },
     ];
 
     const escapeXml = (s) => String(s || '')
