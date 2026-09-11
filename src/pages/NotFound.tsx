@@ -199,7 +199,8 @@ const NotFound = () => {
           font-weight: 700;
           letter-spacing: 0.14em;
           text-transform: uppercase;
-          padding: 0.95rem 2.8rem;
+          padding: 0.95rem 1.9rem;
+          min-height: 48px;
           background: #1a7a2e;
           color: #fff;
           text-decoration: none;
