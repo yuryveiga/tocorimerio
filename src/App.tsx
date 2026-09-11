@@ -100,6 +100,8 @@ const Experiences            = lazy(() => import("./pages/Experiences"));
 const ShortLinkRedirect      = lazy(() => import("./pages/ShortLinkRedirect"));
 const PrivateGuideRio        = lazy(() => import("./pages/PrivateGuideRio"));
 const ThingsToDoInRio        = lazy(() => import("./pages/ThingsToDoInRio"));
+const PrivateToursRio        = lazy(() => import("./pages/PrivateToursRio"));
+const CustomTourRio          = lazy(() => import("./pages/CustomTourRio"));
 
 const PageLoader = () => <div className="min-h-screen flex items-center justify-center bg-background"><div className="w-12 h-12 border-4 border-primary border-t-transparent rounded-full animate-spin" /></div>;
 
