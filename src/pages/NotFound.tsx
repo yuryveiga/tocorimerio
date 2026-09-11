@@ -253,20 +253,12 @@ const NotFound = () => {
           ))}
         </div>
 
-        {/* Countdown */}
-        <div className="nf-redirect">
-          <div className="nf-redirect-text">
-            <span>Redirecting&nbsp;/&nbsp;Redirecionando&nbsp;/&nbsp;Redirigiendo</span>
-            <span className="nf-count">{count}</span>
-            <span>s</span>
-          </div>
-          <div className="nf-progress-track">
-            <div className="nf-progress-fill" style={{ width: `${progress}%` }} />
-          </div>
+        {/* CTAs — sem redirect automático, o visitante escolhe o caminho */}
+        <div className="nf-actions">
+          <a href="/passeio" className="nf-btn">View Tours</a>
+          <a href="/things-to-do-in-rio-de-janeiro" className="nf-btn">Explore Rio</a>
+          <a href="/contato" className="nf-btn">Contact Us</a>
         </div>
-
-        {/* Manual CTA */}
-        <a href="/" className="nf-btn">Home ↗</a>
 
         <p className="nf-footer">tocorimerio.com</p>
       </div>
