@@ -22,6 +22,9 @@ import { OptimizedImage } from "@/components/OptimizedImage";
 import { getCanonicalUrl, generateOptimizedMetaDescription, getHreflangLinks, generateArticleSchema, generateBreadcrumbsSchema, getOgImage, generateFAQSchema } from "@/utils/seo";
 import { BlogPostRating } from "@/components/BlogPostRating";
 import { EmailCaptureCTA } from "@/components/EmailCaptureCTA";
+import { ExploreRioWithTocorime } from "@/components/ExploreRioWithTocorime";
+import { resolveBlogTourTargets } from "@/lib/blogTourMapping";
+
 
 const InlineCTA = () => {
   const { t, language } = useLocale();
