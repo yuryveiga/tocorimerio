@@ -714,37 +714,11 @@ const BlogPost = () => {
                   <span aria-hidden>/</span>
                   <span className="text-foreground/70 truncate max-w-[60%]">{title}</span>
                 </nav>
-                <div 
-                  className="max-w-none ql-editor blog-content-area"
-                  style={{ padding: 0 }}
-                  lang={language}
-                  dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(contentWithSplit.part1 || "", {
-                    ADD_ATTR: ['src', 'width', 'height', 'style', 'class', 'target', 'rel'],
-                    ADD_TAGS: ['img'],
-                    ALLOW_DATA_ATTR: false,
-                    ALLOWED_URI_REGEXP: /^(?:(?:(?:f|ht)tps?|mailto|tel|callto|cid|xmpp|data):|[^a-z]|[a-z+.\-]+(?:[^a-z+.\-:]|$))/i,
-                  }) }}
-                />
-
-                {contentWithSplit.part2 && (
-                  <>
-                    <InlineCTA />
-                    <div 
-                      className="max-w-none ql-editor blog-content-area"
-                      style={{ padding: 0 }}
-                      lang={language}
-                      dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(contentWithSplit.part2 || "", {
-                        ADD_ATTR: ['src', 'width', 'height', 'style', 'class', 'target', 'rel'],
-                        ADD_TAGS: ['img'],
-                        ALLOW_DATA_ATTR: false,
-                        ALLOWED_URI_REGEXP: /^(?:(?:(?:f|ht)tps?|mailto|tel|callto|cid|xmpp|data):|[^a-z]|[a-z+.\-]+(?:[^a-z+.\-:]|$))/i,
-                      }) }}
-                    />
-                  </>
-                )}
+                {renderBody(true)}
 
                 {post.slug === 'is-rocinha-safe' && <RocinhaFAQ language={language} />}
                 {post?.id && <BlogPostRating postId={post.id} />}
+
 
                 {/* AUTHOR BOX */}
                 <div className="mt-16 p-8 bg-muted/30 border border-border/50 rounded-2xl flex flex-col md:flex-row items-center md:items-start gap-8 group">
