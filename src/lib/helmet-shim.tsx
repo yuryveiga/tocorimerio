@@ -1,4 +1,4 @@
-import { Children, forwardRef, isValidElement, useEffect, useRef, type ReactNode } from "react";
+import { Children, isValidElement, useEffect, useRef, type ReactNode } from "react";
 
 // Minimal drop-in replacement for `react-helmet-async`.
 // Handles the subset of tags this project actually uses:
@@ -95,11 +95,6 @@ export const Helmet = ({ children }: { children?: ReactNode }) => {
   return null;
 };
 
-// forwardRef: alguns consumidores (e o próprio React em StrictMode) tentam
-// anexar uma ref ao provider; sem isso o console enche de avisos.
-export const HelmetProvider = forwardRef<HTMLElement, { children?: ReactNode }>(
-  ({ children }, _ref) => <>{children}</>
-);
-HelmetProvider.displayName = "HelmetProvider";
+export const HelmetProvider = ({ children }: { children?: ReactNode }) => <>{children}</>;
 
 export default Helmet;
