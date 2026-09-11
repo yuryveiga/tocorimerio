@@ -129,11 +129,7 @@ export default function Experiences() {
             "@type": "TravelAgency",
             "name": "Tocorime Rio - Private Tours",
             "image": "https://tocorimerio.com/logo.png",
-            "aggregateRating": {
-              "@type": "AggregateRating",
-              "ratingValue": "5.0",
-              "reviewCount": "2000"
-            }
+            "url": "https://tocorimerio.com/experiences"
           })}
         </script>
         {/* Google tag (gtag.js) */}

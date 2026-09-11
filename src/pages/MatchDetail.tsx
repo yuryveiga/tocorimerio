@@ -400,11 +400,8 @@ export default function MatchDetail() {
         }
       }
     },
-    "aggregateRating": {
-      "@type": "AggregateRating",
-      "ratingValue": "4.9",
-      "reviewCount": "86"
-    }
+    // Sem aggregateRating: só publicamos nota quando houver avaliações reais
+    // visíveis na própria página.
   } : null;
 
   const itinerary = [

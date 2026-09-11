@@ -6,7 +6,7 @@ import { HeroSection } from "@/components/HeroSection";
 import { TrustMarquee } from "@/components/TrustMarquee";
 import { useSiteData } from "@/hooks/useSiteData";
 import { useLocale } from "@/contexts/LocaleContext";
-import { getCanonicalUrl, generateLocalBusinessSchema, getHreflangLinks } from "@/utils/seo";
+import { getCanonicalUrl, generateTravelAgencySchema, getHreflangLinks } from "@/utils/seo";
 
 // Lazy load sections below the fold
 const WeatherSection = lazy(() => import("@/components/WeatherSection").then(m => ({ default: m.WeatherSection })));
@@ -63,7 +63,13 @@ const Index = () => {
         <meta name="twitter:title" content={siteTitle} />
         <meta name="twitter:description" content={siteDescription} />
         <script type="application/ld+json">
-          {JSON.stringify(generateLocalBusinessSchema("Tocorime Rio", siteDescription, images?.hero_bg, businessPhone))}
+          {JSON.stringify(generateTravelAgencySchema({
+            description: siteDescription,
+            imageUrl: images?.hero_bg,
+            telephone: businessPhone,
+            email: contactEmail,
+            sameAs: officialProfiles,
+          }))}
         </script>
       </Helmet>
       <Header />
