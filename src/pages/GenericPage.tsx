@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
-import { useParams, Navigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
+import NotFound from "./NotFound";
 import { fetchLovable, LovablePage } from "@/integrations/lovable/client";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
@@ -33,8 +34,10 @@ const GenericPage = () => {
     );
   }
 
+  // Mantém a URL original (sem redirect para /404) para o Google ver a página
+  // 404 no próprio endereço solicitado.
   if (!page || (!page.content && page.is_visible === false)) {
-    return <Navigate to="/404" replace />;
+    return <NotFound />;
   }
 
   return (

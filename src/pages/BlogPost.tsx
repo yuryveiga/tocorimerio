@@ -186,7 +186,8 @@ const BlogPost = () => {
   }
 
   if (!post) {
-    return <Navigate to="/404" replace />;
+    // Mantém a URL original em vez de redirecionar para /404.
+    return <NotFound />;
   }
 
   const title = getTranslated('title');
