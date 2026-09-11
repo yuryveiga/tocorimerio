@@ -182,48 +182,13 @@ const NotFound = () => {
           line-height: 1.55;
         }
 
-        /* Redirect countdown */
-        .nf-redirect {
-          width: 100%;
-          margin-bottom: 2rem;
-        }
-
-        .nf-redirect-text {
-          font-family: 'Barlow Condensed', sans-serif;
-          font-size: 0.8rem;
-          letter-spacing: 0.12em;
-          text-transform: uppercase;
-          color: #7a7360;
-          margin-bottom: 0.8rem;
+        /* CTA group */
+        .nf-actions {
           display: flex;
-          align-items: center;
-          justify-content: center;
-          gap: 0.4rem;
           flex-wrap: wrap;
-        }
-
-        .nf-count {
-          font-family: 'Bebas Neue', sans-serif;
-          font-size: 1.5rem;
-          color: #f0c84a;
-          line-height: 1;
-          display: inline-block;
-          min-width: 1.6rem;
-          text-align: center;
-        }
-
-        /* Progress bar */
-        .nf-progress-track {
-          height: 2px;
-          background: rgba(255,255,255,0.06);
-          border-radius: 1px;
-          overflow: hidden;
-        }
-        .nf-progress-fill {
-          height: 100%;
-          background: linear-gradient(90deg, #1a7a2e, #c9a227);
-          border-radius: 1px;
-          transition: width 0.9s linear;
+          gap: 0.9rem;
+          justify-content: center;
+          width: 100%;
         }
 
         /* CTA */
