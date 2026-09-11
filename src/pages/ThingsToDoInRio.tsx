@@ -186,6 +186,12 @@ export default function ThingsToDoInRio() {
             >
               Hire a private guide by the hour
             </Link>
+            <Link
+              to="/private-tours-rio-de-janeiro"
+              className="inline-flex items-center rounded-full border border-border px-6 py-3 font-semibold text-foreground hover:bg-muted transition"
+            >
+              Private tours in Rio
+            </Link>
           </div>
 
           <section className="space-y-10 mb-16">
