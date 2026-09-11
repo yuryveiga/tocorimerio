@@ -84,6 +84,8 @@ async function generateSitemap() {
       { url: '/passeio' },
       { url: '/our-tours' },
       { url: '/things-to-do-in-rio-de-janeiro' },
+      { url: '/private-tours-rio-de-janeiro' },
+      { url: '/custom-private-tour-rio-de-janeiro' },
       { url: '/your-private-guide-in-rio' },
       { url: '/maracana-calendario' },
       { url: '/flamengo-x-vasco-maracana' },
