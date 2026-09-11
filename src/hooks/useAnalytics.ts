@@ -49,15 +49,13 @@ export const useAnalytics = () => {
         // survives page unload, and stays off the critical path.
         const url = `${SUPABASE_URL}/functions/v1/track-visit`;
         const body = JSON.stringify(payload);
-        const blob = new Blob([body], { type: "application/json" });
-
-        // Try sendBeacon first (cheapest, browser handles it in background).
-        if (typeof navigator.sendBeacon === "function" && navigator.sendBeacon(url, blob)) {
-          return;
-        }
-        // Fallback: fetch with keepalive, no await.
+        // sendBeacon envia com credentials=include, o que o CORS da função
+        // (Access-Control-Allow-Origin: *) rejeita e enche o console de erro.
+        // fetch keepalive tem o mesmo efeito prático e passa no CORS.
         void fetch(url, {
           method: "POST",
+          mode: "cors",
+          credentials: "omit",
           headers: {
             "Content-Type": "application/json",
             apikey: SUPABASE_ANON,

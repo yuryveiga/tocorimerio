@@ -45,7 +45,9 @@ export function HeroSection() {
 
   // Default shown immediately — no API wait (critical for LCP)
   // AVIF used as preload; <img>/CSS load this AVIF (~200KB vs ~258KB WebP, ~22% smaller).
-  const DEFAULT_HERO = "https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776157066514_2zl4bonrweg.avif";
+  // Precisa ser EXATAMENTE o mesmo arquivo de site_images.hero_bg — senão o
+  // browser baixa a imagem do hero duas vezes (a padrão e, depois, a do banco).
+  const DEFAULT_HERO = "https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776157066514_2zl4bonrweg.webp";
 
   const availableBgs = [
     images["hero_bg"],
@@ -57,11 +59,18 @@ export function HeroSection() {
   // Once the API resolves, availableBgs will have real URLs and override.
   const rawHeroBgs = availableBgs.length > 0 ? availableBgs : [DEFAULT_HERO];
 
-  // Mobile: sirva uma versão redimensionada (a tela tem ~390px de largura,
-  // baixar 1920px é desperdício e atrasa o LCP). Desktop mantém o original.
+  // Nunca sirva o original: mesmo no desktop, o arquivo de origem chega a
+  // ~1.5MB. Passamos tudo pelo transformador de imagem do storage, que devolve
+  // WebP/AVIF conforme o Accept do browser.
   const heroBgs = isMobile
     ? rawHeroBgs.map((u) => getOptimizedImage(u, 828, 55))
-    : rawHeroBgs;
+    : rawHeroBgs.map((u) => getOptimizedImage(u, 1920, 62));
+
+  // srcset responsivo para a imagem LCP — o browser baixa só a largura que
+  // realmente precisa (retina de 390px pede 828, notebook 1280, 4K 1920).
+  const HERO_WIDTHS = [640, 828, 1080, 1280, 1600, 1920];
+  const heroSrcSet = (raw: string) =>
+    HERO_WIDTHS.map((w) => `${getOptimizedImage(raw, w, w <= 828 ? 55 : 62)} ${w}w`).join(", ");
 
   // No mobile o slideshow (2ª/3ª imagem) só gasta banda e CPU — 1 imagem basta.
   const slides = isMobile ? heroBgs.slice(0, 1) : heroBgs;
@@ -244,23 +253,23 @@ export function HeroSection() {
           className={`absolute inset-0 transition-opacity duration-1000 bg-cover bg-center bg-no-repeat ${index === currentBg ? 'opacity-100' : 'opacity-0'}`}
           style={
             isMobile
-              // Mobile: sem ken-burns (anima 1 camada em tela cheia = CPU/GPU cara)
-              // e sem background-image — a <img> visível abaixo evita decodificar
-              // a mesma imagem duas vezes.
+              // Mobile: sem ken-burns (anima 1 camada em tela cheia = CPU/GPU cara).
               ? undefined
-              : { backgroundImage: `url(${bg})`, animation: `ken-burns 14s ease-in-out ${index * 2}s infinite alternate`, willChange: 'transform' }
+              : { animation: `ken-burns 14s ease-in-out ${index * 2}s infinite alternate`, willChange: 'transform' }
           }
         >
-          {/* Hidden <img> so the browser preload scanner can fetch the image.
-              fetchpriority="high" on index 0 tells the browser this is LCP-critical.
-              No mobile ela é a própria imagem visível do hero. */}
+          {/* A <img> é a própria imagem visível do hero (não há mais
+              background-image, que impedia srcset e baixava o original inteiro).
+              fetchpriority="high" no índice 0 marca o candidato a LCP. */}
           <img
             src={bg}
+            srcSet={rawHeroBgs[index] ? heroSrcSet(rawHeroBgs[index]) : undefined}
+            sizes="100vw"
             alt=""
             aria-hidden="true"
             width={1920}
             height={1080}
-            className={`absolute inset-0 w-full h-full object-cover pointer-events-none select-none ${isMobile ? '' : 'opacity-0'}`}
+            className="absolute inset-0 w-full h-full object-cover pointer-events-none select-none"
             fetchPriority={index === 0 ? "high" : "low"}
             loading={index === 0 ? "eager" : "lazy"}
             decoding={index === 0 ? "sync" : "async"}
