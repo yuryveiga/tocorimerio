@@ -32,6 +32,12 @@ const Index = () => {
         ? '+' + whatsappSocial.url.replace(/[^\d]/g, '')
         : whatsappSocial.url)
     : undefined;
+  const contactEmail = socialMedia.find((s) => s.platform?.toLowerCase() === 'email')?.url;
+  // sameAs: apenas perfis oficiais realmente cadastrados (sem inventar redes).
+  const officialProfiles = socialMedia
+    .filter((s) => ['instagram', 'tripadvisor', 'youtube', 'facebook'].includes((s.platform || '').toLowerCase()))
+    .map((s) => s.url)
+    .filter((u): u is string => !!u && u.startsWith('http'));
   const siteTitle = language === 'pt'
     ? (siteSettings?.site_title || "Passeios Privados no Rio de Janeiro | Tocorime Rio")
     : language === 'es'
