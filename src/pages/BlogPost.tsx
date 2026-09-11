@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, Fragment } from "react";
 import { useParams, Link } from "react-router-dom";
 import NotFound from "./NotFound";
 import DOMPurify from "dompurify";
@@ -22,6 +22,9 @@ import { OptimizedImage } from "@/components/OptimizedImage";
 import { getCanonicalUrl, generateOptimizedMetaDescription, getHreflangLinks, generateArticleSchema, generateBreadcrumbsSchema, getOgImage, generateFAQSchema } from "@/utils/seo";
 import { BlogPostRating } from "@/components/BlogPostRating";
 import { EmailCaptureCTA } from "@/components/EmailCaptureCTA";
+import { ExploreRioWithTocorime } from "@/components/ExploreRioWithTocorime";
+import { resolveBlogTourTargets } from "@/lib/blogTourMapping";
+
 
 const InlineCTA = () => {
   const { t, language } = useLocale();
@@ -229,17 +232,66 @@ const BlogPost = () => {
       .join('');
   })();
 
-  const contentWithSplit = (() => {
-    if (!content) return { part1: "", part2: "" };
+  // Split the article into up to 3 chunks so contextual tour CTAs can be
+  // inserted at roughly 25% and 65% of the reading flow (plus one at the end).
+  const contentParts: string[] = (() => {
+    if (!content) return [""];
     const paragraphs = content.split('</p>');
-    if (paragraphs.length < 5) return { part1: content, part2: "" };
-    
-    // Split at roughly 1/3 of the text
-    const splitIndex = 2; 
-    const part1 = paragraphs.slice(0, splitIndex).join('</p>') + '</p>';
-    const part2 = paragraphs.slice(splitIndex).join('</p>');
-    return { part1, part2 };
+    if (paragraphs.length < 5) return [content];
+
+    const total = paragraphs.length;
+    const i1 = Math.max(1, Math.round(total * 0.25));
+    const i2 = Math.max(i1 + 1, Math.round(total * 0.65));
+
+    return [
+      paragraphs.slice(0, i1).join('</p>') + '</p>',
+      paragraphs.slice(i1, i2).join('</p>') + '</p>',
+      paragraphs.slice(i2).join('</p>'),
+    ].filter(part => part.replace(/<[^>]*>/g, '').trim().length > 0);
   })();
+
+  // Contextual funnel targets for this article (Blog → Tour → Check Availability)
+  const tourTargets = resolveBlogTourTargets(
+    { slug: post.slug, title, excerpt, tags: (post as unknown as { tags?: string[] }).tags },
+    3,
+  );
+
+  const sanitizeHtml = (html: string) => DOMPurify.sanitize(html, {
+    ADD_ATTR: ['src', 'width', 'height', 'style', 'class', 'target', 'rel'],
+    ADD_TAGS: ['img'],
+    ALLOW_DATA_ATTR: false,
+    ALLOWED_URI_REGEXP: /^(?:(?:(?:f|ht)tps?|mailto|tel|callto|cid|xmpp|data):|[^a-z]|[a-z+.\-]+(?:[^a-z+.\-:]|$))/i,
+  });
+
+  const renderBody = (withSanitize: boolean) => (
+    <>
+      {contentParts.map((part, index) => {
+        const target = tourTargets[index];
+        return (
+          <Fragment key={index}>
+            <div
+              className="max-w-none ql-editor blog-content-area"
+              style={{ padding: 0 }}
+              lang={language}
+              dangerouslySetInnerHTML={{ __html: withSanitize ? sanitizeHtml(part) : part }}
+            />
+            {index < contentParts.length - 1 && (
+              target
+                ? <ExploreRioWithTocorime target={target} tours={tours as unknown as TourCardProps[]} />
+                : <InlineCTA />
+            )}
+          </Fragment>
+        );
+      })}
+      {(tourTargets[2] || tourTargets[0]) && (
+        <ExploreRioWithTocorime
+          target={tourTargets[2] || tourTargets[0]}
+          tours={tours as unknown as TourCardProps[]}
+        />
+      )}
+    </>
+  );
+
 
   const blogHeroStyle = siteSettings?.blog_hero_style || "hero";
 
@@ -714,37 +766,11 @@ const BlogPost = () => {
                   <span aria-hidden>/</span>
                   <span className="text-foreground/70 truncate max-w-[60%]">{title}</span>
                 </nav>
-                <div 
-                  className="max-w-none ql-editor blog-content-area"
-                  style={{ padding: 0 }}
-                  lang={language}
-                  dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(contentWithSplit.part1 || "", {
-                    ADD_ATTR: ['src', 'width', 'height', 'style', 'class', 'target', 'rel'],
-                    ADD_TAGS: ['img'],
-                    ALLOW_DATA_ATTR: false,
-                    ALLOWED_URI_REGEXP: /^(?:(?:(?:f|ht)tps?|mailto|tel|callto|cid|xmpp|data):|[^a-z]|[a-z+.\-]+(?:[^a-z+.\-:]|$))/i,
-                  }) }}
-                />
-
-                {contentWithSplit.part2 && (
-                  <>
-                    <InlineCTA />
-                    <div 
-                      className="max-w-none ql-editor blog-content-area"
-                      style={{ padding: 0 }}
-                      lang={language}
-                      dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(contentWithSplit.part2 || "", {
-                        ADD_ATTR: ['src', 'width', 'height', 'style', 'class', 'target', 'rel'],
-                        ADD_TAGS: ['img'],
-                        ALLOW_DATA_ATTR: false,
-                        ALLOWED_URI_REGEXP: /^(?:(?:(?:f|ht)tps?|mailto|tel|callto|cid|xmpp|data):|[^a-z]|[a-z+.\-]+(?:[^a-z+.\-:]|$))/i,
-                      }) }}
-                    />
-                  </>
-                )}
+                {renderBody(true)}
 
                 {post.slug === 'is-rocinha-safe' && <RocinhaFAQ language={language} />}
                 {post?.id && <BlogPostRating postId={post.id} />}
+
 
                 {/* AUTHOR BOX */}
                 <div className="mt-16 p-8 bg-muted/30 border border-border/50 rounded-2xl flex flex-col md:flex-row items-center md:items-start gap-8 group">
@@ -873,27 +899,11 @@ const BlogPost = () => {
                 {title}
               </h1>
               
-              <div 
-                className="max-w-none ql-editor blog-content-area"
-                style={{ padding: 0 }}
-                lang={language}
-                dangerouslySetInnerHTML={{ __html: contentWithSplit.part1 || "" }}
-              />
-
-              {contentWithSplit.part2 && (
-                <>
-                  <InlineCTA />
-                  <div 
-                    className="max-w-none ql-editor blog-content-area"
-                    style={{ padding: 0 }}
-                    lang={language}
-                    dangerouslySetInnerHTML={{ __html: contentWithSplit.part2 || "" }}
-                  />
-                </>
-              )}
+              {renderBody(false)}
 
               {post.slug === 'is-rocinha-safe' && <RocinhaFAQ language={language} />}
               {post?.id && <BlogPostRating postId={post.id} />}
+
 
               {/* AUTHOR BOX */}
               <div className="mt-16 p-8 bg-muted/30 border border-border/50 rounded-2xl flex flex-col md:flex-row items-center md:items-start gap-8 group">
@@ -997,10 +1007,11 @@ const BlogPost = () => {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-12">
               <h2 className="font-serif text-3xl sm:text-4xl font-bold text-foreground mb-4">
-                {language === 'pt' ? 'Que tal viver essa experiência no Rio de Janeiro?' : 
-                 language === 'es' ? '¿Qué tal viver esta experiência en Río?' : 
-                 'How about living this experience in Rio?'}
+                {language === 'pt' ? 'Experiências relacionadas no Rio' :
+                 language === 'es' ? 'Experiencias relacionadas en Río' :
+                 'Related Rio Experiences'}
               </h2>
+
               <p className="text-muted-foreground text-lg max-w-2xl mx-auto font-sans">
                 {language === 'pt' ? 'Confira nossos passeios mais bem avaliados e reserve sua próxima aventura.' : 
                  language === 'es' ? 'Echa un vistazo a nuestros tours melhor valorados e reserva tu próxima aventura.' : 

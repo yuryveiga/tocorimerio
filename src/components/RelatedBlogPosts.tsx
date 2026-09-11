@@ -134,9 +134,10 @@ export const RelatedBlogPosts = ({
   if (!related.length) return null;
 
   const heading =
-    language === "pt" ? "Leia também sobre este passeio"
-    : language === "es" ? "Lee también sobre este paseo"
-    : "Read more about this experience";
+    language === "pt" ? "Guias relacionados"
+    : language === "es" ? "Guías relacionadas"
+    : "Related Guides";
+
 
   const localizedTitle = (p: PostLite) =>
     (language === "en" ? p.title_en : language === "es" ? p.title_es : language === "zh-CN" ? p.title_zh_cn : language === "zh-TW" ? p.title_zh_tw : p.title) || p.title;
