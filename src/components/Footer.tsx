@@ -139,13 +139,13 @@ export function Footer() {
               {contactEmail && (
                 <li className="flex items-center gap-2 text-[hsl(140,10%,96%)]/80 text-sm">
                   <Mail className="w-4 h-4 text-[hsl(145,40%,40%)]" />
-                  <a href={`mailto:${contactEmail}`} className="hover:text-[hsl(145,40%,40%)] transition-colors">{contactEmail}</a>
+                  <a href={`mailto:${contactEmail}`} className="inline-flex items-center min-h-[44px] py-2 hover:text-[hsl(145,40%,40%)] transition-colors">{contactEmail}</a>
                 </li>
               )}
               {contactPhone && (
                 <li className="flex items-center gap-2 text-[hsl(140,10%,96%)]/80 text-sm">
                   <Phone className="w-4 h-4 text-[hsl(145,40%,40%)]" />
-                  <a href={waLink} target="_blank" rel="noopener noreferrer" className="hover:text-[hsl(145,40%,40%)] transition-colors">
+                  <a href={waLink} target="_blank" rel="noopener noreferrer" className="inline-flex items-center min-h-[44px] py-2 hover:text-[hsl(145,40%,40%)] transition-colors">
                     {contactPhone.replace(/https?:\/\/(wa\.me\/)?/, '')}
                   </a>
                 </li>
