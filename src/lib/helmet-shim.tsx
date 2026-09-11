@@ -95,6 +95,11 @@ export const Helmet = ({ children }: { children?: ReactNode }) => {
   return null;
 };
 
-export const HelmetProvider = ({ children }: { children?: ReactNode }) => <>{children}</>;
+// forwardRef: alguns consumidores (e o próprio React em StrictMode) tentam
+// anexar uma ref ao provider; sem isso o console enche de avisos.
+export const HelmetProvider = forwardRef<HTMLElement, { children?: ReactNode }>(
+  ({ children }, _ref) => <>{children}</>
+);
+HelmetProvider.displayName = "HelmetProvider";
 
 export default Helmet;
