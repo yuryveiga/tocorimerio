@@ -357,6 +357,15 @@ export function PasseioDetalhe() {
     target?.scrollIntoView({ behavior: "smooth", block: "center" });
   }, []);
 
+  // Mobile: open the booking form as an overlay dialog; desktop: smooth-scroll to the sidebar card
+  const handleCheckAvailability = useCallback(() => {
+    if (typeof window !== "undefined" && window.innerWidth < 1024) {
+      setBookingOpen(true);
+    } else {
+      scrollToDate();
+    }
+  }, [scrollToDate]);
+
   // Let global floating buttons (WhatsApp) lift above the sticky bottom bar.
   useEffect(() => {
     document.body.classList.toggle("has-sticky-bar", showStickyBar);
