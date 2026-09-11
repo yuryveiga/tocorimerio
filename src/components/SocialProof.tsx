@@ -30,7 +30,14 @@ export const SocialProof = ({ className = "", light = true, hideReviewsOnMobile 
     >
       <Star className="w-4 h-4 fill-yellow-400 text-yellow-400" />
       <span className="text-xs sm:text-sm font-bold font-sans">
-        ★ 5.0 — 200+ {language === 'pt' ? 'avaliações' : language === 'es' ? 'evaluaciones' : 'reviews'}
+        {hideReviewsOnMobile ? (
+          <>
+            <span className="sm:hidden">★ 5.0</span>
+            <span className="hidden sm:inline">★ 5.0 — 200+ {language === 'pt' ? 'avaliações' : language === 'es' ? 'evaluaciones' : 'reviews'}</span>
+          </>
+        ) : (
+          <>★ 5.0 — 200+ {language === 'pt' ? 'avaliações' : language === 'es' ? 'evaluaciones' : 'reviews'}</>
+        )}
       </span>
     </a>
   );
