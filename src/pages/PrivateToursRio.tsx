@@ -70,11 +70,14 @@ const FAQS = [
 export default function PrivateToursRio() {
   const { tours, isLoading, socialMedia } = useSiteData();
 
-  const whatsappSocial = socialMedia.find((s) => s.platform.toLowerCase().includes("whatsapp"));
-  const waLink = whatsappSocial?.url
-    ? `${buildWhatsappLink(whatsappSocial.url, "en")}&text=${encodeURIComponent(
-        "Hi! I'm interested in a private tour in Rio de Janeiro. Could you tell me about availability?"
-      )}`
+  const wa = socialMedia.find(
+    (s) => s.platform?.toLowerCase().includes("whatsapp") && s.is_active !== false
+  );
+  const waMessage =
+    "Hi! I'm interested in a private tour in Rio de Janeiro. Could you tell me about availability?";
+  const waNumber = (wa?.url || "").replace(/\D/g, "");
+  const waLink = waNumber
+    ? `https://wa.me/${waNumber}?text=${encodeURIComponent(waMessage)}`
     : "#";
 
   const featured = [...(tours || [])]
