@@ -850,7 +850,7 @@ export function PasseioDetalhe() {
           <span className="opacity-30">/</span>
           <Link to="/#tours" className="hover:text-primary transition-colors">{t("passeios")}</Link>
           <span className="opacity-30">/</span>
-          <span className="text-foreground">{translatedTitle}</span>
+          <span className="text-foreground" title={translatedTitle}>{breadcrumbTitle}</span>
         </nav>
         
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
