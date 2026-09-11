@@ -893,7 +893,7 @@ export function PasseioDetalhe() {
                     href={href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex flex-1 items-center justify-center gap-1.5 h-12 px-3 rounded-xl font-bold text-[10px] sm:text-xs uppercase tracking-widest border border-[#25D366]/40 text-[#128C7E] hover:bg-[#25D366]/10 transition-colors"
+                    className="inline-flex flex-1 items-center justify-center gap-1.5 h-10 px-3 rounded-xl font-bold text-[10px] sm:text-xs uppercase tracking-widest border border-[#25D366]/40 text-[#128C7E] hover:bg-[#25D366]/10 transition-colors"
                   >
                     <MessageSquare className="w-4 h-4 shrink-0" /> {t("ask_whatsapp")}
                   </a>
