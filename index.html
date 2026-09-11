@@ -23,6 +23,30 @@
          real vinda do banco (site_images.hero_bg). Preloadar um AVIF
          hardcoded aqui causava DOUBLE-DOWNLOAD (AVIF preload + WEBP <img>),
          ~460KB desperdiçados no mobile. -->
+    <!-- Preload da imagem LCP do hero, SÓ na home. O srcset é idêntico ao do
+         HeroSection (mesmas larguras/qualidade), então o browser reutiliza o
+         mesmo arquivo — sem download duplo — e começa a baixar antes do JS. -->
+    <script>
+      (function () {
+        try {
+          var p = window.location.pathname.replace(/\/+$/, '') || '/';
+          if (p !== '/') return;
+          var BASE = 'https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/render/image/public/site-images/1776157066514_2zl4bonrweg.webp';
+          var mobile = window.matchMedia('(max-width: 767px)').matches;
+          var widths = mobile ? [360, 480, 640, 750] : [1080, 1280, 1600, 1920];
+          var srcset = widths.map(function (w) {
+            return BASE + '?width=' + w + '&quality=' + (w <= 750 ? 45 : 62) + '&resize=cover ' + w + 'w';
+          }).join(', ');
+          var l = document.createElement('link');
+          l.rel = 'preload';
+          l.as = 'image';
+          l.setAttribute('imagesrcset', srcset);
+          l.setAttribute('imagesizes', '100vw');
+          l.setAttribute('fetchpriority', 'high');
+          document.head.appendChild(l);
+        } catch (e) {}
+      })();
+    </script>
     <script>
       (function () {
         'use strict';
