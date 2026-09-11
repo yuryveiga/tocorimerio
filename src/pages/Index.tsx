@@ -18,6 +18,7 @@ const AboutSection = lazy(() => import("@/components/AboutSection").then(m => ({
 const ContactSection = lazy(() => import("@/components/ContactSection").then(m => ({ default: m.ContactSection })));
 const GallerySection = lazy(() => import("@/components/GallerySection").then(m => ({ default: m.GallerySection })));
 const BlogCarousel = lazy(() => import("@/components/BlogCarousel").then(m => ({ default: m.BlogCarousel })));
+const FinalCTASection = lazy(() => import("@/components/FinalCTASection").then(m => ({ default: m.FinalCTASection })));
 const Footer = lazy(() => import("@/components/Footer").then(m => ({ default: m.Footer })));
 
 const SectionLoader = () => <div className="h-40 w-full flex items-center justify-center"><div className="w-8 h-8 border-4 border-primary border-t-transparent rounded-full animate-spin" /></div>;
@@ -31,8 +32,16 @@ const Index = () => {
         ? '+' + whatsappSocial.url.replace(/[^\d]/g, '')
         : whatsappSocial.url)
     : undefined;
-  const siteTitle = siteSettings?.site_title || (language === 'pt' ? "Passeios Privativos no Rio | Tocorime Rio" : language === 'es' ? "Tours Privados en Río | Tocorime Rio" : "Private Tours in Rio de Janeiro | Tocorime Rio");
-  const siteDescription = siteSettings?.site_description || (language === 'pt' ? "Descubra o melhor do Rio de Janeiro com nossos guias especialistas. Tours privativos e personalizados para garantir segurança e exclusividade." : language === 'es' ? "Descubra lo mejor de Río de Janeiro con nuestros guías expertos. Tours privados y personalizados para garantizar seguridad y exclusividad." : "Discover the best of Rio de Janeiro with our expert guides. Private and personalized tours to ensure safety and exclusivity.");
+  const siteTitle = language === 'pt'
+    ? (siteSettings?.site_title || "Passeios Privados no Rio de Janeiro | Tocorime Rio")
+    : language === 'es'
+    ? (siteSettings?.site_title_es || siteSettings?.site_title || "Tours Privados en Río de Janeiro | Tocorime Rio")
+    : (siteSettings?.site_title_en || siteSettings?.site_title || "Private Tours in Rio de Janeiro | Tocorime Rio");
+  const siteDescription = language === 'pt'
+    ? (siteSettings?.site_description || "Explore o Rio de Janeiro com guias locais bilíngues, passeios privados, roteiros flexíveis e reserva segura. Descubra as experiências Tocorime Rio.")
+    : language === 'es'
+    ? (siteSettings?.site_description_es || siteSettings?.site_description || "Explora Río de Janeiro con guías locales bilingües, tours privados, itinerarios flexibles y reserva segura. Descubre las experiencias Tocorime Rio.")
+    : (siteSettings?.site_description_en || siteSettings?.site_description || "Explore Rio de Janeiro with bilingual local guides, private tours, flexible itineraries and secure booking. Discover Tocorime Rio experiences.");
 
   return (
     <main className="flex flex-col">
@@ -75,7 +84,8 @@ const Index = () => {
       <div className="order-7 md:order-5"><LazyMount minHeight={890}><Suspense fallback={null}><WeatherSection /></Suspense></LazyMount></div>
       <div className="order-8 md:order-8"><LazyMount minHeight={749}><Suspense fallback={null}><GallerySection /></Suspense></LazyMount></div>
       <div className="order-9 md:order-9"><LazyMount minHeight={1036}><Suspense fallback={null}><BlogCarousel /></Suspense></LazyMount></div>
-      <div className="order-10 md:order-10"><LazyMount minHeight={1350}><Suspense fallback={null}><Footer /></Suspense></LazyMount></div>
+      <div className="order-10 md:order-10"><LazyMount minHeight={380}><Suspense fallback={null}><FinalCTASection /></Suspense></LazyMount></div>
+      <div className="order-11 md:order-11"><LazyMount minHeight={1350}><Suspense fallback={null}><Footer /></Suspense></LazyMount></div>
     </main>
   );
 };
