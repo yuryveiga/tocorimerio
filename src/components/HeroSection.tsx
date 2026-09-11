@@ -27,18 +27,28 @@ export function HeroSection() {
   const heroTitleKey = language === 'pt' ? 'hero_title' : `hero_title_${language}`;
   const heroSubtitleKey = language === 'pt' ? 'hero_subtitle' : `hero_subtitle_${language}`;
 
-  const heroTitle = siteSettings[heroTitleKey] || siteSettings['hero_title'] || `${t("conheca_melhor")} ${t("rio_janeiro")}`;
-  const heroSubtitle = siteSettings[heroSubtitleKey] || siteSettings['hero_subtitle'] || t("hero_desc");
+  const heroTitle = siteSettings[heroTitleKey] || siteSettings['hero_title'] ||
+    (language === 'pt'
+      ? 'Passeios Privados no Rio de Janeiro com Guias Locais'
+      : language === 'es'
+      ? 'Tours Privados en Río de Janeiro con Guías Locales'
+      : 'Private Tours in Rio de Janeiro with Local Guides');
+  const heroSubtitle = siteSettings[heroSubtitleKey] || siteSettings['hero_subtitle'] ||
+    (language === 'pt'
+      ? 'Descubra o Rio com segurança: guias locais bilíngues, transporte privado e experiências sob medida.'
+      : language === 'es'
+      ? 'Descubre Río con seguridad: guías locales bilingües, transporte privado y experiencias a medida.'
+      : 'Discover Rio safely with bilingual local guides, private transportation and tailor-made experiences.');
   const hideUrgency = siteSettings['hide_urgency'] === 'true';
 
   // Mobile-only headline: a specific promise instead of the generic title.
   const mobileTitle =
     siteSettings['hero_title_mobile'] ||
     (language === 'pt'
-      ? 'Passeios privativos no Rio com guia local'
+      ? 'Passeios privados no Rio com guias locais'
       : language === 'es'
-      ? 'Tours privados en Río con guía local'
-      : 'Private Rio tours with a local guide');
+      ? 'Tours privados en Río con guías locales'
+      : 'Private Tours in Rio with Local Guides');
 
   const siteName = siteSettings['site_name'] || 'Tocorime Rio';
   const logoUrl = siteSettings?.logo_url || images['logo'];
@@ -227,7 +237,7 @@ export function HeroSection() {
         onClick={handleWhatsAppClick}
         className="shimmer-cta group h-14 sm:h-12 text-base sm:text-lg px-8 font-bold font-sans bg-accent hover:bg-accent/90 text-accent-foreground shadow-[0_8px_30px_-4px_hsl(var(--accent)/0.5)] hover:shadow-[0_12px_40px_-4px_hsl(var(--accent)/0.7)] transition-all hover:scale-[1.02]"
       >
-        {language === 'pt' ? 'Tour Personalizado' : language === 'es' ? 'Tour Personalizado' : 'Custom Tour'}
+        {t('plan_custom_tour')}
         <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
       </Button>
       <Button
