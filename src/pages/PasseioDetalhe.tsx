@@ -867,7 +867,7 @@ export function PasseioDetalhe() {
               <li className="inline-flex items-center gap-2"><Shield className="w-4 h-4 text-primary" />{t("gtk_cancellation_value")}</li>
             </ul>
 
-            <div className="flex flex-row items-stretch justify-center gap-2 pt-2">
+            <div className="flex flex-row items-stretch justify-center gap-2 pt-0.5 -mb-1">
               <Button onClick={handleCheckAvailability} size="lg" className="h-12 flex-1 rounded-xl font-black text-[10px] sm:text-xs uppercase tracking-widest gap-1.5 px-3">
                 <CalendarIcon className="w-4 h-4 shrink-0" /> {t("check_availability")}
               </Button>
