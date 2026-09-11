@@ -58,11 +58,6 @@ const Cart = () => {
         const itemFee = feeEnabled ? Math.round((itemTotal * 0.05) * 100) / 100 : 0;
         const totalWithFee = Math.round((itemTotal + itemFee) * 100) / 100;
 
-        console.log(`Inserting sale for ${item.title}:`, {
-          tour_id: item.id,
-          total_price: totalWithFee,
-          quantity: item.quantity
-        });
 
         const saleId = crypto.randomUUID();
         const { error } = await supabase.from("sales").insert({
@@ -91,7 +86,6 @@ const Cart = () => {
         saleIds.push(saleId);
       }
 
-      console.log("Sales created successfully, IDs:", saleIds);
 
       // Now call the Stripe checkout function
       const { data: functionData, error: functionError } = await supabase.functions.invoke("create-checkout", {

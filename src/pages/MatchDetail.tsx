@@ -75,9 +75,6 @@ export default function MatchDetail() {
       
       const { data, error } = await query.single();
       
-      if (data) {
-        console.log("Dados recebidos do dono do calendário:", data);
-      }
 
       if (error) {
          // Fallback mock for demo if not found in real DB
