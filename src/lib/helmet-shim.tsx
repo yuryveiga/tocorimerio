@@ -1,4 +1,4 @@
-import { Children, isValidElement, useEffect, useRef, type ReactNode } from "react";
+import { Children, forwardRef, isValidElement, useEffect, useRef, type ReactNode } from "react";
 
 // Minimal drop-in replacement for `react-helmet-async`.
 // Handles the subset of tags this project actually uses:
