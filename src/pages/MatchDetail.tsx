@@ -34,6 +34,7 @@ const FEATURED_VIDEO_TITLE = "Experiência Maracanã com a Tocorime Rio";
 import { LovableMatch } from "@/types";
 import { WhyChooseUs } from "@/components/WhyChooseUs";
 import { PaymentLogos } from "@/components/PaymentLogos";
+import { track, trackAlways } from "@/lib/analytics";
 
 // Partner Project Config
 const MARACANA_PROJECT_URL = "https://mwxbskzggzznxvkwgrnz.supabase.co";
@@ -202,6 +203,15 @@ export default function MatchDetail() {
     ? Math.min(match.max_per_purchase, effectiveRemaining)
     : effectiveRemaining;
 
+  // GA4: view_maracana_match once per match page view
+  useEffect(() => {
+    if (!match) return;
+    track("view_maracana_match", {
+      item_name: `${match.home_team} x ${match.away_team}`,
+      match_date: match.match_date,
+    }, `view_maracana_match:${match.id}`);
+  }, [match]);
+
   const handleCheckout = async () => {
     if (!customerInfo.name || !customerInfo.whatsapp || !customerInfo.email) {
       toast.error(language === 'pt' ? "Preencha todos os campos" : "Please fill all fields");
@@ -253,6 +263,12 @@ export default function MatchDetail() {
       });
 
       if (saleError) throw saleError;
+
+      trackAlways("begin_checkout", {
+        currency,
+        value: unitPrice * quantity,
+        items: [{ item_name: `${match.home_team} x ${match.away_team}`, quantity }],
+      });
 
       // 2. Call checkout function with PARTNER flavor
       const response = await fetch(
