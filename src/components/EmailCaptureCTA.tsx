@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { supabase } from "@/integrations/supabase/client";
 import { useLocale } from "@/contexts/LocaleContext";
+import { trackAlways } from "@/lib/analytics";
 
 const schema = z.object({
   name: z.string().trim().max(120).optional(),
@@ -82,6 +83,10 @@ export const EmailCaptureCTA = ({ sourceSlug }: Props) => {
       source_url: typeof window !== "undefined" ? window.location.href : null,
     });
     setLoading(false);
+
+    if (!error) {
+      trackAlways("lead", { method: "email_capture", source: sourceSlug ?? "blog" });
+    }
 
     if (error) {
       if (error.code === "23505") {

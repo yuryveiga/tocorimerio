@@ -17,6 +17,7 @@ import { OptimizedImage } from "@/components/OptimizedImage";
 import { PaymentLogos } from "@/components/PaymentLogos";
 import { Helmet } from "react-helmet-async";
 import { getCanonicalUrl } from "@/utils/seo";
+import { track } from "@/lib/analytics";
 
 const Cart = () => {
   const { items, removeFromCart, total, clearCart, updateQuantity } = useCart();
@@ -86,6 +87,12 @@ const Cart = () => {
         saleIds.push(saleId);
       }
 
+
+      track("begin_checkout", {
+        value: items.reduce((sum, i) => sum + i.price * i.quantity, 0),
+        currency: "BRL",
+        items: items.map((i) => ({ item_name: i.title, quantity: i.quantity, price: i.price })),
+      }, `begin_checkout:${Date.now()}`);
 
       // Now call the Stripe checkout function
       const { data: functionData, error: functionError } = await supabase.functions.invoke("create-checkout", {
