@@ -848,11 +848,11 @@ export function PasseioDetalhe() {
         
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-8">
           <div className="space-y-4">
-             <div className="flex flex-wrap items-center gap-3">
-                <span className="text-primary font-black uppercase tracking-[0.2em] text-[10px] px-3 py-1 bg-primary/10 rounded-full border border-primary/20">{translatedCategory}</span>
-                <span className="text-accent font-black uppercase tracking-[0.2em] text-[10px] px-3 py-1 bg-accent/10 rounded-full border border-accent/20">Private & Exclusive</span>
-                {tour.is_featured && <span className="hidden sm:inline-flex bg-amber-100 text-amber-700 font-black text-[10px] px-3 py-1 rounded-full border border-amber-200 uppercase tracking-widest">{t("destaque")}</span>}
-                <SocialProof light={false} hideReviewsOnMobile />
+             <div className="flex flex-nowrap items-center gap-2 overflow-hidden">
+                <span className="shrink-0 text-primary font-black uppercase tracking-[0.15em] text-[9px] px-2 py-1 bg-primary/10 rounded-full border border-primary/20 whitespace-nowrap">{translatedCategory}</span>
+                <span className="shrink-0 text-accent font-black uppercase tracking-[0.15em] text-[9px] px-2 py-1 bg-accent/10 rounded-full border border-accent/20 whitespace-nowrap">Private & Exclusive</span>
+                {tour.is_featured && <span className="hidden sm:inline-flex shrink-0 bg-amber-100 text-amber-700 font-black text-[9px] px-2 py-1 rounded-full border border-amber-200 uppercase tracking-widest">{t("destaque")}</span>}
+                <SocialProof light={false} hideReviewsOnMobile compact className="shrink-0" />
              </div>
             <h1 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-black text-foreground leading-[1.1] tracking-tight">
                {translatedTitle}
