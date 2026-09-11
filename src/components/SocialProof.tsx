@@ -5,9 +5,10 @@ import { useLocale } from "@/contexts/LocaleContext";
 interface SocialProofProps {
   className?: string;
   light?: boolean;
+  hideReviewsOnMobile?: boolean;
 }
 
-export const SocialProof = ({ className = "", light = true }: SocialProofProps) => {
+export const SocialProof = ({ className = "", light = true, hideReviewsOnMobile = false }: SocialProofProps) => {
   const { socialMedia } = useSiteData();
   const { language } = useLocale();
   
