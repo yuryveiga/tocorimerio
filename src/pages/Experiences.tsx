@@ -113,15 +113,17 @@ export default function Experiences() {
       <Helmet>
         <title>{t("ex_meta_title")}</title>
         <meta name="description" content={t("ex_meta_desc")} />
-        <link rel="canonical" href={`https://tocorimerio.com/experiences${language !== 'en' ? `?lang=${language}` : ''}`} />
+        {/* Canonical/hreflang sempre na URL limpa: o site troca de idioma na
+            própria página, sem URLs separadas por idioma. */}
+        <link rel="canonical" href="https://tocorimerio.com/experiences" />
         <link rel="alternate" hrefLang="en" href="https://tocorimerio.com/experiences" />
-        <link rel="alternate" hrefLang="pt" href="https://tocorimerio.com/experiences?lang=pt" />
-        <link rel="alternate" hrefLang="es" href="https://tocorimerio.com/experiences?lang=es" />
+        <link rel="alternate" hrefLang="pt-BR" href="https://tocorimerio.com/experiences" />
+        <link rel="alternate" hrefLang="es" href="https://tocorimerio.com/experiences" />
         <link rel="alternate" hrefLang="x-default" href="https://tocorimerio.com/experiences" />
         <meta property="og:title" content={t("ex_og_title")} />
         <meta property="og:description" content={t("ex_og_desc")} />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content={`https://tocorimerio.com/experiences${language !== 'en' ? `?lang=${language}` : ''}`} />
+        <meta property="og:url" content="https://tocorimerio.com/experiences" />
         <meta property="og:image" content="https://tocorimerio.com/hero-experiences.jpg" />
         <script type="application/ld+json">
           {JSON.stringify({
@@ -129,23 +131,8 @@ export default function Experiences() {
             "@type": "TravelAgency",
             "name": "Tocorime Rio - Private Tours",
             "image": "https://tocorimerio.com/logo.png",
-            "aggregateRating": {
-              "@type": "AggregateRating",
-              "ratingValue": "5.0",
-              "reviewCount": "2000"
-            }
+            "url": "https://tocorimerio.com/experiences"
           })}
-        </script>
-        {/* Google tag (gtag.js) */}
-        <script async src="https://www.googletagmanager.com/gtag/js?id=AW-18075082892"></script>
-        <script>
-          {`
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-
-            gtag('config', 'AW-18075082892');
-          `}
         </script>
       </Helmet>
 

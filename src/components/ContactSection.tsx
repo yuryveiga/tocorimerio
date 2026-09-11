@@ -10,6 +10,7 @@ import { useLocale } from "@/contexts/LocaleContext";
 import { useSiteData } from "@/hooks/useSiteData";
 import { supabase } from "@/integrations/supabase/client";
 import { buildWhatsappLink } from "@/lib/whatsappMessage";
+import { trackAlways } from "@/lib/analytics";
 
 export function ContactSection() {
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -55,6 +56,7 @@ export function ContactSection() {
 
       if (error) throw error;
 
+      trackAlways("contact", { method: "contact_form", form: "homepage" });
       toast({ title: t("msg_enviada"), description: t("contato_breve") });
       (e.target as HTMLFormElement).reset();
     } catch (error: unknown) {

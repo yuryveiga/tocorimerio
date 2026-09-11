@@ -54,7 +54,15 @@ import "./index.css";
   } catch {}
 })();
 
+// Analytics: keep Google Ads click ids / utm params for attribution (canonical
+// URLs stay clean) and report WhatsApp clicks from a single global listener.
+import { captureAttribution, initWhatsappTracking } from "./lib/analytics";
+captureAttribution();
+initWhatsappTracking();
+
 const rootElement = document.getElementById("root")!;
+
+
 
 createRoot(rootElement).render(
   <HelmetProvider>

@@ -216,6 +216,57 @@ export const generateSportsEventSchema = (params: {
   }),
 });
 
+/**
+ * Schema "TravelAgency" para a homepage. Só usa dados reais: nome, URL,
+ * telefone/e-mail cadastrados e perfis oficiais (sameAs). Nada de rating,
+ * prêmios, certificações ou número de clientes inventados.
+ */
+export const generateTravelAgencySchema = (params: {
+  description: string;
+  imageUrl?: string | null;
+  telephone?: string;
+  email?: string;
+  sameAs?: string[];
+}) => {
+  const { description, imageUrl, telephone, email, sameAs } = params;
+  return {
+    "@context": "https://schema.org",
+    "@type": "TravelAgency",
+    "@id": `${BASE_URL}/#organization`,
+    "name": "Tocorime Rio",
+    "url": BASE_URL,
+    "description": description,
+    ...(imageUrl ? { "image": imageUrl, "logo": imageUrl } : {}),
+    ...(telephone ? { "telephone": telephone } : {}),
+    ...(email ? { "email": email } : {}),
+    ...(sameAs && sameAs.length ? { "sameAs": sameAs } : {}),
+    "priceRange": "$$",
+    "currenciesAccepted": "BRL",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Rio de Janeiro",
+      "addressRegion": "RJ",
+      "addressCountry": "BR",
+    },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": -22.9068,
+      "longitude": -43.1729,
+    },
+    "areaServed": {
+      "@type": "City",
+      "name": "Rio de Janeiro",
+    },
+    "availableLanguage": ["Portuguese", "English", "Spanish"],
+    "openingHoursSpecification": {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+      "opens": "08:00",
+      "closes": "20:00",
+    },
+  };
+};
+
 export const generateLocalBusinessSchema = (siteTitle: string, description: string, imageUrl?: string, telephone?: string) => {
   return {
     "@context": "https://schema.org",
@@ -360,12 +411,8 @@ export const generateTourPackageSchema = (
         "returnFees": "https://schema.org/FreeReturn"
       }
     },
-    "aggregateRating": {
-      "@type": "AggregateRating",
-      "ratingValue": "5.0",
-      "bestRating": "5",
-      "ratingCount": "128"
-    }
+    // NOTE: no aggregateRating here on purpose — a rating must come from real,
+    // page-visible reviews. Pass one explicitly only when that data exists.
   };
 };
 

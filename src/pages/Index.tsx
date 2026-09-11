@@ -6,7 +6,7 @@ import { HeroSection } from "@/components/HeroSection";
 import { TrustMarquee } from "@/components/TrustMarquee";
 import { useSiteData } from "@/hooks/useSiteData";
 import { useLocale } from "@/contexts/LocaleContext";
-import { getCanonicalUrl, generateLocalBusinessSchema, getHreflangLinks } from "@/utils/seo";
+import { getCanonicalUrl, getHreflangLinks } from "@/utils/seo";
 
 // Lazy load sections below the fold
 const WeatherSection = lazy(() => import("@/components/WeatherSection").then(m => ({ default: m.WeatherSection })));
@@ -26,12 +26,8 @@ const SectionLoader = () => <div className="h-40 w-full flex items-center justif
 const Index = () => {
   const { siteSettings, images, socialMedia } = useSiteData();
   const { language } = useLocale();
-  const whatsappSocial = socialMedia.find((s) => s.platform?.toLowerCase().includes('whatsapp'));
-  const businessPhone = whatsappSocial?.url
-    ? (whatsappSocial.url.startsWith('http')
-        ? '+' + whatsappSocial.url.replace(/[^\d]/g, '')
-        : whatsappSocial.url)
-    : undefined;
+  // O schema TravelAgency/Organization é estático em index.html (lido por
+  // qualquer crawler, sem depender de JavaScript).
   const siteTitle = language === 'pt'
     ? (siteSettings?.site_title || "Passeios Privados no Rio de Janeiro | Tocorime Rio")
     : language === 'es'
@@ -62,9 +58,6 @@ const Index = () => {
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content={siteTitle} />
         <meta name="twitter:description" content={siteDescription} />
-        <script type="application/ld+json">
-          {JSON.stringify(generateLocalBusinessSchema("Tocorime Rio", siteDescription, images?.hero_bg, businessPhone))}
-        </script>
       </Helmet>
       <Header />
       <HeroSection />

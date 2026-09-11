@@ -15,6 +15,7 @@ import { toast } from "sonner";
 import { LovableSale } from "@/integrations/lovable/client";
 import { Helmet } from "react-helmet-async";
 import { getCanonicalUrl } from "@/utils/seo";
+import { trackPurchaseOnce } from "@/lib/analytics";
 
 // ─── Inline translations for the confirmation page ───────────────────────────
 const i18n = {
@@ -158,6 +159,16 @@ const CheckoutSuccess = () => {
         if (error) throw error;
         if (data) {
           setSales(data as unknown as LovableSale[]);
+          // GA4/Ads: purchase só depois do pagamento confirmado, uma vez por venda.
+          (data as unknown as LovableSale[])
+            .filter((s) => s.is_paid)
+            .forEach((s) => {
+              trackPurchaseOnce(s.id, {
+                value: Number(s.total_price) || 0,
+                currency: (s as unknown as { currency?: string }).currency || "BRL",
+                items: [{ item_name: s.tour_title, quantity: s.quantity || 1 }],
+              });
+            });
           const init: Record<string, { name: string; dob: string }[]> = {};
           data.forEach(s => {
             init[s.id] = Array.from({ length: s.quantity || 1 }, () => ({ name: "", dob: "" }));

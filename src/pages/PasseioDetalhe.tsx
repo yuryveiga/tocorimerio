@@ -48,6 +48,7 @@ import { LazyMount } from "@/components/LazyMount";
 const YouMayAlsoLike = lazy(() => import("@/components/YouMayAlsoLike").then(m => ({ default: m.YouMayAlsoLike })));
 const RelatedBlogPosts = lazy(() => import("@/components/RelatedBlogPosts").then(m => ({ default: m.RelatedBlogPosts })));
 import { TourGuidesCard } from "@/components/TourGuidesCard";
+import { track, trackAlways } from "@/lib/analytics";
 
 const getYouTubeEmbedUrl = (url: string) => {
   if (!url) return "";
@@ -359,6 +360,16 @@ export function PasseioDetalhe() {
     };
   }, [tour]);
 
+  // GA4: view_tour once per tour page view
+  useEffect(() => {
+    if (!tour) return;
+    track("view_tour", {
+      item_id: tour.slug,
+      item_name: tour.title,
+      currency: "BRL",
+    }, `view_tour:${tour.slug}`);
+  }, [tour]);
+
   const scrollToDate = useCallback(() => {
     const target = dateFieldRef.current || bookingCardRef.current;
     target?.scrollIntoView({ behavior: "smooth", block: "center" });
@@ -366,6 +377,10 @@ export function PasseioDetalhe() {
 
   // Mobile: open the booking form as an overlay dialog; desktop: smooth-scroll to the sidebar card
   const handleCheckAvailability = useCallback(() => {
+    trackAlways("click_check_availability", {
+      item_id: tour?.slug,
+      item_name: tour?.title,
+    });
     if (typeof window !== "undefined" && window.innerWidth < 1024) {
       setBookingOpen(true);
     } else {
