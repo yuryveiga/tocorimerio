@@ -837,7 +837,7 @@ export function PasseioDetalhe() {
       <Header />
 
       {/* Breadcrumbs & Title Section */}
-      <section className="pt-24 pb-6 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="pt-24 pb-3 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <nav aria-label={t("breadcrumbs") || "Navegação secundária"} className="flex items-center gap-2 text-[10px] font-black uppercase tracking-[0.2em] text-muted-foreground mb-6">
           <Link to="/" className="hover:text-primary transition-colors">{t("inicio")}</Link>
           <span className="opacity-30">/</span>
@@ -846,7 +846,7 @@ export function PasseioDetalhe() {
           <span className="text-foreground">{translatedTitle}</span>
         </nav>
         
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-8">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
           <div className="space-y-4">
              <div className="flex flex-nowrap items-center gap-2 overflow-hidden">
                 <span className="shrink-0 text-primary font-black uppercase tracking-[0.15em] text-[9px] px-2 py-1 bg-primary/10 rounded-full border border-primary/20 whitespace-nowrap">{translatedCategory}</span>
@@ -922,7 +922,7 @@ export function PasseioDetalhe() {
             </div>
           </div>
           {!hidePrices ? (
-             <div className="flex flex-row items-center justify-between gap-3 bg-card border border-primary/10 px-3 sm:px-8 py-2 sm:py-6 rounded-2xl sm:rounded-[2rem] shadow-xl h-fit ring-4 ring-primary/5 w-fit max-w-full mx-auto">
+             <div className="flex flex-row items-center justify-between gap-3 bg-card border border-primary/10 px-3 sm:px-8 py-1 sm:py-6 rounded-2xl sm:rounded-[2rem] shadow-xl h-fit ring-4 ring-primary/5 w-fit max-w-full mx-auto">
                <div className="text-left min-w-0 leading-none">
                  <span className="text-muted-foreground text-[9px] font-black uppercase tracking-widest block mb-0.5 opacity-70">
                    {tour.pricing_model === 'group' ? t("valor_grupo") || "Valor por Grupo" : t("a_partir_de")}
@@ -936,7 +936,7 @@ export function PasseioDetalhe() {
                </div>
                <Button
                  onClick={handleCheckAvailability}
-                 className="h-9 sm:h-14 w-auto shrink-0 rounded-lg sm:rounded-2xl font-black text-xs sm:text-sm uppercase tracking-widest px-4 sm:px-8"
+                 className="h-8 sm:h-14 w-auto shrink-0 rounded-lg sm:rounded-2xl font-black text-xs sm:text-sm uppercase tracking-widest px-4 sm:px-8"
                >
                  {t("book_exclamation") || "BOOK!"}
                </Button>
@@ -971,7 +971,7 @@ export function PasseioDetalhe() {
       </section>
 
       {/* Progressive booking wrapper: on mobile the booking box comes before the gallery */}
-      <div className="flex flex-col gap-6 px-4 sm:px-6 lg:px-0 lg:block lg:gap-0">
+      <div className="flex flex-col gap-3 px-4 sm:px-6 lg:px-0 lg:block lg:gap-0">
       {/* Mosaic Gallery Section */}
       <section className="-order-1 lg:order-none w-full lg:px-8 max-w-7xl mx-auto lg:mb-12">
         <div className="relative group overflow-hidden rounded-[2rem] shadow-xl bg-muted/20 border">
