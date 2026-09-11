@@ -259,6 +259,8 @@ const App = ({ queryClient: externalQueryClient }: { queryClient?: QueryClient }
                       <Route path="/experiences" element={<Experiences />} />
                       <Route path="/your-private-guide-in-rio" element={<PrivateGuideRio />} />
                       <Route path="/things-to-do-in-rio-de-janeiro" element={<ThingsToDoInRio />} />
+                      <Route path="/private-tours-rio-de-janeiro" element={<PrivateToursRio />} />
+                      <Route path="/custom-private-tour-rio-de-janeiro" element={<CustomTourRio />} />
                       <Route path="/passeio/:id" element={<PasseioDetalhe />} />
                       {/* Fix: accented/corrupted tour slugs that Google indexed without canonical */}
                       <Route path="/passeio/maracanã-matchday" element={<Navigate to="/passeio/maracana-matchday" replace />} />
