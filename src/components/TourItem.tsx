@@ -166,6 +166,10 @@ export const TourItem = memo(({ tour }: { tour: TourCardProps }) => {
 
         {/* Mobile: compact meta row (price · duration · category) */}
         <div className="sm:hidden flex flex-wrap items-center gap-x-2 gap-y-1 text-[11px] font-bold text-muted-foreground mb-3">
+          <span className="flex items-center gap-1 text-foreground">
+            <Star className="w-3 h-3 text-yellow-500 fill-yellow-500" />
+            {siteSettings['rating_value'] || '4.9'}
+          </span>
           {!hidePrices && getTourMinPrice(tour) > 0 && (
             <span className="text-foreground font-black">{formatPrice(getTourMinPrice(tour))}</span>
           )}
@@ -206,6 +210,10 @@ export const TourItem = memo(({ tour }: { tour: TourCardProps }) => {
 
         <div className="mt-auto space-y-4">
           <div className="hidden sm:flex items-center gap-4 text-[10px] text-muted-foreground font-black uppercase tracking-[0.15em] opacity-60 min-h-[18px]">
+            <span className="flex items-center gap-1.5 bg-muted px-2 py-1 rounded-md">
+              <Star className="w-3.5 h-3.5 text-yellow-500 fill-yellow-500" />
+              {siteSettings['rating_value'] || '4.9'}
+            </span>
             {tour.duration ? (
               <span className="flex items-center gap-1.5 bg-muted px-2 py-1 rounded-md">
                 <Clock className="w-3.5 h-3.5 text-primary" />
@@ -241,9 +249,7 @@ export const TourItem = memo(({ tour }: { tour: TourCardProps }) => {
             <div className="flex items-center gap-2">
               {hidePrices 
                 ? (language === 'pt' ? 'VER DETALHES' : language === 'es' ? 'VER DETALLES' : 'VIEW DETAILS')
-                : (isExternal 
-                    ? (language === 'pt' ? 'RESERVAR AGORA' : language === 'es' ? 'RESERVAR AHORA' : 'BOOK NOW') 
-                    : t("reservar"))}
+                : t("check_availability").toUpperCase()}
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </div>
           </div>
