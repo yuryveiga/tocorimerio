@@ -922,21 +922,21 @@ export function PasseioDetalhe() {
             </div>
           </div>
           {!hidePrices ? (
-             <div className="flex flex-row items-center justify-between gap-3 bg-card border border-primary/10 px-3 sm:px-8 py-3 sm:py-6 rounded-2xl sm:rounded-[2rem] shadow-xl h-fit ring-4 ring-primary/5 w-fit max-w-full mx-auto">
-               <div className="text-left min-w-0">
-                 <span className="text-muted-foreground text-[10px] font-black uppercase tracking-widest block mb-1 opacity-70">
+             <div className="flex flex-row items-center justify-between gap-3 bg-card border border-primary/10 px-3 sm:px-8 py-2 sm:py-6 rounded-2xl sm:rounded-[2rem] shadow-xl h-fit ring-4 ring-primary/5 w-fit max-w-full mx-auto">
+               <div className="text-left min-w-0 leading-none">
+                 <span className="text-muted-foreground text-[9px] font-black uppercase tracking-widest block mb-0.5 opacity-70">
                    {tour.pricing_model === 'group' ? t("valor_grupo") || "Valor por Grupo" : t("a_partir_de")}
                  </span>
-                 <span className="text-3xl sm:text-4xl font-black text-primary">
+                 <span className="text-3xl sm:text-4xl font-black text-primary block leading-none">
                    {formatPrice(getTourMinPrice(tour))}
                  </span>
-                 <span className="text-[10px] font-black uppercase text-muted-foreground block mt-1 opacity-60 tracking-tighter shrink-0">
+                 <span className="text-[9px] font-black uppercase text-muted-foreground block mt-0.5 opacity-60 tracking-tighter shrink-0">
                    {tour.pricing_model === 'group' ? t("ate") || "até" : t("por_pessoa")} {tour.pricing_model === 'group' ? `${tour.max_group_size} ${t("pessoas")}` : ""}
                  </span>
                </div>
                <Button
                  onClick={handleCheckAvailability}
-                 className="h-10 sm:h-14 w-auto shrink-0 rounded-xl sm:rounded-2xl font-black text-xs sm:text-sm uppercase tracking-widest px-4 sm:px-8"
+                 className="h-9 sm:h-14 w-auto shrink-0 rounded-lg sm:rounded-2xl font-black text-xs sm:text-sm uppercase tracking-widest px-4 sm:px-8"
                >
                  {t("book_exclamation") || "BOOK!"}
                </Button>
