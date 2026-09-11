@@ -248,12 +248,18 @@ export const TourItem = memo(({ tour }: { tour: TourCardProps }) => {
             </div>
           </div>
 
-          {/* WhatsApp inline CTA */}
-          <a
-            href={`https://wa.me/5521970702523?text=${encodeURIComponent(language === 'pt' ? `Olá! Tenho interesse no passeio: ${title}` : language === 'es' ? `¡Hola! Me interesa el tour: ${title}` : `Hello! I'm interested in the tour: ${title}`)}`}
-            target="_blank"
-            rel="noopener noreferrer"
-            onClick={e => e.stopPropagation()}
+          {/* WhatsApp inline CTA — <button> em vez de <a>: o cartão inteiro já é
+              um link, e um <a> dentro de outro <a> é HTML inválido (o browser
+              quebrava a árvore e o leitor de tela perdia o rótulo). */}
+          <button
+            type="button"
+            aria-label={language === 'pt' ? `Perguntar no WhatsApp sobre ${title}` : language === 'es' ? `Preguntar por WhatsApp sobre ${title}` : `Ask on WhatsApp about ${title}`}
+            onClick={e => {
+              e.preventDefault();
+              e.stopPropagation();
+              const text = language === 'pt' ? `Olá! Tenho interesse no passeio: ${title}` : language === 'es' ? `¡Hola! Me interesa el tour: ${title}` : `Hello! I'm interested in the tour: ${title}`;
+              window.open(`https://wa.me/5521970702523?text=${encodeURIComponent(text)}`, '_blank', 'noopener,noreferrer');
+            }}
             className="hidden sm:flex items-center justify-center gap-2 w-full py-2.5 rounded-xl border border-[#25D366]/30 text-[#25D366] hover:bg-[#25D366]/10 transition-colors text-[11px] font-bold uppercase tracking-wider"
           >
             <svg viewBox="0 0 24 24" className="w-3.5 h-3.5 shrink-0" fill="currentColor">
