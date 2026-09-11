@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 import { Header } from "@/components/Header";
 import { TourItem, TourCardProps } from "@/components/TourItem";
 import { useSiteData } from "@/hooks/useSiteData";
-import { buildWhatsappLink } from "@/lib/whatsappMessage";
 import { getCanonicalUrl, getHreflangLinks, BASE_URL, DEFAULT_OG_IMAGE } from "@/utils/seo";
 
 const Footer = lazy(() => import("@/components/Footer").then((m) => ({ default: m.Footer })));
