@@ -44,6 +44,7 @@ import { slugify } from "@/utils/slugify";
 
 const WeatherSection = lazy(() => import("@/components/WeatherSection").then(m => ({ default: m.WeatherSection })));
 import { LazyMount } from "@/components/LazyMount";
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 const YouMayAlsoLike = lazy(() => import("@/components/YouMayAlsoLike").then(m => ({ default: m.YouMayAlsoLike })));
 const RelatedBlogPosts = lazy(() => import("@/components/RelatedBlogPosts").then(m => ({ default: m.RelatedBlogPosts })));
 import { TourGuidesCard } from "@/components/TourGuidesCard";
@@ -113,6 +114,7 @@ export function PasseioDetalhe() {
   const [quantity, setQuantity] = useState(1);
   const [weather, setWeather] = useState<{ temp: number; condition: string; humidity: number; wind: number } | null>(null);
   const [showStickyBar, setShowStickyBar] = useState(false);
+  const [bookingOpen, setBookingOpen] = useState(false);
   const [descExpanded, setDescExpanded] = useState(false);
   const bookingCardRef = useRef<HTMLDivElement | null>(null);
   const dateFieldRef = useRef<HTMLDivElement | null>(null);
