@@ -837,7 +837,7 @@ export function PasseioDetalhe() {
       <Header />
 
       {/* Breadcrumbs & Title Section */}
-      <section className="pt-24 pb-12 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="pt-24 pb-6 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <nav aria-label={t("breadcrumbs") || "Navegação secundária"} className="flex items-center gap-2 text-[10px] font-black uppercase tracking-[0.2em] text-muted-foreground mb-6">
           <Link to="/" className="hover:text-primary transition-colors">{t("inicio")}</Link>
           <span className="opacity-30">/</span>
@@ -971,7 +971,7 @@ export function PasseioDetalhe() {
       </section>
 
       {/* Progressive booking wrapper: on mobile the booking box comes before the gallery */}
-      <div className="flex flex-col gap-12 px-4 sm:px-6 lg:px-0 lg:block lg:gap-0">
+      <div className="flex flex-col gap-6 px-4 sm:px-6 lg:px-0 lg:block lg:gap-0">
       {/* Mosaic Gallery Section */}
       <section className="-order-1 lg:order-none w-full lg:px-8 max-w-7xl mx-auto lg:mb-12">
         <div className="relative group overflow-hidden rounded-[2rem] shadow-xl bg-muted/20 border">
