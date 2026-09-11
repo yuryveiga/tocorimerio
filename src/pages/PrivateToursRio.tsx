@@ -75,10 +75,12 @@ export default function PrivateToursRio() {
   );
   const waMessage =
     "Hi! I'm interested in a private tour in Rio de Janeiro. Could you tell me about availability?";
-  const waNumber = (wa?.url || "").replace(/\D/g, "");
-  const waLink = waNumber
-    ? `https://wa.me/${waNumber}?text=${encodeURIComponent(waMessage)}`
-    : "#";
+  const waUrl = wa?.url || "";
+  const waLink = !waUrl
+    ? "#"
+    : waUrl.startsWith("http")
+      ? `${waUrl}${waUrl.includes("?") ? "&" : "?"}text=${encodeURIComponent(waMessage)}`
+      : `https://wa.me/${waUrl.replace(/[^\d+]/g, "").replace("+", "")}?text=${encodeURIComponent(waMessage)}`;
 
   const featured = [...(tours || [])]
     .sort((a, b) => {
