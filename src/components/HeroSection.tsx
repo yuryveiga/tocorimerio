@@ -57,11 +57,18 @@ export function HeroSection() {
   // Once the API resolves, availableBgs will have real URLs and override.
   const rawHeroBgs = availableBgs.length > 0 ? availableBgs : [DEFAULT_HERO];
 
-  // Mobile: sirva uma versão redimensionada (a tela tem ~390px de largura,
-  // baixar 1920px é desperdício e atrasa o LCP). Desktop mantém o original.
+  // Nunca sirva o original: mesmo no desktop, o arquivo de origem chega a
+  // ~1.5MB. Passamos tudo pelo transformador de imagem do storage, que devolve
+  // WebP/AVIF conforme o Accept do browser.
   const heroBgs = isMobile
     ? rawHeroBgs.map((u) => getOptimizedImage(u, 828, 55))
-    : rawHeroBgs;
+    : rawHeroBgs.map((u) => getOptimizedImage(u, 1920, 62));
+
+  // srcset responsivo para a imagem LCP — o browser baixa só a largura que
+  // realmente precisa (retina de 390px pede 828, notebook 1280, 4K 1920).
+  const HERO_WIDTHS = [640, 828, 1080, 1280, 1600, 1920];
+  const heroSrcSet = (raw: string) =>
+    HERO_WIDTHS.map((w) => `${getOptimizedImage(raw, w, w <= 828 ? 55 : 62)} ${w}w`).join(", ");
 
   // No mobile o slideshow (2ª/3ª imagem) só gasta banda e CPU — 1 imagem basta.
   const slides = isMobile ? heroBgs.slice(0, 1) : heroBgs;
