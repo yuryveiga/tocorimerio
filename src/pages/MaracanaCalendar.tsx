@@ -7,7 +7,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { Locale } from "date-fns";
 import { format, startOfMonth, endOfMonth, eachDayOfInterval, getDay, isSameDay, addMonths, subMonths } from "date-fns";
 import { ptBR, enUS, es } from "date-fns/locale";
-import { getMatchDateInRio, isMatchOnDay, getDisplaySpots } from "@/lib/dateUtils";
+import { getMatchDateInRio, isMatchOnDay } from "@/lib/dateUtils";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { MapPin, ArrowRight, Bus, Ticket, UserCheck, Clock, Camera, Users, ChevronLeft, ChevronRight, CalendarDays } from "lucide-react";
@@ -41,8 +41,18 @@ const MaracanaCalendar = () => {
 
   const availableMatches = useMemo(() => {
     const now = new Date();
-    return matches?.filter(m => m.status === 'available' && getMatchDateInRio(m.match_date) >= now) || [];
+    return matches?.filter(m =>
+      m.status === 'available' &&
+      getMatchDateInRio(m.match_date) >= now &&
+      !!m.home_team?.trim() &&
+      !!m.away_team?.trim()
+    ) || [];
   }, [matches]);
+
+  // Real remaining spots from the database only — never a fabricated number
+  const realSpotsLeft = (m: { available_spots?: number | null; sold_count?: number | null }) =>
+    (Number(m.available_spots) || 0) - (Number(m.sold_count) || 0);
+
 
   const calendarDays = useMemo(() => {
     const start = startOfMonth(currentMonth);
@@ -107,7 +117,7 @@ const MaracanaCalendar = () => {
     const events = upcoming.map((m, i) => {
       const start = getMatchDateInRio(m.match_date);
       const url = getCanonicalUrl(`/match/${cleanMatchSlug(m.slug || '') || m.id}`);
-      const spots = getDisplaySpots(m.id, m.available_spots, m.sold_count);
+      const spots = realSpotsLeft(m);
       const name = `${m.home_team} x ${m.away_team} — ${m.stadium || m.venue || 'Maracanã'}`;
       return {
         "@type": "ListItem",
@@ -135,7 +145,6 @@ const MaracanaCalendar = () => {
             priceCurrency: 'BRL',
             availability: spots > 0 ? 'https://schema.org/InStock' : 'https://schema.org/SoldOut',
             validFrom: new Date().toISOString(),
-            inventoryLevel: { "@type": "QuantitativeValue", value: spots },
           },
         },
       };
@@ -175,7 +184,7 @@ const MaracanaCalendar = () => {
           { q: 'Dá para comprar ingresso do Maracanã na bilheteria no dia do jogo?', a: 'Nem sempre. Muitos jogos exigem cadastro biométrico, CPF ou sócio-torcedor e esgotam antes do dia da partida. Comprando com o tour, resolvemos toda a parte burocrática e garantimos a entrada.' },
           { q: 'Turista estrangeiro precisa de CPF para entrar no Maracanã?', a: 'Em vários jogos sim — o sistema de venda exige documento brasileiro ou cadastro prévio. Nós fazemos essa emissão para você e entregamos o ingresso já em seu nome no dia.' },
           { q: 'Quando joga o Flamengo no Maracanã?', a: 'Os jogos do Flamengo no Maracanã aparecem destacados no calendário acima assim que são confirmados pela CBF/Conmebol. Como são partidas de alta procura, recomendamos reservar com antecedência.' },
-          { q: 'Quando joga o Fluminense no Maracanã?', a: 'As partidas do Fluminense no Maracanã também são listadas no calendário desta página, com data, campeonato e disponibilidade de vagas em tempo real.' },
+          { q: 'Quando joga o Fluminense no Maracanã?', a: 'As partidas do Fluminense no Maracanã também são listadas no calendário desta página, com data, campeonato e horário de início.' },
           { q: 'O tour inclui transporte do hotel até o Maracanã?', a: 'Sim. Buscamos você no lobby do seu hotel na Zona Sul em van executiva, levamos ao estádio e fazemos o retorno seguro após o apito final.' },
           { q: 'É seguro ir ao Maracanã como turista?', a: 'Sim, indo acompanhado. Nossos guias trilíngues acompanham o grupo do embarque ao retorno, orientando sobre setores, torcidas e comportamento no estádio.' },
         ]
@@ -196,7 +205,7 @@ const MaracanaCalendar = () => {
             { q: '¿Puedo comprar la entrada en la taquilla el día del partido?', a: 'No siempre. Muchos partidos exigen registro biométrico o CPF brasileño y se agotan antes. Con el tour resolvemos todo el trámite y garantizamos tu entrada.' },
             { q: '¿Un turista extranjero necesita CPF para entrar a Maracanã?', a: 'En varios partidos sí: el sistema de venta exige documento brasileño o registro previo. Nosotros gestionamos la emisión y te entregamos la entrada a tu nombre.' },
             { q: '¿Cuándo juega Flamengo en Maracanã?', a: 'Los partidos de Flamengo aparecen destacados en el calendario apenas se confirman. Son de alta demanda: reserva con antelación.' },
-            { q: '¿Cuándo juega Fluminense en Maracanã?', a: 'Los partidos de Fluminense también se listan aquí, con fecha, campeonato y disponibilidad en tiempo real.' },
+            { q: '¿Cuándo juega Fluminense en Maracanã?', a: 'Los partidos de Fluminense también se listan aquí, con fecha, campeonato y hora de inicio.' },
             { q: '¿El tour incluye transporte desde el hotel?', a: 'Sí. Te recogemos en el lobby de tu hotel en la Zona Sur y regresamos tras el pitido final.' },
             { q: '¿Es seguro ir a Maracanã como turista?', a: 'Sí, acompañado. Nuestros guías trilingües están con el grupo durante toda la experiencia.' },
           ]
@@ -215,7 +224,7 @@ const MaracanaCalendar = () => {
             { q: 'Can I buy Maracanã tickets at the box office on matchday?', a: 'Often not. Many matches require biometric registration, a Brazilian CPF number or club membership, and popular fixtures sell out days in advance. Booking the tour removes all of that paperwork and guarantees entry.' },
             { q: 'Do foreign tourists need a CPF to enter Maracanã?', a: 'For several matches, yes — the official ticketing system requires a Brazilian document or prior registration. We handle the issuing process and hand you the ticket in your name on the day.' },
             { q: 'When does Flamengo play at Maracanã?', a: 'Flamengo fixtures are highlighted in the calendar above as soon as they are confirmed. These matches sell out fast, so book early.' },
-            { q: 'When does Fluminense play at Maracanã?', a: 'Fluminense home matches are also listed on this page with date, competition and live spot availability.' },
+            { q: 'When does Fluminense play at Maracanã?', a: 'Fluminense home matches are also listed on this page with date, competition and kick-off time.' },
             { q: 'Does the tour include transport from my hotel to Maracanã?', a: 'Yes. We pick you up at your South Zone hotel lobby in an executive van and bring you back safely after the final whistle.' },
             { q: 'Is it safe to go to Maracanã as a tourist?', a: 'Yes, when accompanied. Our trilingual guides stay with the group from pickup to drop-off and explain sectors, fan culture and stadium etiquette.' },
 
@@ -296,10 +305,10 @@ const MaracanaCalendar = () => {
           </h1>
           <p className="text-muted-foreground mb-4 max-w-3xl leading-relaxed">
             {language === 'pt'
-              ? 'Todos os próximos jogos confirmados no Maracanã, com data, campeonato, preço por pessoa e vagas em tempo real. Cada reserva inclui o ingresso oficial nas Cadeiras Cativas do Setor Oeste, transporte ida e volta do seu hotel na Zona Sul e guia trilíngue — sem fila, sem CPF e sem risco de revenda.'
+              ? 'Todos os próximos jogos confirmados no Maracanã, com data, campeonato, preço por pessoa e horário de início. Cada reserva inclui o ingresso oficial nas Cadeiras Cativas do Setor Oeste, transporte ida e volta do seu hotel na Zona Sul e guia trilíngue — sem fila, sem CPF e sem risco de revenda.'
               : language === 'es'
-                ? 'Todos los próximos partidos confirmados en Maracanã, con fecha, campeonato, precio por persona y plazas en tiempo real. Cada reserva incluye la entrada oficial en las Sillas Reservadas del Sector Oeste, transporte ida y vuelta desde tu hotel en la Zona Sur y guía trilingüe — sin colas, sin CPF y sin riesgo de reventa.'
-                : 'Every confirmed upcoming fixture at Maracanã, with date, competition, price per person and live availability. Each booking includes an official Maracanã ticket in the Reserved Seats (lower West Sector), round-trip transport from your South Zone hotel and a trilingual guide — no queues, no Brazilian CPF and no resale risk.'}
+                ? 'Todos los próximos partidos confirmados en Maracanã, con fecha, campeonato, precio por persona y hora de inicio. Cada reserva incluye la entrada oficial en las Sillas Reservadas del Sector Oeste, transporte ida y vuelta desde tu hotel en la Zona Sur y guía trilingüe — sin colas, sin CPF y sin riesgo de reventa.'
+                : 'Every confirmed upcoming fixture at Maracanã, with date, competition, price per person and kick-off time. Each booking includes an official Maracanã ticket in the Reserved Seats (lower West Sector), round-trip transport from your South Zone hotel and a trilingual guide — no queues, no Brazilian CPF and no resale risk.'}
           </p>
           {(() => {
             const cheapest = availableMatches.length ? Math.min(...availableMatches.map(m => Number(m.price) || Infinity)) : null;
@@ -370,34 +379,31 @@ const MaracanaCalendar = () => {
                   
                   <div className="mt-6 space-y-2">
                     {dayMatches.map(match => {
-                      const displaySpots = getDisplaySpots(match.id, match.available_spots, match.sold_count);
-                      const isUrgent = displaySpots <= 5 && displaySpots > 0;
+                      const soldOut = realSpotsLeft(match) <= 0;
                       const matchDateRio = getMatchDateInRio(match.match_date);
-                      const hoursUntilMatch = (matchDateRio.getTime() - new Date().getTime()) / (1000 * 60 * 60);
-                      const isLastChance = hoursUntilMatch <= 48 && hoursUntilMatch > 0;
-                      
-                        return (
-                          <Link 
-                            key={match.id} 
-                            to={`/match/${match.slug || match.id}`}
-                            className={`block p-2 rounded-lg text-xs leading-tight border transition-all shadow-sm hover:scale-[1.02] active:scale-95 ${match.high_demand ? 'bg-orange-500/10 border-orange-500/30' : 'bg-primary/10 border-primary/30'}`}
-                          >
-                          {isLastChance && (
-                            <span className="block text-[8px] font-black text-destructive uppercase animate-pulse mb-1">
-                              LAST CHANCE
-                            </span>
-                          )}
+
+                      return (
+                        <Link
+                          key={match.id}
+                          to={`/match/${match.slug || match.id}`}
+                          className={`block p-2 rounded-lg text-xs leading-tight border transition-all shadow-sm hover:scale-[1.02] active:scale-95 ${match.high_demand ? 'bg-orange-500/10 border-orange-500/30' : 'bg-primary/10 border-primary/30'}`}
+                        >
                           <div className="font-bold text-foreground truncate mb-1">
                             {match.home_team} x {match.away_team}
                           </div>
-                          <div className="flex flex-col gap-1">
+                          <div className="flex flex-col gap-0.5">
+                            <span className="text-muted-foreground flex items-center gap-1">
+                              <Clock className="h-3 w-3" />
+                              {format(matchDateRio, 'HH:mm')}
+                            </span>
                             <span className="text-primary font-bold">
                               {formatPrice(match.price)}
                             </span>
-                            <span className={`font-medium flex items-center gap-1 ${isUrgent ? 'text-destructive animate-pulse' : 'text-muted-foreground'}`}>
-                              <Users className="h-3 w-3" />
-                              {displaySpots} {language === 'pt' ? 'vagas' : 'left'}
-                            </span>
+                            {soldOut && (
+                              <span className="font-semibold text-destructive uppercase">
+                                {language === 'pt' ? 'Esgotado' : language === 'es' ? 'Agotado' : 'Sold out'}
+                              </span>
+                            )}
                           </div>
                         </Link>
                       );
@@ -408,6 +414,91 @@ const MaracanaCalendar = () => {
             })}
           </div>
         </motion.div>
+
+        {/* Fixture list: every confirmed match with the sellable experience */}
+        <motion.section
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.15 }}
+          className="mb-14"
+        >
+          <h2 className="text-2xl font-bold mb-6 flex items-center gap-2">
+            <Ticket className="h-6 w-6 text-primary" />
+            {language === 'pt' ? 'PRÓXIMOS JOGOS NO MARACANÃ' : language === 'es' ? 'PRÓXIMOS PARTIDOS EN MARACANÃ' : 'UPCOMING MATCHES AT MARACANÃ'}
+          </h2>
+
+          {isLoading ? (
+            <div className="space-y-3">
+              {[0, 1, 2].map(i => <Skeleton key={i} className="h-24 w-full rounded-xl" />)}
+            </div>
+          ) : availableMatches.length === 0 ? (
+            <p className="text-muted-foreground">
+              {language === 'pt'
+                ? 'Nenhum jogo confirmado no momento. Assim que a CBF/Conmebol divulgar as próximas datas, elas aparecem aqui.'
+                : language === 'es'
+                  ? 'Ningún partido confirmado por ahora. En cuanto se publiquen las próximas fechas, aparecerán aquí.'
+                  : 'No confirmed fixtures right now. As soon as the next dates are published they appear here.'}
+            </p>
+          ) : (
+            <ul className="space-y-3">
+              {availableMatches.map(match => {
+                const dateRio = getMatchDateInRio(match.match_date);
+                const soldOut = realSpotsLeft(match) <= 0;
+                const matchUrl = `/match/${match.slug || match.id}`;
+                return (
+                  <li key={match.id}>
+                    <div className="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-6 p-4 rounded-xl border border-border/50 bg-card/50">
+                      <div className="min-w-0 flex-1">
+                        <h3 className="font-bold text-base sm:text-lg text-foreground">
+                          <Link to={matchUrl} className="hover:text-primary transition-colors">
+                            {match.home_team} vs {match.away_team}
+                          </Link>
+                        </h3>
+                        <p className="text-sm text-muted-foreground mt-1">
+                          {format(dateRio, language === 'pt' ? "EEEE, dd 'de' MMMM 'de' yyyy" : "EEEE, MMMM d, yyyy", { locale })}
+                          {' · '}
+                          <span className="inline-flex items-center gap-1">
+                            <Clock className="h-3.5 w-3.5" />
+                            {format(dateRio, 'HH:mm')}
+                          </span>
+                          {' · '}
+                          <span className="inline-flex items-center gap-1">
+                            <MapPin className="h-3.5 w-3.5" />
+                            {match.stadium || match.venue || 'Maracanã'} {language === 'pt' ? '' : 'Stadium'}
+                          </span>
+                        </p>
+                        <p className="text-xs text-muted-foreground mt-1 uppercase tracking-wider">
+                          {match.competition}
+                          {soldOut && (
+                            <span className="ml-2 text-destructive font-bold">
+                              {language === 'pt' ? 'ESGOTADO' : language === 'es' ? 'AGOTADO' : 'SOLD OUT'}
+                            </span>
+                          )}
+                        </p>
+                      </div>
+                      <div className="sm:text-right shrink-0">
+                        <p className="text-primary font-bold">
+                          {language === 'pt' ? 'A partir de ' : language === 'es' ? 'Desde ' : 'From '}
+                          {formatPrice(match.price)}
+                        </p>
+                        <Link
+                          to={matchUrl}
+                          className="mt-2 inline-flex items-center gap-2 rounded-full bg-primary px-5 py-2 text-sm font-bold text-primary-foreground transition-transform hover:scale-[1.03]"
+                        >
+                          {soldOut
+                            ? (language === 'pt' ? 'Ver experiência' : language === 'es' ? 'Ver experiencia' : 'See Match Experience')
+                            : (language === 'pt' ? 'Ver disponibilidade' : language === 'es' ? 'Ver disponibilidad' : 'Check Availability')}
+                          <ArrowRight className="h-4 w-4" />
+                        </Link>
+                      </div>
+                    </div>
+                  </li>
+                );
+              })}
+            </ul>
+          )}
+        </motion.section>
+
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
           {/* Itinerary */}
