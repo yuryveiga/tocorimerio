@@ -997,10 +997,11 @@ const BlogPost = () => {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-12">
               <h2 className="font-serif text-3xl sm:text-4xl font-bold text-foreground mb-4">
-                {language === 'pt' ? 'Que tal viver essa experiência no Rio de Janeiro?' : 
-                 language === 'es' ? '¿Qué tal viver esta experiência en Río?' : 
-                 'How about living this experience in Rio?'}
+                {language === 'pt' ? 'Experiências relacionadas no Rio' :
+                 language === 'es' ? 'Experiencias relacionadas en Río' :
+                 'Related Rio Experiences'}
               </h2>
+
               <p className="text-muted-foreground text-lg max-w-2xl mx-auto font-sans">
                 {language === 'pt' ? 'Confira nossos passeios mais bem avaliados e reserve sua próxima aventura.' : 
                  language === 'es' ? 'Echa un vistazo a nuestros tours melhor valorados e reserva tu próxima aventura.' : 
