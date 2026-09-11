@@ -45,7 +45,9 @@ export function HeroSection() {
 
   // Default shown immediately — no API wait (critical for LCP)
   // AVIF used as preload; <img>/CSS load this AVIF (~200KB vs ~258KB WebP, ~22% smaller).
-  const DEFAULT_HERO = "https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776157066514_2zl4bonrweg.avif";
+  // Precisa ser EXATAMENTE o mesmo arquivo de site_images.hero_bg — senão o
+  // browser baixa a imagem do hero duas vezes (a padrão e, depois, a do banco).
+  const DEFAULT_HERO = "https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776157066514_2zl4bonrweg.webp";
 
   const availableBgs = [
     images["hero_bg"],
