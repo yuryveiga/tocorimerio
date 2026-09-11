@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
-import { useParams, Navigate, Link } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
+import NotFound from "./NotFound";
 import DOMPurify from "dompurify";
 
 import { LovableBlogPost } from "@/integrations/lovable/client";
