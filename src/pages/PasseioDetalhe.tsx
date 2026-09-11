@@ -1,7 +1,7 @@
 import { useState, useEffect, useMemo, useCallback, useRef, lazy, Suspense } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
-import { Clock, Users, MapPin, Calendar, Check, ChevronDown, ChevronUp, ArrowLeft, ArrowRight, X, Star, Shield, ShieldCheck, Utensils, Activity, Sun, Sunrise, Moon, Plus, Minus, Gauge, Youtube, Cloud, Droplets, Wind, ShoppingCart, Facebook, MessageCircle, Link2, MessageSquare } from "lucide-react";
+import { Clock, Users, MapPin, Calendar, Check, ChevronDown, ChevronUp, ArrowLeft, ArrowRight, X, Star, Shield, ShieldCheck, Utensils, Activity, Sun, Sunrise, Moon, Plus, Minus, Gauge, Globe, Youtube, Cloud, Droplets, Wind, ShoppingCart, Facebook, MessageCircle, Link2, MessageSquare } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useQuery } from "@tanstack/react-query";
 import { cn } from "@/lib/utils";
@@ -199,7 +199,39 @@ export function PasseioDetalhe() {
   };
 
   const highlights = (translatedHighlights as { icon: string; text: string }[]) || [];
-  const faqItems = (translatedFaq as { q: string; a: string }[]) || [];
+  const translatedMeetingPoint = useMemo(
+    () => (getTranslated(`meeting_point_address${language !== 'pt' ? `_${langToCol(language)}` : ""}`) as string) || tour?.meeting_point_address || "",
+    [getTranslated, language, tour?.meeting_point_address]
+  );
+
+  const experienceTypeLabel = tour?.allows_private && tour?.allows_open
+    ? t("gtk_group_both")
+    : tour?.allows_private
+      ? t("gtk_group_private")
+      : t("gtk_group_small");
+
+  const customFaq = (translatedFaq as { q: string; a: string }[]) || [];
+  // Base FAQ built only from facts we actually have (never invented).
+  const baseFaq = tour
+    ? [
+        { q: t("faq_q_language"), a: t("faq_a_language") },
+        {
+          q: t("faq_q_private"),
+          a: tour.allows_private && tour.allows_open
+            ? t("faq_a_private_both")
+            : tour.allows_private
+              ? t("faq_a_private_only")
+              : t("faq_a_private_group"),
+        },
+        ...(translatedMeetingPoint ? [{ q: t("faq_q_meeting"), a: translatedMeetingPoint }] : []),
+        { q: t("faq_q_payment"), a: t("faq_a_payment") },
+        { q: t("faq_q_cancel"), a: t("faq_a_cancel") },
+      ]
+    : [];
+  const faqItems = [
+    ...customFaq,
+    ...baseFaq.filter((b) => !customFaq.some((c) => (c.q || "").trim().toLowerCase() === b.q.trim().toLowerCase())),
+  ];
   const cleanSlug = tour?.slug ? slugify(tour.slug) : tour?.id;
   const canonicalUrl = getCanonicalUrl(`/passeio/${cleanSlug || tour?.id}`);
 
@@ -391,7 +423,7 @@ export function PasseioDetalhe() {
     return [...tours]
       .filter(t => t.id !== tour.id && t.is_active !== false)
       .sort(() => 0.5 - Math.random())
-      .slice(0, 10);
+      .slice(0, 4);
   }, [tours, tour?.id]);
 
 
@@ -574,6 +606,41 @@ export function PasseioDetalhe() {
                {translatedTitle}
             </h1>
             <UrgencyBadges tourId={tour.id} tourSlug={tour.slug} />
+
+            {/* Above-the-fold essentials */}
+            <ul className="flex flex-wrap items-center gap-x-5 gap-y-2 pt-1 text-sm font-bold text-foreground/90">
+              <li className="inline-flex items-center gap-2"><Clock className="w-4 h-4 text-primary" />{translateDuration(tour.duration)}</li>
+              <li className="inline-flex items-center gap-2"><Globe className="w-4 h-4 text-primary" />{t("gtk_language_value")}</li>
+              <li className="inline-flex items-center gap-2"><Users className="w-4 h-4 text-primary" />{experienceTypeLabel}</li>
+              <li className="inline-flex items-center gap-2"><Shield className="w-4 h-4 text-primary" />{t("gtk_cancellation_value")}</li>
+            </ul>
+
+            <div className="flex flex-col sm:flex-row gap-3 pt-2">
+              <Button onClick={scrollToDate} size="lg" className="h-12 rounded-xl font-black text-xs uppercase tracking-widest gap-2">
+                <CalendarIcon className="w-4 h-4" /> {t("check_availability")}
+              </Button>
+              {(() => {
+                const wa = socialMedia.find((s) => s.platform?.toLowerCase().includes('whatsapp') && s.is_active !== false);
+                if (!wa) return null;
+                const cleanNumber = wa.url.replace(/[^\d+]/g, "").replace('+', '');
+                const titleI18n = String((tour as Record<string, any>)[`title_${language}`] || tour.title || "");
+                const msg = t("wa_message").replace("{tour}", titleI18n);
+                const href = wa.url.startsWith('http')
+                  ? `${wa.url}${wa.url.includes('?') ? '&' : '?'}text=${encodeURIComponent(msg)}`
+                  : `https://wa.me/${cleanNumber}?text=${encodeURIComponent(msg)}`;
+                return (
+                  <a
+                    href={href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center justify-center gap-2 h-12 px-6 rounded-xl font-bold text-xs uppercase tracking-widest border border-[#25D366]/40 text-[#128C7E] hover:bg-[#25D366]/10 transition-colors"
+                  >
+                    <MessageSquare className="w-4 h-4" /> {t("ask_whatsapp")}
+                  </a>
+                );
+              })()}
+            </div>
+
 
             {/* Mobile essentials: duration, difficulty, what's included */}
             <div className="lg:hidden flex flex-wrap gap-2 pt-1">
@@ -1047,6 +1114,71 @@ export function PasseioDetalhe() {
                  </div>
                )}
 
+               {/* Good to know: only fields we actually have data for */}
+               <div className="bg-card rounded-2xl border p-8 space-y-6">
+                 <h2 className="text-2xl font-serif font-bold flex items-center gap-3">
+                   <ShieldCheck className="text-primary" /> {t("good_to_know")}
+                 </h2>
+                 <dl className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-5">
+                   <div className="flex items-start gap-3">
+                     <Clock className="w-5 h-5 text-primary shrink-0 mt-0.5" />
+                     <div>
+                       <dt className="text-[10px] font-black uppercase tracking-[0.2em] text-muted-foreground">{t("duracao")}</dt>
+                       <dd className="text-sm font-bold text-foreground">{translateDuration(tour.duration)}</dd>
+                     </div>
+                   </div>
+                   <div className="flex items-start gap-3">
+                     <Globe className="w-5 h-5 text-primary shrink-0 mt-0.5" />
+                     <div>
+                       <dt className="text-[10px] font-black uppercase tracking-[0.2em] text-muted-foreground">{t("gtk_language")}</dt>
+                       <dd className="text-sm font-bold text-foreground">{t("gtk_language_value")}</dd>
+                     </div>
+                   </div>
+                   <div className="flex items-start gap-3">
+                     <Users className="w-5 h-5 text-primary shrink-0 mt-0.5" />
+                     <div>
+                       <dt className="text-[10px] font-black uppercase tracking-[0.2em] text-muted-foreground">{t("gtk_group_type")}</dt>
+                       <dd className="text-sm font-bold text-foreground">{experienceTypeLabel}</dd>
+                     </div>
+                   </div>
+                   <div className="flex items-start gap-3">
+                     <Users className="w-5 h-5 text-primary shrink-0 mt-0.5" />
+                     <div>
+                       <dt className="text-[10px] font-black uppercase tracking-[0.2em] text-muted-foreground">{t("gtk_capacity")}</dt>
+                       <dd className="text-sm font-bold text-foreground">{tour.max_group_size} {t("pessoas")}</dd>
+                     </div>
+                   </div>
+                   {translatedMeetingPoint && (
+                     <div className="flex items-start gap-3">
+                       <MapPin className="w-5 h-5 text-primary shrink-0 mt-0.5" />
+                       <div>
+                         <dt className="text-[10px] font-black uppercase tracking-[0.2em] text-muted-foreground">{t("gtk_meeting_point")}</dt>
+                         <dd className="text-sm font-bold text-foreground">{translatedMeetingPoint}</dd>
+                       </div>
+                     </div>
+                   )}
+                   {translatedDifficulty && (
+                     <div className="flex items-start gap-3">
+                       <Gauge className="w-5 h-5 text-primary shrink-0 mt-0.5" />
+                       <div>
+                         <dt className="text-[10px] font-black uppercase tracking-[0.2em] text-muted-foreground">{t("nivel")}</dt>
+                         <dd className="text-sm font-bold text-foreground uppercase">{translatedDifficulty}</dd>
+                       </div>
+                     </div>
+                   )}
+                   <div className="flex items-start gap-3">
+                     <Shield className="w-5 h-5 text-primary shrink-0 mt-0.5" />
+                     <div>
+                       <dt className="text-[10px] font-black uppercase tracking-[0.2em] text-muted-foreground">{t("gtk_cancellation")}</dt>
+                       <dd className="text-sm font-bold text-foreground">{t("gtk_cancellation_value")}</dd>
+                     </div>
+                   </div>
+                 </dl>
+                 <Button onClick={scrollToDate} className="h-12 rounded-xl font-black text-xs uppercase tracking-widest gap-2">
+                   <CalendarIcon className="w-4 h-4" /> {t("check_availability")}
+                 </Button>
+               </div>
+
                {/* FAQ Section */}
                {faqItems.length > 0 && (
                  <div className="bg-card rounded-2xl border p-8 space-y-6">
@@ -1288,7 +1420,7 @@ export function PasseioDetalhe() {
                               rel="noopener noreferrer"
                               className="mt-3 flex items-center justify-center gap-2 w-full h-12 rounded-xl font-bold text-sm uppercase tracking-wider bg-[#25D366] hover:bg-[#1ebe5a] text-white shadow-lg shadow-[#25D366]/20 active:scale-95 transition-all"
                             >
-                              <MessageSquare className="w-4 h-4" /> {t("wa_book")}
+                              <MessageSquare className="w-4 h-4" /> {t("ask_whatsapp")}
                             </a>
                           );
                         })()}
@@ -1475,7 +1607,7 @@ export function PasseioDetalhe() {
                     className="h-11 px-5 rounded-full font-bold text-xs gap-2 shadow-md shrink-0"
                   >
                     <CalendarIcon className="w-4 h-4" />
-                    {language === 'pt' ? 'Escolher data' : language === 'es' ? 'Elegir fecha' : 'Choose date'}
+                    {t("check_availability")}
                   </Button>
                 )}
               </div>
@@ -1526,7 +1658,7 @@ export function PasseioDetalhe() {
             <div className="space-y-4">
               <span className="text-primary font-black text-xs uppercase tracking-[0.3em]">{language === 'pt' ? 'Explore Mais' : language === 'es' ? 'Explorar Más' : 'Explore More'}</span>
               <h2 className="text-3xl md:text-5xl font-serif font-black text-foreground">
-                {language === 'pt' ? 'Você também pode gostar' : language === 'es' ? 'También te pode gustar' : 'You might also like'}
+                {language === 'pt' ? 'Você também pode gostar' : language === 'es' ? 'También te puede gustar' : 'You May Also Like'}
               </h2>
             </div>
             <div className="hidden md:flex gap-2">
