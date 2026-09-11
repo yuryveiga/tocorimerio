@@ -117,7 +117,7 @@ const MaracanaCalendar = () => {
     const events = upcoming.map((m, i) => {
       const start = getMatchDateInRio(m.match_date);
       const url = getCanonicalUrl(`/match/${cleanMatchSlug(m.slug || '') || m.id}`);
-      const spots = getDisplaySpots(m.id, m.available_spots, m.sold_count);
+      const spots = realSpotsLeft(m);
       const name = `${m.home_team} x ${m.away_team} — ${m.stadium || m.venue || 'Maracanã'}`;
       return {
         "@type": "ListItem",
@@ -145,7 +145,6 @@ const MaracanaCalendar = () => {
             priceCurrency: 'BRL',
             availability: spots > 0 ? 'https://schema.org/InStock' : 'https://schema.org/SoldOut',
             validFrom: new Date().toISOString(),
-            inventoryLevel: { "@type": "QuantitativeValue", value: spots },
           },
         },
       };
