@@ -63,14 +63,19 @@ export function HeroSection() {
   // ~1.5MB. Passamos tudo pelo transformador de imagem do storage, que devolve
   // WebP/AVIF conforme o Accept do browser.
   const heroBgs = isMobile
-    ? rawHeroBgs.map((u) => getOptimizedImage(u, 828, 55))
+    ? rawHeroBgs.map((u) => getOptimizedImage(u, 640, 45))
     : rawHeroBgs.map((u) => getOptimizedImage(u, 1920, 62));
 
   // srcset responsivo para a imagem LCP — o browser baixa só a largura que
-  // realmente precisa (retina de 390px pede 828, notebook 1280, 4K 1920).
-  const HERO_WIDTHS = [640, 828, 1080, 1280, 1600, 1920];
+  // realmente precisa. No celular a foto fica atrás de um overlay preto 50%,
+  // então qualidade 45 em até 750px é indistinguível e corta ~60% do peso.
+  // MANTER EM SINCRONIA com o preload do hero em index.html.
+  const HERO_WIDTHS_MOBILE = [360, 480, 640, 750];
+  const HERO_WIDTHS_DESKTOP = [1080, 1280, 1600, 1920];
   const heroSrcSet = (raw: string) =>
-    HERO_WIDTHS.map((w) => `${getOptimizedImage(raw, w, w <= 828 ? 55 : 62)} ${w}w`).join(", ");
+    (isMobile ? HERO_WIDTHS_MOBILE : HERO_WIDTHS_DESKTOP)
+      .map((w) => `${getOptimizedImage(raw, w, w <= 750 ? 45 : 62)} ${w}w`)
+      .join(", ");
 
   // No mobile o slideshow (2ª/3ª imagem) só gasta banda e CPU — 1 imagem basta.
   const slides = isMobile ? heroBgs.slice(0, 1) : heroBgs;
