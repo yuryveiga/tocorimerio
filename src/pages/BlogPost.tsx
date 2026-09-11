@@ -229,17 +229,66 @@ const BlogPost = () => {
       .join('');
   })();
 
-  const contentWithSplit = (() => {
-    if (!content) return { part1: "", part2: "" };
+  // Split the article into up to 3 chunks so contextual tour CTAs can be
+  // inserted at roughly 25% and 65% of the reading flow (plus one at the end).
+  const contentParts: string[] = (() => {
+    if (!content) return [""];
     const paragraphs = content.split('</p>');
-    if (paragraphs.length < 5) return { part1: content, part2: "" };
-    
-    // Split at roughly 1/3 of the text
-    const splitIndex = 2; 
-    const part1 = paragraphs.slice(0, splitIndex).join('</p>') + '</p>';
-    const part2 = paragraphs.slice(splitIndex).join('</p>');
-    return { part1, part2 };
+    if (paragraphs.length < 5) return [content];
+
+    const total = paragraphs.length;
+    const i1 = Math.max(1, Math.round(total * 0.25));
+    const i2 = Math.max(i1 + 1, Math.round(total * 0.65));
+
+    return [
+      paragraphs.slice(0, i1).join('</p>') + '</p>',
+      paragraphs.slice(i1, i2).join('</p>') + '</p>',
+      paragraphs.slice(i2).join('</p>'),
+    ].filter(part => part.replace(/<[^>]*>/g, '').trim().length > 0);
   })();
+
+  // Contextual funnel targets for this article (Blog → Tour → Check Availability)
+  const tourTargets = resolveBlogTourTargets(
+    { slug: post.slug, title, excerpt, tags: (post as unknown as { tags?: string[] }).tags },
+    3,
+  );
+
+  const sanitizeHtml = (html: string) => DOMPurify.sanitize(html, {
+    ADD_ATTR: ['src', 'width', 'height', 'style', 'class', 'target', 'rel'],
+    ADD_TAGS: ['img'],
+    ALLOW_DATA_ATTR: false,
+    ALLOWED_URI_REGEXP: /^(?:(?:(?:f|ht)tps?|mailto|tel|callto|cid|xmpp|data):|[^a-z]|[a-z+.\-]+(?:[^a-z+.\-:]|$))/i,
+  });
+
+  const renderBody = (withSanitize: boolean) => (
+    <>
+      {contentParts.map((part, index) => {
+        const target = tourTargets[index];
+        return (
+          <Fragment key={index}>
+            <div
+              className="max-w-none ql-editor blog-content-area"
+              style={{ padding: 0 }}
+              lang={language}
+              dangerouslySetInnerHTML={{ __html: withSanitize ? sanitizeHtml(part) : part }}
+            />
+            {index < contentParts.length - 1 && (
+              target
+                ? <ExploreRioWithTocorime target={target} tours={tours as unknown as TourCardProps[]} />
+                : <InlineCTA />
+            )}
+          </Fragment>
+        );
+      })}
+      {(tourTargets[2] || tourTargets[0]) && (
+        <ExploreRioWithTocorime
+          target={tourTargets[2] || tourTargets[0]}
+          tours={tours as unknown as TourCardProps[]}
+        />
+      )}
+    </>
+  );
+
 
   const blogHeroStyle = siteSettings?.blog_hero_style || "hero";
 
