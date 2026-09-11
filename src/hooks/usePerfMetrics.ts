@@ -85,6 +85,9 @@ export function usePerfMetrics() {
     window.__perfMetrics = state;
 
     const log = (reason: string) => {
+      // Só polui o console em desenvolvimento; em produção as métricas
+      // continuam disponíveis em window.__perfMetrics.
+      if (!import.meta.env.DEV) return;
       try {
         // eslint-disable-next-line no-console
         console.info("[perf]", reason, {
