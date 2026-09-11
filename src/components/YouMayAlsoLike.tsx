@@ -23,7 +23,7 @@ export const YouMayAlsoLike = ({ excludeId }: { excludeId?: string }) => {
 
   const items = useMemo(() => {
     void seedRef.current;
-    return shuffle((tours || []).filter((t: any) => t.id !== excludeId));
+    return shuffle((tours || []).filter((t: any) => t.id !== excludeId)).slice(0, 4);
   }, [tours, excludeId]);
 
   if (!items.length) return null;
