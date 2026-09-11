@@ -873,27 +873,11 @@ const BlogPost = () => {
                 {title}
               </h1>
               
-              <div 
-                className="max-w-none ql-editor blog-content-area"
-                style={{ padding: 0 }}
-                lang={language}
-                dangerouslySetInnerHTML={{ __html: contentWithSplit.part1 || "" }}
-              />
-
-              {contentWithSplit.part2 && (
-                <>
-                  <InlineCTA />
-                  <div 
-                    className="max-w-none ql-editor blog-content-area"
-                    style={{ padding: 0 }}
-                    lang={language}
-                    dangerouslySetInnerHTML={{ __html: contentWithSplit.part2 || "" }}
-                  />
-                </>
-              )}
+              {renderBody(false)}
 
               {post.slug === 'is-rocinha-safe' && <RocinhaFAQ language={language} />}
               {post?.id && <BlogPostRating postId={post.id} />}
+
 
               {/* AUTHOR BOX */}
               <div className="mt-16 p-8 bg-muted/30 border border-border/50 rounded-2xl flex flex-col md:flex-row items-center md:items-start gap-8 group">
