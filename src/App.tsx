@@ -100,6 +100,8 @@ const Experiences            = lazy(() => import("./pages/Experiences"));
 const ShortLinkRedirect      = lazy(() => import("./pages/ShortLinkRedirect"));
 const PrivateGuideRio        = lazy(() => import("./pages/PrivateGuideRio"));
 const ThingsToDoInRio        = lazy(() => import("./pages/ThingsToDoInRio"));
+const PrivateToursRio        = lazy(() => import("./pages/PrivateToursRio"));
+const CustomTourRio          = lazy(() => import("./pages/CustomTourRio"));
 
 const PageLoader = () => <div className="min-h-screen flex items-center justify-center bg-background"><div className="w-12 h-12 border-4 border-primary border-t-transparent rounded-full animate-spin" /></div>;
 
@@ -257,6 +259,8 @@ const App = ({ queryClient: externalQueryClient }: { queryClient?: QueryClient }
                       <Route path="/experiences" element={<Experiences />} />
                       <Route path="/your-private-guide-in-rio" element={<PrivateGuideRio />} />
                       <Route path="/things-to-do-in-rio-de-janeiro" element={<ThingsToDoInRio />} />
+                      <Route path="/private-tours-rio-de-janeiro" element={<PrivateToursRio />} />
+                      <Route path="/custom-private-tour-rio-de-janeiro" element={<CustomTourRio />} />
                       <Route path="/passeio/:id" element={<PasseioDetalhe />} />
                       {/* Fix: accented/corrupted tour slugs that Google indexed without canonical */}
                       <Route path="/passeio/maracanã-matchday" element={<Navigate to="/passeio/maracana-matchday" replace />} />

@@ -117,6 +117,8 @@ async function fetchDynamicRoutes() {
     '/experiences',
     '/your-private-guide-in-rio',
     '/things-to-do-in-rio-de-janeiro',
+    '/private-tours-rio-de-janeiro',
+    '/custom-private-tour-rio-de-janeiro',
     '/city-tour',
     '/hiking',
     '/one-day',

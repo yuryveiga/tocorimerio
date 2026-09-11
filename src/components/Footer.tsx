@@ -115,6 +115,22 @@ export function Footer() {
                 </li>
               ))}
               <li className="pt-2">
+                <Link
+                  to="/private-tours-rio-de-janeiro"
+                  className="text-[hsl(140,10%,96%)]/80 hover:text-[hsl(145,40%,40%)] transition-colors text-sm"
+                >
+                  Private Tours in Rio de Janeiro
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/custom-private-tour-rio-de-janeiro"
+                  className="text-[hsl(140,10%,96%)]/80 hover:text-[hsl(145,40%,40%)] transition-colors text-sm"
+                >
+                  Custom Private Tour
+                </Link>
+              </li>
+              <li className="pt-2">
                 <Link 
                   to="/sitemap"
                   className="text-[hsl(140,10%,96%)]/80 hover:text-[hsl(145,40%,40%)] transition-colors text-sm"

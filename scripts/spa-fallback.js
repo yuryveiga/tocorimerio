@@ -141,6 +141,8 @@ async function run() {
     '/passeio',
     '/our-tours',
     '/things-to-do-in-rio-de-janeiro',
+    '/private-tours-rio-de-janeiro',
+    '/custom-private-tour-rio-de-janeiro',
     '/maracana-calendario',
     '/flamengo-x-vasco-maracana',
     '/fluminense-bolivar-libertadores',
@@ -232,6 +234,22 @@ async function run() {
 
   let count = 0;
   // Meta estático para landing pages fixas (crawlers não executam JS)
+  postMeta.set('/private-tours-rio-de-janeiro', {
+    title: 'Private Tours in Rio de Janeiro | Local Bilingual Guides',
+    description: 'Private tours in Rio de Janeiro with local bilingual guides, private transport, hotel pickup and flexible itineraries. Check availability and book online.',
+    url: `${SITE}/private-tours-rio-de-janeiro`,
+    image: ogImage(null),
+    imageAlt: 'Private tour group with a local guide in Rio de Janeiro',
+    type: 'website',
+  });
+  postMeta.set('/custom-private-tour-rio-de-janeiro', {
+    title: 'Custom Private Tour in Rio de Janeiro | Built Around You',
+    description: 'Tell us your dates, group and interests and a local guide builds your custom private tour in Rio de Janeiro. Free quote, flexible itinerary, no hidden fees.',
+    url: `${SITE}/custom-private-tour-rio-de-janeiro`,
+    image: ogImage(null),
+    imageAlt: 'Tailor-made private tour itinerary in Rio de Janeiro',
+    type: 'website',
+  });
   postMeta.set('/things-to-do-in-rio-de-janeiro', {
     title: 'Things to Do in Rio de Janeiro: 2026 Local Guide & Tours',
     description: 'What to do in Rio de Janeiro, chosen by local guides: Christ the Redeemer, Sugarloaf, hikes, favela and coffee tours. Book a private English-speaking guide.',
