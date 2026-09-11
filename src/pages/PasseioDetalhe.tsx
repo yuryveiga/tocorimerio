@@ -868,7 +868,7 @@ export function PasseioDetalhe() {
             </ul>
 
             <div className="flex flex-col sm:flex-row gap-3 pt-2">
-              <Button onClick={scrollToDate} size="lg" className="h-12 rounded-xl font-black text-xs uppercase tracking-widest gap-2">
+              <Button onClick={handleCheckAvailability} size="lg" className="h-12 rounded-xl font-black text-xs uppercase tracking-widest gap-2">
                 <CalendarIcon className="w-4 h-4" /> {t("check_availability")}
               </Button>
               {(() => {
@@ -1426,7 +1426,7 @@ export function PasseioDetalhe() {
                      </div>
                    </div>
                  </dl>
-                 <Button onClick={scrollToDate} className="h-12 rounded-xl font-black text-xs uppercase tracking-widest gap-2">
+                 <Button onClick={handleCheckAvailability} className="h-12 rounded-xl font-black text-xs uppercase tracking-widest gap-2">
                    <CalendarIcon className="w-4 h-4" /> {t("check_availability")}
                  </Button>
                </div>
@@ -1560,6 +1560,21 @@ export function PasseioDetalhe() {
         </div>
       </div>
 
+      {/* Mobile booking dialog: opens the form over the page instead of scrolling */}
+      <Dialog open={bookingOpen} onOpenChange={setBookingOpen}>
+        <DialogContent className="w-[calc(100vw-2rem)] max-w-md max-h-[85vh] overflow-y-auto rounded-3xl p-6">
+          <DialogHeader>
+            <DialogTitle className="text-2xl font-serif font-black text-foreground flex items-center gap-3">
+              <div className="w-2 h-8 bg-primary rounded-full shrink-0" />
+              {language === 'pt' ? 'Faça sua Reserva' : language === 'es' ? 'Haz tu Reserva' : 'Book Your Tour'}
+            </DialogTitle>
+          </DialogHeader>
+          <div className="space-y-4">
+            {renderBookingForm()}
+          </div>
+        </DialogContent>
+      </Dialog>
+
       {/* Progressive mobile booking bar: date → people → pay, always showing the running total */}
       <div
         className={`fixed bottom-0 left-0 right-0 z-40 px-4 py-2.5 bg-background/95 backdrop-blur-xl border-t border-border/60 transform transition-transform duration-300 md:hidden ${showStickyBar && !isLightboxOpen ? "translate-y-0" : "translate-y-full"}`}
@@ -1616,7 +1631,7 @@ export function PasseioDetalhe() {
                   </Button>
                 ) : (
                   <Button
-                    onClick={scrollToDate}
+                    onClick={handleCheckAvailability}
                     className="h-11 px-5 rounded-full font-bold text-xs gap-2 shadow-md shrink-0"
                   >
                     <CalendarIcon className="w-4 h-4" />
