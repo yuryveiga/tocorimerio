@@ -41,8 +41,18 @@ const MaracanaCalendar = () => {
 
   const availableMatches = useMemo(() => {
     const now = new Date();
-    return matches?.filter(m => m.status === 'available' && getMatchDateInRio(m.match_date) >= now) || [];
+    return matches?.filter(m =>
+      m.status === 'available' &&
+      getMatchDateInRio(m.match_date) >= now &&
+      !!m.home_team?.trim() &&
+      !!m.away_team?.trim()
+    ) || [];
   }, [matches]);
+
+  // Real remaining spots from the database only — never a fabricated number
+  const realSpotsLeft = (m: { available_spots?: number | null; sold_count?: number | null }) =>
+    (Number(m.available_spots) || 0) - (Number(m.sold_count) || 0);
+
 
   const calendarDays = useMemo(() => {
     const start = startOfMonth(currentMonth);
