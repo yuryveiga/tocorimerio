@@ -1,57 +1,29 @@
-import { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
-
-const REDIRECT_SECONDS = 8;
 
 const MESSAGES = [
   {
     lang: "EN",
-    oops: "Page not found",
-    body: "The page you're looking for doesn't exist or has been moved.",
-    redirect: "Redirecting you to the home page in",
-    seconds: "seconds",
-    btn: "Go to Home",
+    oops: "Looks like this page took the wrong turn in Rio.",
+    body: "The page you're looking for doesn't exist or has been moved. Try one of the routes below.",
   },
   {
     lang: "PT",
-    oops: "Página não encontrada",
-    body: "A página que você procura não existe ou foi movida.",
-    redirect: "Você será redirecionado para a página inicial em",
-    seconds: "segundos",
-    btn: "Ir para a Home",
+    oops: "Parece que esta página errou o caminho no Rio.",
+    body: "A página que você procura não existe ou foi movida. Escolha um dos caminhos abaixo.",
   },
   {
     lang: "ES",
-    oops: "Página no encontrada",
-    body: "La página que buscas no existe o ha sido movida.",
-    redirect: "Serás redirigido a la página principal en",
-    seconds: "segundos",
-    btn: "Ir al Inicio",
+    oops: "Parece que esta página tomó el camino equivocado en Río.",
+    body: "La página que buscas no existe o ha sido movida. Elige una de las opciones de abajo.",
   },
 ];
 
 const NotFound = () => {
-  const location = useLocation();
-  const [count, setCount] = useState(REDIRECT_SECONDS);
-
-  useEffect(() => {
-    console.error("404:", location.pathname);
-  }, [location.pathname]);
-
-  useEffect(() => {
-    if (count <= 0) { window.location.href = "/"; return; }
-    const id = setTimeout(() => setCount(c => c - 1), 1000);
-    return () => clearTimeout(id);
-  }, [count]);
-
-  const progress = ((REDIRECT_SECONDS - count) / REDIRECT_SECONDS) * 100;
-
   return (
     <div className="nf-page">
       <Helmet>
         <title>404 — Page Not Found | Tocorime Rio</title>
-        <meta name="robots" content="noindex, nofollow" />
+        <meta name="robots" content="noindex, follow" />
         <link
           href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@400;600;700&family=Barlow:wght@400;500&display=swap"
           rel="stylesheet"
