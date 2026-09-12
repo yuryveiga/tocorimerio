@@ -198,16 +198,6 @@ export default function Experiences() {
             </a>
           </div>
 
-          <div className="mt-5">
-            <Link to="/passeio" className="text-white/90 underline underline-offset-4 hover:text-white text-sm font-semibold">
-              {language === "pt"
-                ? "Ver todos os passeios no Rio de Janeiro →"
-                : language === "es"
-                  ? "Ver todos los tours en Río de Janeiro →"
-                  : "See all Rio de Janeiro tours →"}
-            </Link>
-          </div>
-
           {/* Inline trust strip */}
           <div className="mt-10 flex flex-wrap items-center justify-center gap-x-6 gap-y-3 text-white/85 text-sm font-medium">
             <span className="inline-flex items-center gap-1.5">
