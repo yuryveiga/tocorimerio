@@ -9,6 +9,7 @@ import { useLocale } from "@/contexts/LocaleContext";
 import { getCanonicalUrl, getHreflangLinks, generateBreadcrumbsSchema } from "@/utils/seo";
 import { BASE_URL } from "@/utils/seo";
 import { slugify } from "@/utils/slugify";
+import { TOUR_CATEGORIES, getCategoryCopy, getCategorySlug } from "@/lib/tourCategories";
 
 const PasseiosIndex = () => {
   const { tours, isLoading } = useSiteData();
@@ -20,19 +21,27 @@ const PasseiosIndex = () => {
     return (a.sort_order ?? 0) - (b.sort_order ?? 0);
   });
 
+  // Categorias na ordem comercial da taxonomia, identificadas pelo slug da URL.
   const categories = useMemo(() => {
-    const set = new Set<string>();
+    const present = new Set<string>();
     sortedTours.forEach((t) => {
-      const c = (t.category || "").trim().toUpperCase();
-      if (c) set.add(c);
+      const s = getCategorySlug(t.category);
+      if (s) present.add(s);
     });
-    return Array.from(set).sort();
-  }, [tours]);
+    const known = TOUR_CATEGORIES.filter((c) => present.has(c.slug)).map((c) => ({
+      slug: c.slug,
+      label: getCategoryCopy(c, language).label,
+    }));
+    const extras = Array.from(present)
+      .filter((s) => !TOUR_CATEGORIES.some((c) => c.slug === s))
+      .map((s) => ({ slug: s, label: s.replace(/-/g, " ") }));
+    return [...known, ...extras];
+  }, [tours, language]);
 
   const visibleTours =
     activeCategory === "ALL"
       ? sortedTours
-      : sortedTours.filter((t) => (t.category || "").trim().toUpperCase() === activeCategory);
+      : sortedTours.filter((t) => getCategorySlug(t.category) === activeCategory);
 
 
   const title =
