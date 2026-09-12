@@ -5,6 +5,7 @@ import Users from "lucide-react/dist/esm/icons/users";
 import Star from "lucide-react/dist/esm/icons/star";
 import ArrowRight from "lucide-react/dist/esm/icons/arrow-right";
 import Check from "lucide-react/dist/esm/icons/check";
+import Mountain from "lucide-react/dist/esm/icons/mountain";
 import { Button } from "@/components/ui/button";
 import { useSiteData } from "@/hooks/useSiteData";
 import { useLocale } from "@/contexts/LocaleContext";
@@ -221,6 +222,12 @@ export const TourItem = memo(({ tour }: { tour: TourCardProps }) => {
               </span>
             ) : (
               <span className="invisible">.</span>
+            )}
+            {difficulty && (
+              <span className="flex items-center gap-1.5 bg-muted px-2 py-1 rounded-md">
+                <Mountain className="w-3.5 h-3.5 text-primary" />
+                {difficulty}
+              </span>
             )}
             {tour.max_group_size > 1 && (
               <span className="flex items-center gap-1.5 bg-muted px-2 py-1 rounded-md">
