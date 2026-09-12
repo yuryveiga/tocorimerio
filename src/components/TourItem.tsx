@@ -5,12 +5,14 @@ import Users from "lucide-react/dist/esm/icons/users";
 import Star from "lucide-react/dist/esm/icons/star";
 import ArrowRight from "lucide-react/dist/esm/icons/arrow-right";
 import Check from "lucide-react/dist/esm/icons/check";
+import Mountain from "lucide-react/dist/esm/icons/mountain";
 import { Button } from "@/components/ui/button";
 import { useSiteData } from "@/hooks/useSiteData";
 import { useLocale } from "@/contexts/LocaleContext";
 import { OptimizedImage } from "./OptimizedImage";
 import { getTourMinPrice } from "@/utils/pricing";
 import { cleanMatchSlug } from "@/utils/seo";
+import { getCategoryLabel } from "@/lib/tourCategories";
 
 export type TourCardProps = {
   id: string;
@@ -29,6 +31,9 @@ export type TourCardProps = {
   short_description_es?: string;
   category_en?: string;
   category_es?: string;
+  difficulty?: string;
+  difficulty_en?: string;
+  difficulty_es?: string;
   external_url?: string;
   pricing_model?: 'fixed' | 'dynamic' | 'group' | 'custom' | 'tiered';
   price_1_person?: number;
@@ -60,12 +65,8 @@ export const TourItem = memo(({ tour }: { tour: TourCardProps }) => {
   const title = getTranslated('title');
   const short_description = getTranslated('short_description');
   
-  const category = (() => {
-    const rawCat = tour?.category;
-    if (rawCat === 'TRILHA') return t('trilhas');
-    if (rawCat === 'CITY TOUR') return t('city_tours');
-    return getTranslated('category');
-  })();
+  const category = getCategoryLabel(tour?.category, language) || getTranslated('category');
+  const difficulty = getTranslated('difficulty');
 
   const durationStr = language === 'pt' ? tour.duration : tour.duration
     ?.replace(/horas/gi, t("horas"))
@@ -221,6 +222,12 @@ export const TourItem = memo(({ tour }: { tour: TourCardProps }) => {
               </span>
             ) : (
               <span className="invisible">.</span>
+            )}
+            {difficulty && (
+              <span className="flex items-center gap-1.5 bg-muted px-2 py-1 rounded-md">
+                <Mountain className="w-3.5 h-3.5 text-primary" />
+                {difficulty}
+              </span>
             )}
             {tour.max_group_size > 1 && (
               <span className="flex items-center gap-1.5 bg-muted px-2 py-1 rounded-md">

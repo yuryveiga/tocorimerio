@@ -9,6 +9,7 @@ import { useLocale } from "@/contexts/LocaleContext";
 import { getCanonicalUrl, getHreflangLinks, generateBreadcrumbsSchema } from "@/utils/seo";
 import { BASE_URL } from "@/utils/seo";
 import { slugify } from "@/utils/slugify";
+import { TOUR_CATEGORIES, getCategoryCopy, getCategorySlug } from "@/lib/tourCategories";
 
 const PasseiosIndex = () => {
   const { tours, isLoading } = useSiteData();
@@ -20,19 +21,27 @@ const PasseiosIndex = () => {
     return (a.sort_order ?? 0) - (b.sort_order ?? 0);
   });
 
+  // Categorias na ordem comercial da taxonomia, identificadas pelo slug da URL.
   const categories = useMemo(() => {
-    const set = new Set<string>();
+    const present = new Set<string>();
     sortedTours.forEach((t) => {
-      const c = (t.category || "").trim().toUpperCase();
-      if (c) set.add(c);
+      const s = getCategorySlug(t.category);
+      if (s) present.add(s);
     });
-    return Array.from(set).sort();
-  }, [tours]);
+    const known = TOUR_CATEGORIES.filter((c) => present.has(c.slug)).map((c) => ({
+      slug: c.slug,
+      label: getCategoryCopy(c, language).label,
+    }));
+    const extras = Array.from(present)
+      .filter((s) => !TOUR_CATEGORIES.some((c) => c.slug === s))
+      .map((s) => ({ slug: s, label: s.replace(/-/g, " ") }));
+    return [...known, ...extras];
+  }, [tours, language]);
 
   const visibleTours =
     activeCategory === "ALL"
       ? sortedTours
-      : sortedTours.filter((t) => (t.category || "").trim().toUpperCase() === activeCategory);
+      : sortedTours.filter((t) => getCategorySlug(t.category) === activeCategory);
 
 
   const title =
@@ -249,11 +258,11 @@ const PasseiosIndex = () => {
               <div className="flex flex-wrap justify-center gap-x-4 gap-y-2">
                 {categories.map((c) => (
                   <Link
-                    key={c}
-                    to={`/passeios/${slugify(c)}`}
-                    className="text-sm font-semibold text-primary hover:underline capitalize"
+                    key={c.slug}
+                    to={`/passeios/${c.slug}`}
+                    className="text-sm font-semibold text-primary hover:underline"
                   >
-                    {c.toLowerCase()}
+                    {c.label}
                   </Link>
                 ))}
               </div>
@@ -266,7 +275,7 @@ const PasseiosIndex = () => {
               className="-mx-4 px-4 mb-8 flex gap-2 overflow-x-auto snap-x scrollbar-none [scrollbar-width:none] [-ms-overflow-style:none] sm:flex-wrap sm:justify-center sm:mx-0 sm:px-0"
             >
               {[{ value: "ALL", label: language === "pt" ? "Todos" : language === "es" ? "Todos" : "All" },
-                ...categories.map((c) => ({ value: c, label: c }))].map((c) => (
+                ...categories.map((c) => ({ value: c.slug, label: c.label }))].map((c) => (
                 <button
                   key={c.value}
                   type="button"
