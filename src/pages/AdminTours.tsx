@@ -198,8 +198,17 @@ const AdminTours = () => {
 
       <div className="flex gap-2 mb-6 shrink-0 flex-wrap">
         <Button variant={categoryFilter === 'all' ? 'default' : 'outline'} size="sm" onClick={() => setCategoryFilter('all')} className="rounded-full">Todos</Button>
-        <Button variant={categoryFilter === 'CITY TOUR' ? 'default' : 'outline'} size="sm" onClick={() => setCategoryFilter('CITY TOUR')} className="rounded-full">City Tour</Button>
-        <Button variant={categoryFilter === 'TRILHA' ? 'default' : 'outline'} size="sm" onClick={() => setCategoryFilter('TRILHA')} className="rounded-full">Trilha</Button>
+        {TOUR_CATEGORIES.map((c) => (
+          <Button
+            key={c.slug}
+            variant={categoryFilter === c.dbValues[0] ? 'default' : 'outline'}
+            size="sm"
+            onClick={() => setCategoryFilter(c.dbValues[0])}
+            className="rounded-full"
+          >
+            {c.label.pt}
+          </Button>
+        ))}
         {siteSettings['home_category_3'] && (
           <Button variant={categoryFilter === siteSettings['home_category_3'] ? 'default' : 'outline'} size="sm" onClick={() => setCategoryFilter(siteSettings['home_category_3'])} className="rounded-full">
             {siteSettings['home_category_3_label'] || siteSettings['home_category_3']}

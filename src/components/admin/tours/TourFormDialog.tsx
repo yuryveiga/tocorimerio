@@ -88,7 +88,7 @@ export function TourFormDialog({
                         <div className="space-y-2">
                           <Label className="text-xs uppercase font-bold text-muted-foreground">Categoria</Label>
                           <div className="flex gap-4 flex-wrap">
-                            {['CITY TOUR', 'TRILHA'].map(cat => (
+                            {TOUR_CATEGORIES.map(c => c.dbValues[0]).map(cat => (
                               <label key={cat} className="flex items-center gap-2 cursor-pointer">
                                 <input
                                   type="radio"
