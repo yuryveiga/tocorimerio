@@ -258,11 +258,11 @@ const PasseiosIndex = () => {
               <div className="flex flex-wrap justify-center gap-x-4 gap-y-2">
                 {categories.map((c) => (
                   <Link
-                    key={c}
-                    to={`/passeios/${slugify(c)}`}
-                    className="text-sm font-semibold text-primary hover:underline capitalize"
+                    key={c.slug}
+                    to={`/passeios/${c.slug}`}
+                    className="text-sm font-semibold text-primary hover:underline"
                   >
-                    {c.toLowerCase()}
+                    {c.label}
                   </Link>
                 ))}
               </div>
@@ -275,7 +275,7 @@ const PasseiosIndex = () => {
               className="-mx-4 px-4 mb-8 flex gap-2 overflow-x-auto snap-x scrollbar-none [scrollbar-width:none] [-ms-overflow-style:none] sm:flex-wrap sm:justify-center sm:mx-0 sm:px-0"
             >
               {[{ value: "ALL", label: language === "pt" ? "Todos" : language === "es" ? "Todos" : "All" },
-                ...categories.map((c) => ({ value: c, label: c }))].map((c) => (
+                ...categories.map((c) => ({ value: c.slug, label: c.label }))].map((c) => (
                 <button
                   key={c.value}
                   type="button"
