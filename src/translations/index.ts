@@ -2302,10 +2302,10 @@ export const translationsZhTW = {
 
   
   // Experiences Page
-  ex_meta_title: 'Rio de Janeiro 旅遊體驗 | 私人包團、健行與一日遊 | Tocorime Rio',
-  ex_meta_desc: '難忘的 Rio de Janeiro 私人體驗：城市觀光、健行與一日遊。TripAdvisor 5.0 滿分好評。雙語在地導遊，立即預訂您的冒險。',
-  ex_og_title: 'Rio de Janeiro 旅遊體驗 — 在地導遊私人行程',
-  ex_og_desc: '透過私人城市導覽、健行冒險與一日遊發現真實的 Rio。TripAdvisor 5.0 好評。雙語導遊，為您的團體量身打造。',
+  ex_meta_title: '為什麼選擇 Tocorime Rio | 在地導遊',
+  ex_meta_desc: '認識 Tocorime Rio：雙語在地導遊、私人交通與貼心規劃。在挑選行程之前，先了解我們的做法。',
+  ex_og_title: '為什麼選擇 Tocorime Rio',
+  ex_og_desc: '每一段 Rio 體驗背後，都有雙語在地導遊、私人交通與專屬規劃。',
   ex_low_season: '淡季 — 訪問 Rio 的最佳時機',
   ex_hero_1: '難忘的',
   ex_hero_2: '旅遊',
