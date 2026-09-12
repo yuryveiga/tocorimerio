@@ -363,6 +363,48 @@ export default function PasseiosCategoria({ categoriaOverride, pathOverride }: P
               ))}
             </div>
           )}
+
+          <section className="mt-16 border-t border-border pt-10">
+            <h2 className="font-serif text-2xl sm:text-3xl font-bold text-foreground mb-4">
+              {language === "pt"
+                ? "Procurando algo específico?"
+                : language === "es"
+                  ? "¿Buscas algo específico?"
+                  : "Looking for something specific?"}
+            </h2>
+            <ul className="flex flex-wrap gap-x-6 gap-y-3">
+              {(language === "pt"
+                ? [
+                    { to: "/passeio", label: "Todos os passeios no Rio" },
+                    { to: "/private-tours-rio-de-janeiro", label: "Passeios privativos no Rio" },
+                    { to: "/custom-private-tour-rio-de-janeiro", label: "Roteiro sob medida" },
+                    { to: "/your-private-guide-in-rio", label: "Guia privativo por hora" },
+                    { to: "/maracana-calendario", label: "Jogos no Maracanã" },
+                  ]
+                : language === "es"
+                  ? [
+                      { to: "/passeio", label: "Todos los tours en Río" },
+                      { to: "/private-tours-rio-de-janeiro", label: "Tours privados en Río" },
+                      { to: "/custom-private-tour-rio-de-janeiro", label: "Itinerario a medida" },
+                      { to: "/your-private-guide-in-rio", label: "Guía privado por hora" },
+                      { to: "/maracana-calendario", label: "Partidos en el Maracaná" },
+                    ]
+                  : [
+                      { to: "/passeio", label: "All Rio de Janeiro tours" },
+                      { to: "/private-tours-rio-de-janeiro", label: "Private tours in Rio" },
+                      { to: "/custom-private-tour-rio-de-janeiro", label: "Custom private tour" },
+                      { to: "/your-private-guide-in-rio", label: "Private guide by the hour" },
+                      { to: "/maracana-calendario", label: "Maracanã match calendar" },
+                    ]
+              ).map((hub) => (
+                <li key={hub.to}>
+                  <Link to={hub.to} className="text-primary font-semibold hover:underline">
+                    {hub.label} →
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </section>
         </div>
       </main>
 
