@@ -209,22 +209,22 @@ export const TourItem = memo(({ tour }: { tour: TourCardProps }) => {
         </div>
 
         <div className="mt-auto space-y-4">
-          <div className="hidden sm:flex items-center gap-4 text-[10px] text-muted-foreground font-black uppercase tracking-[0.15em] opacity-60 min-h-[18px]">
-            <span className="flex items-center gap-1.5 bg-muted px-2 py-1 rounded-md">
+          <div className="hidden sm:flex flex-nowrap items-center gap-2 text-[10px] text-muted-foreground font-black uppercase tracking-[0.08em] opacity-60 min-h-[26px] overflow-hidden">
+            <span className="inline-flex shrink-0 items-center gap-1.5 whitespace-nowrap bg-muted px-2 py-1 rounded-md">
               <Star className="w-3.5 h-3.5 text-yellow-500 fill-yellow-500" />
               {siteSettings['rating_value'] || '4.9'}
             </span>
             {tour.duration ? (
-              <span className="flex items-center gap-1.5 bg-muted px-2 py-1 rounded-md">
-                <Clock className="w-3.5 h-3.5 text-primary" />
+              <span className="inline-flex min-w-0 items-center gap-1.5 whitespace-nowrap bg-muted px-2 py-1 rounded-md">
+                <Clock className="w-3.5 h-3.5 shrink-0 text-primary" />
                 {durationStr?.split(' ')[0]} {t("horas")}
               </span>
             ) : (
               <span className="invisible">.</span>
             )}
             {tour.max_group_size > 1 && (
-              <span className="flex items-center gap-1.5 bg-muted px-2 py-1 rounded-md">
-                <Users className="w-3.5 h-3.5 text-primary" />
+              <span className="inline-flex min-w-0 items-center gap-1.5 whitespace-nowrap bg-muted px-2 py-1 rounded-md">
+                <Users className="w-3.5 h-3.5 shrink-0 text-primary" />
                 {language === 'pt' ? `até ${tour.max_group_size}` : language === 'es' ? `hasta ${tour.max_group_size}` : `up to ${tour.max_group_size}`}
               </span>
             )}
