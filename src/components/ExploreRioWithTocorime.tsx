@@ -56,7 +56,7 @@ type Props = {
  */
 export const ExploreRioWithTocorime = ({ target, tours, className = "" }: Props) => {
   const { t, language, formatPrice } = useLocale();
-  const { siteSettings } = useSiteData();
+  const { siteSettings, gallery } = useSiteData();
   const hidePrices = siteSettings?.["hide_prices"] === "true";
   const copy = getCopy(language);
 
@@ -72,6 +72,9 @@ export const ExploreRioWithTocorime = ({ target, tours, className = "" }: Props)
       : "";
   const href = tour ? `/passeio/${tour.slug}` : target.type === "page" ? target.path : "/#tours";
   const minPrice = tour ? getTourMinPrice(tour) : 0;
+  const galleryIndex = name.split("").reduce((total, character) => total + character.charCodeAt(0), 0);
+  const fallbackImage = gallery.length > 0 ? gallery[galleryIndex % gallery.length]?.url : undefined;
+  const imageUrl = tour?.image_url || fallbackImage;
 
   return (
     <aside
@@ -79,10 +82,10 @@ export const ExploreRioWithTocorime = ({ target, tours, className = "" }: Props)
       aria-label={copy.eyebrow}
     >
       <div className="flex flex-col sm:grid sm:grid-cols-[14rem_minmax(0,1fr)]">
-        {tour?.image_url && (
+        {imageUrl && (
           <Link to={href} className="relative h-40 overflow-hidden sm:h-auto sm:min-h-full" aria-label={name}>
             <OptimizedImage
-              src={tour.image_url}
+              src={imageUrl}
               alt={name}
               width={480}
               containerClassName="w-full h-full sm:absolute sm:inset-0"
