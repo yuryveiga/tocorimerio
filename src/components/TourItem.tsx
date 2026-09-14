@@ -209,24 +209,26 @@ export const TourItem = memo(({ tour }: { tour: TourCardProps }) => {
         </div>
 
         <div className="mt-auto space-y-4">
-          <div className="hidden sm:flex flex-nowrap items-center gap-1 text-[9px] text-muted-foreground font-black uppercase tracking-normal opacity-60 min-h-[24px]">
-            <span className="inline-flex shrink-0 items-center gap-1 whitespace-nowrap bg-muted px-1.5 py-1 rounded-md">
+          <div className="hidden sm:grid grid-cols-3 items-center gap-1 text-[8px] text-muted-foreground font-black uppercase tracking-normal opacity-60 min-h-[24px]">
+            <span className="inline-flex min-w-0 items-center justify-center gap-1 whitespace-nowrap bg-muted px-1 py-1 rounded-md">
               <Star className="w-3 h-3 text-yellow-500 fill-yellow-500" />
               {siteSettings['rating_value'] || '4.9'}
             </span>
             {tour.duration ? (
-              <span className="inline-flex shrink-0 items-center gap-1 whitespace-nowrap bg-muted px-1.5 py-1 rounded-md">
+              <span className="inline-flex min-w-0 items-center justify-center gap-1 whitespace-nowrap bg-muted px-1 py-1 rounded-md">
                 <Clock className="w-3 h-3 shrink-0 text-primary" />
                 {durationStr?.split(' ')[0]} {t("horas")}
               </span>
             ) : (
-              <span className="invisible">.</span>
+              <span className="invisible" aria-hidden="true">.</span>
             )}
-            {tour.max_group_size > 1 && (
-              <span className="inline-flex shrink-0 items-center gap-1 whitespace-nowrap bg-muted px-1.5 py-1 rounded-md">
+            {tour.max_group_size > 1 ? (
+              <span className="inline-flex min-w-0 items-center justify-center gap-1 whitespace-nowrap bg-muted px-1 py-1 rounded-md">
                 <Users className="w-3 h-3 shrink-0 text-primary" />
                 {language === 'pt' ? `até ${tour.max_group_size}` : language === 'es' ? `hasta ${tour.max_group_size}` : `up to ${tour.max_group_size}`}
               </span>
+            ) : (
+              <span className="invisible" aria-hidden="true">.</span>
             )}
           </div>
           
