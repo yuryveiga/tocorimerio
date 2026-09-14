@@ -78,16 +78,16 @@ export const ExploreRioWithTocorime = ({ target, tours, className = "" }: Props)
       className={`my-10 rounded-2xl border border-primary/20 bg-primary/5 overflow-hidden ${className}`}
       aria-label={copy.eyebrow}
     >
-      <div className="flex flex-col sm:flex-row">
+      <div className="flex flex-col sm:grid sm:grid-cols-[14rem_minmax(0,1fr)]">
         {tour?.image_url && (
-          <Link to={href} className="sm:w-56 shrink-0" aria-label={name}>
+          <Link to={href} className="relative h-40 overflow-hidden sm:h-auto sm:min-h-full" aria-label={name}>
             <OptimizedImage
               src={tour.image_url}
               alt={name}
               width={480}
-              containerClassName="w-full h-40 sm:h-full"
+              containerClassName="w-full h-full sm:absolute sm:inset-0"
               fit="cover"
-              className="w-full h-full"
+              className="h-full w-full object-cover"
               loading="lazy"
             />
           </Link>
