@@ -1206,7 +1206,7 @@ const FlamengoMirassolMaracana = () => {
           {" · "}
           <a href="/maracana-calendario" style={{ color: "var(--lib-dim)", textDecoration: "none" }}>Maracanã Calendar</a>
           {" · "}
-          <a href="/passeio/maracana-matchday" style={{ color: "var(--lib-dim)", textDecoration: "none" }}>Matchday Package</a>
+          <a href="/football-experiences-in-rio-de-janeiro" style={{ color: "var(--lib-dim)", textDecoration: "none" }}>Football Experiences</a>
         </p>
       </footer>
 

@@ -54,6 +54,7 @@ const ROUTE_SELECTORS = {
   '/passeio': '[data-tour-card]',
   '/blog': '[data-blog-card]',
   '/maracana-calendario': '[data-match-card]',
+  '/football-experiences-in-rio-de-janeiro': '[data-football-experiences]',
 };
 
 // Rotas de categoria e passeio individuais também esperam pelo card de tour
@@ -119,6 +120,7 @@ async function fetchDynamicRoutes() {
     '/things-to-do-in-rio-de-janeiro',
     '/private-tours-rio-de-janeiro',
     '/custom-private-tour-rio-de-janeiro',
+    '/football-experiences-in-rio-de-janeiro',
     '/city-tour',
     '/hiking',
     '/one-day',
@@ -146,6 +148,7 @@ async function fetchDynamicRoutes() {
     const activeTours = tours.filter(t => t.is_active !== false);
     activeTours.forEach(tour => {
       let slug = tour.slug || tour.id;
+      if (slugify(slug) === 'maracana-matchday') return;
       if (slug.includes('niter-i') || slug.includes('niteroi')) {
         slug = 'um-dia-em-niteroi';
       }
