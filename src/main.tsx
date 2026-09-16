@@ -17,6 +17,17 @@ import "./index.css";
   } catch {}
 })();
 
+// Consolidate the retired generic Matchday tour into the trip-planning page.
+(() => {
+  try {
+    const { pathname, search, hash } = window.location;
+    const normalized = decodeURIComponent(pathname).replace(/\/+$/, "");
+    if (normalized === "/passeio/maracana-matchday" || normalized === "/passeio/maracanã-matchday") {
+      window.location.replace(`/football-experiences-in-rio-de-janeiro${search}${hash}`);
+    }
+  } catch {}
+})();
+
 // SEO: redirect legacy blog slugs to their new shortened versions
 (() => {
   try {

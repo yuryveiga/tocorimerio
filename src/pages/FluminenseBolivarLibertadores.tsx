@@ -100,7 +100,7 @@ const FluminenseBolivarLibertadores = () => {
         <script type="application/ld+json">
           {JSON.stringify(generateBreadcrumbsSchema([
             { name: "Home", url: getCanonicalUrl("/") },
-            { name: "Maracanã Matchday", url: getCanonicalUrl("/passeio/maracana-matchday") },
+            { name: "Football Experiences in Rio", url: getCanonicalUrl("/football-experiences-in-rio-de-janeiro") },
             { name: "Fluminense vs Bolívar", url: getCanonicalUrl(PAGE_PATH) },
           ]))}
         </script>

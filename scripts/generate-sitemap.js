@@ -88,6 +88,7 @@ async function generateSitemap() {
       { url: '/custom-private-tour-rio-de-janeiro' },
       { url: '/your-private-guide-in-rio' },
       { url: '/maracana-calendario' },
+      { url: '/football-experiences-in-rio-de-janeiro' },
       { url: '/flamengo-x-vasco-maracana' },
       { url: '/fluminense-bolivar-libertadores' },
       { url: '/brasil-x-panama-maio-maracana' },
@@ -146,6 +147,7 @@ async function generateSitemap() {
     // Tours
     tours.forEach(tour => {
       let slug = slugify(tour.slug || tour.id);
+      if (slug === 'maracana-matchday') return;
       if (slug.includes('niter-i') || slug.includes('niteroi')) {
         slug = 'um-dia-em-niteroi';
       }
@@ -223,6 +225,7 @@ async function generateSitemap() {
     let imgCount = 0;
     tours.forEach((tour) => {
       let slug = slugify(tour.slug || tour.id);
+      if (slug === 'maracana-matchday') return;
       if (slug.includes('niter-i') || slug.includes('niteroi')) slug = 'um-dia-em-niteroi';
       const urls = collectImages(tour.image_url, tour.carousel_images_json, tour.images_json);
       if (!urls.length) return;

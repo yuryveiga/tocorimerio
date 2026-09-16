@@ -47,8 +47,8 @@ const HIGHLIGHTS: { title: string; text: string; to: string; cta: string }[] = [
   {
     title: "6. A match at Maracanã",
     text: "Flamengo, Fluminense or Vasco at the Maracanã is the loudest thing you will do in Brazil. Sector choice matters a lot for a first visit.",
-    to: "/maracana-calendario",
-    cta: "Match calendar",
+    to: "/football-experiences-in-rio-de-janeiro",
+    cta: "Plan a football experience",
   },
   {
     title: "7. Beaches beyond Copacabana",

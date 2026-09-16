@@ -165,7 +165,7 @@ const FlamengoVascoMaracana = () => {
         <script type="application/ld+json">
           {JSON.stringify(generateBreadcrumbsSchema([
             { name: "Home", url: getCanonicalUrl("/") },
-            { name: "Maracanã Matchday", url: getCanonicalUrl("/passeio/maracana-matchday") },
+            { name: "Football Experiences in Rio", url: getCanonicalUrl("/football-experiences-in-rio-de-janeiro") },
             { name: "Flamengo vs Vasco", url: getCanonicalUrl(PAGE_PATH) },
           ]))}
         </script>

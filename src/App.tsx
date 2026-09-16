@@ -102,6 +102,7 @@ const PrivateGuideRio        = lazy(() => import("./pages/PrivateGuideRio"));
 const ThingsToDoInRio        = lazy(() => import("./pages/ThingsToDoInRio"));
 const PrivateToursRio        = lazy(() => import("./pages/PrivateToursRio"));
 const CustomTourRio          = lazy(() => import("./pages/CustomTourRio"));
+const FootballExperiencesRio = lazy(() => import("./pages/FootballExperiencesRio"));
 
 const PageLoader = () => <div className="min-h-screen flex items-center justify-center bg-background"><div className="w-12 h-12 border-4 border-primary border-t-transparent rounded-full animate-spin" /></div>;
 
@@ -238,6 +239,7 @@ const App = ({ queryClient: externalQueryClient }: { queryClient?: QueryClient }
                       <Route path="/carrinho" element={<Cart />} />
                       <Route path="/confirmacao" element={<CheckoutSuccess />} />
                       <Route path="/maracana-calendario" element={<MaracanaCalendar />} />
+                      <Route path="/football-experiences-in-rio-de-janeiro" element={<FootballExperiencesRio />} />
                       <Route path="/maracanã-calendário" element={<Navigate to="/maracana-calendario" replace />} />
                       <Route path="/maracanacalendar" element={<Navigate to="/maracana-calendario" replace />} />
                       <Route path="/maracana-games-schedule" element={<Navigate to="/maracana-calendario" replace />} />
@@ -261,9 +263,10 @@ const App = ({ queryClient: externalQueryClient }: { queryClient?: QueryClient }
                       <Route path="/things-to-do-in-rio-de-janeiro" element={<ThingsToDoInRio />} />
                       <Route path="/private-tours-rio-de-janeiro" element={<PrivateToursRio />} />
                       <Route path="/custom-private-tour-rio-de-janeiro" element={<CustomTourRio />} />
+                      <Route path="/passeio/maracana-matchday" element={<Navigate to="/football-experiences-in-rio-de-janeiro" replace />} />
+                      <Route path="/passeio/maracanã-matchday" element={<Navigate to="/football-experiences-in-rio-de-janeiro" replace />} />
                       <Route path="/passeio/:id" element={<PasseioDetalhe />} />
                       {/* Fix: accented/corrupted tour slugs that Google indexed without canonical */}
-                      <Route path="/passeio/maracanã-matchday" element={<Navigate to="/passeio/maracana-matchday" replace />} />
                       <Route path="/passeio/um-dia-em-niter-i" element={<Navigate to="/passeio/um-dia-em-niteroi" replace />} />
                       <Route path="/match/:id" element={<MatchDetail />} />
 

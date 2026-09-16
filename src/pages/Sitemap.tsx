@@ -24,6 +24,7 @@ const Sitemap = () => {
         { label: t("blog") || "Blog", href: "/blog" },
         { label: t("carrinho") || "Carrinho", href: "/carrinho" },
         { label: t("maracana-calendario") || "Calendário Maracanã", href: "/maracana-calendario" },
+        { label: language === "pt" ? "Experiências de futebol no Rio" : language === "es" ? "Experiencias de fútbol en Río" : "Football Experiences in Rio", href: "/football-experiences-in-rio-de-janeiro" },
       ]
     },
     {
@@ -63,8 +64,8 @@ const Sitemap = () => {
   return (
     <div className="min-h-screen bg-background pb-20">
       <Helmet>
-        <title>{t("sitemap") || "Mapa do Site"} | Maracanã Match Day</title>
-        <meta name="description" content="Navegue por todas as páginas, experiências e artigos do Maracanã Match Day." />
+        <title>{t("sitemap") || "Mapa do Site"} | Tocorime Rio</title>
+        <meta name="description" content="Navegue por todas as páginas, passeios, experiências de futebol e artigos da Tocorime Rio." />
         <meta name="robots" content="noindex, follow" />
         <link rel="canonical" href="https://tocorimerio.com/sitemap" />
       </Helmet>

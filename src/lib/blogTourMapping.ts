@@ -48,18 +48,26 @@ const RULES: Rule[] = [
     keywords: ["rocinha", "favela", "comunidade"],
     targets: [{ type: "tour", slug: "favela-rio-tour-rocinha" }],
   },
-  // Maracanã / football articles → Maracanã MatchDay + fixture calendar
+  // Football articles → trip-planning hub + confirmed fixture calendar
   {
     keywords: ["maracana", "maracanã", "football", "futebol", "soccer", "flamengo", "fluminense", "vasco", "botafogo", "ingressos", "tickets", "copa do mundo", "world cup", "matchday", "estadio", "stadium"],
     targets: [
-      { type: "tour", slug: "maracana-matchday" },
+      {
+        type: "page",
+        path: "/football-experiences-in-rio-de-janeiro",
+        label: {
+          pt: "Experiências de futebol no Rio de Janeiro",
+          en: "Football Experiences in Rio de Janeiro",
+          es: "Experiencias de fútbol en Río de Janeiro",
+        },
+      },
       {
         type: "page",
         path: "/maracana-calendario",
         label: {
-          pt: "Calendário de jogos e ingressos do Maracanã",
-          en: "Maracanã match calendar & tickets",
-          es: "Calendario de partidos y entradas de Maracanã",
+          pt: "Jogos confirmados no Maracanã",
+          en: "Confirmed Maracanã fixtures",
+          es: "Partidos confirmados en Maracanã",
         },
       },
     ],

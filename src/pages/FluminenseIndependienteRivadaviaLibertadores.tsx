@@ -581,7 +581,7 @@ const FluminenseIndependienteRivadaviaLibertadores = () => {
         <script type="application/ld+json">
           {JSON.stringify(generateBreadcrumbsSchema([
             { name: lang === 'pt' ? "Início" : lang === 'es' ? "Inicio" : "Home", url: getCanonicalUrl("/") },
-            { name: "Maracanã Matchday", url: getCanonicalUrl("/passeio/maracana-matchday") },
+            { name: "Football Experiences in Rio", url: getCanonicalUrl("/football-experiences-in-rio-de-janeiro") },
             { name: "Fluminense vs Independiente Rivadavia", url: canonical },
           ]))}
         </script>
@@ -1291,7 +1291,7 @@ const FluminenseIndependienteRivadaviaLibertadores = () => {
           {" · "}
           <a href="/maracana-calendario" style={{ color: "var(--lib-dim)", textDecoration: "none" }}>Maracanã Calendar</a>
           {" · "}
-          <a href="/passeio/maracana-matchday" style={{ color: "var(--lib-dim)", textDecoration: "none" }}>Matchday Package</a>
+          <a href="/football-experiences-in-rio-de-janeiro" style={{ color: "var(--lib-dim)", textDecoration: "none" }}>Football Experiences</a>
         </p>
       </footer>
 
