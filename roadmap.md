@@ -5,4 +5,4 @@
 - [x] Validate route, metadata, sitemap, and type safety
 - [x] Map the 20 supplied keyword opportunities to existing canonical URLs
 - [x] Improve titles, descriptions, headings, and copy without changing URLs or design
-- [x] Validate the targeted pages, prerender output, and build
+- [ ] Validate prerender output (blocked: the installed Playwright browser version does not match the prerender script)
