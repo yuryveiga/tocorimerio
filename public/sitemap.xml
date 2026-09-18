@@ -155,7 +155,7 @@
   </url>
   <url>
     <loc>https://tocorimerio.com/passeio/pequena-frica-experience-hist-ria-cultura-e-resist-ncia-no-cora-o-do-rio</loc>
-    <lastmod>2026-09-12</lastmod>
+    <lastmod>2026-09-18</lastmod>
     <image:image>
       <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1778591867340_0vmfaoduhgwe.webp</image:loc>
       <image:caption>Pequena África Experience – História, Cultura e Resistência no Coração do Rio</image:caption>
@@ -695,7 +695,7 @@
   </url>
   <url>
     <loc>https://tocorimerio.com/passeio/cachoeiras-horto</loc>
-    <lastmod>2026-09-12</lastmod>
+    <lastmod>2026-09-18</lastmod>
     <image:image>
       <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776136935433_iyan1f2zuk.webp</image:loc>
       <image:caption>Rota das Cachoeiras do Horto</image:caption>
@@ -919,7 +919,7 @@
   </url>
   <url>
     <loc>https://tocorimerio.com/passeio/favela-rio-tour-rocinha</loc>
-    <lastmod>2026-09-12</lastmod>
+    <lastmod>2026-09-18</lastmod>
     <image:image>
       <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776266405320_eflqqt6g2do.webp</image:loc>
       <image:caption>Favela Rio Tour: Rocinha Tour Imersivo</image:caption>
@@ -1308,7 +1308,7 @@
   </url>
   <url>
     <loc>https://tocorimerio.com/match/flamengo-vs-independiente-del-valle-2026-09-17</loc>
-    <lastmod>2026-09-02</lastmod>
+    <lastmod>2026-09-17</lastmod>
   </url>
   <url>
     <loc>https://tocorimerio.com/match/fluminense-vs-cruzeiro-2026-11-29</loc>
@@ -1439,6 +1439,14 @@
     </image:image>
   </url>
   <url>
+    <loc>https://tocorimerio.com/blog/the-best-specialty-coffee-shops-in-the-center-of-rio-de-janeiro</loc>
+    <lastmod>2026-09-18</lastmod>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1779158659742_gn9o1u3egy.webp</image:loc>
+      <image:caption>Cafés Especiais no Centro do Rio: Guia do Viajante</image:caption>
+    </image:image>
+  </url>
+  <url>
     <loc>https://tocorimerio.com/blog/how-to-get-to-rio-de-janeiro-new-flights-routes</loc>
     <lastmod>2026-09-08</lastmod>
     <image:image>
@@ -1488,7 +1496,7 @@
   </url>
   <url>
     <loc>https://tocorimerio.com/blog/best-feijoada-rio-de-janeiro-tourists</loc>
-    <lastmod>2026-08-10</lastmod>
+    <lastmod>2026-09-18</lastmod>
     <image:image>
       <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1777144245848_af37x43rp8q.webp</image:loc>
       <image:caption>Melhor Feijoada do Rio de Janeiro: as 8 Melhores (2026)</image:caption>
@@ -1496,10 +1504,10 @@
   </url>
   <url>
     <loc>https://tocorimerio.com/blog/the-best-specialty-coffees-in-the-center-of-rio-de-janeiro</loc>
-    <lastmod>2026-09-08</lastmod>
+    <lastmod>2026-09-18</lastmod>
     <image:image>
       <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776154873773_6061xrix9z7.webp</image:loc>
-      <image:caption>Cafés Centro RJ: os Melhores Cafés Especiais do Rio</image:caption>
+      <image:caption>Cafeteria no Centro do Rio: Melhores Cafés Especiais</image:caption>
     </image:image>
   </url>
   <url>
@@ -1548,14 +1556,6 @@
     <image:image>
       <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776178598223_s0w825hcry.webp</image:loc>
       <image:caption>Além da Praia: os Tesouros Escondidos do Rio pelo Mar</image:caption>
-    </image:image>
-  </url>
-  <url>
-    <loc>https://tocorimerio.com/blog/the-best-specialty-coffee-shops-in-the-center-of-rio-de-janeiro</loc>
-    <lastmod>2026-09-08</lastmod>
-    <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1779158659742_gn9o1u3egy.webp</image:loc>
-      <image:caption>Cafés Especiais no Centro do Rio: Guia do Viajante</image:caption>
     </image:image>
   </url>
   <url>
@@ -1736,7 +1736,7 @@
   </url>
   <url>
     <loc>https://tocorimerio.com/blog/where-exchange-money</loc>
-    <lastmod>2026-09-08</lastmod>
+    <lastmod>2026-09-18</lastmod>
     <image:image>
       <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1783515195339_q8z74piboqt.webp</image:loc>
       <image:caption>Trocar Dinheiro no Rio: Guia Local para Viajantes</image:caption>
@@ -1816,7 +1816,7 @@
   </url>
   <url>
     <loc>https://tocorimerio.com/blog/gastronomia-carioca-pratos-tipicos</loc>
-    <lastmod>2026-09-10</lastmod>
+    <lastmod>2026-09-18</lastmod>
     <image:image>
       <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776154873773_6061xrix9z7.webp</image:loc>
       <image:caption>Comida Típica de Rio de Janeiro: 5 Pratos Imperdíveis</image:caption>
@@ -1880,10 +1880,10 @@
   </url>
   <url>
     <loc>https://tocorimerio.com/blog/praias-do-rio-de-janeiro</loc>
-    <lastmod>2026-09-08</lastmod>
+    <lastmod>2026-09-18</lastmod>
     <image:image>
       <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1775696770274_874g00vopl.png</image:loc>
-      <image:caption>Praias do Rio de Janeiro: Guia das Melhores</image:caption>
+      <image:caption>Praias e Litoral do Rio de Janeiro: Guia Completo</image:caption>
     </image:image>
   </url>
   <url>
@@ -1928,10 +1928,10 @@
   </url>
   <url>
     <loc>https://tocorimerio.com/blog/trilhas-no-rio-de-janeiro</loc>
-    <lastmod>2026-09-08</lastmod>
+    <lastmod>2026-09-18</lastmod>
     <image:image>
       <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776155661937_gt95mex1i.webp</image:loc>
-      <image:caption>Trilhas no Rio de Janeiro: os Melhores Caminhos</image:caption>
+      <image:caption>Trilhas no Rio de Janeiro: Melhores Rotas e Dicas</image:caption>
     </image:image>
   </url>
   <url>
@@ -2016,7 +2016,7 @@
   </url>
   <url>
     <loc>https://tocorimerio.com/blog/how-to-get-tickets-for-maracana-the-comp</loc>
-    <lastmod>2026-09-08</lastmod>
+    <lastmod>2026-09-18</lastmod>
     <image:image>
       <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1778895384294_t4y9rz1bgyd.webp</image:loc>
       <image:caption>Ingressos para o Maracanã: o Guia Completo (2026)</image:caption>
@@ -2032,10 +2032,10 @@
   </url>
   <url>
     <loc>https://tocorimerio.com/blog/how-much-does-a-city-tour-in-rio-de-jane</loc>
-    <lastmod>2026-09-08</lastmod>
+    <lastmod>2026-09-18</lastmod>
     <image:image>
       <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1778894147868_wgmcbdzag5.webp</image:loc>
-      <image:caption>Quanto Custa um City Tour no Rio? Guia 2026</image:caption>
+      <image:caption>Quanto Custa? Preço de Passeio Turístico no Rio</image:caption>
     </image:image>
   </url>
   <url>
@@ -2072,7 +2072,7 @@
   </url>
   <url>
     <loc>https://tocorimerio.com/blog/things-to-do-in-rio-de-janeiro-when-it-rains</loc>
-    <lastmod>2026-07-30</lastmod>
+    <lastmod>2026-09-18</lastmod>
     <image:image>
       <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1778893799536_6dpfsl0oe6k.webp</image:loc>
       <image:caption>O Que Fazer no RJ com Chuva: 15 Ideias no Rio</image:caption>

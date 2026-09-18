@@ -91,14 +91,14 @@ const MaracanaCalendar = () => {
     // Reforço de clube no título quando há jogos de Fla/Flu na lista
     const title = clubBits.length
       ? (language === 'pt'
-          ? `Ingressos Maracanã 2026: Jogos do ${clubBits.join(' e ')}, Preços e Tour`
+          ? 'Próximos Jogos no Maracanã: Programação 2026 | Tocorime'
           : language === 'es'
             ? `Entradas Maracanã 2026: Partidos de ${clubBits.join(' y ')}, Precios y Tour`
             : `Maracanã Tickets 2026: ${clubBits.join(' & ')} Fixtures, Prices & Tour`)
       : baseTitle;
 
     const description = language === 'pt'
-      ? `Ingressos para o Maracanã${clubBits.length ? ` (${clubBits.join(' e ')})` : ''} com calendário atualizado de jogos, preços e setores. Ingresso oficial, transporte do hotel e guia bilíngue incluídos.`
+      ? 'Veja a programação do Maracanã e os próximos jogos confirmados, com datas, horários e preços. Consulte o próximo jogo no Maracanã e reserve online.'
       : language === 'es'
         ? `Entradas para Maracanã${clubBits.length ? ` (${clubBits.join(' y ')})` : ''} con calendario actualizado, precios y sectores. Entrada oficial, transporte del hotel y guía bilingüe incluidos.`
         : `Maracanã tickets${clubBits.length ? ` for ${clubBits.join(' & ')}` : ''} with the updated fixture calendar, prices and seating sectors. Official ticket, hotel transport and bilingual guide included.`;
@@ -271,7 +271,6 @@ const MaracanaCalendar = () => {
       <Helmet>
         <title>{seo.title}</title>
         <meta name="description" content={seo.description} />
-        <meta name="keywords" content={seo.keywords} />
         <link rel="canonical" href={getCanonicalUrl("/maracana-calendario")} />
         {getHreflangLinks("/maracana-calendario").map((l) => (
           <link key={l.hreflang} rel="alternate" hrefLang={l.hreflang} href={l.href} />
@@ -301,11 +300,11 @@ const MaracanaCalendar = () => {
       <div className="pt-24 pb-8 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
           <h1 className="text-4xl sm:text-5xl font-bold mb-3 font-sans tracking-tight">
-            {language === 'pt' ? 'INGRESSOS PARA O MARACANÃ E CALENDÁRIO DE JOGOS' : language === 'es' ? 'ENTRADAS PARA MARACANÃ Y CALENDARIO DE PARTIDOS' : 'MARACANÃ TICKETS & MATCH CALENDAR'}
+            {language === 'pt' ? 'PRÓXIMOS JOGOS NO MARACANÃ: PROGRAMAÇÃO E INGRESSOS' : language === 'es' ? 'ENTRADAS PARA MARACANÃ Y CALENDARIO DE PARTIDOS' : 'MARACANÃ TICKETS & MATCH CALENDAR'}
           </h1>
           <p className="text-muted-foreground mb-4 max-w-3xl leading-relaxed">
             {language === 'pt'
-              ? 'Todos os próximos jogos confirmados no Maracanã, com data, campeonato, preço por pessoa e horário de início. Cada reserva inclui o ingresso oficial nas Cadeiras Cativas do Setor Oeste, transporte ida e volta do seu hotel na Zona Sul e guia trilíngue — sem fila, sem CPF e sem risco de revenda.'
+              ? 'Acompanhe a programação do Maracanã e descubra qual é o próximo jogo no estádio. Listamos somente partidas confirmadas, com data, campeonato, preço por pessoa e horário de início. Cada reserva inclui ingresso oficial, transporte de ida e volta do seu hotel na Zona Sul e guia trilíngue.'
               : language === 'es'
                 ? 'Todos los próximos partidos confirmados en Maracanã, con fecha, campeonato, precio por persona y hora de inicio. Cada reserva incluye la entrada oficial en las Sillas Reservadas del Sector Oeste, transporte ida y vuelta desde tu hotel en la Zona Sur y guía trilingüe — sin colas, sin CPF y sin riesgo de reventa.'
                 : 'Every confirmed upcoming fixture at Maracanã, with date, competition, price per person and kick-off time. Each booking includes an official Maracanã ticket in the Reserved Seats (lower West Sector), round-trip transport from your South Zone hotel and a trilingual guide — no queues, no Brazilian CPF and no resale risk.'}

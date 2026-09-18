@@ -439,21 +439,28 @@ export default function MatchDetail() {
   ];
 
   const translatedTitle = `${match.home_team} x ${match.away_team}`;
+  const isFlamengoChapecoense2026 = match.slug === "flamengo-vs-chapecoense-2026-12-02";
+  const pageTitle = isFlamengoChapecoense2026 && language === "pt"
+    ? "Chapecoense x Flamengo 2026: Ingressos no Maracanã | Tocorime"
+    : `${translatedTitle} | Maracanã Matchday Experience`;
+  const pageDescription = isFlamengoChapecoense2026 && language === "pt"
+    ? "Chapecoense x Flamengo 2026: consulte ingressos para a partida de 2 de dezembro no Maracanã, com transfer e guia local conforme disponibilidade."
+    : metaDescription;
 
   return (
     <div className="min-h-screen bg-background">
       <Helmet>
-        <title>{translatedTitle} | Maracanã Matchday Experience</title>
-        <meta name="description" content={metaDescription} />
+        <title>{pageTitle}</title>
+        <meta name="description" content={pageDescription} />
         <meta property="og:title" content={`${translatedTitle} | ${siteTitle}`} />
-        <meta property="og:description" content={metaDescription} />
+        <meta property="og:description" content={pageDescription} />
         <meta property="og:type" content="website" />
         <meta property="og:url" content={getCanonicalUrl(`/match/${match.slug || match.id}`)} />
         <meta property="og:image" content={(match as any).banner_url || (match as any).image_url || `${getCanonicalUrl("")}/og-image.jpg`} />
         <meta property="og:image:alt" content={`${translatedTitle} — Maracanã`} />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content={`${translatedTitle} | ${siteTitle}`} />
-        <meta name="twitter:description" content={metaDescription} />
+        <meta name="twitter:description" content={pageDescription} />
         <meta name="twitter:image" content={(match as any).banner_url || (match as any).image_url || `${getCanonicalUrl("")}/og-image.jpg`} />
         <link rel="canonical" href={getCanonicalUrl(`/match/${match.slug || match.id}`)} />
         {jsonLd && <script type="application/ld+json">{JSON.stringify(jsonLd)}</script>}

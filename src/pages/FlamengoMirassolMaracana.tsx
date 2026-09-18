@@ -419,8 +419,8 @@ const FlamengoMirassolMaracana = () => {
       htmlLang: "en",
     },
     pt: {
-      title: "Ingressos Flamengo x Mirassol no Maracanã (02/09/2026) | Tocorime Rio",
-      description: "Ingressos Flamengo x Mirassol no Maracanã em 02/09/2026 com transfer do hotel e guia trilíngue. Setor Oeste Superior e Maracanã Club. Confirmação imediata.",
+      title: "Ingressos Mirassol x Flamengo 2026 no Maracanã | Tocorime",
+      description: "Procura ingressos para Mirassol x Flamengo? Veja a experiência Flamengo x Mirassol no Maracanã em 02/09/2026, com ingresso oficial, transfer e guia.",
       ogTitle: "Flamengo x Mirassol no Maracanã — Ingresso + Transfer + Guia",
       twTitle: "Ingressos Flamengo x Mirassol — Maracanã, 02/09/2026",
       keywords: "ingressos flamengo x mirassol, ingressos maracanã, como comprar ingresso no maracanã, flamengo maracanã ingressos, brasileirão 2026 ingressos, jogo no maracanã para turistas, pacote maracanã com transfer, guia privativo rio de janeiro, o que fazer no rio de janeiro, passeios no rio de janeiro",
@@ -454,7 +454,6 @@ const FlamengoMirassolMaracana = () => {
         <html lang={seo.htmlLang} />
         <title>{seo.title}</title>
         <meta name="description" content={seo.description} />
-        <meta name="keywords" content={seo.keywords} />
         <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
         <link rel="canonical" href={getCanonicalUrl(PAGE_PATH)} />
         {hreflang.map(h => <link key={h.hreflang} rel="alternate" hrefLang={h.hreflang} href={h.href} />)}

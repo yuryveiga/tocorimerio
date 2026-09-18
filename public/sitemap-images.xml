@@ -1288,6 +1288,13 @@
     </image:image>
   </url>
   <url>
+    <loc>https://tocorimerio.com/blog/the-best-specialty-coffee-shops-in-the-center-of-rio-de-janeiro</loc>
+    <image:image>
+      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1779158659742_gn9o1u3egy.webp</image:loc>
+      <image:caption>Cafés Especiais no Centro do Rio: Guia do Viajante</image:caption>
+    </image:image>
+  </url>
+  <url>
     <loc>https://tocorimerio.com/blog/how-to-get-to-rio-de-janeiro-new-flights-routes</loc>
     <image:image>
       <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776178620123_asifj7wd7z7.webp</image:loc>
@@ -1340,7 +1347,7 @@
     <loc>https://tocorimerio.com/blog/the-best-specialty-coffees-in-the-center-of-rio-de-janeiro</loc>
     <image:image>
       <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776154873773_6061xrix9z7.webp</image:loc>
-      <image:caption>Cafés Centro RJ: os Melhores Cafés Especiais do Rio</image:caption>
+      <image:caption>Cafeteria no Centro do Rio: Melhores Cafés Especiais</image:caption>
     </image:image>
   </url>
   <url>
@@ -1383,13 +1390,6 @@
     <image:image>
       <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776178598223_s0w825hcry.webp</image:loc>
       <image:caption>Além da Praia: os Tesouros Escondidos do Rio pelo Mar</image:caption>
-    </image:image>
-  </url>
-  <url>
-    <loc>https://tocorimerio.com/blog/the-best-specialty-coffee-shops-in-the-center-of-rio-de-janeiro</loc>
-    <image:image>
-      <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1779158659742_gn9o1u3egy.webp</image:loc>
-      <image:caption>Cafés Especiais no Centro do Rio: Guia do Viajante</image:caption>
     </image:image>
   </url>
   <url>
@@ -1676,7 +1676,7 @@
     <loc>https://tocorimerio.com/blog/praias-do-rio-de-janeiro</loc>
     <image:image>
       <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1775696770274_874g00vopl.png</image:loc>
-      <image:caption>Praias do Rio de Janeiro: Guia das Melhores</image:caption>
+      <image:caption>Praias e Litoral do Rio de Janeiro: Guia Completo</image:caption>
     </image:image>
   </url>
   <url>
@@ -1718,7 +1718,7 @@
     <loc>https://tocorimerio.com/blog/trilhas-no-rio-de-janeiro</loc>
     <image:image>
       <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776155661937_gt95mex1i.webp</image:loc>
-      <image:caption>Trilhas no Rio de Janeiro: os Melhores Caminhos</image:caption>
+      <image:caption>Trilhas no Rio de Janeiro: Melhores Rotas e Dicas</image:caption>
     </image:image>
   </url>
   <url>
@@ -1809,7 +1809,7 @@
     <loc>https://tocorimerio.com/blog/how-much-does-a-city-tour-in-rio-de-jane</loc>
     <image:image>
       <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1778894147868_wgmcbdzag5.webp</image:loc>
-      <image:caption>Quanto Custa um City Tour no Rio? Guia 2026</image:caption>
+      <image:caption>Quanto Custa? Preço de Passeio Turístico no Rio</image:caption>
     </image:image>
   </url>
   <url>
