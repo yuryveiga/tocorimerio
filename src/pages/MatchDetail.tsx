@@ -464,6 +464,34 @@ export default function MatchDetail() {
         <meta name="twitter:image" content={(match as any).banner_url || (match as any).image_url || `${getCanonicalUrl("")}/og-image.jpg`} />
         <link rel="canonical" href={getCanonicalUrl(`/match/${match.slug || match.id}`)} />
         {jsonLd && <script type="application/ld+json">{JSON.stringify(jsonLd)}</script>}
+        {/* SportsEvent: only real data from the fixture record (teams, venue, date, competition, price, availability) */}
+        <script type="application/ld+json">{JSON.stringify({
+          ...generateSportsEventSchema({
+            name: `${match.home_team} x ${match.away_team}${match.competition ? ` — ${match.competition}` : ''}`,
+            description: pageDescription,
+            startDate: getMatchDateInRio(match.match_date).toISOString(),
+            imageUrl: (match as any).banner_url || (match as any).image_url || undefined,
+            url: getCanonicalUrl(`/match/${match.slug || match.id}`),
+            homeTeam: match.home_team,
+            awayTeam: match.away_team,
+            venueName: (match as any).stadium || (match as any).venue || 'Estádio do Maracanã',
+            offerUrl: getCanonicalUrl(`/match/${match.slug || match.id}`),
+            offerPrice: Number(match.price) || 0,
+            offerCurrency: 'BRL',
+          }),
+          offers: {
+            "@type": "Offer",
+            url: getCanonicalUrl(`/match/${match.slug || match.id}`),
+            price: Number(match.price) || 0,
+            priceCurrency: 'BRL',
+            availability: effectiveRemaining > 0 ? 'https://schema.org/InStock' : 'https://schema.org/SoldOut',
+          },
+        })}</script>
+        <script type="application/ld+json">{JSON.stringify(generateBreadcrumbsSchema([
+          { name: language === 'pt' ? 'Início' : language === 'es' ? 'Inicio' : 'Home', url: getCanonicalUrl('/') },
+          { name: language === 'pt' ? 'Calendário Maracanã' : language === 'es' ? 'Calendario Maracanã' : 'Maracanã Calendar', url: getCanonicalUrl('/maracana-calendario') },
+          { name: `${match.home_team} x ${match.away_team}`, url: getCanonicalUrl(`/match/${match.slug || match.id}`) },
+        ]))}</script>
         <script type="application/ld+json">{JSON.stringify({
           "@context": "https://schema.org",
           "@type": "VideoObject",
