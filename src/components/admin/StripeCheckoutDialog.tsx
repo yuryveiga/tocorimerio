@@ -38,7 +38,8 @@ export default function StripeCheckoutDialog({ open, onClose, tours }: Props) {
   const selectedTour = useMemo(() => tours.find(t => t.id === tourId), [tours, tourId]);
   const tourTitle = isCustom ? (customTitle || "Tour Personalizado") : (selectedTour?.title || "");
 
-  const subtotal = pricePerPerson * quantity;
+  const effectivePricePerPerson = priceMode === 'total' ? (quantity > 0 ? totalValue / quantity : 0) : pricePerPerson;
+  const subtotal = priceMode === 'total' ? totalValue : pricePerPerson * quantity;
   const fee = addFee ? subtotal * 0.05 : 0;
   const total = subtotal + fee;
 
@@ -85,7 +86,7 @@ export default function StripeCheckoutDialog({ open, onClose, tours }: Props) {
           items: [{
             title: tourTitle || "Passeio",
             quantity,
-            price: pricePerPerson,
+            price: effectivePricePerPerson,
             date: selectedDate,
             period: "",
           }],
