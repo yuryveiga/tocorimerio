@@ -27,6 +27,8 @@ export default function StripeCheckoutDialog({ open, onClose, tours }: Props) {
   const [quantity, setQuantity] = useState(1);
   const [selectedDate, setSelectedDate] = useState("");
   const [pricePerPerson, setPricePerPerson] = useState(0);
+  const [priceMode, setPriceMode] = useState<'person' | 'total'>('person');
+  const [totalValue, setTotalValue] = useState(0);
   const [addFee, setAddFee] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [generatedUrl, setGeneratedUrl] = useState("");
