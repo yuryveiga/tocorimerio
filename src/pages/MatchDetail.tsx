@@ -27,7 +27,7 @@ import { Label } from "@/components/ui/label";
 import { supabase as localSupabase } from "@/integrations/supabase/client";
 import { OptimizedImage } from "@/components/OptimizedImage";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
-import { getCanonicalUrl, cleanMatchSlug, uncleanMatchSlug } from "@/utils/seo";
+import { getCanonicalUrl, cleanMatchSlug, uncleanMatchSlug, generateSportsEventSchema, generateBreadcrumbsSchema } from "@/utils/seo";
 
 const FEATURED_VIDEO_ID = "-Wmc5Aqj4iU";
 const FEATURED_VIDEO_TITLE = "Experiência Maracanã com a Tocorime Rio";

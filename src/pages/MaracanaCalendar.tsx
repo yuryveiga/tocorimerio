@@ -498,6 +498,58 @@ const MaracanaCalendar = () => {
           )}
         </motion.section>
 
+        {/* Semantic context + internal links (no design change: same container/typography) */}
+        <motion.section
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.15 }}
+          className="mb-14 max-w-3xl"
+        >
+          <h2 className="text-2xl font-bold mb-4">
+            {language === 'pt'
+              ? 'PROGRAMAÇÃO DO MARACANÃ: COMO USAR ESTE CALENDÁRIO'
+              : language === 'es'
+                ? 'PROGRAMACIÓN DEL MARACANÃ: CÓMO USAR ESTE CALENDARIO'
+                : 'MARACANÃ FIXTURE SCHEDULE: HOW TO USE THIS CALENDAR'}
+          </h2>
+          <p className="text-muted-foreground leading-relaxed mb-4">
+            {language === 'pt'
+              ? 'Esta é a página principal da Tocorime Rio para a programação do Maracanã. Atualizamos a lista sempre que a CBF ou a Conmebol confirmam data e horário, então o próximo jogo no Maracanã aparece aqui com campeonato, hora de início e preço por pessoa. Jogos do Flamengo e do Fluminense no Maracanã são os mais procurados por quem está de viagem ao Rio de Janeiro.'
+              : language === 'es'
+                ? 'Esta es la página principal de Tocorime Rio para la programación del Maracanã. Actualizamos la lista cuando la CBF o la Conmebol confirman fecha y hora, así que los próximos partidos aparecen aquí con campeonato, hora de inicio y precio por persona. Los partidos de Flamengo y Fluminense son los más buscados por quienes viajan a Río de Janeiro.'
+                : 'This is the main Tocorime Rio page for the Maracanã Stadium schedule. We update the list whenever CBF or Conmebol confirm a date and kick-off time, so upcoming matches appear here with competition, start time and price per person. Flamengo and Fluminense matchdays are the football matches in Rio most travellers ask about.'}
+          </p>
+          <ul className="space-y-2 text-sm">
+            <li>
+              <Link to="/football-experiences-in-rio-de-janeiro" className="text-primary font-semibold underline underline-offset-4">
+                {language === 'pt'
+                  ? 'Experiências de futebol no Rio de Janeiro'
+                  : language === 'es'
+                    ? 'Experiencias de fútbol en Río de Janeiro'
+                    : 'Football experiences in Rio de Janeiro'}
+              </Link>
+            </li>
+            <li>
+              <Link to="/blog/how-to-get-tickets-for-maracana-the-comp" className="text-primary font-semibold underline underline-offset-4">
+                {language === 'pt'
+                  ? 'Guia completo: como comprar ingressos para o Maracanã'
+                  : language === 'es'
+                    ? 'Guía completa: cómo comprar entradas para Maracanã'
+                    : 'Complete guide: how to get Maracanã Stadium tickets'}
+              </Link>
+            </li>
+            <li>
+              <Link to="/private-tours-rio-de-janeiro" className="text-primary font-semibold underline underline-offset-4">
+                {language === 'pt'
+                  ? 'Passeios privativos no Rio de Janeiro com guia local'
+                  : language === 'es'
+                    ? 'Tours privados en Río de Janeiro con guía local'
+                    : 'Private tours in Rio de Janeiro with local guides'}
+              </Link>
+            </li>
+          </ul>
+        </motion.section>
+
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
           {/* Itinerary */}
