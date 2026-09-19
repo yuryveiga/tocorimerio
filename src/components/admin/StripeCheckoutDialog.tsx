@@ -132,6 +132,8 @@ export default function StripeCheckoutDialog({ open, onClose, tours }: Props) {
     setQuantity(1);
     setSelectedDate("");
     setPricePerPerson(0);
+    setTotalValue(0);
+    setPriceMode('person');
     setAddFee(false);
     setGeneratedUrl("");
   };
@@ -206,15 +208,30 @@ export default function StripeCheckoutDialog({ open, onClose, tours }: Props) {
               <Input id="checkout-date" type="date" value={selectedDate} onChange={(e) => setSelectedDate(e.target.value)} />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="checkout-price">Valor/pessoa</Label>
-              <Input id="checkout-price" type="number" min={0} step={0.01} value={pricePerPerson} onChange={(e) => setPricePerPerson(Number(e.target.value))} />
+              <div className="flex items-center justify-between">
+                <Label htmlFor="checkout-price">{priceMode === 'person' ? 'Valor/pessoa' : 'Valor total'}</Label>
+                <select
+                  aria-label="Modo de valor"
+                  value={priceMode}
+                  onChange={(e) => setPriceMode(e.target.value as 'person' | 'total')}
+                  className="h-6 text-[11px] rounded border bg-background px-1"
+                >
+                  <option value="person">por pessoa</option>
+                  <option value="total">total</option>
+                </select>
+              </div>
+              {priceMode === 'person' ? (
+                <Input id="checkout-price" type="number" min={0} step={0.01} value={pricePerPerson} onChange={(e) => setPricePerPerson(Number(e.target.value))} />
+              ) : (
+                <Input id="checkout-price" type="number" min={0} step={0.01} value={totalValue} onChange={(e) => setTotalValue(Number(e.target.value))} />
+              )}
             </div>
           </div>
 
           <div className="p-4 rounded-lg bg-primary/5 border border-primary/20">
             <div className="flex justify-between text-sm">
               <span>Subtotal:</span>
-              <span className="font-medium">{formatCurrency(pricePerPerson * quantity)}</span>
+              <span className="font-medium">{formatCurrency(subtotal)}</span>
             </div>
             <div className="flex items-center gap-2 mt-2">
               <Checkbox id="add-fee" checked={addFee} onCheckedChange={(c) => setAddFee(c === true)} />
