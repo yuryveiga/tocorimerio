@@ -40,6 +40,7 @@ import { format, parseISO, isPast, isToday } from "date-fns";
 import { ptBR, enUS, es as esLocale } from "date-fns/locale";
 import { getCanonicalUrl, BASE_URL, generateTouristAttractionSchema, generateTouristTripSchema, generateTourPackageSchema, getOgImage, generateFAQSchema, generateOptimizedMetaDescription, getHreflangLinks, generateBreadcrumbsSchema } from "@/utils/seo";
 import { slugify } from "@/utils/slugify";
+import { sanitizeTourDescription } from "@/utils/tourText";
 
 
 const WeatherSection = lazy(() => import("@/components/WeatherSection").then(m => ({ default: m.WeatherSection })));
@@ -150,6 +151,10 @@ export function PasseioDetalhe() {
     return translatedTitle;
   }, [translatedTitle]);
   const translatedShortDesc = useMemo(() => getTranslated('short_description') as string, [getTranslated]);
+  const sanitizedShortDesc = useMemo(
+    () => sanitizeTourDescription(translatedShortDesc || ""),
+    [translatedShortDesc],
+  );
   
   const translatedCategory = useMemo(() => {
     const rawCat = tour?.category;
@@ -1135,14 +1140,13 @@ export function PasseioDetalhe() {
                   </div>
                 </div>
                 <div>
-                  <p
+                  <div
                     id="tour-about-text"
                     className={`text-lg sm:text-xl text-muted-foreground leading-relaxed font-sans first-letter:text-5xl first-letter:font-black first-letter:text-primary first-letter:float-left first-letter:mr-3 first-letter:mt-1 whitespace-pre-wrap ${
                       descExpanded ? "" : "line-clamp-4 sm:line-clamp-none"
                     }`}
-                  >
-                    {translatedShortDesc}
-                  </p>
+                     dangerouslySetInnerHTML={{ __html: sanitizedShortDesc }}
+                   />
                   {!descExpanded && (translatedShortDesc || "").length > 220 && (
                     <button
                       type="button"

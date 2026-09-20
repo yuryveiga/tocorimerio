@@ -11,6 +11,7 @@ import { useLocale } from "@/contexts/LocaleContext";
 import { OptimizedImage } from "./OptimizedImage";
 import { getTourMinPrice } from "@/utils/pricing";
 import { cleanMatchSlug } from "@/utils/seo";
+import { tourDescriptionToPlainText } from "@/utils/tourText";
 
 export type TourCardProps = {
   id: string;
@@ -58,7 +59,10 @@ export const TourItem = memo(({ tour }: { tour: TourCardProps }) => {
   };
 
   const title = getTranslated('title');
-  const short_description = getTranslated('short_description');
+  const short_description = useMemo(
+    () => tourDescriptionToPlainText(getTranslated('short_description')),
+    [language, tour.short_description, tour.short_description_en, tour.short_description_es],
+  );
   
   const category = (() => {
     const rawCat = tour?.category;
