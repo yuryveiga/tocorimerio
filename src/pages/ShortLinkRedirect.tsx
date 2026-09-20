@@ -16,20 +16,18 @@ export default function ShortLinkRedirect() {
         return;
       }
 
-      const { data, error } = await supabase
-        .from("short_links")
-        .select("target_url")
-        .eq("code", code)
-        .maybeSingle();
+      const { data, error } = await supabase.rpc("register_short_link_click", {
+        _code: code,
+      });
 
       if (cancelled) return;
 
-      if (error || !data?.target_url) {
+      if (error || !data) {
         setNotFound(true);
         return;
       }
 
-      window.location.replace(data.target_url);
+      window.location.replace(data as string);
     };
 
     resolve();
