@@ -20,6 +20,7 @@ import { toast } from "sonner";
 import { format, parseISO } from "date-fns";
 import { ptBR, enUS, es } from "date-fns/locale";
 import { getMatchDateInRio, getMatchHour } from "@/lib/dateUtils";
+import { getMatchHeroImage, getMatchHeroAlt } from "@/lib/matchImages";
 import { buildMatchExperienceContent } from "@/lib/matchExperienceText";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
