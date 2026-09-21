@@ -7,7 +7,7 @@ import { useLocale } from "@/contexts/LocaleContext";
 import { OptimizedImage } from "./OptimizedImage";
 import { getTourMinPrice } from "@/utils/pricing";
 import { useMatches } from "@/hooks/useMatches";
-import { getMatchCardImage } from "@/lib/matchImages";
+import { getMatchCardImage, getMatchCardDescription } from "@/lib/matchImages";
 import { getMatchDateInRio } from "@/lib/dateUtils";
 import { cleanMatchSlug } from "@/utils/seo";
 
@@ -88,7 +88,7 @@ export function ToursSection() {
           title: `${m.home_team} x ${m.away_team}`,
           title_en: `${m.home_team} vs ${m.away_team}`,
           title_es: `${m.home_team} x ${m.away_team}`,
-          short_description: language === 'pt' ? `Experiência completa no Maracanã. Inclui guia, transfer e ingresso oficial.` : language === 'es' ? `Experiencia completa en el Maracanã. Incluye guía, traslado y entrada oficial.` : `Complete Maracanã experience. Includes guide, transfer, and official ticket.`,
+          short_description: getMatchCardDescription(m, language),
           price: m.price,
           duration: "6-7 horas",
           max_group_size: 15,
