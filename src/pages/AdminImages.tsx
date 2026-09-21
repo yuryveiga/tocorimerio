@@ -18,6 +18,9 @@ const PRESET_KEYS = [
   { key: "about_3", label: "Sobre a Eco-Wanderlust - Imagem 3" },
   { key: "about_4", label: "Sobre a Eco-Wanderlust - Imagem 4" },
   { key: "maracana_hero", label: "Imagem de Fundo - Maracanã" },
+  { key: "nfl_hero", label: "Imagem de Fundo - Jogos NFL" },
+  { key: "nilton_santos_hero", label: "Imagem de Fundo - Estádio Nilton Santos" },
+  { key: "sao_januario_hero", label: "Imagem de Fundo - Estádio São Januário" },
 ];
 
 const AdminImages = () => {
