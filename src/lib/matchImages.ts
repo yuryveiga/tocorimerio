@@ -64,3 +64,32 @@ export function getMatchHeroAlt(match: Partial<Match>): string {
   if (venue === "sao_januario") return "Estádio São Januário";
   return "Maracanã Stadium";
 }
+
+export function getMatchCardDescription(
+  match: Partial<Match>,
+  language: "pt" | "en" | "es"
+): string {
+  const venue = getMatchVenueKey(match);
+
+  if (language === "pt") {
+    if (venue === "nilton_santos")
+      return "Experiência completa no Estádio Nilton Santos (Engenhão). Inclui guia, transfer e ingresso oficial.";
+    if (venue === "sao_januario")
+      return "Experiência completa no Estádio São Januário. Inclui guia, transfer e ingresso oficial.";
+    return "Experiência completa no Maracanã. Inclui guia, transfer e ingresso oficial.";
+  }
+
+  if (language === "es") {
+    if (venue === "nilton_santos")
+      return "Experiencia completa en el Estádio Nilton Santos (Engenhão). Incluye guía, traslado y entrada oficial.";
+    if (venue === "sao_januario")
+      return "Experiencia completa en el Estádio São Januário. Incluye guía, traslado y entrada oficial.";
+    return "Experiencia completa en el Maracanã. Incluye guía, traslado y entrada oficial.";
+  }
+
+  if (venue === "nilton_santos")
+    return "Complete experience at Nilton Santos Stadium (Engenhão). Includes guide, transfer, and official ticket.";
+  if (venue === "sao_januario")
+    return "Complete experience at São Januário Stadium. Includes guide, transfer, and official ticket.";
+  return "Complete Maracanã experience. Includes guide, transfer, and official ticket.";
+}
