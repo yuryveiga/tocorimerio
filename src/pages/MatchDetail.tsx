@@ -539,7 +539,7 @@ export default function MatchDetail() {
                  </p>
                  <div className="mt-8 flex items-center gap-4 text-white/60 text-sm font-bold uppercase tracking-widest">
                     <MapPin className="h-5 w-5 text-primary" />
-                    {match.venue || "Maracanã Stadium"}
+                     {match.stadium || match.venue || "Maracanã Stadium"}
                  </div>
               </div>
            </div>
