@@ -7,6 +7,7 @@ import { useLocale } from "@/contexts/LocaleContext";
 import { OptimizedImage } from "./OptimizedImage";
 import { getTourMinPrice } from "@/utils/pricing";
 import { useMatches } from "@/hooks/useMatches";
+import { getMatchCardImage } from "@/lib/matchImages";
 import { getMatchDateInRio } from "@/lib/dateUtils";
 import { cleanMatchSlug } from "@/utils/seo";
 

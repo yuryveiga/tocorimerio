@@ -509,19 +509,19 @@ export default function MatchDetail() {
       <main className="pt-24 pb-20" data-match-detail>
         {/* Hero Section */}
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-12">
-           <div className="relative w-full aspect-video rounded-[3rem] overflow-hidden shadow-2xl border border-white/10">
-              <OptimizedImage 
-                src={images['maracana_hero'] || "https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images//WhatsApp Image 2026-04-14 at 15.41.21.jpeg"} 
-                alt="Maracanã Stadium" 
-                width={1280}
-                quality={70}
-                sizes="(max-width: 1024px) 100vw, 1280px"
-                loading="eager"
-                fetchPriority="high"
-                containerClassName="w-full h-full"
-                fit="cover"
-                className="w-full h-full object-cover"
-              />
+            <div className="relative w-full aspect-video rounded-[3rem] overflow-hidden shadow-2xl border border-white/10">
+               <OptimizedImage 
+                 src={getMatchHeroImage(match, images, "https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images//WhatsApp Image 2026-04-14 at 15.41.21.jpeg")} 
+                 alt={getMatchHeroAlt(match)} 
+                 width={1280}
+                 quality={70}
+                 sizes="(max-width: 1024px) 100vw, 1280px"
+                 loading="eager"
+                 fetchPriority="high"
+                 containerClassName="w-full h-full"
+                 fit="cover"
+                 className="w-full h-full object-cover"
+               />
               <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent" />
               
               <div className="absolute inset-0 flex flex-col items-center justify-center text-center p-6">
