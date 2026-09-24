@@ -67,8 +67,10 @@ export function getMatchHeroAlt(match: Partial<Match>): string {
 
 export function getMatchCardDescription(
   match: Partial<Match>,
-  language: "pt" | "en" | "es"
+  rawLanguage: string
 ): string {
+  const language: "pt" | "en" | "es" =
+    rawLanguage === "pt" || rawLanguage === "es" ? rawLanguage : "en";
   const venue = getMatchVenueKey(match);
 
   if (language === "pt") {
