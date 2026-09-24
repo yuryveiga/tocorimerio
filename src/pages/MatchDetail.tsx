@@ -486,6 +486,7 @@ export default function MatchDetail() {
             price: Number(match.price) || 0,
             priceCurrency: 'BRL',
             availability: effectiveRemaining > 0 ? 'https://schema.org/InStock' : 'https://schema.org/SoldOut',
+            validFrom: new Date().toISOString(),
           },
         })}</script>
         <script type="application/ld+json">{JSON.stringify(generateBreadcrumbsSchema([
