@@ -42,7 +42,7 @@ const CATEGORY_INTROS: Record<string, { pt: { h2: string; p: string[] }; en: { h
       h2: "Trilhas no Rio de Janeiro: Natureza, Vistas e Aventura",
       p: [
         "As trilhas no Rio de Janeiro são muito mais do que simples caminhadas — são portas de entrada para paisagens de tirar o fôlego, história e biodiversidade única. Com montanhas, florestas tropicais e costas paradisíacas, a cidade oferece roteiros para todos os níveis, desde trilhas leves em meio à mata atlântica até ascensões desafiadoras com vistas panorâmicas de 360°.",
-        "Nossos passeios de hiking no Rio de Janeiro são guiados por especialistas locais que conhecem cada sendero, mirante e ponto de interesse. Seja a icônica Trilha do Morro Dois Irmãos com vista para o Leblon, a desafiadora Pedra da Gávea, ou a exuberante Floresta da Tijuca — cada roteiro é pensado para oferecer segurança, informação e momentos inesquecíveis na natureza.",
+        "Nossos passeios de hiking no Rio de Janeiro são guiados por especialistas locais que conhecem cada sendero, mirante e ponto de interesse. O destaque é a trilha da Pedra da Gávea com guia — uma caminhada privada e desafiadora até um dos mirantes mais impressionantes do mundo. Também conduzimos a Trilha do Morro Dois Irmãos com vista para o Leblon, o Pico da Tijuca na exuberante Floresta da Tijuca e o Costão do Pão de Açúcar — cada roteiro é pensado para oferecer segurança, informação e momentos inesquecíveis na natureza.",
         "Com grupos reduzidos, guias bilíngues e todo o suporte necessário, a Tocorime Rio transforma cada trilha em uma experiência completa de aventura e descoberta. Ideal para quem busca atividade física, contato com a natureza e as melhores vistas do Rio de Janeiro.",
       ],
     },
@@ -50,7 +50,7 @@ const CATEGORY_INTROS: Record<string, { pt: { h2: string; p: string[] }; en: { h
       h2: "Hiking in Rio de Janeiro: Nature, Views & Adventure",
       p: [
         "Hiking in Rio de Janeiro is much more than just walking — it's a gateway to breathtaking landscapes, history and unique biodiversity. With mountains, tropical rainforests and paradise coastlines, the city offers trails for every level, from easy walks through the Atlantic Forest to challenging climbs with 360° panoramic views.",
-        "Our hiking tours in Rio de Janeiro are led by local experts who know every trail, viewpoint and point of interest. Whether it's the iconic Morro Dois Irmãos trail overlooking Leblon, the challenging Pedra da Gávea, or the lush Tijuca Forest — each itinerary is designed to offer safety, knowledge and unforgettable moments in nature.",
+        "Our hiking tours in Rio de Janeiro are led by local experts who know every trail, viewpoint and point of interest. The highlight is the Pedra da Gávea guided hike — a challenging private hike with an experienced tour guide to one of the most stunning viewpoints in the world. We also lead the iconic Morro Dois Irmãos trail overlooking Leblon, the Pico da Tijuca hike in the lush Tijuca Forest and the Sugarloaf coastal trail — each itinerary is designed to offer safety, knowledge and unforgettable moments in nature.",
         "With small groups, bilingual guides and all the support you need, Tocorime Rio turns every hike into a complete adventure and discovery experience. Perfect for those seeking physical activity, contact with nature and the best views of Rio de Janeiro.",
       ],
     },
@@ -58,7 +58,7 @@ const CATEGORY_INTROS: Record<string, { pt: { h2: string; p: string[] }; en: { h
       h2: "Senderismo en Río de Janeiro: Naturaleza, Vistas y Aventura",
       p: [
         "Las trilhas en Río de Janeiro son mucho más que simples caminatas — son puertas de entrada a paisajes de película, historia y biodiversidad única. Con montañas, selvas tropicales y costas paradisíacas, la ciudad ofrece rutas para todos los niveles, desde senderos suaves por la mata atlántica hasta ascensos desafiantes con vistas panorámicas de 360°.",
-        "Nuestros tours de senderismo en Río de Janeiro están guiados por expertos locales que conocen cada sendero, mirador y punto de interés. Ya sea la icónica Trilha do Morro Dois Irmãos con vista al Leblon, la desafiante Pedra da Gávea, o la exuberante Floresta da Tijuca — cada itinerario está pensado para ofrecer seguridad, información y momentos inolvidables en la naturaleza.",
+        "Nuestros tours de senderismo en Río de Janeiro están guiados por expertos locales que conocen cada sendero, mirador y punto de interés. El punto culminante es la caminata guiada a la Pedra da Gávea — un ascenso privado y desafiante hasta uno de los miradores más impresionantes del mundo. También guiamos la icónica Trilha do Morro Dois Irmãos con vista al Leblon, el Pico da Tijuca en la exuberante Floresta da Tijuca y el Costão do Pão de Açúcar — cada itinerario está pensado para ofrecer seguridad, información y momentos inolvidables en la naturaleza.",
         "Con grupos reducidos, guías bilingües y todo el apoyo necesario, Tocorime Rio transforma cada trilha en una experiencia completa de aventura y descubrimiento. Ideal para quien busca actividad física, contacto con la naturaleza y las mejores vistas de Río de Janeiro.",
       ],
     },
