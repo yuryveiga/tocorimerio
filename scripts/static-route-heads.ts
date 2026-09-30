@@ -37,6 +37,16 @@ const ROUTES: RouteHead[] = [
     intro:
       "Plan your matchday in Rio with upcoming games, official tickets, hotel transport and a bilingual local guide.",
   },
+  {
+    path: "/hiking",
+    lang: "en",
+    title: "Hiking in Rio de Janeiro | Private Guided Trails | Tocorime Rio",
+    description:
+      "Hike Rio de Janeiro's most iconic trails with a certified local guide. Pedra da Gávea, Sugarloaf, Tijuca Forest, rock climbing & more. Private & safe. Book now.",
+    h1: "Hiking in Rio de Janeiro",
+    intro:
+      "Private guided hiking tours in Rio de Janeiro: the Pedra da Gávea guided hike, Pico da Tijuca in the Tijuca Forest, Morro Dois Irmãos and more, with bilingual local guides.",
+  },
 ];
 
 const esc = (s: string) =>

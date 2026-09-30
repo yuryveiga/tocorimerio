@@ -239,7 +239,7 @@
   </url>
   <url>
     <loc>https://tocorimerio.com/passeio/sunset-sailing-rio</loc>
-    <lastmod>2026-09-20</lastmod>
+    <lastmod>2026-09-30</lastmod>
     <image:image>
       <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776178439310_p7ohei4s7y.webp</image:loc>
       <image:caption>Sailing Rio - Baia de Guanabara</image:caption>
@@ -359,7 +359,7 @@
   </url>
   <url>
     <loc>https://tocorimerio.com/passeio/pedra-da-gavea-trilha</loc>
-    <lastmod>2026-09-12</lastmod>
+    <lastmod>2026-09-30</lastmod>
     <image:image>
       <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776136847390_169n24rnud8.webp</image:loc>
       <image:caption>Pedra da Gávea</image:caption>
@@ -919,7 +919,7 @@
   </url>
   <url>
     <loc>https://tocorimerio.com/passeio/favela-rio-tour-rocinha</loc>
-    <lastmod>2026-09-18</lastmod>
+    <lastmod>2026-09-30</lastmod>
     <image:image>
       <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776266405320_eflqqt6g2do.webp</image:loc>
       <image:caption>Favela Rio Tour: Rocinha Tour Imersivo</image:caption>
@@ -999,7 +999,7 @@
   </url>
   <url>
     <loc>https://tocorimerio.com/passeio/city-tour-rio-completo</loc>
-    <lastmod>2026-09-20</lastmod>
+    <lastmod>2026-09-30</lastmod>
     <image:image>
       <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776269176989_0zgv08vhwp5.webp</image:loc>
       <image:caption>City Tour Rio Completo!</image:caption>
@@ -1123,7 +1123,7 @@
   </url>
   <url>
     <loc>https://tocorimerio.com/passeio/sailing-rio-ilhas-cagarras</loc>
-    <lastmod>2026-09-20</lastmod>
+    <lastmod>2026-09-30</lastmod>
     <image:image>
       <image:loc>https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1776178359892_6dl8jjedune.webp</image:loc>
       <image:caption>Sailing Rio - Ilhas Cagarras</image:caption>
@@ -1175,7 +1175,7 @@
   </url>
   <url>
     <loc>https://tocorimerio.com/passeio/transfer-aeroporto-cidade</loc>
-    <lastmod>2026-09-20</lastmod>
+    <lastmod>2026-09-30</lastmod>
     <image:image>
       <image:loc>https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?q=80&amp;w=1200</image:loc>
       <image:caption>Transfers (Aeroporto e Cidade)</image:caption>
@@ -1275,72 +1275,80 @@
     <loc>https://tocorimerio.com/passeios/um-dia</loc>
   </url>
   <url>
-    <loc>https://tocorimerio.com/match/botafogo-vs-vasco-07-10-2026</loc>
-    <lastmod>2026-09-21</lastmod>
+    <loc>https://tocorimerio.com/match/botafogo-vs-vasco-da-gama-2026-10-07</loc>
+    <lastmod>2026-09-27</lastmod>
   </url>
   <url>
-    <loc>https://tocorimerio.com/match/flamengo-vs-fluminense-2026-10-11</loc>
-    <lastmod>2026-09-21</lastmod>
-  </url>
-  <url>
-    <loc>https://tocorimerio.com/match/fluminense-vs-santos-2026-10-18</loc>
-    <lastmod>2026-09-21</lastmod>
+    <loc>https://tocorimerio.com/match/vasco-da-gama-vs-internacional-2026-11-18</loc>
+    <lastmod>2026-09-27</lastmod>
   </url>
   <url>
     <loc>https://tocorimerio.com/match/fluminense-vs-coritiba-2026-10-07</loc>
-    <lastmod>2026-09-18</lastmod>
+    <lastmod>2026-09-27</lastmod>
   </url>
   <url>
-    <loc>https://tocorimerio.com/match/botafogo-vs-chapecoense-18-10-2026</loc>
-    <lastmod>2026-09-21</lastmod>
+    <loc>https://tocorimerio.com/match/fluminense-vs-santos-2026-10-18</loc>
+    <lastmod>2026-09-30</lastmod>
   </url>
   <url>
-    <loc>https://tocorimerio.com/match/flamengo-vs-atltico-mineiro-2026-10-25</loc>
-    <lastmod>2026-09-21</lastmod>
+    <loc>https://tocorimerio.com/match/flamengo-vs-fluminense-2026-10-11</loc>
+    <lastmod>2026-09-29</lastmod>
   </url>
   <url>
-    <loc>https://tocorimerio.com/match/fluminense-vs-internacional-2026-10-28</loc>
-    <lastmod>2026-09-21</lastmod>
-  </url>
-  <url>
-    <loc>https://tocorimerio.com/match/botafogo-vs-atletico-mineiro-04-11-2026</loc>
-    <lastmod>2026-09-21</lastmod>
+    <loc>https://tocorimerio.com/match/botafogo-vs-bahia-2026-11-29</loc>
+    <lastmod>2026-09-27</lastmod>
   </url>
   <url>
     <loc>https://tocorimerio.com/match/flamengo-vs-gremio-2026-11-04</loc>
-    <lastmod>2026-09-21</lastmod>
+    <lastmod>2026-09-29</lastmod>
   </url>
   <url>
-    <loc>https://tocorimerio.com/match/botafogo-vs-sao-paulo-22-11-2026</loc>
-    <lastmod>2026-09-21</lastmod>
+    <loc>https://tocorimerio.com/match/vasco-da-gama-vs-flamengo-2026-10-28</loc>
+    <lastmod>2026-09-29</lastmod>
   </url>
   <url>
-    <loc>https://tocorimerio.com/match/botafogo-vs-bahia-29-11-2026</loc>
-    <lastmod>2026-09-21</lastmod>
+    <loc>https://tocorimerio.com/match/fluminense-vs-internacional-2026-10-28</loc>
+    <lastmod>2026-09-29</lastmod>
   </url>
   <url>
-    <loc>https://tocorimerio.com/match/flamengo-vs-athletico-paranaense-2026-11-18</loc>
-    <lastmod>2026-09-21</lastmod>
-  </url>
-  <url>
-    <loc>https://tocorimerio.com/match/fluminense-vs-cruzeiro-2026-11-29</loc>
-    <lastmod>2026-09-21</lastmod>
-  </url>
-  <url>
-    <loc>https://tocorimerio.com/match/fluminense-vs-mirassol-sp-2026-11-22</loc>
-    <lastmod>2026-09-21</lastmod>
-  </url>
-  <url>
-    <loc>https://tocorimerio.com/match/vasco-da-gama-vs-corinthians-2026-10-25</loc>
-    <lastmod>2026-09-21</lastmod>
-  </url>
-  <url>
-    <loc>https://tocorimerio.com/match/flamengo-vs-chapecoense-2026-12-02</loc>
-    <lastmod>2026-09-21</lastmod>
+    <loc>https://tocorimerio.com/match/botafogo-vs-so-paulo-2026-11-22</loc>
+    <lastmod>2026-09-27</lastmod>
   </url>
   <url>
     <loc>https://tocorimerio.com/match/baltimore-ravens-vs-dallas-cowboys-2026-09-27</loc>
-    <lastmod>2026-09-21</lastmod>
+    <lastmod>2026-09-27</lastmod>
+  </url>
+  <url>
+    <loc>https://tocorimerio.com/match/flamengo-vs-atltico-mineiro-2026-10-25</loc>
+    <lastmod>2026-09-29</lastmod>
+  </url>
+  <url>
+    <loc>https://tocorimerio.com/match/flamengo-vs-athletico-paranaense-2026-11-18</loc>
+    <lastmod>2026-09-27</lastmod>
+  </url>
+  <url>
+    <loc>https://tocorimerio.com/match/fluminense-vs-cruzeiro-2026-11-29</loc>
+    <lastmod>2026-09-27</lastmod>
+  </url>
+  <url>
+    <loc>https://tocorimerio.com/match/fluminense-vs-mirassol-sp-2026-11-22</loc>
+    <lastmod>2026-09-27</lastmod>
+  </url>
+  <url>
+    <loc>https://tocorimerio.com/match/botafogo-vs-chapecoense-2026-10-18</loc>
+    <lastmod>2026-09-29</lastmod>
+  </url>
+  <url>
+    <loc>https://tocorimerio.com/match/vasco-da-gama-vs-corinthians-2026-10-25</loc>
+    <lastmod>2026-09-29</lastmod>
+  </url>
+  <url>
+    <loc>https://tocorimerio.com/match/flamengo-vs-chapecoense-2026-12-02</loc>
+    <lastmod>2026-09-27</lastmod>
+  </url>
+  <url>
+    <loc>https://tocorimerio.com/match/botafogo-vs-atltico-mineiro-2026-11-04</loc>
+    <lastmod>2026-09-29</lastmod>
   </url>
   <url>
     <loc>https://tocorimerio.com/blog/best-sunset-spots-rio-de-janeiro</loc>
