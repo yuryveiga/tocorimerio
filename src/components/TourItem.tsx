@@ -251,12 +251,14 @@ export const TourItem = memo(({ tour }: { tour: TourCardProps }) => {
             </ul>
           )}
 
-          <div className={`w-full h-12 sm:h-14 rounded-2xl font-black text-xs uppercase tracking-[0.2em] shadow-xl shadow-accent/20 ${hidePrices ? 'bg-accent' : 'bg-accent hover:brightness-110'} hover:shadow-accent/40 group-hover:scale-[1.02] transition-all duration-500 border-none text-white flex items-center justify-center`}>
-            <div className="flex items-center gap-2">
-              {hidePrices 
-                ? (language === 'pt' ? 'VER DETALHES' : language === 'es' ? 'VER DETALLES' : 'VIEW DETAILS')
-                : t("check_availability").toUpperCase()}
-              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+          <div className={`w-full h-12 sm:h-14 min-h-12 sm:min-h-14 rounded-2xl font-black text-xs uppercase tracking-[0.2em] shadow-xl shadow-accent/20 ${hidePrices ? 'bg-accent' : 'bg-accent hover:brightness-110'} hover:shadow-accent/40 group-hover:scale-[1.02] transition-all duration-500 border-none text-white flex items-center justify-center px-3 py-1`}>
+            <div className="flex items-center justify-center gap-2">
+              <span className="text-center leading-tight [text-wrap:balance]">
+                {hidePrices
+                  ? (language === 'pt' ? 'VER DETALHES' : language === 'es' ? 'VER DETALLES' : 'VIEW DETAILS')
+                  : t("check_availability").toUpperCase()}
+              </span>
+              <ArrowRight className="w-4 h-4 shrink-0 group-hover:translate-x-1 transition-transform" />
             </div>
           </div>
 
