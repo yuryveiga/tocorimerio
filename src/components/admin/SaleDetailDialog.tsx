@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { LovableSale } from "@/integrations/lovable/client";
 import { Phone, Mail, Calendar, Users, MapPin, Clock, DollarSign, X, Link2, Copy, ExternalLink } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import { isFootballReservation } from "@/lib/footballReservation";
 
 interface SaleDetailDialogProps {
   sale: LovableSale | null;
@@ -126,10 +127,10 @@ const SaleDetailDialog = ({ sale, open, onClose }: SaleDetailDialogProps) => {
                 </div>
               </div>
             </div>
-            <div className="mt-3 flex items-center gap-2 text-sm">
+            {!isFootballReservation(sale) && <div className="mt-3 flex items-center gap-2 text-sm">
               <span className="text-muted-foreground">Tipo:</span>
               <span className="font-semibold">{sale.is_private ? "Privativo" : "Aberto"}</span>
-            </div>
+            </div>}
           </div>
 
           {/* Link de Pagamento (Stripe manual) */}

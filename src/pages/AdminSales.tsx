@@ -12,6 +12,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/u
 import { DeleteConfirmDialog } from "@/components/admin/DeleteConfirmDialog";
 import SaleDetailDialog from "@/components/admin/SaleDetailDialog";
 import StripeCheckoutDialog from "@/components/admin/StripeCheckoutDialog";
+import { isFootballReservation } from "@/lib/footballReservation";
 
 
 const AdminSales = () => {
@@ -532,13 +533,13 @@ const AdminSales = () => {
               </div>
             </div>
 
-            <div className="flex items-center justify-between">
+            {!isFootballReservation({ ...editing, tour_title: tours.find(t => t.id === editing?.tour_id)?.title || editing?.tour_title }) && <div className="flex items-center justify-between">
               <Label>Privativo</Label>
               <Switch
                 checked={editing?.is_private ?? true}
                 onCheckedChange={(v) => setEditing({ ...editing, is_private: v })}
               />
-            </div>
+            </div>}
 
             <div className="flex items-center justify-between">
               <Label>Pago</Label>

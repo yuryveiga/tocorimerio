@@ -1,0 +1,1 @@
+export { isFootballReservation } from "../../supabase/functions/_shared/footballReservation";
