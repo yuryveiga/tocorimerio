@@ -1,3 +1,5 @@
+import { isFootballReservation } from "../_shared/footballReservation.ts";
+
 Deno.serve(async (req) => {
   // CORS headers
   const corsHeaders = {
@@ -10,7 +12,9 @@ Deno.serve(async (req) => {
   }
 
   try {
-    const { to, customerName, customerEmail, customerPhone, items, total, isCustomerCopy = false, selectedPeriod, isPrivate, replyTo } = await req.json()
+    const { to, customerName, customerEmail, customerPhone, items, total, isCustomerCopy = false, selectedPeriod, isPrivate, replyTo, provider, tourTitle, tourSlug } = await req.json()
+    const hasFootball = isFootballReservation({ provider, selected_period: selectedPeriod, tour_title: tourTitle, tour_slug: tourSlug })
+      || items.some((item: { tour?: string; title?: string; slug?: string; period?: string }) => isFootballReservation({ tour_title: item.tour || item.title, tour_slug: item.slug, selected_period: item.period }));
 
     if (!to) {
       return new Response(JSON.stringify({ error: 'Email não configurado' }), { status: 400, headers: corsHeaders })
@@ -69,7 +73,7 @@ Deno.serve(async (req) => {
                 <p><strong>E-mail:</strong> ${customerEmail}</p>
                 <p><strong>WhatsApp:</strong> ${customerPhone || 'Não informado / Not provided'}</p>
                 ${selectedPeriod ? `<p><strong>Período / Period:</strong> ${selectedPeriod}</p>` : ''}
-                <p><strong>Tipo / Type:</strong> ${isPrivate ? 'Privativo / Private' : 'Grupo Aberto / Open Group'}</p>
+                ${hasFootball ? '' : `<p><strong>Tipo / Type:</strong> ${isPrivate ? 'Privativo / Private' : 'Grupo Aberto / Open Group'}</p>`}
               </div>
             </div>
 

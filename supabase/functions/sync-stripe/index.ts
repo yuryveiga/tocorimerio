@@ -106,6 +106,9 @@ async function sendEmailAlert(sale: Record<string, any>, supabaseUrl: string, is
         isCustomerCopy: isCustomer,
         selectedPeriod: sale.selected_period,
         isPrivate: sale.is_private,
+        provider: sale.provider,
+        tourTitle: sale.tour_title,
+        tourSlug: sale.tour_slug,
         replyTo: replyTo,
         items: [{
           tour: sale.tour_title,
