@@ -30,7 +30,7 @@ describe("Vasco Boca landing", () => {
     expect(VASCO_BOCA_CANONICAL).toBe("https://tocorimerio.com/vasco-x-boca-sulamericana-maracana");
   });
   it("keeps the retired libertadores address forwarding to the new one", () => {
-    const main = readFileSync(new URL("../main.tsx", import.meta.url), "utf8");
+    const main = readFileSync(join(process.cwd(), "src/main.tsx"), "utf8");
     expect(main).toMatch(/"\/vasco-x-boca-libertadores-maracana"/);
     expect(main).toMatch(/\/vasco-x-boca-sulamericana-maracana\$\{search\}\$\{hash\}/);
   });
