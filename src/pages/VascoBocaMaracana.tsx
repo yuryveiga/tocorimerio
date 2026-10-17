@@ -12,7 +12,7 @@ import { getMatchDateInRio, getMatchHour } from "@/lib/dateUtils";
 import { format } from "date-fns";
 import { ptBR, enUS, es } from "date-fns/locale";
 import { generateBreadcrumbsSchema, generateFAQSchema, getCanonicalUrl } from "@/utils/seo";
-import { vascoBocaCopy, buildVascoBocaEvent, VASCO_BOCA_SLUG, VASCO_BOCA_CANONICAL, VASCO_BOCA_BUY_URL } from "@/lib/vascoBocaLanding";
+import { vascoBocaCopy, buildVascoBocaEvent, getVascoBocaCompetitionLabel, VASCO_BOCA_SLUG, VASCO_BOCA_CANONICAL, VASCO_BOCA_BUY_URL } from "@/lib/vascoBocaLanding";
 
 type MatchServices = Match & { includes_ticket?: boolean; includes_transfer?: boolean; includes_guide?: boolean };
 
