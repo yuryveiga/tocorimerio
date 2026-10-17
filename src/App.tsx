@@ -88,6 +88,7 @@ const FluminenseBolivarLibertadores = lazy(() => import("./pages/FluminenseBoliv
 const FluminenseDeportivoGuairaLibertadores = lazy(() => import("./pages/FluminenseDeportivoGuairaLibertadores"));
 const FlamengoCoritibaMaracana = lazy(() => import("./pages/FlamengoCoritibaMaracana"));
 const VascoBocaMaracana = lazy(() => import("./pages/VascoBocaMaracana"));
+const FlamengoEstudiantesMaracana = lazy(() => import("./pages/FlamengoEstudiantesMaracana"));
 const FluminenseIndependienteRivadaviaLibertadores = lazy(() => import("./pages/FluminenseIndependienteRivadaviaLibertadores"));
 const FlamengoMirassolMaracana = lazy(() => import("./pages/FlamengoMirassolMaracana"));
 const FluminensePlatenseLibertadores = lazy(() => import("./pages/FluminensePlatenseLibertadores"));
@@ -280,6 +281,7 @@ const App = ({ queryClient: externalQueryClient }: { queryClient?: QueryClient }
                       <Route path="/fluminense-x-deportivo-guaira-libertadores" element={<FluminenseDeportivoGuairaLibertadores />} />
                       <Route path="/flamengo-x-coritiba-maracana" element={<FlamengoCoritibaMaracana />} />
                       <Route path="/vasco-x-boca-sulamericana-maracana" element={<VascoBocaMaracana />} />
+                      <Route path="/flamengo-x-estudiantes-libertadores-maracana" element={<FlamengoEstudiantesMaracana />} />
                       <Route path="/fluminense-indenpediente-rivadavia-libertadores-maracana" element={<FluminenseIndependienteRivadaviaLibertadores />} />
                       <Route path="/flamengo-x-mirassol-maracana-tickets-02-09" element={<FlamengoMirassolMaracana />} />
                       <Route path="/Fluminense-x-patense-libertadores-maracana-tickets" element={<FluminensePlatenseLibertadores />} />

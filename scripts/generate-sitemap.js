@@ -91,6 +91,7 @@ async function generateSitemap() {
       { url: '/football-experiences-in-rio-de-janeiro' },
       { url: '/flamengo-x-vasco-maracana' },
       { url: '/vasco-x-boca-sulamericana-maracana' },
+      { url: '/flamengo-x-estudiantes-libertadores-maracana' },
       { url: '/fluminense-bolivar-libertadores' },
       { url: '/brasil-x-panama-maio-maracana' },
       { url: '/fluminense-indenpediente-rivadavia-libertadores-maracana' },

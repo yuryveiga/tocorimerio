@@ -5,6 +5,7 @@ import fs from "node:fs";
 import path from "node:path";
 import type { Plugin } from "vite";
 import { VASCO_BOCA_PATH, vascoBocaCopy } from "../src/lib/vascoBocaLanding";
+import { FLAMENGO_ESTUDIANTES_PATH, flamengoEstudiantesCopy } from "../src/lib/flamengoEstudiantesLanding";
 
 const SITE = "https://tocorimerio.com";
 
@@ -25,6 +26,14 @@ const ROUTES: RouteHead[] = [
     description: vascoBocaCopy.pt.description,
     h1: "Vasco x Boca Juniors",
     intro: vascoBocaCopy.pt.intro,
+  },
+  {
+    path: FLAMENGO_ESTUDIANTES_PATH,
+    lang: "pt-BR",
+    title: flamengoEstudiantesCopy.pt.title,
+    description: flamengoEstudiantesCopy.pt.description,
+    h1: "Flamengo x Estudiantes",
+    intro: flamengoEstudiantesCopy.pt.intro,
   },
   {
     path: "/maracana-calendario",

@@ -55,6 +55,7 @@ const ROUTE_SELECTORS = {
   '/blog': '[data-blog-card]',
   '/maracana-calendario': '[data-match-card]',
   '/vasco-x-boca-sulamericana-maracana': '[data-vasco-boca-details="ready"]',
+  '/flamengo-x-estudiantes-libertadores-maracana': '[data-flamengo-estudiantes-details="ready"]',
   '/football-experiences-in-rio-de-janeiro': '[data-football-experiences]',
 };
 
@@ -127,6 +128,7 @@ async function fetchDynamicRoutes() {
     '/one-day',
     '/flamengo-x-vasco-maracana',
     '/vasco-x-boca-sulamericana-maracana',
+    '/flamengo-x-estudiantes-libertadores-maracana',
     '/fluminense-bolivar-libertadores',
     '/brasil-x-panama-maio-maracana',
     '/fluminense-indenpediente-rivadavia-libertadores-maracana',
