@@ -8,7 +8,7 @@ describe("Vasco Boca landing", () => {
     const event = buildVascoBocaEvent(match, "", "");
     expect(VASCO_BOCA_BUY_URL).toBe("https://tocorimerio.com/match/vasco-da-gama-vs-boca-juniors-2026-10-20");
     expect(event.offers?.url).toBe(VASCO_BOCA_BUY_URL);
-    expect(event.url).toBe("https://tocorimerio.com/vasco-x-boca-libertadores-maracana");
+    expect(event.url).toBe("https://tocorimerio.com/vasco-x-boca-sulamericana-maracana");
     expect(event.url).toBe(VASCO_BOCA_CANONICAL);
   });
   it("uses the live price and date without deriving the date from the slug", () => {

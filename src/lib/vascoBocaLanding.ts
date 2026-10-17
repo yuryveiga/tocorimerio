@@ -1,6 +1,6 @@
 import type { Match } from "@/hooks/useMatches";
 
-export const VASCO_BOCA_PATH = "/vasco-x-boca-libertadores-maracana";
+export const VASCO_BOCA_PATH = "/vasco-x-boca-sulamericana-maracana";
 export const VASCO_BOCA_SLUG = "vasco-da-gama-vs-boca-juniors-2026-10-20";
 export const VASCO_BOCA_BUY_URL = `https://tocorimerio.com/match/${VASCO_BOCA_SLUG}`;
 export const VASCO_BOCA_CANONICAL = `https://tocorimerio.com${VASCO_BOCA_PATH}`;

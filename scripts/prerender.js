@@ -54,7 +54,7 @@ const ROUTE_SELECTORS = {
   '/passeio': '[data-tour-card]',
   '/blog': '[data-blog-card]',
   '/maracana-calendario': '[data-match-card]',
-  '/vasco-x-boca-libertadores-maracana': '[data-vasco-boca-details="ready"]',
+  '/vasco-x-boca-sulamericana-maracana': '[data-vasco-boca-details="ready"]',
   '/football-experiences-in-rio-de-janeiro': '[data-football-experiences]',
 };
 
@@ -126,7 +126,7 @@ async function fetchDynamicRoutes() {
     '/hiking',
     '/one-day',
     '/flamengo-x-vasco-maracana',
-    '/vasco-x-boca-libertadores-maracana',
+    '/vasco-x-boca-sulamericana-maracana',
     '/fluminense-bolivar-libertadores',
     '/brasil-x-panama-maio-maracana',
     '/fluminense-indenpediente-rivadavia-libertadores-maracana',
