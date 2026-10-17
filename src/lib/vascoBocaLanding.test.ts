@@ -1,6 +1,7 @@
+import { readFileSync } from "node:fs";
 import { describe, expect, it } from "vitest";
 import type { Match } from "@/hooks/useMatches";
-import { buildVascoBocaEvent, VASCO_BOCA_BUY_URL, VASCO_BOCA_CANONICAL } from "./vascoBocaLanding";
+import { buildVascoBocaEvent, VASCO_BOCA_BUY_URL, VASCO_BOCA_CANONICAL, VASCO_BOCA_PATH } from "./vascoBocaLanding";
 
 const match: Match = { id: "test", home_team: "Vasco da Gama", away_team: "Boca Juniors", match_date: "2099-10-21T00:30:00+00:00", venue: "Maracanã", price: 1150, min_price: 1200, available_spots: 20, sold_count: 1, status: "available" };
 describe("Vasco Boca landing", () => {
