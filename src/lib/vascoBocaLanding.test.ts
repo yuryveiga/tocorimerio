@@ -24,4 +24,14 @@ describe("Vasco Boca landing", () => {
   it("does not invent an offer when no real price exists", () => {
     expect(buildVascoBocaEvent({ ...match, price: 0, min_price: 0 }, "", "")).not.toHaveProperty("offers");
   });
+  it("names the address after the Sulamericana, never the Libertadores", () => {
+    expect(VASCO_BOCA_PATH).toBe("/vasco-x-boca-sulamericana-maracana");
+    expect(VASCO_BOCA_PATH).not.toMatch(/libertadores/i);
+    expect(VASCO_BOCA_CANONICAL).toBe("https://tocorimerio.com/vasco-x-boca-sulamericana-maracana");
+  });
+  it("keeps the retired libertadores address forwarding to the new one", () => {
+    const main = readFileSync(new URL("../main.tsx", import.meta.url), "utf8");
+    expect(main).toMatch(/"\/vasco-x-boca-libertadores-maracana"/);
+    expect(main).toMatch(/\/vasco-x-boca-sulamericana-maracana\$\{search\}\$\{hash\}/);
+  });
 });
