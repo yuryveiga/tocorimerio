@@ -145,6 +145,7 @@ async function run() {
     '/custom-private-tour-rio-de-janeiro',
     '/maracana-calendario',
     '/flamengo-x-vasco-maracana',
+    '/vasco-x-boca-libertadores-maracana',
     '/fluminense-bolivar-libertadores',
     '/brasil-x-panama-maio-maracana',
     '/fluminense-indenpediente-rivadavia-libertadores-maracana',

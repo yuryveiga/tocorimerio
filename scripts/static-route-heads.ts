@@ -4,6 +4,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import type { Plugin } from "vite";
+import { VASCO_BOCA_PATH, vascoBocaCopy } from "../src/lib/vascoBocaLanding";
 
 const SITE = "https://tocorimerio.com";
 
@@ -17,6 +18,14 @@ type RouteHead = {
 };
 
 const ROUTES: RouteHead[] = [
+  {
+    path: VASCO_BOCA_PATH,
+    lang: "pt-BR",
+    title: vascoBocaCopy.pt.title,
+    description: vascoBocaCopy.pt.description,
+    h1: "Vasco x Boca Juniors",
+    intro: vascoBocaCopy.pt.intro,
+  },
   {
     path: "/maracana-calendario",
     lang: "pt-BR",
