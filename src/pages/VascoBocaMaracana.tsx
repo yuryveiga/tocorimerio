@@ -37,7 +37,7 @@ export default function VascoBocaMaracana() {
   }
   const faqs = [
     { q: copy.faqBuy, a: copy.faqBuyAnswer },
-    ...(match ? [{ q: copy.faqWhen, a: `${date} • ${hour} (Rio de Janeiro). ${stadium}. ${match.competition || ""}` }] : []),
+    ...(match ? [{ q: copy.faqWhen, a: `${date} • ${hour} (Rio de Janeiro). ${stadium}. ${competition}` }] : []),
     { q: copy.faqServices, a: copy.faqServicesAnswer },
   ];
   const breadcrumbs = generateBreadcrumbsSchema([
@@ -73,7 +73,7 @@ export default function VascoBocaMaracana() {
           <div className="absolute inset-0 -z-10 bg-sidebar/60" />
           <div className="mx-auto w-full max-w-6xl">
             <nav aria-label={copy.calendar} className="mb-10 text-sm"><Link to="/maracana-calendario" className="underline underline-offset-4">{copy.calendar}</Link><span className="mx-3">/</span>Vasco x Boca</nav>
-            {match?.competition && <p className="mb-4 text-sm font-semibold uppercase">{match.competition}</p>}
+            {competition && <p className="mb-4 text-sm font-semibold uppercase">{competition}</p>}
             <div className="mb-5 flex items-center gap-5">
               {match?.home_team_logo && <img src={match.home_team_logo} alt={match.home_team} className="h-16 w-16 object-contain sm:h-20 sm:w-20" />}
               {match?.away_team_logo && <img src={match.away_team_logo} alt={match.away_team} className="h-16 w-16 object-contain sm:h-20 sm:w-20" />}
@@ -89,7 +89,7 @@ export default function VascoBocaMaracana() {
         <section className="border-b border-border px-4 py-10 sm:px-8" data-vasco-boca-details={match ? "ready" : "pending"}>
           <div className="mx-auto grid max-w-6xl gap-8 md:grid-cols-[2fr_1fr]">
             <div><h2 className="mb-5 font-serif text-2xl font-bold tracking-normal">{copy.details}</h2>
-              {match ? <dl className="grid gap-5 sm:grid-cols-3">{[[copy.date, `${date} · ${hour}`], [copy.venue, stadium], [copy.competition, match.competition]].map(([label, value]) => value && <div key={label}><dt className="mb-1 text-sm text-muted-foreground">{label}</dt><dd className="font-semibold">{value}</dd></div>)}</dl> : <p role="status" className="text-muted-foreground">{isLoading ? copy.loading : copy.unavailable}</p>}
+              {match ? <dl className="grid gap-5 sm:grid-cols-3">{[[copy.date, `${date} · ${hour}`], [copy.venue, stadium], [copy.competition, competition]].map(([label, value]) => value && <div key={label}><dt className="mb-1 text-sm text-muted-foreground">{label}</dt><dd className="font-semibold">{value}</dd></div>)}</dl> : <p role="status" className="text-muted-foreground">{isLoading ? copy.loading : copy.unavailable}</p>}
             </div>
             <div className="md:border-l md:border-border md:pl-8">
               {price && price > 0 ? <><p className="text-sm text-muted-foreground">{copy.from}</p><p className="my-1 text-3xl font-semibold">{formatPrice(price)}</p><p className="mb-4 text-sm text-muted-foreground">{copy.perPerson}</p></> : <p className="mb-4 text-muted-foreground">{copy.unavailable}</p>}
