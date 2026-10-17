@@ -25,6 +25,7 @@ export default function VascoBocaMaracana() {
   const heroImage = siteImages?.imagesMap.maracana_hero || "https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1777297508861_dyv6alnpgjh.webp";
   const match: MatchServices | undefined = matches?.find(m => m.slug === VASCO_BOCA_SLUG);
   const stadium = match?.stadium || match?.venue;
+  const competition = getVascoBocaCompetitionLabel(match?.competition);
   const date = match ? format(getMatchDateInRio(match.match_date), lang === "en" ? "MMMM d, yyyy" : "dd/MM/yyyy", { locale: lang === "pt" ? ptBR : lang === "es" ? es : enUS }) : "";
   const hour = match ? getMatchHour(match.match_date) : "";
   const price = match?.min_price ?? match?.price;
