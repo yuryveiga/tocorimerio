@@ -65,6 +65,18 @@ import "./index.css";
   } catch {}
 })();
 
+// SEO: a landing do Vasco x Boca saiu do endereço "libertadores" para o nome da
+// competição real (Sulamericana). O endereço antigo continua levando ao novo.
+(() => {
+  try {
+    const { pathname, search, hash } = window.location;
+    const decoded = decodeURIComponent(pathname).replace(/\/+$/, "");
+    if (decoded === "/vasco-x-boca-libertadores-maracana") {
+      window.location.replace(`/vasco-x-boca-sulamericana-maracana${search}${hash}`);
+    }
+  } catch {}
+})();
+
 // Analytics: keep Google Ads click ids / utm params for attribution (canonical
 // URLs stay clean) and report WhatsApp clicks from a single global listener.
 import { captureAttribution, initWhatsappTracking } from "./lib/analytics";
