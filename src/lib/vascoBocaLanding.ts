@@ -5,6 +5,12 @@ export const VASCO_BOCA_SLUG = "vasco-da-gama-vs-boca-juniors-2026-10-20";
 export const VASCO_BOCA_BUY_URL = `https://tocorimerio.com/match/${VASCO_BOCA_SLUG}`;
 export const VASCO_BOCA_CANONICAL = `https://tocorimerio.com${VASCO_BOCA_PATH}`;
 
+// Exibe o nome oficial da competição (Sulamericana) em vez do rótulo interno do cadastro.
+export function getVascoBocaCompetitionLabel(competition?: string | null) {
+  if (!competition) return "";
+  return /sul[\s-]*amer/i.test(competition) ? "Sulamericana" : competition;
+}
+
 export const vascoBocaCopy = {
   pt: {
     title: "Vasco x Boca Juniors no Maracanã: Ingressos | Tocorime Rio",
