@@ -279,7 +279,7 @@ const App = ({ queryClient: externalQueryClient }: { queryClient?: QueryClient }
                       <Route path="/fluminense-bolivar-libertadores" element={<FluminenseBolivarLibertadores />} />
                       <Route path="/fluminense-x-deportivo-guaira-libertadores" element={<FluminenseDeportivoGuairaLibertadores />} />
                       <Route path="/flamengo-x-coritiba-maracana" element={<FlamengoCoritibaMaracana />} />
-                      <Route path="/vasco-x-boca-libertadores-maracana" element={<VascoBocaMaracana />} />
+                      <Route path="/vasco-x-boca-sulamericana-maracana" element={<VascoBocaMaracana />} />
                       <Route path="/fluminense-indenpediente-rivadavia-libertadores-maracana" element={<FluminenseIndependienteRivadaviaLibertadores />} />
                       <Route path="/flamengo-x-mirassol-maracana-tickets-02-09" element={<FlamengoMirassolMaracana />} />
                       <Route path="/Fluminense-x-patense-libertadores-maracana-tickets" element={<FluminensePlatenseLibertadores />} />
