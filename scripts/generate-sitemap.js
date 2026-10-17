@@ -90,6 +90,7 @@ async function generateSitemap() {
       { url: '/maracana-calendario' },
       { url: '/football-experiences-in-rio-de-janeiro' },
       { url: '/flamengo-x-vasco-maracana' },
+      { url: '/vasco-x-boca-libertadores-maracana' },
       { url: '/fluminense-bolivar-libertadores' },
       { url: '/brasil-x-panama-maio-maracana' },
       { url: '/fluminense-indenpediente-rivadavia-libertadores-maracana' },
