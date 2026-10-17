@@ -6,6 +6,7 @@ import { Footer } from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { useMatches, type Match } from "@/hooks/useMatches";
+import { useSiteImages } from "@/hooks/useSiteData";
 import { useLocale } from "@/contexts/LocaleContext";
 import { getMatchDateInRio, getMatchHour } from "@/lib/dateUtils";
 import { format } from "date-fns";
@@ -20,6 +21,8 @@ export default function VascoBocaMaracana() {
   const lang = language === "pt" || language === "es" ? language : "en";
   const copy = vascoBocaCopy[lang];
   const { data: matches, isLoading } = useMatches();
+  const { data: siteImages } = useSiteImages();
+  const heroImage = siteImages?.imagesMap.maracana_hero || "https://ogzasprtfgimjqrtcseg.supabase.co/storage/v1/object/public/site-images/1777297508861_dyv6alnpgjh.webp";
   const match: MatchServices | undefined = matches?.find(m => m.slug === VASCO_BOCA_SLUG);
   const stadium = match?.stadium || match?.venue;
   const date = match ? format(getMatchDateInRio(match.match_date), lang === "en" ? "MMMM d, yyyy" : "dd/MM/yyyy", { locale: lang === "pt" ? ptBR : lang === "es" ? es : enUS }) : "";
@@ -60,13 +63,13 @@ export default function VascoBocaMaracana() {
         <meta name="twitter:description" content={copy.description} />
         <script type="application/ld+json">{JSON.stringify(breadcrumbs)}</script>
         <script type="application/ld+json">{JSON.stringify({ "@context": "https://schema.org", ...generateFAQSchema(faqs) })}</script>
-        {match && <script type="application/ld+json">{JSON.stringify(buildVascoBocaEvent(match, copy.description, getCanonicalUrl("/maracana-hero.webp")))}</script>}
+        {match && <script type="application/ld+json">{JSON.stringify(buildVascoBocaEvent(match, copy.description, heroImage))}</script>}
       </Helmet>
       <Header />
       <main lang={lang}>
         <section className="relative isolate flex min-h-[620px] flex-col justify-end overflow-hidden bg-sidebar text-sidebar-foreground px-4 pb-12 pt-28 sm:px-8">
-          <img src="/maracana-hero.webp" alt="Maracanã, Rio de Janeiro" fetchPriority="high" className="absolute inset-0 -z-20 h-full w-full object-cover" />
-          <div className="absolute inset-0 -z-10 bg-sidebar/75" />
+          <img src={heroImage} alt="Maracanã, Rio de Janeiro" fetchPriority="high" className="absolute inset-0 -z-20 h-full w-full object-cover" />
+          <div className="absolute inset-0 -z-10 bg-sidebar/60" />
           <div className="mx-auto w-full max-w-6xl">
             <nav aria-label={copy.calendar} className="mb-10 text-sm"><Link to="/maracana-calendario" className="underline underline-offset-4">{copy.calendar}</Link><span className="mx-3">/</span>Vasco x Boca</nav>
             {match?.competition && <p className="mb-4 text-sm font-semibold uppercase">{match.competition}</p>}
