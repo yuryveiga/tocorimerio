@@ -20,7 +20,7 @@ import { toast } from "sonner";
 import { format, parseISO } from "date-fns";
 import { ptBR, enUS, es } from "date-fns/locale";
 import { getMatchDateInRio, getMatchHour } from "@/lib/dateUtils";
-import { getMatchHeroImage, getMatchHeroAlt } from "@/lib/matchImages";
+import { getMatchHeroImage, getMatchHeroAlt, getMatchGallery } from "@/lib/matchImages";
 import { buildMatchExperienceContent } from "@/lib/matchExperienceText";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
@@ -47,7 +47,7 @@ export default function MatchDetail() {
   const navigate = useNavigate();
   const { language, t, formatPrice, currency } = useLocale();
   const { rates } = useCurrency();
-  const { siteSettings, images, maracanaGallery } = useSiteData();
+  const { siteSettings, images, gallery } = useSiteData();
   const [isBookingModalOpen, setIsBookingModalOpen] = useState(false);
   const [isProcessing, setIsProcessing] = useState(false);
   const [customerInfo, setCustomerInfo] = useState({ name: "", whatsapp: "", email: "" });
@@ -329,6 +329,7 @@ export default function MatchDetail() {
 
   const dateLocale = language === 'en' ? enUS : language === 'es' ? es : ptBR;
   const matchDateRio = getMatchDateInRio(match.match_date);
+  const matchGallery = getMatchGallery(match, gallery);
 
   const siteTitle = siteSettings?.site_title?.split('|')[0].trim() || "Eco-Wanderlust";
 
@@ -978,8 +979,8 @@ export default function MatchDetail() {
         </div>
       </section>
 
-      {/* Maracana Gallery Carousel */}
-      {maracanaGallery && maracanaGallery.length > 0 && (
+      {/* Stadium Gallery Carousel */}
+      {matchGallery.length > 0 && (
          <section className="py-24 bg-background">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                <div className="text-center mb-12">
@@ -989,12 +990,12 @@ export default function MatchDetail() {
                </div>
                <Carousel opts={{ loop: true, align: "start" }} className="w-full">
                   <CarouselContent className="-ml-4">
-                     {maracanaGallery.map((img, i) => (
-                        <CarouselItem key={i} className="pl-4 basis-1/2 md:basis-1/3 lg:basis-1/4">
+                     {matchGallery.map((img, i) => (
+                        <CarouselItem key={img.id} className="pl-4 basis-1/2 md:basis-1/3 lg:basis-1/4">
                            <div className="aspect-[4/3] rounded-3xl overflow-hidden border shadow-sm group">
                               <OptimizedImage 
                                  src={img.url} 
-                                 alt={`Maracanã ${i + 1}`} 
+                                 alt={`${match.stadium || match.venue || 'Maracanã'} ${i + 1}`} 
                                  width={600}
                                  sizes="(max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
                                  containerClassName="w-full h-full"

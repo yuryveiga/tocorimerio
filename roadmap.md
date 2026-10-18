@@ -1,4 +1,5 @@
 # Roadmap
+- [x] Add Nilton Santos gallery category; verified a saved photo in a real match carousel and removed the temporary verification entry.
 - [x] Create Vasco x Boca landing with live match data, purchase links, SEO and browser verification.
 - [x] Remove the private reservation label for football in sales and emails; verified real sale details/editing, 13 classification tests, and email rendering without sending messages.
 - [x] Create the Football Experiences in Rio planning page
