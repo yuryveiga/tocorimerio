@@ -20,7 +20,7 @@ import { toast } from "sonner";
 import { format, parseISO } from "date-fns";
 import { ptBR, enUS, es } from "date-fns/locale";
 import { getMatchDateInRio, getMatchHour } from "@/lib/dateUtils";
-import { getMatchHeroImage, getMatchHeroAlt, getMatchGallery } from "@/lib/matchImages";
+import { getMatchHeroImage, getMatchHeroAlt, getMatchGallery, getMatchFeaturedVideo } from "@/lib/matchImages";
 import { buildMatchExperienceContent } from "@/lib/matchExperienceText";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
@@ -30,8 +30,6 @@ import { OptimizedImage } from "@/components/OptimizedImage";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 import { getCanonicalUrl, cleanMatchSlug, uncleanMatchSlug, generateSportsEventSchema, generateBreadcrumbsSchema } from "@/utils/seo";
 
-const FEATURED_VIDEO_ID = "-Wmc5Aqj4iU";
-const FEATURED_VIDEO_TITLE = "Experiência Maracanã com a Tocorime Rio";
 import { LovableMatch } from "@/types";
 import { WhyChooseUs } from "@/components/WhyChooseUs";
 import { PaymentLogos } from "@/components/PaymentLogos";
@@ -330,6 +328,7 @@ export default function MatchDetail() {
   const dateLocale = language === 'en' ? enUS : language === 'es' ? es : ptBR;
   const matchDateRio = getMatchDateInRio(match.match_date);
   const matchGallery = getMatchGallery(match, gallery);
+  const featuredVideo = getMatchFeaturedVideo(match);
 
   const siteTitle = siteSettings?.site_title?.split('|')[0].trim() || "Eco-Wanderlust";
 
