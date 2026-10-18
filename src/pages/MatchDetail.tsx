@@ -618,44 +618,79 @@ export default function MatchDetail() {
                  <section className="space-y-6">
                     <h2 className="text-3xl font-serif font-black flex items-center gap-4">
                        <div className="w-2 h-10 bg-primary rounded-full" />
-                       Veja a experiência no Maracanã
+                       {featuredVideo.heading}
                     </h2>
-                    <div className="relative w-full aspect-video rounded-3xl overflow-hidden bg-black shadow-xl border border-border/50">
-                       {!videoOpen ? (
-                          <button
-                             type="button"
-                             onClick={() => setVideoOpen(true)}
-                             className="group absolute inset-0 w-full h-full p-0 border-0 cursor-pointer"
-                             aria-label={FEATURED_VIDEO_TITLE}
-                          >
-                             <img
-                                src={`https://img.youtube.com/vi/${FEATURED_VIDEO_ID}/hqdefault.jpg`}
-                                srcSet={`https://img.youtube.com/vi/${FEATURED_VIDEO_ID}/hqdefault.jpg 480w, https://img.youtube.com/vi/${FEATURED_VIDEO_ID}/sddefault.jpg 640w, https://img.youtube.com/vi/${FEATURED_VIDEO_ID}/maxresdefault.jpg 1280w`}
-                                sizes="(max-width: 768px) 100vw, 720px"
-                                width={1280}
-                                height={720}
-                                alt={FEATURED_VIDEO_TITLE}
-                                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                                loading="lazy"
-                                decoding="async"
-                             />
-                             <div className="absolute inset-0 bg-black/30 group-hover:bg-black/20 transition-colors" />
-                             <div className="absolute inset-0 flex items-center justify-center">
-                                <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-primary/90 text-white flex items-center justify-center shadow-2xl transition-transform duration-300 group-hover:scale-110">
-                                   <Play className="w-7 h-7 sm:w-8 sm:h-8 fill-current ml-1" />
+                    {featuredVideo.isShort ? (
+                       <div className="relative w-full max-w-sm mx-auto aspect-[9/16] rounded-3xl overflow-hidden bg-black shadow-xl border border-border/50">
+                          {!videoOpen ? (
+                             <button
+                                type="button"
+                                onClick={() => setVideoOpen(true)}
+                                className="group absolute inset-0 w-full h-full p-0 border-0 cursor-pointer"
+                                aria-label={featuredVideo.title}
+                             >
+                                <img
+                                   src={`https://img.youtube.com/vi/${featuredVideo.id}/maxresdefault.jpg`}
+                                   alt={featuredVideo.title}
+                                   className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                                   loading="lazy"
+                                   decoding="async"
+                                />
+                                <div className="absolute inset-0 bg-black/30 group-hover:bg-black/20 transition-colors" />
+                                <div className="absolute inset-0 flex items-center justify-center">
+                                   <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-primary/90 text-white flex items-center justify-center shadow-2xl transition-transform duration-300 group-hover:scale-110">
+                                      <Play className="w-7 h-7 sm:w-8 sm:h-8 fill-current ml-1" />
+                                   </div>
                                 </div>
-                             </div>
-                          </button>
-                       ) : (
-                          <iframe
-                             src={`https://www.youtube.com/embed/${FEATURED_VIDEO_ID}?rel=0&autoplay=1`}
-                             title={FEATURED_VIDEO_TITLE}
-                             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                             allowFullScreen
-                             className="absolute inset-0 w-full h-full"
-                          />
-                       )}
-                    </div>
+                             </button>
+                          ) : (
+                             <iframe
+                                src={`https://www.youtube.com/embed/${featuredVideo.id}?rel=0&autoplay=1`}
+                                title={featuredVideo.title}
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                allowFullScreen
+                                className="absolute inset-0 w-full h-full"
+                             />
+                          )}
+                       </div>
+                    ) : (
+                       <div className="relative w-full aspect-video rounded-3xl overflow-hidden bg-black shadow-xl border border-border/50">
+                          {!videoOpen ? (
+                             <button
+                                type="button"
+                                onClick={() => setVideoOpen(true)}
+                                className="group absolute inset-0 w-full h-full p-0 border-0 cursor-pointer"
+                                aria-label={featuredVideo.title}
+                             >
+                                <img
+                                   src={`https://img.youtube.com/vi/${featuredVideo.id}/hqdefault.jpg`}
+                                   srcSet={`https://img.youtube.com/vi/${featuredVideo.id}/hqdefault.jpg 480w, https://img.youtube.com/vi/${featuredVideo.id}/sddefault.jpg 640w, https://img.youtube.com/vi/${featuredVideo.id}/maxresdefault.jpg 1280w`}
+                                   sizes="(max-width: 768px) 100vw, 720px"
+                                   width={1280}
+                                   height={720}
+                                   alt={featuredVideo.title}
+                                   className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                                   loading="lazy"
+                                   decoding="async"
+                                />
+                                <div className="absolute inset-0 bg-black/30 group-hover:bg-black/20 transition-colors" />
+                                <div className="absolute inset-0 flex items-center justify-center">
+                                   <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-primary/90 text-white flex items-center justify-center shadow-2xl transition-transform duration-300 group-hover:scale-110">
+                                      <Play className="w-7 h-7 sm:w-8 sm:h-8 fill-current ml-1" />
+                                   </div>
+                                </div>
+                             </button>
+                          ) : (
+                             <iframe
+                                src={`https://www.youtube.com/embed/${featuredVideo.id}?rel=0&autoplay=1`}
+                                title={featuredVideo.title}
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                allowFullScreen
+                                className="absolute inset-0 w-full h-full"
+                             />
+                          )}
+                       </div>
+                    )}
                  </section>
 
                  <section className="space-y-10">
