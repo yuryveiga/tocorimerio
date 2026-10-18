@@ -497,12 +497,12 @@ export default function MatchDetail() {
         <script type="application/ld+json">{JSON.stringify({
           "@context": "https://schema.org",
           "@type": "VideoObject",
-          name: `Experiência ${match.home_team} x ${match.away_team} no Maracanã`,
-          description: `Veja como é a experiência de assistir ${match.home_team} x ${match.away_team} no Estádio do Maracanã com guia bilíngue e ingresso oficial.`,
-          thumbnailUrl: `https://img.youtube.com/vi/${FEATURED_VIDEO_ID}/maxresdefault.jpg`,
+          name: `Experiência ${match.home_team} x ${match.away_team} no ${match.stadium || match.venue || "Maracanã"}`,
+          description: `Veja como é a experiência de assistir ${match.home_team} x ${match.away_team} no ${match.stadium || match.venue || "Estádio do Maracanã"} com guia bilíngue e ingresso oficial.`,
+          thumbnailUrl: `https://img.youtube.com/vi/${featuredVideo.id}/maxresdefault.jpg`,
           uploadDate: match.match_date,
-          embedUrl: `https://www.youtube.com/embed/${FEATURED_VIDEO_ID}`,
-          contentUrl: `https://www.youtube.com/watch?v=${FEATURED_VIDEO_ID}`,
+          embedUrl: `https://www.youtube.com/embed/${featuredVideo.id}`,
+          contentUrl: `https://www.youtube.com/watch?v=${featuredVideo.id}`,
         })}</script>
       </Helmet>
       
