@@ -38,6 +38,34 @@ export function getMatchGallery<T extends { key: string }>(
   return gallery.filter((image) => image.key.startsWith(`gallery__${category}__`));
 }
 
+export interface MatchFeaturedVideo {
+  id: string;
+  isShort: boolean;
+  title: string;
+  heading: string;
+}
+
+const MARACANA_FEATURED_VIDEO: MatchFeaturedVideo = {
+  id: "-Wmc5Aqj4iU",
+  isShort: false,
+  title: "Experiência Maracanã com a Tocorime Rio",
+  heading: "Veja a experiência no Maracanã",
+};
+
+const NILTON_SANTOS_FEATURED_VIDEO: MatchFeaturedVideo = {
+  id: "tCoXqWUVRw0",
+  isShort: true,
+  title: "Experiência Estádio Nilton Santos (Engenhão) com a Tocorime Rio",
+  heading: "Veja a experiência no Estádio Nilton Santos",
+};
+
+/** Featured video per stadium: Nilton Santos games use their own YouTube Short. */
+export function getMatchFeaturedVideo(match: Partial<Match>): MatchFeaturedVideo {
+  return getMatchVenueKey(match) === "nilton_santos"
+    ? NILTON_SANTOS_FEATURED_VIDEO
+    : MARACANA_FEATURED_VIDEO;
+}
+
 /**
  * Imagem do card do jogo (home, calendário, etc.).
  * NFL e jogos fora do Maracanã ganham foto própria; o restante mantém a lógica atual.
