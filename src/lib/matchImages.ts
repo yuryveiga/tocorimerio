@@ -27,6 +27,17 @@ export function getMatchVenueKey(match: Partial<Match>): MatchVenueKey {
   return "maracana";
 }
 
+/** Nilton Santos games use only their own category, including when it is empty. */
+export function getMatchGallery<T extends { key: string }>(
+  match: Partial<Match>,
+  gallery: T[]
+): T[] {
+  const category = getMatchVenueKey(match) === "nilton_santos"
+    ? "nilton_santos"
+    : "maracana";
+  return gallery.filter((image) => image.key.startsWith(`gallery__${category}__`));
+}
+
 /**
  * Imagem do card do jogo (home, calendário, etc.).
  * NFL e jogos fora do Maracanã ganham foto própria; o restante mantém a lógica atual.
