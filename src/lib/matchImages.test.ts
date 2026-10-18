@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { getMatchGallery } from "./matchImages";
+import { getMatchGallery, getMatchFeaturedVideo } from "./matchImages";
 
 const photos = [
   { key: "gallery__maracana__1", url: "maracana.jpg" },
@@ -27,5 +27,23 @@ describe("stadium match gallery", () => {
   it("preserves the Maracanã carousel for other games", () => {
     expect(getMatchGallery({ stadium: "Maracanã" }, photos)
       .map((photo) => photo.url)).toEqual(["maracana.jpg"]);
+  });
+});
+
+describe("stadium featured video", () => {
+  it("uses the Nilton Santos Short for Nilton Santos games", () => {
+    const video = getMatchFeaturedVideo({ stadium: "Estádio Nilton Santos" });
+    expect(video.id).toBe("tCoXqWUVRw0");
+    expect(video.isShort).toBe(true);
+  });
+
+  it("recognizes Engenhão as Nilton Santos", () => {
+    expect(getMatchFeaturedVideo({ venue: "Engenhão" }).id).toBe("tCoXqWUVRw0");
+  });
+
+  it("keeps the Maracanã video for other games", () => {
+    const video = getMatchFeaturedVideo({ stadium: "Maracanã" });
+    expect(video.id).toBe("-Wmc5Aqj4iU");
+    expect(video.isShort).toBe(false);
   });
 });
