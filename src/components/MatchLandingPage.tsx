@@ -10,6 +10,7 @@ import { Footer } from "@/components/Footer";
 import { useMatches } from "@/hooks/useMatches";
 import { getCanonicalUrl, generateSportsEventSchema, generateBreadcrumbsSchema } from "@/utils/seo";
 import { getMatchDateInRio, getMatchHour } from "@/lib/dateUtils";
+import { getMatchEventStatus } from "@/lib/matchEventStatus";
 import { format } from "date-fns";
 import { ptBR, enUS, es as esLocale } from "date-fns/locale";
 import { useLocale } from "@/contexts/LocaleContext";
@@ -180,6 +181,7 @@ export default function MatchLandingPage({
     name: `${match.home_team} x ${match.away_team}${overrideCompetition ? ` — ${overrideCompetition}` : ""}`,
     description: pageDescription,
     startDate: match.match_date,
+    eventStatus: getMatchEventStatus(match.status || ""),
     imageUrl: match.home_team_logo || match.away_team_logo,
     url: canonical,
     homeTeam: match.home_team,
