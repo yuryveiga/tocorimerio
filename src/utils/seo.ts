@@ -156,6 +156,8 @@ export const generateSportsEventSchema = (params: {
   description: string;
   startDate: string; // ISO
   endDate?: string;
+  eventStatus?: string;
+  organizer?: { name: string; url?: string };
   imageUrl?: string;
   url: string;
   homeTeam: string;
@@ -171,8 +173,8 @@ export const generateSportsEventSchema = (params: {
   "name": params.name,
   "description": params.description,
   "startDate": params.startDate,
-  "endDate": params.endDate || params.startDate,
-  "eventStatus": "https://schema.org/EventScheduled",
+  ...(params.endDate && Date.parse(params.endDate) > Date.parse(params.startDate) ? { endDate: params.endDate } : {}),
+  "eventStatus": params.eventStatus || "https://schema.org/EventScheduled",
   "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
   // Google exige o campo "image" em Event — sempre preenchido (com fallback do site)
   "image": [getOgImage(params.imageUrl)],
@@ -199,11 +201,7 @@ export const generateSportsEventSchema = (params: {
     { "@type": "SportsTeam", "name": params.homeTeam },
     { "@type": "SportsTeam", "name": params.awayTeam },
   ],
-  "organizer": {
-    "@type": "Organization",
-    "name": "Tocorime Rio",
-    "url": BASE_URL,
-  },
+  ...(params.organizer ? { organizer: { "@type": "Organization", ...params.organizer } } : {}),
   ...(params.offerUrl && {
     offers: {
       "@type": "Offer",
