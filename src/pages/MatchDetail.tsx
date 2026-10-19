@@ -22,6 +22,7 @@ import { ptBR, enUS, es } from "date-fns/locale";
 import { getMatchDateInRio, getMatchHour } from "@/lib/dateUtils";
 import { getMatchHeroImage, getMatchHeroAlt, getMatchGallery, getMatchFeaturedVideo } from "@/lib/matchImages";
 import { buildMatchExperienceContent } from "@/lib/matchExperienceText";
+import { getMatchEventStatus } from "@/lib/matchEventStatus";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -471,6 +472,7 @@ export default function MatchDetail() {
             name: `${match.home_team} x ${match.away_team}${match.competition ? ` — ${match.competition}` : ''}`,
             description: pageDescription,
             startDate: getMatchDateInRio(match.match_date).toISOString(),
+            eventStatus: getMatchEventStatus(match.status || ""),
             imageUrl: (match as any).banner_url || (match as any).image_url || undefined,
             url: getCanonicalUrl(`/match/${match.slug || match.id}`),
             homeTeam: match.home_team,
