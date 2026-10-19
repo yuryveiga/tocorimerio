@@ -8,6 +8,7 @@ import { Locale } from "date-fns";
 import { format, startOfMonth, endOfMonth, eachDayOfInterval, getDay, isSameDay, addMonths, subMonths } from "date-fns";
 import { ptBR, enUS, es } from "date-fns/locale";
 import { getMatchDateInRio, isMatchOnDay } from "@/lib/dateUtils";
+import { getMatchEventStatus } from "@/lib/matchEventStatus";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { MapPin, ArrowRight, Bus, Ticket, UserCheck, Clock, Camera, Users, ChevronLeft, ChevronRight, CalendarDays } from "lucide-react";
@@ -129,6 +130,7 @@ const MaracanaCalendar = () => {
               ? `${name}: ${m.competition}. Tour com ingresso oficial, transporte e guia bilíngue.`
               : `${name}: ${m.competition}. Tour with official ticket, transport and bilingual guide.`,
             startDate: start.toISOString(),
+            eventStatus: getMatchEventStatus(m.status || ""),
             imageUrl: (m as any).image_url || undefined,
             url,
             homeTeam: m.home_team,

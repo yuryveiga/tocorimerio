@@ -8,6 +8,7 @@ import { useMatches } from "@/hooks/useMatches";
 import { getCanonicalUrl, generateSportsEventSchema, generateBreadcrumbsSchema, cleanMatchSlug } from "@/utils/seo";
 import { slugify } from "@/utils/slugify";
 import { getMatchDateInRio, getMatchHour } from "@/lib/dateUtils";
+import { getMatchEventStatus } from "@/lib/matchEventStatus";
 import { format } from "date-fns";
 import { ptBR } from "date-fns/locale";
 import { useState } from "react";
@@ -48,6 +49,7 @@ export default function JogoLanding() {
     name: `${match.home_team} x ${match.away_team}`,
     description,
     startDate: match.match_date,
+    eventStatus: getMatchEventStatus(match.status || ""),
     imageUrl: match.home_team_logo || match.away_team_logo,
     url: canonical,
     homeTeam: match.home_team,

@@ -1,4 +1,5 @@
 import type { Match } from "@/hooks/useMatches";
+import { getMatchEventStatus } from "./matchEventStatus";
 
 export const FLAMENGO_ESTUDIANTES_PATH = "/flamengo-x-estudiantes-libertadores-maracana";
 export const FLAMENGO_ESTUDIANTES_SLUG = "flamengo-vs-estudiantes-de-la-plata-2026-10-22";
@@ -47,7 +48,7 @@ export function buildFlamengoEstudiantesEvent(match: Match, description: string,
     name: `${match.home_team} x ${match.away_team}`, description,
     startDate: match.match_date, url: FLAMENGO_ESTUDIANTES_CANONICAL, image: [image],
     eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
-    ...(match.status === "cancelled" ? { eventStatus: "https://schema.org/EventCancelled" } : {}),
+    eventStatus: getMatchEventStatus(match.status),
     location: { "@type": "Place", name: match.stadium || match.venue, address: { "@type": "PostalAddress", addressLocality: "Rio de Janeiro", addressRegion: "RJ", addressCountry: "BR" } },
     homeTeam: { "@type": "SportsTeam", name: match.home_team },
     awayTeam: { "@type": "SportsTeam", name: match.away_team },
