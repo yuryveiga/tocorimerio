@@ -1,5 +1,5 @@
 import type { Match } from "@/hooks/useMatches";
-import { getMatchEventStatus } from "./matchEventStatus";
+import { getMatchEventDetails, getMatchEventStatus } from "./matchEventStatus";
 
 export const VASCO_BOCA_PATH = "/vasco-x-boca-sulamericana-maracana";
 export const VASCO_BOCA_SLUG = "vasco-da-gama-vs-boca-juniors-2026-10-20";
@@ -49,6 +49,7 @@ export function buildVascoBocaEvent(match: Match, description: string, image: st
     startDate: match.match_date, url: VASCO_BOCA_CANONICAL, image: [image],
     eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
     eventStatus: getMatchEventStatus(match.status),
+    ...getMatchEventDetails(match.match_date, match.home_team),
     location: { "@type": "Place", name: match.stadium || match.venue, address: { "@type": "PostalAddress", addressLocality: "Rio de Janeiro", addressRegion: "RJ", addressCountry: "BR" } },
     homeTeam: { "@type": "SportsTeam", name: match.home_team },
     awayTeam: { "@type": "SportsTeam", name: match.away_team },
