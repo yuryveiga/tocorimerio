@@ -1,4 +1,5 @@
 # Roadmap
+- [x] Apply approved game end time and home-team organizer across event schemas; 20 tests passed and browser verified both landings, match detail and 13 calendar events.
 - [x] Verify eventStatus warnings; omit unverified event end times and organizers.
 - [x] Add Nilton Santos gallery category; verified a saved photo in a real match carousel and removed the temporary verification entry.
 - [x] Create Vasco x Boca landing with live match data, purchase links, SEO and browser verification.
