@@ -241,6 +241,16 @@ export function Footer() {
             <div className="flex flex-col gap-2 md:w-1/3">
               <p className="text-[hsl(140,10%,96%)]/60 text-sm font-sans">&copy; 2026 Tocorime Rio. {t("direitos")}</p>
               <p className="text-[hsl(140,10%,96%)]/60 text-xs font-sans opacity-70 tracking-tight">{t("turismo_sustentavel")}</p>
+              <p className="text-[hsl(140,10%,96%)]/40 text-xs font-sans">
+                <a
+                  href="https://trafficpeak.io"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-[hsl(145,40%,40%)] transition-colors"
+                >
+                  Boost Your Website Traffic with TrafficPeak
+                </a>
+              </p>
             </div>
 
             <div className="flex justify-center items-center gap-6 md:w-1/3">
