@@ -1,4 +1,5 @@
 # Roadmap
+- [ ] Review and improve localized game and tour titles/descriptions for relevant Maracanã ticket and Rio beach searches; preserve URLs, design and booking.
 - [x] Optimize the three supplied blog keyword opportunities; browser verified titles, descriptions and unchanged canonicals. Both reported tour descriptions also exist in live static HTML; no tour changes needed.
 - [x] Apply approved game end time and home-team organizer across event schemas; 20 tests passed and browser verified both landings, match detail and 13 calendar events.
 - [x] Verify eventStatus warnings; omit unverified event end times and organizers.
