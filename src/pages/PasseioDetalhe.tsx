@@ -814,12 +814,10 @@ export function PasseioDetalhe() {
     meta_title_es?: string; meta_description_es?: string;
   };
   const customTitle =
-    (language === "pt" ? seoMeta.meta_title_pt : language === "es" ? seoMeta.meta_title_es : seoMeta.meta_title_en) ||
-    seoMeta.meta_title_en;
+    language === "pt" ? seoMeta.meta_title_pt : language === "es" ? seoMeta.meta_title_es : language === "en" ? seoMeta.meta_title_en : undefined;
   const customDescription =
-    (language === "pt" ? seoMeta.meta_description_pt : language === "es" ? seoMeta.meta_description_es : seoMeta.meta_description_en) ||
-    seoMeta.meta_description_en;
-  const seoTitle = customTitle || `${translatedTitle} | Private Tour Rio de Janeiro | ${siteTitle}`;
+    language === "pt" ? seoMeta.meta_description_pt : language === "es" ? seoMeta.meta_description_es : language === "en" ? seoMeta.meta_description_en : undefined;
+  const seoTitle = customTitle || `${translatedTitle} | ${siteTitle}`;
   const seoDescription = customDescription || generateOptimizedMetaDescription(translatedShortDesc, translatedTitle, language);
 
   return (

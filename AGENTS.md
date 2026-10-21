@@ -1,4 +1,5 @@
 # Architecture rules
+- Derive generic game page and static route metadata through `src/lib/matchSeo.js`; sharing registered teams, venue and Rio-local date prevents incorrect stadium labels and generic published titles.
 - Share fixture status and event detail derivation through `src/lib/matchEventStatus.ts`, consumed by the general schema generator and landing builders; this keeps approved timing and home-team rules consistent without changing stored match data.
 
 - Select match carousel photos from the existing site gallery through `getMatchGallery` in `src/lib/matchImages.ts`; this keeps stadium selection testable without extra requests or duplicated image storage.
