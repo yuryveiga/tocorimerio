@@ -9,6 +9,7 @@ import { getCanonicalUrl, generateSportsEventSchema, generateBreadcrumbsSchema, 
 import { slugify } from "@/utils/slugify";
 import { getMatchDateInRio, getMatchHour } from "@/lib/dateUtils";
 import { getMatchEventStatus } from "@/lib/matchEventStatus";
+import { getMatchSeo } from "@/lib/matchSeo";
 import { format } from "date-fns";
 import { ptBR } from "date-fns/locale";
 import { useState } from "react";
@@ -38,8 +39,7 @@ export default function JogoLanding() {
   const dateRio = getMatchDateInRio(match.match_date);
   const formattedDate = format(dateRio, "EEEE, dd 'de' MMMM 'de' yyyy", { locale: ptBR });
   const hour = getMatchHour(match.match_date);
-  const title = `${match.home_team} x ${match.away_team} no Maracanã - ${format(dateRio, "dd/MM/yyyy")} | Tocorime Rio`;
-  const description = `Ingresso + transfer + guia bilíngue para ${match.home_team} x ${match.away_team} em ${formattedDate} às ${hour} no ${match.stadium || "Maracanã"}. Reserve agora! ✓`;
+  const { title, description } = getMatchSeo(match, "pt");
   const cleanSlug = slugify(match.slug || `${match.home_team}-vs-${match.away_team}`) || match.id;
   const canonical = getCanonicalUrl(`/jogo/${cleanSlug}`);
   const matchUrl = `/match/${match.slug || match.id}`;

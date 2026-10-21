@@ -6,6 +6,7 @@ import { createClient } from '@supabase/supabase-js';
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { getMatchSeo } from '../src/lib/matchSeo.js';
 
 if (fs.existsSync('.env')) {
   try {
@@ -221,11 +222,23 @@ async function run() {
         'https://mwxbskzggzznxvkwgrnz.supabase.co',
         'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im13eGJza3pnZ3p6bnh2a3dncm56Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzMzNjE5OTUsImV4cCI6MjA4ODkzNzk5NX0.EFfaaN79uifOMgFdIZlQ5C8c-HQH-YodNGWf0MEcf9o'
       );
-      const { data: matches } = await partner.from('matches').select('id, slug, hidden, home_team, away_team');
+      const { data: matches } = await partner.from('matches').select('id, slug, hidden, home_team, away_team, stadium, venue, match_date');
       (matches || []).filter(m => !m.hidden).forEach(m => {
         const s = slugify(m.slug || `${m.home_team || ''}-vs-${m.away_team || ''}`) || m.id;
         routes.add(`/match/${s}`);
         routes.add(`/jogo/${s}`);
+        for (const [prefix, language] of [['match', 'en'], ['jogo', 'pt']]) {
+          const route = `/${prefix}/${s}`;
+          const seo = getMatchSeo(m, language);
+          postMeta.set(route, {
+            title: seo.title,
+            description: seo.description,
+            url: `${SITE}${route}`,
+            image: ogImage(null),
+            imageAlt: `${m.home_team} vs ${m.away_team} — ${seo.venue}`,
+            type: 'website',
+          });
+        }
       });
     } catch (e) {
       console.warn('[spa-fallback] sem matches do parceiro:', e.message);

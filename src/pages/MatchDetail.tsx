@@ -23,6 +23,7 @@ import { getMatchDateInRio, getMatchHour } from "@/lib/dateUtils";
 import { getMatchHeroImage, getMatchHeroAlt, getMatchGallery, getMatchFeaturedVideo } from "@/lib/matchImages";
 import { buildMatchExperienceContent } from "@/lib/matchExperienceText";
 import { getMatchEventStatus } from "@/lib/matchEventStatus";
+import { getMatchSeo } from "@/lib/matchSeo";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -356,14 +357,6 @@ export default function MatchDetail() {
         : match.description_pt) || experience?.plain || ""
     : "";
 
-  const metaDescription = match
-    ? (language === "pt"
-        ? `${match.home_team} x ${match.away_team} no Maracanã: ingresso oficial + transfer executivo + guia bilíngue. Reserve sua experiência matchday com a Tocorime Rio. ✓`
-        : language === "es"
-        ? `${match.home_team} vs ${match.away_team} en el Maracanã: entrada oficial + traslado ejecutivo + guía bilingüe. Reserva tu experiencia matchday con Tocorime Rio. ✓`
-        : `${match.home_team} vs ${match.away_team} at Maracanã: official ticket + executive transfer + bilingual guide. Book your matchday experience with Tocorime Rio. ✓`)
-    : "";
-
   const jsonLd = match ? {
     "@context": "https://schema.org",
     "@type": "Product",
@@ -441,27 +434,23 @@ export default function MatchDetail() {
   ];
 
   const translatedTitle = `${match.home_team} x ${match.away_team}`;
-  const isFlamengoChapecoense2026 = match.slug === "flamengo-vs-chapecoense-2026-12-02";
-  const pageTitle = isFlamengoChapecoense2026 && language === "pt"
-    ? "Chapecoense x Flamengo 2026: Ingressos no Maracanã | Tocorime"
-    : `${translatedTitle} | Maracanã Matchday Experience`;
-  const pageDescription = isFlamengoChapecoense2026 && language === "pt"
-    ? "Chapecoense x Flamengo 2026: consulte ingressos para a partida de 2 de dezembro no Maracanã, com transfer e guia local conforme disponibilidade."
-    : metaDescription;
+  const matchSeo = getMatchSeo(match, language);
+  const pageTitle = matchSeo.title;
+  const pageDescription = matchSeo.description;
 
   return (
     <div className="min-h-screen bg-background">
       <Helmet>
         <title>{pageTitle}</title>
         <meta name="description" content={pageDescription} />
-        <meta property="og:title" content={`${translatedTitle} | ${siteTitle}`} />
+        <meta property="og:title" content={pageTitle} />
         <meta property="og:description" content={pageDescription} />
         <meta property="og:type" content="website" />
         <meta property="og:url" content={getCanonicalUrl(`/match/${match.slug || match.id}`)} />
         <meta property="og:image" content={(match as any).banner_url || (match as any).image_url || `${getCanonicalUrl("")}/og-image.jpg`} />
-        <meta property="og:image:alt" content={`${translatedTitle} — Maracanã`} />
+        <meta property="og:image:alt" content={`${translatedTitle} — ${matchSeo.venue}`} />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content={`${translatedTitle} | ${siteTitle}`} />
+        <meta name="twitter:title" content={pageTitle} />
         <meta name="twitter:description" content={pageDescription} />
         <meta name="twitter:image" content={(match as any).banner_url || (match as any).image_url || `${getCanonicalUrl("")}/og-image.jpg`} />
         <link rel="canonical" href={getCanonicalUrl(`/match/${match.slug || match.id}`)} />
