@@ -524,17 +524,16 @@ const BlogPost = () => {
               <link key={l.hreflang} rel="alternate" hrefLang={l.hreflang} href={l.href} />
             ))}
           </>
-        ) : post.slug === 'how-to-get-tickets-for-maracana-the-comp' ? (
+        ) : post.slug === 'how-to-get-tickets-for-maracana-the-comp' && language === 'en' ? (
           <>
-            <title>How to Get Tickets for Maracanã Stadium: The Complete Guide</title>
-            <meta name="description" content="Experience the thrill of Maracanã Stadium! This guide helps you get tickets for live football matches in Rio, navigate safely, and enjoy the electric atmosphere. Find out how Tocorime Rio can assist with your Maracanã experience." />
-            <meta name="keywords" content="Maracanã Stadium, Maracanã tickets, football Rio, soccer Rio, Flamengo, Fluminense, Rio derby, live match Rio, Maracanã tour, Tocorime Rio" />
+            <title>{metaTitleOverride || `${title} | ${siteTitle}`}</title>
+            <meta name="description" content={metaDescOverride || generateOptimizedMetaDescription(excerpt || content || title, title, language)} />
             <meta name="robots" content="index, follow" />
             <link rel="canonical" href="https://tocorimerio.com/blog/how-to-get-tickets-for-maracana-the-comp" />
 
             <meta property="og:type" content="article" />
-            <meta property="og:title" content="How to Get Tickets for Maracanã Stadium: The Complete Guide" />
-            <meta property="og:description" content="Experience the thrill of Maracanã Stadium! This guide helps you get tickets for live football matches in Rio, navigate safely, and enjoy the electric atmosphere. Find out how Tocorime Rio can assist with your Maracanã experience." />
+            <meta property="og:title" content={metaTitleOverride || `${title} | ${siteTitle}`} />
+            <meta property="og:description" content={metaDescOverride || generateOptimizedMetaDescription(excerpt || content || title, title, language)} />
             <meta property="og:url" content="https://tocorimerio.com/blog/how-to-get-tickets-for-maracana-the-comp" />
             <meta property="og:image" content={ogImage} />
             <meta property="og:image:secure_url" content={ogImage} />
@@ -545,8 +544,8 @@ const BlogPost = () => {
             <meta property="og:site_name" content="Tocorime Rio" />
 
             <meta name="twitter:card" content="summary_large_image" />
-            <meta name="twitter:title" content="How to Get Tickets for Maracanã Stadium: The Complete Guide" />
-            <meta name="twitter:description" content="Experience the thrill of Maracanã Stadium! This guide helps you get tickets for live football matches in Rio, navigate safely, and enjoy the electric atmosphere. Find out how Tocorime Rio can assist with your Maracanã experience." />
+            <meta name="twitter:title" content={metaTitleOverride || `${title} | ${siteTitle}`} />
+            <meta name="twitter:description" content={metaDescOverride || generateOptimizedMetaDescription(excerpt || content || title, title, language)} />
             <meta name="twitter:image" content={ogImage} />
             {getHreflangLinks(`/blog/how-to-get-tickets-for-maracana-the-comp`).map((l) => (
               <link key={l.hreflang} rel="alternate" hrefLang={l.hreflang} href={l.href} />
