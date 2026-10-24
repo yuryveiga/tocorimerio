@@ -1,4 +1,5 @@
 # Roadmap
+- [ ] Automate paid-sale confirmation for all sources with recipient-level deduplication, retries and live verification.
 - [x] Shorten English search titles for the 50 supplied blog URLs, preserving article headings and content; verify saved lengths and browser titles. Static published heads update on next publish.
 - [x] Strengthen the three requested blog keyword targets with practical planning sections, localized headings, corrected beach editorial fragments and direct calendar links; verified saved data and five preview page/language combinations, preserving canonicals and bookings.
 - [x] Review localized game and tour metadata: shared correct-stadium ticket titles for match/jogo and static output; update four relevant tours in PT/EN/ES. Verified 15 live preview page/language combinations, unchanged canonicals and 27 passing game tests.
