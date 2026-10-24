@@ -1,4 +1,5 @@
 # Roadmap
+- [ ] Review and strengthen the three requested blog keyword targets without changing routes, design or bookings; verify saved article metadata and preview.
 - [x] Review localized game and tour metadata: shared correct-stadium ticket titles for match/jogo and static output; update four relevant tours in PT/EN/ES. Verified 15 live preview page/language combinations, unchanged canonicals and 27 passing game tests.
 - [x] Optimize the three supplied blog keyword opportunities; browser verified titles, descriptions and unchanged canonicals. Both reported tour descriptions also exist in live static HTML; no tour changes needed.
 - [x] Apply approved game end time and home-team organizer across event schemas; 20 tests passed and browser verified both landings, match detail and 13 calendar events.
