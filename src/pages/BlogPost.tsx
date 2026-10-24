@@ -498,14 +498,14 @@ const BlogPost = () => {
           </>
         ) : post.slug === 'how-to-hire-a-safe-tour-guide-in-rio-de-janeiro-without-getting-scammed' ? (
           <>
-            <title>How to Hire a Safe Tour Guide in Rio de Janeiro Without Getting Scammed</title>
+            <title>{metaTitleOverride || 'How to Hire a Safe Tour Guide in Rio de Janeiro'}</title>
             <meta name="description" content="Learn how to hire a safe and professional tour guide in Rio de Janeiro and avoid scams. Get tips on verifying credentials, checking reviews, and choosing private tours for a secure and enjoyable trip with Tocorime Rio." />
             <meta name="keywords" content="Rio de Janeiro tour guide, safe tour guide Rio, avoid scams Rio, private tours Rio, professional guide Rio, travel safety Rio, Tocorime Rio, how to hire a guide Rio" />
             <meta name="robots" content="index, follow" />
             <link rel="canonical" href="https://tocorimerio.com/blog/how-to-hire-a-safe-tour-guide-in-rio-de-janeiro-without-getting-scammed" />
 
             <meta property="og:type" content="article" />
-            <meta property="og:title" content="How to Hire a Safe Tour Guide in Rio de Janeiro Without Getting Scammed" />
+            <meta property="og:title" content={metaTitleOverride || 'How to Hire a Safe Tour Guide in Rio de Janeiro'} />
             <meta property="og:description" content="Learn how to hire a safe and professional tour guide in Rio de Janeiro and avoid scams. Get tips on verifying credentials, checking reviews, and choosing private tours for a secure and enjoyable trip with Tocorime Rio." />
             <meta property="og:url" content="https://tocorimerio.com/blog/how-to-hire-a-safe-tour-guide-in-rio-de-janeiro-without-getting-scammed" />
             <meta property="og:image" content={ogImage} />
@@ -517,7 +517,7 @@ const BlogPost = () => {
             <meta property="og:site_name" content="Tocorime Rio" />
 
             <meta name="twitter:card" content="summary_large_image" />
-            <meta name="twitter:title" content="How to Hire a Safe Tour Guide in Rio de Janeiro Without Getting Scammed" />
+            <meta name="twitter:title" content={metaTitleOverride || 'How to Hire a Safe Tour Guide in Rio de Janeiro'} />
             <meta name="twitter:description" content="Learn how to hire a safe and professional tour guide in Rio de Janeiro and avoid scams. Get tips on verifying credentials, checking reviews, and choosing private tours for a secure and enjoyable trip with Tocorime Rio." />
             <meta name="twitter:image" content={ogImage} />
             {getHreflangLinks(`/blog/how-to-hire-a-safe-tour-guide-in-rio-de-janeiro-without-getting-scammed`).map((l) => (
