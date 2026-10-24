@@ -1,18 +1,45 @@
 import { isFootballReservation } from "../_shared/footballReservation.ts";
+import { createClient } from 'npm:@supabase/supabase-js@2';
+import { corsHeaders } from 'npm:@supabase/supabase-js@2/cors';
+import { z } from 'npm:zod@3';
+
+const EmailBody = z.object({
+  to: z.union([z.string().min(3).max(1000), z.array(z.string().email()).min(1).max(10)]),
+  customerName: z.string().max(255), customerEmail: z.string().email(),
+  customerPhone: z.string().nullish(), items: z.array(z.object({ tour: z.string(), quantity: z.number(), date: z.string() })).min(1).max(50),
+  total: z.number().finite().nonnegative(), isCustomerCopy: z.boolean().default(false),
+  selectedPeriod: z.string().nullish(), isPrivate: z.boolean().nullish(), replyTo: z.string().email().optional(),
+  provider: z.string().nullish(), tourTitle: z.string().nullish(), tourSlug: z.string().nullish(),
+  idempotencyKey: z.string().min(1).max(256).regex(/^[a-zA-Z0-9_-]+$/).optional(),
+});
+const escapeHtml = (value: string) => value.replace(/[&<>"']/g, char => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[char] || char));
 
 Deno.serve(async (req) => {
-  // CORS headers
-  const corsHeaders = {
-    "Access-Control-Allow-Origin": "*",
-    "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
-  };
 
   if (req.method === "OPTIONS") {
     return new Response(null, { headers: corsHeaders });
   }
 
   try {
-    const { to, customerName, customerEmail, customerPhone, items, total, isCustomerCopy = false, selectedPeriod, isPrivate, replyTo, provider, tourTitle, tourSlug } = await req.json()
+    const serviceKey = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY');
+    const url = Deno.env.get('SUPABASE_URL');
+    const bearer = req.headers.get('Authorization')?.replace(/^Bearer /, '');
+    if (!serviceKey || !url) throw new Error('Missing configuration');
+    if (bearer !== serviceKey) {
+      const db = createClient(url, serviceKey);
+      const { data } = await db.auth.getUser(bearer || '');
+      if (!data.user) return new Response(JSON.stringify({ error: 'Unauthorized' }), { status: 401, headers: corsHeaders });
+      const { data: admin } = await db.rpc('has_role', { _user_id: data.user.id, _role: 'admin' });
+      if (!admin) return new Response(JSON.stringify({ error: 'Forbidden' }), { status: 403, headers: corsHeaders });
+    }
+    const parsed = EmailBody.safeParse(await req.json().catch(() => null));
+    if (!parsed.success) return new Response(JSON.stringify({ error: 'Invalid email data' }), { status: 400, headers: corsHeaders });
+    const { to, total, isCustomerCopy, isPrivate, replyTo, provider, tourTitle, tourSlug, idempotencyKey } = parsed.data;
+    const customerName = escapeHtml(parsed.data.customerName);
+    const customerEmail = escapeHtml(parsed.data.customerEmail);
+    const customerPhone = escapeHtml(parsed.data.customerPhone || '');
+    const selectedPeriod = escapeHtml(parsed.data.selectedPeriod || '');
+    const items = parsed.data.items.map(item => ({ ...item, tour: escapeHtml(item.tour), date: escapeHtml(item.date) }));
     const hasFootball = isFootballReservation({ provider, selected_period: selectedPeriod, tour_title: tourTitle, tour_slug: tourSlug })
       || items.some((item: { tour?: string; title?: string; slug?: string; period?: string }) => isFootballReservation({ tour_title: item.tour || item.title, tour_slug: item.slug, selected_period: item.period }));
 
@@ -125,13 +152,14 @@ Deno.serve(async (req) => {
       return new Response(JSON.stringify({ error: 'No valid recipients', raw: to }), { status: 400, headers: corsHeaders });
     }
 
-    console.log('Sending email to:', recipients, 'isCustomerCopy:', isCustomerCopy);
+    console.log('Sending booking confirmation; customer copy:', isCustomerCopy);
 
     const response = await fetch('https://api.resend.com/emails', {
       method: 'POST',
       headers: {
         'Authorization': `Bearer ${Deno.env.get('RESEND_API_KEY')}`,
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        ...(idempotencyKey ? { 'Idempotency-Key': idempotencyKey } : {}),
       },
       body: JSON.stringify({
         from: 'Tocorime Rio <reservas@tocorimerio.com>',

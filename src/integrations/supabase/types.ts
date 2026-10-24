@@ -397,6 +397,68 @@ export type Database = {
         }
         Relationships: []
       }
+      paid_sale_email_config: {
+        Row: {
+          endpoint: string
+          id: boolean
+        }
+        Insert: {
+          endpoint: string
+          id?: boolean
+        }
+        Update: {
+          endpoint?: string
+          id?: boolean
+        }
+        Relationships: []
+      }
+      paid_sale_email_deliveries: {
+        Row: {
+          admin_sent_at: string | null
+          attempts: number
+          completed_at: string | null
+          created_at: string
+          customer_sent_at: string | null
+          last_error: string | null
+          locked_until: string | null
+          next_attempt_at: string
+          sale_id: string
+          token: string
+        }
+        Insert: {
+          admin_sent_at?: string | null
+          attempts?: number
+          completed_at?: string | null
+          created_at?: string
+          customer_sent_at?: string | null
+          last_error?: string | null
+          locked_until?: string | null
+          next_attempt_at?: string
+          sale_id: string
+          token?: string
+        }
+        Update: {
+          admin_sent_at?: string | null
+          attempts?: number
+          completed_at?: string | null
+          created_at?: string
+          customer_sent_at?: string | null
+          last_error?: string | null
+          locked_until?: string | null
+          next_attempt_at?: string
+          sale_id?: string
+          token?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "paid_sale_email_deliveries_sale_id_fkey"
+            columns: ["sale_id"]
+            isOneToOne: true
+            referencedRelation: "sales"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       profiles: {
         Row: {
           created_at: string
@@ -1015,9 +1077,39 @@ export type Database = {
     }
     Functions: {
       auto_archive_sales: { Args: never; Returns: undefined }
+      claim_paid_sale_email: {
+        Args: { _sale_id: string; _token: string }
+        Returns: {
+          admin_sent_at: string | null
+          attempts: number
+          completed_at: string | null
+          created_at: string
+          customer_sent_at: string | null
+          last_error: string | null
+          locked_until: string | null
+          next_attempt_at: string
+          sale_id: string
+          token: string
+        }[]
+        SetofOptions: {
+          from: "*"
+          to: "paid_sale_email_deliveries"
+          isOneToOne: false
+          isSetofReturn: true
+        }
+      }
+      complete_paid_sale_email: {
+        Args: { _sale_id: string }
+        Returns: undefined
+      }
       count_recent_bookings: {
         Args: { _days?: number; _tour_id: string }
         Returns: number
+      }
+      dispatch_pending_paid_sale_emails: { Args: never; Returns: undefined }
+      enqueue_paid_sale_email: {
+        Args: { _sale_id: string }
+        Returns: undefined
       }
       get_sales_by_ids: {
         Args: { _ids: string[] }
