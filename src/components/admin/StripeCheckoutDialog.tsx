@@ -91,6 +91,7 @@ export default function StripeCheckoutDialog({ open, onClose, tours }: Props) {
             period: "",
           }],
           sale_ids: saleId ? [saleId] : [],
+          customer: { email: customerEmail || undefined, whatsapp: customerPhone || undefined },
           apply_fee: addFee,
         },
       });
