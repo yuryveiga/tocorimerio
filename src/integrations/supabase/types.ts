@@ -459,6 +459,68 @@ export type Database = {
           },
         ]
       }
+      pending_stripe_check_config: {
+        Row: {
+          endpoint: string
+          id: boolean
+        }
+        Insert: {
+          endpoint: string
+          id?: boolean
+        }
+        Update: {
+          endpoint?: string
+          id?: boolean
+        }
+        Relationships: []
+      }
+      pending_stripe_checks: {
+        Row: {
+          attempts: number
+          completed_at: string | null
+          due_at: string
+          last_error: string | null
+          locked_until: string | null
+          next_attempt_at: string
+          outcome: string | null
+          sale_id: string
+          session_id: string
+          token: string
+        }
+        Insert: {
+          attempts?: number
+          completed_at?: string | null
+          due_at: string
+          last_error?: string | null
+          locked_until?: string | null
+          next_attempt_at: string
+          outcome?: string | null
+          sale_id: string
+          session_id: string
+          token?: string
+        }
+        Update: {
+          attempts?: number
+          completed_at?: string | null
+          due_at?: string
+          last_error?: string | null
+          locked_until?: string | null
+          next_attempt_at?: string
+          outcome?: string | null
+          sale_id?: string
+          session_id?: string
+          token?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "pending_stripe_checks_sale_id_fkey"
+            columns: ["sale_id"]
+            isOneToOne: true
+            referencedRelation: "sales"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       profiles: {
         Row: {
           created_at: string
@@ -1098,6 +1160,27 @@ export type Database = {
           isSetofReturn: true
         }
       }
+      claim_pending_stripe_check: {
+        Args: { _sale_id: string; _token: string }
+        Returns: {
+          attempts: number
+          completed_at: string | null
+          due_at: string
+          last_error: string | null
+          locked_until: string | null
+          next_attempt_at: string
+          outcome: string | null
+          sale_id: string
+          session_id: string
+          token: string
+        }[]
+        SetofOptions: {
+          from: "*"
+          to: "pending_stripe_checks"
+          isOneToOne: false
+          isSetofReturn: true
+        }
+      }
       complete_paid_sale_email: {
         Args: { _sale_id: string }
         Returns: undefined
@@ -1107,8 +1190,17 @@ export type Database = {
         Returns: number
       }
       dispatch_pending_paid_sale_emails: { Args: never; Returns: undefined }
+      dispatch_pending_stripe_checks: { Args: never; Returns: undefined }
       enqueue_paid_sale_email: {
         Args: { _sale_id: string }
+        Returns: undefined
+      }
+      enqueue_pending_stripe_check: {
+        Args: {
+          _customer_email: string
+          _sale_ids: string[]
+          _session_id: string
+        }
         Returns: undefined
       }
       get_sales_by_ids: {

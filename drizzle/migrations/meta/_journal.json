@@ -15,6 +15,13 @@
       "when": 1792867758311,
       "tag": "0001_paid_sale_email_delivery",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1793247667569,
+      "tag": "0002_pending_stripe_checks",
+      "breakpoints": true
     }
   ]
 }
