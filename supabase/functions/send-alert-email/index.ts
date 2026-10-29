@@ -1,4 +1,4 @@
-import { isFootballReservation } from "../_shared/footballReservation.ts";
+import { formatReservationAmount, confirmationRecipientName } from "../_shared/reservationPresentation.ts";
 import { createClient } from 'npm:@supabase/supabase-js@2';
 import { corsHeaders } from 'npm:@supabase/supabase-js@2/cors';
 import { z } from 'npm:zod@3';
@@ -8,6 +8,7 @@ const EmailBody = z.object({
   customerName: z.string().max(255), customerEmail: z.string().email(),
   customerPhone: z.string().nullish(), items: z.array(z.object({ tour: z.string(), quantity: z.number(), date: z.string() })).min(1).max(50),
   total: z.number().finite().nonnegative(), isCustomerCopy: z.boolean().default(false),
+  currency: z.string().trim().regex(/^[A-Za-z]{3}$/).nullish(),
   selectedPeriod: z.string().nullish(), isPrivate: z.boolean().nullish(), replyTo: z.string().email().optional(),
   provider: z.string().nullish(), tourTitle: z.string().nullish(), tourSlug: z.string().nullish(),
   idempotencyKey: z.string().min(1).max(256).regex(/^[a-zA-Z0-9_-]+$/).optional(),
@@ -34,14 +35,13 @@ Deno.serve(async (req) => {
     }
     const parsed = EmailBody.safeParse(await req.json().catch(() => null));
     if (!parsed.success) return new Response(JSON.stringify({ error: 'Invalid email data' }), { status: 400, headers: corsHeaders });
-    const { to, total, isCustomerCopy, isPrivate, replyTo, provider, tourTitle, tourSlug, idempotencyKey } = parsed.data;
+    const { to, total, currency, isCustomerCopy, replyTo, idempotencyKey } = parsed.data;
     const customerName = escapeHtml(parsed.data.customerName);
     const customerEmail = escapeHtml(parsed.data.customerEmail);
     const customerPhone = escapeHtml(parsed.data.customerPhone || '');
-    const selectedPeriod = escapeHtml(parsed.data.selectedPeriod || '');
+    const recipientName = escapeHtml(confirmationRecipientName(parsed.data.customerName, isCustomerCopy));
+    const formattedTotal = escapeHtml(formatReservationAmount(total, currency));
     const items = parsed.data.items.map(item => ({ ...item, tour: escapeHtml(item.tour), date: escapeHtml(item.date) }));
-    const hasFootball = isFootballReservation({ provider, selected_period: selectedPeriod, tour_title: tourTitle, tour_slug: tourSlug })
-      || items.some((item: { tour?: string; title?: string; slug?: string; period?: string }) => isFootballReservation({ tour_title: item.tour || item.title, tour_slug: item.slug, selected_period: item.period }));
 
     if (!to) {
       return new Response(JSON.stringify({ error: 'Email não configurado' }), { status: 400, headers: corsHeaders })
@@ -86,7 +86,7 @@ Deno.serve(async (req) => {
             <p>${headerTitle}</p>
           </div>
           <div class="content">
-            <p>Olá / Hello, <strong>${customerName}</strong>,</p>
+            <p>Olá / Hello, <strong>${recipientName}</strong>,</p>
             <p>
               ${isCustomerCopy 
                 ? 'Temos o prazer de informar que sua reserva foi confirmada com sucesso! Estamos ansiosos para recebê-lo. <br> <span class="translation">We are pleased to inform you that your booking has been successfully confirmed! We look forward to welcoming you.</span>' 
@@ -99,8 +99,6 @@ Deno.serve(async (req) => {
                 <p><strong>Nome / Name:</strong> ${customerName}</p>
                 <p><strong>E-mail:</strong> ${customerEmail}</p>
                 <p><strong>WhatsApp:</strong> ${customerPhone || 'Não informado / Not provided'}</p>
-                ${selectedPeriod ? `<p><strong>Período / Period:</strong> ${selectedPeriod}</p>` : ''}
-                ${hasFootball ? '' : `<p><strong>Tipo / Type:</strong> ${isPrivate ? 'Privativo / Private' : 'Grupo Aberto / Open Group'}</p>`}
               </div>
             </div>
 
@@ -118,7 +116,7 @@ Deno.serve(async (req) => {
 
             <div class="total-box">
               <span class="total-label">Valor Pago / Total Paid</span>
-              <span class="total-value">R$ ${total.toFixed(2)}</span>
+              <span class="total-value">${formattedTotal}</span>
             </div>
 
             ${isCustomerCopy ? `

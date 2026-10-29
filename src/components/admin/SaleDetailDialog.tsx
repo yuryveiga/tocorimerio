@@ -4,6 +4,7 @@ import { LovableSale } from "@/integrations/lovable/client";
 import { Phone, Mail, Calendar, Users, MapPin, Clock, DollarSign, X, Link2, Copy, ExternalLink } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { isFootballReservation } from "@/lib/footballReservation";
+import { formatReservationAmount } from "@/lib/reservationPresentation";
 
 interface SaleDetailDialogProps {
   sale: LovableSale | null;
@@ -20,9 +21,6 @@ const SaleDetailDialog = ({ sale, open, onClose }: SaleDetailDialogProps) => {
     navigator.clipboard.writeText(sale.payment_link);
     toast({ title: "Link copiado!" });
   };
-
-  const formatPrice = (price: number) =>
-    new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL" }).format(price);
 
   const formatDate = (date: string) => {
     const parts = date.split("-");
@@ -123,7 +121,7 @@ const SaleDetailDialog = ({ sale, open, onClose }: SaleDetailDialogProps) => {
                 <DollarSign className="w-4 h-4 text-primary shrink-0" />
                 <div>
                   <p className="text-[10px] text-muted-foreground uppercase">Total</p>
-                  <p className="text-sm font-bold text-primary">{formatPrice(sale.total_price || 0)}</p>
+                  <p className="text-sm font-bold text-primary">{formatReservationAmount(sale.total_price || 0, sale.currency)}</p>
                 </div>
               </div>
             </div>
@@ -145,7 +143,7 @@ const SaleDetailDialog = ({ sale, open, onClose }: SaleDetailDialogProps) => {
                   <Button size="sm" variant="outline" className="flex-1" onClick={copyPaymentLink}>
                     <Copy className="w-3.5 h-3.5 mr-1.5" /> Copiar
                   </Button>
-                  <Button size="sm" className="flex-1" onClick={() => window.open(sale.payment_link!, "_blank")}>
+                  <Button size="sm" className="flex-1" onClick={() => { if (sale.payment_link) window.open(sale.payment_link, "_blank"); }}>
                     <ExternalLink className="w-3.5 h-3.5 mr-1.5" /> Abrir
                   </Button>
                 </div>

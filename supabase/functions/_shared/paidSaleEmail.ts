@@ -1,3 +1,5 @@
+import { normalizeReservationCurrency } from './reservationPresentation.ts';
+
 export interface PaidSale {
   id: string;
   is_paid: boolean | null;
@@ -11,6 +13,7 @@ export interface PaidSale {
   provider?: string | null;
   quantity?: number | null;
   total_price?: number | null;
+  currency?: string | null;
   selected_date?: string | null;
   selected_period?: string | null;
   is_private?: boolean | null;
@@ -28,8 +31,8 @@ export function paidEmailBody(sale: PaidSale, to: string, audience: 'admin' | 'c
   return {
     to, customerName: sale.customer_name, customerEmail: sale.customer_email,
     customerPhone: sale.customer_phone ?? '', total: Number(sale.total_price ?? 0),
-    isCustomerCopy: audience === 'customer', selectedPeriod: sale.selected_period ?? undefined,
-    isPrivate: sale.is_private ?? false, provider: sale.provider ?? undefined,
+    currency: normalizeReservationCurrency(sale.currency),
+    isCustomerCopy: audience === 'customer', provider: sale.provider ?? undefined,
     tourTitle: sale.tour_title ?? undefined, tourSlug: sale.tour_slug ?? undefined,
     idempotencyKey: paidEmailKey(sale.id, audience),
     ...(audience === 'customer' ? { replyTo: 'tocorimeriotours@gmail.com' } : {}),
