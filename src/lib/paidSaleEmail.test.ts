@@ -14,4 +14,9 @@ describe('paid sale confirmations', () => {
   it('keeps the buyer and actual amount in the confirmation', () => {
     expect(paidEmailBody(sale, sale.customer_email, 'customer')).toMatchObject({ to: 'test@example.com', total: 900, isCustomerCopy: true, items: [{ quantity: 3 }] });
   });
+  it.each(['BRL', 'USD', 'EUR'])('passes the recorded %s payment currency to both audiences', currency => {
+    for (const audience of ['admin', 'customer'] as const) {
+      expect(paidEmailBody({ ...sale, currency, total_price: 147.25 }, 'test@example.com', audience)).toMatchObject({ currency, total: 147.25 });
+    }
+  });
 });
