@@ -1,5 +1,5 @@
 # Roadmap
-- [ ] Show recorded payment currency in emails and admin reservation details; remove period/type from emails and greet administrators separately from buyers; verify without resending customer confirmations.
+- [x] Show recorded payment currency in emails and admin reservation details; remove period/type from emails and greet administrators separately from buyers. Deployed email functions; 29 tests passed, six complete email renders checked without sending, real authenticated USD reservation detail verified.
 - [x] Automate paid-sale confirmation for all sources: real trigger test accepted admin and buyer copies, repeated payment did not resend, retry job stopped after drain; 20 tests passed and authenticated sales panel verified. Temporary test removed.
 - [x] Shorten English search titles for the 50 supplied blog URLs, preserving article headings and content; verify saved lengths and browser titles. Static published heads update on next publish.
 - [x] Strengthen the three requested blog keyword targets with practical planning sections, localized headings, corrected beach editorial fragments and direct calendar links; verified saved data and five preview page/language combinations, preserving canonicals and bookings.
