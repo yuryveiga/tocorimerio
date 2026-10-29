@@ -158,12 +158,23 @@ serve(async (req) => {
     // Register only server-created Stripe sessions; due time is based on the pending sale's creation.
     const databaseUrl = Deno.env.get('SUPABASE_URL');
     const serviceKey = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY');
-    if (databaseUrl && serviceKey && Array.isArray(sale_ids) && sale_ids.length && customer?.email) {
+    if (databaseUrl && serviceKey && Array.isArray(sale_ids) && sale_ids.length) {
       const db = createClient(databaseUrl, serviceKey);
-      const { error: scheduleError } = await db.rpc('enqueue_pending_stripe_check', {
-        _session_id: session.id, _sale_ids: sale_ids, _customer_email: customer.email,
-      });
-      if (scheduleError) console.error('Could not schedule delayed Stripe check:', scheduleError.code);
+      let verifiedAdmin = false;
+      const bearer = req.headers.get('Authorization')?.replace(/^Bearer /, '');
+      if (bearer) {
+        const { data: user } = await db.auth.getUser(bearer);
+        if (user.user) {
+          const { data: admin } = await db.rpc('has_role', { _user_id: user.user.id, _role: 'admin' });
+          verifiedAdmin = admin === true;
+        }
+      }
+      if (customer?.email || verifiedAdmin) {
+        const { error: scheduleError } = await db.rpc('enqueue_pending_stripe_check', {
+          _session_id: session.id, _sale_ids: sale_ids, _customer_email: verifiedAdmin ? null : customer.email,
+        });
+        if (scheduleError) console.error('Could not schedule delayed Stripe check:', scheduleError.code);
+      }
     }
 
     return new Response(
