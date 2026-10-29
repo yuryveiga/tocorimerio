@@ -1,4 +1,5 @@
 # Architecture rules
+- Schedule pending Stripe reconciliation from server-created checkout session IDs in a service-only capability queue; derive the 15-minute deadline from sale creation, stop scheduling after drain, and reuse `sync-stripe` for existing paid-sale side effects.
 - Share recorded reservation amount formatting through `supabase/functions/_shared/reservationPresentation.ts`, re-exported for the frontend; email and admin details must format stored denominations without exchange-rate conversion.
 - Route all paid-sale confirmations through the database-triggered `process-paid-sale-email` worker, preserving Resend templates; store per-audience acceptance and stable provider idempotency keys, and arm retries only while pending deliveries exist so partner inserts and Stripe updates share one low-cost path.
 - Derive generic game page and static route metadata through `src/lib/matchSeo.js`; sharing registered teams, venue and Rio-local date prevents incorrect stadium labels and generic published titles.
