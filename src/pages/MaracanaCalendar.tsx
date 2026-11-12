@@ -9,6 +9,7 @@ import { format, startOfMonth, endOfMonth, eachDayOfInterval, getDay, isSameDay,
 import { ptBR, enUS, es } from "date-fns/locale";
 import { getMatchDateInRio, isMatchOnDay } from "@/lib/dateUtils";
 import { getMatchEventStatus } from "@/lib/matchEventStatus";
+import { maracanaCalendarSeo } from "@/lib/maracanaCalendarSeo.js";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { MapPin, ArrowRight, Bus, Ticket, UserCheck, Clock, Camera, Users, ChevronLeft, ChevronRight, CalendarDays } from "lucide-react";
@@ -83,26 +84,16 @@ const MaracanaCalendar = () => {
     if (hasTeam('flamengo')) clubBits.push('Flamengo');
     if (hasTeam('fluminense')) clubBits.push('Fluminense');
 
-    const baseTitle = language === 'pt'
-      ? 'Ingressos Maracanã 2026: Calendário de Jogos, Preços e Tour'
-      : language === 'es'
-        ? 'Entradas Maracanã 2026: Calendario de Partidos, Precios y Tour'
-        : 'Maracanã Tickets 2026: Match Calendar, Prices & Guided Tour';
-
-    // Reforço de clube no título quando há jogos de Fla/Flu na lista
-    const title = clubBits.length
-      ? (language === 'pt'
-          ? 'Próximos Jogos no Maracanã: Programação 2026 | Tocorime'
-          : language === 'es'
-            ? `Entradas Maracanã 2026: Partidos de ${clubBits.join(' y ')}, Precios y Tour`
-            : `Maracanã Tickets 2026: ${clubBits.join(' & ')} Fixtures, Prices & Tour`)
-      : baseTitle;
-
-    const description = language === 'pt'
-      ? 'Veja a programação do Maracanã e os próximos jogos confirmados, com datas, horários e preços. Consulte o próximo jogo no Maracanã e reserve online.'
-      : language === 'es'
-        ? `Entradas para Maracanã${clubBits.length ? ` (${clubBits.join(' y ')})` : ''} con calendario actualizado, precios y sectores. Entrada oficial, transporte del hotel y guía bilingüe incluidos.`
-        : `Maracanã tickets${clubBits.length ? ` for ${clubBits.join(' & ')}` : ''} with the updated fixture calendar, prices and seating sectors. Official ticket, hotel transport and bilingual guide included.`;
+    // Keep schedule/planning snippets stable while match data loads or changes.
+    const snippet = language === 'pt' ? maracanaCalendarSeo.pt : maracanaCalendarSeo.en;
+    const title = language === 'es'
+      ? (clubBits.length
+          ? `Entradas Maracanã 2026: Partidos de ${clubBits.join(' y ')}, Precios y Tour`
+          : 'Entradas Maracanã 2026: Calendario de Partidos, Precios y Tour')
+      : snippet.title;
+    const description = language === 'es'
+      ? `Entradas para Maracanã${clubBits.length ? ` (${clubBits.join(' y ')})` : ''} con calendario actualizado, precios y sectores. Entrada oficial, transporte del hotel y guía bilingüe incluidos.`
+      : snippet.description;
 
     const keywords = [
       'maracana tickets', 'maracanã tickets', 'maracana stadium tickets', 'buy maracana tickets',

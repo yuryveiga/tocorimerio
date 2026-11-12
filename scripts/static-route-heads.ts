@@ -6,6 +6,7 @@ import path from "node:path";
 import type { Plugin } from "vite";
 import { VASCO_BOCA_PATH, vascoBocaCopy } from "../src/lib/vascoBocaLanding";
 import { FLAMENGO_ESTUDIANTES_PATH, flamengoEstudiantesCopy } from "../src/lib/flamengoEstudiantesLanding";
+import { maracanaCalendarSeo } from "../src/lib/maracanaCalendarSeo.js";
 
 const SITE = "https://tocorimerio.com";
 
@@ -37,13 +38,12 @@ const ROUTES: RouteHead[] = [
   },
   {
     path: "/maracana-calendario",
-    lang: "pt-BR",
-    title: "Próximos Jogos no Maracanã: Programação e Ingressos 2026 | Tocorime",
-    description:
-      "Veja a programação do Maracanã e os próximos jogos confirmados, com datas, horários e preços. Consulte o próximo jogo no Maracanã e reserve online.",
-    h1: "Próximos Jogos no Maracanã: Programação e Ingressos",
+    lang: "en",
+    title: maracanaCalendarSeo.en.title,
+    description: maracanaCalendarSeo.en.description,
+    h1: "Maracanã Tickets & Match Calendar",
     intro:
-      "Confira os próximos jogos no Maracanã, incluindo partidas do Flamengo e do Fluminense, com datas, horários e preços atualizados. Reserve seu ingresso oficial com transporte e guia bilíngue.",
+      "Check upcoming Maracanã matches, dates and kick-off times. Compare matchday packages with official tickets, hotel transport and a guide, and plan your visit.",
   },
   {
     path: "/football-experiences-in-rio-de-janeiro",
