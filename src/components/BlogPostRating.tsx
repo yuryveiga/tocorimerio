@@ -78,23 +78,18 @@ export function BlogPostRating({ postId }: Props) {
 
   useEffect(() => {
     let cancelled = false;
+    // Submission memory is local; never expose other visitors' identifiers.
+    try {
+      setSubmitted(localStorage.getItem(`blog_rating_submitted:${postId}`) === 'true');
+    } catch { setSubmitted(false); }
     (async () => {
       const { data } = await supabase
-        .from("blog_post_ratings")
-        .select("stars, visitor_key")
-        .eq("post_id", postId);
+        .rpc("get_blog_rating_summary", { _post_id: postId });
       if (cancelled || !data) return;
-      if (data.length) {
-        const sum = data.reduce((s, r: any) => s + r.stars, 0);
-        setAvg(sum / data.length);
-        setCount(data.length);
-      } else {
-        setAvg(null);
-        setCount(0);
-      }
-      if (data.some((r: any) => r.visitor_key === visitorKey)) {
-        setSubmitted(true);
-      }
+      const summary = data[0];
+      const ratingCount = Number(summary?.rating_count || 0);
+      setAvg(ratingCount ? Number(summary.average_stars) : null);
+      setCount(ratingCount);
     })();
     return () => { cancelled = true; };
   }, [postId, visitorKey]);
@@ -116,6 +111,7 @@ export function BlogPostRating({ postId }: Props) {
     if (error) {
       if (error.code === "23505") {
         setSubmitted(true);
+        try { localStorage.setItem(`blog_rating_submitted:${postId}`, 'true'); } catch {}
         toast.info(t.already);
       } else {
         toast.error(t.error);
@@ -123,6 +119,7 @@ export function BlogPostRating({ postId }: Props) {
       return;
     }
     setSubmitted(true);
+    try { localStorage.setItem(`blog_rating_submitted:${postId}`, 'true'); } catch {}
     setCount((c) => c + 1);
     setAvg((prev) => {
       const newCount = count + 1;

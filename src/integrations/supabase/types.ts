@@ -1203,6 +1203,22 @@ export type Database = {
         }
         Returns: undefined
       }
+      get_blog_rating_summary: {
+        Args: { _post_id: string }
+        Returns: {
+          average_stars: number
+          rating_count: number
+        }[]
+      }
+      get_public_match_inventory: {
+        Args: { _match_ids: string[] }
+        Returns: {
+          available_spots: number
+          match_id: string
+          max_per_purchase: number
+          sold_count_local: number
+        }[]
+      }
       get_sales_by_ids: {
         Args: { _ids: string[] }
         Returns: {

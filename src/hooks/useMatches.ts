@@ -86,9 +86,7 @@ export function useMatches() {
 
       // 3) Buscar overrides locais de estoque (Tocorime controla seu próprio inventário)
       const { data: overridesData } = await localSupabase
-        .from('match_overrides')
-        .select('match_id, available_spots, max_per_purchase, sold_count_local')
-        .in('match_id', matchIds);
+        .rpc('get_public_match_inventory', { _match_ids: matchIds });
 
       const overridesByMatch: Record<string, any> = {};
       (overridesData || []).forEach((o: any) => {

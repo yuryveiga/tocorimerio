@@ -108,11 +108,9 @@ export default function MatchDetail() {
       };
 
       // Apply local stock override (we control our own inventory)
-      const { data: override } = await localSupabase
-        .from("match_overrides")
-        .select("available_spots, max_per_purchase, sold_count_local")
-        .eq("match_id", data.id)
-        .maybeSingle();
+      const { data: inventory } = await localSupabase
+        .rpc("get_public_match_inventory", { _match_ids: [data.id] });
+      const override = inventory?.[0];
 
       if (override && override.available_spots !== null && override.available_spots !== undefined) {
         const localSold = override.sold_count_local || 0;

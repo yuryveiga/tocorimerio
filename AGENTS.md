@@ -1,4 +1,8 @@
 # Architecture rules
+- Public match inventory uses a bounded RPC exposing only availability fields; raw local overrides and administrative metadata remain admin-only.
+- Public blog ratings use an aggregate-only RPC; raw feedback and visitor identifiers are admin-only, with local submission memory and database uniqueness preventing repeated ratings.
+- Public sales inserts must start unpaid, uncancelled, unarchived and without delivery/payment-link fields; payment workers and verified admins retain privileged writes.
+- Anonymous visit records are written by the existing service-side tracking function, not direct table inserts; public catalogue reads honor active/visible flags and short-link administration requires the admin role.
 - Share English/Portuguese calendar snippets through `src/lib/maracanaCalendarSeo.js` and preserve the generated calendar HTML during SPA fallback; this prevents loading-state and build-step metadata drift.
 - Schedule pending Stripe reconciliation from server-created checkout session IDs in a service-only capability queue; derive the 15-minute deadline from sale creation, stop scheduling after drain, and reuse `sync-stripe` for existing paid-sale side effects.
 - Share recorded reservation amount formatting through `supabase/functions/_shared/reservationPresentation.ts`, re-exported for the frontend; email and admin details must format stored denominations without exchange-rate conversion.
