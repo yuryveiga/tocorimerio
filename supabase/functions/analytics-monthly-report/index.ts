@@ -1,3 +1,4 @@
+import { isPrivilegedCaller } from "../_shared/privilegedCaller.ts";
 
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 
@@ -31,6 +32,8 @@ const processMetrics = (visits: any[], sales: any[]) => {
   return { totalVisits, uniqueVisitors, totalSales, conversionRate, topPages, topCountries };
 };
 
+const escHtml = (v: unknown) => String(v ?? "").slice(0, 300).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#39;");
+
 Deno.serve(async (req) => {
   if (req.method === "OPTIONS") {
     return new Response(null, { headers: corsHeaders });
@@ -41,6 +44,7 @@ Deno.serve(async (req) => {
     const serviceRoleKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY") ?? "";
     const resendApiKey = Deno.env.get("RESEND_API_KEY") ?? "";
     const supabase = createClient(supabaseUrl, serviceRoleKey);
+    if (!(await isPrivilegedCaller(req, supabase))) return new Response(JSON.stringify({ error: "Unauthorized" }), { status: 401, headers: { ...corsHeaders, "Content-Type": "application/json" } });
 
     const now = new Date();
     const firstDayCurrentMonth = new Date(now.getFullYear(), now.getMonth(), 1);
@@ -155,13 +159,13 @@ Deno.serve(async (req) => {
               <div>
                 <h3 style="font-size: 14px; margin-bottom: 8px;">Top 5 Páginas</h3>
                 <ul style="padding-left: 16px; margin: 0; font-size: 13px;">
-                  ${metricsCurrent.topPages.map(([p, v]) => `<li>${p} (${v})</li>`).join('')}
+                  ${metricsCurrent.topPages.map(([p, v]) => `<li>${escHtml(p)} (${v})</li>`).join('')}
                 </ul>
               </div>
               <div>
                 <h3 style="font-size: 14px; margin-bottom: 8px;">Top 5 Países</h3>
                 <ul style="padding-left: 16px; margin: 0; font-size: 13px;">
-                  ${metricsCurrent.topCountries.map(([c, v]) => `<li>${c} (${v})</li>`).join('')}
+                  ${metricsCurrent.topCountries.map(([c, v]) => `<li>${escHtml(c)} (${v})</li>`).join('')}
                 </ul>
               </div>
             </div>

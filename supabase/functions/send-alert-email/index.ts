@@ -146,7 +146,7 @@ Deno.serve(async (req) => {
       .filter((e: string) => emailRegex.test(e));
 
     if (recipients.length === 0) {
-      console.error('No valid recipients after parsing:', to);
+      console.error('No valid recipients after parsing');
       return new Response(JSON.stringify({ error: 'No valid recipients', raw: to }), { status: 400, headers: corsHeaders });
     }
 

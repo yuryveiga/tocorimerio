@@ -165,7 +165,11 @@ serve(async (req) => {
       }
     }
 
-    const origin = req.headers.get("origin") || req.headers.get("referer")?.replace(/\/$/, "") || "https://tocorimerio.lovable.app";
+    // Return only to our own sites; unknown origins fall back to the primary domain.
+    const ALLOWED_ORIGINS = ["https://tocorimerio.com", "https://www.tocorimerio.com", "https://tocorimerio.lovable.app", "https://id-preview--c63d0df1-ee90-451c-af57-a8e7f8701e37.lovable.app", "http://localhost:8080"];
+    let requested = req.headers.get("origin") || "";
+    if (!requested) { try { requested = new URL(req.headers.get("referer") || "").origin; } catch { requested = ""; } }
+    const origin = ALLOWED_ORIGINS.includes(requested) ? requested : "https://tocorimerio.com";
 
     console.log(`Processing checkout in ${targetCurrency} with rate ${rate}`);
     

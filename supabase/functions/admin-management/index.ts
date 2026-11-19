@@ -48,7 +48,7 @@ Deno.serve(async (req) => {
     }
 
     const { action, email, password, role } = await req.json();
-    console.log("Action:", action, "Email:", email);
+    console.log("Action:", action);
 
     if (action === "create_user") {
       if (!email || !password) {
@@ -92,14 +92,14 @@ Deno.serve(async (req) => {
 
       if (!targetUser) {
         // User exists in profiles but not in Auth — auto-create in Auth
-        console.log("User not in Auth, auto-creating:", email);
+        console.log("User not in Auth, auto-creating");
         const { data: newUser, error: createError } = await adminClient.auth.admin.createUser({
           email,
           password,
           email_confirm: true,
         });
         if (createError) throw createError;
-        console.log("Auto-created user in Auth and set password for:", email);
+        console.log("Auto-created user in Auth and set password");
         return new Response(JSON.stringify({ success: true, auto_created: true }), { headers: { ...corsHeaders, "Content-Type": "application/json" } });
       }
 
@@ -109,7 +109,7 @@ Deno.serve(async (req) => {
 
       if (updateError) throw updateError;
 
-      console.log("Password updated for:", email);
+      console.log("Password updated");
       return new Response(JSON.stringify({ success: true }), { headers: { ...corsHeaders, "Content-Type": "application/json" } });
     }
 

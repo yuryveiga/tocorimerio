@@ -57,6 +57,13 @@
       "when": 1795104331261,
       "tag": "0007_checkout_session_scoped_sale_access",
       "breakpoints": true
+    },
+    {
+      "idx": 8,
+      "version": "7",
+      "when": 1795104788244,
+      "tag": "0008_bound_public_booking_counts",
+      "breakpoints": true
     }
   ]
 }

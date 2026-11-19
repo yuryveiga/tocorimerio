@@ -44,7 +44,12 @@ export const EmailLeadsPanel = () => {
     const rows = [["email", "nome", "idioma", "origem", "data"], ...leads.map((l) => [
       l.email, l.name || "", l.language || "", l.source_slug || "", l.created_at,
     ])];
-    const csv = rows.map((r) => r.map((c) => `"${String(c).replace(/"/g, '""')}"`).join(",")).join("\n");
+    const csv = rows.map((r) => r.map((c) => {
+      // Neutralise spreadsheet formulas planted in visitor-supplied fields.
+      const v = String(c ?? "");
+      const safe = /^[=+\-@\t\r]/.test(v) ? `'${v}` : v;
+      return `"${safe.replace(/"/g, '""')}"`;
+    }).join(",")).join("\n");
     const url = URL.createObjectURL(new Blob([csv], { type: "text/csv;charset=utf-8;" }));
     const a = document.createElement("a");
     a.href = url;
