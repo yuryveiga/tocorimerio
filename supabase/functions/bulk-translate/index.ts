@@ -112,6 +112,16 @@ function serve() {
     }
 
     const supabase = createClient(SUPABASE_URL, SERVICE_ROLE_KEY);
+    const bearer = req.headers.get("Authorization")?.replace(/^Bearer\s+/i, "") || "";
+    const { data: userData } = bearer ? await supabase.auth.getUser(bearer) : { data: { user: null } };
+    const { data: isAdmin } = userData?.user
+      ? await supabase.rpc("has_role", { _user_id: userData.user.id, _role: "admin" })
+      : { data: false };
+    if (isAdmin !== true) {
+      return new Response(JSON.stringify({ error: "Unauthorized" }), {
+        status: 401, headers: { ...corsHeaders, "Content-Type": "application/json" },
+      });
+    }
 
     const stream = new ReadableStream({
       async start(controller) {

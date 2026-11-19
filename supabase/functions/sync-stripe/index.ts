@@ -198,6 +198,27 @@ serve(async (req) => {
       }
     }
 
+    // Service callers and verified admins may run broad syncs; anyone else may only
+    // ask for one Stripe checkout session, which Stripe itself confirms as paid.
+    const bearer = req.headers.get("Authorization")?.replace(/^Bearer\s+/i, "") || "";
+    const cronSecrets = [Deno.env.get("LOVABLE_CRON_SECRET"), Deno.env.get("LOVABLE_CRON_SECRET_PREVIOUS")].filter(Boolean);
+    let privileged = bearer === supabaseServiceKey || cronSecrets.includes(bearer);
+    if (!privileged && bearer) {
+      const { data: userData } = await supabase.auth.getUser(bearer);
+      if (userData?.user) {
+        const { data: isAdmin } = await supabase.rpc("has_role", { _user_id: userData.user.id, _role: "admin" });
+        privileged = isAdmin === true;
+      }
+    }
+    if (!privileged) {
+      explicitSaleIds = null;
+      if (!targetSessionId || !/^cs_[A-Za-z0-9_]{10,250}$/.test(targetSessionId)) {
+        return new Response(JSON.stringify({ error: "Unauthorized" }), {
+          status: 401, headers: { ...corsHeaders, "Content-Type": "application/json" },
+        });
+      }
+    }
+
     let sessionsList: any[] = [];
 
     let syncedCount = 0;
@@ -298,11 +319,7 @@ serve(async (req) => {
     }
 
     return new Response(
-      JSON.stringify({ 
-        success: true, 
-        syncedCount, 
-        syncedSaleIds 
-      }),
+      JSON.stringify(privileged ? { success: true, syncedCount, syncedSaleIds } : { success: true }),
       { 
         headers: { ...corsHeaders, "Content-Type": "application/json" },
         status: 200 

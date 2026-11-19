@@ -37,6 +37,48 @@ async function getExchangeRates() {
   }
 }
 
+const PARTNER_URL = "https://mwxbskzggzznxvkwgrnz.supabase.co";
+const PARTNER_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im13eGJza3pnZ3p6bnh2a3dncm56Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzMzNjE5OTUsImV4cCI6MjA4ODkzNzk5NX0.EFfaaN79uifOMgFdIZlQ5C8c-HQH-YodNGWf0MEcf9o";
+const num = (v: unknown) => { const n = Number(v); return Number.isFinite(n) ? n : 0; };
+
+// Per-person BRL prices the public catalogue allows for this tour and group size.
+function allowedTourPrices(tour: any, quantity: number): number[] {
+  let base = 0;
+  const baseP = num(tour.price);
+  if (tour.pricing_model === "tiered") {
+    const tiers = [...(tour.tiered_pricing_json || [])].sort((a: any, b: any) => num(a.min_people) - num(b.min_people));
+    const hit = tiers.find((t: any) => quantity >= num(t.min_people) && quantity <= (t.max_people == null ? Infinity : num(t.max_people)));
+    base = num((hit || tiers[tiers.length - 1])?.price_per_person);
+  } else if (tour.pricing_model === "dynamic") {
+    base = quantity === 1 ? num(tour.price_1_person) : quantity === 2 ? num(tour.price_2_people)
+      : quantity <= 6 ? num(tour.price_3_6_people) : num(tour.price_7_19_people);
+  } else if (tour.pricing_model === "group") {
+    base = baseP / quantity;
+  } else if (tour.pricing_model === "custom") {
+    return [];
+  } else {
+    base = baseP;
+  }
+  const options = Array.isArray(tour.custom_options_json) && tour.use_custom_options ? tour.custom_options_json : [];
+  const prices = options.length ? options.map((o: any) => base + num(o.price)) : [base];
+  return prices.filter((p: number) => p > 0);
+}
+
+async function allowedMatchPrices(matchId: string): Promise<number[]> {
+  if (!/^[0-9a-f-]{36}$/i.test(matchId)) return [];
+  const h = { apikey: PARTNER_ANON_KEY, Authorization: `Bearer ${PARTNER_ANON_KEY}` };
+  const [mRes, pRes] = await Promise.all([
+    fetch(`${PARTNER_URL}/rest/v1/matches?id=eq.${matchId}&select=*`, { headers: h }),
+    fetch(`${PARTNER_URL}/rest/v1/match_packages?match_id=eq.${matchId}&is_active=eq.true&select=price_brl`, { headers: h }),
+  ]);
+  if (!mRes.ok) return [];
+  const [m] = await mRes.json();
+  if (!m) return [];
+  const packages = pRes.ok ? (await pRes.json()).map((x: any) => num(x?.price_brl)) : [];
+  const sectors = Array.isArray(m.sectors_json) ? m.sectors_json.map((x: any) => num(x?.price)) : [];
+  return [num(m.price), num(m.price_premium), ...sectors, ...packages].filter((p) => p > 0);
+}
+
 serve(async (req) => {
   if (req.method === "OPTIONS") {
     return new Response("ok", { headers: corsHeaders });
@@ -44,7 +86,10 @@ serve(async (req) => {
 
   try {
     const { items, sale_ids, customer, currency = "brl", apply_fee = false } = await req.json();
-    const targetCurrency = currency.toLowerCase();
+    const targetCurrency = String(currency).toLowerCase();
+    if (!['brl', 'usd', 'eur', 'cny'].includes(targetCurrency)) {
+      return new Response(JSON.stringify({ error: "Moeda inválida" }), { status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" } });
+    }
 
     const stripeKey = Deno.env.get("STRIPE_SECRET_KEY");
     if (!stripeKey) {
@@ -60,6 +105,49 @@ serve(async (req) => {
         JSON.stringify({ error: "Carrinho vazio" }),
         { status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" } }
       );
+    }
+
+    const databaseUrl = Deno.env.get('SUPABASE_URL')!;
+    const serviceKey = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!;
+    const db = createClient(databaseUrl, serviceKey);
+    let verifiedAdmin = false;
+    const bearer = req.headers.get('Authorization')?.replace(/^Bearer /, '');
+    if (bearer) {
+      const { data: user } = await db.auth.getUser(bearer);
+      if (user?.user) {
+        const { data: admin } = await db.rpc('has_role', { _user_id: user.user.id, _role: 'admin' });
+        verifiedAdmin = admin === true;
+      }
+    }
+
+    const reject = (msg: string) => new Response(JSON.stringify({ error: msg }), {
+      status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" },
+    });
+
+    // Public checkouts: every charged price comes from the server-side catalogue,
+    // bound to an unpaid reservation owned by the same customer email.
+    if (!verifiedAdmin) {
+      if (!Array.isArray(items) || !Array.isArray(sale_ids) || items.length !== sale_ids.length || items.length > 20) return reject("Checkout inválido");
+      const email = String(customer?.email || '').trim().toLowerCase();
+      if (!email) return reject("Checkout inválido");
+      const { data: sales } = await db.from('sales').select('id,tour_id,tour_title,quantity,provider,customer_email,is_paid,is_cancelled').in('id', sale_ids);
+      for (let i = 0; i < items.length; i++) {
+        const item = items[i];
+        const sale = sales?.find((x: any) => x.id === sale_ids[i]);
+        const qty = Number(item.quantity);
+        if (!sale || sale.is_paid || sale.is_cancelled || String(sale.customer_email).toLowerCase() !== email
+          || !Number.isInteger(qty) || qty < 1 || qty > 100 || qty !== Number(sale.quantity)) return reject("Reserva inválida");
+        const priceBrl = num(item.price_brl);
+        if (sale.provider === 'matchday') {
+          const allowed = await allowedMatchPrices(String(sale.tour_id));
+          if (!allowed.some((p) => Math.abs(p - priceBrl) < 0.01)) return reject("Preço inválido");
+        } else {
+          const { data: tour } = await db.from('tours').select('*').eq('id', sale.tour_id).eq('is_active', true).maybeSingle();
+          const allowed = tour ? allowedTourPrices(tour, qty) : [];
+          if (!allowed.some((p) => Math.abs(p - priceBrl) < 0.01)) return reject("Preço inválido");
+        }
+        items[i] = { ...item, price: undefined, price_brl: priceBrl, quantity: qty, title: String(sale.tour_title || item.title || 'Reserva').slice(0, 250) };
+      }
     }
 
     // Get current rate for the target currency
@@ -94,7 +182,7 @@ serve(async (req) => {
       
       // Let's assume for now the frontend passes the price it wants to charge, 
       // but we will apply the rate logic if we have the BRL price.
-      const unitPrice = item.price_brl ? (item.price_brl * rate) : item.price;
+      const unitPrice = item.price_brl ? (item.price_brl * rate) : Number(item.price);
       
       return {
         ...item,
@@ -164,26 +252,14 @@ serve(async (req) => {
     const session = await stripe.checkout.sessions.create({
       line_items: lineItems,
       mode: "payment",
-      success_url: `${origin}/confirmacao?sale_ids=${encodeURIComponent(JSON.stringify(sale_ids))}`,
+      success_url: `${origin}/confirmacao?sale_ids=${encodeURIComponent(JSON.stringify(sale_ids))}&session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${origin}/carrinho?canceled=true`,
       customer_email: customer?.email,
       metadata: metadata,
     });
 
     // Register only server-created Stripe sessions; due time is based on the pending sale's creation.
-    const databaseUrl = Deno.env.get('SUPABASE_URL');
-    const serviceKey = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY');
-    if (databaseUrl && serviceKey && Array.isArray(sale_ids) && sale_ids.length) {
-      const db = createClient(databaseUrl, serviceKey);
-      let verifiedAdmin = false;
-      const bearer = req.headers.get('Authorization')?.replace(/^Bearer /, '');
-      if (bearer) {
-        const { data: user } = await db.auth.getUser(bearer);
-        if (user.user) {
-          const { data: admin } = await db.rpc('has_role', { _user_id: user.user.id, _role: 'admin' });
-          verifiedAdmin = admin === true;
-        }
-      }
+    if (Array.isArray(sale_ids) && sale_ids.length) {
       if (customer?.email || verifiedAdmin) {
         const { error: scheduleError } = await db.rpc('enqueue_pending_stripe_check', {
           _session_id: session.id, _sale_ids: sale_ids, _customer_email: verifiedAdmin ? null : customer.email,

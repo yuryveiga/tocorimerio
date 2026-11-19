@@ -1,7 +1,10 @@
 import { createClient } from "npm:@supabase/supabase-js@2";
+import { authenticateCronRequest } from "../_shared/cron-auth.ts";
 
 // Weekly job: stores the latest BRL-based rates as fallback for site and checkout.
-Deno.serve(async () => {
+Deno.serve(async (req) => {
+  const denied = authenticateCronRequest(req);
+  if (denied) return denied;
   try {
     const res = await fetch("https://open.er-api.com/v6/latest/BRL");
     if (!res.ok) throw new Error(`rates ${res.status}`);

@@ -1210,6 +1210,21 @@ export type Database = {
           rating_count: number
         }[]
       }
+      get_checkout_sales: {
+        Args: { _session_id: string }
+        Returns: {
+          currency: string
+          customer_name: string
+          id: string
+          is_archived: boolean
+          is_paid: boolean
+          quantity: number
+          selected_date: string
+          selected_period: string
+          total_price: number
+          tour_title: string
+        }[]
+      }
       get_public_match_inventory: {
         Args: { _match_ids: string[] }
         Returns: {
@@ -1268,6 +1283,10 @@ export type Database = {
         }[]
       }
       register_short_link_click: { Args: { _code: string }; Returns: string }
+      set_checkout_passengers: {
+        Args: { _passengers: Json; _sale_id: string; _session_id: string }
+        Returns: undefined
+      }
       set_sale_passengers: {
         Args: { _id: string; _passengers: Json }
         Returns: undefined

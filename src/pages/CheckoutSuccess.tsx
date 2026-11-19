@@ -153,9 +153,11 @@ const CheckoutSuccess = () => {
       }
 
       try {
-        const saleIds = JSON.parse(saleIdsStr);
-        supabase.functions.invoke("sync-stripe", { body: { limit: 20, saleIds } }).catch(() => {});
-        const { data, error } = await supabase.rpc("get_sales_by_ids", { _ids: saleIds });
+        const sessionId = searchParams.get("session_id") || "";
+        if (!sessionId) throw new Error("Missing checkout session");
+        // Stripe-verified sync for this checkout only, then read its reservations.
+        await supabase.functions.invoke("sync-stripe", { body: { sessionId } }).catch(() => {});
+        const { data, error } = await supabase.rpc("get_checkout_sales", { _session_id: sessionId });
         if (error) throw error;
         if (data) {
           setSales(data as unknown as LovableSale[]);
@@ -203,8 +205,9 @@ const CheckoutSuccess = () => {
     setSubmitting(true);
     try {
       for (const saleId in participants) {
-        const { error } = await supabase.rpc("set_sale_passengers", {
-          _id: saleId,
+        const { error } = await supabase.rpc("set_checkout_passengers", {
+          _session_id: searchParams.get("session_id") || "",
+          _sale_id: saleId,
           _passengers: participants[saleId] as any,
         });
         if (error) throw error;

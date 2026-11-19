@@ -11,11 +11,22 @@ serve(async (req) => {
   }
 
   try {
-    const { to, senderName, senderEmail, senderPhone, tourInterest, message } = await req.json();
-
-    if (!to) {
-      throw new Error("E-mail de destino não fornecido");
+    const body = await req.json();
+    const esc = (v: unknown, max: number) => String(v ?? "").slice(0, max)
+      .replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#39;");
+    const rawEmail = String(body?.senderEmail ?? "").trim();
+    if (!/^[^\s@<>]{1,64}@[^\s@<>]{1,190}\.[^\s@<>]{2,}$/.test(rawEmail) || !body?.senderName || !body?.message) {
+      return new Response(JSON.stringify({ error: "Dados inválidos" }), {
+        status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" },
+      });
     }
+    const senderEmail = rawEmail;
+    const senderName = esc(body.senderName, 200);
+    const senderPhone = esc(body.senderPhone, 100);
+    const tourInterest = esc(body.tourInterest, 300);
+    const message = esc(body.message, 5000);
+    // Recipients are fixed server-side; callers cannot choose where admin mail goes.
+    const to = Deno.env.get("ADMIN_EMAIL") || "contato@tocorimerio.com";
 
     const resendApiKey = Deno.env.get("RESEND_API_KEY");
     if (!resendApiKey) {
@@ -51,7 +62,7 @@ serve(async (req) => {
               <span class="label">Nome:</span> ${senderName}
             </div>
             <div class="field">
-              <span class="label">E-mail:</span> ${senderEmail}
+              <span class="label">E-mail:</span> ${esc(senderEmail, 254)}
             </div>
             <div class="field">
               <span class="label">Telefone:</span> ${senderPhone || "Não informado"}
