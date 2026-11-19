@@ -7,11 +7,23 @@ const corsHeaders = {
   "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
 };
 
+// Last-resort rates; normally replaced by the weekly stored fallback.
 const CHECKOUT_FALLBACK_RATES: Record<string, number> = {
   brl: 1,
-  usd: 0.18, // 1 USD ≈ R$ 5,55
-  eur: 0.16, // 1 EUR ≈ R$ 6,25
+  usd: 0.172, // 1 USD ≈ R$ 5,81
+  eur: 0.157, // 1 EUR ≈ R$ 6,38
+  cny: 1.23,
 };
+
+async function getStoredFallbackRates(): Promise<Record<string, number> | null> {
+  try {
+    const client = createClient(Deno.env.get("SUPABASE_URL")!, Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!);
+    const { data } = await client.from("site_settings").select("value").eq("key", "fallback_exchange_rates").maybeSingle();
+    return data?.value ? JSON.parse(data.value) : null;
+  } catch {
+    return null;
+  }
+}
 
 async function getExchangeRates() {
   try {
@@ -57,6 +69,9 @@ serve(async (req) => {
       if (dynamicRates && dynamicRates[targetCurrency.toUpperCase()]) {
         rate = dynamicRates[targetCurrency.toUpperCase()];
         console.log(`Using dynamic rate for ${targetCurrency}: ${rate}`);
+      } else if ((await getStoredFallbackRates())?.[targetCurrency.toUpperCase()]) {
+        rate = (await getStoredFallbackRates())![targetCurrency.toUpperCase()];
+        console.log(`Using weekly stored fallback rate for ${targetCurrency}: ${rate}`);
       } else {
         console.log(`Using fallback rate for ${targetCurrency}: ${rate}`);
       }

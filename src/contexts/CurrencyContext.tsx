@@ -1,3 +1,4 @@
+import { supabase } from '@/integrations/supabase/client';
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 
 type Currency = 'BRL' | 'USD' | 'EUR' | 'CNY';
@@ -10,9 +11,9 @@ interface CurrencyContextType {
 
 const DEFAULT_RATES: Record<Currency, number> = {
   BRL: 1,
-  USD: 0.20, // 1 USD = R$ 5,00
-  EUR: 0.18, // 1 EUR = R$ 5,55
-  CNY: 1.30, // 1 CNY ≈ R$ 0,77 → 1 BRL ≈ 1,30 CNY
+  USD: 0.172, // 1 USD ≈ R$ 5,81 (last resort; weekly stored fallback preferred)
+  EUR: 0.157, // 1 EUR ≈ R$ 6,38
+  CNY: 1.23,
 };
 
 const CurrencyContext = createContext<CurrencyContextType | undefined>(undefined);
@@ -37,9 +38,14 @@ export const CurrencyProvider = ({ children }: { children: ReactNode }) => {
           });
         }
       } catch (error) {
-        console.error('Error fetching currency rates, using fallback:', error);
-        // Fallback already set in state initialization, but ensuring it here
-        setRates(DEFAULT_RATES);
+        console.error('Error fetching currency rates, using weekly fallback:', error);
+        try {
+          const { data } = await supabase.from('site_settings').select('value').eq('key', 'fallback_exchange_rates').maybeSingle();
+          const stored = data?.value ? JSON.parse(data.value) : null;
+          setRates(stored?.USD ? { BRL: 1, USD: stored.USD, EUR: stored.EUR, CNY: stored.CNY } : DEFAULT_RATES);
+        } catch {
+          setRates(DEFAULT_RATES);
+        }
       } finally {
         setLoading(false);
       }
