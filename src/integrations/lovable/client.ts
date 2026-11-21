@@ -15,7 +15,7 @@ const REST_KEY = import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY as string;
 // needs the authenticated session held by the SDK.
 const PUBLIC_TABLES = new Set([
   "tours", "pages", "site_images", "social_media", "site_settings",
-  "blog_posts", "guides", "tour_categories",
+  "blog_posts", "guides", "tour_categories", "tripadvisor_review_snapshot",
 ]);
 
 

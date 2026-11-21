@@ -1,0 +1,10 @@
+CREATE TABLE public.tripadvisor_review_snapshot (id text PRIMARY KEY CHECK (id = 'tocorime'), reviews jsonb NOT NULL CHECK (jsonb_typeof(reviews) = 'array' AND jsonb_array_length(reviews) BETWEEN 1 AND 30), source_url text NOT NULL, synced_at timestamptz NOT NULL DEFAULT now());
+GRANT SELECT ON public.tripadvisor_review_snapshot TO anon, authenticated;
+GRANT ALL ON public.tripadvisor_review_snapshot TO service_role;
+ALTER TABLE public.tripadvisor_review_snapshot ENABLE ROW LEVEL SECURITY;
+CREATE POLICY "Read imported public Tripadvisor reviews" ON public.tripadvisor_review_snapshot FOR SELECT TO anon, authenticated USING (id = 'tocorime');
+CREATE TABLE public.tripadvisor_sync_status (id text PRIMARY KEY CHECK (id = 'tocorime'), last_attempt_at timestamptz NOT NULL DEFAULT now(), last_success_at timestamptz, last_error text);
+GRANT SELECT ON public.tripadvisor_sync_status TO authenticated;
+GRANT ALL ON public.tripadvisor_sync_status TO service_role;
+ALTER TABLE public.tripadvisor_sync_status ENABLE ROW LEVEL SECURITY;
+CREATE POLICY "Admins read Tripadvisor sync status" ON public.tripadvisor_sync_status FOR SELECT TO authenticated USING (public.has_role(auth.uid(), 'admin'::text));

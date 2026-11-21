@@ -64,6 +64,13 @@
       "when": 1795104788244,
       "tag": "0008_bound_public_booking_counts",
       "breakpoints": true
+    },
+    {
+      "idx": 9,
+      "version": "7",
+      "when": 1795277554358,
+      "tag": "0009_tripadvisor_review_snapshot",
+      "breakpoints": true
     }
   ]
 }

@@ -1112,6 +1112,48 @@ export type Database = {
         }
         Relationships: []
       }
+      tripadvisor_review_snapshot: {
+        Row: {
+          id: string
+          reviews: Json
+          source_url: string
+          synced_at: string
+        }
+        Insert: {
+          id: string
+          reviews: Json
+          source_url: string
+          synced_at?: string
+        }
+        Update: {
+          id?: string
+          reviews?: Json
+          source_url?: string
+          synced_at?: string
+        }
+        Relationships: []
+      }
+      tripadvisor_sync_status: {
+        Row: {
+          id: string
+          last_attempt_at: string
+          last_error: string | null
+          last_success_at: string | null
+        }
+        Insert: {
+          id: string
+          last_attempt_at?: string
+          last_error?: string | null
+          last_success_at?: string | null
+        }
+        Update: {
+          id?: string
+          last_attempt_at?: string
+          last_error?: string | null
+          last_success_at?: string | null
+        }
+        Relationships: []
+      }
       user_roles: {
         Row: {
           created_at: string | null
