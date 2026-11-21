@@ -1,12 +1,10 @@
-import { useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
-import Autoplay from "embla-carousel-autoplay";
-import { useReducedMotion } from "framer-motion";
 import { ExternalLink, Star } from "lucide-react";
 import { useLocale } from "@/contexts/LocaleContext";
 import { fetchLovable } from "@/integrations/lovable/client";
 import { Button } from "@/components/ui/button";
-import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
+import { type CarouselApi, Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 import { TRIPADVISOR_URL, type TripadvisorReview } from "../../supabase/functions/_shared/tripadvisorReviews";
 import { REVIEWS_AUTOPLAY_INTERVAL_MS, shouldAutoplayReviews } from "@/lib/carouselAutoplay";
 
@@ -30,9 +28,17 @@ export function TripadvisorReviewsCarousel() {
     refetchOnWindowFocus: false,
   });
   const reviews = data?.[0]?.reviews ?? [];
-  const prefersReducedMotion = useReducedMotion() ?? false;
-  const autoplay = useMemo(() => Autoplay({ delay: REVIEWS_AUTOPLAY_INTERVAL_MS, stopOnInteraction: false, stopOnMouseEnter: true }), []);
-  const autoplayPlugins = shouldAutoplayReviews(reviews.length, prefersReducedMotion) ? [autoplay] : undefined;
+  const [api, setApi] = useState<CarouselApi>();
+  const [paused, setPaused] = useState(false);
+  const autoplayOn = shouldAutoplayReviews(reviews.length);
+  useEffect(() => {
+    if (!api || !autoplayOn || paused) return;
+    const timer = window.setInterval(() => {
+      if (document.hidden) return;
+      if (api.canScrollNext()) api.scrollNext(); else api.scrollTo(0);
+    }, REVIEWS_AUTOPLAY_INTERVAL_MS);
+    return () => window.clearInterval(timer);
+  }, [api, autoplayOn, paused]);
   const copy = language === "pt"
     ? { read: "Ler avaliação", next: "Próximas avaliações", previous: "Avaliações anteriores", source: "Avaliações no Tripadvisor", empty: "Veja as avaliações de nossos visitantes no Tripadvisor." }
     : language === "es"
@@ -49,7 +55,7 @@ export function TripadvisorReviewsCarousel() {
         </div>
 
         {reviews.length > 0 ? (
-          <Carousel opts={{ align: "start", loop: reviews.length > 4 }} plugins={autoplayPlugins} aria-label={copy.source} className="w-full">
+          <Carousel opts={{ align: "start", loop: reviews.length > 4 }} setApi={setApi} onMouseEnter={() => setPaused(true)} onMouseLeave={() => setPaused(false)} aria-label={copy.source} className="w-full">
             <CarouselContent>
               {reviews.map((review) => (
                 <CarouselItem key={review.id} className="md:basis-1/2 lg:basis-1/4">
