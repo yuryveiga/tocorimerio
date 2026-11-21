@@ -48,7 +48,8 @@ export type TourCardProps = {
 export const TourItem = memo(({ tour }: { tour: TourCardProps }) => {
   const { t, formatPrice, language } = useLocale();
   const { siteSettings } = useSiteData();
-  const hidePrices = siteSettings['hide_prices'] === 'true';
+  const isMatchCard = !!tour.match_date;
+  const hidePrices = (isMatchCard ? siteSettings['hide_match_prices'] : siteSettings['hide_prices']) === 'true';
   const hideUrgency = siteSettings['hide_urgency'] === 'true';
   const [showDetails, setShowDetails] = useState(false);
 

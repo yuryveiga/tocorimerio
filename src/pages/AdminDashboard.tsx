@@ -122,6 +122,23 @@ const AdminDashboard = () => {
     }
   };
 
+  const handleToggleHideMatchPrices = async (checked: boolean) => {
+    const newValue = checked ? "true" : "false";
+    setSettings({ ...settings, hide_match_prices: newValue });
+    try {
+      const settingRecord = settingsList.find(s => s.key === 'hide_match_prices');
+      if (settingRecord?.id) {
+        await updateLovable("site_settings", settingRecord.id, { value: newValue });
+      } else {
+        const newRecord = await insertLovable<LovableSiteSetting>("site_settings", { key: 'hide_match_prices', value: newValue });
+        setSettingsList([...settingsList, newRecord]);
+      }
+      toast({ title: checked ? "Preços dos jogos ocultos!" : "Preços dos jogos visíveis!" });
+    } catch (err) {
+      toast({ title: "Erro ao atualizar modo", variant: "destructive" });
+    }
+  };
+
   const handleToggleServiceFee = async (checked: boolean) => {
     const newValue = checked ? "true" : "false";
     setSettings({ ...settings, service_fee_enabled: newValue });
@@ -344,6 +361,16 @@ const AdminDashboard = () => {
                 <Switch 
                   checked={settings['hide_prices'] === 'true'} 
                   onCheckedChange={handleToggleHidePrices}
+                />
+              </div>
+              <div className="flex items-center justify-between p-4 bg-primary/5 rounded-2xl border border-primary/10">
+                <div className="space-y-0.5">
+                  <Label className="text-base font-bold text-foreground">Ocultar Preços dos Jogos</Label>
+                  <p className="text-sm text-muted-foreground">Oculta os valores apenas nos jogos de futebol e substitui a reserva por contato via WhatsApp. Funciona de forma independente do Modo Orçamento geral.</p>
+                </div>
+                <Switch 
+                  checked={settings['hide_match_prices'] === 'true'} 
+                  onCheckedChange={handleToggleHideMatchPrices}
                 />
               </div>
               <div className="bg-amber-50 border border-amber-200 p-4 rounded-xl flex gap-3">

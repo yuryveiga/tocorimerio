@@ -5,7 +5,7 @@ import {
   Clock, Users, MapPin, Calendar, Check, ChevronLeft, 
   ArrowRight, ShieldCheck, Bus, Ticket, Camera, Info,
   Smartphone, CreditCard, ChevronDown, ChevronUp, Plus, Minus,
-  X, Ban, AlertTriangle, Backpack, HeartHandshake, Activity, Play
+  X, Ban, AlertTriangle, Backpack, HeartHandshake, Activity, Play, MessageSquare
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
@@ -47,7 +47,8 @@ export default function MatchDetail() {
   const navigate = useNavigate();
   const { language, t, formatPrice, currency } = useLocale();
   const { rates } = useCurrency();
-  const { siteSettings, images, gallery } = useSiteData();
+  const { siteSettings, images, gallery, socialMedia } = useSiteData();
+  const hideMatchPrices = siteSettings?.['hide_match_prices'] === 'true';
   const [isBookingModalOpen, setIsBookingModalOpen] = useState(false);
   const [isProcessing, setIsProcessing] = useState(false);
   const [customerInfo, setCustomerInfo] = useState({ name: "", whatsapp: "", email: "" });
@@ -709,6 +710,14 @@ export default function MatchDetail() {
                        <div className="absolute top-0 right-0 w-32 h-32 bg-primary/10 rounded-full -mr-16 -mt-16 blur-2xl" />
                        
                        <div className="relative">
+                          {hideMatchPrices ? (
+                             <div className="mb-8">
+                                <span className="text-[10px] font-black uppercase text-muted-foreground tracking-widest block mb-2">{language === 'pt' ? 'Valores' : language === 'es' ? 'Precios' : 'Pricing'}</span>
+                                <span className="text-3xl font-black text-primary">
+                                   {language === 'pt' ? 'Sob consulta' : language === 'es' ? 'A consultar' : 'On request'}
+                                </span>
+                             </div>
+                          ) : (
                           <div className="flex justify-between items-start mb-8">
                              <div>
                                 <span className="text-[10px] font-black uppercase text-muted-foreground tracking-widest block mb-2">{t('valor_por_pessoa')}</span>
@@ -717,12 +726,50 @@ export default function MatchDetail() {
                                  </span>
                              </div>
                              {match.high_demand && (
-                                <div className="bg-orange-500 text-white text-[8px] font-black px-2 py-1 rounded-full animate-pulse shadow-lg">
+                                 <div className="bg-orange-500 text-white text-[8px] font-black px-2 py-1 rounded-full animate-pulse shadow-lg">
                                    {t('alta_demanda')}
                                 </div>
                              )}
                           </div>
+                          )}
 
+                           {hideMatchPrices ? (
+                              <div className="space-y-6">
+                                 <p className="text-sm text-muted-foreground leading-relaxed">
+                                    {language === 'pt'
+                                      ? 'Os valores desta experiência são personalizados de acordo com o grupo e a data — fale com nosso guia pelo WhatsApp e garanta seu lugar.'
+                                      : language === 'es'
+                                      ? 'Los precios de esta experiencia se adaptan según el grupo y la fecha — habla con nuestro guía por WhatsApp y asegura tu lugar.'
+                                      : 'Pricing for this experience adapts to your group and date — chat with our guide on WhatsApp and secure your spot.'}
+                                 </p>
+                                 {(() => {
+                                    const wa = socialMedia.find((s) => s.platform?.toLowerCase().includes('whatsapp') && s.is_active !== false);
+                                    const matchName = `${match.home_team} x ${match.away_team}`;
+                                    const msg = language === 'pt'
+                                      ? `Olá! Tenho interesse no jogo: ${matchName}`
+                                      : language === 'es'
+                                      ? `¡Hola! Me interesa el partido: ${matchName}`
+                                      : `Hello! I'm interested in the match: ${matchName}`;
+                                    const href = wa
+                                      ? (wa.url.startsWith('http')
+                                          ? `${wa.url}${wa.url.includes('?') ? '&' : '?'}text=${encodeURIComponent(msg)}`
+                                          : `https://wa.me/${wa.url.replace(/[^\d+]/g, "").replace('+', '')}?text=${encodeURIComponent(msg)}`)
+                                      : `https://wa.me/5521970702523?text=${encodeURIComponent(msg)}`;
+                                    return (
+                                       <a
+                                          href={href}
+                                          target="_blank"
+                                          rel="noopener noreferrer"
+                                          className="flex items-center justify-center gap-3 w-full h-18 rounded-2xl font-black text-lg bg-[#25D366] hover:bg-[#1ebe5a] text-white shadow-xl shadow-[#25D366]/30 hover:scale-[1.02] active:scale-95 transition-all"
+                                       >
+                                          <MessageSquare className="h-6 w-6" />
+                                          {t('ask_whatsapp')}
+                                          <ArrowRight className="h-5 w-5" />
+                                       </a>
+                                    );
+                                 })()}
+                              </div>
+                           ) : (
                            <div className="space-y-6">
                               <div className="space-y-3">
                                  <div className="flex items-center justify-between">
@@ -827,10 +874,11 @@ export default function MatchDetail() {
                                 className="w-full h-18 rounded-2xl font-black text-lg gap-4 shadow-xl shadow-primary/30 hover:scale-[1.02] active:scale-95 transition-all bg-primary hover:bg-primary/90"
                              >
                                 <Ticket className="h-6 w-6" />
-                                {t('reservar_agora')}
+                                 {t('reservar_agora')}
                                 <ArrowRight className="h-5 w-5" />
                              </Button>
                           </div>
+                           )}
 
                            <div className="mt-8 flex items-center gap-3 p-4 bg-muted/20 rounded-2xl border border-dashed text-[10px] text-muted-foreground font-medium uppercase tracking-tighter">
                               <ShieldCheck className="h-6 w-6 text-green-600 shrink-0" />

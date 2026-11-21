@@ -30,7 +30,7 @@ const weekDaysByLang: Record<string, string[]> = {
 const MaracanaCalendar = () => {
   const { language, t, formatPrice } = useLocale();
   const { data: matches, isLoading } = useMatches();
-  const { socialMedia } = useSiteData();
+  const { socialMedia, siteSettings } = useSiteData();
   const locale = localeMap[language] || enUS;
   const [currentMonth, setCurrentMonth] = useState(new Date());
 
@@ -158,7 +158,8 @@ const MaracanaCalendar = () => {
     const cheapest = availableMatches.length
       ? Math.min(...availableMatches.map(m => Number(m.price) || Infinity))
       : null;
-    const priceLabel = cheapest && Number.isFinite(cheapest) ? formatPrice(cheapest) : null;
+    const hideMatchPrices = siteSettings?.['hide_match_prices'] === 'true';
+    const priceLabel = !hideMatchPrices && cheapest && Number.isFinite(cheapest) ? formatPrice(cheapest) : null;
 
     const faqs: { q: string; a: string }[] = language === 'pt'
 
