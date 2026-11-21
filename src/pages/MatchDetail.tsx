@@ -24,6 +24,7 @@ import { getMatchHeroImage, getMatchHeroAlt, getMatchGallery, getMatchFeaturedVi
 import { buildMatchExperienceContent } from "@/lib/matchExperienceText";
 import { getMatchEventStatus } from "@/lib/matchEventStatus";
 import { getMatchSeo } from "@/lib/matchSeo";
+import { getMatchRemaining } from "@/lib/matchInventory";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -56,7 +57,7 @@ export default function MatchDetail() {
   const [selectedSectorIdx, setSelectedSectorIdx] = useState(0);
   const [videoOpen, setVideoOpen] = useState(false);
 
-  const { data: match, isLoading } = useQuery({
+  const { data: match, isLoading } = useQuery<(LovableMatch & { localInventoryRemaining?: number | null }) | null>({
     queryKey: ["partner-match", id],
     queryFn: async () => {
       if (!id) return null;
@@ -122,9 +123,11 @@ export default function MatchDetail() {
         (data as LovableMatch).max_per_purchase = override.max_per_purchase;
       }
 
-      return data as LovableMatch;
+      return { ...data, localInventoryRemaining: override?.available_spots == null ? null : data.available_spots } as LovableMatch & { localInventoryRemaining: number | null };
     },
     enabled: !!id,
+    refetchInterval: 120000,
+    refetchOnWindowFocus: true,
   });
 
   const processedSectors = useMemo(() => {
@@ -170,6 +173,8 @@ export default function MatchDetail() {
         .sort((a: any, b: any) => (a.package_type?.display_order ?? 99) - (b.package_type?.display_order ?? 99));
     },
     enabled: !!match?.id,
+    refetchInterval: 120000,
+    refetchOnWindowFocus: true,
   });
 
   // Final sector list — prefer live partner packages when available
@@ -198,7 +203,10 @@ export default function MatchDetail() {
     return processedSectors;
   }, [partnerPackages, processedSectors, language]);
 
-  const effectiveRemaining = match ? Math.max(0, match.available_spots - match.sold_count) : 0;
+  const selectedPackageRemaining = partnerPackages?.[selectedSectorIdx]
+    ? Math.max(0, Number(partnerPackages[selectedSectorIdx].total_stock || 0) - Number(partnerPackages[selectedSectorIdx].sold_count || 0))
+    : undefined;
+  const effectiveRemaining = match ? getMatchRemaining(match.available_spots - match.sold_count, selectedPackageRemaining, match.localInventoryRemaining) : 0;
   const maxPerPurchase = match?.max_per_purchase
     ? Math.min(match.max_per_purchase, effectiveRemaining)
     : effectiveRemaining;
