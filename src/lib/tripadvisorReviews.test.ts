@@ -1,7 +1,8 @@
 import { describe, expect, it } from "vitest";
 import { parseTripadvisorReviews, TRIPADVISOR_URL, TRIPADVISOR_WEEKLY_CRON } from "../../supabase/functions/_shared/tripadvisorReviews";
 
-const review = `[Ana](https://www.tripadvisor.com.br/Profile/ana)
+const review = `[![](https://dynamic-media-cdn.tripadvisor.com/media/photo-s/00/15/dd/0d/kvk74.jpg?w=100&h=-1&s=1)](https://www.tripadvisor.com.br/Profile/ana)
+[Ana](https://www.tripadvisor.com.br/Profile/ana)
 
 5 de 5 círculos
 
@@ -39,5 +40,14 @@ describe("weekly Tripadvisor import", () => {
   it("rejects untrusted links and missing ratings", () => {
     expect(() => parseTripadvisorReviews(review.replace("/ShowUserReviews-g", "/untrusted-g"))).toThrow();
     expect(() => parseTripadvisorReviews(review.replace("5 de 5 círculos", ""))).toThrow();
+  });
+  it("keeps the reviewer photo only from Tripadvisor's own image CDN", () => {
+    expect(parseTripadvisorReviews(review)[0].avatar_url).toBe("https://dynamic-media-cdn.tripadvisor.com/media/photo-s/00/15/dd/0d/kvk74.jpg?w=100&h=-1&s=1");
+  });
+  it("treats the generic placeholder and foreign image hosts as no photo", () => {
+    const placeholder = review.replace("photo-s/00/15/dd/0d/kvk74.jpg", "photo-o/1a/f6/f1/42/default-avatar-2020-20.jpg");
+    expect(parseTripadvisorReviews(placeholder)[0].avatar_url).toBeNull();
+    const foreign = review.replace("https://dynamic-media-cdn.tripadvisor.com/media/photo-s/00/15/dd/0d/kvk74.jpg", "https://evil.example.com/avatar.jpg");
+    expect(parseTripadvisorReviews(foreign)[0].avatar_url).toBeNull();
   });
 });

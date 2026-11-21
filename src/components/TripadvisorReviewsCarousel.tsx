@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import Autoplay from "embla-carousel-autoplay";
 import { useReducedMotion } from "framer-motion";
@@ -11,6 +11,15 @@ import { TRIPADVISOR_URL, type TripadvisorReview } from "../../supabase/function
 import { REVIEWS_AUTOPLAY_INTERVAL_MS, shouldAutoplayReviews } from "@/lib/carouselAutoplay";
 
 interface ReviewSnapshot { reviews: TripadvisorReview[]; synced_at: string }
+
+function ReviewAvatar({ review }: { review: TripadvisorReview }) {
+  const [failed, setFailed] = useState(false);
+  const fallback = (
+    <div aria-hidden="true" className="h-11 w-11 shrink-0 rounded-full bg-primary/10 text-primary flex items-center justify-center font-semibold">{review.author.slice(0, 1).toUpperCase()}</div>
+  );
+  if (!review.avatar_url || failed) return fallback;
+  return <img src={review.avatar_url} alt="" aria-hidden="true" width="44" height="44" loading="lazy" referrerPolicy="no-referrer" onError={() => setFailed(true)} className="h-11 w-11 shrink-0 rounded-full object-cover" />;
+}
 
 export function TripadvisorReviewsCarousel() {
   const { t, language } = useLocale();
@@ -40,13 +49,13 @@ export function TripadvisorReviewsCarousel() {
         </div>
 
         {reviews.length > 0 ? (
-          <Carousel opts={{ align: "start", loop: reviews.length > 3 }} plugins={autoplayPlugins} aria-label={copy.source} className="w-full">
+          <Carousel opts={{ align: "start", loop: reviews.length > 4 }} plugins={autoplayPlugins} aria-label={copy.source} className="w-full">
             <CarouselContent>
               {reviews.map((review) => (
-                <CarouselItem key={review.id} className="md:basis-1/2 lg:basis-1/3">
+                <CarouselItem key={review.id} className="md:basis-1/2 lg:basis-1/4">
                   <article className="h-[370px] rounded-lg border border-border bg-card text-card-foreground p-6 flex flex-col">
                     <div className="flex items-center gap-3 mb-5">
-                      <div aria-hidden="true" className="h-11 w-11 shrink-0 rounded-full bg-primary/10 text-primary flex items-center justify-center font-semibold">{review.author.slice(0, 1).toUpperCase()}</div>
+                      <ReviewAvatar review={review} />
                       <div className="min-w-0">
                         <p className="font-semibold truncate">{review.author}</p>
                         <p className="text-xs text-muted-foreground truncate" lang="pt-BR">{review.date_label}</p>
@@ -71,8 +80,8 @@ export function TripadvisorReviewsCarousel() {
             </div>
           </Carousel>
         ) : isPending ? (
-          <div aria-busy="true" className="grid md:grid-cols-3 gap-4 h-[370px] overflow-hidden">
-            {[0, 1, 2].map(i => <div key={i} className="rounded-lg bg-muted animate-pulse motion-reduce:animate-none h-full" />)}
+          <div aria-busy="true" className="grid md:grid-cols-2 lg:grid-cols-4 gap-4 h-[370px] overflow-hidden">
+            {[0, 1, 2, 3].map(i => <div key={i} className="rounded-lg bg-muted animate-pulse motion-reduce:animate-none h-full" />)}
           </div>
         ) : <p className="text-center text-muted-foreground">{copy.empty}</p>}
 

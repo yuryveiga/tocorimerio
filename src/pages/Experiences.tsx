@@ -20,7 +20,7 @@ import { useSiteData } from "@/hooks/useSiteData";
 import { useLocale } from "@/contexts/LocaleContext";
 
 const Footer = lazy(() => import("@/components/Footer").then(m => ({ default: m.Footer })));
-const ReviewsSection = lazy(() => import("@/components/ReviewsSection").then(m => ({ default: m.ReviewsSection })));
+const ReviewsSection = lazy(() => import("@/components/TripadvisorReviewsCarousel").then(m => ({ default: m.TripadvisorReviewsCarousel })));
 const GallerySection = lazy(() => import("@/components/GallerySection").then(m => ({ default: m.GallerySection })));
 const BlogCarousel = lazy(() => import("@/components/BlogCarousel").then(m => ({ default: m.BlogCarousel })));
 

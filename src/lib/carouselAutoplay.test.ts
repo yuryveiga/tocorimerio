@@ -8,7 +8,7 @@ describe("reviews carousel autoplay", () => {
   });
 
   it("stays still when there are not enough reviews to loop back to the first one", () => {
-    expect(shouldAutoplayReviews(3, false)).toBe(false);
+    expect(shouldAutoplayReviews(4, false)).toBe(false);
     expect(shouldAutoplayReviews(0, false)).toBe(false);
   });
 

@@ -6,5 +6,5 @@ export const REVIEWS_AUTOPLAY_INTERVAL_MS = 5000;
  * reduce motion.
  */
 export function shouldAutoplayReviews(reviewCount: number, prefersReducedMotion: boolean): boolean {
-  return reviewCount > 3 && !prefersReducedMotion;
+  return reviewCount > 4 && !prefersReducedMotion;
 }

@@ -2,7 +2,7 @@ import { createClient } from "npm:@supabase/supabase-js@2";
 import { corsHeaders } from "npm:@supabase/supabase-js@2/cors";
 import { z } from "npm:zod@3";
 import { authenticateCronRequest } from "../_shared/cron-auth.ts";
-import { parseTripadvisorReviews, TRIPADVISOR_URL } from "../_shared/tripadvisorReviews.ts";
+import { MAX_STORED_REVIEWS, parseTripadvisorReviews, TRIPADVISOR_PAGE_URLS, TRIPADVISOR_URL, type TripadvisorReview } from "../_shared/tripadvisorReviews.ts";
 
 const headers = { ...corsHeaders, "Content-Type": "application/json" };
 Deno.serve(async (request) => {
@@ -29,28 +29,45 @@ Deno.serve(async (request) => {
     const key = Deno.env.get("FIRECRAWL_API_KEY");
     const gatewayKey = Deno.env.get("LOVABLE_API_KEY");
     if (!key || !gatewayKey) throw new Error("Firecrawl connection is unavailable");
-    // One page per week, deterministic parsing and no translation/AI requests.
-    const response = await fetch("https://connector-gateway.lovable.dev/firecrawl/v2/scrape", {
-      method: "POST",
-      headers: { "Content-Type": "application/json", Authorization: `Bearer ${gatewayKey}`, "X-Connection-Api-Key": key },
-      body: JSON.stringify({ url: TRIPADVISOR_URL, formats: ["markdown"], maxAge: 0, waitFor: 2000 }),
-      signal: AbortSignal.timeout(90000),
-    });
-    if (!response.ok) {
-      const details = await response.text();
-      console.error(`Firecrawl [${response.status}]: ${details}`);
-      await db.from("tripadvisor_sync_status").upsert({ id: "tocorime", last_attempt_at: attemptedAt, last_success_at: status?.last_success_at ?? null, last_error: `Firecrawl [${response.status}]: ${details}`.slice(0, 2000) });
-      return new Response(JSON.stringify({ error: "Tripadvisor collection failed", status: response.status, details }), { status: response.status, headers });
+    // Two fixed pages per week (10 reviews each), deterministic parsing and no
+    // translation/AI requests. A failure on page 2 never erases page 1.
+    const merged = new Map<string, TripadvisorReview>();
+    let creditsUsed = 0;
+    for (const pageUrl of TRIPADVISOR_PAGE_URLS) {
+      const response = await fetch("https://connector-gateway.lovable.dev/firecrawl/v2/scrape", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Authorization: `Bearer ${gatewayKey}`, "X-Connection-Api-Key": key },
+        body: JSON.stringify({ url: pageUrl, formats: ["markdown"], maxAge: 0, waitFor: 2000 }),
+        signal: AbortSignal.timeout(90000),
+      });
+      if (!response.ok) {
+        const details = await response.text();
+        console.error(`Firecrawl [${response.status}] ${pageUrl}: ${details}`);
+        if (merged.size === 0) {
+          await db.from("tripadvisor_sync_status").upsert({ id: "tocorime", last_attempt_at: attemptedAt, last_success_at: status?.last_success_at ?? null, last_error: `Firecrawl [${response.status}]: ${details}`.slice(0, 2000) });
+          return new Response(JSON.stringify({ error: "Tripadvisor collection failed", status: response.status, details }), { status: response.status, headers });
+        }
+        break;
+      }
+      const data = await response.json();
+      if (data.success !== true || typeof data.data?.markdown !== "string") throw new Error("Tripadvisor: resposta sem conteúdo válido");
+      creditsUsed += data.data?.creditsUsed ?? data.creditsUsed ?? 0;
+      try {
+        for (const review of parseTripadvisorReviews(data.data.markdown)) merged.set(review.id, review);
+      } catch (parseError) {
+        if (merged.size === 0) throw parseError;
+        console.error(`Tripadvisor page ignored: ${pageUrl}`, parseError);
+      }
     }
-    const data = await response.json();
-    if (data.success !== true || typeof data.data?.markdown !== "string") throw new Error("Tripadvisor: resposta sem conteúdo válido");
-    const reviews = parseTripadvisorReviews(data.data.markdown);
+    const reviews = [...merged.values()]
+      .sort((a, b) => (b.published_at ?? "").localeCompare(a.published_at ?? ""))
+      .slice(0, MAX_STORED_REVIEWS);
     const syncedAt = new Date().toISOString();
     const { error } = await db.from("tripadvisor_review_snapshot").upsert({ id: "tocorime", source_url: TRIPADVISOR_URL, reviews, synced_at: syncedAt });
     if (error) throw error;
     const { error: statusError } = await db.from("tripadvisor_sync_status").upsert({ id: "tocorime", last_attempt_at: attemptedAt, last_success_at: syncedAt, last_error: null });
     if (statusError) throw statusError;
-    return new Response(JSON.stringify({ success: true, count: reviews.length, synced_at: syncedAt, credits_used: data.data?.creditsUsed ?? data.creditsUsed ?? null }), { headers });
+    return new Response(JSON.stringify({ success: true, count: reviews.length, synced_at: syncedAt, credits_used: creditsUsed }), { headers });
   } catch (error) {
     const message = error instanceof Error ? error.message : String(error);
     console.error("Tripadvisor collection failed:", message);

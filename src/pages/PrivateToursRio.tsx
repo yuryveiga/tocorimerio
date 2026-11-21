@@ -7,7 +7,7 @@ import { useSiteData } from "@/hooks/useSiteData";
 import { getCanonicalUrl, getHreflangLinks, BASE_URL, DEFAULT_OG_IMAGE } from "@/utils/seo";
 
 const Footer = lazy(() => import("@/components/Footer").then((m) => ({ default: m.Footer })));
-const ReviewsSection = lazy(() => import("@/components/ReviewsSection").then((m) => ({ default: m.ReviewsSection })));
+const ReviewsSection = lazy(() => import("@/components/TripadvisorReviewsCarousel").then((m) => ({ default: m.TripadvisorReviewsCarousel })));
 
 const PATH = "/private-tours-rio-de-janeiro";
 
