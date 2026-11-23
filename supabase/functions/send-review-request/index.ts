@@ -33,6 +33,11 @@ Deno.serve(async (req) => {
   const { data: role } = await db.from("user_roles").select("role").eq("user_id", u.user.id).eq("role", "admin").maybeSingle();
   if (!role) return json({ error: "Forbidden" }, 403);
   const mode = (await req.json().catch(() => ({}))).mode;
+  if (mode === "status") {
+    const r = await fetch("https://api.resend.com/emails?limit=5", { headers: { Authorization: `Bearer ${resend}` } });
+    const d = await r.json().catch(() => ({}));
+    return json({ status: r.status, emails: (d.data ?? []).map((e: any) => ({ to: e.to, subject: e.subject, last_event: e.last_event, created_at: e.created_at })) });
+  }
   if (mode !== "test" && mode !== "all") return json({ error: "mode must be test or all" }, 400);
 
   const { data: sales, error } = await db.from("sales").select("customer_name, customer_email, tour_title, created_at")
