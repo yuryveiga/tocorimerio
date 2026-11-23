@@ -8,6 +8,8 @@ import { type CarouselApi, Carousel, CarouselContent, CarouselItem, CarouselNext
 import { TRIPADVISOR_URL, type TripadvisorReview } from "../../supabase/functions/_shared/tripadvisorReviews";
 import { REVIEWS_AUTOPLAY_INTERVAL_MS, shouldAutoplayReviews } from "@/lib/carouselAutoplay";
 
+const SOURCE_LABEL = { tripadvisor: "Tripadvisor", airbnb: "Airbnb", viator: "Viator" } as const;
+
 interface ReviewSnapshot { reviews: TripadvisorReview[]; synced_at: string }
 
 function ReviewAvatar({ review }: { review: TripadvisorReview }) {
@@ -67,13 +69,13 @@ export function TripadvisorReviewsCarousel() {
                         <p className="text-xs text-muted-foreground truncate" lang="pt-BR">{review.date_label}</p>
                       </div>
                     </div>
-                    <div className="flex gap-1 text-primary mb-3" aria-label={`${review.rating}/5`}>
+                    {review.rating > 0 && <div className="flex gap-1 text-primary mb-3" aria-label={`${review.rating}/5`}>
                       {Array.from({ length: 5 }, (_, index) => <Star key={index} aria-hidden="true" className={`h-4 w-4 ${index < review.rating ? "fill-current" : "text-muted-foreground/30"}`} />)}
-                    </div>
-                    <h3 className="font-semibold line-clamp-2 mb-2" lang="pt-BR">{review.title}</h3>
-                    <p className="text-sm leading-relaxed text-muted-foreground line-clamp-5 whitespace-pre-line" lang="pt-BR">{review.text}</p>
+                    </div>}
+                    {review.title && <h3 className="font-semibold line-clamp-2 mb-2">{review.title}</h3>}
+                    <p className="text-sm leading-relaxed text-muted-foreground line-clamp-5 whitespace-pre-line">{review.text}</p>
                     <div className="mt-auto pt-4 flex items-center justify-between gap-2">
-                      <span className="text-xs text-muted-foreground">Tripadvisor</span>
+                      <span className="text-xs text-muted-foreground">{SOURCE_LABEL[review.source ?? "tripadvisor"]}</span>
                       <Button variant="link" asChild className="h-auto p-0 text-xs"><a href={review.url} target="_blank" rel="noopener noreferrer">{copy.read}<ExternalLink className="h-3 w-3 ml-1" /></a></Button>
                     </div>
                   </article>

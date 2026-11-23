@@ -2,6 +2,7 @@ import { createClient } from "npm:@supabase/supabase-js@2";
 import { corsHeaders } from "npm:@supabase/supabase-js@2/cors";
 import { z } from "npm:zod@3";
 import { authenticateCronRequest } from "../_shared/cron-auth.ts";
+import { AIRBNB_URL, parseAirbnbReviews, parseViatorReviews, VIATOR_URL } from "../_shared/partnerReviews.ts";
 import { MAX_STORED_REVIEWS, parseTripadvisorReviews, TRIPADVISOR_PAGE_URLS, TRIPADVISOR_URL, type TripadvisorReview } from "../_shared/tripadvisorReviews.ts";
 
 const headers = { ...corsHeaders, "Content-Type": "application/json" };
@@ -59,9 +60,32 @@ Deno.serve(async (request) => {
         console.error(`Tripadvisor page ignored: ${pageUrl}`, parseError);
       }
     }
-    const reviews = [...merged.values()]
+    const tripadvisor = [...merged.values()]
       .sort((a, b) => (b.published_at ?? "").localeCompare(a.published_at ?? ""))
       .slice(0, MAX_STORED_REVIEWS);
+    // Airbnb and Viator: 5 newest each. A failure keeps that site's previous reviews.
+    const { data: previous } = await db.from("tripadvisor_review_snapshot").select("reviews").eq("id", "tocorime").maybeSingle();
+    const previousReviews = (previous?.reviews ?? []) as TripadvisorReview[];
+    const partners: TripadvisorReview[] = [];
+    for (const [source, pageUrl, parse] of [["airbnb", AIRBNB_URL, parseAirbnbReviews], ["viator", VIATOR_URL, parseViatorReviews]] as const) {
+      try {
+        const response = await fetch("https://connector-gateway.lovable.dev/firecrawl/v2/scrape", {
+          method: "POST",
+          headers: { "Content-Type": "application/json", Authorization: `Bearer ${gatewayKey}`, "X-Connection-Api-Key": key },
+          body: JSON.stringify({ url: pageUrl, formats: ["markdown"], maxAge: 0, waitFor: 2000 }),
+          signal: AbortSignal.timeout(90000),
+        });
+        if (!response.ok) throw new Error(`Firecrawl [${response.status}]: ${await response.text()}`);
+        const data = await response.json();
+        creditsUsed += data.data?.creditsUsed ?? data.creditsUsed ?? 0;
+        partners.push(...parse(String(data.data?.markdown ?? "")));
+      } catch (partnerError) {
+        console.error(`${source} reviews kept from previous import:`, partnerError);
+        partners.push(...previousReviews.filter((r) => r.source === source));
+      }
+    }
+    const reviews = [...tripadvisor, ...partners]
+      .sort((a, b) => (b.published_at ?? "").localeCompare(a.published_at ?? ""));
     const syncedAt = new Date().toISOString();
     const { error } = await db.from("tripadvisor_review_snapshot").upsert({ id: "tocorime", source_url: TRIPADVISOR_URL, reviews, synced_at: syncedAt });
     if (error) throw error;
