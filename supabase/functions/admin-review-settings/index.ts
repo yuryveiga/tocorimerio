@@ -26,8 +26,6 @@ Deno.serve(async request => {
     const parsed = bodySchema.safeParse(await request.json().catch(() => null));
     if (!parsed.success) return json({ error: "Configuração inválida", details: parsed.error.flatten() }, 400);
     if (parsed.data.action === "save") {
-      // Google import is deliberately held until the declined connector is set up.
-      if (parsed.data.settings.google.enabled) return json({ error: "A importação Google está pendente de conexão; nenhuma avaliação Google foi carregada." }, 409);
       const { error } = await db.from("site_settings").upsert({ key: REVIEW_SETTINGS_KEY, value: JSON.stringify(parsed.data.settings) }, { onConflict: "key" });
       if (error) throw error;
     }
@@ -37,7 +35,7 @@ Deno.serve(async request => {
       db.from("tripadvisor_sync_status").select("last_attempt_at,last_success_at,last_error").eq("id", "tocorime").maybeSingle(),
     ]);
     for (const result of [settingsResult, snapshotResult, statusResult]) if (result.error) throw result.error;
-    return json({ settings: readReviewSettings(settingsResult.data?.value), snapshot: snapshotResult.data, status: statusResult.data, google_status: "pending_connection" });
+    return json({ settings: readReviewSettings(settingsResult.data?.value), snapshot: snapshotResult.data, status: statusResult.data, google_status: "public_page" });
   } catch (error) {
     console.error("Review settings failed:", error);
     return json({ error: "Não foi possível carregar ou salvar as configurações de Reviews." }, 500);

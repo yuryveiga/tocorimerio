@@ -65,7 +65,7 @@ export default function AdminReviews() {
         if (action === "sync") {
           await invoke("sync-tripadvisor-reviews", {});
           await queryClient.invalidateQueries({ queryKey: ["tripadvisor-review-snapshot"] });
-          toast({ title: "Avaliações atualizadas", description: "Tripadvisor, Airbnb e Viator. Google continua pendente de conexão." });
+          toast({ title: "Avaliações atualizadas", description: "Tripadvisor, Airbnb, Viator e Google. Se uma fonte falhar, suas avaliações anteriores são mantidas." });
         }
         await load();
       }
@@ -97,13 +97,13 @@ export default function AdminReviews() {
       <div className="divide-y divide-border">
         {REVIEW_SOURCES.map(source => {
           const item = sources[source];
-          const pending = source === "google";
+          const pending = false;
           const count = reviews.filter(review => (review.source ?? "tripadvisor") === source).length;
           return <section key={source} className="py-6 flex flex-wrap items-center justify-between gap-5">
             <div className="min-w-0 flex-1 basis-64">
               <h2 className="text-lg font-semibold">{item.label}</h2>
               <p className="text-sm text-muted-foreground mt-1">{pending ? "Pendente de conexão · nenhuma avaliação importada" : `${count} avaliações carregadas`}</p>
-              {pending && <p className="text-sm text-muted-foreground mt-2 max-w-xl">Filtro: somente 5 estrelas. O acesso público do Google retorna até 5 avaliações por relevância, sem garantir as mais recentes.</p>}
+              {source === "google" && <p className="text-sm text-muted-foreground mt-2 max-w-xl">Somente 5 estrelas · página pública. Exibição limitada às avaliações disponíveis; não garante as cinco mais recentes do perfil.</p>}
               <Button asChild variant="link" className="px-0 h-auto mt-2"><a href={item.url} target="_blank" rel="noopener noreferrer">Abrir perfil<ExternalLink className="ml-2 h-3 w-3" /></a></Button>
             </div>
             <div className="flex flex-wrap items-center gap-6">

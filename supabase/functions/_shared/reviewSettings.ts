@@ -1,7 +1,7 @@
 import type { TripadvisorReview } from "./tripadvisorReviews.ts";
 
 export const REVIEW_SETTINGS_KEY = "review_carousel_settings";
-export const GOOGLE_REVIEWS_URL = "https://www.google.com/maps/place//@-22.9542571,-43.1857662,17z/data=!3m1!4b1!4m3!3m2!1s0x2acf3837a7420fe1:0x664e0c0a1047d810!12e1";
+export const GOOGLE_REVIEWS_URL = "https://www.google.com/maps/place/Tocorime+Rio/@-22.9542571,-43.1883411,17z/data=!4m8!3m7!1s0x2acf3837a7420fe1:0x664e0c0a1047d810!8m2!3d-22.9542571!4d-43.1857662!9m1!1b1!16s%2Fg%2F11yxhrmjc9?entry=ttu";
 export const REVIEW_SOURCES = ["tripadvisor", "airbnb", "viator", "google"] as const;
 export type ReviewSource = typeof REVIEW_SOURCES[number];
 export type ReviewSettings = Record<ReviewSource, { enabled: boolean; limit: number }>;

@@ -4,6 +4,8 @@ import { z } from "npm:zod@3";
 import { authenticateCronRequest } from "../_shared/cron-auth.ts";
 import { AIRBNB_URL, parseAirbnbReviews, parseViatorReviews, VIATOR_URL } from "../_shared/partnerReviews.ts";
 import { MAX_STORED_REVIEWS, parseTripadvisorReviews, TRIPADVISOR_PAGE_URLS, TRIPADVISOR_URL, type TripadvisorReview } from "../_shared/tripadvisorReviews.ts";
+import { GOOGLE_REVIEWS_URL } from "../_shared/reviewSettings.ts";
+import { parseGoogleReviews } from "../_shared/googleReviews.ts";
 
 const headers = { ...corsHeaders, "Content-Type": "application/json" };
 Deno.serve(async (request) => {
@@ -22,14 +24,34 @@ Deno.serve(async (request) => {
     if (roleError || !role) return new Response(JSON.stringify({ error: "Unauthorized" }), { status: 401, headers });
   }
   if (request.method !== "POST") return new Response(JSON.stringify({ error: "Method not allowed" }), { status: 405, headers });
-  const parsed = z.object({}).strict().safeParse(await request.json().catch(() => null));
-  if (!parsed.success) return new Response(JSON.stringify({ error: "Expected an empty JSON object" }), { status: 400, headers });
+  const parsed = z.object({ source: z.literal("google").optional() }).strict().safeParse(await request.json().catch(() => null));
+  if (!parsed.success) return new Response(JSON.stringify({ error: "Invalid review source" }), { status: 400, headers });
   const attemptedAt = new Date().toISOString();
   const { data: status } = await db.from("tripadvisor_sync_status").select("last_success_at").eq("id", "tocorime").maybeSingle();
   try {
     const key = Deno.env.get("FIRECRAWL_API_KEY");
     const gatewayKey = Deno.env.get("LOVABLE_API_KEY");
     if (!key || !gatewayKey) throw new Error("Firecrawl connection is unavailable");
+    if (parsed.data.source === "google") {
+      const response = await fetch("https://connector-gateway.lovable.dev/firecrawl/v2/scrape", {
+        method: "POST", headers: { "Content-Type": "application/json", Authorization: `Bearer ${gatewayKey}`, "X-Connection-Api-Key": key },
+        body: JSON.stringify({ url: GOOGLE_REVIEWS_URL, formats: ["markdown"], maxAge: 0, waitFor: 2000 }), signal: AbortSignal.timeout(90000),
+      });
+      if (!response.ok) {
+        const details = await response.text();
+        console.error(`Google scrape [${response.status}]: ${details}`);
+        return new Response(JSON.stringify({ error: "Google collection failed", status: response.status, details }), { status: response.status, headers });
+      }
+      const payload = await response.json();
+      const google = parseGoogleReviews(String(payload.data?.markdown ?? ""));
+      const { data: previous, error: readError } = await db.from("tripadvisor_review_snapshot").select("reviews").eq("id", "tocorime").maybeSingle();
+      if (readError) throw readError;
+      const reviews = [...((previous?.reviews ?? []) as TripadvisorReview[]).filter(r => r.source !== "google"), ...google];
+      const syncedAt = new Date().toISOString();
+      const { error } = await db.from("tripadvisor_review_snapshot").upsert({ id: "tocorime", source_url: TRIPADVISOR_URL, reviews, synced_at: syncedAt });
+      if (error) throw error;
+      return new Response(JSON.stringify({ success: true, google_count: google.length, count: reviews.length, synced_at: syncedAt }), { headers });
+    }
     // Two fixed pages per week (10 reviews each), deterministic parsing and no
     // translation/AI requests. A failure on page 2 never erases page 1.
     const merged = new Map<string, TripadvisorReview>();
@@ -67,7 +89,8 @@ Deno.serve(async (request) => {
     const { data: previous } = await db.from("tripadvisor_review_snapshot").select("reviews").eq("id", "tocorime").maybeSingle();
     const previousReviews = (previous?.reviews ?? []) as TripadvisorReview[];
     const partners: TripadvisorReview[] = [];
-    for (const [source, pageUrl, parse] of [["airbnb", AIRBNB_URL, parseAirbnbReviews], ["viator", VIATOR_URL, parseViatorReviews]] as const) {
+    const warnings: string[] = [];
+    for (const [source, pageUrl, parse] of [["airbnb", AIRBNB_URL, parseAirbnbReviews], ["viator", VIATOR_URL, parseViatorReviews], ["google", GOOGLE_REVIEWS_URL, parseGoogleReviews]] as const) {
       try {
         const response = await fetch("https://connector-gateway.lovable.dev/firecrawl/v2/scrape", {
           method: "POST",
@@ -81,6 +104,7 @@ Deno.serve(async (request) => {
         partners.push(...parse(String(data.data?.markdown ?? "")));
       } catch (partnerError) {
         console.error(`${source} reviews kept from previous import:`, partnerError);
+        warnings.push(`${source}: ${partnerError instanceof Error ? partnerError.message : String(partnerError)}`);
         partners.push(...previousReviews.filter((r) => r.source === source));
       }
     }
@@ -89,7 +113,7 @@ Deno.serve(async (request) => {
     const syncedAt = new Date().toISOString();
     const { error } = await db.from("tripadvisor_review_snapshot").upsert({ id: "tocorime", source_url: TRIPADVISOR_URL, reviews, synced_at: syncedAt });
     if (error) throw error;
-    const { error: statusError } = await db.from("tripadvisor_sync_status").upsert({ id: "tocorime", last_attempt_at: attemptedAt, last_success_at: syncedAt, last_error: null });
+    const { error: statusError } = await db.from("tripadvisor_sync_status").upsert({ id: "tocorime", last_attempt_at: attemptedAt, last_success_at: syncedAt, last_error: warnings.length ? warnings.join("; ").slice(0, 2000) : null });
     if (statusError) throw statusError;
     return new Response(JSON.stringify({ success: true, count: reviews.length, synced_at: syncedAt, credits_used: creditsUsed }), { headers });
   } catch (error) {
