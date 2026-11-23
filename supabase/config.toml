@@ -2,3 +2,6 @@ project_id = "ogzasprtfgimjqrtcseg"
 
 [functions.stripe-webhook]
 verify_jwt = false
+
+[functions.send-review-request]
+verify_jwt = false
