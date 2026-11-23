@@ -74,6 +74,7 @@ const menuGroups = [
       { title: "Blog", url: "/admin/blog", icon: PenTool },
       { title: "Galeria", url: "/admin/gallery", icon: Images },
       { title: "Guias", url: "/admin/guides", icon: UserRound },
+      { title: "Reviews", url: "/admin/reviews", icon: MessageSquare },
     ]
   },
   {

@@ -7,8 +7,10 @@ import { Button } from "@/components/ui/button";
 import { type CarouselApi, Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 import { TRIPADVISOR_URL, type TripadvisorReview } from "../../supabase/functions/_shared/tripadvisorReviews";
 import { REVIEWS_AUTOPLAY_INTERVAL_MS, shouldAutoplayReviews } from "@/lib/carouselAutoplay";
+import { useSiteSettings } from "@/hooks/useSiteData";
+import { readReviewSettings, REVIEW_SETTINGS_KEY, selectCarouselReviews } from "../../supabase/functions/_shared/reviewSettings";
 
-const SOURCE_LABEL = { tripadvisor: "Tripadvisor", airbnb: "Airbnb", viator: "Viator" } as const;
+const SOURCE_LABEL = { tripadvisor: "Tripadvisor", airbnb: "Airbnb", viator: "Viator", google: "Google" } as const;
 
 interface ReviewSnapshot { reviews: TripadvisorReview[]; synced_at: string }
 
@@ -23,13 +25,14 @@ function ReviewAvatar({ review }: { review: TripadvisorReview }) {
 
 export function TripadvisorReviewsCarousel() {
   const { t, language } = useLocale();
+  const { data: siteSettings } = useSiteSettings();
   const { data, isPending } = useQuery({
     queryKey: ["tripadvisor-review-snapshot"],
     queryFn: () => fetchLovable<ReviewSnapshot>("tripadvisor_review_snapshot", "reviews,synced_at"),
     staleTime: 60 * 60 * 1000,
     refetchOnWindowFocus: false,
   });
-  const reviews = data?.[0]?.reviews ?? [];
+  const reviews = selectCarouselReviews(data?.[0]?.reviews ?? [], readReviewSettings(siteSettings?.[REVIEW_SETTINGS_KEY]));
   const [api, setApi] = useState<CarouselApi>();
   const [paused, setPaused] = useState(false);
   const autoplayOn = shouldAutoplayReviews(reviews.length);

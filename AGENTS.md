@@ -1,6 +1,7 @@
 # Architecture rules
 - Match detail availability uses the selected live partner package capped by any local allocation, refreshing while open; legacy match counters must not block available packages.
 - Import Tripadvisor reviews plus the newest Airbnb and Viator reviews (public listing pages, each site falling back to its previous reviews) through a fixed-source, authenticated weekly Firecrawl job with deterministic parsing and service-only snapshot writes; the home carousel reads the last successful public snapshot without scraping on visits or loading third-party widgets.
+- Review carousel visibility/count settings use a validated admin-only endpoint and the shared review selector; unconnected Google imports remain disabled, and public Google snippets must never be represented as a complete newest feed.
 - Public match inventory uses a bounded RPC exposing only availability fields; raw local overrides and administrative metadata remain admin-only.
 - Public blog ratings use an aggregate-only RPC; raw feedback and visitor identifiers are admin-only, with local submission memory and database uniqueness preventing repeated ratings.
 - Public sales inserts must start unpaid, uncancelled, unarchived and without delivery/payment-link fields; payment workers and verified admins retain privileged writes.

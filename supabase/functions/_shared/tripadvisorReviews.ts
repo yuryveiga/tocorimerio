@@ -19,7 +19,7 @@ export interface TripadvisorReview {
   published_at: string | null;
   url: string;
   /** Missing means Tripadvisor. */
-  source?: "tripadvisor" | "airbnb" | "viator";
+  source?: "tripadvisor" | "airbnb" | "viator" | "google";
 }
 
 // Both the Portuguese (www.tripadvisor.com.br) and English (www.tripadvisor.com)

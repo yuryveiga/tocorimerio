@@ -24,3 +24,5 @@
 - [x] Map the 20 supplied keyword opportunities to existing canonical URLs
 - [x] Improve titles, descriptions, headings, and copy without changing URLs or design
 - [ ] Validate prerender output (blocked: the installed Playwright browser version does not match the prerender script)
+- [x] Add Reviews admin settings with per-source visibility/count, last sync and manual refresh; authenticated save/read-back tested, existing 22-review carousel preserved, desktop/mobile without overflow or runtime errors; 15 tests passed, two existing partner tests skipped.
+- [ ] Import Google reviews: blocked by declined Google Maps connection. Source link and five-star filter prepared but Google remains disabled; public Google exposes at most five relevance-ranked reviews, not a guaranteed newest feed.
