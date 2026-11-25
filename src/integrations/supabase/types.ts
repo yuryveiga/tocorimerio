@@ -254,6 +254,7 @@ export type Database = {
           updated_at: string
           valor: number
           valor_cobrado: number
+          vendedor: string | null
         }
         Insert: {
           campos_editados?: string[]
@@ -274,6 +275,7 @@ export type Database = {
           updated_at?: string
           valor?: number
           valor_cobrado?: number
+          vendedor?: string | null
         }
         Update: {
           campos_editados?: string[]
@@ -294,6 +296,7 @@ export type Database = {
           updated_at?: string
           valor?: number
           valor_cobrado?: number
+          vendedor?: string | null
         }
         Relationships: []
       }

@@ -13,7 +13,7 @@ import { useSugestoes } from "./useFin";
 import { FinStripeButton } from "./FinStripeButton";
 
 const hoje = () => new Date().toLocaleDateString("en-CA", { timeZone: "America/Sao_Paulo" });
-const vazio = () => ({ data: hoje(), hotel: "", nome_pax: "", tour: "", valor: "", valor_cobrado: "", guia_responsavel: "", comissao: "", modo_pagamento: "Pix", observacoes: "" });
+const vazio = () => ({ data: hoje(), hotel: "", nome_pax: "", tour: "", valor: "", valor_cobrado: "", guia_responsavel: "", vendedor: "", comissao: "", modo_pagamento: "Pix", observacoes: "" });
 type Desp = { descricao: string; valor: string };
 const num = (s: string) => { const n = Number(String(s).replace(/\./g, "").replace(",", ".")); return Number.isFinite(n) ? n : NaN; };
 const numOpt = (s: string) => (String(s).trim() === "" ? null : num(s));
@@ -36,7 +36,7 @@ export default function FinForm() {
       if (!v) { toast.error("Venda não encontrada"); return; }
       setOrig(v);
       const s = (x: unknown) => (x === null || x === undefined ? "" : String(x).replace(".", ","));
-      setF({ data: v.data, hotel: v.hotel || "", nome_pax: v.nome_pax, tour: v.tour, valor: s(v.valor), valor_cobrado: s(v.valor_cobrado), guia_responsavel: v.guia_responsavel || "", comissao: s(v.comissao), modo_pagamento: v.modo_pagamento, observacoes: v.observacoes || "" });
+      setF({ data: v.data, hotel: v.hotel || "", nome_pax: v.nome_pax, tour: v.tour, valor: s(v.valor), valor_cobrado: s(v.valor_cobrado), guia_responsavel: v.guia_responsavel || "", vendedor: v.vendedor || "", comissao: s(v.comissao), modo_pagamento: v.modo_pagamento, observacoes: v.observacoes || "" });
       setDesp((d || []).map(x => ({ descricao: x.descricao, valor: s(x.valor) })));
     })();
   }, [id]);
@@ -57,7 +57,7 @@ export default function FinForm() {
     if ([valor, cobrado].some(Number.isNaN) || (comissao !== null && Number.isNaN(comissao)) || desp.some(d => Number.isNaN(num(d.valor || "0"))))
       return toast.error("Confira os valores numéricos.");
     const row = { data: f.data, hotel: f.hotel.trim() || null, nome_pax: f.nome_pax.trim(), tour: f.tour.trim(), valor, valor_cobrado: cobrado,
-      guia_responsavel: f.guia_responsavel.trim() || null, comissao, despesas: Math.round(totalDesp * 100) / 100,
+      guia_responsavel: f.guia_responsavel.trim() || null, vendedor: f.vendedor.trim() || null, comissao, despesas: Math.round(totalDesp * 100) / 100,
       modo_pagamento: f.modo_pagamento, observacoes: f.observacoes.trim() || null };
     setSaving(true);
     try {
@@ -96,6 +96,7 @@ export default function FinForm() {
         <div><Label htmlFor="f-4282">Valor (tabela)</Label><Input id="f-4282" {...money} value={f.valor} onChange={set("valor")} className="h-12" /></div>
         <div><Label htmlFor="f-9646">Valor cobrado</Label><Input id="f-9646" {...money} value={f.valor_cobrado} onChange={set("valor_cobrado")} className="h-12" /></div>
         <div><Label htmlFor="f-888">Guia responsável</Label><Input id="f-888" list="fin-guias" value={f.guia_responsavel} onChange={set("guia_responsavel")} className="h-12" /></div>
+        <div><Label htmlFor="f-vend">Quem vendeu (recebe a comissão)</Label><Input id="f-vend" value={f.vendedor} onChange={set("vendedor")} className="h-12" /></div>
         <div><div className="flex items-center justify-between"><Label htmlFor="f-2426">Comissão ({comPct ? "%" : "R$"})</Label>
           <div className="flex rounded-md border border-input text-xs overflow-hidden" role="group" aria-label="Tipo de comissão">
             <button type="button" onClick={() => setComPct(false)} className={`px-2 py-1 ${!comPct ? "bg-primary text-primary-foreground" : ""}`}>R$</button>

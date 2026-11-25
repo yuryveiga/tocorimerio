@@ -1,0 +1,1 @@
+ALTER TABLE public.fin_vendas ADD COLUMN IF NOT EXISTS vendedor text;
