@@ -2,7 +2,8 @@ import { optionExtraPerPerson } from "@/utils/pricing";
 import { useState, useEffect, useMemo, useCallback, useRef, lazy, Suspense } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
-import { Clock, Users, MapPin, Calendar, Check, ChevronDown, ChevronUp, ArrowLeft, ArrowRight, X, Star, Shield, ShieldCheck, Utensils, Activity, Sun, Sunrise, Moon, Plus, Minus, Gauge, Globe, Youtube, Cloud, Droplets, Wind, ShoppingCart, Facebook, MessageCircle, Link2, MessageSquare } from "lucide-react";
+import { Clock, Users, MapPin, Calendar, Check, ChevronDown, ChevronUp, ArrowLeft, ArrowRight, ArrowLeftRight, X, Star, Shield, ShieldCheck, Utensils, Activity, Sun, Sunrise, Moon, Plus, Minus, Gauge, Globe, Youtube, Cloud, Droplets, Wind, ShoppingCart, Facebook, MessageCircle, Link2, MessageSquare } from "lucide-react";
+import { getTransferDirection } from "@/lib/transferOption";
 import { Button } from "@/components/ui/button";
 import { useQuery } from "@tanstack/react-query";
 import { cn } from "@/lib/utils";
@@ -122,6 +123,7 @@ export function PasseioDetalhe() {
   const bookingCardRef = useRef<HTMLDivElement | null>(null);
   const dateFieldRef = useRef<HTMLDivElement | null>(null);
   const [selectedOptionIdx, setSelectedOptionIdx] = useState(0);
+  const [swappedOptions, setSwappedOptions] = useState<Record<number, boolean>>({});
   const [imageDimensions, setImageDimensions] = useState<{ [key: string]: { width: number, height: number } }>({});
 
   const siteTitle = siteSettings?.site_title?.split('|')[0].trim() || "Eco-Wanderlust";
@@ -774,7 +776,7 @@ export function PasseioDetalhe() {
       group_price: tour.pricing_model === 'group' ? tour.price : undefined,
       max_group_size: tour.max_group_size,
       selected_option: tour.use_custom_options && (tour.custom_options_json as Record<string, unknown>[])?.[selectedOptionIdx] ? {
-        title: String((tour.custom_options_json as Record<string, unknown>[])[selectedOptionIdx].title),
+        title: getTransferDirection((tour.custom_options_json as Record<string, unknown>[])[selectedOptionIdx], !!swappedOptions[selectedOptionIdx]).title,
         extra_price: Number((tour.custom_options_json as Record<string, unknown>[])[selectedOptionIdx].price)
       } : undefined
     });
@@ -1196,7 +1198,9 @@ export function PasseioDetalhe() {
                    </h2>
                    
                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                     {(tour.custom_options_json as Record<string, unknown>[]).map((option, idx) => (
+                     {(tour.custom_options_json as Record<string, unknown>[]).map((option, idx) => {
+                       const dir = getTransferDirection(option, !!swappedOptions[idx]);
+                       return (
                        <div 
                          key={idx}
                          onClick={() => setSelectedOptionIdx(idx)}
@@ -1215,13 +1219,27 @@ export function PasseioDetalhe() {
                          <div className="space-y-4">
                            <div className="space-y-1">
                              <h3 className={`text-xl font-black transition-colors ${selectedOptionIdx === idx ? 'text-primary' : 'text-foreground'}`}>
-                               {option.from || option.to ? (
+                               {dir.from || dir.to ? (
                                  <span className="flex flex-col gap-1">
-                                   {option.from ? <span><span className="text-xs uppercase tracking-widest text-muted-foreground block">{language === 'pt' ? 'Saindo de' : language === 'es' ? 'Saliendo de' : 'From'}</span>{String(option.from)}</span> : null}
-                                   {option.to ? <span><span className="text-xs uppercase tracking-widest text-muted-foreground block">{language === 'pt' ? 'Destino' : language === 'es' ? 'Destino' : 'To'}</span>{String(option.to)}</span> : null}
+                                   {dir.from ? <span><span className="text-xs uppercase tracking-widest text-muted-foreground block">{language === 'pt' ? 'Saindo de' : language === 'es' ? 'Saliendo de' : 'From'}</span>{dir.from}</span> : null}
+                                   {dir.to ? <span><span className="text-xs uppercase tracking-widest text-muted-foreground block">{language === 'pt' ? 'Destino' : language === 'es' ? 'Destino' : 'To'}</span>{dir.to}</span> : null}
                                  </span>
                                ) : String(option.title || "")}
                              </h3>
+                             {dir.hasRoute && (
+                               <button
+                                 type="button"
+                                 onClick={(e) => {
+                                   e.stopPropagation();
+                                   setSwappedOptions(prev => ({ ...prev, [idx]: !prev[idx] }));
+                                 }}
+                                 aria-label={language === 'pt' ? 'Inverter origem e destino' : language === 'es' ? 'Invertir origen y destino' : 'Swap origin and destination'}
+                                 className="inline-flex items-center gap-2 rounded-full border border-primary/30 bg-background px-3 py-1.5 text-[11px] font-black uppercase tracking-widest text-primary transition-colors hover:bg-primary/10"
+                               >
+                                 <ArrowLeftRight className="w-3.5 h-3.5" />
+                                 {language === 'pt' ? 'Inverter' : language === 'es' ? 'Invertir' : 'Swap'}
+                               </button>
+                             )}
                              {Number(option.price || 0) > 0 && (
                                <p className="text-primary font-black text-sm">
                                  +{formatPrice(Number(option.price))} · {language === 'pt' ? 'até 4 pessoas' : language === 'es' ? 'hasta 4 personas' : 'up to 4 people'}
@@ -1260,7 +1278,8 @@ export function PasseioDetalhe() {
                            </div>
                          </div>
                        </div>
-                     ))}
+                       );
+                     })}
                    </div>
                    {quantity > 4 && (
                      <div role="alert" className="flex items-start gap-3 rounded-2xl border border-primary/30 bg-primary/5 p-5 text-sm font-semibold text-foreground">
