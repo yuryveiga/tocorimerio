@@ -26,3 +26,9 @@
 - [ ] Validate prerender output (blocked: the installed Playwright browser version does not match the prerender script)
 - [x] Add Reviews admin settings with per-source visibility/count, last sync and manual refresh; authenticated save/read-back tested, existing 22-review carousel preserved, desktop/mobile without overflow or runtime errors; 15 tests passed, two existing partner tests skipped.
 - [x] Import five real five-star Google reviews from the user's new public Maps link via the existing Firecrawl connection; enabled Google in admin and verified saved settings plus 27 home cards (five Google, all five-star). Weekly import includes Google with prior-snapshot fallback; relative dates kept as labels, no exact date fabrication, and limited public selection disclosed. 18 tests passed; frontend awaits publication.
+
+## Google Ads — passeios (2026-11-25)
+- [ ] Criar 3 campanhas Search pausadas (Cristo, Rocinha, Pedra da Gávea)
+- [ ] Incluir Europa e Reino Unido nos países das 3 campanhas
+- [ ] Instalar aviso de cookies (consentimento de anúncios) no site antes de ligar
+- [x] Remover aviso de conversão para conta Google Ads alheia (index.html)
