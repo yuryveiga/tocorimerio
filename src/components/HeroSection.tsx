@@ -31,7 +31,8 @@ export function HeroSection() {
 
   // German/French/Italian use the built-in translated headline (admin texts exist only in PT/EN/ES).
   const extraLang = ['de', 'fr', 'it'].includes(useSiteLanguage());
-  const heroTitle = (!extraLang && (siteSettings[heroTitleKey] || siteSettings['hero_title'])) ||
+  const siteLang = useSiteLanguage();
+  const heroTitle = (extraLang ? siteSettings[`hero_title_${siteLang}`] : (siteSettings[heroTitleKey] || siteSettings['hero_title'])) ||
     tl(language, { pt: 'Passeios Privados no Rio de Janeiro com Guias Locais', es: 'Tours Privados en Río de Janeiro con Guías Locales', en: 'Private Tours in Rio de Janeiro with Local Guides', de: "Private Touren in Rio de Janeiro mit lokalen Guides", fr: "Visites privées à Rio de Janeiro avec des guides locaux", it: "Tour Privati a Rio de Janeiro con Guide Locali" });
   const heroSubtitle = (!extraLang && (siteSettings[heroSubtitleKey] || siteSettings['hero_subtitle'])) ||
     tl(language, { pt: 'Descubra o Rio com segurança: guias locais bilíngues, transporte privado e experiências sob medida.', es: 'Descubre Río con seguridad: guías locales bilingües, transporte privado y experiencias a medida.', en: 'Discover Rio safely with bilingual local guides, private transportation and tailor-made experiences.', de: "Entdecken Sie Rio sicher mit zweisprachigen lokalen Guides, privatem Transport und maßgeschneiderten Erlebnissen.", fr: "Découvrez Rio en toute sécurité avec des guides locaux bilingues, un transport privé et des expériences sur mesure.", it: "Scopri Rio in totale sicurezza con guide locali bilingui, trasporto privato ed esperienze su misura." });
