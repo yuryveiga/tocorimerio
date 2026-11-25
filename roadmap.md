@@ -35,3 +35,4 @@
 - [x] Corrigir marcação de propaganda política da UE (Cristo, Rocinha) para 'não contém'
 - [x] Contar só reservas pagas como resultado (visitas ao carrinho/experiências viram secundárias)
 - [x] Ligar as 3 campanhas (R$ 19,50/dia) após aprovação
+- [x] Página de política de privacidade PT/EN/ES ligada ao aviso de cookies e ao rodapé

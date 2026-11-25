@@ -80,6 +80,7 @@ const AdminAnalytics         = lazy(() => import("./pages/AdminAnalytics"));
 const Blog                   = lazy(() => import("./pages/Blog"));
 const Contact                = lazy(() => import("./pages/Contact"));
 const AboutUs                = lazy(() => import("./pages/AboutUs"));
+const PrivacyPolicy          = lazy(() => import("./pages/PrivacyPolicy"));
 const Cart                   = lazy(() => import("./pages/Cart"));
 const MaracanaCalendar       = lazy(() => import("./pages/MaracanaCalendar"));
 const GenericPage            = lazy(() => import("./pages/GenericPage"));
@@ -240,6 +241,8 @@ const App = ({ queryClient: externalQueryClient }: { queryClient?: QueryClient }
                       <Route path="/blog" element={<Blog />} />
                       <Route path="/contact" element={<Contact />} />
                       <Route path="/about-us" element={<AboutUs />} />
+                      <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+                      <Route path="/politica-de-privacidade" element={<Navigate to="/privacy-policy" replace />} />
                       <Route path="/blog/:slug" element={<BlogPost />} />
                       <Route path="/carrinho" element={<Cart />} />
                       <Route path="/confirmacao" element={<CheckoutSuccess />} />

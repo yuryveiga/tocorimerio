@@ -10,6 +10,7 @@ export const OPEN_COOKIE_SETTINGS = "open-cookie-settings";
 type Copy = Record<string, string>;
 const COPY: Record<"pt" | "en" | "es", Copy> = {
   pt: {
+    policy: "Política de privacidade",
     title: "Cookies e privacidade",
     body: "Contamos as visitas sem identificar você. Se aceitar, também medimos cliques e outras ações, e usamos cookies para medir e melhorar nossos anúncios.",
     accept: "Aceitar todos", reject: "Recusar todos", settings: "Configurar cookies", save: "Salvar escolhas",
@@ -19,6 +20,7 @@ const COPY: Record<"pt" | "en" | "es", Copy> = {
     gpc: "Seu navegador pede para não ser rastreado, então esta escolha fica desativada.",
   },
   en: {
+    policy: "Privacy policy",
     title: "Cookies & privacy",
     body: "We count visits without identifying you. If you accept, we also measure clicks and other actions, and use cookies to measure and improve our ads.",
     accept: "Accept all", reject: "Reject all", settings: "Cookie settings", save: "Save choices",
@@ -28,6 +30,7 @@ const COPY: Record<"pt" | "en" | "es", Copy> = {
     gpc: "Your browser's privacy signal applies, so these choices are turned off.",
   },
   es: {
+    policy: "Política de privacidad",
     title: "Cookies y privacidad",
     body: "Contamos las visitas sin identificarte. Si aceptas, también medimos clics y otras acciones, y usamos cookies para medir y mejorar nuestros anuncios.",
     accept: "Aceptar todas", reject: "Rechazar todas", settings: "Configurar cookies", save: "Guardar opciones",
@@ -95,7 +98,7 @@ export function CookieConsent() {
       className="fixed bottom-4 left-4 right-4 z-[60] mx-auto max-w-xl rounded-2xl border border-border bg-card p-5 text-card-foreground shadow-xl outline-none md:left-6 md:right-auto"
     >
       <h2 className="font-serif text-lg font-bold">{c.title}</h2>
-      <p className="mt-2 text-sm text-muted-foreground">{c.body}</p>
+      <p className="mt-2 text-sm text-muted-foreground">{c.body} <a href="/privacy-policy" className="font-medium text-foreground underline underline-offset-4">{c.policy}</a></p>
       {showSettings && (
         <div className="mt-4 space-y-3">
           <div className="flex items-start justify-between gap-4 rounded-lg bg-muted/50 p-3">
@@ -121,6 +124,9 @@ export function CookieConsent() {
     </div>
   );
 }
+
+export const privacyPolicyLabel = (language: string) =>
+  COPY[(language === "pt" || language === "es" ? language : "en") as "pt" | "en" | "es"].policy;
 
 export const cookieSettingsLabel = (language: string) =>
   COPY[(language === "pt" || language === "es" ? language : "en") as "pt" | "en" | "es"].settings;
