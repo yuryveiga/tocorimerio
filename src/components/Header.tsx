@@ -231,12 +231,6 @@ export function Header({ forceLanguage }: { forceLanguage?: 'pt' | 'en' | 'es' }
                   <DropdownMenuItem onClick={() => setLanguage('es')} className="gap-2 font-bold text-xs rounded-lg cursor-pointer">
                     <span>🇪🇸</span> Español
                   </DropdownMenuItem>
-                  <DropdownMenuItem onClick={() => setLanguage('zh-CN')} className="gap-2 font-bold text-xs rounded-lg cursor-pointer">
-                    <span>🇨🇳</span> 简体中文
-                  </DropdownMenuItem>
-                  <DropdownMenuItem onClick={() => setLanguage('zh-TW')} className="gap-2 font-bold text-xs rounded-lg cursor-pointer">
-                    <span>🇹🇼</span> 繁體中文
-                  </DropdownMenuItem>
                   
                   <div className="h-px bg-border/50 my-2" />
                   
@@ -416,7 +410,7 @@ export function Header({ forceLanguage }: { forceLanguage?: 'pt' | 'en' | 'es' }
                   <div>
                     <p className="text-[10px] font-black uppercase tracking-widest text-muted-foreground/60 mb-2">{t("idioma") || "Idioma"}</p>
                     <div className="flex flex-wrap gap-2">
-                      {([['pt','🇧🇷 PT'],['en','🇺🇸 EN'],['es','🇪🇸 ES'],['zh-CN','🇨🇳 ZH'],['zh-TW','🇹🇼 繁']] as const).map(([code, label]) => (
+                      {([['pt','🇧🇷 PT'],['en','🇺🇸 EN'],['es','🇪🇸 ES']] as const).map(([code, label]) => (
                         <button
                           key={code}
                           onClick={() => setLanguage(code)}

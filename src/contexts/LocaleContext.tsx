@@ -39,8 +39,8 @@ const detectLocale = (): { language: Language; currency: Currency } => {
       pt:    { language: 'pt',    currency: 'BRL' },
       en:    { language: 'en',    currency: 'USD' },
       es:    { language: 'es',    currency: 'USD' },
-      'zh-cn': { language: 'zh-CN', currency: 'CNY' },
-      'zh-tw': { language: 'zh-TW', currency: 'CNY' },
+      'zh-cn': { language: 'en', currency: 'USD' },
+      'zh-tw': { language: 'en', currency: 'USD' },
     };
     const match = map[urlLang.toLowerCase()];
     if (match) return match;
@@ -52,7 +52,7 @@ const detectLocale = (): { language: Language; currency: Currency } => {
     if (raw) {
       const parsed = JSON.parse(raw);
       const age = Date.now() - (parsed?.savedAt ?? 0);
-      if (parsed?.language && parsed?.currency && age < TTL_MS) {
+      if (parsed?.language && parsed?.currency && age < TTL_MS && !String(parsed.language).startsWith('zh')) {
         return { language: parsed.language, currency: parsed.currency };
       }
       // Expired — remove stale entry so detection runs fresh
@@ -77,12 +77,6 @@ const detectLocale = (): { language: Language; currency: Currency } => {
 
   if (primary.startsWith('es')) return { language: 'es', currency: 'USD' };
 
-  if (primary.startsWith('zh')) {
-    return {
-      language: primary.includes('tw') || primary.includes('hk') ? 'zh-TW' : 'zh-CN',
-      currency: 'CNY',
-    };
-  }
 
   return { language: 'en', currency: 'USD' };
 };
@@ -111,8 +105,8 @@ export const LocaleProvider = ({ children }: { children: ReactNode }) => {
       pt:      { language: 'pt',    currency: 'BRL' },
       en:      { language: 'en',    currency: 'USD' },
       es:      { language: 'es',    currency: 'USD' },
-      'zh-cn': { language: 'zh-CN', currency: 'CNY' },
-      'zh-tw': { language: 'zh-TW', currency: 'CNY' },
+      'zh-cn': { language: 'en', currency: 'USD' },
+      'zh-tw': { language: 'en', currency: 'USD' },
     };
     const match = map[urlLang.toLowerCase()];
     if (match && match.language !== language) {
