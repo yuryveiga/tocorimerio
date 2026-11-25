@@ -106,6 +106,8 @@ const PasseiosIndex          = lazy(() => import("./pages/PasseiosIndex"));
 const JogoLanding            = lazy(() => import("./pages/JogoLanding"));
 const Sitemap                = lazy(() => import("./pages/Sitemap"));
 const PasseiosCategoria      = lazy(() => import("./pages/PasseiosCategoria"));
+const VendasHome = lazy(() => import("./pages/vendas/VendasHome"));
+const VendasCategoria = lazy(() => import("./pages/vendas/VendasCategoria"));
 const Experiences            = lazy(() => import("./pages/Experiences"));
 const ShortLinkRedirect      = lazy(() => import("./pages/ShortLinkRedirect"));
 const PrivateGuideRio        = lazy(() => import("./pages/PrivateGuideRio"));
@@ -268,6 +270,8 @@ const App = ({ queryClient: externalQueryClient }: { queryClient?: QueryClient }
                       <Route path="/our-tours/index.html" element={<Navigate to="/passeio" replace />} />
                       <Route path="/passeios" element={<Navigate to="/passeio" replace />} />
                       <Route path="/passeios/:categoria" element={<PasseiosCategoria />} />
+                      <Route path="/vendas" element={<VendasHome />} />
+                      <Route path="/vendas/:slug" element={<VendasCategoria />} />
                       <Route path="/city-tour" element={<PasseiosCategoria categoriaOverride="city-tour" pathOverride="/city-tour" />} />
                       <Route path="/hiking" element={<PasseiosCategoria categoriaOverride="trilha" pathOverride="/hiking" />} />
                       <Route path="/one-day" element={<PasseiosCategoria categoriaOverride="um-dia" pathOverride="/one-day" />} />
