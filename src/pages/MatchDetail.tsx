@@ -1,3 +1,4 @@
+import { goToPayment } from "@/lib/vendasFrame";
 import { tl } from "@/lib/tl";
 import { useState, useEffect, useMemo } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
@@ -307,7 +308,7 @@ export default function MatchDetail() {
       
       const sessionData = await response.json();
       if (sessionData.url) {
-        window.location.href = sessionData.url;
+        goToPayment(sessionData.url);
       } else {
         throw new Error(sessionData.error || "Payment error");
       }

@@ -83,11 +83,13 @@ import { captureAttribution, initWhatsappTracking } from "./lib/analytics";
 captureAttribution();
 initWhatsappTracking();
 
+import { mountVendasFrame } from "./lib/vendasFrame";
 const rootElement = document.getElementById("root")!;
+const framedShell = mountVendasFrame(rootElement);
 
 
 
-createRoot(rootElement).render(
+if (!framedShell) createRoot(rootElement).render(
   <HelmetProvider>
     <BrowserRouter>
       <App />

@@ -1,3 +1,4 @@
+import { goToPayment } from "@/lib/vendasFrame";
 import { useState, useEffect } from "react";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
@@ -115,7 +116,7 @@ const Cart = () => {
 
       if (functionError) throw functionError;
       if (functionData?.url) {
-        window.location.href = functionData.url;
+        goToPayment(functionData.url);
       }
     } catch (error: unknown) {
       console.error("Checkout error details:", error);
