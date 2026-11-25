@@ -31,6 +31,7 @@ const MagneticCursor  = lazy(() => import("./components/MagneticCursor").then(m 
  * Toast layers are never visible on first paint — mount them once the browser is
  * idle so their JS (radix-toast + sonner) stays off the critical path.
  */
+import { CookieConsent } from "@/components/CookieConsent";
 const DeferredToasters = () => {
   const [ready, setReady] = useState(false);
   useEffect(() => {
@@ -217,6 +218,7 @@ const App = ({ queryClient: externalQueryClient }: { queryClient?: QueryClient }
             <SiteDataReadyNotifier />
             <CurrencyProvider>
               <LocaleProvider>
+                <CookieConsent />
                 <CartProvider>
                   <AnalyticsTracker />
                   <SchemaGuard />

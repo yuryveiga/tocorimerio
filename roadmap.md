@@ -30,6 +30,6 @@
 ## Google Ads — passeios (2026-11-25)
 - [x] Criar 3 campanhas Search pausadas (Cristo, Rocinha, Pedra da Gávea)
 - [x] Incluir Europa e Reino Unido nos países das 3 campanhas
-- [ ] Instalar aviso de cookies (consentimento de anúncios) no site antes de ligar
+- [x] Instalar aviso de cookies (consentimento de anúncios) no site antes de ligar
 - [x] Remover aviso de conversão para conta Google Ads alheia (index.html)
 - [x] Corrigir marcação de propaganda política da UE (Cristo, Rocinha) para 'não contém'

@@ -5,6 +5,7 @@ import { useLocale } from "@/contexts/LocaleContext";
 import { OptimizedImage } from "./OptimizedImage";
 import { PaymentLogos } from "./PaymentLogos";
 import { buildWhatsappLink } from "@/lib/whatsappMessage";
+import { OPEN_COOKIE_SETTINGS, cookieSettingsLabel } from "@/components/CookieConsent";
 
 const iconMap: Record<string, React.ElementType> = {
   Instagram, MapPin, Phone, Mail, Music, Facebook, Youtube,
@@ -288,6 +289,9 @@ export function Footer() {
             </div>
           </div>
         </div>
+      </div>
+      <div className="pb-6 text-center">
+                <button type="button" onClick={() => window.dispatchEvent(new Event(OPEN_COOKIE_SETTINGS))} className="text-[hsl(140,10%,96%)]/60 text-xs underline underline-offset-4 hover:text-[hsl(140,10%,96%)]">{cookieSettingsLabel(language)}</button>
       </div>
     </footer>
   );

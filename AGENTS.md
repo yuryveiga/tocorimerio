@@ -20,3 +20,4 @@
 - Public checkout prices are re-derived server-side from the tour catalogue or partner match packages and bound to the customer's unpaid reservation; checkout confirmation reads/writes reservations only via the Stripe session id, so URLs with sale ids alone expose nothing.
 - Admin translate buttons call the admin-only `translate-text` function (Lovable AI); the free Google endpoint was rate-limited (429).
 - Weekly Reddit ticket-question alerts run in `reddit-ticket-questions` (Firecrawl search+scrape, max 5 posts, one low-effort AI reply each with fixed-template fallback, owner email via Resend); it never posts to Reddit, avoiding spam bans and AI cost.
+- Cookie consent lives in `src/lib/consent.ts` (skill module) with Consent Mode defaults first in `index.html` and the PT/EN/ES banner in `src/components/CookieConsent.tsx`; tools that ignore Consent Mode (Clarity) load only via `canTrack`, so ads/analytics respect EU/UK choices.
