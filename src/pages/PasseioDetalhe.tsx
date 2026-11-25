@@ -34,7 +34,7 @@ import {
 } from "@/components/ui/carousel";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Label } from "@/components/ui/label";
-import { Maximize2, Calendar as CalendarIcon } from "lucide-react";
+import { Maximize2, Info, Calendar as CalendarIcon } from "lucide-react";
 import { Calendar as CalendarUI } from "@/components/ui/calendar";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { format, parseISO, isPast, isToday } from "date-fns";
@@ -1219,7 +1219,7 @@ export function PasseioDetalhe() {
                              </h3>
                              {Number(option.price || 0) > 0 && (
                                <p className="text-primary font-black text-sm">
-                                 +{formatPrice(Number(option.price))} · até 4 pessoas
+                                 +{formatPrice(Number(option.price))} · {language === 'pt' ? 'até 4 pessoas' : language === 'es' ? 'hasta 4 personas' : 'up to 4 people'}
                                </p>
                              )}
                            </div>
@@ -1257,6 +1257,18 @@ export function PasseioDetalhe() {
                        </div>
                      ))}
                    </div>
+                   {quantity > 4 && (
+                     <div role="alert" className="flex items-start gap-3 rounded-2xl border border-primary/30 bg-primary/5 p-5 text-sm font-semibold text-foreground">
+                       <Info className="w-5 h-5 text-primary shrink-0 mt-0.5" />
+                       <span>
+                         {language === 'pt'
+                           ? 'Os valores das opções valem para até 4 pessoas. Para grupos maiores, entre em contato conosco.'
+                           : language === 'es'
+                           ? 'Los precios de las opciones son para hasta 4 personas. Para grupos más grandes, contáctanos.'
+                           : 'Option prices are for up to 4 people. For larger groups, please contact us.'}
+                       </span>
+                     </div>
+                   )}
                  </div>
                )}
 

@@ -33,7 +33,7 @@ export function CustomOptionsEditor({ enabled, onEnabledChange, value, onChange 
         </label>
       </div>
       <p className="text-xs text-muted-foreground">
-        O cliente escolhe uma opção. O preço é fixo por carro, para até 4 pessoas (5 a 8 pessoas pagam 2 carros, e assim por diante). Use 0 para uma opção sem custo extra.
+        O cliente escolhe uma opção. O preço é fixo para até 4 pessoas. Acima de 4, o cliente vê um aviso para entrar em contato. Use 0 para uma opção sem custo extra.
       </p>
 
       {value.map((o, i) => (
@@ -44,7 +44,7 @@ export function CustomOptionsEditor({ enabled, onEnabledChange, value, onChange 
               <Input value={o.title} placeholder="Ex.: Transfer saindo de Copacabana" onChange={(e) => update(i, { title: e.target.value })} />
             </div>
             <div className="space-y-1">
-              <Label className="text-xs">Preço por carro, até 4 pessoas (R$)</Label>
+              <Label className="text-xs">Preço até 4 pessoas (R$)</Label>
               <Input type="number" min={0} step="0.01" value={o.price} onChange={(e) => update(i, { price: Math.max(0, Number(e.target.value) || 0) })} />
             </div>
             <Button type="button" variant="ghost" size="icon" aria-label="Remover opção" onClick={() => onChange(value.filter((_, idx) => idx !== i))}>
