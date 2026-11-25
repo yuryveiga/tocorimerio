@@ -202,6 +202,101 @@ export type Database = {
         }
         Relationships: []
       }
+      fin_despesas: {
+        Row: {
+          created_at: string
+          descricao: string
+          id: string
+          valor: number
+          venda_id: string
+        }
+        Insert: {
+          created_at?: string
+          descricao?: string
+          id?: string
+          valor?: number
+          venda_id: string
+        }
+        Update: {
+          created_at?: string
+          descricao?: string
+          id?: string
+          valor?: number
+          venda_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "fin_despesas_venda_id_fkey"
+            columns: ["venda_id"]
+            isOneToOne: false
+            referencedRelation: "fin_vendas"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      fin_vendas: {
+        Row: {
+          campos_editados: string[]
+          comissao: number | null
+          created_at: string
+          created_by: string | null
+          data: string
+          despesas: number
+          guia_responsavel: string | null
+          hotel: string | null
+          id: string
+          id_externo: string | null
+          modo_pagamento: string
+          nome_pax: string
+          observacoes: string | null
+          origem: Database["public"]["Enums"]["fin_origem"]
+          tour: string
+          updated_at: string
+          valor: number
+          valor_cobrado: number
+        }
+        Insert: {
+          campos_editados?: string[]
+          comissao?: number | null
+          created_at?: string
+          created_by?: string | null
+          data?: string
+          despesas?: number
+          guia_responsavel?: string | null
+          hotel?: string | null
+          id?: string
+          id_externo?: string | null
+          modo_pagamento?: string
+          nome_pax?: string
+          observacoes?: string | null
+          origem?: Database["public"]["Enums"]["fin_origem"]
+          tour?: string
+          updated_at?: string
+          valor?: number
+          valor_cobrado?: number
+        }
+        Update: {
+          campos_editados?: string[]
+          comissao?: number | null
+          created_at?: string
+          created_by?: string | null
+          data?: string
+          despesas?: number
+          guia_responsavel?: string | null
+          hotel?: string | null
+          id?: string
+          id_externo?: string | null
+          modo_pagamento?: string
+          nome_pax?: string
+          observacoes?: string | null
+          origem?: Database["public"]["Enums"]["fin_origem"]
+          tour?: string
+          updated_at?: string
+          valor?: number
+          valor_cobrado?: number
+        }
+        Relationships: []
+      }
       guides: {
         Row: {
           bio: string | null
@@ -1371,6 +1466,15 @@ export type Database = {
         }
         Returns: undefined
       }
+      fin_is_football: {
+        Args: { s: Database["public"]["Tables"]["sales"]["Row"] }
+        Returns: boolean
+      }
+      fin_sync_site_sales: { Args: never; Returns: number }
+      fin_upsert_from_sale: {
+        Args: { s: Database["public"]["Tables"]["sales"]["Row"] }
+        Returns: undefined
+      }
       get_blog_rating_summary: {
         Args: { _post_id: string }
         Returns: {
@@ -1462,6 +1566,7 @@ export type Database = {
     }
     Enums: {
       app_role: "admin" | "user"
+      fin_origem: "site" | "manual"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -1590,6 +1695,7 @@ export const Constants = {
   public: {
     Enums: {
       app_role: ["admin", "user"],
+      fin_origem: ["site", "manual"],
     },
   },
 } as const

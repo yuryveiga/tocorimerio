@@ -17,7 +17,7 @@ export const useAnalytics = () => {
   const location = useLocation();
 
   useEffect(() => {
-    if (location.pathname.startsWith("/admin")) {
+    if ((location.pathname.startsWith("/admin") || location.pathname.startsWith("/financeiro"))) {
       return;
     }
 

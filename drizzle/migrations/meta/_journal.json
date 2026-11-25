@@ -78,6 +78,13 @@
       "when": 1795628841430,
       "tag": "0010_add_de_fr_it_content_columns",
       "breakpoints": true
+    },
+    {
+      "idx": 11,
+      "version": "7",
+      "when": 1795646671035,
+      "tag": "0011_financeiro",
+      "breakpoints": true
     }
   ]
 }

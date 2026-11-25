@@ -7,6 +7,7 @@ Allow: /
 
 # Private / transactional areas (no SEO value)
 Disallow: /admin
+Disallow: /financeiro
 Disallow: /api
 Disallow: /carrinho
 Disallow: /checkout

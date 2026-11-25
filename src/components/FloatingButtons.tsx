@@ -10,7 +10,7 @@ export function FloatingButtons() {
   const { language } = useLocale();
   const location = useLocation();
   const isMobile = useIsMobile();
-  const isAdmin = location.pathname.startsWith('/admin');
+  const isAdmin = (location.pathname.startsWith('/admin') || location.pathname.startsWith('/financeiro'));
 
   useEffect(() => {
     if (isAdmin) return;

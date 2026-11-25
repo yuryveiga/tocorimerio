@@ -23,3 +23,4 @@
 - Cookie consent lives in `src/lib/consent.ts` (skill module) with Consent Mode defaults first in `index.html` and the PT/EN/ES banner in `src/components/CookieConsent.tsx`; tools that ignore Consent Mode (Clarity) load only via `canTrack`, so ads/analytics respect EU/UK choices.
 
 - German/French/Italian: LocaleContext exposes `siteLanguage` (real choice) and `language` (de/fr/it report 'en'); DB text comes from `*_de/_fr/_it` columns overlaid onto `*_en` via `src/lib/contentLanguage.ts`, inline page copy uses `tl()` from `src/lib/tl.ts`, and `translate-content-languages` (AI, admin/key-only) fills the columns on admin save; this added three languages without rewriting every PT/EN/ES branch.
+- Financeiro lives at /financeiro inside the main app (src/pages/financeiro, tables fin_vendas/fin_despesas, admin-only RLS); paid non-football sales import via the sales trigger and fin_sync_site_sales RPC, respecting campos_editados so admin edits are never overwritten.

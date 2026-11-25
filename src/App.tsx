@@ -57,6 +57,11 @@ const DeferredToasters = () => {
 const PasseioDetalhe         = lazy(() => import("./pages/PasseioDetalhe"));
 const BlogPost               = lazy(() => import("./pages/BlogPost"));
 const NotFound               = lazy(() => import("./pages/NotFound"));
+const FinLayout = lazy(() => import("./pages/financeiro/FinLayout"));
+const FinHome = lazy(() => import("./pages/financeiro/FinHome"));
+const FinForm = lazy(() => import("./pages/financeiro/FinForm"));
+const FinList = lazy(() => import("./pages/financeiro/FinList"));
+const FinReports = lazy(() => import("./pages/financeiro/FinReports"));
 const AdminLogin             = lazy(() => import("./pages/AdminLogin"));
 const OAuthConsent           = lazy(() => import("./pages/OAuthConsent"));
 const AdminResetPassword     = lazy(() => import("./pages/AdminResetPassword"));
@@ -296,6 +301,13 @@ const App = ({ queryClient: externalQueryClient }: { queryClient?: QueryClient }
                       <Route path="/flamengo-x-independiente-del-valle-libertadores-maracana-tickets" element={<FlamengoIndependienteDelValleLibertadores />} />
                       <Route path="/brasil-x-panama-maio-maracana" element={<RedirectToHash hash="#tours" />} />
 
+                      <Route path="/financeiro" element={<FinLayout />}>
+                        <Route index element={<FinHome />} />
+                        <Route path="cadastrar" element={<FinForm />} />
+                        <Route path="editar/:id" element={<FinForm />} />
+                        <Route path="consultar" element={<FinList />} />
+                        <Route path="relatorios" element={<FinReports />} />
+                      </Route>
                       <Route path="/sitemap" element={<Sitemap />} />
                       <Route path="/:slug" element={<GenericPage />} />
                       <Route path="/admin/login" element={<AdminLogin />} />

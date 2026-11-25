@@ -13,7 +13,7 @@ export function MobileStickyCTA() {
 
   // Don't show on admin or checkout/cart pages
   const isExcludedPage = 
-    location.pathname.startsWith('/admin') || 
+    (location.pathname.startsWith('/admin') || location.pathname.startsWith('/financeiro')) || 
     location.pathname.includes('/carrinho') ||
     location.pathname.includes('/checkout');
 
