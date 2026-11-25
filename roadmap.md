@@ -36,3 +36,5 @@
 - [x] Contar só reservas pagas como resultado (visitas ao carrinho/experiências viram secundárias)
 - [x] Ligar as 3 campanhas (R$ 19,50/dia) após aprovação
 - [x] Página de política de privacidade PT/EN/ES ligada ao aviso de cookies e ao rodapé
+- [x] Remover chinês do site
+- [x] Adicionar alemão, francês e italiano (menu, textos, passeios, blog, cookies, privacidade)
