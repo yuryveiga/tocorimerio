@@ -1,3 +1,4 @@
+import { optionExtraPerPerson } from "@/utils/pricing";
 import { useState, useEffect, useMemo, useCallback, useRef, lazy, Suspense } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
@@ -691,7 +692,7 @@ export function PasseioDetalhe() {
     const options = tour.custom_options_json as Record<string, unknown>[] | undefined;
     if (tour.use_custom_options && options && options[selectedOptionIdx]) {
       const option = options[selectedOptionIdx];
-      basePrice += (Number(option.price) || 0);
+      basePrice += optionExtraPerPerson(Number(option.price) || 0, quantity);
     }
     
     return basePrice;
@@ -1218,7 +1219,7 @@ export function PasseioDetalhe() {
                              </h3>
                              {Number(option.price || 0) > 0 && (
                                <p className="text-primary font-black text-sm">
-                                 +{formatPrice(Number(option.price))} / {t("pessoa")}
+                                 +{formatPrice(Number(option.price))} · até 4 pessoas
                                </p>
                              )}
                            </div>

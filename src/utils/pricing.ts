@@ -118,3 +118,11 @@ export function getTourMinPrice(tour: PricingTour): number {
   return minBase;
 }
 
+
+/** Option (e.g. transfer) price is fixed per vehicle of up to 4 people; returns the per-person share. */
+export const OPTION_PEOPLE_PER_VEHICLE = 4;
+export function optionExtraPerPerson(optionPrice: number, quantity: number): number {
+  const q = Math.max(1, Math.floor(quantity) || 1);
+  const total = (Number(optionPrice) || 0) * Math.ceil(q / OPTION_PEOPLE_PER_VEHICLE);
+  return Math.round((total / q) * 100) / 100;
+}

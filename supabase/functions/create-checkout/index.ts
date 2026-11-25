@@ -60,7 +60,7 @@ function allowedTourPrices(tour: any, quantity: number): number[] {
     base = baseP;
   }
   const options = Array.isArray(tour.custom_options_json) && tour.use_custom_options ? tour.custom_options_json : [];
-  const prices = options.length ? options.map((o: any) => base + num(o.price)) : [base];
+  const prices = options.length ? options.map((o: any) => Math.round((base + Math.round(num(o.price) * Math.ceil(Math.max(1, quantity) / 4) / Math.max(1, quantity) * 100) / 100) * 100) / 100) : [base];
   return prices.filter((p: number) => p > 0);
 }
 

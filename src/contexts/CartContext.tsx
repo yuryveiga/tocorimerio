@@ -1,3 +1,4 @@
+import { optionExtraPerPerson } from "@/utils/pricing";
 import React, { createContext, useContext, useState, useEffect } from 'react';
 
 export interface CartItem {
@@ -86,7 +87,7 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
         
         // Add extra price from selected option if it exists
         if (i.selected_option?.extra_price) {
-          newPrice += i.selected_option.extra_price;
+          newPrice += optionExtraPerPerson(i.selected_option.extra_price, validQuantity);
         }
 
         return { ...i, quantity: validQuantity, price: newPrice };
