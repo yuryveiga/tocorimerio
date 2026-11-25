@@ -10,6 +10,7 @@ import { LovableTour, LovableSiteImage, fetchLovable } from "@/integrations/lova
 import { TourJsonList } from "./TourJsonList";
 import { TourGalleryTab } from "./TourGalleryTab";
 import { TieredPricingEditor } from "./TieredPricingEditor";
+import { CustomOptionsEditor } from "./CustomOptionsEditor";
 import { Calendar as CalendarUI } from "@/components/ui/calendar";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { format, parseISO } from "date-fns";
@@ -320,6 +321,15 @@ export function TourFormDialog({
                       />
                     </div>
                   )}
+
+                  <div className="bg-muted/20 p-6 rounded-2xl border">
+                    <CustomOptionsEditor
+                      enabled={!!form.watch("use_custom_options")}
+                      onEnabledChange={(v) => form.setValue("use_custom_options", v, { shouldDirty: true })}
+                      value={(form.watch("custom_options_json") || []) as any}
+                      onChange={(opts) => form.setValue("custom_options_json", opts as any, { shouldDirty: true })}
+                    />
+                  </div>
 
                   <div className="flex gap-6 items-center bg-muted/20 p-6 rounded-2xl border">
                     <div className="flex items-center gap-2">

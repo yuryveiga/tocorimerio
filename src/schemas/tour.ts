@@ -82,6 +82,13 @@ export const tourSchema = z.object({
   allows_open: z.boolean().optional().default(false),
   bares_diurnos: z.string().optional().default(""),
   bares_noturnos: z.string().optional().default(""),
+  use_custom_options: z.boolean().optional().default(false),
+  custom_options_json: z.array(z.object({
+    title: z.string().default(""),
+    price: z.number().min(0).default(0),
+    positive_notices: z.array(z.string()).default([]),
+    negative_notices: z.array(z.string()).default([]),
+  })).optional().default([]),
   tiered_pricing_json: z.array(z.object({
     min_people: z.number().min(1),
     max_people: z.number().nullable().default(null),
