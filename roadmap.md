@@ -33,3 +33,5 @@
 - [x] Instalar aviso de cookies (consentimento de anúncios) no site antes de ligar
 - [x] Remover aviso de conversão para conta Google Ads alheia (index.html)
 - [x] Corrigir marcação de propaganda política da UE (Cristo, Rocinha) para 'não contém'
+- [ ] Contar só reservas pagas como resultado (visitas ao carrinho/experiências viram secundárias)
+- [ ] Ligar as 3 campanhas (R$ 19,50/dia) após aprovação
