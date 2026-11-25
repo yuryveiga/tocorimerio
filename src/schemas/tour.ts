@@ -85,6 +85,8 @@ export const tourSchema = z.object({
   use_custom_options: z.boolean().optional().default(false),
   custom_options_json: z.array(z.object({
     title: z.string().default(""),
+    from: z.string().optional(),
+    to: z.string().optional(),
     price: z.number().min(0).default(0),
     positive_notices: z.array(z.string()).default([]),
     negative_notices: z.array(z.string()).default([]),

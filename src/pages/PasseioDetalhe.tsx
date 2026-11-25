@@ -1215,7 +1215,12 @@ export function PasseioDetalhe() {
                          <div className="space-y-4">
                            <div className="space-y-1">
                              <h3 className={`text-xl font-black transition-colors ${selectedOptionIdx === idx ? 'text-primary' : 'text-foreground'}`}>
-                               {String(option.title || "")}
+                               {option.from || option.to ? (
+                                 <span className="flex flex-col gap-1">
+                                   {option.from ? <span><span className="text-xs uppercase tracking-widest text-muted-foreground block">{language === 'pt' ? 'Saindo de' : language === 'es' ? 'Saliendo de' : 'From'}</span>{String(option.from)}</span> : null}
+                                   {option.to ? <span><span className="text-xs uppercase tracking-widest text-muted-foreground block">{language === 'pt' ? 'Destino' : language === 'es' ? 'Destino' : 'To'}</span>{String(option.to)}</span> : null}
+                                 </span>
+                               ) : String(option.title || "")}
                              </h3>
                              {Number(option.price || 0) > 0 && (
                                <p className="text-primary font-black text-sm">

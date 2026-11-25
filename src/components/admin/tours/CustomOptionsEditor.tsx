@@ -5,6 +5,8 @@ import { Plus, Trash2 } from "lucide-react";
 
 export interface CustomOption {
   title: string;
+  from?: string;
+  to?: string;
   price: number;
   positive_notices: string[];
   negative_notices: string[];
@@ -17,11 +19,17 @@ interface Props {
   onChange: (v: CustomOption[]) => void;
 }
 
-const lines = (s: string) => s.split("\n").map((l) => l.trim()).filter(Boolean);
+const makeTitle = (from: string, to: string) =>
+  from && to ? `${from} → ${to}` : from || to;
 
 export function CustomOptionsEditor({ enabled, onEnabledChange, value, onChange }: Props) {
   const update = (i: number, patch: Partial<CustomOption>) =>
-    onChange(value.map((o, idx) => (idx === i ? { ...o, ...patch } : o)));
+    onChange(value.map((o, idx) => {
+      if (idx !== i) return o;
+      const next = { ...o, ...patch, positive_notices: [], negative_notices: [] };
+      next.title = makeTitle((next.from || "").trim(), (next.to || "").trim());
+      return next;
+    }));
 
   return (
     <div className="space-y-4">
@@ -33,15 +41,19 @@ export function CustomOptionsEditor({ enabled, onEnabledChange, value, onChange 
         </label>
       </div>
       <p className="text-xs text-muted-foreground">
-        O cliente escolhe uma opção. O preço é fixo para até 4 pessoas. Acima de 4, o cliente vê um aviso para entrar em contato. Use 0 para uma opção sem custo extra.
+        O preço é fixo para até 4 pessoas. Acima de 4, o cliente vê um aviso para entrar em contato.
       </p>
 
       {value.map((o, i) => (
-        <div key={i} className="bg-background border rounded-xl p-4 space-y-3">
-          <div className="grid grid-cols-1 md:grid-cols-[1fr_160px_auto] gap-3 items-end">
+        <div key={i} className="bg-background border rounded-xl p-4">
+          <div className="grid grid-cols-1 md:grid-cols-[1fr_1fr_160px_auto] gap-3 items-end">
             <div className="space-y-1">
-              <Label className="text-xs">Nome da opção</Label>
-              <Input value={o.title} placeholder="Ex.: Transfer saindo de Copacabana" onChange={(e) => update(i, { title: e.target.value })} />
+              <Label className="text-xs">Saindo de</Label>
+              <Input value={o.from ?? o.title ?? ""} placeholder="Ex.: Copacabana" onChange={(e) => update(i, { from: e.target.value })} />
+            </div>
+            <div className="space-y-1">
+              <Label className="text-xs">Destino</Label>
+              <Input value={o.to ?? ""} placeholder="Ex.: Maracanã" onChange={(e) => update(i, { to: e.target.value })} />
             </div>
             <div className="space-y-1">
               <Label className="text-xs">Preço até 4 pessoas (R$)</Label>
@@ -51,24 +63,10 @@ export function CustomOptionsEditor({ enabled, onEnabledChange, value, onChange 
               <Trash2 className="w-4 h-4 text-destructive" />
             </Button>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-            <div className="space-y-1">
-              <Label className="text-xs">Inclui (uma por linha)</Label>
-              <textarea className="w-full min-h-[70px] rounded-md border border-input bg-background px-3 py-2 text-sm"
-                defaultValue={(o.positive_notices || []).join("\n")}
-                onBlur={(e) => update(i, { positive_notices: lines(e.target.value) })} />
-            </div>
-            <div className="space-y-1">
-              <Label className="text-xs">Não inclui (uma por linha)</Label>
-              <textarea className="w-full min-h-[70px] rounded-md border border-input bg-background px-3 py-2 text-sm"
-                defaultValue={(o.negative_notices || []).join("\n")}
-                onBlur={(e) => update(i, { negative_notices: lines(e.target.value) })} />
-            </div>
-          </div>
         </div>
       ))}
 
-      <Button type="button" variant="outline" onClick={() => onChange([...value, { title: "", price: 0, positive_notices: [], negative_notices: [] }])}>
+      <Button type="button" variant="outline" onClick={() => onChange([...value, { title: "", from: "", to: "", price: 0, positive_notices: [], negative_notices: [] }])}>
         <Plus className="w-4 h-4 mr-2" /> Adicionar opção
       </Button>
     </div>
