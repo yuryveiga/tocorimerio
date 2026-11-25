@@ -1,3 +1,4 @@
+import { tl } from "@/lib/tl";
 import { useMemo, useRef } from "react";
 import useEmblaCarousel from "embla-carousel-react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
@@ -28,7 +29,7 @@ export const YouMayAlsoLike = ({ excludeId }: { excludeId?: string }) => {
 
   if (!items.length) return null;
 
-  const title = language === "pt" ? "Você também pode gostar" : language === "es" ? "También te puede gustar" : "You may also like";
+  const title = tl(language, { pt: "Você também pode gostar", es: "También te puede gustar", en: "You may also like", de: "Das könnte Ihnen auch gefallen", fr: "Vous aimerez peut-être aussi", it: "Potrebbe piacerti anche" });
 
   return (
     <section className="py-16 bg-background">

@@ -1,3 +1,4 @@
+import { tl } from "@/lib/tl";
 import { useSiteData } from "@/hooks/useSiteData";
 import { useLocale } from "@/contexts/LocaleContext";
 import { Link } from "react-router-dom";
@@ -24,7 +25,7 @@ const Sitemap = () => {
         { label: t("blog") || "Blog", href: "/blog" },
         { label: t("carrinho") || "Carrinho", href: "/carrinho" },
         { label: t("maracana-calendario") || "Calendário Maracanã", href: "/maracana-calendario" },
-        { label: language === "pt" ? "Experiências de futebol no Rio" : language === "es" ? "Experiencias de fútbol en Río" : "Football Experiences in Rio", href: "/football-experiences-in-rio-de-janeiro" },
+        { label: tl(language, { pt: "Experiências de futebol no Rio", es: "Experiencias de fútbol en Río", en: "Football Experiences in Rio", de: "Fußballerlebnisse in Rio", fr: "Expériences football à Rio", it: "Esperienze di Calcio a Rio" }), href: "/football-experiences-in-rio-de-janeiro" },
       ]
     },
     {

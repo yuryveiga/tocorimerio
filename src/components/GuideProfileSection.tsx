@@ -1,3 +1,4 @@
+import { tl } from "@/lib/tl";
 import React, { useEffect, useState } from 'react';
 import { useLocale } from '@/contexts/LocaleContext';
 import { Link } from 'react-router-dom';
@@ -21,8 +22,7 @@ export const GuideProfileSection = () => {
 
   if (!guides.length) return null;
 
-  const heading =
-    language === 'pt' ? 'Conheça nossos guias' : language === 'es' ? 'Conoce a nuestros guías' : 'Meet our guides';
+  const heading =tl(language, { pt: 'Conheça nossos guias', es: 'Conoce a nuestros guías', en: 'Meet our guides', de: "Lernen Sie unsere Guides kennen", fr: "Rencontrez nos guides", it: "Conosci le nostre guide" });
 
   return (
     <section className="py-12 bg-background">

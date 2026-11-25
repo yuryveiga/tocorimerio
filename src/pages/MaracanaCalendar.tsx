@@ -1,3 +1,4 @@
+import { tl } from "@/lib/tl";
 import { useLocale } from "@/contexts/LocaleContext";
 import { useMatches } from "@/hooks/useMatches";
 import { Header } from "@/components/Header";
@@ -235,28 +236,28 @@ const MaracanaCalendar = () => {
   const itinerary = [
     {
       icon: <Bus className="h-5 w-5" />,
-      title: language === 'pt' ? 'Busca no Hotel' : language === 'es' ? 'Recogida en el Hotel' : 'Hotel Pickup',
-      description: language === 'pt' ? 'Van executiva com paradas nos hotéis da Zona Sul. Nosso guia te busca no lobby.' : language === 'es' ? 'Van ejecutiva con paradas en hoteles de la Zona Sur. Nuestro guía te recoge en el lobby.' : 'Executive van with stops at South Zone hotels. Our guide picks you up at the lobby.',
+      title: tl(language, { pt: 'Busca no Hotel', es: 'Recogida en el Hotel', en: 'Hotel Pickup', de: "Hotelabholung", fr: "Prise en charge à l'hôtel", it: "Prelievo in Hotel" }),
+      description: tl(language, { pt: 'Van executiva com paradas nos hotéis da Zona Sul. Nosso guia te busca no lobby.', es: 'Van ejecutiva con paradas en hoteles de la Zona Sur. Nuestro guía te recoge en el lobby.', en: 'Executive van with stops at South Zone hotels. Our guide picks you up at the lobby.', de: "Executive-Van mit Haltestellen an Hotels in der Südzone. Unser Guide holt Sie in der Lobby ab.", fr: "Van exécutif avec arrêts aux hôtels de la Zone Sud. Notre guide vient vous chercher dans le hall.", it: "Van executive con fermate negli hotel della Zona Sud. La nostra guida ti accoglierà nella hall." }),
     },
     {
       icon: <Users className="h-5 w-5" />,
-      title: language === 'pt' ? 'Chegada ao Estádio' : language === 'es' ? 'Llegada al Estadio' : 'Stadium Arrival',
-      description: language === 'pt' ? 'Desembarque no estacionamento do estádio ou o mais próximo possível. Imersão na atmosfera pré-jogo.' : language === 'es' ? 'Descenso en el estacionamiento del estadio o lo más cerca posible. Inmersión en la atmósfera previa al partido.' : 'Drop-off at the stadium parking lot or as close as possible. Pre-match atmosphere immersion.',
+      title: tl(language, { pt: 'Chegada ao Estádio', es: 'Llegada al Estadio', en: 'Stadium Arrival', de: "Ankunft am Stadion", fr: "Arrivée au stade", it: "Arrivo allo Stadio" }),
+      description: tl(language, { pt: 'Desembarque no estacionamento do estádio ou o mais próximo possível. Imersão na atmosfera pré-jogo.', es: 'Descenso en el estacionamiento del estadio o lo más cerca posible. Inmersión en la atmósfera previa al partido.', en: 'Drop-off at the stadium parking lot or as close as possible. Pre-match atmosphere immersion.', de: "Ausstieg am Stadionparkplatz oder so nah wie möglich. Eintauchen in die Atmosphäre vor dem Spiel.", fr: "Dépose au parking du stade ou au plus près. Immersion dans l'ambiance d'avant-match.", it: "Arrivo al parcheggio dello stadio o il più vicino possibile. Immersione nell'atmosfera pre-partita." }),
     },
     {
       icon: <Ticket className="h-5 w-5" />,
-      title: language === 'pt' ? 'Entrada no Estádio' : language === 'es' ? 'Entrada al Estadio' : 'Stadium Entry',
-      description: language === 'pt' ? 'Acesso com ingresso oficial nas Cadeiras Cativas (Setor Oeste), uma das melhores áreas do Maracanã.' : language === 'es' ? 'Acceso con entrada oficial en las Sillas Reservadas (Sector Oeste), una de las mejores áreas del Maracanã.' : 'Entry with official ticket in the Reserved Seats (West Sector), one of the best areas in Maracanã.',
+      title: tl(language, { pt: 'Entrada no Estádio', es: 'Entrada al Estadio', en: 'Stadium Entry', de: "Stadioneinlass", fr: "Entrée au stade", it: "Ingresso allo Stadio" }),
+      description: tl(language, { pt: 'Acesso com ingresso oficial nas Cadeiras Cativas (Setor Oeste), uma das melhores áreas do Maracanã.', es: 'Acceso con entrada oficial en las Sillas Reservadas (Sector Oeste), una de las mejores áreas del Maracanã.', en: 'Entry with official ticket in the Reserved Seats (West Sector), one of the best areas in Maracanã.', de: "Einlass mit offiziellem Ticket auf reservierten Plätzen (Sektor West), einem der besten Bereiche im Maracanã.", fr: "Entrée avec billet officiel en Sièges Réservés (Secteur Ouest), l'une des meilleures zones du Maracanã.", it: "Ingresso con biglietto ufficiale nei Posti Riservati (Settore Ovest), una delle migliori aree del Maracanã." }),
     },
     {
       icon: <Camera className="h-5 w-5" />,
-      title: language === 'pt' ? 'Experiência no Jogo' : language === 'es' ? 'Experiencia del Partido' : 'Match Experience',
-      description: language === 'pt' ? 'Assista ao jogo com guia trilíngue que explica curiosidades, tradições e a cultura do futebol carioca.' : language === 'es' ? 'Vea el partido con un guía trilingüe que explica curiosidades, tradiciones y la cultura del fútbol carioca.' : 'Watch the match with a trilingual guide who explains curiosities, traditions, and Carioca football culture.',
+      title: tl(language, { pt: 'Experiência no Jogo', es: 'Experiencia del Partido', en: 'Match Experience', de: "Spieltagserlebnis", fr: "Expérience Jour de Match", it: "Match Experience" }),
+      description: tl(language, { pt: 'Assista ao jogo com guia trilíngue que explica curiosidades, tradições e a cultura do futebol carioca.', es: 'Vea el partido con un guía trilingüe que explica curiosidades, tradiciones y la cultura del fútbol carioca.', en: 'Watch the match with a trilingual guide who explains curiosities, traditions, and Carioca football culture.', de: "Verfolgen Sie das Spiel mit einem dreisprachigen Guide, der Ihnen Kuriositäten, Traditionen und die Fußballkultur der Cariocas näherbringt.", fr: "Assistez au match avec un guide trilingue qui vous explique les anecdotes, les traditions et la culture du football carioca.", it: "Guarda la partita con una guida trilingue che ti racconterà curiosità, tradizioni e la cultura calcistica carioca." }),
     },
     {
       icon: <Bus className="h-5 w-5" />,
-      title: language === 'pt' ? 'Retorno ao Hotel' : language === 'es' ? 'Regreso al Hotel' : 'Return to Hotel',
-      description: language === 'pt' ? 'Após o apito final, retorno seguro e confortável ao seu hotel.' : language === 'es' ? 'Después del pitido final, regreso seguro y cómodo a su hotel.' : 'After the final whistle, safe and comfortable return to your hotel.',
+      title: tl(language, { pt: 'Retorno ao Hotel', es: 'Regreso al Hotel', en: 'Return to Hotel', de: "Rückfahrt zum Hotel", fr: "Retour à l'hôtel", it: "Rientro in Hotel" }),
+      description: tl(language, { pt: 'Após o apito final, retorno seguro e confortável ao seu hotel.', es: 'Después del pitido final, regreso seguro y cómodo a su hotel.', en: 'After the final whistle, safe and comfortable return to your hotel.', de: "Nach dem Schlusspfiff sichere und bequeme Rückfahrt zu Ihrem Hotel.", fr: "Après le coup de sifflet final, retour sûr et confortable à votre hôtel.", it: "Dopo il fischio finale, rientro in hotel comodo e sicuro." }),
     },
   ];
 
@@ -294,14 +295,10 @@ const MaracanaCalendar = () => {
       <div className="pt-24 pb-8 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
           <h1 className="text-4xl sm:text-5xl font-bold mb-3 font-sans tracking-tight">
-            {language === 'pt' ? 'PRÓXIMOS JOGOS NO MARACANÃ: PROGRAMAÇÃO E INGRESSOS' : language === 'es' ? 'ENTRADAS PARA MARACANÃ Y CALENDARIO DE PARTIDOS' : 'MARACANÃ TICKETS & MATCH CALENDAR'}
+            {tl(language, { pt: 'PRÓXIMOS JOGOS NO MARACANÃ: PROGRAMAÇÃO E INGRESSOS', es: 'ENTRADAS PARA MARACANÃ Y CALENDARIO DE PARTIDOS', en: 'MARACANÃ TICKETS & MATCH CALENDAR', de: "MARACANÃ-TICKETS & SPIELKALENDER", fr: "BILLETS MARACANÃ ET CALENDRIER DES MATCHS", it: "BIGLIETTI MARACANÃ E CALENDARIO DELLE PARTITE" })}
           </h1>
           <p className="text-muted-foreground mb-4 max-w-3xl leading-relaxed">
-            {language === 'pt'
-              ? 'Acompanhe a programação do Maracanã e descubra qual é o próximo jogo no estádio. Listamos somente partidas confirmadas, com data, campeonato, preço por pessoa e horário de início. Cada reserva inclui ingresso oficial, transporte de ida e volta do seu hotel na Zona Sul e guia trilíngue.'
-              : language === 'es'
-                ? 'Todos los próximos partidos confirmados en Maracanã, con fecha, campeonato, precio por persona y hora de inicio. Cada reserva incluye la entrada oficial en las Sillas Reservadas del Sector Oeste, transporte ida y vuelta desde tu hotel en la Zona Sur y guía trilingüe — sin colas, sin CPF y sin riesgo de reventa.'
-                : 'Every confirmed upcoming fixture at Maracanã, with date, competition, price per person and kick-off time. Each booking includes an official Maracanã ticket in the Reserved Seats (lower West Sector), round-trip transport from your South Zone hotel and a trilingual guide — no queues, no Brazilian CPF and no resale risk.'}
+            {tl(language, { pt: 'Acompanhe a programação do Maracanã e descubra qual é o próximo jogo no estádio. Listamos somente partidas confirmadas, com data, campeonato, preço por pessoa e horário de início. Cada reserva inclui ingresso oficial, transporte de ida e volta do seu hotel na Zona Sul e guia trilíngue.', es: 'Todos los próximos partidos confirmados en Maracanã, con fecha, campeonato, precio por persona y hora de inicio. Cada reserva incluye la entrada oficial en las Sillas Reservadas del Sector Oeste, transporte ida y vuelta desde tu hotel en la Zona Sur y guía trilingüe — sin colas, sin CPF y sin riesgo de reventa.', en: 'Every confirmed upcoming fixture at Maracanã, with date, competition, price per person and kick-off time. Each booking includes an official Maracanã ticket in the Reserved Seats (lower West Sector), round-trip transport from your South Zone hotel and a trilingual guide — no queues, no Brazilian CPF and no resale risk.', de: "Jedes bestätigte bevorstehende Spiel im Maracanã mit Datum, Wettbewerb, Preis pro Person und Anstoßzeit. Jede Buchung beinhaltet ein offizielles Maracanã-Ticket auf reservierten Plätzen (unterer Sektor West), Hin- und Rücktransfer von Ihrem Hotel in der Südzone und einen dreisprachigen Guide – keine Warteschlangen, keine brasilianische CPF und kein Wiederverkaufsrisiko.", fr: "Tous les prochains matchs confirmés au Maracanã, avec date, compétition, prix par personne et heure du coup d'envoi. Chaque réservation comprend un billet officiel pour le Maracanã en Sièges Réservés (Secteur Ouest inférieur), le transport aller-retour depuis votre hôtel en Zone Sud et un guide trilingue — sans file d'attente, sans CPF brésilien et sans risque de revente.", it: "Tutte le prossime partite confermate al Maracanã, con data, competizione, prezzo a persona e orario d'inizio. Ogni prenotazione include un biglietto ufficiale per il Maracanã nei Posti Riservati (Settore Ovest inferiore), trasporto di andata e ritorno dal tuo hotel nella Zona Sud e una guida trilingue — niente code, nessun CPF brasiliano e zero rischi di bagarinaggio." })}
           </p>
           {(() => {
             const cheapest = availableMatches.length ? Math.min(...availableMatches.map(m => Number(m.price) || Infinity)) : null;
@@ -394,7 +391,7 @@ const MaracanaCalendar = () => {
                             </span>
                             {soldOut && (
                               <span className="font-semibold text-destructive uppercase">
-                                {language === 'pt' ? 'Esgotado' : language === 'es' ? 'Agotado' : 'Sold out'}
+                                {tl(language, { pt: 'Esgotado', es: 'Agotado', en: 'Sold out', de: "Ausverkauft", fr: "Complet", it: "Tutto esaurito" })}
                               </span>
                             )}
                           </div>
@@ -417,7 +414,7 @@ const MaracanaCalendar = () => {
         >
           <h2 className="text-2xl font-bold mb-6 flex items-center gap-2">
             <Ticket className="h-6 w-6 text-primary" />
-            {language === 'pt' ? 'PRÓXIMOS JOGOS NO MARACANÃ' : language === 'es' ? 'PRÓXIMOS PARTIDOS EN MARACANÃ' : 'UPCOMING MATCHES AT MARACANÃ'}
+            {tl(language, { pt: 'PRÓXIMOS JOGOS NO MARACANÃ', es: 'PRÓXIMOS PARTIDOS EN MARACANÃ', en: 'UPCOMING MATCHES AT MARACANÃ', de: "NÄCHSTE SPIELE IM MARACANÃ", fr: "PROCHAINS MATCHS AU MARACANÃ", it: "PROSSIME PARTITE AL MARACANÃ" })}
           </h2>
 
           {isLoading ? (
@@ -426,11 +423,7 @@ const MaracanaCalendar = () => {
             </div>
           ) : availableMatches.length === 0 ? (
             <p className="text-muted-foreground">
-              {language === 'pt'
-                ? 'Nenhum jogo confirmado no momento. Assim que a CBF/Conmebol divulgar as próximas datas, elas aparecem aqui.'
-                : language === 'es'
-                  ? 'Ningún partido confirmado por ahora. En cuanto se publiquen las próximas fechas, aparecerán aquí.'
-                  : 'No confirmed fixtures right now. As soon as the next dates are published they appear here.'}
+              {tl(language, { pt: 'Nenhum jogo confirmado no momento. Assim que a CBF/Conmebol divulgar as próximas datas, elas aparecem aqui.', es: 'Ningún partido confirmado por ahora. En cuanto se publiquen las próximas fechas, aparecerán aquí.', en: 'No confirmed fixtures right now. As soon as the next dates are published they appear here.', de: "Derzeit keine bestätigten Spiele. Sobald die nächsten Termine feststehen, erscheinen sie hier.", fr: "Aucun match confirmé pour le moment. Dès que les prochaines dates seront publiées, elles apparaîtront ici.", it: "Al momento non ci sono partite confermate. Non appena le prossime date saranno pubblicate, appariranno qui." })}
             </p>
           ) : (
             <ul className="space-y-3">
@@ -464,14 +457,14 @@ const MaracanaCalendar = () => {
                           {match.competition}
                           {soldOut && (
                             <span className="ml-2 text-destructive font-bold">
-                              {language === 'pt' ? 'ESGOTADO' : language === 'es' ? 'AGOTADO' : 'SOLD OUT'}
+                              {tl(language, { pt: 'ESGOTADO', es: 'AGOTADO', en: 'SOLD OUT', de: "AUSVERKAUFT", fr: "COMPLET", it: "TUTTO ESAURITO" })}
                             </span>
                           )}
                         </p>
                       </div>
                       <div className="sm:text-right shrink-0">
                         <p className="text-primary font-bold">
-                          {language === 'pt' ? 'A partir de ' : language === 'es' ? 'Desde ' : 'From '}
+                          {tl(language, { pt: 'A partir de ', es: 'Desde ', en: 'From ', de: "Ab ", fr: "À partir de ", it: "Da " })}
                           {formatPrice(match.price)}
                         </p>
                         <Link
@@ -479,8 +472,8 @@ const MaracanaCalendar = () => {
                           className="mt-2 inline-flex items-center gap-2 rounded-full bg-primary px-5 py-2 text-sm font-bold text-primary-foreground transition-transform hover:scale-[1.03]"
                         >
                           {soldOut
-                            ? (language === 'pt' ? 'Ver experiência' : language === 'es' ? 'Ver experiencia' : 'See Match Experience')
-                            : (language === 'pt' ? 'Ver disponibilidade' : language === 'es' ? 'Ver disponibilidad' : 'Check Availability')}
+                            ? tl(language, { pt: 'Ver experiência', es: 'Ver experiencia', en: 'See Match Experience', de: "Spieltagserlebnis ansehen", fr: "Voir l'Expérience Jour de Match", it: "Vedi Match Experience" })
+                            : tl(language, { pt: 'Ver disponibilidade', es: 'Ver disponibilidad', en: 'Check Availability', de: "Verfügbarkeit prüfen", fr: "Vérifier la disponibilité", it: "Verifica Disponibilità" })}
                           <ArrowRight className="h-4 w-4" />
                         </Link>
                       </div>
@@ -500,45 +493,25 @@ const MaracanaCalendar = () => {
           className="mb-14 max-w-3xl"
         >
           <h2 className="text-2xl font-bold mb-4">
-            {language === 'pt'
-              ? 'PROGRAMAÇÃO DO MARACANÃ: COMO USAR ESTE CALENDÁRIO'
-              : language === 'es'
-                ? 'PROGRAMACIÓN DEL MARACANÃ: CÓMO USAR ESTE CALENDARIO'
-                : 'MARACANÃ FIXTURE SCHEDULE: HOW TO USE THIS CALENDAR'}
+            {tl(language, { pt: 'PROGRAMAÇÃO DO MARACANÃ: COMO USAR ESTE CALENDÁRIO', es: 'PROGRAMACIÓN DEL MARACANÃ: CÓMO USAR ESTE CALENDARIO', en: 'MARACANÃ FIXTURE SCHEDULE: HOW TO USE THIS CALENDAR', de: "SPIELPLAN DES MARACANÃ: SO NUTZEN SIE DIESEN KALENDER", fr: "CALENDRIER DES MATCHS DU MARACANÃ : COMMENT UTILISER CE CALENDRIER", it: "CALENDARIO PARTITE DEL MARACANÃ: COME USARE QUESTO CALENDARIO" })}
           </h2>
           <p className="text-muted-foreground leading-relaxed mb-4">
-            {language === 'pt'
-              ? 'Esta é a página principal da Tocorime Rio para a programação do Maracanã. Atualizamos a lista sempre que a CBF ou a Conmebol confirmam data e horário, então o próximo jogo no Maracanã aparece aqui com campeonato, hora de início e preço por pessoa. Jogos do Flamengo e do Fluminense no Maracanã são os mais procurados por quem está de viagem ao Rio de Janeiro.'
-              : language === 'es'
-                ? 'Esta es la página principal de Tocorime Rio para la programación del Maracanã. Actualizamos la lista cuando la CBF o la Conmebol confirman fecha y hora, así que los próximos partidos aparecen aquí con campeonato, hora de inicio y precio por persona. Los partidos de Flamengo y Fluminense son los más buscados por quienes viajan a Río de Janeiro.'
-                : 'This is the main Tocorime Rio page for the Maracanã Stadium schedule. We update the list whenever CBF or Conmebol confirm a date and kick-off time, so upcoming matches appear here with competition, start time and price per person. Flamengo and Fluminense matchdays are the football matches in Rio most travellers ask about.'}
+            {tl(language, { pt: 'Esta é a página principal da Tocorime Rio para a programação do Maracanã. Atualizamos a lista sempre que a CBF ou a Conmebol confirmam data e horário, então o próximo jogo no Maracanã aparece aqui com campeonato, hora de início e preço por pessoa. Jogos do Flamengo e do Fluminense no Maracanã são os mais procurados por quem está de viagem ao Rio de Janeiro.', es: 'Esta es la página principal de Tocorime Rio para la programación del Maracanã. Actualizamos la lista cuando la CBF o la Conmebol confirman fecha y hora, así que los próximos partidos aparecen aquí con campeonato, hora de inicio y precio por persona. Los partidos de Flamengo y Fluminense son los más buscados por quienes viajan a Río de Janeiro.', en: 'This is the main Tocorime Rio page for the Maracanã Stadium schedule. We update the list whenever CBF or Conmebol confirm a date and kick-off time, so upcoming matches appear here with competition, start time and price per person. Flamengo and Fluminense matchdays are the football matches in Rio most travellers ask about.', de: "Dies ist die Hauptseite von Tocorime Rio für den Spielplan des Maracanã-Stadions. Wir aktualisieren die Liste, sobald CBF oder Conmebol Datum und Anstoßzeit bestätigen, sodass anstehende Spiele hier mit Wettbewerb, Anstoßzeit und Preis pro Person erscheinen. Spieltage von Flamengo und Fluminense sind die Fußballspiele in Rio, nach denen Reisende am häufigsten fragen.", fr: "Ceci est la page principale de Tocorime Rio pour le calendrier du stade Maracanã. Nous mettons la liste à jour dès que la CBF ou la Conmebol confirme une date et l'heure du coup d'envoi, afin que les prochains matchs apparaissent ici avec la compétition, l'heure de début et le prix par personne. Les jours de match de Flamengo et Fluminense sont les rencontres de football à Rio les plus demandées par les voyageurs.", it: "Questa è la pagina principale di Tocorime Rio per il calendario dello Stadio Maracanã. Aggiorniamo l'elenco non appena CBF o Conmebol confermano data e orario d'inizio, così le prossime partite appariranno qui con indicazione di competizione, orario e prezzo a persona. Le partite di Flamengo e Fluminense sono le gare calcistiche a Rio più richieste dai viaggiatori." })}
           </p>
           <ul className="space-y-2 text-sm">
             <li>
               <Link to="/football-experiences-in-rio-de-janeiro" className="text-primary font-semibold underline underline-offset-4">
-                {language === 'pt'
-                  ? 'Experiências de futebol no Rio de Janeiro'
-                  : language === 'es'
-                    ? 'Experiencias de fútbol en Río de Janeiro'
-                    : 'Football experiences in Rio de Janeiro'}
+                {tl(language, { pt: 'Experiências de futebol no Rio de Janeiro', es: 'Experiencias de fútbol en Río de Janeiro', en: 'Football experiences in Rio de Janeiro', de: "Fußballerlebnisse in Rio de Janeiro", fr: "Expériences football à Rio de Janeiro", it: "Esperienze calcistiche a Rio de Janeiro" })}
               </Link>
             </li>
             <li>
               <Link to="/blog/how-to-get-tickets-for-maracana-the-comp" className="text-primary font-semibold underline underline-offset-4">
-                {language === 'pt'
-                  ? 'Guia completo: como comprar ingressos para o Maracanã'
-                  : language === 'es'
-                    ? 'Guía completa: cómo comprar entradas para Maracanã'
-                    : 'Complete guide: how to get Maracanã Stadium tickets'}
+                {tl(language, { pt: 'Guia completo: como comprar ingressos para o Maracanã', es: 'Guía completa: cómo comprar entradas para Maracanã', en: 'Complete guide: how to get Maracanã Stadium tickets', de: "Kompletter Leitfaden: So bekommen Sie Tickets für das Maracanã-Stadion", fr: "Guide complet : comment obtenir des billets pour le stade Maracanã", it: "Guida completa: come acquistare i biglietti per lo Stadio Maracanã" })}
               </Link>
             </li>
             <li>
               <Link to="/private-tours-rio-de-janeiro" className="text-primary font-semibold underline underline-offset-4">
-                {language === 'pt'
-                  ? 'Passeios privativos no Rio de Janeiro com guia local'
-                  : language === 'es'
-                    ? 'Tours privados en Río de Janeiro con guía local'
-                    : 'Private tours in Rio de Janeiro with local guides'}
+                {tl(language, { pt: 'Passeios privativos no Rio de Janeiro com guia local', es: 'Tours privados en Río de Janeiro con guía local', en: 'Private tours in Rio de Janeiro with local guides', de: "Private Touren in Rio de Janeiro mit lokalen Guides", fr: "Visites privées à Rio de Janeiro avec des guides locaux", it: "Tour privati a Rio de Janeiro con guide locali" })}
               </Link>
             </li>
           </ul>
@@ -674,38 +647,34 @@ const MaracanaCalendar = () => {
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
           <div>
             <h2 className="text-3xl sm:text-4xl font-bold mb-4 tracking-tight">
-              {language === 'pt' ? 'GUIA DE INGRESSOS DO MARACANÃ' : language === 'es' ? 'GUÍA DE ENTRADAS DE MARACANÃ' : 'MARACANÃ TICKETS GUIDE'}
+              {tl(language, { pt: 'GUIA DE INGRESSOS DO MARACANÃ', es: 'GUÍA DE ENTRADAS DE MARACANÃ', en: 'MARACANÃ TICKETS GUIDE', de: "LEITFADEN FÜR MARACANÃ-TICKETS", fr: "GUIDE DES BILLETS POUR LE MARACANÃ", it: "GUIDA AI BIGLIETTI DEL MARACANÃ" })}
             </h2>
             <p className="text-muted-foreground leading-relaxed">
-              {language === 'pt'
-                ? 'Comprar ingresso para o Maracanã como turista não é tão simples quanto parece: a maioria dos jogos exige cadastro biométrico, CPF brasileiro ou sócio-torcedor, e os clássicos esgotam com dias de antecedência. Por isso trabalhamos com pacotes matchday: você reserva uma vaga, nós emitimos o ingresso oficial no seu nome e cuidamos de toda a logística.'
-                : language === 'es'
-                  ? 'Comprar entradas para Maracanã como turista no es tan simple: la mayoría de los partidos exige registro biométrico, CPF brasileño o membresía del club, y los clásicos se agotan con días de antelación. Por eso trabajamos con paquetes matchday: reservas una plaza, nosotros emitimos la entrada oficial a tu nombre y gestionamos toda la logística.'
-                  : 'Buying Maracanã tickets as a visitor is rarely straightforward: most matches require biometric registration, a Brazilian CPF number or club membership, and big derbies sell out days in advance. That is why we sell matchday packages instead — you reserve a spot, we issue the official ticket in your name and handle every logistical step.'}
+              {tl(language, { pt: 'Comprar ingresso para o Maracanã como turista não é tão simples quanto parece: a maioria dos jogos exige cadastro biométrico, CPF brasileiro ou sócio-torcedor, e os clássicos esgotam com dias de antecedência. Por isso trabalhamos com pacotes matchday: você reserva uma vaga, nós emitimos o ingresso oficial no seu nome e cuidamos de toda a logística.', es: 'Comprar entradas para Maracanã como turista no es tan simple: la mayoría de los partidos exige registro biométrico, CPF brasileño o membresía del club, y los clásicos se agotan con días de antelación. Por eso trabajamos con paquetes matchday: reservas una plaza, nosotros emitimos la entrada oficial a tu nombre y gestionamos toda la logística.', en: 'Buying Maracanã tickets as a visitor is rarely straightforward: most matches require biometric registration, a Brazilian CPF number or club membership, and big derbies sell out days in advance. That is why we sell matchday packages instead — you reserve a spot, we issue the official ticket in your name and handle every logistical step.', de: "Der Ticketkauf für das Maracanã ist für Besucher selten unkompliziert: Die meisten Spiele erfordern eine biometrische Registrierung, eine brasilianische CPF-Nummer oder eine Vereinsmitgliedschaft, und große Derbys sind Tage im Voraus ausverkauft. Deshalb bieten wir stattdessen Spieltagspakete an – Sie reservieren einen Platz, wir stellen das offizielle Ticket auf Ihren Namen aus und kümmern uns um die gesamte Logistik.", fr: "Acheter des billets pour le Maracanã en tant que visiteur est rarement simple : la plupart des matchs nécessitent un enregistrement biométrique, un numéro de CPF brésilien ou une adhésion au club, et les grands derbys affichent complet plusieurs jours à l'avance. C'est pourquoi nous proposons plutôt des forfaits jour de match — vous réservez votre place, nous émettons le billet officiel à votre nom et nous nous occupons de toute la logistique.", it: "Acquistare i biglietti per il Maracanã come visitatore non è affatto semplice: la maggior parte delle partite richiede la registrazione biometrica, un codice CPF brasiliano o la tessera del club, e i grandi derby fanno il tutto esaurito con giorni di anticipo. Per questo offriamo pacchetti completi per la partita: prenoti il tuo posto, noi emettiamo il biglietto ufficiale a tuo nome e gestiamo ogni aspetto logistico." })}
             </p>
           </div>
 
           <div>
             <h3 className="text-xl font-bold mb-4">
-              {language === 'pt' ? 'Setores do Maracanã e o que esperar de cada um' : language === 'es' ? 'Sectores de Maracanã y qué esperar' : 'Maracanã sectors and what to expect'}
+              {tl(language, { pt: 'Setores do Maracanã e o que esperar de cada um', es: 'Sectores de Maracanã y qué esperar', en: 'Maracanã sectors and what to expect', de: "Sektoren im Maracanã und was Sie erwartet", fr: "Les secteurs du Maracanã et à quoi s'attendre", it: "Settori del Maracanã e cosa aspettarsi" })}
             </h3>
             <div className="grid gap-4 sm:grid-cols-2">
               {[
                 {
-                  t: language === 'pt' ? 'Cadeiras Cativas Oeste (nosso setor)' : language === 'es' ? 'Sillas Reservadas Oeste (nuestro sector)' : 'Reserved Seats West (our sector)',
-                  d: language === 'pt' ? 'Visão central do campo, cobertura parcial, acesso tranquilo e distância segura das torcidas organizadas. Melhor custo-benefício para turistas.' : language === 'es' ? 'Vista central del campo, cobertura parcial, acceso tranquilo y distancia segura de las hinchadas. La mejor relación calidad-precio para turistas.' : 'Central view of the pitch, partial roof cover, calm access gates and a safe distance from the organised supporter ends. Best value for visitors.',
+                  t: tl(language, { pt: 'Cadeiras Cativas Oeste (nosso setor)', es: 'Sillas Reservadas Oeste (nuestro sector)', en: 'Reserved Seats West (our sector)', de: "Reservierte Plätze West (unser Sektor)", fr: "Sièges Réservés Ouest (notre secteur)", it: "Posti Riservati Ovest (il nostro settore)" }),
+                  d: tl(language, { pt: 'Visão central do campo, cobertura parcial, acesso tranquilo e distância segura das torcidas organizadas. Melhor custo-benefício para turistas.', es: 'Vista central del campo, cobertura parcial, acceso tranquilo y distancia segura de las hinchadas. La mejor relación calidad-precio para turistas.', en: 'Central view of the pitch, partial roof cover, calm access gates and a safe distance from the organised supporter ends. Best value for visitors.', de: "Zentraler Blick auf das Spielfeld, teilweise überdacht, ruhige Eingangsbereiche und sicherer Abstand zu den Fanblöcken. Bestes Preis-Leistungs-Verhältnis für Besucher.", fr: "Vue centrale sur le terrain, toit partiel, portes d'accès calmes et distance de sécurité avec les tribunes des supporters organisés. Le meilleur rapport qualité-prix pour les visiteurs.", it: "Vista centrale del campo, copertura parziale, varchi di accesso tranquilli e distanza di sicurezza dalle curve del tifo organizzato. Il miglior rapporto qualità-prezzo per i visitatori." }),
                 },
                 {
-                  t: language === 'pt' ? 'Setor Leste inferior' : language === 'es' ? 'Sector Este inferior' : 'Lower East Sector',
-                  d: language === 'pt' ? 'Boa visão e mais barato, porém sem cobertura e sol forte em jogos diurnos.' : language === 'es' ? 'Buena vista y más barato, pero sin cobertura y con mucho sol en partidos diurnos.' : 'Good view and cheaper, but uncovered and exposed to strong sun in afternoon kick-offs.',
+                  t: tl(language, { pt: 'Setor Leste inferior', es: 'Sector Este inferior', en: 'Lower East Sector', de: "Unterer Sektor Ost", fr: "Secteur Est inférieur", it: "Settore Est Inferiore" }),
+                  d: tl(language, { pt: 'Boa visão e mais barato, porém sem cobertura e sol forte em jogos diurnos.', es: 'Buena vista y más barato, pero sin cobertura y con mucho sol en partidos diurnos.', en: 'Good view and cheaper, but uncovered and exposed to strong sun in afternoon kick-offs.', de: "Gute Sicht und günstiger, aber nicht überdacht und bei Nachmittagsspielen starker Sonne ausgesetzt.", fr: "Bonne vue et plus abordable, mais non couvert et exposé au fort soleil lors des matchs de l'après-midi.", it: "Buona visuale e più economico, ma scoperto ed esposto al sole forte nelle partite pomeridiane." }),
                 },
                 {
-                  t: language === 'pt' ? 'Setor Norte e Sul (torcidas)' : language === 'es' ? 'Sector Norte y Sur (hinchadas)' : 'North & South Sectors (fan ends)',
-                  d: language === 'pt' ? 'Atrás dos gols, onde ficam as torcidas organizadas. Atmosfera intensa, mas não recomendado para quem vai pela primeira vez.' : language === 'es' ? 'Detrás de los arcos, donde están las hinchadas organizadas. Ambiente intenso, no recomendado para la primera visita.' : 'Behind the goals, home of the organised supporter groups. Electric atmosphere, but not recommended for a first visit.',
+                  t: tl(language, { pt: 'Setor Norte e Sul (torcidas)', es: 'Sector Norte y Sur (hinchadas)', en: 'North & South Sectors (fan ends)', de: "Sektoren Nord & Süd (Fankurven)", fr: "Secteurs Nord et Sud (tribunes des supporters)", it: "Settori Nord e Sud (curve)" }),
+                  d: tl(language, { pt: 'Atrás dos gols, onde ficam as torcidas organizadas. Atmosfera intensa, mas não recomendado para quem vai pela primeira vez.', es: 'Detrás de los arcos, donde están las hinchadas organizadas. Ambiente intenso, no recomendado para la primera visita.', en: 'Behind the goals, home of the organised supporter groups. Electric atmosphere, but not recommended for a first visit.', de: "Hinter den Toren, Heimat der organisierten Fangruppen. Elektrisierende Atmosphäre, aber für einen ersten Besuch nicht empfohlen.", fr: "Derrière les buts, le repaire des groupes de supporters organisés. Ambiance électrique, mais déconseillé pour une première visite.", it: "Dietro le porte, la casa del tifo organizzato. Atmosfera elettrizzante, ma non consigliato per una prima visita." }),
                 },
                 {
-                  t: language === 'pt' ? 'Camarotes e Maracanã Mais' : language === 'es' ? 'Palcos y Maracanã Mais' : 'Boxes & Maracanã Mais',
-                  d: language === 'pt' ? 'Ingressos premium com serviço, bem mais caros e geralmente vendidos por temporada.' : language === 'es' ? 'Entradas premium con servicio, mucho más caras y normalmente vendidas por temporada.' : 'Premium hospitality tickets, far more expensive and usually sold on a season basis.',
+                  t: tl(language, { pt: 'Camarotes e Maracanã Mais', es: 'Palcos y Maracanã Mais', en: 'Boxes & Maracanã Mais', de: "Logen & Maracanã Mais", fr: "Loges & Maracanã Mais", it: "Palchi & Maracanã Mais" }),
+                  d: tl(language, { pt: 'Ingressos premium com serviço, bem mais caros e geralmente vendidos por temporada.', es: 'Entradas premium con servicio, mucho más caras y normalmente vendidas por temporada.', en: 'Premium hospitality tickets, far more expensive and usually sold on a season basis.', de: "Premium-Hospitality-Tickets, deutlich teurer und meist auf Saisonbasis verkauft.", fr: "Billets hospitalité premium, beaucoup plus chers et généralement vendus sous forme d'abonnement pour la saison.", it: "Biglietti hospitality premium, molto più costosi e generalmente venduti su base stagionale." }),
                 },
               ].map((s, i) => (
                 <div key={i} className="p-5 rounded-xl border border-border/50 bg-card/50">
@@ -718,25 +687,25 @@ const MaracanaCalendar = () => {
 
           <div>
             <h3 className="text-xl font-bold mb-4">
-              {language === 'pt' ? 'Como funciona a reserva, passo a passo' : language === 'es' ? 'Cómo funciona la reserva, paso a paso' : 'How booking works, step by step'}
+              {tl(language, { pt: 'Como funciona a reserva, passo a passo', es: 'Cómo funciona la reserva, paso a paso', en: 'How booking works, step by step', de: "So funktioniert die Buchung, Schritt für Schritt", fr: "Comment fonctionne la réservation, étape par étape", it: "Come funziona la prenotazione, passo dopo passo" })}
             </h3>
             <ol className="list-decimal pl-5 space-y-2 text-muted-foreground leading-relaxed">
-              <li>{language === 'pt' ? 'Escolha o jogo no calendário acima (data, campeonato e preço por pessoa).' : language === 'es' ? 'Elige el partido en el calendario (fecha, campeonato y precio por persona).' : 'Pick your fixture in the calendar above (date, competition and price per person).'}</li>
-              <li>{language === 'pt' ? 'Reserve online e informe seu hotel — o pagamento é seguro via Stripe.' : language === 'es' ? 'Reserva online e indica tu hotel — el pago es seguro vía Stripe.' : 'Book online and tell us your hotel — payment is secured through Stripe.'}</li>
-              <li>{language === 'pt' ? 'Emitimos o ingresso oficial no seu nome e confirmamos o horário da busca.' : language === 'es' ? 'Emitimos la entrada oficial a tu nombre y confirmamos la hora de recogida.' : 'We issue the official ticket in your name and confirm your pickup time.'}</li>
-              <li>{language === 'pt' ? 'No dia do jogo: van executiva, entrada com o guia e retorno seguro ao hotel.' : language === 'es' ? 'El día del partido: van ejecutiva, entrada con el guía y regreso seguro al hotel.' : 'On matchday: executive van, guided entry to the stadium and a safe ride back to your hotel.'}</li>
+              <li>{tl(language, { pt: 'Escolha o jogo no calendário acima (data, campeonato e preço por pessoa).', es: 'Elige el partido en el calendario (fecha, campeonato y precio por persona).', en: 'Pick your fixture in the calendar above (date, competition and price per person).', de: "Wählen Sie Ihr Spiel im Kalender oben aus (Datum, Wettbewerb und Preis pro Person).", fr: "Choisissez votre match dans le calendrier ci-dessus (date, compétition et prix par personne).", it: "Scegli la tua partita nel calendario qui sopra (data, competizione e prezzo a persona)." })}</li>
+              <li>{tl(language, { pt: 'Reserve online e informe seu hotel — o pagamento é seguro via Stripe.', es: 'Reserva online e indica tu hotel — el pago es seguro vía Stripe.', en: 'Book online and tell us your hotel — payment is secured through Stripe.', de: "Buchen Sie online und nennen Sie uns Ihr Hotel – die Zahlung ist über Stripe abgesichert.", fr: "Réservez en ligne et indiquez-nous votre hôtel — le paiement est sécurisé via Stripe.", it: "Prenota online e indicaci il tuo hotel — pagamento sicuro tramite Stripe." })}</li>
+              <li>{tl(language, { pt: 'Emitimos o ingresso oficial no seu nome e confirmamos o horário da busca.', es: 'Emitimos la entrada oficial a tu nombre y confirmamos la hora de recogida.', en: 'We issue the official ticket in your name and confirm your pickup time.', de: "Wir stellen das offizielle Ticket auf Ihren Namen aus und bestätigen Ihre Abholzeit.", fr: "Nous émettons le billet officiel à votre nom et vous confirmons votre heure de prise en charge.", it: "Emettiamo il biglietto ufficiale a tuo nome e confermiamo l'orario di prelievo." })}</li>
+              <li>{tl(language, { pt: 'No dia do jogo: van executiva, entrada com o guia e retorno seguro ao hotel.', es: 'El día del partido: van ejecutiva, entrada con el guía y regreso seguro al hotel.', en: 'On matchday: executive van, guided entry to the stadium and a safe ride back to your hotel.', de: "Am Spieltag: Executive-Van, begleiteter Stadioneinlass und eine sichere Rückfahrt zu Ihrem Hotel.", fr: "Le jour du match : van exécutif, entrée guidée au stade et retour sécurisé à votre hôtel.", it: "Il giorno della partita: van executive, ingresso guidato allo stadio e rientro sicuro in hotel." })}</li>
             </ol>
           </div>
 
           <div>
             <h3 className="text-xl font-bold mb-4">
-              {language === 'pt' ? 'Continue explorando o Rio' : language === 'es' ? 'Sigue explorando Río' : 'Keep exploring Rio'}
+              {tl(language, { pt: 'Continue explorando o Rio', es: 'Sigue explorando Río', en: 'Keep exploring Rio', de: "Erkunden Sie Rio weiter", fr: "Continuez à explorer Rio", it: "Continua a esplorare Rio" })}
             </h3>
             <ul className="grid gap-3 sm:grid-cols-2 text-primary">
-              <li><Link className="hover:underline font-medium" to="/passeios">{language === 'pt' ? 'Todos os passeios privativos no Rio' : language === 'es' ? 'Todos los tours privados en Río' : 'All private tours in Rio de Janeiro'}</Link></li>
-              <li><Link className="hover:underline font-medium" to="/things-to-do-in-rio-de-janeiro">{language === 'pt' ? 'O que fazer no Rio de Janeiro' : language === 'es' ? 'Qué hacer en Río de Janeiro' : 'Things to do in Rio de Janeiro'}</Link></li>
-              <li><Link className="hover:underline font-medium" to="/blog">{language === 'pt' ? 'Blog: guias locais do Rio' : language === 'es' ? 'Blog: guías locales de Río' : 'Blog: local Rio travel guides'}</Link></li>
-              <li><Link className="hover:underline font-medium" to="/contact">{language === 'pt' ? 'Falar com um guia local' : language === 'es' ? 'Hablar con un guía local' : 'Talk to a local guide'}</Link></li>
+              <li><Link className="hover:underline font-medium" to="/passeios">{tl(language, { pt: 'Todos os passeios privativos no Rio', es: 'Todos los tours privados en Río', en: 'All private tours in Rio de Janeiro', de: "Alle privaten Touren in Rio de Janeiro", fr: "Toutes les visites privées à Rio de Janeiro", it: "Tutti i tour privati a Rio de Janeiro" })}</Link></li>
+              <li><Link className="hover:underline font-medium" to="/things-to-do-in-rio-de-janeiro">{tl(language, { pt: 'O que fazer no Rio de Janeiro', es: 'Qué hacer en Río de Janeiro', en: 'Things to do in Rio de Janeiro', de: "Aktivitäten in Rio de Janeiro", fr: "Activités à faire à Rio de Janeiro", it: "Cose da fare a Rio de Janeiro" })}</Link></li>
+              <li><Link className="hover:underline font-medium" to="/blog">{tl(language, { pt: 'Blog: guias locais do Rio', es: 'Blog: guías locales de Río', en: 'Blog: local Rio travel guides', de: "Blog: Lokale Rio-Reiseführer", fr: "Blog : guides de voyage locaux sur Rio", it: "Blog: guide di viaggio locali su Rio" })}</Link></li>
+              <li><Link className="hover:underline font-medium" to="/contact">{tl(language, { pt: 'Falar com um guia local', es: 'Hablar con un guía local', en: 'Talk to a local guide', de: "Mit einem lokalen Guide sprechen", fr: "Parler à un guide local", it: "Parla con una guida locale" })}</Link></li>
             </ul>
           </div>
         </div>
@@ -746,14 +715,10 @@ const MaracanaCalendar = () => {
       <section className="py-16 border-t border-border/50">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl sm:text-4xl font-bold mb-3 tracking-tight">
-            {language === 'pt' ? 'PERGUNTAS FREQUENTES' : language === 'es' ? 'PREGUNTAS FRECUENTES' : 'FREQUENTLY ASKED QUESTIONS'}
+            {tl(language, { pt: 'PERGUNTAS FREQUENTES', es: 'PREGUNTAS FRECUENTES', en: 'FREQUENTLY ASKED QUESTIONS', de: "HÄUFIG GESTELLTE FRAGEN", fr: "FOIRE AUX QUESTIONS", it: "DOMANDE FREQUENTI" })}
           </h2>
           <p className="text-muted-foreground mb-8">
-            {language === 'pt'
-              ? 'Tudo sobre os próximos jogos no Maracanã, ingressos e como funciona o tour.'
-              : language === 'es'
-                ? 'Todo sobre los próximos partidos en Maracanã, entradas y cómo funciona el tour.'
-                : 'Everything about upcoming games at Maracanã, tickets and how the tour works.'}
+            {tl(language, { pt: 'Tudo sobre os próximos jogos no Maracanã, ingressos e como funciona o tour.', es: 'Todo sobre los próximos partidos en Maracanã, entradas y cómo funciona el tour.', en: 'Everything about upcoming games at Maracanã, tickets and how the tour works.', de: "Alles über anstehende Spiele im Maracanã, Tickets und den Ablauf der Tour.", fr: "Tout sur les prochains matchs au Maracanã, les billets et le déroulement de la visite.", it: "Tutto sulle prossime partite al Maracanã, sui biglietti e su come funziona il tour." })}
           </p>
           <Accordion type="single" collapsible className="w-full">
             {seo.faqs.map((faq, i) => (

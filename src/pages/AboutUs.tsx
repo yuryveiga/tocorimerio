@@ -1,3 +1,4 @@
+import { tl } from "@/lib/tl";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { AboutSection } from "@/components/AboutSection";
@@ -9,19 +10,9 @@ import { useLocale } from "@/contexts/LocaleContext";
 const AboutUs = () => {
   const { language } = useLocale();
 
-  const title =
-    language === "pt"
-      ? "Sobre Nós | Tocorime Rio – Passeios Privativos no Rio de Janeiro"
-      : language === "es"
-      ? "Sobre Nosotros | Tocorime Rio – Tours Privados en Río de Janeiro"
-      : "About Us | Tocorime Rio – Private Tours in Rio de Janeiro";
+  const title =tl(language, { pt: "Sobre Nós | Tocorime Rio – Passeios Privativos no Rio de Janeiro", es: "Sobre Nosotros | Tocorime Rio – Tours Privados en Río de Janeiro", en: "About Us | Tocorime Rio – Private Tours in Rio de Janeiro", de: "Über uns | Tocorime Rio – Private Touren in Rio de Janeiro", fr: "À propos de nous | Tocorime Rio – Visites privées à Rio de Janeiro", it: "Chi Siamo | Tocorime Rio – Tour Privati a Rio de Janeiro" });
 
-  const description =
-    language === "pt"
-      ? "Conheça a Tocorime Rio — guias locais especializados em passeios privativos exclusivos pelo Rio de Janeiro com segurança, autenticidade e atenção aos detalhes."
-      : language === "es"
-      ? "Conoce a Tocorime Rio — guías locales especializados en tours privados exclusivos por Río de Janeiro con seguridad, autenticidad y atención al detalle."
-      : "Meet Tocorime Rio — local guides specialized in exclusive private tours around Rio de Janeiro with safety, authenticity and attention to detail.";
+  const description =tl(language, { pt: "Conheça a Tocorime Rio — guias locais especializados em passeios privativos exclusivos pelo Rio de Janeiro com segurança, autenticidade e atenção aos detalhes.", es: "Conoce a Tocorime Rio — guías locales especializados en tours privados exclusivos por Río de Janeiro con seguridad, autenticidad y atención al detalle.", en: "Meet Tocorime Rio — local guides specialized in exclusive private tours around Rio de Janeiro with safety, authenticity and attention to detail.", de: "Lernen Sie Tocorime Rio kennen – lokale Guides, die auf exklusive private Touren in Rio de Janeiro mit Sicherheit, Authentizität und Liebe zum Detail spezialisiert sind.", fr: "Faites connaissance avec Tocorime Rio — des guides locaux spécialisés dans les visites privées exclusives à Rio de Janeiro, alliant sécurité, authenticité et souci du détail.", it: "Scopri Tocorime Rio — guide locali specializzate in tour privati esclusivi a Rio de Janeiro all'insegna di sicurezza, autenticità e cura dei dettagli." });
 
   return (
     <div className="min-h-screen flex flex-col pt-20">

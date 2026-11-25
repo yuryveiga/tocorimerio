@@ -1,3 +1,4 @@
+import { tl } from "@/lib/tl";
 import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { useLocale } from "@/contexts/LocaleContext";
@@ -33,9 +34,8 @@ export function GuidesSection() {
 
   if (!guides.length) return null;
 
-  const heading =
-    language === "pt" ? "Conheça nossos guias" : language === "es" ? "Conoce a nuestros guías" : "Meet our guides";
-  const eyebrow = language === "pt" ? "Nossa equipe" : language === "es" ? "Nuestro equipo" : "Our team";
+  const heading =tl(language, { pt: "Conheça nossos guias", es: "Conoce a nuestros guías", en: "Meet our guides", de: "Lernen Sie unsere Guides kennen", fr: "Rencontrez nos guides", it: "Conosci le nostre guide" });
+  const eyebrow = tl(language, { pt: "Nossa equipe", es: "Nuestro equipo", en: "Our team", de: "Unser Team", fr: "Notre équipe", it: "Il nostro team" });
 
   const pick = (g: Guide, field: "role" | "bio") => {
     if (language === "en") return g[`${field}_en`] || g[field];

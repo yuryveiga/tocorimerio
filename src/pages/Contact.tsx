@@ -1,3 +1,4 @@
+import { tl } from "@/lib/tl";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { ContactSection } from "@/components/ContactSection";
@@ -8,19 +9,9 @@ import { useLocale } from "@/contexts/LocaleContext";
 const Contact = () => {
   const { language } = useLocale();
 
-  const title =
-    language === "pt"
-      ? "Contato | Tocorime Rio – Passeios Privativos no Rio de Janeiro"
-      : language === "es"
-      ? "Contacto | Tocorime Rio – Tours Privados en Río de Janeiro"
-      : "Contact | Tocorime Rio – Private Tours in Rio de Janeiro";
+  const title =tl(language, { pt: "Contato | Tocorime Rio – Passeios Privativos no Rio de Janeiro", es: "Contacto | Tocorime Rio – Tours Privados en Río de Janeiro", en: "Contact | Tocorime Rio – Private Tours in Rio de Janeiro", de: "Kontakt | Tocorime Rio – Private Touren in Rio de Janeiro", fr: "Contact | Tocorime Rio – Visites privées à Rio de Janeiro", it: "Contatti | Tocorime Rio – Tour Privati a Rio de Janeiro" });
 
-  const description =
-    language === "pt"
-      ? "Entre em contato conosco para reservar seu passeio privativo ou tirar dúvidas. Estamos disponíveis 7 dias por semana via e-mail e WhatsApp 24h."
-      : language === "es"
-      ? "Contáctanos para reservar tu tour privado o hacer preguntas. Estamos disponibles 7 días a la semana por correo electrónico y WhatsApp 24h."
-      : "Get in touch to book your private tour or ask questions. We are available 7 days a week via email and WhatsApp 24h.";
+  const description =tl(language, { pt: "Entre em contato conosco para reservar seu passeio privativo ou tirar dúvidas. Estamos disponíveis 7 dias por semana via e-mail e WhatsApp 24h.", es: "Contáctanos para reservar tu tour privado o hacer preguntas. Estamos disponibles 7 días a la semana por correo electrónico y WhatsApp 24h.", en: "Get in touch to book your private tour or ask questions. We are available 7 days a week via email and WhatsApp 24h.", de: "Kontaktieren Sie uns, um Ihre private Tour zu buchen oder Fragen zu stellen. Wir sind an 7 Tagen in der Woche per E-Mail und WhatsApp rund um die Uhr erreichbar.", fr: "Contactez-nous pour réserver votre visite privée ou poser vos questions. Nous sommes disponibles 7j/7 par e-mail et 24h/24 sur WhatsApp.", it: "Contattaci per prenotare il tuo tour privato o per qualsiasi domanda. Siamo disponibili 7 giorni su 7 via e-mail e WhatsApp 24 ore su 24." });
 
   return (
     <div className="min-h-screen flex flex-col pt-20">

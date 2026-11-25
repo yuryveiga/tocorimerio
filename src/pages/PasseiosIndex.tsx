@@ -1,3 +1,4 @@
+import { tl } from "@/lib/tl";
 import { useMemo, useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { Header } from "@/components/Header";
@@ -33,36 +34,16 @@ const PasseiosIndex = () => {
       : sortedTours.filter((t) => (t.category || "").trim().toUpperCase() === activeCategory);
 
 
-  const title =
-    language === "pt"
-      ? "Todos os Passeios no Rio de Janeiro | Tocorime Rio"
-      : language === "es"
-      ? "Todos los Tours en Río de Janeiro | Tocorime Rio"
-      : "All Tours in Rio de Janeiro | Tocorime Rio";
+  const title =tl(language, { pt: "Todos os Passeios no Rio de Janeiro | Tocorime Rio", es: "Todos los Tours en Río de Janeiro | Tocorime Rio", en: "All Tours in Rio de Janeiro | Tocorime Rio", de: "Alle Touren in Rio de Janeiro | Tocorime Rio", fr: "Toutes les visites à Rio de Janeiro | Tocorime Rio", it: "Tutti i Tour a Rio de Janeiro | Tocorime Rio" });
 
-  const description =
-    language === "pt"
-      ? "Lista completa de passeios, city tours, trilhas e experiências exclusivas no Rio de Janeiro com guias bilíngues."
-      : language === "es"
-      ? "Lista completa de tours, city tours, senderismo y experiencias exclusivas en Río de Janeiro con guías bilingües."
-      : "Explore a curated selection of private tours in Rio de Janeiro with Tocorime Rio. From thrilling hiking adventures like Pedra da Gávea to cultural immersions and coffee tastings, find your perfect Rio experience.";
+  const description =tl(language, { pt: "Lista completa de passeios, city tours, trilhas e experiências exclusivas no Rio de Janeiro com guias bilíngues.", es: "Lista completa de tours, city tours, senderismo y experiencias exclusivas en Río de Janeiro con guías bilingües.", en: "Explore a curated selection of private tours in Rio de Janeiro with Tocorime Rio. From thrilling hiking adventures like Pedra da Gávea to cultural immersions and coffee tastings, find your perfect Rio experience.", de: "Entdecken Sie eine ausgewählte Auswahl privater Touren in Rio de Janeiro mit Tocorime Rio. Von aufregenden Wanderabenteuern wie der Pedra da Gávea bis hin zu kulturellen Einblicken und Kaffeeverkostungen – finden Sie Ihr perfektes Rio-Erlebnis.", fr: "Découvrez une sélection exclusive de visites privées à Rio de Janeiro avec Tocorime Rio. Des randonnées palpitantes comme la Pedra da Gávea aux immersions culturelles et dégustations de café, trouvez votre expérience idéale à Rio.", it: "Esplora una selezione curata di tour privati a Rio de Janeiro con Tocorime Rio. Dalle emozionanti avventure di trekking come la Pedra da Gávea alle immersioni culturali e degustazioni di caffè, trova la tua esperienza perfetta a Rio." });
 
   const keywords =
     "Rio de Janeiro tours, private tours Rio, adventure tours Rio, cultural tours Rio, Pedra da Gávea, Sugarloaf hiking, Little Africa Rio, coffee tasting Rio, Tijuca Forest, Tocorime Rio";
 
-  const h1 =
-    language === "pt"
-      ? "Passeios no Rio de Janeiro"
-      : language === "es"
-      ? "Tours en Río de Janeiro"
-      : "Tours in Rio de Janeiro";
+  const h1 =tl(language, { pt: "Passeios no Rio de Janeiro", es: "Tours en Río de Janeiro", en: "Tours in Rio de Janeiro", de: "Touren in Rio de Janeiro", fr: "Visites à Rio de Janeiro", it: "Tour a Rio de Janeiro" });
 
-  const subtitle =
-    language === "pt"
-      ? "Conheça nossa lista completa de experiências cuidadosamente selecionadas."
-      : language === "es"
-      ? "Descubre nuestra lista completa de experiencias cuidadosamente seleccionadas."
-      : "Explore our complete list of carefully curated experiences.";
+  const subtitle =tl(language, { pt: "Conheça nossa lista completa de experiências cuidadosamente selecionadas.", es: "Descubre nuestra lista completa de experiencias cuidadosamente seleccionadas.", en: "Explore our complete list of carefully curated experiences.", de: "Entdecken Sie unsere vollständige Liste sorgfältig ausgewählter Erlebnisse.", fr: "Découvrez notre liste complète d'expériences soigneusement sélectionnées.", it: "Esplora la nostra lista completa di esperienze selezionate con cura." });
 
   const itemListSchema = {
     "@context": "https://schema.org",
@@ -120,10 +101,10 @@ const PasseiosIndex = () => {
 
           {!isLoading && categories.length > 1 && (
             <nav
-              aria-label={language === "pt" ? "Filtrar por categoria" : language === "es" ? "Filtrar por categoría" : "Filter by category"}
+              aria-label={tl(language, { pt: "Filtrar por categoria", es: "Filtrar por categoría", en: "Filter by category", de: "Nach Kategorie filtern", fr: "Filtrer par catégorie", it: "Filtra per categoria" })}
               className="-mx-4 px-4 mb-8 flex gap-2 overflow-x-auto snap-x scrollbar-none [scrollbar-width:none] [-ms-overflow-style:none] sm:flex-wrap sm:justify-center sm:mx-0 sm:px-0"
             >
-              {[{ value: "ALL", label: language === "pt" ? "Todos" : language === "es" ? "Todos" : "All" },
+              {[{ value: "ALL", label: tl(language, { pt: "Todos", es: "Todos", en: "All", de: "Alle", fr: "Tous", it: "Tutti" })},
                 ...categories.map((c) => ({ value: c, label: c }))].map((c) => (
                 <button
                   key={c.value}

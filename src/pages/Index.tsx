@@ -1,3 +1,4 @@
+import { tl } from "@/lib/tl";
 import { lazy, Suspense } from "react";
 import { LazyMount } from "@/components/LazyMount";
 import { Helmet } from "react-helmet-async";
@@ -50,7 +51,7 @@ const Index = () => {
         <meta property="og:url" content={getCanonicalUrl("/")} />
         <meta property="og:image" content={`${getCanonicalUrl("")}/og-image.jpg`} />
         <meta property="og:site_name" content="Tocorime Rio" />
-        <meta property="og:locale" content={language === 'pt' ? 'pt_BR' : language === 'es' ? 'es_ES' : 'en_US'} />
+        <meta property="og:locale" content={tl(language, { pt: 'pt_BR', es: 'es_ES', en: 'en_US', de: "de_DE", fr: "fr_FR", it: "it_IT" })} />
         <link rel="canonical" href={getCanonicalUrl("/")} />
         {getHreflangLinks("/").map((l) => (
           <link key={l.hreflang} rel="alternate" hrefLang={l.hreflang} href={l.href} />

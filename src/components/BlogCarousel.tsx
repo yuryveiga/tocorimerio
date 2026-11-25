@@ -1,3 +1,4 @@
+import { overlayLanguage } from "@/lib/contentLanguage";
 import { useState, useEffect, useRef } from "react";
 import { ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -17,7 +18,7 @@ import { OptimizedImage } from "./OptimizedImage";
 export function BlogCarousel({ title }: { title?: string }) {
   const [posts, setPosts] = useState<LovableBlogPost[]>([]);
   const [isLoading, setIsLoading] = useState(true);
-  const { t, language } = useLocale();
+  const { t, language, siteLanguage } = useLocale();
   const { images } = useSiteData();
   const fallbackImage = images.hero_bg || "/placeholder.svg";
   const sectionRef = useRef<HTMLElement>(null);
@@ -35,9 +36,9 @@ export function BlogCarousel({ title }: { title?: string }) {
           // Colunas mínimas para o carrossel (sem `content` completo)
           fetchLovable<LovableBlogPost>(
             "blog_posts",
-            "id,slug,image_url,is_published,title,title_en,title_es,excerpt,excerpt_en,excerpt_es",
+            "id,slug,image_url,is_published,title,title_en,title_es,excerpt,excerpt_en,excerpt_es,title_de,title_fr,title_it,excerpt_de,excerpt_fr,excerpt_it",
           ).then((data) => {
-            setPosts(data.filter(p => p.is_published));
+            setPosts(data.filter(p => p.is_published).map((p) => overlayLanguage(p as unknown as Record<string, unknown>, siteLanguage) as unknown as LovableBlogPost));
             setIsLoading(false);
           }).catch(() => setIsLoading(false));
           observer.disconnect();

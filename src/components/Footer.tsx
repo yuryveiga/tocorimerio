@@ -13,7 +13,7 @@ const iconMap: Record<string, React.ElementType> = {
 
 export function Footer() {
   const { pages, socialMedia, images, siteSettings, tours } = useSiteData();
-  const { t, language } = useLocale();
+  const { t, language, siteLanguage } = useLocale();
 
 
 
@@ -291,8 +291,8 @@ export function Footer() {
         </div>
       </div>
       <div className="pb-6 flex justify-center gap-4">
-                <a href="/privacy-policy" className="text-[hsl(140,10%,96%)]/60 text-xs underline underline-offset-4 hover:text-[hsl(140,10%,96%)]">{privacyPolicyLabel(language)}</a>
-                <button type="button" onClick={() => window.dispatchEvent(new Event(OPEN_COOKIE_SETTINGS))} className="text-[hsl(140,10%,96%)]/60 text-xs underline underline-offset-4 hover:text-[hsl(140,10%,96%)]">{cookieSettingsLabel(language)}</button>
+                <a href="/privacy-policy" className="text-[hsl(140,10%,96%)]/60 text-xs underline underline-offset-4 hover:text-[hsl(140,10%,96%)]">{privacyPolicyLabel(siteLanguage)}</a>
+                <button type="button" onClick={() => window.dispatchEvent(new Event(OPEN_COOKIE_SETTINGS))} className="text-[hsl(140,10%,96%)]/60 text-xs underline underline-offset-4 hover:text-[hsl(140,10%,96%)]">{cookieSettingsLabel(siteLanguage)}</button>
       </div>
     </footer>
   );

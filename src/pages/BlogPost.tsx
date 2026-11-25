@@ -1,3 +1,5 @@
+import { tl } from "@/lib/tl";
+import { overlayLanguage } from "@/lib/contentLanguage";
 import { useState, useEffect, Fragment } from "react";
 import { useParams, Link } from "react-router-dom";
 import NotFound from "./NotFound";
@@ -86,7 +88,7 @@ const RocinhaFAQ = ({ language }: { language: string }) => {
   return (
     <section className="mt-16 border-t border-border/50 pt-10">
       <h2 className="font-serif text-2xl sm:text-3xl font-bold mb-6">
-        {language === 'pt' ? 'Perguntas Frequentes' : language === 'es' ? 'Preguntas Frecuentes' : 'Frequently Asked Questions'}
+        {tl(language, { pt: 'Perguntas Frequentes', es: 'Preguntas Frecuentes', en: 'Frequently Asked Questions', de: "Häufig gestellte Fragen", fr: "Foire aux questions", it: "Domande Frequenti" })}
       </h2>
       <div className="space-y-6">
         {list.map((item, index) => (
@@ -132,7 +134,7 @@ const BlogPost = () => {
   const { slug } = useParams();
   const [post, setPost] = useState<LovableBlogPost | null>(null);
   const [isLoading, setIsLoading] = useState(true);
-  const { t, language } = useLocale();
+  const { t, language, siteLanguage } = useLocale();
   const { siteSettings, tours } = useSiteData();
 
   const dateLocale = language === 'en' ? enUS : language === 'es' ? es : ptBR;
@@ -150,11 +152,11 @@ const BlogPost = () => {
         .eq("slug", slug!)
         .eq("is_published", true)
         .maybeSingle();
-      setPost((data as unknown as LovableBlogPost) || null);
+      setPost(data ? (overlayLanguage(data as unknown as Record<string, unknown>, siteLanguage) as unknown as LovableBlogPost) : null);
       setIsLoading(false);
     };
     loadPost();
-  }, [slug]);
+  }, [slug, siteLanguage]);
 
   const shareOnWhatsApp = () => {
     const text = encodeURIComponent(`${title}\n\n${window.location.href}`);
@@ -167,7 +169,7 @@ const BlogPost = () => {
 
   const copyToClipboard = () => {
     navigator.clipboard.writeText(window.location.href);
-    toast.success(language === 'pt' ? 'Link copiado!' : language === 'es' ? '¡Enlace copiado!' : 'Link copied!');
+    toast.success(tl(language, { pt: 'Link copiado!', es: '¡Enlace copiado!', en: 'Link copied!', de: "Link kopiert!", fr: "Lien copié !", it: "Link copiato!" }));
   };
 
   // Mapeia zh-CN → zh_cn, zh-TW → zh_tw para bater com nomes de coluna SQL
@@ -573,7 +575,7 @@ const BlogPost = () => {
             <meta property="og:image:width" content="1200" />
             <meta property="og:image:height" content="630" />
             <meta property="og:image:alt" content={post.featured_image_alt || SOCIAL_SEO[post.slug].imageAlt} />
-            <meta property="og:locale" content={language === 'pt' ? 'pt_BR' : language === 'es' ? 'es_ES' : 'en_US'} />
+            <meta property="og:locale" content={tl(language, { pt: 'pt_BR', es: 'es_ES', en: 'en_US', de: "de_DE", fr: "fr_FR", it: "it_IT" })} />
             {post.created_at && <meta property="article:published_time" content={post.created_at} />}
             {post.updated_at && <meta property="article:modified_time" content={post.updated_at} />}
             <meta property="article:author" content="Tocorime Rio" />
@@ -595,7 +597,7 @@ const BlogPost = () => {
                 datePublished: post.created_at,
                 dateModified: post.updated_at || post.created_at,
                 keywords: SOCIAL_SEO[post.slug].keywords,
-                inLanguage: language === 'pt' ? 'pt-BR' : language === 'es' ? 'es-ES' : 'en-US',
+                inLanguage: tl(language, { pt: 'pt-BR', es: 'es-ES', en: 'en-US', de: "de-DE", fr: "fr-FR", it: "it-IT" }),
                 wordCount: String(content || "").replace(/<[^>]*>/g, " ").trim().split(/\s+/).filter(Boolean).length || undefined,
                 articleSection: "Rio de Janeiro Travel Guide",
               }))}
@@ -637,7 +639,7 @@ const BlogPost = () => {
             <meta property="og:image:height" content="630" />
             <meta property="og:image:alt" content={post.featured_image_alt || title} />
             <meta property="og:site_name" content="Tocorime Rio" />
-            <meta property="og:locale" content={language === 'pt' ? 'pt_BR' : language === 'es' ? 'es_ES' : 'en_US'} />
+            <meta property="og:locale" content={tl(language, { pt: 'pt_BR', es: 'es_ES', en: 'en_US', de: "de_DE", fr: "fr_FR", it: "it_IT" })} />
             {post.created_at && <meta property="article:published_time" content={post.created_at} />}
             {post.updated_at && <meta property="article:modified_time" content={post.updated_at} />}
 
@@ -650,7 +652,7 @@ const BlogPost = () => {
                 datePublished: post.created_at,
                 dateModified: post.updated_at || post.created_at,
                 keywords: post.meta_keywords || (Array.isArray(post.tags) ? post.tags.join(", ") : undefined),
-                inLanguage: language === 'pt' ? 'pt-BR' : language === 'es' ? 'es-ES' : 'en-US',
+                inLanguage: tl(language, { pt: 'pt-BR', es: 'es-ES', en: 'en-US', de: "de-DE", fr: "fr-FR", it: "it-IT" }),
                 wordCount: String(content || "").replace(/<[^>]*>/g, " ").trim().split(/\s+/).filter(Boolean).length || undefined,
                 articleSection: "Rio de Janeiro Travel Guide",
               }))}
@@ -808,29 +810,23 @@ const BlogPost = () => {
                   <div className="flex flex-col md:flex-row items-center justify-between gap-8 relative z-10">
                     <div className="text-left flex-1">
                       <h3 className="font-serif text-2xl sm:text-3xl font-bold mb-4">
-                        {language === 'pt' ? 'Gostou dessa dica?' : 
-                         language === 'es' ? '¿Te gustó este consejo?' : 
-                         'Did you like this tip?'}
+                        {tl(language, { pt: 'Gostou dessa dica?', es: '¿Te gustó este consejo?', en: 'Did you like this tip?', de: "Hat Ihnen dieser Tipp gefallen?", fr: "Vous avez aimé ce conseil ?", it: "Ti è piaciuto questo consiglio?" })}
                       </h3>
                       <p className="text-muted-foreground text-lg mb-0 font-sans max-w-xl">
-                        {language === 'pt' ? 'Viva a emoção de descobrir o Rio de Janeiro com nossos guias especialistas e exclusivos.' : 
-                         language === 'es' ? 'Vive la emoción de descubrir Río de Janeiro con nuestros guías expertos y exclusivos.' : 
-                         'Experience the thrill of discovering Rio de Janeiro with our expert and exclusive guides.'}
+                        {tl(language, { pt: 'Viva a emoção de descobrir o Rio de Janeiro com nossos guias especialistas e exclusivos.', es: 'Vive la emoción de descubrir Río de Janeiro con nuestros guías expertos y exclusivos.', en: 'Experience the thrill of discovering Rio de Janeiro with our expert and exclusive guides.', de: "Erleben Sie die Faszination von Rio de Janeiro mit unseren fachkundigen und exklusiven Guides.", fr: "Vivez l'émotion de découvrir Rio de Janeiro avec nos guides experts et exclusifs.", it: "Vivi l'emozione di scoprire Rio de Janeiro con le nostre guide esperte ed esclusive." })}
                       </p>
                     </div>
 
                     <div className="flex flex-col items-center gap-4 shrink-0">
                       <Link to="/#tours">
                         <Button size="lg" className="rounded-full px-12 font-bold h-16 text-base uppercase tracking-wider shadow-2xl shadow-primary/30 hover:scale-105 transition-all duration-300">
-                          {language === 'pt' ? 'Reservar Agora' : 
-                           language === 'es' ? 'Reservar Ahora' : 
-                           'Book Now'}
+                          {tl(language, { pt: 'Reservar Agora', es: 'Reservar Ahora', en: 'Book Now', de: "Jetzt buchen", fr: "Réserver maintenant", it: "Prenota Ora" })}
                         </Button>
                       </Link>
 
                       <div className="flex items-center gap-3 mt-2">
                         <span className="text-[10px] font-black uppercase text-muted-foreground tracking-widest mr-2 opacity-60">
-                          {language === 'pt' ? 'Compartilhar:' : language === 'es' ? 'Compartir:' : 'Share:'}
+                          {tl(language, { pt: 'Compartilhar:', es: 'Compartir:', en: 'Share:', de: "Teilen:", fr: "Partager :", it: "Condividi:" })}
                         </span>
                         <Button 
                           variant="outline" 
@@ -838,7 +834,7 @@ const BlogPost = () => {
                           className="rounded-full w-10 h-10 border-green-500/20 hover:bg-green-500 hover:text-white transition-all shadow-sm"
                           onClick={shareOnWhatsApp}
                           title="WhatsApp"
-                          aria-label={language === 'pt' ? 'Compartilhar no WhatsApp' : language === 'es' ? 'Compartir en WhatsApp' : 'Share on WhatsApp'}
+                          aria-label={tl(language, { pt: 'Compartilhar no WhatsApp', es: 'Compartir en WhatsApp', en: 'Share on WhatsApp', de: "Auf WhatsApp teilen", fr: "Partager sur WhatsApp", it: "Condividi su WhatsApp" })}
                         >
                           <MessageCircle className="w-4 h-4" />
                         </Button>
@@ -848,7 +844,7 @@ const BlogPost = () => {
                           className="rounded-full w-10 h-10 border-blue-600/20 hover:bg-blue-600 hover:text-white transition-all shadow-sm"
                           onClick={shareOnFacebook}
                           title="Facebook"
-                          aria-label={language === 'pt' ? 'Compartilhar no Facebook' : language === 'es' ? 'Compartir en Facebook' : 'Share on Facebook'}
+                          aria-label={tl(language, { pt: 'Compartilhar no Facebook', es: 'Compartir en Facebook', en: 'Share on Facebook', de: "Auf Facebook teilen", fr: "Partager sur Facebook", it: "Condividi su Facebook" })}
                         >
                           <Facebook className="w-4 h-4" />
                         </Button>
@@ -858,7 +854,7 @@ const BlogPost = () => {
                           className="rounded-full w-10 h-10 border-primary/20 hover:bg-primary hover:text-white transition-all shadow-sm"
                           onClick={copyToClipboard}
                           title={language === 'pt' ? 'Copiar Link' : 'Copy Link'}
-                          aria-label={language === 'pt' ? 'Copiar link do post' : language === 'es' ? 'Copiar enlace' : 'Copy post link'}
+                          aria-label={tl(language, { pt: 'Copiar link do post', es: 'Copiar enlace', en: 'Copy post link', de: "Beitragslink kopieren", fr: "Copier le lien de l'article", it: "Copia link del post" })}
                         >
                           <Link2 className="w-4 h-4" />
                         </Button>
@@ -940,29 +936,23 @@ const BlogPost = () => {
                 <div className="flex flex-col md:flex-row items-center justify-between gap-8 relative z-10">
                   <div className="text-left flex-1">
                     <h3 className="font-serif text-2xl sm:text-3xl font-bold mb-4">
-                      {language === 'pt' ? 'Gostou dessa dica?' : 
-                       language === 'es' ? '¿Te gustó este consejo?' : 
-                       'Did you like this tip?'}
+                      {tl(language, { pt: 'Gostou dessa dica?', es: '¿Te gustó este consejo?', en: 'Did you like this tip?', de: "Hat Ihnen dieser Tipp gefallen?", fr: "Vous avez aimé ce conseil ?", it: "Ti è piaciuto questo consiglio?" })}
                     </h3>
                     <p className="text-muted-foreground text-lg mb-0 font-sans max-w-xl">
-                      {language === 'pt' ? 'Viva a emoção de descobrir o Rio de Janeiro com nossos guias especialistas e exclusivos.' : 
-                       language === 'es' ? 'Vive la emoción de descobrir Río de Janeiro con nossos guías expertos e exclusivos.' : 
-                       'Experience the thrill of discovering Rio de Janeiro with our expert and exclusive guides.'}
+                      {tl(language, { pt: 'Viva a emoção de descobrir o Rio de Janeiro com nossos guias especialistas e exclusivos.', es: 'Vive la emoción de descobrir Río de Janeiro con nossos guías expertos e exclusivos.', en: 'Experience the thrill of discovering Rio de Janeiro with our expert and exclusive guides.', de: "Erleben Sie die Faszination von Rio de Janeiro mit unseren fachkundigen und exklusiven Guides.", fr: "Vivez l'émotion de découvrir Rio de Janeiro avec nos guides experts et exclusifs.", it: "Vivi l'emozione di scoprire Rio de Janeiro con le nostre guide esperte ed esclusive." })}
                     </p>
                   </div>
 
                   <div className="flex flex-col items-center gap-4 shrink-0">
                     <Link to="/#tours">
                       <Button size="lg" className="rounded-full px-12 font-bold h-16 text-base uppercase tracking-wider shadow-2xl shadow-primary/30 hover:scale-105 transition-all duration-300">
-                        {language === 'pt' ? 'Reservar Agora' : 
-                         language === 'es' ? 'Reservar Ahora' : 
-                         'Book Now'}
+                        {tl(language, { pt: 'Reservar Agora', es: 'Reservar Ahora', en: 'Book Now', de: "Jetzt buchen", fr: "Réserver maintenant", it: "Prenota Ora" })}
                       </Button>
                     </Link>
 
                     <div className="flex items-center gap-3 mt-2">
                       <span className="text-[10px] font-black uppercase text-muted-foreground tracking-widest mr-2 opacity-60">
-                        {language === 'pt' ? 'Compartilhar:' : language === 'es' ? 'Compartir:' : 'Share:'}
+                        {tl(language, { pt: 'Compartilhar:', es: 'Compartir:', en: 'Share:', de: "Teilen:", fr: "Partager :", it: "Condividi:" })}
                       </span>
                       <Button 
                         variant="outline" 
@@ -970,7 +960,7 @@ const BlogPost = () => {
                         className="rounded-full w-10 h-10 border-green-500/20 hover:bg-green-500 hover:text-white transition-all shadow-sm"
                         onClick={shareOnWhatsApp}
                         title="WhatsApp"
-                        aria-label={language === 'pt' ? 'Compartilhar no WhatsApp' : language === 'es' ? 'Compartir en WhatsApp' : 'Share on WhatsApp'}
+                        aria-label={tl(language, { pt: 'Compartilhar no WhatsApp', es: 'Compartir en WhatsApp', en: 'Share on WhatsApp', de: "Auf WhatsApp teilen", fr: "Partager sur WhatsApp", it: "Condividi su WhatsApp" })}
                       >
                         <MessageCircle className="w-4 h-4" />
                       </Button>
@@ -980,7 +970,7 @@ const BlogPost = () => {
                         className="rounded-full w-10 h-10 border-blue-600/20 hover:bg-blue-600 hover:text-white transition-all shadow-sm"
                         onClick={shareOnFacebook}
                         title="Facebook"
-                        aria-label={language === 'pt' ? 'Compartilhar no Facebook' : language === 'es' ? 'Compartir en Facebook' : 'Share on Facebook'}
+                        aria-label={tl(language, { pt: 'Compartilhar no Facebook', es: 'Compartir en Facebook', en: 'Share on Facebook', de: "Auf Facebook teilen", fr: "Partager sur Facebook", it: "Condividi su Facebook" })}
                       >
                         <Facebook className="w-4 h-4" />
                       </Button>
@@ -990,7 +980,7 @@ const BlogPost = () => {
                         className="rounded-full w-10 h-10 border-primary/20 hover:bg-primary hover:text-white transition-all shadow-sm"
                         onClick={copyToClipboard}
                         title={language === 'pt' ? 'Copiar Link' : 'Copy Link'}
-                        aria-label={language === 'pt' ? 'Copiar link do post' : language === 'es' ? 'Copiar enlace' : 'Copy post link'}
+                        aria-label={tl(language, { pt: 'Copiar link do post', es: 'Copiar enlace', en: 'Copy post link', de: "Beitragslink kopieren", fr: "Copier le lien de l'article", it: "Copia link del post" })}
                       >
                         <Link2 className="w-4 h-4" />
                       </Button>
@@ -1006,15 +996,11 @@ const BlogPost = () => {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-12">
               <h2 className="font-serif text-3xl sm:text-4xl font-bold text-foreground mb-4">
-                {language === 'pt' ? 'Experiências relacionadas no Rio' :
-                 language === 'es' ? 'Experiencias relacionadas en Río' :
-                 'Related Rio Experiences'}
+                {tl(language, { pt: 'Experiências relacionadas no Rio', es: 'Experiencias relacionadas en Río', en: 'Related Rio Experiences', de: "Ähnliche Rio-Erlebnisse", fr: "Expériences associées à Rio", it: "Esperienze a Rio Correlate" })}
               </h2>
 
               <p className="text-muted-foreground text-lg max-w-2xl mx-auto font-sans">
-                {language === 'pt' ? 'Confira nossos passeios mais bem avaliados e reserve sua próxima aventura.' : 
-                 language === 'es' ? 'Echa un vistazo a nuestros tours melhor valorados e reserva tu próxima aventura.' : 
-                 'Check out our top-rated tours and book your next adventure.'}
+                {tl(language, { pt: 'Confira nossos passeios mais bem avaliados e reserve sua próxima aventura.', es: 'Echa un vistazo a nuestros tours melhor valorados e reserva tu próxima aventura.', en: 'Check out our top-rated tours and book your next adventure.', de: "Entdecken Sie unsere am besten bewerteten Touren und buchen Sie Ihr nächstes Abenteuer.", fr: "Découvrez nos visites les mieux notées et réservez votre prochaine aventure.", it: "Scopri i nostri tour più apprezzati e prenota la tua prossima avventura." })}
               </p>
             </div>
             

@@ -1,3 +1,5 @@
+import { tl } from "@/lib/tl";
+import { overlayLanguage } from "@/lib/contentLanguage";
 import { useMemo } from "react";
 import { Link } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
@@ -78,17 +80,17 @@ export const RelatedBlogPosts = ({
   tourDescription?: string;
   tourKeywords?: string | null;
 }) => {
-  const { language } = useLocale();
+  const { language, siteLanguage } = useLocale();
 
   const { data: posts } = useQuery({
-    queryKey: ["blogPostsLite"],
+    queryKey: ["blogPostsLite", siteLanguage],
     queryFn: async () => {
       const { data } = await supabase
         .from("blog_posts")
-        .select("id,title,slug,meta_keywords,tags,excerpt,title_en,title_es,title_zh_cn,title_zh_tw,excerpt_en,excerpt_es")
+        .select("id,title,slug,meta_keywords,tags,excerpt,title_en,title_es,title_zh_cn,title_zh_tw,excerpt_en,excerpt_es,title_de,title_fr,title_it,excerpt_de,excerpt_fr,excerpt_it")
         .eq("is_published", true)
         .order("created_at", { ascending: false });
-      return (data || []) as unknown as PostLite[];
+      return (data || []).map((p) => overlayLanguage(p as unknown as Record<string, unknown>, siteLanguage)) as unknown as PostLite[];
     },
     staleTime: 1000 * 60 * 10,
   });
@@ -133,10 +135,7 @@ export const RelatedBlogPosts = ({
 
   if (!related.length) return null;
 
-  const heading =
-    language === "pt" ? "Guias relacionados"
-    : language === "es" ? "Guías relacionadas"
-    : "Related Guides";
+  const heading =tl(language, { pt: "Guias relacionados", es: "Guías relacionadas", en: "Related Guides", de: "Ähnliche Reiseführer", fr: "Guides associés", it: "Guide Correlate" });
 
 
   const localizedTitle = (p: PostLite) =>

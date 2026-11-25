@@ -1,3 +1,4 @@
+import { tl } from "@/lib/tl";
 import { useState, useEffect, useMemo } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
@@ -227,7 +228,7 @@ export default function MatchDetail() {
     }
 
     if (quantity > effectiveRemaining) {
-      toast.error(language === 'pt' ? "Quantidade indisponível no estoque" : language === 'es' ? "Cantidad no disponible en stock" : "Quantity unavailable in stock");
+      toast.error(tl(language, { pt: "Quantidade indisponível no estoque", es: "Cantidad no disponible en stock", en: "Quantity unavailable in stock", de: "Menge nicht auf Lager verfügbar", fr: "Quantité non disponible en stock", it: "Quantità non disponibile" }));
       return;
     }
 
@@ -488,8 +489,8 @@ export default function MatchDetail() {
           },
         })}</script>
         <script type="application/ld+json">{JSON.stringify(generateBreadcrumbsSchema([
-          { name: language === 'pt' ? 'Início' : language === 'es' ? 'Inicio' : 'Home', url: getCanonicalUrl('/') },
-          { name: language === 'pt' ? 'Calendário Maracanã' : language === 'es' ? 'Calendario Maracanã' : 'Maracanã Calendar', url: getCanonicalUrl('/maracana-calendario') },
+          { name: tl(language, { pt: 'Início', es: 'Inicio', en: 'Home', de: "Startseite", fr: "Accueil", it: "Home" }), url: getCanonicalUrl('/') },
+          { name: tl(language, { pt: 'Calendário Maracanã', es: 'Calendario Maracanã', en: 'Maracanã Calendar', de: "Maracanã-Kalender", fr: "Calendrier du Maracanã", it: "Calendario Maracanã" }), url: getCanonicalUrl('/maracana-calendario') },
           { name: `${match.home_team} x ${match.away_team}`, url: getCanonicalUrl(`/match/${match.slug || match.id}`) },
         ]))}</script>
         <script type="application/ld+json">{JSON.stringify({
@@ -720,9 +721,9 @@ export default function MatchDetail() {
                        <div className="relative">
                           {hideMatchPrices ? (
                              <div className="mb-8">
-                                <span className="text-[10px] font-black uppercase text-muted-foreground tracking-widest block mb-2">{language === 'pt' ? 'Valores' : language === 'es' ? 'Precios' : 'Pricing'}</span>
+                                <span className="text-[10px] font-black uppercase text-muted-foreground tracking-widest block mb-2">{tl(language, { pt: 'Valores', es: 'Precios', en: 'Pricing', de: "Preise", fr: "Tarifs", it: "Tariffe" })}</span>
                                 <span className="text-3xl font-black text-primary">
-                                   {language === 'pt' ? 'Sob consulta' : language === 'es' ? 'A consultar' : 'On request'}
+                                   {tl(language, { pt: 'Sob consulta', es: 'A consultar', en: 'On request', de: "Auf Anfrage", fr: "Sur demande", it: "Su richiesta" })}
                                 </span>
                              </div>
                           ) : (
@@ -744,11 +745,7 @@ export default function MatchDetail() {
                            {hideMatchPrices ? (
                               <div className="space-y-6">
                                  <p className="text-sm text-muted-foreground leading-relaxed">
-                                    {language === 'pt'
-                                      ? 'Os valores desta experiência são personalizados de acordo com o grupo e a data — fale com nosso guia pelo WhatsApp e garanta seu lugar.'
-                                      : language === 'es'
-                                      ? 'Los precios de esta experiencia se adaptan según el grupo y la fecha — habla con nuestro guía por WhatsApp y asegura tu lugar.'
-                                      : 'Pricing for this experience adapts to your group and date — chat with our guide on WhatsApp and secure your spot.'}
+                                    {tl(language, { pt: 'Os valores desta experiência são personalizados de acordo com o grupo e a data — fale com nosso guia pelo WhatsApp e garanta seu lugar.', es: 'Los precios de esta experiencia se adaptan según el grupo y la fecha — habla con nuestro guía por WhatsApp y asegura tu lugar.', en: 'Pricing for this experience adapts to your group and date — chat with our guide on WhatsApp and secure your spot.', de: "Die Preise für dieses Erlebnis passen sich Ihrer Gruppe und dem Datum an – chatten Sie mit unserem Guide auf WhatsApp und sichern Sie sich Ihren Platz.", fr: "Le tarif de cette expérience s'adapte à votre groupe et à la date — discutez avec notre guide sur WhatsApp et réservez votre place.", it: "Il prezzo di questa esperienza si adatta al tuo gruppo e alla data — chatta con la nostra guida su WhatsApp e assicurati il tuo posto." })}
                                  </p>
                                  {(() => {
                                     const wa = socialMedia.find((s) => s.platform?.toLowerCase().includes('whatsapp') && s.is_active !== false);
@@ -1048,7 +1045,7 @@ export default function MatchDetail() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-5xl font-serif font-black text-foreground mb-4">
-              {language === 'pt' ? 'O que dizem nossos viajantes' : language === 'es' ? 'Lo que dicen nuestros viajeros' : 'What our travelers say'}
+              {tl(language, { pt: 'O que dizem nossos viajantes', es: 'Lo que dicen nuestros viajeros', en: 'What our travelers say', de: "Was unsere Reisenden sagen", fr: "Ce que disent nos voyageurs", it: "Cosa dicono i nostri viaggiatori" })}
             </h2>
           </div>
           
@@ -1064,7 +1061,7 @@ export default function MatchDetail() {
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                <div className="text-center mb-12">
                   <h2 className="text-3xl md:text-5xl font-serif font-black text-foreground mb-4">
-                     {language === 'pt' ? 'Galeria de Fotos' : language === 'es' ? 'Galería de Fotos' : 'Photo Gallery'}
+                     {tl(language, { pt: 'Galeria de Fotos', es: 'Galería de Fotos', en: 'Photo Gallery', de: "Fotogalerie", fr: "Galerie photos", it: "Galleria Fotografica" })}
                   </h2>
                </div>
                <Carousel opts={{ loop: true, align: "start" }} className="w-full">

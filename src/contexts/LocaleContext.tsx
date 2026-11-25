@@ -2,13 +2,23 @@
 import React, { createContext, useContext, useState, ReactNode, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { translationsPt, translationsEn, translationsEs, translationsZhCN, translationsZhTW } from "@/translations";
+import { translationsDe } from "@/translations/de";
+import { translationsFr } from "@/translations/fr";
+import { translationsIt } from "@/translations/it";
+import { setTlLanguage } from "@/lib/tl";
 import { useCurrency } from './CurrencyContext';
 
-type Language = 'pt' | 'en' | 'es' | 'zh-CN' | 'zh-TW';
+export type SiteLanguage = 'pt' | 'en' | 'es' | 'de' | 'fr' | 'it';
+type Language = SiteLanguage | 'zh-CN' | 'zh-TW';
+/** de/fr/it reuse the English layout copy where a page has no own translation. */
+const baseLanguage = (l: Language): Language => (l === 'de' || l === 'fr' || l === 'it' ? 'en' : l);
 type Currency = 'BRL' | 'USD' | 'EUR' | 'CNY';
 
 interface LocaleContextType {
+  /** Language for page logic; German/French/Italian report 'en' so untranslated page copy falls back to English. */
   language: Language;
+  /** The language the visitor actually chose. */
+  siteLanguage: Language;
   setLanguage: (lang: Language) => void;
   currency: Currency;
   setCurrency: (currency: Currency) => void;
@@ -39,6 +49,9 @@ const detectLocale = (): { language: Language; currency: Currency } => {
       pt:    { language: 'pt',    currency: 'BRL' },
       en:    { language: 'en',    currency: 'USD' },
       es:    { language: 'es',    currency: 'USD' },
+      de:    { language: 'de',    currency: 'EUR' },
+      fr:    { language: 'fr',    currency: 'EUR' },
+      it:    { language: 'it',    currency: 'EUR' },
       'zh-cn': { language: 'en', currency: 'USD' },
       'zh-tw': { language: 'en', currency: 'USD' },
     };
@@ -76,6 +89,9 @@ const detectLocale = (): { language: Language; currency: Currency } => {
   }
 
   if (primary.startsWith('es')) return { language: 'es', currency: 'USD' };
+  if (primary.startsWith('de')) return { language: 'de', currency: 'EUR' };
+  if (primary.startsWith('fr')) return { language: 'fr', currency: 'EUR' };
+  if (primary.startsWith('it')) return { language: 'it', currency: 'EUR' };
 
 
   return { language: 'en', currency: 'USD' };
@@ -104,7 +120,10 @@ export const LocaleProvider = ({ children }: { children: ReactNode }) => {
     const map: Record<string, { language: Language; currency: Currency }> = {
       pt:      { language: 'pt',    currency: 'BRL' },
       en:      { language: 'en',    currency: 'USD' },
-      es:      { language: 'es',    currency: 'USD' },
+      es:    { language: 'es',    currency: 'USD' },
+      de:    { language: 'de',    currency: 'EUR' },
+      fr:    { language: 'fr',    currency: 'EUR' },
+      it:    { language: 'it',    currency: 'EUR' },
       'zh-cn': { language: 'en', currency: 'USD' },
       'zh-tw': { language: 'en', currency: 'USD' },
     };
@@ -132,6 +151,7 @@ export const LocaleProvider = ({ children }: { children: ReactNode }) => {
       document.documentElement.lang =
         language === 'pt'    ? 'pt-BR'
         : language === 'es'  ? 'es'
+        : language === 'de' || language === 'fr' || language === 'it' ? language
         : language === 'zh-CN' ? 'zh-Hans'
         : language === 'zh-TW' ? 'zh-Hant'
         : 'en';
@@ -143,6 +163,9 @@ export const LocaleProvider = ({ children }: { children: ReactNode }) => {
       pt: translationsPt,
       en: translationsEn,
       es: translationsEs,
+      de: translationsDe,
+      fr: translationsFr,
+      it: translationsIt,
       'zh-CN': translationsZhCN,
       'zh-TW': translationsZhTW,
     };
@@ -159,6 +182,9 @@ export const LocaleProvider = ({ children }: { children: ReactNode }) => {
     const locale =
       language === 'en'    ? 'en-US'
       : language === 'es'  ? 'es-ES'
+      : language === 'de'  ? 'de-DE'
+      : language === 'fr'  ? 'fr-FR'
+      : language === 'it'  ? 'it-IT'
       : language === 'zh-CN' ? 'zh-CN'
       : language === 'zh-TW' ? 'zh-TW'
       : 'pt-BR';
@@ -169,8 +195,10 @@ export const LocaleProvider = ({ children }: { children: ReactNode }) => {
     }).format(converted);
   };
 
+  setTlLanguage(language);
+
   return (
-    <LocaleContext.Provider value={{ language, setLanguage, currency, setCurrency, t, formatPrice }}>
+    <LocaleContext.Provider value={{ language: baseLanguage(language), siteLanguage: language, setLanguage, currency, setCurrency, t, formatPrice }}>
       {children}
     </LocaleContext.Provider>
   );
@@ -181,3 +209,6 @@ export const useLocale = () => {
   if (!context) throw new Error('useLocale must be used within a LocaleProvider');
   return context;
 };
+
+/** Visitor's chosen language, safe outside the provider (falls back to English). */
+export const useSiteLanguage = () => useContext(LocaleContext)?.siteLanguage ?? 'en';

@@ -5,7 +5,7 @@ import { getCanonicalUrl, getHreflangLinks } from "@/utils/seo";
 import { useLocale } from "@/contexts/LocaleContext";
 import { OPEN_COOKIE_SETTINGS } from "@/components/CookieConsent";
 
-type Lang = "pt" | "en" | "es";
+type Lang = "pt" | "en" | "es" | "de" | "fr" | "it";
 type Section = { h: string; p: string[] };
 type Doc = { title: string; description: string; h1: string; updated: string; intro: string; sections: Section[]; settings: string };
 
@@ -90,6 +90,84 @@ const DOCS: Record<Lang, Doc> = {
     ],
     settings: "Configurar cookies",
   },
+  fr: {
+    title: "Politique de confidentialité | Tocorime Rio",
+    description: "Comment Tocorime Rio collecte, utilise et protège vos données lorsque vous visitez le site et réservez des visites et des matchs à Rio de Janeiro.",
+    h1: "Politique de confidentialité",
+    updated: "Dernière mise à jour : 25 novembre 2026",
+    intro: "Cette politique explique quelles données Tocorime Rio (tocorimerio.com) collecte lorsque vous visitez le site ou effectuez une réservation, à quelles fins nous les utilisons et les choix qui s'offrent à vous. Questions : tocorimeriotours@gmail.com.",
+    sections: [
+      { h: "Données que vous nous transmettez", p: ["Lorsque vous réservez une visite ou un match, ou que vous utilisez le formulaire de contact, nous collectons votre nom, votre adresse e-mail, votre numéro WhatsApp, le nombre de personnes, les dates et tout message que vous rédigez. Nous utilisons ces informations pour confirmer et organiser votre réservation, envoyer des e-mails de confirmation et échanger avec vous au sujet de la prestation. Après une visite, nous pouvons vous envoyer un e-mail pour recueillir votre avis."] },
+      { h: "Paiements", p: ["Les paiements sont gérés par Stripe. Les coordonnées bancaires sont saisies directement sur la page de Stripe ; elles ne transitent jamais par notre site et nous ne les conservons pas. Nous recevons uniquement la confirmation du paiement et son montant."] },
+      { h: "Mesure d'audience sans cookies", p: [
+        "Le site utilise l'analyse d'audience de Lovable, notre plateforme d'hébergement. Elle n'utilise aucun cookie, ne stocke rien sur votre appareil, ne conserve pas les adresses IP et n'identifie pas les visiteurs. Lovable collecte ces données pour notre compte. La [politique de confidentialité de Lovable](" + LOVABLE_PRIVACY + ") explique comment ces données sont traitées.",
+        "Elle enregistre les pages visitées, la provenance des visiteurs, leur pays, leur navigateur, leur système d'exploitation et le type d'appareil, la durée de consultation, la vitesse de chargement des pages, les erreurs rencontrées ainsi que les clics. Les données détaillées sont conservées pendant 90 jours et les synthèses quotidiennes pendant un an.",
+        "Les clics ne sont enregistrés qu'après votre acceptation de l'analyse d'audience si vous vous trouvez dans l'UE/EEE, au Royaume-Uni, en Suisse ou au Canada, ou si votre pays ne peut pas être déterminé. Pour tous les autres visiteurs, ils sont enregistrés sauf en cas de refus de votre part. Ils ne sont jamais enregistrés si votre navigateur transmet le signal Global Privacy Control, même après votre acceptation. Les pages visitées, le temps passé sur une page, la vitesse de chargement et les erreurs sont enregistrés pour chaque visiteur, sans cookies et sans identifier qui que ce soit. Votre choix est conservé dans votre navigateur pour une durée maximale de 12 mois.",
+        "Nous utilisons également notre propre compteur de visites : il enregistre la page consultée, votre provenance, votre navigateur et un identifiant de visite temporaire (supprimé lorsque vous fermez l'onglet). Pour identifier votre pays, votre adresse IP est vérifiée auprès du service ipapi.co mais n'est pas conservée.",
+      ] },
+      { h: "Cookies d'analyse et de publicité (avec votre autorisation)", p: [
+        "Avec votre autorisation pour les cookies d'analyse, nous utilisons Google Analytics (Google) pour mesurer l'utilisation du site et Microsoft Clarity (Microsoft), qui enregistre de manière anonyme la navigation des utilisateurs à travers les pages. Avec votre autorisation pour les cookies publicitaires, nous utilisons Google Ads pour savoir quelles réservations proviennent de nos annonces. Ces outils peuvent déposer des cookies et transmettre des données à Google ou Microsoft.",
+        "En Europe, au Royaume-Uni, en Suisse et au Canada, ils restent bloqués tant que vous ne les avez pas acceptés. Vous pouvez modifier votre choix à tout moment dans les Paramètres des cookies situés en pied de page.",
+      ] },
+      { h: "Données stockées dans votre navigateur", p: ["Le site enregistre votre panier de réservation, la langue sélectionnée et vos préférences en matière de cookies dans votre navigateur. Ces données restent stockées sur votre appareil."] },
+      { h: "Partage de vos données", p: ["Nous partageons vos données uniquement avec les tiers qui nous aident à assurer nos services : Stripe (paiements), Resend (envoi d'e-mails), Lovable (hébergement et base de données), Google et Microsoft (analyses et publicités, avec votre autorisation) ainsi que les partenaires qui fournissent les billets de match, lorsque cela est nécessaire à votre réservation. Nous ne vendons pas vos données."] },
+      { h: "Durée de conservation des données", p: ["Nous conservons les données de réservation aussi longtemps que nécessaire pour assurer le service et nous conformer à nos obligations légales et fiscales."] },
+      { h: "Vos droits", p: ["Vous pouvez demander l'accès à vos données, leur rectification ou leur suppression, ou retirer une autorisation accordée, en écrivant à tocorimeriotours@gmail.com. Vous pouvez également introduire une réclamation auprès de l'autorité de protection des données compétente dans votre pays."] },
+    ],
+    settings: "Paramètres des cookies",
+  },
+  it: {
+    title: "Informativa sulla privacy | Tocorime Rio",
+    description: "Come Tocorime Rio raccoglie, utilizza e protegge i tuoi dati quando visiti il sito e prenoti tour e partite a Rio de Janeiro.",
+    h1: "Informativa sulla privacy",
+    updated: "Ultimo aggiornamento: 25 novembre 2026",
+    intro: "Questa informativa spiega quali dati Tocorime Rio (tocorimerio.com) raccoglie quando visiti il sito o effettui una prenotazione, per cosa li utilizziamo e quali scelte hai a disposizione. Domande: tocorimeriotours@gmail.com.",
+    sections: [
+      { h: "Dati che ci fornisci", p: ["Quando prenoti un tour o una partita, oppure utilizzi il modulo di contatto, raccogliamo il tuo nome, l'email, il numero WhatsApp, il numero di persone, le date e qualsiasi messaggio tu scriva. Utilizziamo questi dati per confermare e organizzare la tua prenotazione, inviare email di conferma e comunicare con te in merito al servizio. Dopo un tour potremmo inviarti un'email per chiederti una recensione."] },
+      { h: "Pagamenti", p: ["I pagamenti sono gestiti da Stripe. I dati della carta vengono inseriti sulla pagina di Stripe; non transitano mai dal nostro sito e non li conserviamo mai. Riceviamo solo la conferma e l'importo del pagamento."] },
+      { h: "Conteggio delle visite senza cookie", p: [
+        "Il sito utilizza il sistema di analisi dei visitatori di Lovable, la nostra piattaforma di hosting. Non utilizza cookie, non memorizza nulla sul tuo dispositivo, non conserva gli indirizzi IP e non identifica i visitatori. Lovable raccoglie questi dati per nostro conto. L'[informativa sulla privacy di Lovable](" + LOVABLE_PRIVACY + ") spiega come li gestisce.",
+        "Registra le pagine visitate, la provenienza dei visitatori, il loro Paese, browser, sistema operativo e tipo di dispositivo, la durata della permanenza, la velocità di caricamento delle pagine e gli errori, oltre ai clic. I dati dettagliati vengono conservati per 90 giorni e i riepiloghi giornalieri per un anno.",
+        "I clic vengono registrati solo dopo che hai accettato i dati analitici se ti trovi nell'UE/SEE, nel Regno Unito, in Svizzera o in Canada, oppure se non è possibile determinare il tuo Paese. Per tutti gli altri, vengono registrati a meno che tu non li rifiuti. Non vengono mai registrati se il tuo browser invia il segnale Global Privacy Control, anche dopo l'accettazione. Le visite alle pagine, il tempo trascorso sulla pagina, la velocità della pagina e gli errori vengono registrati per ogni visitatore, senza cookie e senza identificare nessuno. La tua scelta viene salvata nel tuo browser per un massimo di 12 mesi.",
+        "Utilizziamo anche un nostro contatore di visite: memorizza la pagina, la provenienza, il browser e un codice di visita temporaneo (cancellato alla chiusura della scheda). Per individuare il tuo Paese, il tuo indirizzo IP viene verificato tramite il servizio ipapi.co, ma non viene memorizzato.",
+      ] },
+      { h: "Cookie analitici e pubblicitari (con il tuo consenso)", p: [
+        "Con il tuo consenso per i dati analitici, utilizziamo Google Analytics (Google) per misurare l'utilizzo del sito e Microsoft Clarity (Microsoft), che registra in modo anonimo come gli utenti navigano tra le pagine. Con il tuo consenso per la pubblicità, utilizziamo Google Ads per sapere quali prenotazioni provengono dai nostri annunci. Questi strumenti possono impostare cookie e inviare dati a Google o Microsoft.",
+        "In Europa, nel Regno Unito, in Svizzera e in Canada rimangono bloccati finché non li accetti. Puoi modificare la tua scelta in qualsiasi momento su Impostazioni cookie nel footer.",
+      ] },
+      { h: "Dati memorizzati nel tuo browser", p: ["Il sito memorizza nel tuo browser il carrello delle prenotazioni, la lingua scelta e le preferenze sui cookie. Questi dati rimangono sul tuo dispositivo."] },
+      { h: "Con chi condividiamo i dati", p: ["Condividiamo i dati solo con chi ci aiuta a fornire il servizio: Stripe (pagamenti), Resend (invio email), Lovable (hosting e database), Google e Microsoft (analisi e pubblicità, con il tuo consenso) e i partner che forniscono i biglietti per le partite, quando necessario per la tua prenotazione. Non vendiamo i tuoi dati."] },
+      { h: "Per quanto tempo conserviamo i dati", p: ["Conserviamo i dati di prenotazione per il tempo necessario a fornire il servizio e ad adempiere agli obblighi legali e fiscali."] },
+      { h: "I tuoi diritti", p: ["Puoi richiedere l'accesso, la rettifica o la cancellazione dei tuoi dati, oppure revocare un consenso, scrivendo a tocorimeriotours@gmail.com. Puoi anche presentare un reclamo all'autorità per la protezione dei dati del tuo Paese."] },
+    ],
+    settings: "Impostazioni cookie",
+  },
+  de: {
+    title: "Datenschutzerklärung | Tocorime Rio",
+    description: "Wie Tocorime Rio Ihre Daten erfasst, verwendet und schützt, wenn Sie die Website besuchen und Touren sowie Spiele in Rio de Janeiro buchen.",
+    h1: "Datenschutzerklärung",
+    updated: "Zuletzt aktualisiert: 25. November 2026",
+    intro: "Diese Erklärung erläutert, welche Daten Tocorime Rio (tocorimerio.com) erfasst, wenn Sie die Website besuchen oder eine Buchung vornehmen, wofür wir sie verwenden und welche Wahlmöglichkeiten Sie haben. Fragen: tocorimeriotours@gmail.com.",
+    sections: [
+      { h: "Daten, die Sie uns übermitteln", p: ["Wenn Sie eine Tour oder ein Spiel buchen oder das Kontaktformular nutzen, erfassen wir Ihren Namen, Ihre E-Mail-Adresse, WhatsApp-Nummer, Personenanzahl, Reisedaten und alle von Ihnen geschriebenen Nachrichten. Wir verwenden diese Angaben, um Ihre Buchung zu bestätigen und zu organisieren, Bestätigungs-E-Mails zu senden und uns mit Ihnen über den Service auszutauschen. Nach einer Tour können wir Ihnen eine E-Mail senden, um nach einer Bewertung zu fragen."] },
+      { h: "Zahlungen", p: ["Zahlungen werden über Stripe abgewickelt. Kartendaten werden auf der Seite von Stripe eingegeben; sie gelangen niemals über unsere Website und werden von uns zu keinem Zeitpunkt gespeichert. Wir erhalten lediglich die Zahlungsbestätigung und den Betrag."] },
+      { h: "Besucherzählung ohne Cookies", p: [
+        "Die Website nutzt Besucheranalysen von Lovable, unserer Hosting-Plattform. Sie verwendet keine Cookies, speichert nichts auf Ihrem Gerät, speichert keine IP-Adressen und identifiziert keine Besucher. Lovable erfasst diese Daten für uns. [Datenschutzerklärung von Lovable](" + LOVABLE_PRIVACY + ") erklärt, wie damit umgegangen wird.",
+        "Erfasst werden die besuchten Seiten, die Herkunft der Besucher, ihr Land, Browser, Betriebssystem und Gerätetyp, die Verweildauer, wie schnell Seiten laden, Fehler sowie Klicks. Detaillierte Daten werden für 90 Tage und tägliche Zusammenfassungen für ein Jahr gespeichert.",
+        "Klicks werden erst erfasst, nachdem Sie Analyse-Cookies akzeptiert haben, wenn Sie sich in der EU/im EWR, im Vereinigten Königreich, in der Schweiz oder in Kanada befinden oder wenn Ihr Land nicht ermittelt werden kann. Für alle anderen Personen werden sie erfasst, sofern Sie nicht ablehnen. Sie werden niemals erfasst, wenn Ihr Browser Global Privacy Control sendet, selbst wenn Sie zugestimmt haben. Seitenaufrufe, Verweildauer auf der Seite, Ladegeschwindigkeit und Fehler werden für jeden Besucher erfasst, ganz ohne Cookies und ohne jemanden zu identifizieren. Ihre Auswahl wird bis zu 12 Monate in Ihrem Browser gespeichert.",
+        "Wir betreiben zudem unseren eigenen Besucherzähler: Dieser speichert die besuchte Seite, Ihre Herkunft, Ihren Browser und einen temporären Besuchscode (der gelöscht wird, wenn Sie den Tab schließen). Um Ihr Land zu ermitteln, wird Ihre IP-Adresse über den Dienst ipapi.co abgefragt, aber nicht gespeichert.",
+      ] },
+      { h: "Analyse- und Werbe-Cookies (mit Ihrer Zustimmung)", p: [
+        "Mit Ihrer Zustimmung zu Analyse-Cookies nutzen wir Google Analytics (Google), um die Nutzung der Website zu messen, sowie Microsoft Clarity (Microsoft), das anonym aufzeichnet, wie sich Personen durch Seiten bewegen. Mit Ihrer Zustimmung zu Werbe-Cookies nutzen wir Google Ads, um zu erfahren, welche Buchungen über unsere Anzeigen zustande kamen. Diese Tools können Cookies setzen und Daten an Google oder Microsoft übertragen.",
+        "In Europa, dem Vereinigten Königreich, der Schweiz und Kanada bleiben diese blockiert, bis Sie zustimmen. Sie können Ihre Auswahl jederzeit unter Cookie-Einstellungen in der Fußzeile ändern.",
+      ] },
+      { h: "In Ihrem Browser gespeicherte Daten", p: ["Die Website speichert Ihren Buchungswarenkorb, die ausgewählte Sprache und Ihre Cookie-Einstellungen in Ihrem Browser. Diese Daten verbleiben auf Ihrem Gerät."] },
+      { h: "Mit wem wir Daten teilen", p: ["Wir teilen Daten nur mit Dritten, die uns bei der Bereitstellung unseres Dienstes unterstützen: Stripe (Zahlungen), Resend (E-Mail-Zustellung), Lovable (Hosting und Datenbank), Google und Microsoft (Analysen und Werbung, mit Ihrer Zustimmung) sowie Partnern, die Spieltickets bereitstellen, sofern dies für Ihre Buchung erforderlich ist. Wir verkaufen Ihre Daten nicht."] },
+      { h: "Wie lange wir Daten aufbewahren", p: ["Wir bewahren Buchungsdaten so lange auf, wie es für die Erbringung des Dienstes und die Erfüllung gesetzlicher sowie steuerlicher Pflichten erforderlich ist."] },
+      { h: "Ihre Rechte", p: ["Sie können Auskunft über Ihre Daten sowie deren Berichtigung oder Löschung verlangen oder eine Einwilligung widerrufen, indem Sie an tocorimeriotours@gmail.com schreiben. Sie können sich auch bei der Datenschutzbehörde Ihres Landes beschweren."] },
+    ],
+    settings: "Cookie-Einstellungen",
+  },
 };
 
 // Render "[text](url)" links inside a paragraph.
@@ -102,8 +180,8 @@ function renderText(text: string) {
 }
 
 const PrivacyPolicy = () => {
-  const { language } = useLocale();
-  const d = DOCS[(language === "pt" || language === "es" ? language : "en") as Lang];
+  const { siteLanguage } = useLocale();
+  const d = DOCS[(["pt", "es", "de", "fr", "it"].includes(siteLanguage) ? siteLanguage : "en") as Lang];
   const path = "/privacy-policy";
 
   return (

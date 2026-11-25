@@ -1,3 +1,4 @@
+import { overlayLanguage } from "@/lib/contentLanguage";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { fetchLovable, LovableBlogPost } from "@/integrations/lovable/client";
@@ -15,7 +16,7 @@ import { getCanonicalUrl, getHreflangLinks } from "@/utils/seo";
 const Blog = () => {
   const [posts, setPosts] = useState<LovableBlogPost[]>([]);
   const [isLoading, setIsLoading] = useState(true);
-  const { t, language } = useLocale();
+  const { t, language, siteLanguage } = useLocale();
   const { images } = useSiteData();
   const fallbackImage = images.hero_bg || "/placeholder.svg";
 
@@ -26,20 +27,20 @@ const Blog = () => {
     // Só carrega colunas usadas na listagem (evita trazer `content` gigante).
     const data = await fetchLovable<LovableBlogPost>(
       "blog_posts",
-      "id,slug,image_url,is_published,created_at,title,title_en,title_es,excerpt,excerpt_en,excerpt_es",
+      "id,slug,image_url,is_published,created_at,title,title_en,title_es,excerpt,excerpt_en,excerpt_es,title_de,title_fr,title_it,excerpt_de,excerpt_fr,excerpt_it",
     );
 
     const published = data
       .filter(p => p.is_published)
       .sort((a, b) => new Date(b.created_at || 0).getTime() - new Date(a.created_at || 0).getTime());
 
-    setPosts(published);
+    setPosts(published.map((p) => overlayLanguage(p as unknown as Record<string, unknown>, siteLanguage) as unknown as LovableBlogPost));
     setIsLoading(false);
   };
 
   useEffect(() => {
     loadPosts();
-  }, []);
+  }, [siteLanguage]);
 
   const getTranslated = (obj: LovableBlogPost, field: keyof LovableBlogPost) => {
     if (!obj) return "";

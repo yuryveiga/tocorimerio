@@ -1,3 +1,4 @@
+import { tl } from "@/lib/tl";
 import { memo, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import Clock from "lucide-react/dist/esm/icons/clock";
@@ -122,7 +123,7 @@ export const TourItem = memo(({ tour }: { tour: TourCardProps }) => {
         {tour.match_date && (
           <div className="absolute bottom-4 left-4 bg-white/90 backdrop-blur-md text-primary px-3 py-2 rounded-xl shadow-xl border border-primary/20 z-10 flex flex-col items-center min-w-[60px]">
             <span className="text-[10px] font-black uppercase tracking-widest leading-none mb-1 opacity-70">
-              {new Date(tour.match_date).toLocaleDateString(language === 'pt' ? 'pt-BR' : language === 'es' ? 'es-ES' : 'en-US', { month: 'short', timeZone: 'America/Sao_Paulo' })}
+              {new Date(tour.match_date).toLocaleDateString(tl(language, { pt: 'pt-BR', es: 'es-ES', en: 'en-US', de: "de-DE", fr: "fr-FR", it: "it-IT" }), { month: 'short', timeZone: 'America/Sao_Paulo' })}
             </span>
             <span className="text-2xl font-black leading-none">
               {new Date(tour.match_date).toLocaleDateString('en-US', { day: 'numeric', timeZone: 'America/Sao_Paulo' })}
@@ -203,13 +204,13 @@ export const TourItem = memo(({ tour }: { tour: TourCardProps }) => {
             onClick={(e) => { e.preventDefault(); e.stopPropagation(); setShowDetails(v => !v); }}
             aria-expanded={showDetails}
             aria-label={`${showDetails
-              ? (language === 'pt' ? 'Ocultar detalhes de' : language === 'es' ? 'Ocultar detalles de' : 'Hide details of')
-              : (language === 'pt' ? 'Ver detalhes de' : language === 'es' ? 'Ver detalles de' : 'View details of')} ${title}`}
+              ? tl(language, { pt: 'Ocultar detalhes de', es: 'Ocultar detalles de', en: 'Hide details of', de: "Details ausblenden von", fr: "Masquer les détails de", it: "Nascondi dettagli di" })
+              : tl(language, { pt: 'Ver detalhes de', es: 'Ver detalles de', en: 'View details of', de: "Details anzeigen von", fr: "Voir les détails de", it: "Vedi dettagli di" })} ${title}`}
             className="inline-flex items-center min-h-[44px] py-2 pr-3 text-[11px] font-bold uppercase tracking-wider text-primary underline underline-offset-4"
           >
             {showDetails
-              ? (language === 'pt' ? 'Ocultar detalhes' : language === 'es' ? 'Ocultar detalles' : 'Hide details')
-              : (language === 'pt' ? 'Ver detalhes' : language === 'es' ? 'Ver detalles' : 'View details')}
+              ? tl(language, { pt: 'Ocultar detalhes', es: 'Ocultar detalles', en: 'Hide details', de: "Details ausblenden", fr: "Masquer les détails", it: "Nascondi dettagli" })
+              : tl(language, { pt: 'Ver detalhes', es: 'Ver detalles', en: 'View details', de: "Details anzeigen", fr: "Voir les détails", it: "Vedi dettagli" })}
           </button>
         </div>
 
@@ -256,7 +257,7 @@ export const TourItem = memo(({ tour }: { tour: TourCardProps }) => {
             <div className="flex items-center justify-center gap-2">
               <span className="text-center leading-tight [text-wrap:balance]">
                 {hidePrices
-                  ? (language === 'pt' ? 'VER DETALHES' : language === 'es' ? 'VER DETALLES' : 'VIEW DETAILS')
+                  ? tl(language, { pt: 'VER DETALHES', es: 'VER DETALLES', en: 'VIEW DETAILS', de: "DETAILS ANZEIGEN", fr: "VOIR LES DÉTAILS", it: "VEDI DETTAGLI" })
                   : t("check_availability").toUpperCase()}
               </span>
               <ArrowRight className="w-4 h-4 shrink-0 group-hover:translate-x-1 transition-transform" />
@@ -280,7 +281,7 @@ export const TourItem = memo(({ tour }: { tour: TourCardProps }) => {
             <svg viewBox="0 0 24 24" className="w-3.5 h-3.5 shrink-0" fill="currentColor">
               <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
             </svg>
-            {language === 'pt' ? 'Perguntar no WhatsApp' : language === 'es' ? 'Preguntar por WhatsApp' : 'Ask on WhatsApp'}
+            {tl(language, { pt: 'Perguntar no WhatsApp', es: 'Preguntar por WhatsApp', en: 'Ask on WhatsApp', de: "Auf WhatsApp fragen", fr: "Demander sur WhatsApp", it: "Chiedi su WhatsApp" })}
           </button>
         </div>
       </div>

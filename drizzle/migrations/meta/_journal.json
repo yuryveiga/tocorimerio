@@ -71,6 +71,13 @@
       "when": 1795277554358,
       "tag": "0009_tripadvisor_review_snapshot",
       "breakpoints": true
+    },
+    {
+      "idx": 10,
+      "version": "7",
+      "when": 1795628841430,
+      "tag": "0010_add_de_fr_it_content_columns",
+      "breakpoints": true
     }
   ]
 }

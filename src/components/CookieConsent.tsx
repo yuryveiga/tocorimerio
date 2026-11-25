@@ -8,7 +8,9 @@ const PURPOSES: Purpose[] = ["analytics", "advertising"];
 export const OPEN_COOKIE_SETTINGS = "open-cookie-settings";
 
 type Copy = Record<string, string>;
-const COPY: Record<"pt" | "en" | "es", Copy> = {
+type CopyLang = "pt" | "en" | "es" | "de" | "fr" | "it";
+const pickCopyLang = (l: string): CopyLang => (["pt", "es", "de", "fr", "it"].includes(l) ? (l as CopyLang) : "en");
+const COPY: Record<CopyLang, Copy> = {
   pt: {
     policy: "Política de privacidade",
     title: "Cookies e privacidade",
@@ -39,6 +41,36 @@ const COPY: Record<"pt" | "en" | "es", Copy> = {
     advertising: "Publicidad, proporcionada por Google", advertisingDesc: "Medir reservas que vienen de anuncios.",
     gpc: "La señal de privacidad de tu navegador se aplica, por eso estas opciones están desactivadas.",
   },
+  fr: {
+    policy: "Politique de confidentialité",
+    title: "Cookies et confidentialité",
+    body: "Nous comptabilisons les visites sans vous identifier. Si vous acceptez, nous mesurons également les clics et d'autres actions, et utilisons des cookies pour mesurer et améliorer nos publicités.",
+    accept: "Tout accepter", reject: "Tout refuser", settings: "Paramètres des cookies", save: "Enregistrer les choix",
+    necessary: "Nécessaires", necessaryDesc: "Toujours activés pour que le site fonctionne.",
+    analytics: "Statistiques, fournies par Lovable, Google et Microsoft", analyticsDesc: "Comprendre comment le site est utilisé.",
+    advertising: "Publicité, fournie par Google", advertisingDesc: "Mesurer les réservations provenant des publicités.",
+    gpc: "Le signal de confidentialité de votre navigateur s'applique, ces choix sont donc désactivés.",
+  },
+  it: {
+    policy: "Informativa sulla privacy",
+    title: "Cookie e privacy",
+    body: "Conteggiamo le visite senza identificarti. Se accetti, misuriamo anche i clic e altre azioni, e utilizziamo i cookie per misurare e migliorare i nostri annunci.",
+    accept: "Accetta tutti", reject: "Rifiuta tutti", settings: "Impostazioni cookie", save: "Salva scelte",
+    necessary: "Necessari", necessaryDesc: "Sempre attivi per garantire il funzionamento del sito.",
+    analytics: "Analisi, fornita da Lovable, Google e Microsoft", analyticsDesc: "Comprendere come viene utilizzato il sito.",
+    advertising: "Pubblicità, fornita da Google", advertisingDesc: "Misurare le prenotazioni provenienti dagli annunci.",
+    gpc: "Si applica il segnale di privacy del tuo browser, pertanto queste scelte sono disattivate.",
+  },
+  de: {
+    policy: "Datenschutzerklärung",
+    title: "Cookies & Datenschutz",
+    body: "Wir zählen Besuche, ohne Sie zu identifizieren. Wenn Sie zustimmen, messen wir auch Klicks und andere Aktionen und verwenden Cookies, um unsere Anzeigen zu messen und zu verbessern.",
+    accept: "Alle akzeptieren", reject: "Alle ablehnen", settings: "Cookie-Einstellungen", save: "Auswahl speichern",
+    necessary: "Notwendig", necessaryDesc: "Immer aktiv, damit die Website funktioniert.",
+    analytics: "Analysen, bereitgestellt von Lovable, Google und Microsoft", analyticsDesc: "Verstehen, wie die Website genutzt wird.",
+    advertising: "Werbung, bereitgestellt von Google", advertisingDesc: "Buchungen messen, die über Anzeigen zustande kommen.",
+    gpc: "Das Datenschutzsignal Ihres Browsers wird angewendet, daher sind diese Optionen deaktiviert.",
+  },
 };
 
 let clarityLoaded = false;
@@ -54,8 +86,8 @@ function loadClarity() {
 }
 
 export function CookieConsent() {
-  const { language } = useLocale();
-  const c = COPY[(language === "pt" || language === "es" ? language : "en") as "pt" | "en" | "es"];
+  const { siteLanguage } = useLocale();
+  const c = COPY[pickCopyLang(siteLanguage)];
   const [open, setOpen] = useState(false);
   const [showSettings, setShowSettings] = useState(false);
   const [toggles, setToggles] = useState<Record<Purpose, boolean>>({ analytics: false, advertising: false });
@@ -126,7 +158,7 @@ export function CookieConsent() {
 }
 
 export const privacyPolicyLabel = (language: string) =>
-  COPY[(language === "pt" || language === "es" ? language : "en") as "pt" | "en" | "es"].policy;
+  COPY[pickCopyLang(language)].policy;
 
 export const cookieSettingsLabel = (language: string) =>
-  COPY[(language === "pt" || language === "es" ? language : "en") as "pt" | "en" | "es"].settings;
+  COPY[pickCopyLang(language)].settings;

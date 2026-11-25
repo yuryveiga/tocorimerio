@@ -55,14 +55,20 @@ export type Database = {
       blog_posts: {
         Row: {
           content: string
+          content_de: string | null
           content_en: string | null
           content_es: string | null
+          content_fr: string | null
+          content_it: string | null
           content_zh_cn: string | null
           content_zh_tw: string | null
           created_at: string
           excerpt: string | null
+          excerpt_de: string | null
           excerpt_en: string | null
           excerpt_es: string | null
+          excerpt_fr: string | null
+          excerpt_it: string | null
           excerpt_zh_cn: string | null
           excerpt_zh_tw: string | null
           featured_image_alt: string | null
@@ -77,22 +83,31 @@ export type Database = {
           slug: string
           tags: string[] | null
           title: string
+          title_de: string | null
           title_en: string | null
           title_es: string | null
+          title_fr: string | null
+          title_it: string | null
           title_zh_cn: string | null
           title_zh_tw: string | null
           updated_at: string
         }
         Insert: {
           content: string
+          content_de?: string | null
           content_en?: string | null
           content_es?: string | null
+          content_fr?: string | null
+          content_it?: string | null
           content_zh_cn?: string | null
           content_zh_tw?: string | null
           created_at?: string
           excerpt?: string | null
+          excerpt_de?: string | null
           excerpt_en?: string | null
           excerpt_es?: string | null
+          excerpt_fr?: string | null
+          excerpt_it?: string | null
           excerpt_zh_cn?: string | null
           excerpt_zh_tw?: string | null
           featured_image_alt?: string | null
@@ -107,22 +122,31 @@ export type Database = {
           slug: string
           tags?: string[] | null
           title: string
+          title_de?: string | null
           title_en?: string | null
           title_es?: string | null
+          title_fr?: string | null
+          title_it?: string | null
           title_zh_cn?: string | null
           title_zh_tw?: string | null
           updated_at?: string
         }
         Update: {
           content?: string
+          content_de?: string | null
           content_en?: string | null
           content_es?: string | null
+          content_fr?: string | null
+          content_it?: string | null
           content_zh_cn?: string | null
           content_zh_tw?: string | null
           created_at?: string
           excerpt?: string | null
+          excerpt_de?: string | null
           excerpt_en?: string | null
           excerpt_es?: string | null
+          excerpt_fr?: string | null
+          excerpt_it?: string | null
           excerpt_zh_cn?: string | null
           excerpt_zh_tw?: string | null
           featured_image_alt?: string | null
@@ -137,8 +161,11 @@ export type Database = {
           slug?: string
           tags?: string[] | null
           title?: string
+          title_de?: string | null
           title_en?: string | null
           title_es?: string | null
+          title_fr?: string | null
+          title_it?: string | null
           title_zh_cn?: string | null
           title_zh_tw?: string | null
           updated_at?: string
@@ -855,61 +882,88 @@ export type Database = {
           bares_noturnos: string | null
           carousel_images_json: Json | null
           category: string
+          category_de: string | null
           category_en: string | null
           category_es: string | null
+          category_fr: string | null
+          category_it: string | null
           category_zh_cn: string | null
           category_zh_tw: string | null
           created_at: string
           custom_options_json: Json | null
           difficulty: string | null
+          difficulty_de: string | null
           difficulty_en: string | null
           difficulty_es: string | null
+          difficulty_fr: string | null
+          difficulty_it: string | null
           difficulty_zh_cn: string | null
           difficulty_zh_tw: string | null
           duration: string
           external_url: string | null
           faq_json: Json | null
+          faq_json_de: Json | null
           faq_json_en: Json | null
           faq_json_es: Json | null
+          faq_json_fr: Json | null
+          faq_json_it: Json | null
           faq_json_zh_cn: Json | null
           faq_json_zh_tw: Json | null
           has_afternoon: boolean
           has_morning: boolean
           has_night: boolean
           highlights_json: Json | null
+          highlights_json_de: Json | null
           highlights_json_en: Json | null
           highlights_json_es: Json | null
+          highlights_json_fr: Json | null
+          highlights_json_it: Json | null
           highlights_json_zh_cn: Json | null
           highlights_json_zh_tw: Json | null
           id: string
           image_url: string
           images_json: Json | null
           included_json: Json | null
+          included_json_de: Json | null
           included_json_en: Json | null
           included_json_es: Json | null
+          included_json_fr: Json | null
+          included_json_it: Json | null
           included_json_zh_cn: Json | null
           included_json_zh_tw: Json | null
           is_active: boolean
           is_featured: boolean
           itinerary_json: Json | null
+          itinerary_json_de: Json | null
           itinerary_json_en: Json | null
           itinerary_json_es: Json | null
+          itinerary_json_fr: Json | null
+          itinerary_json_it: Json | null
           itinerary_json_zh_cn: Json | null
           itinerary_json_zh_tw: Json | null
           max_group_size: number
           meeting_point_address: string | null
+          meeting_point_address_de: string | null
           meeting_point_address_en: string | null
           meeting_point_address_es: string | null
+          meeting_point_address_fr: string | null
+          meeting_point_address_it: string | null
           meeting_point_address_zh_cn: string | null
           meeting_point_address_zh_tw: string | null
+          meta_description_de: string | null
           meta_description_en: string | null
           meta_description_es: string | null
+          meta_description_fr: string | null
+          meta_description_it: string | null
           meta_description_pt: string | null
           meta_keywords: string | null
           meta_keywords_es: string | null
           meta_keywords_pt: string | null
+          meta_title_de: string | null
           meta_title_en: string | null
           meta_title_es: string | null
+          meta_title_fr: string | null
+          meta_title_it: string | null
           meta_title_pt: string | null
           price: number
           price_1_person: number | null
@@ -918,16 +972,22 @@ export type Database = {
           price_7_19_people: number | null
           pricing_model: string | null
           short_description: string
+          short_description_de: string | null
           short_description_en: string | null
           short_description_es: string | null
+          short_description_fr: string | null
+          short_description_it: string | null
           short_description_zh_cn: string | null
           short_description_zh_tw: string | null
           slug: string | null
           sort_order: number
           tiered_pricing_json: Json | null
           title: string
+          title_de: string | null
           title_en: string | null
           title_es: string | null
+          title_fr: string | null
+          title_it: string | null
           title_zh_cn: string | null
           title_zh_tw: string | null
           updated_at: string
@@ -943,61 +1003,88 @@ export type Database = {
           bares_noturnos?: string | null
           carousel_images_json?: Json | null
           category?: string
+          category_de?: string | null
           category_en?: string | null
           category_es?: string | null
+          category_fr?: string | null
+          category_it?: string | null
           category_zh_cn?: string | null
           category_zh_tw?: string | null
           created_at?: string
           custom_options_json?: Json | null
           difficulty?: string | null
+          difficulty_de?: string | null
           difficulty_en?: string | null
           difficulty_es?: string | null
+          difficulty_fr?: string | null
+          difficulty_it?: string | null
           difficulty_zh_cn?: string | null
           difficulty_zh_tw?: string | null
           duration?: string
           external_url?: string | null
           faq_json?: Json | null
+          faq_json_de?: Json | null
           faq_json_en?: Json | null
           faq_json_es?: Json | null
+          faq_json_fr?: Json | null
+          faq_json_it?: Json | null
           faq_json_zh_cn?: Json | null
           faq_json_zh_tw?: Json | null
           has_afternoon?: boolean
           has_morning?: boolean
           has_night?: boolean
           highlights_json?: Json | null
+          highlights_json_de?: Json | null
           highlights_json_en?: Json | null
           highlights_json_es?: Json | null
+          highlights_json_fr?: Json | null
+          highlights_json_it?: Json | null
           highlights_json_zh_cn?: Json | null
           highlights_json_zh_tw?: Json | null
           id?: string
           image_url?: string
           images_json?: Json | null
           included_json?: Json | null
+          included_json_de?: Json | null
           included_json_en?: Json | null
           included_json_es?: Json | null
+          included_json_fr?: Json | null
+          included_json_it?: Json | null
           included_json_zh_cn?: Json | null
           included_json_zh_tw?: Json | null
           is_active?: boolean
           is_featured?: boolean
           itinerary_json?: Json | null
+          itinerary_json_de?: Json | null
           itinerary_json_en?: Json | null
           itinerary_json_es?: Json | null
+          itinerary_json_fr?: Json | null
+          itinerary_json_it?: Json | null
           itinerary_json_zh_cn?: Json | null
           itinerary_json_zh_tw?: Json | null
           max_group_size?: number
           meeting_point_address?: string | null
+          meeting_point_address_de?: string | null
           meeting_point_address_en?: string | null
           meeting_point_address_es?: string | null
+          meeting_point_address_fr?: string | null
+          meeting_point_address_it?: string | null
           meeting_point_address_zh_cn?: string | null
           meeting_point_address_zh_tw?: string | null
+          meta_description_de?: string | null
           meta_description_en?: string | null
           meta_description_es?: string | null
+          meta_description_fr?: string | null
+          meta_description_it?: string | null
           meta_description_pt?: string | null
           meta_keywords?: string | null
           meta_keywords_es?: string | null
           meta_keywords_pt?: string | null
+          meta_title_de?: string | null
           meta_title_en?: string | null
           meta_title_es?: string | null
+          meta_title_fr?: string | null
+          meta_title_it?: string | null
           meta_title_pt?: string | null
           price?: number
           price_1_person?: number | null
@@ -1006,16 +1093,22 @@ export type Database = {
           price_7_19_people?: number | null
           pricing_model?: string | null
           short_description?: string
+          short_description_de?: string | null
           short_description_en?: string | null
           short_description_es?: string | null
+          short_description_fr?: string | null
+          short_description_it?: string | null
           short_description_zh_cn?: string | null
           short_description_zh_tw?: string | null
           slug?: string | null
           sort_order?: number
           tiered_pricing_json?: Json | null
           title: string
+          title_de?: string | null
           title_en?: string | null
           title_es?: string | null
+          title_fr?: string | null
+          title_it?: string | null
           title_zh_cn?: string | null
           title_zh_tw?: string | null
           updated_at?: string
@@ -1031,61 +1124,88 @@ export type Database = {
           bares_noturnos?: string | null
           carousel_images_json?: Json | null
           category?: string
+          category_de?: string | null
           category_en?: string | null
           category_es?: string | null
+          category_fr?: string | null
+          category_it?: string | null
           category_zh_cn?: string | null
           category_zh_tw?: string | null
           created_at?: string
           custom_options_json?: Json | null
           difficulty?: string | null
+          difficulty_de?: string | null
           difficulty_en?: string | null
           difficulty_es?: string | null
+          difficulty_fr?: string | null
+          difficulty_it?: string | null
           difficulty_zh_cn?: string | null
           difficulty_zh_tw?: string | null
           duration?: string
           external_url?: string | null
           faq_json?: Json | null
+          faq_json_de?: Json | null
           faq_json_en?: Json | null
           faq_json_es?: Json | null
+          faq_json_fr?: Json | null
+          faq_json_it?: Json | null
           faq_json_zh_cn?: Json | null
           faq_json_zh_tw?: Json | null
           has_afternoon?: boolean
           has_morning?: boolean
           has_night?: boolean
           highlights_json?: Json | null
+          highlights_json_de?: Json | null
           highlights_json_en?: Json | null
           highlights_json_es?: Json | null
+          highlights_json_fr?: Json | null
+          highlights_json_it?: Json | null
           highlights_json_zh_cn?: Json | null
           highlights_json_zh_tw?: Json | null
           id?: string
           image_url?: string
           images_json?: Json | null
           included_json?: Json | null
+          included_json_de?: Json | null
           included_json_en?: Json | null
           included_json_es?: Json | null
+          included_json_fr?: Json | null
+          included_json_it?: Json | null
           included_json_zh_cn?: Json | null
           included_json_zh_tw?: Json | null
           is_active?: boolean
           is_featured?: boolean
           itinerary_json?: Json | null
+          itinerary_json_de?: Json | null
           itinerary_json_en?: Json | null
           itinerary_json_es?: Json | null
+          itinerary_json_fr?: Json | null
+          itinerary_json_it?: Json | null
           itinerary_json_zh_cn?: Json | null
           itinerary_json_zh_tw?: Json | null
           max_group_size?: number
           meeting_point_address?: string | null
+          meeting_point_address_de?: string | null
           meeting_point_address_en?: string | null
           meeting_point_address_es?: string | null
+          meeting_point_address_fr?: string | null
+          meeting_point_address_it?: string | null
           meeting_point_address_zh_cn?: string | null
           meeting_point_address_zh_tw?: string | null
+          meta_description_de?: string | null
           meta_description_en?: string | null
           meta_description_es?: string | null
+          meta_description_fr?: string | null
+          meta_description_it?: string | null
           meta_description_pt?: string | null
           meta_keywords?: string | null
           meta_keywords_es?: string | null
           meta_keywords_pt?: string | null
+          meta_title_de?: string | null
           meta_title_en?: string | null
           meta_title_es?: string | null
+          meta_title_fr?: string | null
+          meta_title_it?: string | null
           meta_title_pt?: string | null
           price?: number
           price_1_person?: number | null
@@ -1094,16 +1214,22 @@ export type Database = {
           price_7_19_people?: number | null
           pricing_model?: string | null
           short_description?: string
+          short_description_de?: string | null
           short_description_en?: string | null
           short_description_es?: string | null
+          short_description_fr?: string | null
+          short_description_it?: string | null
           short_description_zh_cn?: string | null
           short_description_zh_tw?: string | null
           slug?: string | null
           sort_order?: number
           tiered_pricing_json?: Json | null
           title?: string
+          title_de?: string | null
           title_en?: string | null
           title_es?: string | null
+          title_fr?: string | null
+          title_it?: string | null
           title_zh_cn?: string | null
           title_zh_tw?: string | null
           updated_at?: string

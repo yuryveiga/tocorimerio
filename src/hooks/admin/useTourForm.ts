@@ -1,3 +1,4 @@
+import { refreshExtraTranslations } from "@/lib/refreshExtraTranslations";
 import { useState, useEffect } from "react";
 
 import { useForm } from "react-hook-form";
@@ -207,10 +208,12 @@ export function useTourForm(initialData: Partial<LovableTour> | null, onSuccess:
       const dataToSave = { ...values, slug };
 
       if (!initialData?.id) {
-        await insertLovable("tours", dataToSave);
+        const created = (await insertLovable("tours", dataToSave)) as unknown as { id?: string } | null;
+        refreshExtraTranslations("tours", created?.id);
         toast({ title: "Passeio criado!" });
       } else {
         await updateLovable("tours", initialData.id, dataToSave);
+        refreshExtraTranslations("tours", initialData.id);
         toast({ title: "Passeio atualizado!" });
       }
 

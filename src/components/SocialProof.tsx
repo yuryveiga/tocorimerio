@@ -1,3 +1,4 @@
+import { tl } from "@/lib/tl";
 import { Star } from "lucide-react";
 import { useSiteData } from "@/hooks/useSiteData";
 import { useLocale } from "@/contexts/LocaleContext";
@@ -36,10 +37,10 @@ export const SocialProof = ({ className = "", light = true, hideReviewsOnMobile 
         {hideReviewsOnMobile ? (
           <>
             <span className="sm:hidden">★ 5.0</span>
-            <span className="hidden sm:inline">★ 5.0 — 200+ {language === 'pt' ? 'avaliações' : language === 'es' ? 'evaluaciones' : 'reviews'}</span>
+            <span className="hidden sm:inline">★ 5.0 — 200+ {tl(language, { pt: 'avaliações', es: 'evaluaciones', en: 'reviews', de: "Bewertungen", fr: "avis", it: "recensioni" })}</span>
           </>
         ) : (
-          <>★ 5.0 — 200+ {language === 'pt' ? 'avaliações' : language === 'es' ? 'evaluaciones' : 'reviews'}</>
+          <>★ 5.0 — 200+ {tl(language, { pt: 'avaliações', es: 'evaluaciones', en: 'reviews', de: "Bewertungen", fr: "avis", it: "recensioni" })}</>
         )}
       </span>
     </a>

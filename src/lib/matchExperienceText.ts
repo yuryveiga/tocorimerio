@@ -1,3 +1,4 @@
+import { tl } from "./tl";
 // ============= Full file contents =============
 
 // Generates a 350–450-word SEO-optimized "About the Experience" block
@@ -46,7 +47,7 @@ const venueKeyFromStadium = (stadium?: string | null): VenueKey => {
 const formatDate = (date: string | Date, language: Lang): string => {
   const d = typeof date === "string" ? new Date(date) : date;
   if (isNaN(d.getTime())) return "";
-  const locale = language === "pt" ? "pt-BR" : language === "es" ? "es-ES" : "en-US";
+  const locale = tl(language, { pt: "pt-BR", es: "es-ES", en: "en-US", de: "de-DE", fr: "fr-FR", it: "it-IT" });
   return d.toLocaleDateString(locale, {
     weekday: "long",
     day: "numeric",

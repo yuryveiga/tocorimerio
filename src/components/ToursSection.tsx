@@ -1,3 +1,4 @@
+import { tl } from "@/lib/tl";
 import { useState, memo, useMemo } from "react";
 import { Link } from "react-router-dom";
 // (icons used by ToursSection itself are none — TourItem uses its own)
@@ -118,8 +119,8 @@ export function ToursSection() {
   // Title and subtitle
   const toursSectionTitleKey = language === 'pt' ? 'tours_section_title' : `tours_section_title_${language}`;
   const toursSectionSubtitleKey = language === 'pt' ? 'tours_section_subtitle' : `tours_section_subtitle_${language}`;
-  const toursTitle = siteSettings[toursSectionTitleKey] || siteSettings['tours_section_title'] || (language === 'pt' ? 'Conheça o Melhor do Rio de Janeiro' : language === 'es' ? 'Descubre lo mejor de Río' : 'Discover the Best of Rio');
-  const toursSubtitle = siteSettings[toursSectionSubtitleKey] || siteSettings['tours_section_subtitle'] || (language === 'pt' ? 'City tours completos, passeios de barco em Arraial do Cabo e Angra dos Reis, e experiências inesquecíveis com guias especializados.' : language === 'es' ? 'Tours completos por la ciudad, paseos en barco en Arraial do Cabo y Angra dos Reis, y experiencias increibles con guías especializados.' : 'Complete city tours, boat trips in Arraial do Cabo and Angra dos Reis, and unforgettable experiences with specialized guides.');
+  const toursTitle = siteSettings[toursSectionTitleKey] || siteSettings['tours_section_title'] || tl(language, { pt: 'Conheça o Melhor do Rio de Janeiro', es: 'Descubre lo mejor de Río', en: 'Discover the Best of Rio', de: "Entdecken Sie das Beste von Rio", fr: "Découvrez le meilleur de Rio", it: "Scopri il Meglio di Rio" });
+  const toursSubtitle = siteSettings[toursSectionSubtitleKey] || siteSettings['tours_section_subtitle'] || tl(language, { pt: 'City tours completos, passeios de barco em Arraial do Cabo e Angra dos Reis, e experiências inesquecíveis com guias especializados.', es: 'Tours completos por la ciudad, paseos en barco en Arraial do Cabo y Angra dos Reis, y experiencias increibles con guías especializados.', en: 'Complete city tours, boat trips in Arraial do Cabo and Angra dos Reis, and unforgettable experiences with specialized guides.', de: "Komplette Stadtrundfahrten, Bootstouren in Arraial do Cabo und Angra dos Reis sowie unvergessliche Erlebnisse mit spezialisierten Guides.", fr: "Visites complètes de la ville, excursions en bateau à Arraial do Cabo et Angra dos Reis, et expériences inoubliables avec des guides spécialisés.", it: "Tour completi della città, gite in barca ad Arraial do Cabo e Angra dos Reis ed esperienze indimenticabili con guide specializzate." });
 
   return (
     <section id="tours" className="py-20 lg:py-28 bg-muted/30">

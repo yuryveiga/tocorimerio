@@ -1,3 +1,5 @@
+import { tl } from "@/lib/tl";
+import { overlayLanguage } from "@/lib/contentLanguage";
 import { optionExtraPerPerson } from "@/utils/pricing";
 import { useState, useEffect, useMemo, useCallback, useRef, lazy, Suspense } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
@@ -79,8 +81,9 @@ export function PasseioDetalhe() {
     () => (id ? tours.find((t) => t.slug === id || t.id === id) : undefined),
     [tours, id]
   );
+  const { siteLanguage: siteLanguageRef } = useLocale();
   const { data: tourData, isLoading: isTourLoading } = useQuery({
-    queryKey: ["tour", id],
+    queryKey: ["tour", id, siteLanguageRef],
     queryFn: async () => {
       if (!id) return null;
       
@@ -97,7 +100,7 @@ export function PasseioDetalhe() {
       
       const { data, error } = await query.single();
       if (error) throw error;
-      return data as unknown as LovableTour;
+      return overlayLanguage(data as unknown as Record<string, unknown>, siteLanguageRef) as unknown as LovableTour;
     },
     enabled: !!id,
     staleTime: 1000 * 60 * 5, // 5 minutes
@@ -436,17 +439,17 @@ export function PasseioDetalhe() {
           {tour.pricing_model === 'tiered' && (tour as any).tiered_pricing_json?.length > 0 && (
             <div className="space-y-1 bg-primary/5 rounded-xl border border-primary/10 p-3">
               <span className="text-[9px] font-black uppercase tracking-widest text-primary block mb-2">
-                📊 {language === 'pt' ? 'Preço por qtd.' : language === 'es' ? 'Precio por cant.' : 'Price by qty.'}
+                📊 {tl(language, { pt: 'Preço por qtd.', es: 'Precio por cant.', en: 'Price by qty.', de: "Preis nach Anzahl", fr: "Prix selon qté", it: "Prezzo per q.tà" })}
               </span>
               {[...(tour as any).tiered_pricing_json]
                 .sort((a: any, b: any) => a.min_people - b.min_people)
                 .map((tier: any, i: number) => {
                   const isActive = quantity >= tier.min_people && (tier.max_people == null || quantity <= tier.max_people);
                   const label = tier.max_people == null
-                    ? `${tier.min_people}+ ${language === 'pt' ? 'pessoas' : language === 'es' ? 'personas' : 'people'}`
+                    ? `${tier.min_people}+ ${tl(language, { pt: 'pessoas', es: 'personas', en: 'people', de: "Personen", fr: "personnes", it: "persone" })}`
                     : tier.min_people === tier.max_people
-                      ? `${tier.min_people} ${language === 'pt' ? 'pessoa' : language === 'es' ? 'persona' : 'person'}${tier.min_people > 1 ? 's' : ''}`
-                      : `${tier.min_people}–${tier.max_people} ${language === 'pt' ? 'pessoas' : language === 'es' ? 'personas' : 'people'}`;
+                      ? `${tier.min_people} ${tl(language, { pt: 'pessoa', es: 'persona', en: 'person', de: "Person", fr: "personne", it: "persona" })}${tier.min_people > 1 ? 's' : ''}`
+                      : `${tier.min_people}–${tier.max_people} ${tl(language, { pt: 'pessoas', es: 'personas', en: 'people', de: "Personen", fr: "personnes", it: "persone" })}`;
                   return (
                     <div
                       key={i}
@@ -559,21 +562,13 @@ export function PasseioDetalhe() {
               <MessageSquare className="w-6 h-6 text-primary" />
             </div>
             <p className="text-base font-black text-foreground">
-              {language === 'pt'
-                ? 'Experiência Exclusiva & Personalizada'
-                : language === 'es'
-                  ? 'Experiencia Exclusiva & Personalizada'
-                  : 'Exclusive & Personalised Experience'}
+              {tl(language, { pt: 'Experiência Exclusiva & Personalizada', es: 'Experiencia Exclusiva & Personalizada', en: 'Exclusive & Personalised Experience', de: "Exklusives & personalisiertes Erlebnis", fr: "Expérience exclusive et personnalisée", it: "Esperienza Esclusiva e Personalizzata" })}
             </p>
           </div>
 
           {/* Body copy */}
           <p className="text-sm text-muted-foreground font-sans text-center leading-relaxed">
-            {language === 'pt'
-              ? 'Este passeio é feito sob medida para você. Os valores são personalizados de acordo com o grupo, data e preferências — fale com nosso guia pelo WhatsApp e monte a experiência perfeita.'
-              : language === 'es'
-                ? 'Este tour está hecho a tu medida. Los precios se adaptan según el grupo, la fecha y tus preferencias — habla con nuestro guía por WhatsApp y diseña la experiencia perfecta.'
-                : 'This tour is tailored just for you. Pricing adapts to your group size, date and preferences — chat with our guide on WhatsApp and design your perfect experience.'}
+            {tl(language, { pt: 'Este passeio é feito sob medida para você. Os valores são personalizados de acordo com o grupo, data e preferências — fale com nosso guia pelo WhatsApp e monte a experiência perfeita.', es: 'Este tour está hecho a tu medida. Los precios se adaptan según el grupo, la fecha y tus preferencias — habla con nuestro guía por WhatsApp y diseña la experiencia perfecta.', en: 'This tour is tailored just for you. Pricing adapts to your group size, date and preferences — chat with our guide on WhatsApp and design your perfect experience.', de: "Diese Tour wird ganz individuell für Sie zusammengestellt. Die Preise passen sich Ihrer Gruppengröße, dem Datum und Ihren Wünschen an – chatten Sie mit unserem Guide auf WhatsApp und gestalten Sie Ihr perfektes Erlebnis.", fr: "Cette visite est conçue sur mesure pour vous. Le tarif s'adapte à la taille de votre groupe, à la date et à vos préférences — discutez avec notre guide sur WhatsApp et créez votre expérience idéale.", it: "Questo tour è fatto su misura per te. Il prezzo si adatta alle dimensioni del tuo gruppo, alla data e alle preferenze — chatta con la nostra guida su WhatsApp e crea la tua esperienza perfetta." })}
           </p>
 
           {/* Bullet perks */}
@@ -613,7 +608,7 @@ export function PasseioDetalhe() {
                 className="flex items-center justify-center gap-3 w-full h-16 rounded-2xl font-black text-sm uppercase tracking-widest bg-[#25D366] hover:bg-[#1ebe5a] text-white shadow-xl shadow-[#25D366]/30 active:scale-95 transition-all"
               >
                 <MessageSquare className="w-6 h-6" />
-                {language === 'pt' ? 'MONTAR MEU PASSEIO' : language === 'es' ? 'DISEÑAR MI TOUR' : 'BUILD MY TOUR'}
+                {tl(language, { pt: 'MONTAR MEU PASSEIO', es: 'DISEÑAR MI TOUR', en: 'BUILD MY TOUR', de: "MEINE TOUR ZUSAMMENSTELLEN", fr: "CRÉER MON CIRCUIT", it: "CREA IL MIO TOUR" })}
               </a>
             );
           })()}
@@ -796,7 +791,7 @@ export function PasseioDetalhe() {
 
   const copyToClipboard = () => {
     navigator.clipboard.writeText(window.location.href);
-    toast.success(language === 'pt' ? 'Link copiado!' : language === 'es' ? '¡Enlace copiado!' : 'Link copied!');
+    toast.success(tl(language, { pt: 'Link copiado!', es: '¡Enlace copiado!', en: 'Link copied!', de: "Link kopiert!", fr: "Lien copié !", it: "Link copiato!" }));
   };
 
   if (isLoading) return <TourDetailSkeleton />;
@@ -845,7 +840,7 @@ export function PasseioDetalhe() {
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
         <meta property="og:site_name" content="Tocorime Rio" />
-        <meta property="og:locale" content={language === 'pt' ? 'pt_BR' : language === 'es' ? 'es_ES' : 'en_US'} />
+        <meta property="og:locale" content={tl(language, { pt: 'pt_BR', es: 'es_ES', en: 'en_US', de: "de_DE", fr: "fr_FR", it: "it_IT" })} />
 
         {/* Twitter */}
         <meta name="twitter:card" content="summary_large_image" />
@@ -990,7 +985,7 @@ export function PasseioDetalhe() {
                 className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#25D366]/10 border border-[#25D366]/30 hover:bg-[#25D366]/20 text-[#25D366] font-bold text-sm transition-all shrink-0 h-fit"
               >
                 <MessageSquare className="w-4 h-4" />
-                {language === 'pt' ? 'Solicitar Orçamento' : language === 'es' ? 'Solicitar Presupuesto' : 'Request a Quote'}
+                {tl(language, { pt: 'Solicitar Orçamento', es: 'Solicitar Presupuesto', en: 'Request a Quote', de: "Angebot anfordern", fr: "Demander un devis", it: "Richiedi un Preventivo" })}
               </a>
             );
           })()}
@@ -1109,7 +1104,7 @@ export function PasseioDetalhe() {
                   
                   <div className="flex items-center gap-3">
                     <span className="text-[10px] font-black uppercase text-muted-foreground tracking-widest opacity-60 mr-1">
-                      {language === 'pt' ? 'Compartilhar:' : language === 'es' ? 'Compartir:' : 'Share:'}
+                      {tl(language, { pt: 'Compartilhar:', es: 'Compartir:', en: 'Share:', de: "Teilen:", fr: "Partager :", it: "Condividi:" })}
                     </span>
                     <Button 
                       variant="outline" 
@@ -1154,7 +1149,7 @@ export function PasseioDetalhe() {
                       onClick={() => setDescExpanded(true)}
                       className="sm:hidden mt-2 text-xs font-black uppercase tracking-widest text-primary"
                     >
-                      {language === 'pt' ? 'Ler mais' : language === 'es' ? 'Leer más' : 'Read more'}
+                      {tl(language, { pt: 'Ler mais', es: 'Leer más', en: 'Read more', de: "Mehr lesen", fr: "Lire plus", it: "Leggi di più" })}
                     </button>
                   )}
                 </div>
@@ -1221,8 +1216,8 @@ export function PasseioDetalhe() {
                              <h3 className={`text-xl font-black transition-colors ${selectedOptionIdx === idx ? 'text-primary' : 'text-foreground'}`}>
                                {dir.from || dir.to ? (
                                  <span className="flex flex-col gap-1">
-                                   {dir.from ? <span><span className="text-xs uppercase tracking-widest text-muted-foreground block">{language === 'pt' ? 'Saindo de' : language === 'es' ? 'Saliendo de' : 'From'}</span>{dir.from}</span> : null}
-                                   {dir.to ? <span><span className="text-xs uppercase tracking-widest text-muted-foreground block">{language === 'pt' ? 'Destino' : language === 'es' ? 'Destino' : 'To'}</span>{dir.to}</span> : null}
+                                   {dir.from ? <span><span className="text-xs uppercase tracking-widest text-muted-foreground block">{tl(language, { pt: 'Saindo de', es: 'Saliendo de', en: 'From', de: "Von", fr: "De", it: "Da" })}</span>{dir.from}</span> : null}
+                                   {dir.to ? <span><span className="text-xs uppercase tracking-widest text-muted-foreground block">{tl(language, { pt: 'Destino', es: 'Destino', en: 'To', de: "Nach", fr: "À", it: "A" })}</span>{dir.to}</span> : null}
                                  </span>
                                ) : String(option.title || "")}
                              </h3>
@@ -1233,16 +1228,16 @@ export function PasseioDetalhe() {
                                    e.stopPropagation();
                                    setSwappedOptions(prev => ({ ...prev, [idx]: !prev[idx] }));
                                  }}
-                                 aria-label={language === 'pt' ? 'Inverter origem e destino' : language === 'es' ? 'Invertir origen y destino' : 'Swap origin and destination'}
+                                 aria-label={tl(language, { pt: 'Inverter origem e destino', es: 'Invertir origen y destino', en: 'Swap origin and destination', de: "Start und Ziel tauschen", fr: "Inverser l'origine et la destination", it: "Inverti partenza e destinazione" })}
                                  className="inline-flex items-center gap-2 rounded-full border border-primary/30 bg-background px-3 py-1.5 text-[11px] font-black uppercase tracking-widest text-primary transition-colors hover:bg-primary/10"
                                >
                                  <ArrowLeftRight className="w-3.5 h-3.5" />
-                                 {language === 'pt' ? 'Inverter' : language === 'es' ? 'Invertir' : 'Swap'}
+                                 {tl(language, { pt: 'Inverter', es: 'Invertir', en: 'Swap', de: "Tauschen", fr: "Inverser", it: "Inverti" })}
                                </button>
                              )}
                              {Number(option.price || 0) > 0 && (
                                <p className="text-primary font-black text-sm">
-                                 +{formatPrice(Number(option.price))} · {language === 'pt' ? 'até 4 pessoas' : language === 'es' ? 'hasta 4 personas' : 'up to 4 people'}
+                                 +{formatPrice(Number(option.price))} · {tl(language, { pt: 'até 4 pessoas', es: 'hasta 4 personas', en: 'up to 4 people', de: "bis zu 4 Personen", fr: "jusqu'à 4 personnes", it: "fino a 4 persone" })}
                                </p>
                              )}
                            </div>
@@ -1284,25 +1279,13 @@ export function PasseioDetalhe() {
                    <div className="flex items-start gap-3 rounded-2xl border border-border bg-muted/30 p-5 text-sm font-semibold text-foreground">
                      <MapPin className="w-5 h-5 text-primary shrink-0 mt-0.5" />
                      <span>
-                       {language === 'pt'
-                         ? 'Para outras localidades, '
-                         : language === 'es'
-                         ? 'Para otras localidades, '
-                         : 'For other locations, '}
+                       {tl(language, { pt: 'Para outras localidades, ', es: 'Para otras localidades, ', en: 'For other locations, ', de: "Für andere Orte, ", fr: "Pour d'autres destinations, ", it: "Per altre destinazioni, " })}
                        {(() => {
                          const wa = socialMedia.find((s) => s.platform?.toLowerCase().includes('whatsapp') && s.is_active !== false);
-                         const tail = language === 'pt'
-                           ? 'entre em contato conosco.'
-                           : language === 'es'
-                           ? 'contáctanos.'
-                           : 'please contact us.';
+                         const tail = tl(language, { pt: 'entre em contato conosco.', es: 'contáctanos.', en: 'please contact us.', de: "kontaktieren Sie uns bitte.", fr: "veuillez nous contacter.", it: "contattaci." });
                          if (!wa) return tail;
                          const cleanNumber = wa.url.replace(/[^\d+]/g, "").replace("+", "");
-                         const msg = language === 'pt'
-                           ? 'Olá! Gostaria de um transfer para outra localidade.'
-                           : language === 'es'
-                           ? '¡Hola! Quisiera un transfer para otra localidad.'
-                           : 'Hello! I would like a transfer to another location.';
+                         const msg = tl(language, { pt: 'Olá! Gostaria de um transfer para outra localidade.', es: '¡Hola! Quisiera un transfer para otra localidad.', en: 'Hello! I would like a transfer to another location.', de: "Hallo! Ich möchte einen Transfer zu einem anderen Ort.", fr: "Bonjour ! Je souhaiterais un transfert vers une autre destination.", it: "Ciao! Vorrei un transfer verso un'altra destinazione." });
                          const href = wa.url.startsWith('http')
                            ? `${wa.url}${wa.url.includes('?') ? '&' : '?'}text=${encodeURIComponent(msg)}`
                            : `https://wa.me/${cleanNumber}?text=${encodeURIComponent(msg)}`;
@@ -1318,11 +1301,7 @@ export function PasseioDetalhe() {
                      <div role="alert" className="flex items-start gap-3 rounded-2xl border border-primary/30 bg-primary/5 p-5 text-sm font-semibold text-foreground">
                        <Info className="w-5 h-5 text-primary shrink-0 mt-0.5" />
                        <span>
-                         {language === 'pt'
-                           ? 'Os valores das opções valem para até 4 pessoas. Para grupos maiores, entre em contato conosco.'
-                           : language === 'es'
-                           ? 'Los precios de las opciones son para hasta 4 personas. Para grupos más grandes, contáctanos.'
-                           : 'Option prices are for up to 4 people. For larger groups, please contact us.'}
+                         {tl(language, { pt: 'Os valores das opções valem para até 4 pessoas. Para grupos maiores, entre em contato conosco.', es: 'Los precios de las opciones son para hasta 4 personas. Para grupos más grandes, contáctanos.', en: 'Option prices are for up to 4 people. For larger groups, please contact us.', de: "Die Optionspreise gelten für bis zu 4 Personen. Für größere Gruppen kontaktieren Sie uns bitte.", fr: "Les tarifs des options s'appliquent jusqu'à 4 personnes. Pour les groupes plus importants, veuillez nous contacter.", it: "I prezzi delle opzioni sono validi fino a 4 persone. Per gruppi più numerosi, contattaci." })}
                        </span>
                      </div>
                    )}
@@ -1334,7 +1313,7 @@ export function PasseioDetalhe() {
                  <div className="bg-card rounded-[2.5rem] border border-primary/10 p-10 space-y-8 shadow-xl ring-1 ring-primary/5">
                    <h2 className="text-3xl font-serif font-black flex items-center gap-4 text-foreground">
                      <div className="w-2 h-10 bg-primary rounded-full" />
-                     {language === 'pt' ? 'Escolha sua Experiência' : language === 'es' ? 'Elige tu Experiencia' : 'Choose your Experience'}
+                     {tl(language, { pt: 'Escolha sua Experiência', es: 'Elige tu Experiencia', en: 'Choose your Experience', de: "Wählen Sie Ihr Erlebnis", fr: "Choisissez votre expérience", it: "Scegli la tua Esperienza" })}
                    </h2>
                    <div className="space-y-4">
                      <h3 className="text-xs font-black uppercase tracking-widest text-muted-foreground">{language === 'pt' ? '1. Escolha o Bairro' : '1. Choose Neighborhood'}</h3>
@@ -1662,7 +1641,7 @@ export function PasseioDetalhe() {
           <DialogHeader>
             <DialogTitle className="text-2xl font-serif font-black text-foreground flex items-center gap-3">
               <div className="w-2 h-8 bg-primary rounded-full shrink-0" />
-              {language === 'pt' ? 'Faça sua Reserva' : language === 'es' ? 'Haz tu Reserva' : 'Book Your Tour'}
+              {tl(language, { pt: 'Faça sua Reserva', es: 'Haz tu Reserva', en: 'Book Your Tour', de: "Buchen Sie Ihre Tour", fr: "Réservez votre visite", it: "Prenota il Tuo Tour" })}
             </DialogTitle>
           </DialogHeader>
           <div className="space-y-4">
@@ -1679,10 +1658,7 @@ export function PasseioDetalhe() {
           const showPrice = !hidePrices && tour.pricing_model !== 'custom';
           const hasDate = !!selectedDate;
           const peopleLabel = language === 'pt' ? (quantity > 1 ? 'pessoas' : 'pessoa') : language === 'es' ? (quantity > 1 ? 'personas' : 'persona') : quantity > 1 ? 'people' : 'person';
-          const steps = [
-            language === 'pt' ? 'Data' : language === 'es' ? 'Fecha' : 'Date',
-            language === 'pt' ? 'Pessoas' : language === 'es' ? 'Personas' : 'People',
-            language === 'pt' ? 'Pagar' : language === 'es' ? 'Pagar' : 'Pay',
+          const steps = [tl(language, { pt: 'Data', es: 'Fecha', en: 'Date', de: "Datum", fr: "Date", it: "Data" }),tl(language, { pt: 'Pessoas', es: 'Personas', en: 'People', de: "Personen", fr: "Personnes", it: "Persone" }),tl(language, { pt: 'Pagar', es: 'Pagar', en: 'Pay', de: "Bezahlen", fr: "Payer", it: "Paga" }),
           ];
           const currentStep = hasDate ? 2 : 0;
           return (
@@ -1714,7 +1690,7 @@ export function PasseioDetalhe() {
                       </span>
                     </>
                   ) : (
-                    <span className="text-sm font-black text-primary uppercase leading-none">{language === 'pt' ? 'Sob Consulta' : language === 'es' ? 'Bajo Consulta' : 'Upon Request'}</span>
+                    <span className="text-sm font-black text-primary uppercase leading-none">{tl(language, { pt: 'Sob Consulta', es: 'Bajo Consulta', en: 'Upon Request', de: "Auf Anfrage", fr: "Sur demande", it: "Su Richiesta" })}</span>
                   )}
                 </div>
                 {showPrice && hasDate ? (
@@ -1761,7 +1737,7 @@ export function PasseioDetalhe() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-5xl font-serif font-black text-foreground mb-4">
-              {language === 'pt' ? 'O que dizem nossos viajantes' : language === 'es' ? 'Lo que dicen nuestros viajeros' : 'What our travelers say'}
+              {tl(language, { pt: 'O que dizem nossos viajantes', es: 'Lo que dicen nuestros viajeros', en: 'What our travelers say', de: "Was unsere Reisenden sagen", fr: "Ce que disent nos voyageurs", it: "Cosa dicono i nostri viaggiatori" })}
             </h2>
             <div className="flex items-center justify-center gap-2 mb-6">
               <div className="flex items-center gap-1">
@@ -1782,9 +1758,9 @@ export function PasseioDetalhe() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-4">
             <div className="space-y-4">
-              <span className="text-primary font-black text-xs uppercase tracking-[0.3em]">{language === 'pt' ? 'Explore Mais' : language === 'es' ? 'Explorar Más' : 'Explore More'}</span>
+              <span className="text-primary font-black text-xs uppercase tracking-[0.3em]">{tl(language, { pt: 'Explore Mais', es: 'Explorar Más', en: 'Explore More', de: "Mehr entdecken", fr: "En savoir plus", it: "Esplora di Più" })}</span>
               <h2 className="text-3xl md:text-5xl font-serif font-black text-foreground">
-                {language === 'pt' ? 'Você também pode gostar' : language === 'es' ? 'También te puede gustar' : 'You May Also Like'}
+                {tl(language, { pt: 'Você também pode gostar', es: 'También te puede gustar', en: 'You May Also Like', de: "Das könnte Ihnen auch gefallen", fr: "Vous aimerez peut-être aussi", it: "Potrebbe Piacerti Anche" })}
               </h2>
             </div>
             <div className="hidden md:flex gap-2">
@@ -1825,7 +1801,7 @@ export function PasseioDetalhe() {
           <div className="bg-card rounded-[2.5rem] border border-primary/20 p-6 shadow-2xl">
             <h2 className="text-2xl font-serif font-black text-foreground mb-6 flex items-center gap-3">
               <div className="w-2 h-8 bg-primary rounded-full shrink-0" />
-              {language === 'pt' ? 'Faça sua Reserva' : language === 'es' ? 'Haz tu Reserva' : 'Book Your Tour'}
+              {tl(language, { pt: 'Faça sua Reserva', es: 'Haz tu Reserva', en: 'Book Your Tour', de: "Buchen Sie Ihre Tour", fr: "Réservez votre visite", it: "Prenota il Tuo Tour" })}
             </h2>
             <div className="space-y-4">
               {renderBookingForm(false)}

@@ -1,3 +1,4 @@
+import { tl } from "@/lib/tl";
 import { useLocale } from "@/contexts/LocaleContext";
 import { Button } from "@/components/ui/button";
 import ArrowRight from "lucide-react/dist/esm/icons/arrow-right";
@@ -41,10 +42,10 @@ export function MobileStickyCTA() {
       <div className="bg-card/80 backdrop-blur-xl border border-white/20 rounded-2xl p-4 shadow-[0_-10px_40px_rgba(0,0,0,0.1)] flex items-center justify-between gap-4">
         <div className="flex-1">
           <p className="text-[10px] font-black uppercase tracking-widest text-muted-foreground mb-0.5">
-            {language === 'pt' ? 'Gostou do Rio?' : language === 'es' ? '¿Te gusta Río?' : 'Loving Rio?'}
+            {tl(language, { pt: 'Gostou do Rio?', es: '¿Te gusta Río?', en: 'Loving Rio?', de: "Gefällt Ihnen Rio?", fr: "Vous aimez Rio ?", it: "Ti piace Rio?" })}
           </p>
           <p className="text-sm font-bold text-foreground leading-tight">
-            {language === 'pt' ? 'Reserve seu passeio agora' : language === 'es' ? 'Reserva tu tour ahora' : 'Book your tour now'}
+            {tl(language, { pt: 'Reserve seu passeio agora', es: 'Reserva tu tour ahora', en: 'Book your tour now', de: "Buchen Sie jetzt Ihre Tour", fr: "Réservez votre visite dès maintenant", it: "Prenota ora il tuo tour" })}
           </p>
         </div>
         

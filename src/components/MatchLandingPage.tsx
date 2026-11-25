@@ -1,3 +1,4 @@
+import { tl } from "@/lib/tl";
 import { useEffect, useState, useMemo } from "react";
 import { Link, Navigate } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
@@ -166,8 +167,7 @@ export default function MatchLandingPage({
 
   const dateRio = getMatchDateInRio(match.match_date);
   const formattedDate = format(
-    dateRio, 
-    language === 'en' ? "EEEE, MMMM do, yyyy" : language === 'es' ? "EEEE, d 'de' MMMM 'de' yyyy" : "EEEE, dd 'de' MMMM 'de' yyyy", 
+    dateRio, tl(language, { pt: "EEEE, dd 'de' MMMM 'de' yyyy", es: "EEEE, d 'de' MMMM 'de' yyyy", en: "EEEE, MMMM do, yyyy", de: "EEEE, d. MMMM yyyy", fr: "EEEE d MMMM yyyy", it: "EEEE, d MMMM yyyy" }), 
     { locale: language === 'en' ? enUS : language === 'es' ? esLocale : ptBR }
   );
   const hour = getMatchHour(match.match_date);
@@ -491,10 +491,10 @@ export default function MatchLandingPage({
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-10">
             <h2 className="font-serif text-3xl sm:text-4xl font-bold mb-3">
-              {language === 'pt' ? 'Galeria de Fotos' : language === 'es' ? 'Galería de Fotos' : 'Photo Gallery'}
+              {tl(language, { pt: 'Galeria de Fotos', es: 'Galería de Fotos', en: 'Photo Gallery', de: "Fotogalerie", fr: "Galerie photos", it: "Galleria Fotografica" })}
             </h2>
             <p className="text-muted-foreground max-w-2xl mx-auto">
-              {language === 'pt' ? 'Veja a festa das torcidas no Maracanã.' : language === 'es' ? 'Mira la fiesta de la afición en el Maracaná.' : 'See the fan party at Maracanã.'}
+              {tl(language, { pt: 'Veja a festa das torcidas no Maracanã.', es: 'Mira la fiesta de la afición en el Maracaná.', en: 'See the fan party at Maracanã.', de: "Erleben Sie die Fanparty im Maracanã.", fr: "Assistez à la fête des supporters au Maracanã.", it: "Vivi la festa dei tifosi al Maracanã." })}
             </p>
           </div>
 

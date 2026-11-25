@@ -1,3 +1,4 @@
+import { tl } from "@/lib/tl";
 import { Button } from "@/components/ui/button";
 import { useLocale } from "@/contexts/LocaleContext";
 import { useSiteData } from "@/hooks/useSiteData";
@@ -14,11 +15,7 @@ export const FinalCTASection = () => {
       s.platform?.toLowerCase().includes('whatsapp') ||
       (s.icon_name && s.icon_name.toLowerCase().includes('phone'))
     );
-    const text = language === 'pt'
-      ? 'Olá! Quero planejar um tour personalizado no Rio de Janeiro.'
-      : language === 'es'
-      ? '¡Hola! Quiero planificar un tour personalizado en Río de Janeiro.'
-      : 'Hello! I want to plan a custom tour in Rio de Janeiro.';
+    const text = tl(language, { pt: 'Olá! Quero planejar um tour personalizado no Rio de Janeiro.', es: '¡Hola! Quiero planificar un tour personalizado en Río de Janeiro.', en: 'Hello! I want to plan a custom tour in Rio de Janeiro.', de: "Hallo! Ich möchte eine maßgeschneiderte Tour in Rio de Janeiro planen.", fr: "Bonjour ! Je souhaite organiser un circuit sur mesure à Rio de Janeiro.", it: "Ciao! Vorrei organizzare un tour personalizzato a Rio de Janeiro." });
     if (whatsapp) {
       const cleanNumber = whatsapp.url.replace(/[^\d+]/g, "");
       const url = whatsapp.url.startsWith('http')
@@ -69,7 +66,7 @@ export const FinalCTASection = () => {
               className="h-13 sm:h-12 px-8 text-base font-semibold font-sans border-2 border-[#25D366]/60 text-white hover:bg-[#25D366]/20"
             >
               <MessageCircle className="w-5 h-5 text-[#25D366]" />
-              {language === 'pt' ? 'Chamar no WhatsApp' : language === 'es' ? 'Preguntar por WhatsApp' : 'Ask on WhatsApp'}
+              {tl(language, { pt: 'Chamar no WhatsApp', es: 'Preguntar por WhatsApp', en: 'Ask on WhatsApp', de: "Auf WhatsApp fragen", fr: "Demander sur WhatsApp", it: "Chiedi su WhatsApp" })}
             </Button>
           </div>
         </ViewFadeIn>

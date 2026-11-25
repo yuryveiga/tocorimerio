@@ -1,3 +1,5 @@
+import { useSiteLanguage } from "@/contexts/LocaleContext";
+import { tl } from "@/lib/tl";
 import React, { useState, useEffect } from "react";
 import ChevronDown from "lucide-react/dist/esm/icons/chevron-down";
 import ArrowRight from "lucide-react/dist/esm/icons/arrow-right";
@@ -27,28 +29,18 @@ export function HeroSection() {
   const heroTitleKey = language === 'pt' ? 'hero_title' : `hero_title_${language}`;
   const heroSubtitleKey = language === 'pt' ? 'hero_subtitle' : `hero_subtitle_${language}`;
 
-  const heroTitle = siteSettings[heroTitleKey] || siteSettings['hero_title'] ||
-    (language === 'pt'
-      ? 'Passeios Privados no Rio de Janeiro com Guias Locais'
-      : language === 'es'
-      ? 'Tours Privados en Río de Janeiro con Guías Locales'
-      : 'Private Tours in Rio de Janeiro with Local Guides');
-  const heroSubtitle = siteSettings[heroSubtitleKey] || siteSettings['hero_subtitle'] ||
-    (language === 'pt'
-      ? 'Descubra o Rio com segurança: guias locais bilíngues, transporte privado e experiências sob medida.'
-      : language === 'es'
-      ? 'Descubre Río con seguridad: guías locales bilingües, transporte privado y experiencias a medida.'
-      : 'Discover Rio safely with bilingual local guides, private transportation and tailor-made experiences.');
+  // German/French/Italian use the built-in translated headline (admin texts exist only in PT/EN/ES).
+  const extraLang = ['de', 'fr', 'it'].includes(useSiteLanguage());
+  const heroTitle = (!extraLang && (siteSettings[heroTitleKey] || siteSettings['hero_title'])) ||
+    tl(language, { pt: 'Passeios Privados no Rio de Janeiro com Guias Locais', es: 'Tours Privados en Río de Janeiro con Guías Locales', en: 'Private Tours in Rio de Janeiro with Local Guides', de: "Private Touren in Rio de Janeiro mit lokalen Guides", fr: "Visites privées à Rio de Janeiro avec des guides locaux", it: "Tour Privati a Rio de Janeiro con Guide Locali" });
+  const heroSubtitle = (!extraLang && (siteSettings[heroSubtitleKey] || siteSettings['hero_subtitle'])) ||
+    tl(language, { pt: 'Descubra o Rio com segurança: guias locais bilíngues, transporte privado e experiências sob medida.', es: 'Descubre Río con seguridad: guías locales bilingües, transporte privado y experiencias a medida.', en: 'Discover Rio safely with bilingual local guides, private transportation and tailor-made experiences.', de: "Entdecken Sie Rio sicher mit zweisprachigen lokalen Guides, privatem Transport und maßgeschneiderten Erlebnissen.", fr: "Découvrez Rio en toute sécurité avec des guides locaux bilingues, un transport privé et des expériences sur mesure.", it: "Scopri Rio in totale sicurezza con guide locali bilingui, trasporto privato ed esperienze su misura." });
   const hideUrgency = siteSettings['hide_urgency'] === 'true';
 
   // Mobile-only headline: a specific promise instead of the generic title.
   const mobileTitle =
-    siteSettings['hero_title_mobile'] ||
-    (language === 'pt'
-      ? 'Passeios privados no Rio com guias locais'
-      : language === 'es'
-      ? 'Tours privados en Río con guías locales'
-      : 'Private Tours in Rio with Local Guides');
+    (!extraLang && siteSettings['hero_title_mobile']) ||
+    tl(language, { pt: 'Passeios privados no Rio com guias locais', es: 'Tours privados en Río con guías locales', en: 'Private Tours in Rio with Local Guides', de: "Private Touren in Rio mit lokalen Guides", fr: "Visites privées à Rio avec des guides locaux", it: "Tour Privati a Rio con Guide Locali" });
 
   const siteName = siteSettings['site_name'] || 'Tocorime Rio';
   const logoUrl = siteSettings?.logo_url || images['logo'];

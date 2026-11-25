@@ -1,5 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { useMemo } from "react";
+import { useSiteLanguage } from "@/contexts/LocaleContext";
+import { overlayLanguage, extraColumns } from "@/lib/contentLanguage";
 import { fetchLovable, LovableTour, LovablePage, LovableSiteImage, LovableSocialMedia, LovableSiteSetting } from "@/integrations/lovable/client";
 
 const fallbackTours: LovableTour[] = [
@@ -10,12 +12,19 @@ const fallbackTours: LovableTour[] = [
 
 const TOUR_LISTING_COLUMNS = "id,title,short_description,price,duration,max_group_size,image_url,is_featured,category,is_active,sort_order,slug,pricing_model,price_1_person,price_2_people,price_3_6_people,price_7_19_people,use_custom_options,custom_options_json,tiered_pricing_json,external_url,title_en,title_es,short_description_en,short_description_es,category_en,category_es,included_json,included_json_en,included_json_es";
 
+const TOUR_LISTING_TRANSLATED = ["title", "short_description", "category", "included_json"];
+
 export function useTours() {
+  const siteLanguage = useSiteLanguage();
+  const extra = extraColumns(TOUR_LISTING_TRANSLATED, siteLanguage);
   return useQuery({
-    queryKey: ["tours"],
+    queryKey: ["tours", extra ? siteLanguage : "base"],
     queryFn: async () => {
-      const data = await fetchLovable<LovableTour>("tours", TOUR_LISTING_COLUMNS);
-      return data.filter((t) => t.is_active).sort((a, b) => a.sort_order - b.sort_order);
+      const data = await fetchLovable<LovableTour>("tours", extra ? `${TOUR_LISTING_COLUMNS},${extra}` : TOUR_LISTING_COLUMNS);
+      return data
+        .filter((t) => t.is_active)
+        .sort((a, b) => a.sort_order - b.sort_order)
+        .map((t) => overlayLanguage(t as unknown as Record<string, unknown>, siteLanguage) as unknown as LovableTour);
     },
     staleTime: 1000 * 60 * 10,
   });

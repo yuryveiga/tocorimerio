@@ -1,3 +1,4 @@
+import { refreshExtraTranslations } from "@/lib/refreshExtraTranslations";
 import { useState, useEffect, lazy, Suspense, useMemo, useCallback, useRef } from "react";
 import { useSearchParams } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -94,10 +95,12 @@ const AdminBlog = () => {
 
     try {
       if (isNew) {
-        await insertLovable("blog_posts", { ...editing, is_published: editing.is_published ?? false });
+        const created = (await insertLovable("blog_posts", { ...editing, is_published: editing.is_published ?? false })) as unknown as { id?: string } | null;
+        refreshExtraTranslations("blog_posts", created?.id);
         toast({ title: "Post criado!" });
       } else if (editing.id) {
         await updateLovable("blog_posts", editing.id, editing);
+        refreshExtraTranslations("blog_posts", editing.id);
         toast({ title: "Post atualizado!" });
       }
 

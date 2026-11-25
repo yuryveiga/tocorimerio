@@ -1,3 +1,4 @@
+import { tl } from "@/lib/tl";
 import { useParams, Navigate, Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import { useState, useEffect, useMemo } from "react";
@@ -119,10 +120,8 @@ interface IntroParagraphsProps {
 
 function IntroParagraphs({ paragraphs, language }: IntroParagraphsProps) {
   const [expanded, setExpanded] = useState(false);
-  const readMoreLabel =
-    language === "pt" ? "Ler mais" : language === "es" ? "Leer más" : "Read more";
-  const readLessLabel =
-    language === "pt" ? "Ler menos" : language === "es" ? "Leer menos" : "Read less";
+  const readMoreLabel =tl(language, { pt: "Ler mais", es: "Leer más", en: "Read more", de: "Mehr lesen", fr: "Lire plus", it: "Leggi di più" });
+  const readLessLabel =tl(language, { pt: "Ler menos", es: "Leer menos", en: "Read less", de: "Weniger anzeigen", fr: "Lire moins", it: "Leggi meno" });
 
   // Split first paragraph into "first sentence" + "rest"
   // First sentence = up to (and including) the first "." that is followed by a space or end.
@@ -305,11 +304,7 @@ export default function PasseiosCategoria({ categoriaOverride, pathOverride }: P
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <Link to="/passeio" className="inline-flex items-center gap-2 text-muted-foreground hover:text-primary mb-6 text-sm">
             <ArrowLeft className="w-4 h-4" />{" "}
-            {language === "pt"
-              ? "Todos os passeios"
-              : language === "es"
-                ? "Todos los paseos"
-                : "All tours"}
+            {tl(language, { pt: "Todos os passeios", es: "Todos los paseos", en: "All tours", de: "Alle Touren", fr: "Toutes les visites", it: "Tutti i tour" })}
           </Link>
 
           <header className="text-center mb-12">

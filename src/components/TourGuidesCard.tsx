@@ -1,3 +1,4 @@
+import { tl } from "@/lib/tl";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
@@ -52,7 +53,7 @@ export function TourGuidesCard() {
           ))}
         </div>
         <span className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-accent hover:gap-3 transition-all">
-          {language === "pt" ? "Conheça nossos guias" : language === "es" ? "Conoce a nuestros guías" : "Meet our guides"}
+          {tl(language, { pt: "Conheça nossos guias", es: "Conoce a nuestros guías", en: "Meet our guides", de: "Lernen Sie unsere Guides kennen", fr: "Rencontrez nos guides", it: "Conosci le nostre guide" })}
           <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
         </span>
       </Link>

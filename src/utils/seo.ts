@@ -99,6 +99,9 @@ export const getHreflangLinks = (path: string = "") => {
     { hreflang: "pt-BR", href: url },
     { hreflang: "en", href: url },
     { hreflang: "es", href: url },
+    { hreflang: "de", href: url },
+    { hreflang: "fr", href: url },
+    { hreflang: "it", href: url },
     { hreflang: "x-default", href: url },
   ];
 };

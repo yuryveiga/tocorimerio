@@ -1,3 +1,4 @@
+import { tl } from "@/lib/tl";
 import { useEffect, useState, useMemo } from "react";
 import { Helmet } from "react-helmet-async";
 import { useLocale } from "@/contexts/LocaleContext";
