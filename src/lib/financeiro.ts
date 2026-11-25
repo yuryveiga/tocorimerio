@@ -4,7 +4,8 @@ export interface FinVenda {
   despesas: number; modo_pagamento: string; origem: "site" | "manual"; id_externo: string | null;
   observacoes: string | null; campos_editados: string[];
 }
-export const MODOS_PAGAMENTO = ["Pix", "Dinheiro", "Cartão de crédito", "Cartão de débito", "Stripe", "PayPal", "Transferência", "Outro"];
+export const MODOS_PAGAMENTO = ["Pix", "Dinheiro", "Cartão de crédito", "Cartão de débito", "Stripe", "Outro"];
+export const PIX_A_PARTIR = "a partir de 18/01";
 
 const brl = new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL" });
 export const fmtBRL = (v: number | null | undefined) => brl.format(Number(v || 0));

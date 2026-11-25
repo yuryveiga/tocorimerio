@@ -8,7 +8,7 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "sonner";
 import { Plus, Trash2 } from "lucide-react";
-import { MODOS_PAGAMENTO, fmtBRL, liquidoVenda } from "@/lib/financeiro";
+import { MODOS_PAGAMENTO, PIX_A_PARTIR, fmtBRL, liquidoVenda } from "@/lib/financeiro";
 import { useSugestoes } from "./useFin";
 import { FinStripeButton } from "./FinStripeButton";
 
@@ -92,8 +92,9 @@ export default function FinForm() {
         <div><Label>Modo de pagamento</Label>
           <select value={f.modo_pagamento} onChange={set("modo_pagamento")} className="h-12 w-full rounded-md border border-input bg-background px-3">
             {MODOS_PAGAMENTO.map(m => <option key={m}>{m}</option>)}
-          </select></div>
-        <div className="flex items-end"><FinStripeButton modo={f.modo_pagamento} amount={num(f.valor_cobrado || "0") || 0} tour={f.tour} pax={f.nome_pax}
+          </select>
+          {f.modo_pagamento === "Pix" && <p className="text-xs text-muted-foreground mt-1">Pix {PIX_A_PARTIR}</p>}</div>
+        <div className="flex flex-col gap-1 justify-end"><FinStripeButton modo={f.modo_pagamento} amount={num(f.valor_cobrado || "0") || 0} tour={f.tour} pax={f.nome_pax}
           onLink={t => setF(prev => ({ ...prev, observacoes: [prev.observacoes, t].filter(Boolean).join("\n") }))} /></div>
       </div>
       <div className="space-y-2">
