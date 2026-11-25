@@ -1281,6 +1281,39 @@ export function PasseioDetalhe() {
                        );
                      })}
                    </div>
+                   <div className="flex items-start gap-3 rounded-2xl border border-border bg-muted/30 p-5 text-sm font-semibold text-foreground">
+                     <MapPin className="w-5 h-5 text-primary shrink-0 mt-0.5" />
+                     <span>
+                       {language === 'pt'
+                         ? 'Para outras localidades, '
+                         : language === 'es'
+                         ? 'Para otras localidades, '
+                         : 'For other locations, '}
+                       {(() => {
+                         const wa = socialMedia.find((s) => s.platform?.toLowerCase().includes('whatsapp') && s.is_active !== false);
+                         const tail = language === 'pt'
+                           ? 'entre em contato conosco.'
+                           : language === 'es'
+                           ? 'contáctanos.'
+                           : 'please contact us.';
+                         if (!wa) return tail;
+                         const cleanNumber = wa.url.replace(/[^\d+]/g, "").replace("+", "");
+                         const msg = language === 'pt'
+                           ? 'Olá! Gostaria de um transfer para outra localidade.'
+                           : language === 'es'
+                           ? '¡Hola! Quisiera un transfer para otra localidad.'
+                           : 'Hello! I would like a transfer to another location.';
+                         const href = wa.url.startsWith('http')
+                           ? `${wa.url}${wa.url.includes('?') ? '&' : '?'}text=${encodeURIComponent(msg)}`
+                           : `https://wa.me/${cleanNumber}?text=${encodeURIComponent(msg)}`;
+                         return (
+                           <a href={href} target="_blank" rel="noopener noreferrer" className="text-primary underline underline-offset-4 hover:opacity-80">
+                             {tail}
+                           </a>
+                         );
+                       })()}
+                     </span>
+                   </div>
                    {quantity > 4 && (
                      <div role="alert" className="flex items-start gap-3 rounded-2xl border border-primary/30 bg-primary/5 p-5 text-sm font-semibold text-foreground">
                        <Info className="w-5 h-5 text-primary shrink-0 mt-0.5" />
