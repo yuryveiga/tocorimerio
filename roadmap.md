@@ -28,7 +28,8 @@
 - [x] Import five real five-star Google reviews from the user's new public Maps link via the existing Firecrawl connection; enabled Google in admin and verified saved settings plus 27 home cards (five Google, all five-star). Weekly import includes Google with prior-snapshot fallback; relative dates kept as labels, no exact date fabrication, and limited public selection disclosed. 18 tests passed; frontend awaits publication.
 
 ## Google Ads — passeios (2026-11-25)
-- [ ] Criar 3 campanhas Search pausadas (Cristo, Rocinha, Pedra da Gávea)
-- [ ] Incluir Europa e Reino Unido nos países das 3 campanhas
+- [x] Criar 3 campanhas Search pausadas (Cristo, Rocinha, Pedra da Gávea)
+- [x] Incluir Europa e Reino Unido nos países das 3 campanhas
 - [ ] Instalar aviso de cookies (consentimento de anúncios) no site antes de ligar
 - [x] Remover aviso de conversão para conta Google Ads alheia (index.html)
+- [x] Corrigir marcação de propaganda política da UE (Cristo, Rocinha) para 'não contém'
