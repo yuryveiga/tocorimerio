@@ -10,6 +10,7 @@ import { toast } from "sonner";
 import { Plus, Trash2 } from "lucide-react";
 import { MODOS_PAGAMENTO, fmtBRL, liquidoVenda } from "@/lib/financeiro";
 import { useSugestoes } from "./useFin";
+import { FinStripeButton } from "./FinStripeButton";
 
 const hoje = () => new Date().toLocaleDateString("en-CA", { timeZone: "America/Sao_Paulo" });
 const vazio = () => ({ data: hoje(), hotel: "", nome_pax: "", tour: "", valor: "", valor_cobrado: "", guia_responsavel: "", comissao: "", modo_pagamento: "Pix", observacoes: "" });
@@ -92,6 +93,8 @@ export default function FinForm() {
           <select value={f.modo_pagamento} onChange={set("modo_pagamento")} className="h-12 w-full rounded-md border border-input bg-background px-3">
             {MODOS_PAGAMENTO.map(m => <option key={m}>{m}</option>)}
           </select></div>
+        <div className="flex items-end"><FinStripeButton modo={f.modo_pagamento} amount={num(f.valor_cobrado || "0") || 0} tour={f.tour} pax={f.nome_pax}
+          onLink={t => setF(prev => ({ ...prev, observacoes: [prev.observacoes, t].filter(Boolean).join("\n") }))} /></div>
       </div>
       <div className="space-y-2">
         <div className="flex items-center justify-between"><Label>Despesas · total {fmtBRL(totalDesp)}</Label>
