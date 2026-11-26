@@ -37,6 +37,10 @@ export default function FinList() {
   }
   async function excluir() {
     if (!sel) return;
+    if (sel.google_event_id) {
+      const { data, error } = await supabase.functions.invoke("sync-calendar", { body: { finSaleId: sel.id, remove: true } });
+      if (error || (data as { error?: string } | null)?.error) return toast.error("Não foi possível remover o evento da Google Agenda. Tente novamente.");
+    }
     const { error } = await supabase.from("fin_vendas").delete().eq("id", sel.id);
     if (error) return toast.error("Não foi possível excluir.");
     toast.success("Venda excluída."); setDel(false); setSel(null); qc.invalidateQueries({ queryKey: ["fin-vendas"] });
@@ -82,7 +86,7 @@ export default function FinList() {
             <DialogHeader><DialogTitle>{sel.nome_pax}</DialogTitle></DialogHeader>
             {pendente(sel) && <p className="text-sm text-destructive">Venda do site pendente de preenchimento (guia, comissão ou hotel).</p>}
             <dl className="grid grid-cols-2 gap-2 text-sm">
-              {([["Data", fmtData(sel.data)], ["Quantidade", `${sel.quantidade || 1} pax`], ["Contato/WhatsApp", sel.contato || "—"], ["Hotel", sel.hotel || "—"], ["Tour", sel.tour], ["Guia", sel.guia_responsavel || "—"], ["Valor", fmtBRL(sel.valor)], ["Valor cobrado", fmtBRL(sel.valor_cobrado)],
+              {([["Data", fmtData(sel.data)], ["Data do passeio", fmtData(sel.data_tour || sel.data)], ["Quantidade", `${sel.quantidade || 1} pax`], ["Contato/WhatsApp", sel.contato || "—"], ["Hotel", sel.hotel || "—"], ["Tour", sel.tour], ["Guia", sel.guia_responsavel || "—"], ["Valor", fmtBRL(sel.valor)], ["Valor cobrado", fmtBRL(sel.valor_cobrado)],
                 ["Comissão", sel.comissao === null ? "—" : fmtBRL(sel.comissao)], ["Despesas", fmtBRL(sel.despesas)], ["Pagamento", sel.modo_pagamento], ["Origem", sel.origem], ["Líquido", fmtBRL(liquidoVenda(sel))]] as const)
                 .map(([k, v]) => <div key={k}><dt className="text-muted-foreground text-xs">{k}</dt><dd className="font-medium">{v}</dd></div>)}
             </dl>

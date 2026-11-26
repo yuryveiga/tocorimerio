@@ -1,5 +1,5 @@
 export interface FinVenda {
-  id: string; data: string; hotel: string | null; nome_pax: string; quantidade: number; contato: string | null; tour: string;
+  id: string; data: string; data_tour?: string | null; google_event_id?: string | null; hotel: string | null; nome_pax: string; quantidade: number; contato: string | null; tour: string;
   valor: number; valor_cobrado: number; guia_responsavel: string | null; vendedor?: string | null; comissao: number | null;
   despesas: number; modo_pagamento: string; origem: "site" | "manual"; id_externo: string | null;
   observacoes: string | null; campos_editados: string[];
@@ -11,6 +11,7 @@ const brl = new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL" 
 export const fmtBRL = (v: number | null | undefined) => brl.format(Number(v || 0));
 export const fmtData = (iso: string) => { const [y, m, d] = iso.slice(0, 10).split("-"); return `${d}/${m}/${y}`; };
 export const valorComTaxaCartao = (valor: number, comTaxa: boolean) => Math.round(valor * (comTaxa ? 1.05 : 1) * 100) / 100;
+export const dataTourVenda = (dataVenda: string, dataAgendada: string, agendar: boolean) => agendar ? dataAgendada : dataVenda;
 
 export const liquidoVenda = (v: Pick<FinVenda, "valor_cobrado" | "comissao" | "despesas">) =>
   Math.round((Number(v.valor_cobrado || 0) - Number(v.comissao || 0) - Number(v.despesas || 0)) * 100) / 100;

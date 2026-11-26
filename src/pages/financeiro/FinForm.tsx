@@ -7,28 +7,36 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "sonner";
-import { Plus, Trash2 } from "lucide-react";
-import { MODOS_PAGAMENTO, PIX_A_PARTIR, fmtBRL, liquidoVenda, valorComTaxaCartao } from "@/lib/financeiro";
+import { CalendarIcon, Plus, Trash2 } from "lucide-react";
+import { format } from "date-fns";
+import { Calendar } from "@/components/ui/calendar";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+import { MODOS_PAGAMENTO, PIX_A_PARTIR, dataTourVenda, fmtBRL, liquidoVenda, valorComTaxaCartao } from "@/lib/financeiro";
 import { useSugestoes } from "./useFin";
 import { FinStripeButton } from "./FinStripeButton";
 
 const hoje = () => new Date().toLocaleDateString("en-CA", { timeZone: "America/Sao_Paulo" });
-const vazio = () => ({ data: hoje(), hotel: "", nome_pax: "", quantidade: "1", contato: "", tour: "", valor: "", valor_cobrado: "", guia_responsavel: "", vendedor: "", comissao: "", modo_pagamento: "Pix", observacoes: "" });
+const vazio = () => ({ data: hoje(), data_tour: hoje(), hotel: "", nome_pax: "", quantidade: "1", contato: "", tour: "", valor: "", valor_cobrado: "", guia_responsavel: "", vendedor: "", comissao: "", modo_pagamento: "Pix", observacoes: "" });
 type Desp = { descricao: string; valor: string };
 const num = (s: string) => { const n = Number(String(s).replace(/\./g, "").replace(",", ".")); return Number.isFinite(n) ? n : NaN; };
 const numOpt = (s: string) => (String(s).trim() === "" ? null : num(s));
+const dataLocal = (iso: string) => new Date(`${iso}T12:00:00`);
 
 export default function FinForm() {
   const { id } = useParams(); const nav = useNavigate(); const qc = useQueryClient();
   const { data: sug } = useSugestoes();
   const [f, setF] = useState(vazio()); const [desp, setDesp] = useState<Desp[]>([]);
   const [taxaCartao, setTaxaCartao] = useState(false);
+  const [agendar, setAgendar] = useState(false);
+  const [calendarOpen, setCalendarOpen] = useState(false);
   const [comPct, setComPct] = useState(false);
   const [orig, setOrig] = useState<Record<string, unknown> | null>(null); const [saving, setSaving] = useState(false);
 
   useEffect(() => {
     setComPct(false);
     setTaxaCartao(false);
+    setAgendar(false);
+    setCalendarOpen(false);
     if (!id) { setF(vazio()); setDesp([]); setOrig(null); return; }
     (async () => {
       const [{ data: v }, { data: d }] = await Promise.all([
@@ -37,8 +45,9 @@ export default function FinForm() {
       ]);
       if (!v) { toast.error("Venda não encontrada"); return; }
       setOrig(v);
+      setAgendar(!!v.data_tour && v.data_tour !== v.data);
       const s = (x: unknown) => (x === null || x === undefined ? "" : String(x).replace(".", ","));
-      setF({ data: v.data, hotel: v.hotel || "", nome_pax: v.nome_pax, quantidade: String(v.quantidade || 1), contato: v.contato || "", tour: v.tour, valor: s(v.valor), valor_cobrado: s(v.valor_cobrado), guia_responsavel: v.guia_responsavel || "", vendedor: v.vendedor || "", comissao: s(v.comissao), modo_pagamento: v.modo_pagamento, observacoes: v.observacoes || "" });
+      setF({ data: v.data, data_tour: v.data_tour || v.data, hotel: v.hotel || "", nome_pax: v.nome_pax, quantidade: String(v.quantidade || 1), contato: v.contato || "", tour: v.tour, valor: s(v.valor), valor_cobrado: s(v.valor_cobrado), guia_responsavel: v.guia_responsavel || "", vendedor: v.vendedor || "", comissao: s(v.comissao), modo_pagamento: v.modo_pagamento, observacoes: v.observacoes || "" });
       setDesp((d || []).map(x => ({ descricao: x.descricao, valor: s(x.valor) })));
     })();
   }, [id]);
@@ -56,12 +65,14 @@ export default function FinForm() {
   async function salvar(outra: boolean) {
     const valor = num(f.valor || "0"), cobrado = valorCobradoFinal(), comissao = comissaoRS();
     const quantidade = Number(f.quantidade);
+    const dataPasseio = dataTourVenda(f.data, f.data_tour, agendar);
     if (!f.nome_pax.trim() || !f.tour.trim()) return toast.error("Preencha o nome do pax e o tour.");
     if (!f.data) return toast.error("Informe a data.");
+    if (!dataPasseio) return toast.error("Escolha a data do passeio no calendário.");
     if (!Number.isInteger(quantidade) || quantidade < 1) return toast.error("Informe uma quantidade de pax válida.");
     if ([valor, cobrado].some(Number.isNaN) || (comissao !== null && Number.isNaN(comissao)) || desp.some(d => Number.isNaN(num(d.valor || "0"))))
       return toast.error("Confira os valores numéricos.");
-    const row = { data: f.data, hotel: f.hotel.trim() || null, nome_pax: f.nome_pax.trim(), quantidade, contato: f.contato.trim() || null, tour: f.tour.trim(), valor, valor_cobrado: cobrado,
+    const row = { data: f.data, data_tour: dataPasseio, hotel: f.hotel.trim() || null, nome_pax: f.nome_pax.trim(), quantidade, contato: f.contato.trim() || null, tour: f.tour.trim(), valor, valor_cobrado: cobrado,
       guia_responsavel: f.guia_responsavel.trim() || null, vendedor: f.vendedor.trim() || null, comissao, despesas: Math.round(totalDesp * 100) / 100,
       modo_pagamento: f.modo_pagamento, observacoes: f.observacoes.trim() || null };
     setSaving(true);
@@ -79,9 +90,12 @@ export default function FinForm() {
       }
       const ds = desp.filter(d => d.descricao.trim() || num(d.valor || "0")).map(d => ({ venda_id: vid!, descricao: d.descricao.trim(), valor: num(d.valor || "0") }));
       if (ds.length) { const { error } = await supabase.from("fin_despesas").insert(ds); if (error) throw error; }
+      const { data: calendarData, error: calendarError } = await supabase.functions.invoke("sync-calendar", { body: { finSaleId: vid } });
+      const calendarFailed = calendarError || (calendarData as { error?: string } | null)?.error;
       qc.invalidateQueries({ queryKey: ["fin-vendas"] });
-      toast.success("Venda salva!");
-      if (outra) { setF(vazio()); setDesp([]); setTaxaCartao(false); if (id) nav("/financeiro/cadastrar"); window.scrollTo(0, 0); }
+      if (calendarFailed) toast.error("Venda salva, mas não foi possível atualizar a Google Agenda. Salve novamente para tentar de novo.");
+      else toast.success("Venda salva e enviada ao calendário!");
+      if (outra) { setF(vazio()); setDesp([]); setTaxaCartao(false); setAgendar(false); setCalendarOpen(false); if (id) nav("/financeiro/cadastrar"); window.scrollTo(0, 0); }
       else nav("/financeiro/consultar");
     } catch (e) { toast.error("Não foi possível salvar: " + (e as Error).message); }
     finally { setSaving(false); }
@@ -94,7 +108,39 @@ export default function FinForm() {
       <datalist id="fin-tours">{sug?.tours.map(t => <option key={t} value={t} />)}</datalist>
       <datalist id="fin-guias">{sug?.guias.map(t => <option key={t} value={t} />)}</datalist>
       <div className="grid gap-4 sm:grid-cols-2">
-        <div><Label htmlFor="f-4917">Data</Label><Input id="f-4917" type="date" value={f.data} onChange={set("data")} className="h-12" /></div>
+        <div className="space-y-2">
+          <Label htmlFor="f-4917">Data</Label>
+          <Input id="f-4917" type="date" value={f.data} onChange={set("data")} className="h-12" />
+          <div className="flex flex-wrap gap-x-4 gap-y-2">
+            <Label htmlFor="f-mesmo-dia" className="flex items-center gap-2 font-normal cursor-pointer">
+              <input id="f-mesmo-dia" type="checkbox" checked={!agendar} onChange={() => { setAgendar(false); setCalendarOpen(false); }} className="h-4 w-4 accent-primary" />
+              Tour no mesmo dia da venda
+            </Label>
+            <Label htmlFor="f-agendar" className="flex items-center gap-2 font-normal cursor-pointer">
+              <input id="f-agendar" type="checkbox" checked={agendar} onChange={e => { setAgendar(e.target.checked); setCalendarOpen(e.target.checked); }} className="h-4 w-4 accent-primary" />
+              Agendar
+            </Label>
+          </div>
+          {agendar && (
+            <Popover open={calendarOpen} onOpenChange={setCalendarOpen}>
+              <PopoverTrigger asChild>
+                <Button type="button" variant="outline" className="w-full justify-start font-normal">
+                  <CalendarIcon className="w-4 h-4 mr-2" />
+                  {f.data_tour ? format(dataLocal(f.data_tour), "dd/MM/yyyy") : "Escolher data do passeio"}
+                </Button>
+              </PopoverTrigger>
+              <PopoverContent className="w-auto p-0" align="start">
+                <Calendar
+                  mode="single"
+                  selected={f.data_tour ? dataLocal(f.data_tour) : undefined}
+                  onSelect={date => { if (!date) return; setF({ ...f, data_tour: format(date, "yyyy-MM-dd") }); setCalendarOpen(false); }}
+                  initialFocus
+                  className="p-3 pointer-events-auto"
+                />
+              </PopoverContent>
+            </Popover>
+          )}
+        </div>
         <div><Label htmlFor="f-3758">Nome do pax *</Label><Input id="f-3758" value={f.nome_pax} onChange={set("nome_pax")} className="h-12" /></div>
         <div><Label htmlFor="f-quantidade">Número de pax (quantidade)</Label><Input id="f-quantidade" type="number" min="1" step="1" inputMode="numeric" value={f.quantidade} onChange={set("quantidade")} className="h-12" /></div>
         <div><Label htmlFor="f-contato">Contato/WhatsApp</Label><Input id="f-contato" type="tel" autoComplete="tel" placeholder="Ex.: +55 21 99999-9999" value={f.contato} onChange={set("contato")} className="h-12" /></div>

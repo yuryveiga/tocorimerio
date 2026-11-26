@@ -260,7 +260,9 @@ export type Database = {
           created_at: string
           created_by: string | null
           data: string
+          data_tour: string | null
           despesas: number
+          google_event_id: string | null
           guia_responsavel: string | null
           hotel: string | null
           id: string
@@ -283,7 +285,9 @@ export type Database = {
           created_at?: string
           created_by?: string | null
           data?: string
+          data_tour?: string | null
           despesas?: number
+          google_event_id?: string | null
           guia_responsavel?: string | null
           hotel?: string | null
           id?: string
@@ -306,7 +310,9 @@ export type Database = {
           created_at?: string
           created_by?: string | null
           data?: string
+          data_tour?: string | null
           despesas?: number
+          google_event_id?: string | null
           guia_responsavel?: string | null
           hotel?: string | null
           id?: string

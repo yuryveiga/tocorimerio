@@ -70,6 +70,16 @@ async function createGoogleJWT(email: string, key: string, scopes: string[]): Pr
   return `${signingInput}.${base64url(new Uint8Array(signature))}`;
 }
 
+async function isCalendarCaller(req: Request, db: any): Promise<boolean> {
+  if (await isPrivilegedCaller(req, db)) return true;
+  const bearer = req.headers.get("Authorization")?.replace(/^Bearer\s+/i, "") || "";
+  if (!bearer) return false;
+  const { data } = await db.auth.getUser(bearer);
+  if (!data?.user) return false;
+  const { data: role } = await db.from("user_roles").select("id").eq("user_id", data.user.id).eq("role", "admin").maybeSingle();
+  return !!role;
+}
+
 async function getAccessToken(email: string, key: string): Promise<string> {
   const jwt = await createGoogleJWT(email, key, [
     "https://www.googleapis.com/auth/calendar.events",
@@ -88,18 +98,19 @@ serve(async (req) => {
   if (req.method === "OPTIONS") return new Response("ok", { headers: corsHeaders });
 
   try {
-    const { saleId } = await req.json();
-    
+    const { saleId, finSaleId, remove } = await req.json();
+    if (!saleId && !finSaleId) throw new Error("Venda não informada");
+
     const supabase = createClient(
       Deno.env.get("SUPABASE_URL") ?? "",
       Deno.env.get("SUPABASE_SERVICE_ROLE_KEY") ?? ""
     );
-    if (!(await isPrivilegedCaller(req, supabase))) return new Response(JSON.stringify({ error: "Unauthorized" }), { status: 401, headers: { ...corsHeaders, "Content-Type": "application/json" } });
+    if (!(await isCalendarCaller(req, supabase))) return new Response(JSON.stringify({ error: "Unauthorized" }), { status: 401, headers: { ...corsHeaders, "Content-Type": "application/json" } });
 
     const { data: sale, error: fetchError } = await supabase
-      .from("sales")
+      .from(finSaleId ? "fin_vendas" : "sales")
       .select("*")
-      .eq("id", saleId)
+      .eq("id", finSaleId || saleId)
       .single();
 
     if (fetchError || !sale) throw new Error("Venda não encontrada");
@@ -112,19 +123,37 @@ serve(async (req) => {
       throw new Error("Configurações do Google ausentes no servidor.");
     }
 
-    console.log("Getting access token for:", GOOGLE_EMAIL);
     const token = await getAccessToken(GOOGLE_EMAIL, GOOGLE_KEY);
-    console.log("Access token obtained successfully");
+    const calendarBase = `https://www.googleapis.com/calendar/v3/calendars/${encodeURIComponent(CALENDAR_ID)}/events`;
+    const authHeaders = { Authorization: `Bearer ${token}`, "Content-Type": "application/json" };
 
-    const startDate = new Date(sale.selected_date);
-    if (sale.selected_period === "Manhã") startDate.setHours(9, 0, 0);
-    else if (sale.selected_period === "Tarde") startDate.setHours(14, 0, 0);
-    else startDate.setHours(10, 0, 0);
+    if (finSaleId && remove) {
+      if (sale.google_event_id) {
+        const response = await fetch(`${calendarBase}/${encodeURIComponent(sale.google_event_id)}`, { method: "DELETE", headers: authHeaders });
+        if (!response.ok && response.status !== 404 && response.status !== 410) throw new Error(await response.text());
+      }
+      const { error } = await supabase.from("fin_vendas").update({ google_event_id: null }).eq("id", finSaleId);
+      if (error) throw error;
+      return new Response(JSON.stringify({ success: true }), { headers: { ...corsHeaders, "Content-Type": "application/json" } });
+    }
 
+    const startDate = finSaleId ? new Date(`${sale.data_tour || sale.data}T10:00:00-03:00`) : new Date(sale.selected_date);
+    if (Number.isNaN(startDate.getTime())) throw new Error("Data do passeio inválida");
+    if (!finSaleId) {
+      if (sale.selected_period === "Manhã") startDate.setHours(9, 0, 0);
+      else if (sale.selected_period === "Tarde") startDate.setHours(14, 0, 0);
+      else startDate.setHours(10, 0, 0);
+    }
     const endDate = new Date(startDate);
     endDate.setHours(startDate.getHours() + 4);
 
-    const event = {
+    const event = finSaleId ? {
+      summary: `Reserva do Site Tocorime: ${sale.tour} - ${sale.nome_pax}`,
+      description: `Cliente: ${sale.nome_pax}\nTelefone: ${sale.contato || "Não informado"}\nPessoas: ${sale.quantidade || 1}\nGuia: ${sale.guia_responsavel || "Não definido"}\nTotal: R$ ${sale.valor_cobrado}\nData: ${sale.data_tour || sale.data}\nOrigem: Financeiro\nStatus: Sincronizado`,
+      start: { dateTime: startDate.toISOString(), timeZone: "America/Sao_Paulo" },
+      end: { dateTime: endDate.toISOString(), timeZone: "America/Sao_Paulo" },
+      colorId: "5",
+    } : {
       summary: `Reserva do Site Tocorime: ${sale.tour_title} - ${sale.customer_name}`,
       description: `Cliente: ${sale.customer_name}\nEmail: ${sale.customer_email}\nTelefone: ${sale.customer_phone || 'Não informado'}\nPessoas: ${sale.quantity}\nTipo: ${sale.is_private ? 'Privativo' : 'Grupo Aberto'}\nPeríodo: ${sale.selected_period || 'Não definido'}\nTotal: R$ ${sale.total_price}\nData: ${sale.selected_date}\nStatus: Sincronizado`,
       start: { dateTime: startDate.toISOString(), timeZone: "America/Sao_Paulo" },
@@ -132,22 +161,20 @@ serve(async (req) => {
       colorId: "5",
     };
 
-    const response = await fetch(
-      `https://www.googleapis.com/calendar/v3/calendars/${encodeURIComponent(CALENDAR_ID)}/events`,
-      {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(event),
-      }
-    );
-
+    let response: Response | null = null;
+    if (finSaleId && sale.google_event_id) {
+      response = await fetch(`${calendarBase}/${encodeURIComponent(sale.google_event_id)}`, { method: "PATCH", headers: authHeaders, body: JSON.stringify(event) });
+      if (response.status === 404 || response.status === 410) response = null;
+    }
+    if (!response) response = await fetch(calendarBase, { method: "POST", headers: authHeaders, body: JSON.stringify(event) });
     if (!response.ok) throw new Error(await response.text());
 
-    console.log("Calendar event created for sale:", saleId);
-    return new Response(JSON.stringify({ success: true }), {
+    const savedEvent = await response.json();
+    if (finSaleId) {
+      const { error } = await supabase.from("fin_vendas").update({ google_event_id: savedEvent.id }).eq("id", finSaleId);
+      if (error) throw error;
+    }
+    return new Response(JSON.stringify({ success: true, eventId: savedEvent.id }), {
       headers: { ...corsHeaders, "Content-Type": "application/json" },
       status: 200,
     });
