@@ -256,6 +256,7 @@ export type Database = {
         Row: {
           campos_editados: string[]
           comissao: number | null
+          contato: string | null
           created_at: string
           created_by: string | null
           data: string
@@ -268,6 +269,7 @@ export type Database = {
           nome_pax: string
           observacoes: string | null
           origem: Database["public"]["Enums"]["fin_origem"]
+          quantidade: number
           tour: string
           updated_at: string
           valor: number
@@ -277,6 +279,7 @@ export type Database = {
         Insert: {
           campos_editados?: string[]
           comissao?: number | null
+          contato?: string | null
           created_at?: string
           created_by?: string | null
           data?: string
@@ -289,6 +292,7 @@ export type Database = {
           nome_pax?: string
           observacoes?: string | null
           origem?: Database["public"]["Enums"]["fin_origem"]
+          quantidade?: number
           tour?: string
           updated_at?: string
           valor?: number
@@ -298,6 +302,7 @@ export type Database = {
         Update: {
           campos_editados?: string[]
           comissao?: number | null
+          contato?: string | null
           created_at?: string
           created_by?: string | null
           data?: string
@@ -310,6 +315,7 @@ export type Database = {
           nome_pax?: string
           observacoes?: string | null
           origem?: Database["public"]["Enums"]["fin_origem"]
+          quantidade?: number
           tour?: string
           updated_at?: string
           valor?: number

@@ -1,5 +1,5 @@
 export interface FinVenda {
-  id: string; data: string; hotel: string | null; nome_pax: string; tour: string;
+  id: string; data: string; hotel: string | null; nome_pax: string; quantidade: number; contato: string | null; tour: string;
   valor: number; valor_cobrado: number; guia_responsavel: string | null; vendedor?: string | null; comissao: number | null;
   despesas: number; modo_pagamento: string; origem: "site" | "manual"; id_externo: string | null;
   observacoes: string | null; campos_editados: string[];

@@ -24,7 +24,7 @@ export default function FinList() {
   const uniq = (k: keyof FinVenda) => [...new Set(data.map(v => v[k] as string).filter(Boolean))].sort();
   const lista = useMemo(() => data.filter(v => {
     const s = q.toLowerCase();
-    return (!s || [v.nome_pax, v.hotel, v.tour, v.guia_responsavel].some(x => (x || "").toLowerCase().includes(s)))
+    return (!s || [v.nome_pax, v.contato, v.hotel, v.tour, v.guia_responsavel].some(x => (x || "").toLowerCase().includes(s)))
       && (!guia || v.guia_responsavel === guia) && (!tour || v.tour === tour) && (!pg || v.modo_pagamento === pg);
   }), [data, q, guia, tour, pg]);
 
@@ -57,7 +57,7 @@ export default function FinList() {
       </div>
       <FinCards t={totais(lista)} />
       <div className="grid gap-2 sm:grid-cols-4">
-        <Input placeholder="Buscar pax, hotel, tour ou guia" value={q} onChange={e => setQ(e.target.value)} className="h-11 sm:col-span-4" />
+        <Input placeholder="Buscar pax, contato, hotel, tour ou guia" value={q} onChange={e => setQ(e.target.value)} className="h-11 sm:col-span-4" />
         <select className={sel_} value={guia} onChange={e => setGuia(e.target.value)}><option value="">Todos os guias</option>{uniq("guia_responsavel").map(x => <option key={x}>{x}</option>)}</select>
         <select className={sel_} value={tour} onChange={e => setTour(e.target.value)}><option value="">Todos os tours</option>{uniq("tour").map(x => <option key={x}>{x}</option>)}</select>
         <select className={sel_} value={pg} onChange={e => setPg(e.target.value)}><option value="">Todos os pagamentos</option>{MODOS_PAGAMENTO.map(x => <option key={x}>{x}</option>)}</select>
@@ -82,7 +82,7 @@ export default function FinList() {
             <DialogHeader><DialogTitle>{sel.nome_pax}</DialogTitle></DialogHeader>
             {pendente(sel) && <p className="text-sm text-destructive">Venda do site pendente de preenchimento (guia, comissão ou hotel).</p>}
             <dl className="grid grid-cols-2 gap-2 text-sm">
-              {([["Data", fmtData(sel.data)], ["Hotel", sel.hotel || "—"], ["Tour", sel.tour], ["Guia", sel.guia_responsavel || "—"], ["Valor", fmtBRL(sel.valor)], ["Valor cobrado", fmtBRL(sel.valor_cobrado)],
+              {([["Data", fmtData(sel.data)], ["Quantidade", `${sel.quantidade || 1} pax`], ["Contato/WhatsApp", sel.contato || "—"], ["Hotel", sel.hotel || "—"], ["Tour", sel.tour], ["Guia", sel.guia_responsavel || "—"], ["Valor", fmtBRL(sel.valor)], ["Valor cobrado", fmtBRL(sel.valor_cobrado)],
                 ["Comissão", sel.comissao === null ? "—" : fmtBRL(sel.comissao)], ["Despesas", fmtBRL(sel.despesas)], ["Pagamento", sel.modo_pagamento], ["Origem", sel.origem], ["Líquido", fmtBRL(liquidoVenda(sel))]] as const)
                 .map(([k, v]) => <div key={k}><dt className="text-muted-foreground text-xs">{k}</dt><dd className="font-medium">{v}</dd></div>)}
             </dl>

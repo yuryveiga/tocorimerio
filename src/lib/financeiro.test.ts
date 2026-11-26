@@ -1,7 +1,7 @@
 import { describe, it, expect } from "vitest";
 import { liquidoVenda, totais, toCSV, MODOS_PAGAMENTO, PIX_A_PARTIR, type FinVenda } from "./financeiro";
 import { isFootballReservation } from "./footballReservation";
-const v = (p: Partial<FinVenda>) => ({ id: "1", data: "2026-11-02", hotel: null, nome_pax: "A", tour: "T", valor: 0, valor_cobrado: 0, guia_responsavel: null, comissao: null, despesas: 0, modo_pagamento: "Pix", origem: "manual", id_externo: null, observacoes: null, campos_editados: [], ...p } as FinVenda);
+const v = (p: Partial<FinVenda>) => ({ id: "1", data: "2026-11-02", hotel: null, nome_pax: "A", quantidade: 1, contato: null, tour: "T", valor: 0, valor_cobrado: 0, guia_responsavel: null, comissao: null, despesas: 0, modo_pagamento: "Pix", origem: "manual", id_externo: null, observacoes: null, campos_editados: [], ...p } as FinVenda);
 describe("financeiro", () => {
   it("líquido = cobrado − comissão − despesas", () => expect(liquidoVenda(v({ valor_cobrado: 500, comissao: 100, despesas: 50.5 }))).toBe(349.5));
   it("bruto do mês soma valor cobrado", () => {

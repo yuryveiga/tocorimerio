@@ -13,7 +13,7 @@ import { useSugestoes } from "./useFin";
 import { FinStripeButton } from "./FinStripeButton";
 
 const hoje = () => new Date().toLocaleDateString("en-CA", { timeZone: "America/Sao_Paulo" });
-const vazio = () => ({ data: hoje(), hotel: "", nome_pax: "", tour: "", valor: "", valor_cobrado: "", guia_responsavel: "", vendedor: "", comissao: "", modo_pagamento: "Pix", observacoes: "" });
+const vazio = () => ({ data: hoje(), hotel: "", nome_pax: "", quantidade: "1", contato: "", tour: "", valor: "", valor_cobrado: "", guia_responsavel: "", vendedor: "", comissao: "", modo_pagamento: "Pix", observacoes: "" });
 type Desp = { descricao: string; valor: string };
 const num = (s: string) => { const n = Number(String(s).replace(/\./g, "").replace(",", ".")); return Number.isFinite(n) ? n : NaN; };
 const numOpt = (s: string) => (String(s).trim() === "" ? null : num(s));
@@ -36,7 +36,7 @@ export default function FinForm() {
       if (!v) { toast.error("Venda não encontrada"); return; }
       setOrig(v);
       const s = (x: unknown) => (x === null || x === undefined ? "" : String(x).replace(".", ","));
-      setF({ data: v.data, hotel: v.hotel || "", nome_pax: v.nome_pax, tour: v.tour, valor: s(v.valor), valor_cobrado: s(v.valor_cobrado), guia_responsavel: v.guia_responsavel || "", vendedor: v.vendedor || "", comissao: s(v.comissao), modo_pagamento: v.modo_pagamento, observacoes: v.observacoes || "" });
+      setF({ data: v.data, hotel: v.hotel || "", nome_pax: v.nome_pax, quantidade: String(v.quantidade || 1), contato: v.contato || "", tour: v.tour, valor: s(v.valor), valor_cobrado: s(v.valor_cobrado), guia_responsavel: v.guia_responsavel || "", vendedor: v.vendedor || "", comissao: s(v.comissao), modo_pagamento: v.modo_pagamento, observacoes: v.observacoes || "" });
       setDesp((d || []).map(x => ({ descricao: x.descricao, valor: s(x.valor) })));
     })();
   }, [id]);
@@ -52,11 +52,13 @@ export default function FinForm() {
 
   async function salvar(outra: boolean) {
     const valor = num(f.valor || "0"), cobrado = num(f.valor_cobrado), comissao = comissaoRS();
+    const quantidade = Number(f.quantidade);
     if (!f.nome_pax.trim() || !f.tour.trim()) return toast.error("Preencha o nome do pax e o tour.");
     if (!f.data) return toast.error("Informe a data.");
+    if (!Number.isInteger(quantidade) || quantidade < 1) return toast.error("Informe uma quantidade de pax válida.");
     if ([valor, cobrado].some(Number.isNaN) || (comissao !== null && Number.isNaN(comissao)) || desp.some(d => Number.isNaN(num(d.valor || "0"))))
       return toast.error("Confira os valores numéricos.");
-    const row = { data: f.data, hotel: f.hotel.trim() || null, nome_pax: f.nome_pax.trim(), tour: f.tour.trim(), valor, valor_cobrado: cobrado,
+    const row = { data: f.data, hotel: f.hotel.trim() || null, nome_pax: f.nome_pax.trim(), quantidade, contato: f.contato.trim() || null, tour: f.tour.trim(), valor, valor_cobrado: cobrado,
       guia_responsavel: f.guia_responsavel.trim() || null, vendedor: f.vendedor.trim() || null, comissao, despesas: Math.round(totalDesp * 100) / 100,
       modo_pagamento: f.modo_pagamento, observacoes: f.observacoes.trim() || null };
     setSaving(true);
@@ -91,6 +93,8 @@ export default function FinForm() {
       <div className="grid gap-4 sm:grid-cols-2">
         <div><Label htmlFor="f-4917">Data</Label><Input id="f-4917" type="date" value={f.data} onChange={set("data")} className="h-12" /></div>
         <div><Label htmlFor="f-3758">Nome do pax *</Label><Input id="f-3758" value={f.nome_pax} onChange={set("nome_pax")} className="h-12" /></div>
+        <div><Label htmlFor="f-quantidade">Número de pax (quantidade)</Label><Input id="f-quantidade" type="number" min="1" step="1" inputMode="numeric" value={f.quantidade} onChange={set("quantidade")} className="h-12" /></div>
+        <div><Label htmlFor="f-contato">Contato/WhatsApp</Label><Input id="f-contato" type="tel" autoComplete="tel" placeholder="Ex.: +55 21 99999-9999" value={f.contato} onChange={set("contato")} className="h-12" /></div>
         <div><Label htmlFor="f-899">Hotel</Label><Input id="f-899" value={f.hotel} onChange={set("hotel")} className="h-12" /></div>
         <div><Label htmlFor="f-6396">Tour *</Label><Input id="f-6396" list="fin-tours" value={f.tour} onChange={set("tour")} className="h-12" /></div>
         <div><Label htmlFor="f-4282">Valor (tabela)</Label><Input id="f-4282" {...money} value={f.valor} onChange={set("valor")} className="h-12" /></div>

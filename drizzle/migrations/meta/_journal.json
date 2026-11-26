@@ -99,6 +99,13 @@
       "when": 1795658493574,
       "tag": "0013_private_ai_translation_reuse",
       "breakpoints": true
+    },
+    {
+      "idx": 14,
+      "version": "7",
+      "when": 1795706983211,
+      "tag": "0014_fin_vendas_quantidade_contato",
+      "breakpoints": true
     }
   ]
 }
