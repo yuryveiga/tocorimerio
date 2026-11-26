@@ -252,6 +252,30 @@ export type Database = {
           },
         ]
       }
+      fin_despesas_fixas: {
+        Row: {
+          created_at: string
+          descricao: string
+          id: string
+          mes: string
+          valor: number
+        }
+        Insert: {
+          created_at?: string
+          descricao: string
+          id?: string
+          mes: string
+          valor?: number
+        }
+        Update: {
+          created_at?: string
+          descricao?: string
+          id?: string
+          mes?: string
+          valor?: number
+        }
+        Relationships: []
+      }
       fin_vendas: {
         Row: {
           campos_editados: string[]

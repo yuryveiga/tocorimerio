@@ -6,6 +6,7 @@ import { Download, FileText } from "lucide-react";
 import { agrupar, fmtBRL, fmtData, liquidoVenda, mesRange, toCSV, totais, type FinVenda } from "@/lib/financeiro";
 import { useVendas } from "./useFin";
 import { FinCards } from "./FinCards";
+import { FinDespesasFixas } from "./FinDespesasFixas";
 
 export default function FinReports() {
   const d = new Date(); const r = mesRange(d.getFullYear(), d.getMonth() + 1);
@@ -53,6 +54,7 @@ export default function FinReports() {
         <Button className="h-12" onClick={pdf} disabled={!vendas.length}><FileText className="w-4 h-4 mr-2" />Baixar PDF</Button>
         <Button className="h-12" variant="outline" onClick={csv} disabled={!vendas.length}><Download className="w-4 h-4 mr-2" />Exportar CSV</Button>
       </div>
+      <FinDespesasFixas mesInicial={ini.slice(0, 7)} />
       {guia && <div className="rounded-xl border border-border p-4 text-sm">Comissões a pagar para <strong>{guia}</strong>: <strong>{fmtBRL(t.comissoes)}</strong></div>}
     </div>
   );
