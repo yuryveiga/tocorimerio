@@ -209,11 +209,11 @@ export function useTourForm(initialData: Partial<LovableTour> | null, onSuccess:
 
       if (!initialData?.id) {
         const created = (await insertLovable("tours", dataToSave)) as unknown as { id?: string } | null;
-        refreshExtraTranslations("tours", created?.id);
+        refreshExtraTranslations("tours", created?.id, null, dataToSave);
         toast({ title: "Passeio criado!" });
       } else {
         await updateLovable("tours", initialData.id, dataToSave);
-        refreshExtraTranslations("tours", initialData.id);
+        refreshExtraTranslations("tours", initialData.id, initialData, dataToSave);
         toast({ title: "Passeio atualizado!" });
       }
 

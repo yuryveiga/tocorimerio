@@ -2,6 +2,7 @@
 // Returns a streaming progress log so the admin UI can show live updates.
 
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2.45.0";
+import { reuseTranslation, translationStore } from "../_shared/translationReuse.ts";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -25,6 +26,8 @@ type Lang = "en" | "es";
 async function translateBatch(
   fields: Record<string, string>,
   targetLang: Lang,
+  db: any,
+  force = false,
 ): Promise<Record<string, string>> {
   const entries = Object.entries(fields).filter(([, v]) => v && v.trim());
   if (entries.length === 0) return {};
@@ -47,6 +50,7 @@ CRITICAL RULES:
 - Do NOT add explanations or notes — only the translation.
 - Return strictly JSON with the same keys as the input, no extra text.`;
 
+  const generate = async () => {
   const response = await fetch(
     "https://ai.gateway.lovable.dev/v1/chat/completions",
     {
@@ -100,7 +104,11 @@ CRITICAL RULES:
   const toolCall = data.choices?.[0]?.message?.tool_calls?.[0];
   if (!toolCall) throw new Error("No tool call returned");
   const args = JSON.parse(toolCall.function.arguments);
+  if (data.choices?.[0]?.finish_reason === "length") throw new Error("Incomplete translation");
   return args.translations || {};
+  };
+  const valid = (value: unknown): value is Record<string, string> => !!value && typeof value === "object" && entries.every(([key]) => typeof (value as Record<string, unknown>)[key] === "string" && String((value as Record<string, unknown>)[key]).trim().length > 0);
+  return force ? generate() : reuseTranslation(translationStore(db), { model: "google/gemini-2.5-flash", systemPrompt, userPayload }, generate, valid);
 }
 
 serve();
@@ -161,13 +169,13 @@ function serve() {
 
                 const update: Record<string, string> = {};
                 if (needEn) {
-                  const en = await translateBatch(fields, "en");
+                  const en = await translateBatch(fields, "en", supabase, scope.force);
                   if (en.title) update.title_en = en.title;
                   if (en.short_description) update.short_description_en = en.short_description;
                   if (en.category) update.category_en = en.category;
                 }
                 if (needEs) {
-                  const es = await translateBatch(fields, "es");
+                  const es = await translateBatch(fields, "es", supabase, scope.force);
                   if (es.title) update.title_es = es.title;
                   if (es.short_description) update.short_description_es = es.short_description;
                   if (es.category) update.category_es = es.category;
@@ -198,12 +206,12 @@ function serve() {
                 const needEs = scope.force || !r.title_es || !r.content_es;
                 const update: Record<string, string> = {};
                 if (needEn) {
-                  const en = await translateBatch(fields, "en");
+                  const en = await translateBatch(fields, "en", supabase, scope.force);
                   if (en.title) update.title_en = en.title;
                   if (en.content) update.content_en = en.content;
                 }
                 if (needEs) {
-                  const es = await translateBatch(fields, "es");
+                  const es = await translateBatch(fields, "es", supabase, scope.force);
                   if (es.title) update.title_es = es.title;
                   if (es.content) update.content_es = es.content;
                 }
@@ -236,13 +244,13 @@ function serve() {
                 const needEs = scope.force || !p.title_es || !p.content_es;
                 const update: Record<string, string> = {};
                 if (needEn) {
-                  const en = await translateBatch(fields, "en");
+                  const en = await translateBatch(fields, "en", supabase, scope.force);
                   if (en.title) update.title_en = en.title;
                   if (en.excerpt) update.excerpt_en = en.excerpt;
                   if (en.content) update.content_en = en.content;
                 }
                 if (needEs) {
-                  const es = await translateBatch(fields, "es");
+                  const es = await translateBatch(fields, "es", supabase, scope.force);
                   if (es.title) update.title_es = es.title;
                   if (es.excerpt) update.excerpt_es = es.excerpt;
                   if (es.content) update.content_es = es.content;

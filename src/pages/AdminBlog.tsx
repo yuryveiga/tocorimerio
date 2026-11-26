@@ -96,11 +96,11 @@ const AdminBlog = () => {
     try {
       if (isNew) {
         const created = (await insertLovable("blog_posts", { ...editing, is_published: editing.is_published ?? false })) as unknown as { id?: string } | null;
-        refreshExtraTranslations("blog_posts", created?.id);
+        refreshExtraTranslations("blog_posts", created?.id, null, editing);
         toast({ title: "Post criado!" });
       } else if (editing.id) {
         await updateLovable("blog_posts", editing.id, editing);
-        refreshExtraTranslations("blog_posts", editing.id);
+        refreshExtraTranslations("blog_posts", editing.id, posts.find((p) => p.id === editing.id), editing);
         toast({ title: "Post atualizado!" });
       }
 

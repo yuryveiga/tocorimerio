@@ -1,5 +1,6 @@
 // Admin-only translation via Lovable AI. Replaces the rate-limited free Google endpoint.
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2.45.0";
+import { reuseTranslation, translationStore } from "../_shared/translationReuse.ts";
 
 const cors = {
   "Access-Control-Allow-Origin": "*",
@@ -24,22 +25,33 @@ Deno.serve(async (req) => {
   const { text, target, source = "pt", html = false } = await req.json().catch(() => ({}));
   if (typeof text !== "string" || !text.trim()) return json({ text: "" });
   if (text.length > 60000 || !LANGS[target] || !LANGS[source]) return json({ error: "Invalid input" }, 400);
+  if (source === target) return json({ text });
 
-  const r = await fetch("https://ai.gateway.lovable.dev/v1/chat/completions", {
+  const requestBody = {
+    model: "openai/gpt-6-astra",
+    reasoning_effort: "low",
+    messages: [
+      { role: "system", content: `Translate from ${LANGS[source]} to ${LANGS[target]} for a Rio de Janeiro tourism website. Keep these names unchanged: ${PROTECTED}. ${html ? "Input is HTML: preserve every tag, attribute and URL exactly; translate only visible text." : "Preserve line breaks and emojis."} Output only the translation, no notes, no code fences.` },
+      { role: "user", content: text },
+    ],
+  };
+  try {
+    const out = await reuseTranslation(translationStore(supabase), requestBody, async () => {
+      const r = await fetch("https://ai.gateway.lovable.dev/v1/chat/completions", {
     method: "POST",
     headers: { Authorization: `Bearer ${Deno.env.get("LOVABLE_API_KEY")}`, "Content-Type": "application/json" },
-    body: JSON.stringify({
-      model: "openai/gpt-6-astra",
-      reasoning_effort: "low",
-      messages: [
-        { role: "system", content: `Translate from ${LANGS[source]} to ${LANGS[target]} for a Rio de Janeiro tourism website. Keep these names unchanged: ${PROTECTED}. ${html ? "Input is HTML: preserve every tag, attribute and URL exactly; translate only visible text." : "Preserve line breaks and emojis."} Output only the translation, no notes, no code fences.` },
-        { role: "user", content: text },
-      ],
-    }),
+    body: JSON.stringify(requestBody),
   });
-  if (!r.ok) return json({ error: `AI ${r.status}` }, r.status === 429 || r.status === 402 ? r.status : 502);
+  if (!r.ok) throw Object.assign(new Error(`AI ${r.status}`), { status: [429, 402, 403].includes(r.status) ? r.status : 502 });
   const d = await r.json();
   let out: string = d?.choices?.[0]?.message?.content ?? "";
   out = out.replace(/^```(?:html)?\s*/i, "").replace(/\s*```$/, "").trim();
+  if (d.choices?.[0]?.finish_reason === "length") throw new Error("Incomplete translation");
+  return out;
+    }, (value): value is string => typeof value === "string" && value.trim().length > 0);
   return json({ text: out });
+  } catch (error) {
+    const status = error && typeof error === "object" && "status" in error ? Number(error.status) : 502;
+    return json({ error: error instanceof Error ? error.message : "Translation failed" }, status);
+  }
 });

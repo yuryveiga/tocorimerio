@@ -14,6 +14,24 @@ export type Database = {
   }
   public: {
     Tables: {
+      ai_translation_cache: {
+        Row: {
+          cache_key: string
+          created_at: string
+          result: Json
+        }
+        Insert: {
+          cache_key: string
+          created_at?: string
+          result: Json
+        }
+        Update: {
+          cache_key?: string
+          created_at?: string
+          result?: Json
+        }
+        Relationships: []
+      }
       blog_post_ratings: {
         Row: {
           comment: string | null

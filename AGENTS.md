@@ -19,6 +19,7 @@
 - Store weekly-refreshed fallback exchange rates in `site_settings` key `fallback_exchange_rates` via `refresh-fallback-rates`; site and checkout use it only when the live rate API fails, keeping fallbacks aligned without per-request polling.
 - Public checkout prices are re-derived server-side from the tour catalogue or partner match packages and bound to the customer's unpaid reservation; checkout confirmation reads/writes reservations only via the Stripe session id, so URLs with sale ids alone expose nothing.
 - Admin translate buttons call the admin-only `translate-text` function (Lovable AI); the free Google endpoint was rate-limited (429).
+- Reuse validated translations in a service-only exact-input cache keyed by model, prompt and source; admin saves send only changed or missing DE/FR/IT fields so unrelated edits never regenerate complete posts.
 - Weekly Reddit ticket-question alerts run in `reddit-ticket-questions` (Firecrawl search+scrape, max 5 posts, one low-effort AI reply each with fixed-template fallback, owner email via Resend); it never posts to Reddit, avoiding spam bans and AI cost.
 - Cookie consent lives in `src/lib/consent.ts` (skill module) with Consent Mode defaults first in `index.html` and the PT/EN/ES banner in `src/components/CookieConsent.tsx`; tools that ignore Consent Mode (Clarity) load only via `canTrack`, so ads/analytics respect EU/UK choices.
 

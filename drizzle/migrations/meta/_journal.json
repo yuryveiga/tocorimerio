@@ -92,6 +92,13 @@
       "when": 1795648392081,
       "tag": "0012_fin_vendas_vendedor",
       "breakpoints": true
+    },
+    {
+      "idx": 13,
+      "version": "7",
+      "when": 1795658493574,
+      "tag": "0013_private_ai_translation_reuse",
+      "breakpoints": true
     }
   ]
 }
