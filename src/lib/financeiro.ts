@@ -10,6 +10,7 @@ export const PIX_A_PARTIR = "a partir de 18/01";
 const brl = new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL" });
 export const fmtBRL = (v: number | null | undefined) => brl.format(Number(v || 0));
 export const fmtData = (iso: string) => { const [y, m, d] = iso.slice(0, 10).split("-"); return `${d}/${m}/${y}`; };
+export const valorComTaxaCartao = (valor: number, comTaxa: boolean) => Math.round(valor * (comTaxa ? 1.05 : 1) * 100) / 100;
 
 export const liquidoVenda = (v: Pick<FinVenda, "valor_cobrado" | "comissao" | "despesas">) =>
   Math.round((Number(v.valor_cobrado || 0) - Number(v.comissao || 0) - Number(v.despesas || 0)) * 100) / 100;
