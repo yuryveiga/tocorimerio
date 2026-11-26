@@ -255,24 +255,30 @@ export type Database = {
       fin_despesas_fixas: {
         Row: {
           created_at: string
+          data_pagamento: string | null
           descricao: string
           id: string
           mes: string
           valor: number
+          vencimento: string | null
         }
         Insert: {
           created_at?: string
+          data_pagamento?: string | null
           descricao: string
           id?: string
           mes: string
           valor?: number
+          vencimento?: string | null
         }
         Update: {
           created_at?: string
+          data_pagamento?: string | null
           descricao?: string
           id?: string
           mes?: string
           valor?: number
+          vencimento?: string | null
         }
         Relationships: []
       }

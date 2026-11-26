@@ -127,6 +127,13 @@
       "when": 1795736697012,
       "tag": "0017_fin_despesas_operacionais",
       "breakpoints": true
+    },
+    {
+      "idx": 18,
+      "version": "7",
+      "when": 1795737482112,
+      "tag": "0018_fin_fixas_vencimento_pagamento",
+      "breakpoints": true
     }
   ]
 }

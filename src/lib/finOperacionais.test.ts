@@ -1,8 +1,13 @@
 import { describe, it, expect } from "vitest";
-import { csvCelula, despesaVencida, limiteAlertaDespesas, totaisRelatorio, type DespesaOperacional } from "./finOperacionais";
+import { csvCelula, despesaVencida, limiteAlertaDespesas, vencimentoMes, totaisRelatorio, type DespesaOperacional } from "./finOperacionais";
 
 const d = (p: Partial<DespesaOperacional> = {}): DespesaOperacional => ({ id: "1", descricao: "Transporte", valor: 100, vencimento: "2026-11-26", data_pagamento: null, ...p });
 describe("despesas operacionais", () => {
+  it("importa vencimento para o novo mês sem inventar datas ausentes", () => {
+    expect(vencimentoMes("2026-01-31", "2026-02")).toBe("2026-02-28");
+    expect(vencimentoMes("2026-11-10", "2026-12")).toBe("2026-12-10");
+    expect(vencimentoMes(null, "2026-12")).toBe(null);
+  });
   it("alerta antes de 7 dias, excluindo exatamente 7 dias e incluindo vencidas", () => {
     const limite = limiteAlertaDespesas("2026-11-26");
     expect(limite).toBe("2026-12-03");

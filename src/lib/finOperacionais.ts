@@ -8,6 +8,12 @@ export function limiteAlertaDespesas(hoje: string) {
   data.setUTCDate(data.getUTCDate() + 7);
   return data.toISOString().slice(0, 10);
 }
+export function vencimentoMes(vencimento: string | null, mes: string) {
+  if (!vencimento) return null;
+  const [ano, numeroMes] = mes.split("-").map(Number);
+  const dia = Math.min(Number(vencimento.slice(8, 10)), new Date(ano, numeroMes, 0).getDate());
+  return `${mes}-${String(dia).padStart(2, "0")}`;
+}
 export function totaisRelatorio(vendas: FinVenda[], fixas: number, operacionais: DespesaOperacional[], guia = false) {
   const base = totais(vendas);
   const naoRecorrentes = Math.round(operacionais.reduce((s, d) => s + Number(d.valor), 0) * 100) / 100;
