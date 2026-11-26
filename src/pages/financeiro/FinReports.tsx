@@ -9,6 +9,7 @@ import { agrupar, fmtBRL, fmtData, liquidoVenda, mesRange, toCSV, totais, type F
 import { useVendas } from "./useFin";
 import { FinCards } from "./FinCards";
 import { FinDespesasFixas } from "./FinDespesasFixas";
+import { csvCelula, totaisRelatorio, type DespesaOperacional } from "@/lib/finOperacionais";
 
 export default function FinReports() {
   const d = new Date(); const r = mesRange(d.getFullYear(), d.getMonth() + 1);
@@ -21,12 +22,20 @@ export default function FinReports() {
     if (error) throw error; return data as { mes: string; descricao: string; valor: number }[];
   } });
   const fixas = guia ? 0 : Math.round(fixasLinhas.reduce((s, l) => s + Number(l.valor || 0), 0) * 100) / 100;
+  const { data: operacionais = [], isLoading: loadingOp, error: erroOp } = useQuery({ queryKey: ["fin_operacionais", "periodo", ini.slice(0, 7), fim.slice(0, 7)], queryFn: async () => {
+    const ultimo = fim.slice(0, 7).split("-").map(Number);
+    const { data, error } = await supabase.from("fin_despesas_operacionais").select("id,descricao,valor,vencimento,data_pagamento").gte("vencimento", ini.slice(0, 7) + "-01").lte("vencimento", mesRange(ultimo[0], ultimo[1]).fim).order("vencimento");
+    if (error) throw error; return data as DespesaOperacional[];
+  } });
   const base = totais(vendas);
-  const t = guia ? base : { ...base, fixas, liquido: Math.round((base.liquido - fixas) * 100) / 100 }; const nome = `financeiro-${ini}_${fim}${guia ? "-" + guia : ""}`;
+  const t = totaisRelatorio(vendas, fixas, operacionais, Boolean(guia)); const nome = `financeiro-${ini}_${fim}${guia ? "-" + guia : ""}`;
   const periodo = `${fmtData(ini)} a ${fmtData(fim)}`;
 
   function csv() {
-    const blob = new Blob(["\ufeff" + toCSV(vendas) + (guia ? "" : `\n\nDespesas fixas\nMês;Descrição;Valor\n${fixasLinhas.map(l => `${l.mes};${l.descricao};${Number(l.valor).toFixed(2).replace(".", ",")}`).join("\n")}\nTotal despesas fixas;;${fixas.toFixed(2).replace(".", ",")}\nLíquido final;;${t.liquido.toFixed(2).replace(".", ",")}\n`)], { type: "text/csv;charset=utf-8" });
+    const money = (n: number) => n.toFixed(2).replace(".", ",");
+    const rows = (r: unknown[][]) => r.map(l => l.map(csvCelula).join(";")).join("\n");
+    const despesas = guia ? "" : `\n\nDespesas fixas\n${rows([["Mês", "Descrição", "Valor"], ...fixasLinhas.map(l => [l.mes, l.descricao, money(Number(l.valor))]), ["Total despesas fixas", "", money(fixas)]])}\n\nDespesas não recorrentes\n${rows([["Descrição", "Vencimento", "Data de pagamento", "Valor"], ...operacionais.map(l => [l.descricao, fmtData(l.vencimento), l.data_pagamento ? fmtData(l.data_pagamento) : "Não pago", money(Number(l.valor))]), ["Total despesas não recorrentes", "", "", money(t.naoRecorrentes)], ["Fixas + não recorrentes", "", "", money(fixas + t.naoRecorrentes)], ["Líquido final", "", "", money(t.liquido)]])}\n`;
+    const blob = new Blob(["\ufeff" + toCSV(vendas) + despesas], { type: "text/csv;charset=utf-8" });
     const a = document.createElement("a"); a.href = URL.createObjectURL(blob); a.download = nome + ".csv"; a.click();
   }
   async function pdf() {
@@ -42,7 +51,11 @@ export default function FinReports() {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       autoTable(doc, { startY: (doc as any).lastAutoTable.finalY + 8, styles: { fontSize: 8 }, head: [["Despesas fixas", "Mês", "Valor"]],
         body: fixasLinhas.map(l => [l.descricao, l.mes.split("-").reverse().join("/"), fmtBRL(Number(l.valor))]),
-        foot: [["Total despesas fixas", "", fmtBRL(fixas)], ["Líquido final (após despesas fixas)", "", fmtBRL(t.liquido)]] });
+        foot: [["Total despesas fixas", "", fmtBRL(fixas)]] });
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      autoTable(doc, { startY: (doc as any).lastAutoTable.finalY + 8, styles: { fontSize: 8 }, head: [["Despesas não recorrentes", "Vencimento", "Data de pagamento", "Valor"]],
+        body: operacionais.map(l => [l.descricao, fmtData(l.vencimento), l.data_pagamento ? fmtData(l.data_pagamento) : "Não pago", fmtBRL(l.valor)]),
+        foot: [["Total despesas não recorrentes", "", "", fmtBRL(t.naoRecorrentes)], ["Fixas + não recorrentes", "", "", fmtBRL(fixas + t.naoRecorrentes)], ["Líquido final", "", "", fmtBRL(t.liquido)]] });
     }
     const resumo = (titulo: string, k: (v: FinVenda) => string) => {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -63,12 +76,13 @@ export default function FinReports() {
         <div><Label>Guia (acerto de comissões)</Label>
           <select value={guia} onChange={e => setGuia(e.target.value)} className="h-12 w-full rounded-md border border-input bg-background px-3"><option value="">Todos</option>{guias.map(g => <option key={g}>{g}</option>)}</select></div>
       </div>
-      {isLoading ? <p className="text-muted-foreground">Carregando...</p> : <FinCards t={t} />}
+      {erroOp ? <p role="alert" className="text-destructive">Não foi possível carregar as despesas operacionais.</p> : isLoading || loadingOp ? <p className="text-muted-foreground">Carregando...</p> : <FinCards t={t} />}
       <div className="flex flex-col sm:flex-row gap-3">
-        <Button className="h-12" onClick={pdf} disabled={!vendas.length && !fixasLinhas.length}><FileText className="w-4 h-4 mr-2" />Baixar PDF</Button>
-        <Button className="h-12" variant="outline" onClick={csv} disabled={!vendas.length && !fixasLinhas.length}><Download className="w-4 h-4 mr-2" />Exportar CSV</Button>
+        <Button className="h-12" onClick={pdf} disabled={Boolean(erroOp) || loadingOp || (!vendas.length && !fixasLinhas.length && !operacionais.length)}><FileText className="w-4 h-4 mr-2" />Baixar PDF</Button>
+        <Button className="h-12" variant="outline" onClick={csv} disabled={Boolean(erroOp) || loadingOp || (!vendas.length && !fixasLinhas.length && !operacionais.length)}><Download className="w-4 h-4 mr-2" />Exportar CSV</Button>
       </div>
       <FinDespesasFixas mesInicial={ini.slice(0, 7)} />
+      {!guia && <section className="space-y-2"><h2 className="text-lg font-bold">Despesas não recorrentes</h2>{operacionais.length ? <ul className="divide-y divide-border">{operacionais.map(d => <li key={d.id} className="py-2 flex flex-wrap justify-between gap-2"><div className="min-w-0"><p className="break-words">{d.descricao}</p><p className="text-sm text-muted-foreground">Vencimento: {fmtData(d.vencimento)} · {d.data_pagamento ? `Pago em ${fmtData(d.data_pagamento)}` : "Não pago"}</p></div><strong>{fmtBRL(d.valor)}</strong></li>)}</ul> : <p className="text-muted-foreground text-sm">Nenhuma despesa não recorrente no período.</p>}<p className="font-semibold">Fixas + não recorrentes: {fmtBRL(fixas + t.naoRecorrentes)}</p></section>}
       {guia && <div className="rounded-xl border border-border p-4 text-sm">Comissões a pagar para <strong>{guia}</strong>: <strong>{fmtBRL(t.comissoes)}</strong></div>}
     </div>
   );

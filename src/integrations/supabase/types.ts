@@ -276,6 +276,33 @@ export type Database = {
         }
         Relationships: []
       }
+      fin_despesas_operacionais: {
+        Row: {
+          created_at: string
+          data_pagamento: string | null
+          descricao: string
+          id: string
+          valor: number
+          vencimento: string
+        }
+        Insert: {
+          created_at?: string
+          data_pagamento?: string | null
+          descricao: string
+          id?: string
+          valor?: number
+          vencimento: string
+        }
+        Update: {
+          created_at?: string
+          data_pagamento?: string | null
+          descricao?: string
+          id?: string
+          valor?: number
+          vencimento?: string
+        }
+        Relationships: []
+      }
       fin_vendas: {
         Row: {
           campos_editados: string[]

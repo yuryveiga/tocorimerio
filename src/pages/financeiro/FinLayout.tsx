@@ -1,13 +1,15 @@
 import { NavLink, Navigate, Outlet } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useAuth } from "@/hooks/useAuth";
-import { Home, PlusCircle, Search, FileText, Moon, Sun, Users } from "lucide-react";
+import { Home, PlusCircle, Search, FileText, Moon, Sun, Users, Receipt } from "lucide-react";
+import { FinAvisos } from "./FinAvisos";
 
 const NAV = [
   { to: "/financeiro", label: "Início", icon: Home, end: true },
   { to: "/financeiro/cadastrar", label: "Cadastrar", icon: PlusCircle },
   { to: "/financeiro/consultar", label: "Consultar", icon: Search },
   { to: "/financeiro/relatorios", label: "Relatórios", icon: FileText },
+  { to: "/financeiro/despesas-operacionais", label: "Despesas Operacionais", icon: Receipt },
 ];
 
 export default function FinLayout() {
@@ -42,12 +44,12 @@ export default function FinLayout() {
           <span className="font-bold">Financeiro</span>
           <button aria-label="Alternar modo escuro" onClick={() => setDark(!dark)} className="p-2">{dark ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}</button>
         </header>
-        <main className="p-4 md:p-8 pb-24 md:pb-8 max-w-5xl mx-auto"><Outlet /></main>
+        <main className="p-4 md:p-8 pb-24 md:pb-8 max-w-5xl mx-auto"><FinAvisos /><Outlet /></main>
       </div>
-      <nav className="md:hidden fixed bottom-0 inset-x-0 bg-background border-t border-border grid grid-cols-4 z-50">
+      <nav className="md:hidden fixed bottom-0 inset-x-0 bg-background border-t border-border grid grid-cols-5 z-50">
         {NAV.map(n => (
           <NavLink key={n.to} to={n.to} end={n.end} className={({ isActive }) => `flex flex-col items-center py-2 text-xs gap-1 ${isActive ? "text-primary font-semibold" : "text-muted-foreground"}`}>
-            <n.icon className="w-6 h-6" />{n.label}
+            <n.icon className="w-6 h-6" /><span className="text-center leading-tight px-1 w-full break-words">{n.label}</span>
           </NavLink>
         ))}
       </nav>

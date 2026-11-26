@@ -120,6 +120,13 @@
       "when": 1795717771600,
       "tag": "0016_fin_despesas_fixas",
       "breakpoints": true
+    },
+    {
+      "idx": 17,
+      "version": "7",
+      "when": 1795736697012,
+      "tag": "0017_fin_despesas_operacionais",
+      "breakpoints": true
     }
   ]
 }

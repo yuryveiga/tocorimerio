@@ -62,6 +62,7 @@ const FinHome = lazy(() => import("./pages/financeiro/FinHome"));
 const FinForm = lazy(() => import("./pages/financeiro/FinForm"));
 const FinList = lazy(() => import("./pages/financeiro/FinList"));
 const FinReports = lazy(() => import("./pages/financeiro/FinReports"));
+const FinOperacionais = lazy(() => import("./pages/financeiro/FinOperacionais"));
 const AdminLogin             = lazy(() => import("./pages/AdminLogin"));
 const OAuthConsent           = lazy(() => import("./pages/OAuthConsent"));
 const AdminResetPassword     = lazy(() => import("./pages/AdminResetPassword"));
@@ -311,6 +312,7 @@ const App = ({ queryClient: externalQueryClient }: { queryClient?: QueryClient }
                         <Route path="editar/:id" element={<FinForm />} />
                         <Route path="consultar" element={<FinList />} />
                         <Route path="relatorios" element={<FinReports />} />
+                        <Route path="despesas-operacionais" element={<FinOperacionais />} />
                       </Route>
                       <Route path="/sitemap" element={<Sitemap />} />
                       <Route path="/:slug" element={<GenericPage />} />

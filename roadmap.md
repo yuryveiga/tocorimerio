@@ -39,3 +39,4 @@
 - [x] Página de política de privacidade PT/EN/ES ligada ao aviso de cookies e ao rodapé
 - [x] Remover chinês do site
 - [x] Adicionar alemão, francês e italiano (menu, textos, passeios, blog, cookies, privacidade)
+- [x] Add operational expenses menu, due-day on-screen alerts, payment dates, and due-month non-recurring deductions in screen/PDF/CSV. Admin create/edit/payment/delete flow, mobile layout, 14 tests and PDF/CSV verified; test expense removed.
