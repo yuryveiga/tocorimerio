@@ -21,7 +21,7 @@ export function FinDespesasFixas({ mesInicial }: { mesInicial: string }) {
   } });
   const [edits, setEdits] = useState<Record<string, { descricao: string; valor: string }>>({});
   useEffect(() => setEdits({}), [mes, data]);
-  const refresh = () => qc.invalidateQueries({ queryKey: key });
+  const refresh = () => qc.invalidateQueries({ queryKey: ["fin_despesas_fixas"] });
   const total = data.reduce((s, l) => s + Number(l.valor || 0), 0);
 
   async function adicionar() {

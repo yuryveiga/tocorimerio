@@ -1,8 +1,8 @@
 import { fmtBRL, totais } from "@/lib/financeiro";
-export function FinCards({ t, compact }: { t: ReturnType<typeof totais>; compact?: boolean }) {
-  const items = compact ? [["Bruto", t.bruto]] : [["Bruto", t.bruto], ["Comissões", t.comissoes], ["Despesas", t.despesas]];
+export function FinCards({ t, compact }: { t: ReturnType<typeof totais> & { fixas?: number }; compact?: boolean }) {
+  const items = compact ? [["Bruto", t.bruto]] : [["Bruto", t.bruto], ["Comissões", t.comissoes], ["Despesas", t.despesas], ...(t.fixas !== undefined ? [["Despesas fixas", t.fixas]] : [])];
   return (
-    <div className={`grid gap-3 ${compact ? "grid-cols-2" : "grid-cols-2 md:grid-cols-5"}`}>
+    <div className={`grid gap-3 ${compact ? "grid-cols-2" : (t.fixas !== undefined ? "grid-cols-2 md:grid-cols-3 lg:grid-cols-6" : "grid-cols-2 md:grid-cols-5")}`}>
       {items.map(([l, v]) => (
         <div key={l as string} className="rounded-xl border border-border bg-card p-4">
           <p className="text-xs text-muted-foreground">{l}</p><p className="text-lg font-semibold">{fmtBRL(v as number)}</p>

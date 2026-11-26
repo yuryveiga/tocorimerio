@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { useQuery } from "@tanstack/react-query";
+import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -14,11 +16,17 @@ export default function FinReports() {
   const { data = [], isLoading } = useVendas(ini, fim);
   const guias = [...new Set(data.map(v => v.guia_responsavel).filter(Boolean) as string[])].sort();
   const vendas = guia ? data.filter(v => v.guia_responsavel === guia) : data;
-  const t = totais(vendas); const nome = `financeiro-${ini}_${fim}${guia ? "-" + guia : ""}`;
+  const { data: fixasLinhas = [] } = useQuery({ queryKey: ["fin_despesas_fixas", "periodo", ini.slice(0, 7), fim.slice(0, 7)], queryFn: async () => {
+    const { data, error } = await supabase.from("fin_despesas_fixas").select("mes,descricao,valor").gte("mes", ini.slice(0, 7)).lte("mes", fim.slice(0, 7)).order("mes");
+    if (error) throw error; return data as { mes: string; descricao: string; valor: number }[];
+  } });
+  const fixas = guia ? 0 : Math.round(fixasLinhas.reduce((s, l) => s + Number(l.valor || 0), 0) * 100) / 100;
+  const base = totais(vendas);
+  const t = guia ? base : { ...base, fixas, liquido: Math.round((base.liquido - fixas) * 100) / 100 }; const nome = `financeiro-${ini}_${fim}${guia ? "-" + guia : ""}`;
   const periodo = `${fmtData(ini)} a ${fmtData(fim)}`;
 
   function csv() {
-    const blob = new Blob(["\ufeff" + toCSV(vendas)], { type: "text/csv;charset=utf-8" });
+    const blob = new Blob(["\ufeff" + toCSV(vendas) + (guia ? "" : `\n\nDespesas fixas\nMês;Descrição;Valor\n${fixasLinhas.map(l => `${l.mes};${l.descricao};${Number(l.valor).toFixed(2).replace(".", ",")}`).join("\n")}\nTotal despesas fixas;;${fixas.toFixed(2).replace(".", ",")}\nLíquido final;;${t.liquido.toFixed(2).replace(".", ",")}\n`)], { type: "text/csv;charset=utf-8" });
     const a = document.createElement("a"); a.href = URL.createObjectURL(blob); a.download = nome + ".csv"; a.click();
   }
   async function pdf() {
@@ -29,7 +37,13 @@ export default function FinReports() {
     autoTable(doc, { startY: 27, styles: { fontSize: 8 },
       head: [["Data", "Pax", "Hotel", "Tour", "Guia", "Cobrado", "Comissão", "Despesas", "Líquido"]],
       body: vendas.slice().reverse().map((v: FinVenda) => [fmtData(v.data), v.nome_pax, v.hotel || "", v.tour, v.guia_responsavel || "", fmtBRL(v.valor_cobrado), fmtBRL(v.comissao), fmtBRL(v.despesas), fmtBRL(liquidoVenda(v))]),
-      foot: [["Totais", `${t.n} vendas`, "", "", "", fmtBRL(t.bruto), fmtBRL(t.comissoes), fmtBRL(t.despesas), fmtBRL(t.liquido)]] });
+      foot: [["Totais", `${t.n} vendas`, "", "", "", fmtBRL(t.bruto), fmtBRL(t.comissoes), fmtBRL(t.despesas), fmtBRL(base.liquido)]] });
+    if (!guia) {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      autoTable(doc, { startY: (doc as any).lastAutoTable.finalY + 8, styles: { fontSize: 8 }, head: [["Despesas fixas", "Mês", "Valor"]],
+        body: fixasLinhas.map(l => [l.descricao, l.mes.split("-").reverse().join("/"), fmtBRL(Number(l.valor))]),
+        foot: [["Total despesas fixas", "", fmtBRL(fixas)], ["Líquido final (após despesas fixas)", "", fmtBRL(t.liquido)]] });
+    }
     const resumo = (titulo: string, k: (v: FinVenda) => string) => {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const y = (doc as any).lastAutoTable.finalY + 8;
@@ -51,8 +65,8 @@ export default function FinReports() {
       </div>
       {isLoading ? <p className="text-muted-foreground">Carregando...</p> : <FinCards t={t} />}
       <div className="flex flex-col sm:flex-row gap-3">
-        <Button className="h-12" onClick={pdf} disabled={!vendas.length}><FileText className="w-4 h-4 mr-2" />Baixar PDF</Button>
-        <Button className="h-12" variant="outline" onClick={csv} disabled={!vendas.length}><Download className="w-4 h-4 mr-2" />Exportar CSV</Button>
+        <Button className="h-12" onClick={pdf} disabled={!vendas.length && !fixasLinhas.length}><FileText className="w-4 h-4 mr-2" />Baixar PDF</Button>
+        <Button className="h-12" variant="outline" onClick={csv} disabled={!vendas.length && !fixasLinhas.length}><Download className="w-4 h-4 mr-2" />Exportar CSV</Button>
       </div>
       <FinDespesasFixas mesInicial={ini.slice(0, 7)} />
       {guia && <div className="rounded-xl border border-border p-4 text-sm">Comissões a pagar para <strong>{guia}</strong>: <strong>{fmtBRL(t.comissoes)}</strong></div>}
